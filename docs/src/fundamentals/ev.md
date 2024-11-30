@@ -1,6 +1,6 @@
 # Battery Management Systems for Electric Vehicles
 
-Electric Vehicles (EVs) are at the forefront of the global shift towards sustainable transportation. Central to their performance, safety, and longevity is the Battery Management System (BMS). This document provides an in-depth exploration of BMS, elucidating its structure, functionality, and pivotal role in the efficient operation of electric vehicle battery packs. The insights presented are grounded in scientific rigor and reflect the latest advancements in battery management technologies.
+Electric Vehicles are at the forefront of the global shift towards sustainable transportation. Central to their performance, safety, and longevity is the Battery Management System. This part provides an in-depth exploration of BMS, elucidating its structure, functionality, and pivotal role in the efficient operation of electric vehicle battery packs. The insights presented are grounded in scientific rigor and reflect the latest advancements in battery management technologies.
 
 ---
 

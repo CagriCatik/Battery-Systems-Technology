@@ -1,4 +1,4 @@
-# CANoe – Anwendung im Batteriemanagementsystem (BMS)
+# CANoe – Anwendung im Batteriemanagementsystem
 
 In Projekten, die Komponenten- und Systemtests für Batteriemanagementsysteme (BMS) umfassen, ist **CANoe** ein leistungsstarkes Tool zur Entwicklung, Simulation und zum Test vernetzter Systeme. CANoe unterstützt die Kommunikation und das Testen in Echtzeit, was es zu einem unverzichtbaren Werkzeug für die Validierung und Optimierung von BMS macht. Im Folgenden wird erläutert, wie CANoe speziell für Tests im Bereich BMS eingesetzt werden kann:
 

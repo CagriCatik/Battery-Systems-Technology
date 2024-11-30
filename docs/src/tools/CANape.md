@@ -1,4 +1,4 @@
-# CANape – Anwendung im Batteriemanagementsystem (BMS)
+# CANape – Anwendung im Batteriemanagementsystem
 
 In Projekten, die die Entwicklung und Validierung von Batteriemanagementsystemen (BMS) umfassen, bietet **CANape** essenzielle Funktionen zur Kalibrierung, Diagnose und Datenanalyse in Echtzeit. CANape ermöglicht die Parametrierung von Steuergeräten und die Überwachung kritischer Daten während des Betriebs. Hier ist eine detaillierte Beschreibung, wie CANape speziell für BMS-Projekte eingesetzt werden kann:
 

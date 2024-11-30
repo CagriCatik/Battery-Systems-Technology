@@ -4,8 +4,10 @@ language = "en"
 multilingual = false
 src = "src"
 title = "Battery Management Systems"
-
 [preprocessor.katex]
 
 [output.html]
-default-theme = "light"
+default-theme = "rust"
+additional-css = ["src/custom.css"]
+
+

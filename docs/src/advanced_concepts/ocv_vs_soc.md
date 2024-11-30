@@ -67,6 +67,7 @@ Battery systems are complex, requiring detailed understanding and precise manage
 ---
 
 ## Appendix: Key Parameters
+
 | **Parameter**         | **Definition**                                           |
 |------------------------|---------------------------------------------------------|
 | OCV                   | Open Circuit Voltage                                    |

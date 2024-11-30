@@ -1,190 +1,156 @@
 # BMS State Machine
 
-Dieses Zustandsdiagramm beschreibt die verschiedenen Betriebszustände des BMS und die Übergänge zwischen diesen Zuständen basierend auf bestimmten Ereignissen und Bedingungen.
+This state diagram outlines the various operating states of the Battery Management System (BMS) and the transitions between these states based on specific events and conditions.
 
-## **Übersicht des Zustandsdiagramms**
+## **Overview of the State Diagram**
 
-Das Zustandsdiagramm besteht aus sechs Hauptzuständen:
-
-1. **Sleep_Mode**
-2. **Active_Mode**
-3. **Start_Mode**
-4. **Operational_Mode**
-5. **Fault_Mode**
-6. **Safety_Mode**
-
-Die Zustandsmaschine beginnt im **Sleep_Mode** und wechselt je nach Ereignissen und Bedingungen zwischen den verschiedenen Zuständen.
+The state diagram comprises six primary states: Sleep Mode, Active Mode, Start Mode, Operational Mode, Fault Mode, and Safety Mode. The state machine initiates in Sleep Mode and transitions between the different states in response to various events and conditions.
 
 ```mermaid
 stateDiagram-v2
     [*] --> Sleep_Mode
 
-    Sleep_Mode: Minimiert Energieverbrauch \ Periodisches Aufwachen gemäß Zykluszeit
-    Sleep_Mode --> Start_Mode : Fahrzeug eingeschaltet
-    Sleep_Mode --> Active_Mode : Kurzzeitige Aktivierung
+    Sleep_Mode: Minimizes energy consumption \ Periodic wake-up based on cycle time
+    Sleep_Mode --> Start_Mode : Vehicle turned on
+    Sleep_Mode --> Active_Mode : Temporary activation
 
-    Active_Mode: Durchführung von Systemprüfungen \ Fehlererkennung und -protokollierung \ Steuerung von Kühl- und Heizfunktionen
-    Active_Mode --> Sleep_Mode : Abschluss der Prüfungen
+    Active_Mode: Conducts system checks \ Error detection and logging \ Controls cooling and heating functions
+    Active_Mode --> Sleep_Mode : Completion of inspections
 
-    Start_Mode: Überprüfung des Fahrakkuzustands \ Aktivierung der Schütze für Motorstrom
-    Start_Mode --> Operational_Mode : Erfolgreiche Überprüfung
-    Start_Mode --> Fault_Mode : Fehler erkannt
+    Start_Mode: Verifies battery condition \ Activates relays for motor power
+    Start_Mode --> Operational_Mode : Successful verification
+    Start_Mode --> Fault_Mode : Fault detected
 
-    Operational_Mode: Kontinuierliche Überwachung der Batterie \ Dynamische Anpassung der Kühl-/Heizmaßnahmen
-    Operational_Mode --> Sleep_Mode : Fahrzeug ausgeschaltet
-    Operational_Mode --> Fault_Mode : Fehler erkannt
+    Operational_Mode: Continuously monitors battery \ Dynamically adjusts cooling/heating measures
+    Operational_Mode --> Sleep_Mode : Vehicle turned off
+    Operational_Mode --> Fault_Mode : Fault detected
 
-    Fault_Mode: Analyse und Kategorisierung des Fehlers \ Speicherung und Anzeige des Fehlers
-    Fault_Mode --> Safety_Mode : Kritischer Fehler
-    Fault_Mode --> Operational_Mode : Fehler behoben
+    Fault_Mode: Analyzes and categorizes fault \ Stores and displays fault
+    Fault_Mode --> Safety_Mode : Critical fault
+    Fault_Mode --> Operational_Mode : Fault resolved
 
-    Safety_Mode: Unterbrechung des Fahrstroms \ Vollständige Abschaltung der Batterie
-    Safety_Mode --> Operational_Mode : Fehler behoben und überprüft
-    Safety_Mode --> Sleep_Mode : Nach vollständiger Abschaltung
-
+    Safety_Mode: Interrupts driving power \ Completely shuts down battery
+    Safety_Mode --> Operational_Mode : Fault resolved and verified
+    Safety_Mode --> Sleep_Mode : After complete shutdown
 ```
 
-Das Sequenzdiagramm beginnt im **Sleep_Mode** und wechselt je nach Ereignissen und Bedingungen zwischen den verschiedenen Zuständen.
+The sequence diagram begins in Sleep Mode and transitions between various states based on events and conditions.
 
 ```mermaid
 sequenceDiagram
-    participant Fahrzeug
+    participant Vehicle
     participant System
 
-    Fahrzeug->>System: Fahrzeug einschalten
-    System->>System: Wechsel zu Start_Mode
+    Vehicle->>System: Turn on vehicle
+    System->>System: Transition to Start_Mode
     activate System
-    System->>System: Überprüfung des Fahrakkuzustands
-    alt Erfolgreiche Überprüfung
-        System->>System: Wechsel zu Operational_Mode
-        System->>System: Überwachung der Batterie
-        System->>System: Dynamische Anpassung der Kühl-/Heizmaßnahmen
-        Fahrzeug->>System: Fahrzeug ausschalten
-        System->>System: Wechsel zu Sleep_Mode
-    else Fehler erkannt
-        System->>System: Wechsel zu Fault_Mode
-        System->>System: Fehleranalyse und -speicherung
-        alt Kritischer Fehler
-            System->>System: Wechsel zu Safety_Mode
-            System->>System: Unterbrechung des Fahrstroms
-            Fahrzeug->>System: Fehler behoben
-            System->>System: Wechsel zu Operational_Mode
-        else Fehler behoben
-            System->>System: Wechsel zu Operational_Mode
+    System->>System: Verify battery condition
+    alt Successful verification
+        System->>System: Transition to Operational_Mode
+        System->>System: Monitor battery
+        System->>System: Dynamically adjust cooling/heating measures
+        Vehicle->>System: Turn off vehicle
+        System->>System: Transition to Sleep_Mode
+    else Fault detected
+        System->>System: Transition to Fault_Mode
+        System->>System: Analyze and log fault
+        alt Critical fault
+            System->>System: Transition to Safety_Mode
+            System->>System: Interrupt driving power
+            Vehicle->>System: Fault resolved
+            System->>System: Transition to Operational_Mode
+        else Fault resolved
+            System->>System: Transition to Operational_Mode
         end
     end
     deactivate System
-
 ```
 
+## **Detailed Description of States and Transitions**
 
-## **Detaillierte Beschreibung der Zustände und Übergänge**
+### 1. **Sleep Mode**
 
-### 1. **Sleep_Mode (Schlafmodus)**
-**Beschreibung:**
-- **Minimiert Energieverbrauch:** Im Schlafmodus verbraucht das BMS so wenig Energie wie möglich, um die Batterielebensdauer zu verlängern.
-- **Periodisches Aufwachen gemäß Zykluszeit:** Das System weckt sich regelmäßig auf, um bestimmte Aufgaben zu erledigen oder den Systemstatus zu überprüfen.
+**Description:**
+In Sleep Mode, the BMS minimizes energy consumption to extend the battery's lifespan. The system periodically wakes up according to a programmed cycle time to perform specific tasks or check the system status.
 
-**Übergänge:**
-- **Sleep_Mode → Start_Mode:** **Ereignis:** Fahrzeug eingeschaltet.  
-  Wenn das Fahrzeug eingeschaltet wird, wechselt das BMS vom Schlafmodus in den Startmodus, um sich auf den Betrieb vorzubereiten.
-  
-- **Sleep_Mode → Active_Mode:** **Ereignis:** Kurzzeitige Aktivierung.  
-  Ein kurzfristiges Ereignis oder eine Anforderung kann das BMS aus dem Schlafmodus in den Aktivmodus versetzen, um bestimmte Prüfungen oder Steuerungen durchzuführen.
+**Transitions:**
+- **Sleep Mode to Start Mode:** Triggered when the vehicle is turned on. This transition prepares the BMS for operation.
+- **Sleep Mode to Active Mode:** Occurs during temporary activations, such as when immediate inspections or controls are required.
 
-### 2. **Active_Mode (Aktivmodus)**
-**Beschreibung:**
-- **Durchführung von Systemprüfungen:** Das BMS führt umfassende Prüfungen des Systems durch, um sicherzustellen, dass alle Komponenten ordnungsgemäß funktionieren.
-- **Fehlererkennung und -protokollierung:** Fehler werden erkannt, analysiert und protokolliert, um zukünftige Analysen und Wartungen zu erleichtern.
-- **Steuerung von Kühl- und Heizfunktionen:** Das BMS steuert aktiv die Kühl- und Heizsysteme, um die optimale Temperatur der Batterie zu gewährleisten.
+### 2. **Active Mode**
 
-**Übergänge:**
-- **Active_Mode → Sleep_Mode:** **Ereignis:** Abschluss der Prüfungen.  
-  Nach Abschluss der notwendigen Prüfungen und Steuerungsaufgaben wechselt das BMS zurück in den Schlafmodus, um Energie zu sparen.
+**Description:**
+Active Mode is a transient state where the BMS conducts comprehensive system checks to ensure all components are functioning correctly. During this state, the BMS detects and logs any errors and actively controls the cooling and heating systems to regulate the battery's temperature.
 
-### 3. **Start_Mode (Startmodus)**
-**Beschreibung:**
-- **Überprüfung des Fahrakkuzustands:** Das BMS überprüft den Zustand des Fahraktsystems, um sicherzustellen, dass alles bereit für den Betrieb ist.
-- **Aktivierung der Schütze für Motorstrom:** Die Schütze (Schaltvorrichtungen) werden aktiviert, um den Motorstrom bereitzustellen.
+**Transitions:**
+- **Active Mode to Sleep Mode:** After completing the necessary inspections and control tasks, the BMS returns to Sleep Mode to conserve energy.
 
-**Übergänge:**
-- **Start_Mode → Operational_Mode:** **Ereignis:** Erfolgreiche Überprüfung.  
-  Wenn alle Überprüfungen erfolgreich abgeschlossen wurden, wechselt das BMS in den Betriebsmodus, um die kontinuierliche Überwachung und Steuerung zu übernehmen.
-  
-- **Start_Mode → Fault_Mode:** **Ereignis:** Fehler erkannt.  
-  Wird ein Fehler während der Überprüfungen festgestellt, wechselt das BMS in den Fehlerzustand zur weiteren Analyse und Handhabung.
+### 3. **Start Mode**
 
-### 4. **Operational_Mode (Betriebsmodus)**
-**Beschreibung:**
-- **Kontinuierliche Überwachung der Batterie:** Das BMS überwacht ständig den Zustand der Batterie, einschließlich Ladestand, Temperatur und anderen wichtigen Parametern.
-- **Dynamische Anpassung der Kühl-/Heizmaßnahmen:** Basierend auf den Überwachungsdaten passt das BMS die Kühl- und Heizsysteme dynamisch an, um die Batterie im optimalen Temperaturbereich zu halten.
+**Description:**
+Start Mode is initiated when the vehicle begins to start. In this state, the BMS verifies the condition of the vehicle's battery and activates the necessary relays to supply power to the motor.
 
-**Übergänge:**
-- **Operational_Mode → Sleep_Mode:** **Ereignis:** Fahrzeug ausgeschaltet.  
-  Wenn das Fahrzeug ausgeschaltet wird, wechselt das BMS in den Schlafmodus, um den Energieverbrauch zu minimieren.
-  
-- **Operational_Mode → Fault_Mode:** **Ereignis:** Fehler erkannt.  
-  Bei der kontinuierlichen Überwachung können Fehler erkannt werden, die einen Wechsel in den Fehlerzustand erfordern.
+**Transitions:**
+- **Start Mode to Operational Mode:** Occurs upon successful verification of the battery condition, allowing the BMS to take over continuous monitoring and control.
+- **Start Mode to Fault Mode:** If a fault is detected during verification, the BMS transitions to Fault Mode for further analysis and handling.
 
-### 5. **Fault_Mode (Fehlerzustand)**
-**Beschreibung:**
-- **Analyse und Kategorisierung des Fehlers:** Das BMS analysiert den aufgetretenen Fehler und kategorisiert ihn nach seiner Schwere und Art.
-- **Speicherung und Anzeige des Fehlers:** Der Fehler wird gespeichert und kann über ein Display oder ein Diagnosewerkzeug angezeigt werden.
+### 4. **Operational Mode**
 
-**Übergänge:**
-- **Fault_Mode → Safety_Mode:** **Ereignis:** Kritischer Fehler.  
-  Bei einem kritischen Fehler, der das sichere Funktionieren des Fahrzeugs beeinträchtigt, wechselt das BMS in den Sicherheitszustand.
-  
-- **Fault_Mode → Operational_Mode:** **Ereignis:** Fehler behoben.  
-  Wenn der Fehler behoben wurde, kehrt das BMS in den Betriebsmodus zurück, um die normale Überwachung fortzusetzen.
+**Description:**
+Operational Mode represents the primary operating state during vehicle use. The BMS continuously monitors battery parameters and dynamically adjusts cooling and heating measures to optimize battery performance and longevity.
 
-### 6. **Safety_Mode (Sicherheitszustand)**
-**Beschreibung:**
-- **Unterbrechung des Fahrstroms:** Das BMS unterbricht den Fahrstrom, um die Sicherheit zu gewährleisten und weitere Schäden zu verhindern.
-- **Vollständige Abschaltung der Batterie:** Die Batterie wird vollständig abgeschaltet, um ein sicheres Verhalten des Fahrzeugs zu gewährleisten.
+**Transitions:**
+- **Operational Mode to Sleep Mode:** Triggered when the vehicle is turned off, prompting the BMS to minimize energy consumption.
+- **Operational Mode to Fault Mode:** Activated upon detection of a fault during continuous monitoring, necessitating a transition to Fault Mode.
 
-**Übergänge:**
-- **Safety_Mode → Operational_Mode:** **Ereignis:** Fehler behoben und überprüft.  
-  Nachdem der kritische Fehler behoben und überprüft wurde, wechselt das BMS zurück in den Betriebsmodus.
-  
-- **Safety_Mode → Sleep_Mode:** **Ereignis:** Nach vollständiger Abschaltung.  
-  Nach der vollständigen Abschaltung der Batterie kann das BMS in den Schlafmodus zurückkehren, wenn keine weiteren Aktionen erforderlich sind.
+### 5. **Fault Mode**
 
-## **Gesamtverhalten des Systems**
+**Description:**
+Fault Mode is activated when the BMS detects an error within the battery system. In this state, the BMS analyzes and categorizes the fault, stores the information for future maintenance, and displays an error indicator to the driver.
 
-Das Zustandsdiagramm beschreibt ein robustes und flexibles Batteriemanagementsystem, das in der Lage ist, effizient zwischen verschiedenen Betriebszuständen zu wechseln, um den Energieverbrauch zu minimieren und gleichzeitig die Sicherheit und Zuverlässigkeit des Fahrzeugs zu gewährleisten.
+**Transitions:**
+- **Fault Mode to Safety Mode:** Initiated when a critical fault is identified that compromises the vehicle's safe operation.
+- **Fault Mode to Operational Mode:** Occurs when the detected fault is resolved, allowing the BMS to resume normal monitoring and control.
 
-### **Normale Betriebsabläufe:**
+### 6. **Safety Mode**
 
-1. **Start des Fahrzeugs:**
-   - Das Fahrzeug wird eingeschaltet, wodurch das BMS vom **Sleep_Mode** in den **Start_Mode** wechselt.
-   - Im **Start_Mode** überprüft das BMS den Fahrakkuzustand und aktiviert die Schütze für den Motorstrom.
-   - Bei erfolgreicher Überprüfung wechselt das BMS in den **Operational_Mode**.
+**Description:**
+Safety Mode is the ultimate protective state activated in response to critical faults. In this state, the BMS interrupts the driving power and completely shuts down the battery to ensure the safety of the vehicle and its occupants.
 
-2. **Kontinuierliche Überwachung:**
-   - Im **Operational_Mode** überwacht das BMS ständig die Batterie und passt die Kühl- und Heizmaßnahmen dynamisch an.
-   - Bei Bedarf kann das BMS in den **Active_Mode** wechseln, um zusätzliche Prüfungen durchzuführen oder spezifische Steuerungen vorzunehmen.
+**Transitions:**
+- **Safety Mode to Operational Mode:** After the critical fault is resolved and verified, the BMS transitions back to Operational Mode.
+- **Safety Mode to Sleep Mode:** Occurs following the complete shutdown of the battery when no further actions are required.
 
-3. **Beendigung des Fahrzeugs:**
-   - Wenn das Fahrzeug ausgeschaltet wird, wechselt das BMS vom **Operational_Mode** zurück in den **Sleep_Mode**, um Energie zu sparen.
+## **Overall System Behavior**
 
-### **Fehlerbehandlung:**
+The state diagram describes a robust and flexible Battery Management System capable of efficiently transitioning between various operating states to minimize energy consumption while ensuring the vehicle's safety and reliability.
 
-1. **Fehlererkennung:**
-   - Während des Betriebs können Fehler erkannt werden, die das BMS in den **Fault_Mode** versetzen.
+### **Normal Operational Flows:**
 
-2. **Fehleranalyse:**
-   - Im **Fault_Mode** analysiert und kategorisiert das BMS den Fehler.
-   - Wenn es sich um einen kritischen Fehler handelt, wechselt das System in den **Safety_Mode**, um den Fahrstrom zu unterbrechen und die Batterie vollständig abzuschalten.
+1. **Vehicle Start:**
+   Upon turning on the vehicle, the control unit initiates a transition from Sleep Mode to Start Mode. In Start Mode, the BMS verifies the battery condition and activates the necessary relays to supply power to the motor. If the verification is successful, the BMS transitions to Operational Mode.
 
-3. **Fehlerbehebung:**
-   - Nach der Behebung des Fehlers wechselt das BMS zurück in den **Operational_Mode**, um die normale Überwachung fortzusetzen.
-   - Falls keine weiteren Maßnahmen erforderlich sind, kann das System auch in den **Sleep_Mode** wechseln.
+2. **Continuous Monitoring:**
+   In Operational Mode, the BMS continuously monitors battery parameters and dynamically adjusts cooling and heating measures to maintain optimal conditions. If necessary, the BMS can temporarily switch to Active Mode to perform additional inspections or specific controls.
 
-### **Sicherheitsmechanismen:**
+3. **Vehicle Shutdown:**
+   When the vehicle is turned off, the BMS transitions from Operational Mode back to Sleep Mode to conserve energy.
 
-Der Übergang in den **Safety_Mode** bei kritischen Fehlern stellt sicher, dass das Fahrzeug in einem sicheren Zustand bleibt, indem der Fahrstrom unterbrochen und die Batterie abgeschaltet wird. Dies verhindert mögliche Schäden oder gefährliche Situationen, die durch fehlerhafte Batteriebetriebe entstehen könnten.
+### **Error Handling:**
 
-## **Zusammenfassung**
+1. **Error Detection:**
+   During operation, the BMS may detect errors that prompt a transition to Fault Mode.
 
-Die Zustandsmaschine für das Batteriemanagementsystem (BMS) ist so konzipiert, dass sie effizient zwischen verschiedenen Betriebszuständen wechselt, um den Energieverbrauch zu minimieren, die Batterielebensdauer zu verlängern und die Sicherheit des Fahrzeugs zu gewährleisten. Durch die klare Strukturierung der Zustände und Übergänge kann das BMS effektiv auf normale Betriebsbedingungen sowie auf Fehler reagieren, wodurch ein zuverlässiger und sicherer Betrieb des Fahrzeugs unterstützt wird.
+2. **Error Analysis:**
+   In Fault Mode, the BMS analyzes and categorizes the error. If the error is critical, the system transitions to Safety Mode to protect the battery and prevent potential hazards by interrupting the driving power and shutting down the battery.
+
+3. **Error Resolution:**
+   Once the error is resolved, the BMS can transition back to Operational Mode to resume normal monitoring and control. If no further actions are needed, the system may also revert to Sleep Mode.
+
+### **Safety Mechanisms:**
+
+Transitioning to Safety Mode in the event of critical faults ensures that the vehicle remains in a safe state by interrupting the driving power and completely shutting down the battery. This prevents potential damage or dangerous situations that could arise from malfunctioning battery operations.
+
+## **Summary**
+
+The state machine for the Battery Management System (BMS) is designed to efficiently transition between various operating states to minimize energy consumption, extend battery lifespan, and ensure vehicle safety. By clearly structuring the states and transitions, the BMS can effectively respond to both normal operational conditions and faults, thereby supporting the reliable and secure operation of the vehicle.
