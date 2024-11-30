@@ -30,8 +30,7 @@ The `python` folder contains Python scripts for analysis and simulations:
 - `battery_connection_simulator.py`: Simulates different battery connection configurations.
 - `kalman-filter.py`: Implements a Kalman Filter for state estimation.
 - `linear-regression.py`: Performs linear regression analysis on battery data.
-- `spider-chart-ii-ion.py`: Visualizes battery parameters using spider charts.
-- `vehicle_performance.png`: Performance plots for vehicle dynamics.
+- `spider-chart-li-ion.py`: Visualizes battery parameters using spider charts.
 
 ---
 
@@ -65,8 +64,3 @@ The documentation is built using **mdBook**, a tool to create modern documentati
 
 4. **Deploy the Documentation**:  
    You can deploy the generated files in the `docs/book` folder to any static hosting service (e.g., GitHub Pages, Netlify, etc.).
-
-### Helpful Links
-
-- [Udemy Course on BMS](https://www.udemy.com/course/battery-and-battery-management-system-design-simulation/)
-- [YouTube Playlist on BMS](https://www.youtube.com/playlist?list=PLn8RpPpmu08pYxWr-qihN6abrk3To97NN)
