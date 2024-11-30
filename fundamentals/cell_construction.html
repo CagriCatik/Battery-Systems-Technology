@@ -1,0 +1,304 @@
+<!DOCTYPE HTML>
+<html lang="en" class="rust sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Cell Construction - Battery Management Systems</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/custom.css">
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Battery Management Systems</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="cell-construction"><a class="header" href="#cell-construction">Cell Construction</a></h1>
+<hr />
+<p>Battery cells are the fundamental units of energy storage in a battery pack. The design, structure, and arrangement of these cells determine the battery's performance, efficiency, and safety. This section explores the internal construction of cylindrical and prismatic cells, highlighting their components, design principles, and operational features.</p>
+<hr />
+<h3 id="key-components-of-a-battery-cell"><a class="header" href="#key-components-of-a-battery-cell">Key Components of a Battery Cell</a></h3>
+<p>A battery cell consists of three primary components:</p>
+<ol>
+<li>
+<p><strong>Cathode (Positive Terminal)</strong><br />
+The cathode is the positively charged electrode that facilitates the movement of electrons during discharge.</p>
+</li>
+<li>
+<p><strong>Anode (Negative Terminal)</strong><br />
+The anode is the negatively charged electrode that provides electrons during discharge.</p>
+</li>
+<li>
+<p><strong>Separator</strong><br />
+A separator is a thin, insulating layer that prevents direct contact between the cathode and anode while allowing ionic flow.</p>
+</li>
+</ol>
+<hr />
+<h3 id="cylindrical-cells"><a class="header" href="#cylindrical-cells">Cylindrical Cells</a></h3>
+<h4 id="structural-design"><a class="header" href="#structural-design">Structural Design</a></h4>
+<p>Cylindrical cells are constructed in a rolled or "jelly-roll" configuration:</p>
+<ul>
+<li>Layers of the cathode, separator, and anode are stacked and rolled into a cylindrical shape, similar to how steel sheets are rolled for transportation.</li>
+<li>The rolled structure is encased in a metal shell, which serves as the cell's negative terminal.</li>
+</ul>
+<h4 id="advantages"><a class="header" href="#advantages">Advantages</a></h4>
+<ul>
+<li>The outer casing is robust and conductive, simplifying the design for connecting to the circuit.</li>
+<li>The top of the cell is typically plastic-insulated, ensuring safety during handling.</li>
+</ul>
+<h4 id="electrical-potential"><a class="header" href="#electrical-potential">Electrical Potential</a></h4>
+<ul>
+<li>When measured with a voltmeter:
+<ul>
+<li>The positive terminal of the voltmeter is placed on the top terminal.</li>
+<li>The negative terminal can be placed on the outer metal casing to measure the cell's voltage.</li>
+</ul>
+</li>
+<li>If the insulation on the outer surface is compromised, the metal casing can exhibit the cell's full potential.</li>
+</ul>
+<hr />
+<h3 id="prismatic-cells"><a class="header" href="#prismatic-cells">Prismatic Cells</a></h3>
+<h4 id="structural-design-1"><a class="header" href="#structural-design-1">Structural Design</a></h4>
+<p>Prismatic cells resemble a notebook:</p>
+<ul>
+<li>The "covers" are made of hard materials, such as cardboard-like casings, to provide structural integrity.</li>
+<li>The "pages" inside consist of stacked layers of the cathode, separator, and anode, arranged in a flat, rectangular format.</li>
+</ul>
+<h4 id="features"><a class="header" href="#features">Features</a></h4>
+<ul>
+<li><strong>Open Pressure Band</strong>
+<ul>
+<li>A safety mechanism to release internal gases formed due to chemical reactions.</li>
+<li>Opens under high pressure to prevent cell rupture.</li>
+</ul>
+</li>
+<li>Prismatic cells are more compact and suited for applications requiring efficient space utilization.</li>
+</ul>
+<h4 id="terminals"><a class="header" href="#terminals">Terminals</a></h4>
+<ul>
+<li>Prismatic cells use screws to secure terminals, enabling easy connections to external circuits.</li>
+<li><strong>Tabs (Current Collectors)</strong>:
+<ul>
+<li>Made of aluminum and copper, serving as positive and negative terminals respectively.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h3 id="comparison-of-cylindrical-and-prismatic-cells"><a class="header" href="#comparison-of-cylindrical-and-prismatic-cells">Comparison of Cylindrical and Prismatic Cells</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Feature</th><th>Cylindrical Cells</th><th>Prismatic Cells</th></tr></thead><tbody>
+<tr><td><strong>Shape</strong></td><td>Cylindrical, rolled structure</td><td>Rectangular, stacked structure</td></tr>
+<tr><td><strong>Casing Material</strong></td><td>Metal shell (negative terminal)</td><td>Hard case (e.g., plastic/cardboard)</td></tr>
+<tr><td><strong>Terminals</strong></td><td>Insulated plastic top, metal casing</td><td>Screw terminals for connections</td></tr>
+<tr><td><strong>Safety Features</strong></td><td>Robust insulation</td><td>Open pressure band</td></tr>
+<tr><td><strong>Applications</strong></td><td>Durable, versatile</td><td>Space-efficient, compact</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h3 id="variations-soft-pack-cells"><a class="header" href="#variations-soft-pack-cells">Variations: Soft Pack Cells</a></h3>
+<p>Soft pack cells are similar to prismatic cells but lack a rigid casing:</p>
+<ul>
+<li>Constructed by stacking layers of components without the hard outer case.</li>
+<li>Lightweight and flexible, suitable for applications where weight is a critical factor.</li>
+</ul>
+<hr />
+<h3 id="material-composition"><a class="header" href="#material-composition">Material Composition</a></h3>
+<ul>
+<li><strong>Positive Terminal (Cathode Tab):</strong> Aluminum</li>
+<li><strong>Negative Terminal (Anode Tab):</strong> Copper</li>
+</ul>
+<p>These materials are selected for their conductivity and compatibility with the electrochemical reactions within the cell.</p>
+<hr />
+<h2 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h2>
+<p>Understanding the construction and design of battery cells is critical for engineers and professionals involved in energy storage and battery management systems. Cylindrical and prismatic cells offer distinct advantages, tailored to different applications. Their structure, materials, and safety mechanisms ensure reliable operation across a wide range of use cases.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../fundamentals/form_factors.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../fundamentals/cell_comparison.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../fundamentals/form_factors.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../fundamentals/cell_comparison.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

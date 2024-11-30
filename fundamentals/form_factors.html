@@ -1,0 +1,387 @@
+<!DOCTYPE HTML>
+<html lang="en" class="rust sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Battery Form Factors - Battery Management Systems</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/custom.css">
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Battery Management Systems</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="battery-form-factors"><a class="header" href="#battery-form-factors">Battery Form Factors</a></h1>
+<hr />
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>Batteries and Battery Management Systems (BMS) are integral components in modern energy storage and management systems. Their applications range from consumer electronics to electric vehicles (EVs) and energy storage systems. Understanding battery form factors, their advantages, and limitations is crucial for engineers designing battery packs and associated systems.</p>
+<p>This document provides a detailed overview of battery form factors, their design considerations, and the implications on thermal management, cost, and application suitability.</p>
+<hr />
+<h2 id="battery-form-factors-1"><a class="header" href="#battery-form-factors-1">Battery Form Factors</a></h2>
+<p>Battery form factors refer to the physical shape and dimensions of battery cells. The three primary form factors available in the market, irrespective of battery chemistry, are:</p>
+<ul>
+<li><strong>Cylindrical</strong></li>
+<li><strong>Prismatic</strong></li>
+<li><strong>Pouch</strong></li>
+</ul>
+<p>Each form factor offers unique benefits and challenges based on the application.</p>
+<hr />
+<h3 id="cylindrical-cells"><a class="header" href="#cylindrical-cells">Cylindrical Cells</a></h3>
+<p>Cylindrical cells are one of the oldest and most commonly used battery formats, widely seen in applications such as laptops, electric vehicles, and consumer electronics.</p>
+<h4 id="features"><a class="header" href="#features">Features</a></h4>
+<ul>
+<li><strong>Dimensions</strong>: Defined by standard naming conventions such as <code>18650</code> or <code>21700</code>. For example:
+<ul>
+<li>The first two digits indicate the diameter in millimeters.</li>
+<li>The last three digits specify the length in millimeters.</li>
+<li>E.g., <code>18650</code> has a diameter of 18mm and a length of 65mm.</li>
+</ul>
+</li>
+</ul>
+<h4 id="advantages"><a class="header" href="#advantages">Advantages</a></h4>
+<ol>
+<li><strong>Mechanical Rigidity</strong>: Cylindrical cells are structurally strong and resistant to deformation under standard operating conditions.</li>
+<li><strong>Established Manufacturing</strong>: Well-established production processes and high market volume make these cells cost-effective.</li>
+<li><strong>Versatility</strong>: Suitable for a wide range of applications, including laptops, power tools, and EVs.</li>
+</ol>
+<h4 id="disadvantages"><a class="header" href="#disadvantages">Disadvantages</a></h4>
+<ol>
+<li><strong>Thermal Management</strong>:
+<ul>
+<li>Limited contact surface between adjacent cells reduces heat dissipation.</li>
+<li>Heat transfer between cells is inefficient, leading to potential thermal management issues.</li>
+</ul>
+</li>
+<li><strong>Packing Density</strong>:
+<ul>
+<li>Packing cylindrical cells into a battery pack leaves void spaces, reducing energy density per unit volume.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="prismatic-cells"><a class="header" href="#prismatic-cells">Prismatic Cells</a></h3>
+<p>Prismatic cells are rectangular cells enclosed in rigid metal casings, commonly used in automotive and stationary energy storage systems.</p>
+<h4 id="features-1"><a class="header" href="#features-1">Features</a></h4>
+<ul>
+<li><strong>Structure</strong>: Rectangular design with a protective metal casing.</li>
+<li><strong>Applications</strong>: Frequently used in electric vehicles and energy storage systems.</li>
+</ul>
+<h4 id="advantages-1"><a class="header" href="#advantages-1">Advantages</a></h4>
+<ol>
+<li><strong>Improved Thermal Management</strong>:
+<ul>
+<li>Larger surface area enables better heat dissipation.</li>
+<li>Enhanced thermal performance compared to cylindrical cells.</li>
+</ul>
+</li>
+<li><strong>High Packing Density</strong>:
+<ul>
+<li>Rectangular shape allows efficient use of space within a battery pack.</li>
+</ul>
+</li>
+<li><strong>Mechanical Protection</strong>:
+<ul>
+<li>Metal casing provides durability and protection against external damage.</li>
+</ul>
+</li>
+</ol>
+<h4 id="disadvantages-1"><a class="header" href="#disadvantages-1">Disadvantages</a></h4>
+<ol>
+<li><strong>Weight</strong>:
+<ul>
+<li>The metal casing increases the overall weight of the battery cell.</li>
+<li>Reduces specific energy (energy per unit weight).</li>
+</ul>
+</li>
+<li><strong>Cost</strong>:
+<ul>
+<li>Higher manufacturing costs compared to cylindrical cells.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h3 id="pouch-cells"><a class="header" href="#pouch-cells">Pouch Cells</a></h3>
+<p>Pouch cells, also known as polymer cells, use a flexible foil pouch as their enclosure, eliminating the need for a rigid casing.</p>
+<h4 id="features-2"><a class="header" href="#features-2">Features</a></h4>
+<ul>
+<li><strong>Structure</strong>: Flexible and lightweight pouch without rigid mechanical support.</li>
+<li><strong>Applications</strong>: Commonly used in consumer electronics, mobile phones, and some electric vehicles.</li>
+</ul>
+<h4 id="advantages-2"><a class="header" href="#advantages-2">Advantages</a></h4>
+<ol>
+<li><strong>Flexibility</strong>:
+<ul>
+<li>Can be manufactured in various shapes and sizes to fit specific applications.</li>
+</ul>
+</li>
+<li><strong>Lightweight</strong>:
+<ul>
+<li>Absence of a metal casing reduces weight, enhancing specific energy and gravimetric energy density.</li>
+</ul>
+</li>
+</ol>
+<h4 id="disadvantages-2"><a class="header" href="#disadvantages-2">Disadvantages</a></h4>
+<ol>
+<li><strong>Structural Weakness</strong>:
+<ul>
+<li>Requires additional mechanical support to prevent deformation and damage during operation.</li>
+</ul>
+</li>
+<li><strong>Swelling</strong>:
+<ul>
+<li>Improper usage or design can lead to swelling or bulging, potentially causing safety issues.</li>
+</ul>
+</li>
+<li><strong>Thermal and Mechanical Constraints</strong>:
+<ul>
+<li>Higher susceptibility to damage under extreme thermal or mechanical conditions.</li>
+</ul>
+</li>
+</ol>
+<hr />
+<h2 id="comparative-analysis-of-form-factors"><a class="header" href="#comparative-analysis-of-form-factors">Comparative Analysis of Form Factors</a></h2>
+<div class="table-wrapper"><table><thead><tr><th><strong>Aspect</strong></th><th><strong>Cylindrical</strong></th><th><strong>Prismatic</strong></th><th><strong>Pouch</strong></th></tr></thead><tbody>
+<tr><td><strong>Thermal Management</strong></td><td>Poor</td><td>Good</td><td>Moderate</td></tr>
+<tr><td><strong>Packing Efficiency</strong></td><td>Moderate</td><td>High</td><td>Very High</td></tr>
+<tr><td><strong>Structural Strength</strong></td><td>High</td><td>Very High</td><td>Low</td></tr>
+<tr><td><strong>Weight</strong></td><td>Moderate</td><td>High</td><td>Low</td></tr>
+<tr><td><strong>Cost</strong></td><td>Low</td><td>Moderate</td><td>High</td></tr>
+<tr><td><strong>Applications</strong></td><td>EVs, laptops, tools</td><td>EVs, energy storage</td><td>Consumer electronics, EVs</td></tr>
+</tbody></table>
+</div>
+<hr />
+<h2 id="market-trends"><a class="header" href="#market-trends">Market Trends</a></h2>
+<h3 id="cost-trends"><a class="header" href="#cost-trends">Cost Trends</a></h3>
+<ul>
+<li><strong>Cylindrical Cells</strong>:
+<ul>
+<li>Most cost-effective due to high production volume and established manufacturing processes.</li>
+<li>Common in mass-market EVs and consumer electronics.</li>
+</ul>
+</li>
+<li><strong>Prismatic Cells</strong>:
+<ul>
+<li>Moderately expensive, designed for applications like electric cars and commercial vehicles.</li>
+</ul>
+</li>
+<li><strong>Pouch Cells</strong>:
+<ul>
+<li>Cost varies significantly depending on size and application. Generally more expensive for similar capacity compared to cylindrical and prismatic cells.</li>
+</ul>
+</li>
+</ul>
+<h3 id="application-suitability"><a class="header" href="#application-suitability">Application Suitability</a></h3>
+<ul>
+<li><strong>Cylindrical Cells</strong>:
+<ul>
+<li>Versatile and suitable for high-volume, cost-sensitive applications.</li>
+</ul>
+</li>
+<li><strong>Prismatic Cells</strong>:
+<ul>
+<li>Preferred for automotive and energy storage systems requiring high energy density and durability.</li>
+</ul>
+</li>
+<li><strong>Pouch Cells</strong>:
+<ul>
+<li>Ideal for compact designs and weight-sensitive applications, such as mobile devices.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h2>
+<p>The choice of battery form factor depends on application-specific requirements, including energy density, thermal management, cost, and mechanical constraints. Cylindrical cells offer cost benefits and mechanical strength, prismatic cells excel in thermal management and packing efficiency, while pouch cells provide flexibility and lightweight solutions. Understanding these characteristics allows engineers to optimize battery pack design and enhance system performance.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../fundamentals/chemistries_vs_design.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../fundamentals/cell_construction.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../fundamentals/chemistries_vs_design.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../fundamentals/cell_construction.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

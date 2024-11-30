@@ -1,0 +1,486 @@
+<!DOCTYPE HTML>
+<html lang="en" class="rust sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Battery Terminology - Battery Management Systems</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="../src/custom.css">
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "rust";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('rust')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Battery Management Systems</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="battery-terminology"><a class="header" href="#battery-terminology">Battery Terminology</a></h1>
+<hr />
+<h2 id="introduction"><a class="header" href="#introduction">Introduction</a></h2>
+<p>Battery Management Systems rely on specific technical terminologies to monitor, analyze, and optimize battery performance, safety, and reliability. A deep understanding of these terms is essential for professionals in electric vehicle (EV) development and energy storage systems. This guide provides an in-depth exploration of battery terminology, offering precise definitions, equations, examples, and their relevance to battery technology.</p>
+<hr />
+<h2 id="state-of-charge-soc"><a class="header" href="#state-of-charge-soc">State of Charge (SOC)</a></h2>
+<p>The State of Charge (SOC) quantifies the remaining energy in a battery as a percentage of its full capacity.</p>
+<ul>
+<li>
+<p>Definition:<br />
+$$ SOC = \frac{\text{Remaining Capacity (Ah)}}{\text{Full Capacity (Ah)}} \times 100 $$</p>
+</li>
+<li>
+<p>Example:<br />
+For a battery with a total capacity of 100 Ah and 40 Ah remaining:<br />
+$$ SOC = \frac{40}{100} \times 100 = 40% $$</p>
+</li>
+<li>
+<p>Key Characteristics:</p>
+<ul>
+<li>SOC is dynamic, varying with usage and charging conditions.</li>
+<li>Indicates how much energy is still available for use.</li>
+</ul>
+</li>
+<li>
+<p>Example:<br />
+For a battery with a total capacity of 100 Ah and 40 Ah remaining:<br />
+$$ SOC = \frac{40}{100} \times 100 = 40% $$</p>
+</li>
+<li>
+<p>Importance:<br />
+SOC acts as a fuel gauge for batteries, helping users understand energy availability in real-time.</p>
+</li>
+</ul>
+<hr />
+<h2 id="state-of-health-soh"><a class="header" href="#state-of-health-soh">State of Health (SOH)</a></h2>
+<p>The State of Health (SOH) represents the overall condition of a battery relative to its original state.</p>
+<ul>
+<li>
+<p>Definition:<br />
+$$ SOH = \frac{\text{Current Usable Capacity (Ah)}}{\text{Initial Full Capacity (Ah)}} \times 100 $$</p>
+</li>
+<li>
+<p>Key Characteristics:</p>
+<ul>
+<li>SOH decreases over time due to chemical degradation and operational wear.</li>
+<li>Common replacement threshold in EVs is at 80% SOH.</li>
+</ul>
+</li>
+<li>
+<p>Example:<br />
+A new battery with 100 Ah capacity degrades to 80 Ah:<br />
+$$ SOH = \frac{80}{100} \times 100 = 80% $$</p>
+</li>
+<li>
+<p>Importance:<br />
+SOH is critical for predicting remaining useful life and scheduling maintenance.</p>
+</li>
+</ul>
+<hr />
+<h2 id="depth-of-discharge-dod"><a class="header" href="#depth-of-discharge-dod">Depth of Discharge (DOD)</a></h2>
+<p>The Depth of Discharge (DOD) measures the percentage of energy removed from a battery relative to its full capacity.</p>
+<ul>
+<li>
+<p>Definition:<br />
+$$ DOD = 100% - SOC $$</p>
+</li>
+<li>
+<p>Key Characteristics:</p>
+<ul>
+<li>High DOD reduces cycle life.</li>
+<li>Managing DOD improves battery longevity.</li>
+</ul>
+</li>
+<li>
+<p>Example:<br />
+If a battery has 40% SOC remaining, then:<br />
+$$ DOD = 100% - 40% = 60% $$</p>
+</li>
+<li>
+<p>Importance:<br />
+DOD directly impacts battery life and performance.</p>
+</li>
+</ul>
+<hr />
+<h2 id="cycle-life"><a class="header" href="#cycle-life">Cycle Life</a></h2>
+<p>The Cycle Life defines the number of complete charge-discharge cycles a battery can undergo before its capacity drops to a predefined threshold (e.g., 80% SOH).</p>
+<ul>
+<li>
+<p>Definition of a Cycle:<br />
+A single cycle consists of one full discharge (100% to 0%) and one full recharge (0% to 100%).</p>
+</li>
+<li>
+<p>Key Characteristics:</p>
+<ul>
+<li>Dependent on Depth of Discharge (DOD).</li>
+<li>Higher cycle life corresponds to increased durability.</li>
+</ul>
+</li>
+<li>
+<p>Example:<br />
+A battery rated for 3000 cycles can sustain 3000 full charge-discharge cycles before significant capacity loss.</p>
+</li>
+<li>
+<p>Importance:<br />
+Cycle life defines battery longevity and cost-effectiveness.</p>
+</li>
+</ul>
+<hr />
+<h2 id="c-rate"><a class="header" href="#c-rate">C-Rate</a></h2>
+<p>The C-Rate indicates the charge or discharge rate relative to a battery's capacity.</p>
+<ul>
+<li>
+<p>Formula:<br />
+$$ C\text{-Rate} = \frac{\text{Current (A)}}{\text{Battery Capacity (Ah)}} $$</p>
+</li>
+<li>
+<p>Key Characteristics:</p>
+<ul>
+<li>A 1C rate discharges the battery fully in 1 hour.</li>
+<li>High C-Rates result in heat generation and faster degradation.</li>
+</ul>
+</li>
+<li>
+<p>Example:<br />
+For a 100 Ah battery, a discharge current of 200 A corresponds to:<br />
+$$ C\text{-Rate} = \frac{200}{100} = 2C $$</p>
+</li>
+<li>
+<p>Importance:<br />
+C-Rate impacts battery safety, efficiency, and thermal management.</p>
+</li>
+</ul>
+<hr />
+<h2 id="self-discharge"><a class="header" href="#self-discharge">Self-Discharge</a></h2>
+<p>Self-Discharge is the natural reduction in battery capacity over time due to internal chemical reactions, even when the battery is not in use.</p>
+<ul>
+<li>
+<p>Key Characteristics:</p>
+<ul>
+<li>Affected by battery chemistry and storage conditions.</li>
+<li>Lithium-ion batteries exhibit lower self-discharge compared to older technologies.</li>
+</ul>
+</li>
+<li>
+<p>Example:<br />
+A fully charged battery loses 10–15% of its charge after 6 months of storage.</p>
+</li>
+<li>
+<p>Importance:<br />
+Understanding self-discharge is essential for long-term storage and efficiency.</p>
+</li>
+</ul>
+<hr />
+<h2 id="calendar-life"><a class="header" href="#calendar-life">Calendar Life</a></h2>
+<p>The Calendar Life is the duration a battery can be stored under specified conditions before performance degrades.</p>
+<ul>
+<li>
+<p>Key Characteristics:</p>
+<ul>
+<li>Affected by storage temperature, SOC, and chemical composition.</li>
+<li>Measured in years for lithium-ion batteries.</li>
+</ul>
+</li>
+<li>
+<p>Example:<br />
+A lithium-ion battery stored at 50% SOC and 25°C may have a calendar life of 10 years.</p>
+</li>
+<li>
+<p>Importance:<br />
+Calendar life considerations are vital for backup power systems and seasonal storage.</p>
+</li>
+</ul>
+<hr />
+<h2 id="internal-resistance"><a class="header" href="#internal-resistance">Internal Resistance</a></h2>
+<p>Internal Resistance measures the opposition to current flow within a battery.</p>
+<ul>
+<li>
+<p>Key Characteristics:</p>
+<ul>
+<li>Increases with age and affects power output.</li>
+<li>Varies with SOC, temperature, and usage.</li>
+</ul>
+</li>
+<li>
+<p>Example:<br />
+A new battery may have 10 mΩ resistance, which increases to 15 mΩ over time due to aging.</p>
+</li>
+<li>
+<p>Importance:<br />
+Impacts energy efficiency and heat generation during operation.</p>
+</li>
+</ul>
+<hr />
+<h2 id="specific-energy-and-energy-density"><a class="header" href="#specific-energy-and-energy-density">Specific Energy and Energy Density</a></h2>
+<ul>
+<li>
+<p>Specific Energy:<br />
+Energy output per unit mass, expressed as:
+$$
+\text{Specific Energy (Wh/kg)} = \frac{\text{Total Energy (Wh)}}{\text{Mass (kg)}}
+$$</p>
+</li>
+<li>
+<p>Energy Density:<br />
+Energy output per unit volume, expressed as:
+$$
+\text{Energy Density (Wh/L)} = \frac{\text{Total Energy (Wh)}}{\text{Volume (L)}}
+$$</p>
+</li>
+<li>
+<p>Example:<br />
+A lithium-ion battery has a specific energy of 200 Wh/kg and an energy density of 500 Wh/L.</p>
+</li>
+<li>
+<p>Importance:<br />
+Essential for lightweight, compact designs in EVs and portable devices.</p>
+</li>
+</ul>
+<hr />
+<h2 id="open-circuit-voltage-ocv"><a class="header" href="#open-circuit-voltage-ocv">Open Circuit Voltage (OCV)</a></h2>
+<p>Open Circuit Voltage (OCV) is the voltage measured across battery terminals when no current flows.</p>
+<ul>
+<li>
+<p>Key Characteristics:</p>
+<ul>
+<li>Directly correlates with SOC.</li>
+<li>Provides insight into battery health.</li>
+</ul>
+</li>
+<li>
+<p>Example:<br />
+A fully charged lithium-ion battery may have an OCV of 4.2V, while a discharged battery shows 3.0V.</p>
+</li>
+<li>
+<p>Importance:<br />
+OCV is used to estimate SOC and validate battery health.</p>
+</li>
+</ul>
+<hr />
+<h2 id="nominal-voltage"><a class="header" href="#nominal-voltage">Nominal Voltage</a></h2>
+<p>Nominal Voltage is the average voltage at which a battery operates under typical conditions.</p>
+<ul>
+<li>
+<p>Key Characteristics:</p>
+<ul>
+<li>Specific to battery chemistry.</li>
+<li>Lower than the maximum voltage.</li>
+</ul>
+</li>
+<li>
+<p>Example:<br />
+A lithium-ion battery with a maximum voltage of 4.2V has a nominal voltage of 3.7V.</p>
+</li>
+<li>
+<p>Importance:<br />
+Used as a design parameter for system compatibility.</p>
+</li>
+</ul>
+<hr />
+<h2 id="depth-of-discharge-dod-vs-state-of-charge-soc"><a class="header" href="#depth-of-discharge-dod-vs-state-of-charge-soc">Depth of Discharge (DOD) vs. State of Charge (SOC)</a></h2>
+<ul>
+<li>
+<p>Relationship:<br />
+$$
+DOD = 100% - SOC
+$$</p>
+</li>
+<li>
+<p>Key Characteristics:</p>
+<ul>
+<li>SOC reflects remaining capacity, while DOD indicates usage.</li>
+<li>Managing both ensures optimal performance and longevity.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="conclusion"><a class="header" href="#conclusion">Conclusion</a></h2>
+<p>This guide emphasizes the precise definitions and significance of key battery terminologies, equipping engineers and professionals with the knowledge to design, analyze, and optimize battery systems for various applications. These concepts are foundational for enhancing the safety, performance, and lifespan of modern battery technologies.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../fundamentals/how_lithium_battery_works.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="../fundamentals/cycle_ageing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../fundamentals/how_lithium_battery_works.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="../fundamentals/cycle_ageing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>
