@@ -2,13 +2,6 @@
 
 This repository contains resources, scripts, and documentation for simulating, designing, and analyzing Battery Management Systems using MATLAB/Simulink and Python.
 
-## Table of Contents
-
-- [MATLAB/Simulink](#matlabsimulink)
-- [Python](#python)
-- [Documentation](#documentation)
-- [Resources](#resources)
-
 ---
 
 ## MATLAB/Simulink
