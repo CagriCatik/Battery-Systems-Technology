@@ -1,10 +1,5 @@
 # Cell Types and Welding
 
-This part provides a professional and technical overview of battery cell types and the mechanical aspects of battery assembly, with a focus on welding techniques. It is designed for engineers and industry professionals, offering insights into materials, methods, and best practices for battery manufacturing and assembly.
-
----
-
-## 1. Introduction to Battery Cell Types
 Battery cells are the fundamental building blocks of energy storage systems, and their types dictate the design and assembly techniques required for robust and efficient battery management systems (BMS). The main types of battery cells include:
 
 - **Cylindrical Cells:** Widely used in consumer electronics and electric vehicles due to their high energy density and structural integrity.
@@ -15,7 +10,7 @@ Each cell type requires specific assembly methods, particularly for creating mec
 
 ---
 
-## 2. Importance of Welding in Battery Assembly
+## Importance of Welding in Battery Assembly
 Welding plays a critical role in ensuring the mechanical integrity and electrical connectivity of battery cells. The terminals of the cells are often made of different materials (e.g., aluminum, copper), and improper handling or alteration can lead to poor connections or performance issues. 
 
 The choice of welding technique depends on:
@@ -25,10 +20,10 @@ The choice of welding technique depends on:
 
 ---
 
-## 3. Common Welding Techniques
+## Common Welding Techniques
 The following are the most common welding techniques used in battery manufacturing:
 
-### 3.1 Laser Welding
+### Laser Welding
 - **Advantages:**
   - High precision and speed.
   - Minimal deformation and impurities at the weld joint.
@@ -36,18 +31,18 @@ The following are the most common welding techniques used in battery manufacturi
 - **Applications:** Widely used for both cylindrical and prismatic cells due to its efficiency and clean finish.
 - **Industry Adoption:** Approximately 85% of manufacturers have shifted to laser welding due to its production efficiency and superior output quality.
 
-### 3.2 Ultrasonic Welding
+### Ultrasonic Welding
 - **Advantages:**
   - Creates strong, reliable joints without melting the materials.
   - Suitable for delicate components where excessive heat is undesirable.
 - **Applications:** Used for specific cases where minimal thermal stress is critical, such as sensitive pouch cells.
 
-### 3.3 Arc Welding
+### Arc Welding
 - **Advantages:**
   - Cost-effective and straightforward.
 - **Applications:** Used for larger-scale applications where precision is less critical.
 
-### 3.4 Mechanical Fastening
+### Mechanical Fastening
 - **Advantages:**
   - Modular approach enabling easy disassembly and repair.
   - Suitable for systems requiring frequent maintenance or replacement.
@@ -55,7 +50,7 @@ The following are the most common welding techniques used in battery manufacturi
 
 ---
 
-## 4. Welding and Mechanical Connection Considerations
+## Welding and Mechanical Connection Considerations
 When selecting a welding or connection technique, several factors must be considered:
 
 | **Factor**                | **Description**                                                                                 |
@@ -68,7 +63,7 @@ When selecting a welding or connection technique, several factors must be consid
 
 ---
 
-## 5. Recommendations and Best Practices
+## Recommendations and Best Practices
 - **For High-Volume Manufacturing:** Laser welding is the preferred method due to its precision, speed, and ability to produce consistent, high-quality joints.
 - **For Repairable Systems:** Modular designs with mechanical fastening should be considered for systems requiring frequent maintenance.
 - **For Specialized Applications:** Ultrasonic welding is ideal for applications needing minimal heat impact, while arc welding remains a cost-effective option for non-critical applications.
@@ -76,5 +71,5 @@ When selecting a welding or connection technique, several factors must be consid
 
 ---
 
-## 6. Conclusion
+## Conclusion
 The choice of welding technique significantly impacts the performance, safety, and manufacturability of battery systems. With advancements in laser welding technology, most manufacturers have adopted it as the standard for its superior performance. However, alternative methods like ultrasonic welding and mechanical fastening still have their place in specific applications. A thorough understanding of the material properties, design requirements, and operational needs is essential for selecting the right welding approach.

@@ -5,12 +5,12 @@
 ---
 
 - [**Fundamentals**](./fundamentals.md)
-  - [Battery Management Systems for Electric Vehicles](./fundamentals/ev.md)
-  - [Electric Machine, Power Electronics and Battery](./fundamentals/components.md)
-  - [Importance of Battery](./fundamentals/importance_of_battery.md)
-  - [Why Lithium Battery Not Others?](./fundamentals/why_lithium_battery.md)
-  - [How Does Lithium Battery Work?](./fundamentals/how_lithium_battery_works.md)
-  - [Battery Terminology](./fundamentals/battery_terminology.md)
+  - [✅ Battery Management Systems for EVs](./fundamentals/ev.md)
+  - [✅ Electric Machine, Power Electronics and Battery](./fundamentals/components.md)
+  - [✅ Importance of Battery](./fundamentals/importance_of_battery.md)
+  - [✅ Why Lithium Battery Not Others?](./fundamentals/why_lithium_battery.md)
+  - [✅ How Does Lithium Battery Work?](./fundamentals/how_lithium_battery_works.md)
+  - [✅ Battery Terminology](./fundamentals/battery_terminology.md)
   - [Cycle Aging in Battery](./fundamentals/cycle_ageing.md)
   - [Calendar Aging in Batteries](./fundamentals/calendar_ageing.md)
   - [Types of Chemistries vs Battery Design Methodologies](./fundamentals/chemistries_vs_design.md)

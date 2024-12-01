@@ -1,11 +1,5 @@
 # Prismatic Module
 
-This document provides a detailed exploration of prismatic battery modules, including their construction, cooling mechanisms, and assembly into battery packs. Prismatic modules are widely used in electric vehicles (EVs) and energy storage systems due to their simple and space-efficient design. This guide aims to offer a comprehensive understanding for engineers and industry professionals.
-
----
-
-## Introduction
-
 Prismatic cells are one of the simplest formats for constructing battery packs. Encased in a rigid metal or hard plastic enclosure, prismatic cells offer a flat and compact design, making them ideal for high-density applications. Their modularity and ease of assembly contribute to their popularity in automotive and stationary energy storage solutions.
 
 ---

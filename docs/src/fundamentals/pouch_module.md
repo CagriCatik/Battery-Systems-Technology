@@ -1,9 +1,5 @@
 # Pouch Module
 
----
-
-## Introduction
-
 Pouch cells are a popular choice for applications requiring high energy density and lightweight designs. Unlike cylindrical cells, pouch cells are encased in a flexible aluminum-laminated film, allowing for more efficient space utilization. However, this form factor introduces unique challenges, such as susceptibility to swelling under certain conditions. This document outlines the design, assembly, and operational considerations for pouch battery modules.
 
 ---

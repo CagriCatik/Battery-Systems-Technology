@@ -1,16 +1,12 @@
 # Battery Terminology
 
----
-
-## Introduction
-
 Battery Management Systems rely on specific technical terminologies to monitor, analyze, and optimize battery performance, safety, and reliability. A deep understanding of these terms is essential for professionals in electric vehicle (EV) development and energy storage systems. This guide provides an in-depth exploration of battery terminology, offering precise definitions, equations, examples, and their relevance to battery technology.
 
 ---
 
-## State of Charge (SOC)
+## State of Charge (SoC)
 
-The State of Charge (SOC) quantifies the remaining energy in a battery as a percentage of its full capacity.
+The State of Charge (SoC) quantifies the remaining energy in a battery as a percentage of its full capacity.
 
 - Definition:  
   $$ SOC = \frac{\text{Remaining Capacity (Ah)}}{\text{Full Capacity (Ah)}} \times 100 $$
@@ -33,9 +29,9 @@ The State of Charge (SOC) quantifies the remaining energy in a battery as a perc
 
 ---
 
-## State of Health (SOH)
+## State of Health (SoH)
 
-The State of Health (SOH) represents the overall condition of a battery relative to its original state.
+The State of Health (SoH) represents the overall condition of a battery relative to its original state.
 
 - Definition:  
   $$ SOH = \frac{\text{Current Usable Capacity (Ah)}}{\text{Initial Full Capacity (Ah)}} \times 100 $$

@@ -1,12 +1,8 @@
 # How Does Lithium Battery Work?
 
----
-
-## Introduction
-
 Lithium-ion batteries are ubiquitous in modern applications due to their high energy density, rechargeability, and long lifespan. They are integral to devices ranging from smartphones to electric vehicles (EVs), enabling the transition toward renewable energy systems.
 
-### Core Components of a Lithium-Ion Battery
+## Core Components of a Lithium-Ion Battery
 A lithium-ion battery consists of the following critical components:
 
 - Anode (Negative Electrode):
@@ -151,4 +147,3 @@ Battery Management Systems are essential to ensure the safe, efficient, and reli
 ## Conclusion
 
 Lithium-ion batteries have revolutionized energy storage, powering a wide array of applications. However, their complexity necessitates robust management systems like BMS to ensure safety, efficiency, and longevity. As research continues, innovations in materials, design, and recycling will shape the future of this critical technology, addressing current limitations while expanding its potential applications.
-

@@ -1,7 +1,5 @@
 # Cycle Aging in Batteries and Battery Management Systems
 
-## Introduction
-
 **Cycle aging** refers to the gradual reduction in a battery’s capacity and performance due to repeated charge-discharge cycles. This degradation is inevitable but can be managed effectively with proper usage and advanced battery management techniques.
 
 Key parameters influencing cycle ageing include:
