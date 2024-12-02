@@ -2,6 +2,7 @@
 book
 info.txt
 .DS_Store
+.sort/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
