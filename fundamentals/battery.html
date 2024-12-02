@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Open-Circuit Voltage Testing - Battery Management Systems</title>
+        <title>Battery and Battery Management Systems - Battery Management Systems</title>
 
 
         <!-- Custom HTML head -->
@@ -153,171 +153,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="open-circuit-voltage-ocv-testing"><a class="header" href="#open-circuit-voltage-ocv-testing">Open Circuit Voltage (OCV) Testing</a></h1>
-<p><strong>Open Circuit Voltage (OCV) Testing</strong> is a crucial procedure for characterizing the state of charge (SoC) and internal properties of a battery. It measures the voltage across the battery terminals when no load is applied. OCV testing provides insights into the battery's behavior under non-dynamic conditions, forming the basis for several battery management system (BMS) algorithms.</p>
-<hr />
-<h3 id="1-importance-of-ocv-testing"><a class="header" href="#1-importance-of-ocv-testing"><strong>1. Importance of OCV Testing</strong></a></h3>
-<ul>
-<li><strong>State of Charge Estimation:</strong> OCV is directly related to the SoC, which helps in monitoring the battery's energy levels.</li>
-<li><strong>Model Calibration:</strong> Accurate OCV measurements are essential for refining battery equivalent circuit models.</li>
-<li><strong>Health Diagnostics:</strong> OCV curves can indicate aging effects, capacity loss, and polarization issues.</li>
-<li><strong>Performance Optimization:</strong> Serves as a reference for dynamic model tuning and real-time state estimations.</li>
-</ul>
-<hr />
-<h3 id="2-process-of-ocv-testing"><a class="header" href="#2-process-of-ocv-testing"><strong>2. Process of OCV Testing</strong></a></h3>
-<p>The testing involves discharging or charging the battery to different SoC levels, followed by rest periods to stabilize the voltage.</p>
-<ol>
-<li>
-<p><strong>Preparation:</strong></p>
-<ul>
-<li>Ensure the battery is at a stable temperature.</li>
-<li>Use a precision voltage meter to measure OCV.</li>
-<li>Disconnect any load or external circuitry.</li>
-</ul>
-</li>
-<li>
-<p><strong>Stepwise Procedure:</strong></p>
-<ul>
-<li>Charge or discharge the battery incrementally (e.g., 10% SoC steps).</li>
-<li>Allow the battery to rest after each increment for the voltage to stabilize (rest periods can vary, typically 1–24 hours).</li>
-<li>Record the OCV for each SoC level.</li>
-</ul>
-</li>
-<li>
-<p><strong>Data Logging:</strong></p>
-<ul>
-<li>Store OCV measurements alongside corresponding SoC values.</li>
-<li>The data forms the OCV curve, which maps SoC to voltage.</li>
-</ul>
-</li>
-</ol>
-<hr />
-<h3 id="3-characteristics-of-the-ocv-curve"><a class="header" href="#3-characteristics-of-the-ocv-curve"><strong>3. Characteristics of the OCV Curve</strong></a></h3>
-<p>The OCV curve is unique to the battery chemistry and reflects its electrochemical properties.</p>
-<ul>
-<li>
-<p><strong>Flat Regions:</strong></p>
-<ul>
-<li>Indicate stable SoC ranges.</li>
-<li>Common in lithium-ion chemistries during mid-range SoC.</li>
-</ul>
-</li>
-<li>
-<p><strong>Steep Regions:</strong></p>
-<ul>
-<li>Indicate rapid voltage changes with slight SoC variations, usually near full charge or discharge.</li>
-</ul>
-</li>
-<li>
-<p><strong>Hysteresis Effect:</strong></p>
-<ul>
-<li>Due to charging and discharging pathways differing slightly, leading to minor discrepancies in OCV.</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h3 id="4-factors-influencing-ocv-measurements"><a class="header" href="#4-factors-influencing-ocv-measurements"><strong>4. Factors Influencing OCV Measurements</strong></a></h3>
-<ul>
-<li>
-<p><strong>Temperature:</strong></p>
-<ul>
-<li>OCV varies with temperature; low temperatures can reduce OCV for the same SoC.</li>
-<li>Compensation algorithms are often integrated into the testing setup.</li>
-</ul>
-</li>
-<li>
-<p><strong>Battery Aging:</strong></p>
-<ul>
-<li>Aging increases internal resistance, affecting the measured OCV.</li>
-</ul>
-</li>
-<li>
-<p><strong>Rest Periods:</strong></p>
-<ul>
-<li>Insufficient rest can lead to transient voltage effects, skewing OCV readings.</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h3 id="5-simulation-and-modeling-with-ocv-data"><a class="header" href="#5-simulation-and-modeling-with-ocv-data"><strong>5. Simulation and Modeling with OCV Data</strong></a></h3>
-<p>OCV data is often used in equivalent circuit models or more advanced techniques like Kalman filters.</p>
-<ul>
-<li>
-<p><strong>Integration into Models:</strong></p>
-<ul>
-<li>The OCV-SOC relationship serves as a lookup table for estimating SoC during operation.</li>
-<li>Parameters such as resistance and capacitance are adjusted based on OCV measurements.</li>
-</ul>
-</li>
-<li>
-<p><strong>Simulation Scenarios:</strong></p>
-<ul>
-<li>Apply dynamic current profiles to the battery model.</li>
-<li>Compare simulated OCV values against measured data for validation.</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h3 id="6-advanced-techniques"><a class="header" href="#6-advanced-techniques"><strong>6. Advanced Techniques:</strong></a></h3>
-<p>Modern OCV testing setups may incorporate:</p>
-<ul>
-<li><strong>Automated Test Equipment:</strong> Reduces manual effort and increases precision.</li>
-<li><strong>Temperature Control Systems:</strong> Ensures consistent conditions.</li>
-<li><strong>Statistical Analysis:</strong> Identifies outliers and trends in OCV-SOC data.</li>
-<li><strong>Kalman Filtering:</strong> Corrects noise and improves the accuracy of OCV-based SoC estimations.</li>
-</ul>
-<hr />
-<h3 id="7-challenges-in-ocv-testing"><a class="header" href="#7-challenges-in-ocv-testing"><strong>7. Challenges in OCV Testing</strong></a></h3>
-<ul>
-<li><strong>Time-Consuming:</strong> Requires long rest periods for stabilization.</li>
-<li><strong>Environmental Sensitivity:</strong> Requires strict control over temperature and external disturbances.</li>
-<li><strong>Data Integrity:</strong> Accurate logging and interpretation are critical to avoid model inaccuracies.</li>
-</ul>
-<hr />
-<h3 id="8-practical-application-example"><a class="header" href="#8-practical-application-example"><strong>8. Practical Application Example</strong></a></h3>
-<ol>
-<li>
-<p><strong>Battery Specification:</strong></p>
-<ul>
-<li>Lithium-ion NMC (Nickel Manganese Cobalt).</li>
-<li>Rated capacity: 5Ah.</li>
-</ul>
-</li>
-<li>
-<p><strong>Test Setup:</strong></p>
-<ul>
-<li>Incremental discharge from 100% to 0% SoC in 10% steps.</li>
-<li>Rest period: 2 hours between steps.</li>
-</ul>
-</li>
-<li>
-<p><strong>Results:</strong></p>
-<ul>
-<li>OCV-SOC curve obtained and plotted.</li>
-<li>Data integrated into an equivalent circuit model.</li>
-</ul>
-</li>
-<li>
-<p><strong>Outcome:</strong></p>
-<ul>
-<li>Improved SoC estimation accuracy.</li>
-<li>Validation of model parameters against real-world conditions.</li>
-</ul>
-</li>
-</ol>
-<hr />
-<h3 id="9-summary"><a class="header" href="#9-summary"><strong>9. Summary</strong></a></h3>
-<p>OCV testing is a fundamental procedure in battery characterization, providing essential data for modeling, diagnostics, and management. Its integration into simulation environments enhances the accuracy and reliability of battery systems in applications ranging from electric vehicles to grid storage.</p>
+                        <h1 id="battery-and-battery-management-systems"><a class="header" href="#battery-and-battery-management-systems">Battery and Battery Management Systems</a></h1>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="../testing_and_validation/estimation_parameter.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="../fundamentals/pe.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
 
-                            <a rel="next prefetch" href="../modeling_simulation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="../fundamentals/importance_of_battery.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -327,11 +173,11 @@
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="../testing_and_validation/estimation_parameter.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="../fundamentals/pe.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
 
-                    <a rel="next prefetch" href="../modeling_simulation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="../fundamentals/importance_of_battery.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>
