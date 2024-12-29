@@ -6,9 +6,9 @@ This repository provides comprehensive resources, scripts, and documentation for
 
 ## Contents
 
+- [Documentation](#documentation)
 - [MATLAB/Simulink Resources](#matlabsimulink-resources)
 - [Python Scripts](#python-scripts)
-- [Documentation](#documentation)
 - [Contributing](#contributing)
 
 ---
@@ -59,31 +59,38 @@ The `python` folder contains scripts for advanced analysis, simulations, and vis
 
 ## Documentation
 
-This repository includes detailed documentation built with **mdBook**, providing insights into using and extending the available tools and models.
+This repository includes detailed documentation built with **Docusaurus**, providing insights into using and extending the available tools and models.
 
-1. **Install mdBook**  
-   Install `mdBook` by following the [official installation guide](https://rust-lang.github.io/mdBook/guide/installation.html).  
-   Example with `cargo`:
+1. **Install Docusaurus CLI**  
+   Install the Docusaurus CLI tool globally using npm or yarn:  
+   Example with `npm`:
    ```bash
-   cargo install mdbook
+   npm install --global docusaurus-init
    ```
 
-2. **Build the Documentation**  
-   Navigate to the `docs` folder and build the documentation:
+2. **Initialize the Documentation**  
+   Navigate to your project directory and initialize a new Docusaurus site:
    ```bash
-   mdbook build
+   npx docusaurus-init
    ```
-   The generated files will be available in the `docs/book` directory.
+   Follow the prompts to set up your documentation structure.
 
-3. **Serve the Documentation Locally**  
-   Preview the documentation by running:
+3. **Build the Documentation**  
+   Navigate to the documentation directory (e.g., `docs`) and build the documentation:
    ```bash
-   mdbook serve
+   npm run build
+   ```
+   The generated files will be available in the `build` directory.
+
+4. **Serve the Documentation Locally**  
+   Preview the documentation locally by running:
+   ```bash
+   npm run start
    ```
    Open your browser and go to `http://localhost:3000`.
 
-4. **Deploy the Documentation**  
-   Upload the contents of the `docs/book` folder to any static hosting service (e.g., GitHub Pages, Netlify, Vercel).
+5. **Deploy the Documentation**  
+   Deploy the built documentation to any static hosting service (e.g., GitHub Pages, Netlify, Vercel) by uploading the contents of the `build` folder.
 
 ---
 
