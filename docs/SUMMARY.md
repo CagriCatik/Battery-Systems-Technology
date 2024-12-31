@@ -5,12 +5,7 @@
 ---
 
 - [**Fundamentals**](./fundamentals.md)
-  - [✅ Battery Management Systems for EVs](./fundamentals/ev.md)
-  - [✅ Electric Machine, Power Electronics and Battery](./fundamentals/components.md)
-    - [✅ Permanent Magnet Synchronous Motor](./fundamentals/em-pmsm.md)
-    - [✅ Asynchronous Motor](./fundamentals/em-asm.md)
-    - [✅ Power Electronics](./fundamentals/pe.md)
-    - [Battery and Battery Management Systems](./fundamentals/battery.md)
+
   - [✅ Importance of Battery](./fundamentals/importance_of_battery.md)
   - [✅ Why Lithium Battery Not Others?](./fundamentals/why_lithium_battery.md)
   - [✅ How Does Lithium Battery Work?](./fundamentals/how_lithium_battery_works.md)

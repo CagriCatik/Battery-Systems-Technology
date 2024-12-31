@@ -3,18 +3,23 @@
 // (when paired with `@ts-check`).
 
 import { themes as prismThemes } from 'prism-react-renderer';
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'BMS',
-  tagline: 'Bring your Knowledge to another level',
+  title: 'Battery Management System', // Title for your website
+  tagline: 'Bring your Knowledge to another level',   // Tagline for your website
   favicon: 'img/favicon.ico',
 
-  url: 'https://your-github-username.github.io',
+  // Corrected URL
+  url: 'https://CagriCatik.github.io',
+  
+  // Assuming you're deploying a project site
   baseUrl: '/BMS/',
 
-  organizationName: 'CagriCatik',
-  projectName: 'BMS',
+  organizationName: 'CagriCatik', // GitHub org/user name
+  projectName: 'BMS', // Repo name
   deploymentBranch: 'gh-pages',
 
   onBrokenLinks: 'warn',
@@ -34,8 +39,8 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl:
             'https://github.com/CagriCatik/BMS/edit/main/',
-          remarkPlugins: [require('remark-math')], // Add remark-math plugin
-          rehypePlugins: [require('rehype-katex')], // Add rehype-katex plugin
+          remarkPlugins: [remarkMath],
+          rehypePlugins: [rehypeKatex],
         },
         blog: {
           showReadingTime: true,
@@ -49,14 +54,26 @@ const config = {
     ],
   ],
 
+  // Add the stylesheets array to include KaTeX CSS
+  stylesheets: [
+    {
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      type: 'text/css',
+      integrity:
+        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+      crossorigin: 'anonymous',
+    },
+  ],
+  
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
-        title: 'RC-Plane-Knowledgebase',
+        title: '',
         logo: {
-          alt: 'Docu Logo',
+          alt: '',
           src: 'img/logo.png',
         },
         items: [

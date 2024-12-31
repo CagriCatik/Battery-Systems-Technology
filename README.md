@@ -1,6 +1,6 @@
 # Battery Management System
 
-This repository provides comprehensive resources, scripts, and documentation for simulating, designing, and analyzing **Battery Management Systems (BMS)** using MATLAB/Simulink and Python.
+This repository provides comprehensive resources, scripts, and documentation for simulating, designing, and analyzing **Battery Management Systems** using MATLAB/Simulink and Python.
 
 ---
 

@@ -2,44 +2,44 @@ import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
+// 1. Update FeatureList items to describe BMS features
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'Battery Monitoring',
+    // Swap out the SVG below for something relevant to batteries
+    //Svg: require('@site/static/img/undraw_battery_level.svg').default,
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        Monitor battery voltage, current, temperature, and overall health in real-time, ensuring safe and optimal performance.
       </>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'Cell Balancing',
+    //Svg: require('@site/static/img/undraw_balance.svg').default,
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
+        Keep cells at a similar state of charge to maximize battery lifetime and capacity, preventing premature wear or damage.
       </>
     ),
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
+    title: 'Alerts & Notifications',
+    //Svg: require('@site/static/img/undraw_alert.svg').default,
     description: (
       <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        Receive notifications for overcharge, overheating, low voltage, and other critical conditions—enabling proactive maintenance.
       </>
     ),
   },
 ];
 
-function Feature({Svg, title, description}) {
+// 2. The Feature component can remain the same, just referencing your new data
+function Feature({ Svg, title, description }) {
   return (
     <div className={clsx('col col--4')}>
       <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
+        {Svg && <Svg className={styles.featureSvg} role="img" />}
       </div>
       <div className="text--center padding-horiz--md">
         <Heading as="h3">{title}</Heading>
@@ -49,7 +49,8 @@ function Feature({Svg, title, description}) {
   );
 }
 
-export default function HomepageFeatures() {
+// 3. Optionally rename the exported function to "BmsFeatures" or keep it "HomepageFeatures"
+export default function BmsFeatures() {
   return (
     <section className={styles.features}>
       <div className="container">
