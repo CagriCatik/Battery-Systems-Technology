@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Battery Management System Blog</title>
+        <link>https://CagriCatik.github.io/BMS/blog</link>
+        <description>Battery Management System Blog</description>
+        <lastBuildDate>Tue, 07 Jan 2025 00:00:00 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <item>
+            <title><![CDATA[EV]]></title>
+            <link>https://CagriCatik.github.io/BMS/blog/welcome</link>
+            <guid>https://CagriCatik.github.io/BMS/blog/welcome</guid>
+            <pubDate>Tue, 07 Jan 2025 00:00:00 GMT</pubDate>
+            <category>Battery Management Systeme</category>
+            <category>Electic Vehicle</category>
+        </item>
+        <item>
+            <title><![CDATA[BMS]]></title>
+            <link>https://CagriCatik.github.io/BMS/blog/welcome</link>
+            <guid>https://CagriCatik.github.io/BMS/blog/welcome</guid>
+            <pubDate>Wed, 01 Jan 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[In the electric vehicle (EV) revolution, the Battery Management System (BMS) is arguably the unsung hero, working tirelessly behind the scenes. As the bridge between the battery pack and the rest of the vehicle, the BMS ensures efficiency, safety, and performance—a crucial trifecta for any EV. But what exactly makes the BMS such an integral component, and why does its role go beyond mere power management?]]></description>
+            <category>Battery Management Systeme</category>
+            <category>Electic Vehicle</category>
+        </item>
+    </channel>
+</rss>

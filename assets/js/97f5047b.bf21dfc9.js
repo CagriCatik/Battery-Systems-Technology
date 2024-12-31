@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkmy_document=self.webpackChunkmy_document||[]).push([[9091],{4057:e=>{e.exports=JSON.parse('{"tags":[{"label":"Battery Management Systeme","permalink":"/BMS/blog/tags/bms","description":"Battery Management Systeme","count":2},{"label":"Electic Vehicle","permalink":"/BMS/blog/tags/ev","description":"Electic Vehicle","count":2}]}')}}]);
