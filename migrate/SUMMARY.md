@@ -1,14 +1,5 @@
 # Battery Management Systems
 
-[**Battery Management Systems**](./bms.md)
-
-- [**Advanced Concepts**](./advanced_concepts.md)
-  - [OCV vs SOC for Chemistries](./advanced_concepts/ocv_vs_soc.md)
-  - [Battery Cell Specification Sheet](./advanced_concepts/specification_sheet.md)
-  - [Battery Sizing Basics Steps](./advanced_concepts/sizing_basics.md)
-  - [SOA of Lithium Ion Battery](./advanced_concepts/soa_lithium.md)
-  - [Battery Standards](./advanced_concepts/battery_standards.md)
-
 ---
 
 - [**System and Algorithms**](./system_and_algorithms.md)
@@ -54,22 +45,3 @@
   - [Testing Generated Code for a BMS](./modeling_simulation/bms_code_testing.md)  
   - [Closed-Loop Testing of a BMS](./modeling_simulation/bms_closed_loop_testing.md)
   - [Machine Learning for BMS Design](./modeling_simulation/ml_for_bms.md)
-
----
-
-- [**Test Concept**](./test_concept/test_concept.md)
-  - [Test Strategy](./test_concept/test_strategy.md)
-
----
-
-- [**Tools**](./tools/tools.md)
-  - [CANoe](./tools/CANoe.md)
-  - [CANape](./tools/CANape.md)
-  - [ecu.test](./tools/ecu-test.md)
-
----
-
-- [**Appendix**](./appendix/appendix.md)
-  - [Glossary](./appendix/glossary.md)
-  - [Notions](./appendix/notions.md)
-  - [ISO26262](./appendix/iso26262.md)
