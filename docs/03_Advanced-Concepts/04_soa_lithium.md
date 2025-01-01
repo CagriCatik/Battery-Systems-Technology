@@ -1,3 +1,7 @@
+---
+id: soa_lithium
+---
+
 # SOA of Lithium Ion Battery
 
 ## Introduction

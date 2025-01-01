@@ -1,3 +1,7 @@
+---
+id: ocv_vs_soc
+---
+
 # OCV vs SOC for Chemistries
 
 ## Introduction

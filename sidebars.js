@@ -39,6 +39,8 @@ const sidebars = {
       label: 'Advanced Concepts',
       items: [
         'Advanced-Concepts/ocv_vs_soc',
+        'Advanced-Concepts/specification_sheet',
+        'Advanced-Concepts/sizing_basics',
         'Advanced-Concepts/soa_lithium',
         'Advanced-Concepts/battery_standards',
       ],
