@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+id: bms
 ---
 
 # Battery Management Systems in Electric Vehicles

@@ -6,3 +6,5 @@ tags: [BMS, EV]
 ---
 
 # Blog 1
+
+<!-- truncate -->

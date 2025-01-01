@@ -1,0 +1,1 @@
+- **Variable Frequency Drive (VFD)**: An electronic controller that adjusts the frequency and voltage supplied to an electric motor, enabling variable speed and torque control.

@@ -2,32 +2,6 @@
 
 [**Battery Management Systems**](./bms.md)
 
----
-
-- [**Fundamentals**](./fundamentals.md)
-
-  - [✅ Importance of Battery](./fundamentals/importance_of_battery.md)
-  - [✅ Why Lithium Battery Not Others?](./fundamentals/why_lithium_battery.md)
-  - [✅ How Does Lithium Battery Work?](./fundamentals/how_lithium_battery_works.md)
-  - [✅ Battery Terminology](./fundamentals/battery_terminology.md)
-  - [✅ Cycle Aging in Battery](./fundamentals/cycle_ageing.md)
-  - [✅ Calendar Aging in Batteries](./fundamentals/calendar_ageing.md)
-  - [✅ Types of Chemistries vs Battery Design Methodologies](./fundamentals/chemistries_vs_design.md)
-  - [✅ Battery Form Factors](./fundamentals/form_factors.md)
-  - [✅ Cell Construction](./fundamentals/cell_construction.md)
-  - [✅ Types of Cell Comparison](./fundamentals/cell_comparison.md)
-  - [Cell to Cell Electrical Connection](./fundamentals/electrical_connection.md)
-  - [Cell Types and Welding](./fundamentals/types_and_welding.md)
-  - [Cylindrical Module](./fundamentals/cylindrical_module.md)
-  - [Pouch Module](./fundamentals/pouch_module.md)
-  - [Prismatic Module](./fundamentals/prismatic_module.md)
-  - [Cell to Pack Integration](./fundamentals/cell_to_pack.md)
-  - [Cooling Mechanism for EV Batteries](./fundamentals/cooling_mechanism.md)
-  - [Air Cooling and Heating Technology](./fundamentals/ac-ht.md)
-  - [Topology](./fundamentals/topology.md)
-
----
-
 - [**Advanced Concepts**](./advanced_concepts.md)
   - [OCV vs SOC for Chemistries](./advanced_concepts/ocv_vs_soc.md)
   - [Battery Cell Specification Sheet](./advanced_concepts/specification_sheet.md)

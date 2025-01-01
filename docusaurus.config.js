@@ -9,7 +9,7 @@ import rehypeKatex from 'rehype-katex';
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Battery Management System', // Title for your website
-  tagline: 'Bring your Knowledge to another level',   // Tagline for your website
+  tagline: 'Bring your Knowledge to another level', // Tagline for your website
   favicon: 'img/favicon.ico',
 
   // Corrected URL
@@ -33,19 +33,16 @@ const config = {
   presets: [
     [
       'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl:
-            'https://github.com/CagriCatik/BMS/edit/main/',
+          editUrl: 'https://github.com/CagriCatik/BMS/edit/main/',
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
         },
         blog: {
           showReadingTime: true,
-          editUrl:
-            'https://github.com/CagriCatik/BMS/edit/main/',
+          editUrl: 'https://github.com/CagriCatik/BMS/edit/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -54,20 +51,18 @@ const config = {
     ],
   ],
 
-  // Add the stylesheets array to include KaTeX CSS
+  // Updated KaTeX CSS to a newer version
   stylesheets: [
     {
-      href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
+      href: 'https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css',
       type: 'text/css',
       integrity:
-        'sha384-odtC+0UGzzFL/6PNoE8rX/SPcQDXBJ+uRepguP4QkPCm2LBxH3FA3y+fKSiJ+AmM',
+        'sha384-R4556vVJtIc0EJ3NKnM5ePcM78Zv5e+/ff+f6aZwYzZjnj84pK8i0PZyNnO+g0OQ',
       crossorigin: 'anonymous',
     },
   ],
-  
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
@@ -81,9 +76,19 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'tutorialSidebar',
             position: 'left',
-            label: 'Documentation',
+            label: 'Docs',
           },
-          { to: '/blog', label: 'Blog', position: 'left' },
+          {
+            type: 'docSidebar',
+            sidebarId: 'codesSidebar', // from sidebars.js
+            position: 'left',
+            label: 'Codes',
+          },
+          {
+            to: '/blog',
+            label: 'Blog',
+            position: 'left',
+          },
           {
             href: 'https://github.com/CagriCatik/BMS',
             label: 'GitHub',
@@ -91,49 +96,9 @@ const config = {
           },
         ],
       },
+
       footer: {
         style: 'dark',
-        links: [
-          {
-            title: 'Docs',
-            items: [
-              {
-                label: 'Documentation',
-                to: '/docs/getting-started',
-              },
-            ],
-          },
-          {
-            title: 'Community',
-            items: [
-              {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-              },
-              {
-                label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
-              },
-              {
-                label: 'X',
-                href: 'https://x.com/docusaurus',
-              },
-            ],
-          },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/CagriCatik/BMS',
-              },
-            ],
-          },
-        ],
         copyright: `Copyright © ${new Date().getFullYear()} BMS, Built with Docusaurus.`,
       },
       prism: {

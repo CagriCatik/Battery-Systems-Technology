@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+id: em-pmsm
 ---
 
 # Permanent Magnet Synchronous Motors in Automotive Applications

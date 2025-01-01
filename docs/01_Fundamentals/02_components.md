@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+id: components
 ---
 
 # Components of Electric Vehicles

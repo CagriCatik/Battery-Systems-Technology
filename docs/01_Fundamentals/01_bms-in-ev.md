@@ -1,8 +1,8 @@
 ---
-sidebar_position: 1
+id: introduction
 ---
 
-# Battery Management Systems in Electric Vehicles
+# Introduction
 
 Electric Vehicles (EVs) are at the forefront of the global shift towards sustainable transportation. Central to their functionality and reliability is the **Battery Management System (BMS)**, an intricate electronic system that governs the performance, safety, and longevity of lithium-ion battery packs. This documentation delves into the pivotal role of BMS in EVs, exploring its core functionalities, design challenges, and the innovative advancements shaping its future.
 
