@@ -74,15 +74,39 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
+            sidebarId: 'FundamentalsSidebar',
             position: 'left',
-            label: 'Docs',
+            label: 'Fundamentals',
           },
           {
             type: 'docSidebar',
-            sidebarId: 'codesSidebar', // from sidebars.js
+            sidebarId: 'BatterySidebar', // from sidebars.js
             position: 'left',
-            label: 'Codes',
+            label: 'Battery',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'AdvancedSidebar', // from sidebars.js
+            position: 'left',
+            label: 'Advanced Concepts',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'SystemAlgorithmSidebar', // from sidebars.js
+            position: 'left',
+            label: 'System & Algorithms',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'TestingValidationSidebar', // from sidebars.js
+            position: 'left',
+            label: 'Testing & Validation',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'GlossaryValidationSidebar', // from sidebars.js
+            position: 'left',
+            label: 'Glossary',
           },
           {
             to: '/blog',
@@ -99,7 +123,7 @@ const config = {
 
       footer: {
         style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} BMS, Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} BMS`,
       },
       prism: {
         theme: prismThemes.github,

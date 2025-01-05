@@ -1,7 +1,3 @@
----
-id: components
----
-
 # Components of Electric Vehicles
 
 Electric Vehicles (EVs) represent a pivotal advancement in the automotive industry, driven by the urgent need for sustainable transportation solutions. At the heart of every EV lies a sophisticated interplay of key components: the **Electric Machine**, **Power Electronics**, and **Battery**. Central to the harmonious operation of these elements is the **Battery Management System (BMS)**, which orchestrates their interactions to ensure optimal performance, safety, and longevity. This documentation provides an in-depth exploration of each component, their interdependencies, and the innovations shaping the future of electric mobility.
@@ -243,25 +239,6 @@ Accurate SoH data from the BMS enables better sorting of used batteries for recy
 
 Innovations in battery chemistry and power electronics design focus on reducing the use of scarce or environmentally harmful materials, contributing to more sustainable manufacturing practices.
 
-## Conclusion
-
-The **Electric Machine**, **Power Electronics**, and **Battery** form the triad of essential components that drive the performance, efficiency, and reliability of modern electric vehicles. The **Battery Management System (BMS)** serves as the central orchestrator, managing the intricate interactions between these components to ensure optimal operation, safety, and longevity. As the automotive industry continues its rapid shift towards electrification, advancements in these areas—such as high-efficiency motor designs, sophisticated power electronics, and intelligent BMS technologies—are pivotal in shaping the future of sustainable transportation.
-
-Through continuous innovation and integration, these components not only enhance vehicle performance and user experience but also contribute significantly to broader environmental and sustainability goals. As electric vehicles become increasingly prevalent, the synergy between the electric machine, power electronics, and battery, underpinned by an advanced BMS, will remain critical in driving the next generation of mobility solutions.
-
-# References
-
-1. **IEEE Standards**: [Institute of Electrical and Electronics Engineers](https://www.ieee.org/)
-2. **Automotive Industry Publications**: Tesla, BMW, Nissan official websites and technical whitepapers.
-3. **Academic Journals**: *Journal of Power Sources*, *IEEE Transactions on Vehicular Technology*.
-4. **Recent Innovations**: Industry reports from BloombergNEF, McKinsey & Company on EV technology trends.
-
-# Further Reading
-
-- **"Electric Vehicle Technology Explained" by James Larminie and John Lowry**: A comprehensive guide to EV technologies, including electric machines, power electronics, and battery systems.
-- **"Battery Management Systems for Large Lithium-Ion Battery Packs" by Davide Andrea**: An in-depth look at BMS design, functionality, and applications in EVs.
-- **"Power Electronics in Electric Vehicles" by Muhammad H. Rashid**: Explores the role of power electronics in EVs, covering inverters, converters, and control strategies.
-
 
 
 # FAQs
@@ -283,4 +260,7 @@ Through continuous innovation and integration, these components not only enhance
 
 # Conclusion
 
-The integration of the **Electric Machine**, **Power Electronics**, and **Battery**, orchestrated by the **Battery Management System (BMS)**, forms the backbone of modern electric vehicles. This synergy ensures that EVs deliver high performance, exceptional efficiency, and uncompromised safety. As technology continues to evolve, ongoing innovations in these components will further propel electric mobility, making it an increasingly viable and sustainable alternative to traditional combustion engine vehicles. Understanding the roles and interactions of these components is essential for anyone involved in the design, manufacture, or maintenance of electric vehicles, as well as for enthusiasts and stakeholders invested in the future of transportation.
+The **Electric Machine**, **Power Electronics**, and **Battery** form the triad of essential components that drive the performance, efficiency, and reliability of modern electric vehicles. The **Battery Management System (BMS)** serves as the central orchestrator, managing the intricate interactions between these components to ensure optimal operation, safety, and longevity. As the automotive industry continues its rapid shift towards electrification, advancements in these areas—such as high-efficiency motor designs, sophisticated power electronics, and intelligent BMS technologies—are pivotal in shaping the future of sustainable transportation.
+
+Through continuous innovation and integration, these components not only enhance vehicle performance and user experience but also contribute significantly to broader environmental and sustainability goals. As electric vehicles become increasingly prevalent, the synergy between the electric machine, power electronics, and battery, underpinned by an advanced BMS, will remain critical in driving the next generation of mobility solutions.
+

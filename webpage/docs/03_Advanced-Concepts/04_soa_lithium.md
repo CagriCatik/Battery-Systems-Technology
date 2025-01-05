@@ -5,11 +5,11 @@ id: soa_lithium
 # SOA of Lithium Ion Battery
 
 ## Introduction
-Lithium-ion batteries (LIBs) are at the forefront of modern energy storage solutions due to their superior energy density, cycle life, and efficiency. However, their performance and safety rely on adherence to stringent regulations, standards, and effective Battery Management Systems (BMS). This documentation explores the key aspects of LIBs, including their operation, standards, safety protocols, and failure mechanisms, with a focus on BMS implementation.
+Lithium-ion batteries are at the forefront of modern energy storage solutions due to their superior energy density, cycle life, and efficiency. However, their performance and safety rely on adherence to stringent regulations, standards, and effective Battery Management Systems (BMS). This documentation explores the key aspects of LIBs, including their operation, standards, safety protocols, and failure mechanisms, with a focus on BMS implementation.
 
 ---
 
-## 1. Fundamentals of Lithium-Ion Batteries (LIBs)
+## 1. Fundamentals of Lithium-Ion Batteries
 
 Lithium-ion batteries stand out due to their exceptional energy storage capabilities and operational reliability. Their high energy density allows compact designs suitable for portable electronics and electric vehicles. The extended cycle life of LIBs makes them ideal for repeated charging and discharging processes. Additionally, the low self-discharge rate ensures that energy is retained for longer periods, enhancing their usability in diverse applications.
 

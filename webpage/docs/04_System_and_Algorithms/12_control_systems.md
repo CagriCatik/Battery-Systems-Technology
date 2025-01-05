@@ -2,7 +2,7 @@
 id: control_systems
 ---
 
-# BMS Control Systems and Workings
+# Control Systems and Workings
 
 Battery Management Systems (BMS) control the operation of battery packs through complex mechanisms that ensure optimal performance, safety, and longevity. The BMS control system plays a pivotal role in monitoring real-time data, executing dynamic actions, and communicating with other subsystems in applications such as electric vehicles (EVs) and stationary energy storage. This document provides a comprehensive overview of the control systems within a BMS, detailing their workings, architecture, and operational strategies.
 

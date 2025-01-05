@@ -2,7 +2,6 @@
 sidebar_position: 6
 ---
 
-
 # Calendar Aging  
 
 **Calendar aging** refers to the gradual decline in a battery’s capacity, efficiency, and overall performance over time, even when the battery is not actively in use. This phenomenon significantly affects lithium-ion batteries, which are prevalent in electric vehicles (EVs), consumer electronics, and energy storage systems. Understanding the mechanisms, influencing factors, and mitigation strategies for calendar aging is crucial for enhancing battery longevity and performance, making it a pivotal consideration in the design and management of Battery Management Systems (BMS).

@@ -1,9 +1,26 @@
+# tags.yml
+
 BMS:
-  label: Battery Management Systeme
-  permalink: /bms
-  description: Battery Management Systeme
+  label: Battery Management System
+  permalink: /tags/bms
+  description: Battery Management Systems in Electric Vehicles
 
 EV:
-  label: Electic Vehicle
-  permalink: /ev
-  description: Electic Vehicle
+  label: Electric Vehicle
+  permalink: /tags/ev
+  description: Electric Vehicles and their Technologies
+
+ICE:
+  label: Internal Combustion Engine
+  permalink: /tags/ice
+  description: Internal Combustion Engines and Their Control Units
+
+Automotive Technology:
+  label: Automotive Technology
+  permalink: /tags/automotive-technology
+  description: Various Technologies Used in the Automotive Industry
+
+Sustainable Mobility:
+  label: Sustainable Mobility
+  permalink: /tags/sustainable-mobility
+  description: Innovations Promoting Sustainable Transportation

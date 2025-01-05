@@ -2,7 +2,7 @@
 id: bms_architecture
 ---
 
-# BMS Architecture
+# Architecture
 
 A Battery Management System (BMS) is a sophisticated system designed to monitor, control, and optimize the performance and safety of battery packs. Its architecture is modular and hierarchical, ensuring scalability and efficiency in managing large-scale battery configurations for applications such as electric vehicles (EVs), energy storage, and consumer electronics.
 

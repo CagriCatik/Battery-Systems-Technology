@@ -2,7 +2,7 @@
 id: sizing_basics
 ---
 
-# Battery Sizing and Management for Electric Vehicles
+# Battery Sizing and Management
 
 This guide offers an extensive exploration of battery sizing and Battery Management Systems (BMS) tailored specifically for electric vehicles (EVs). Aimed at engineers and industry professionals, it delves into foundational principles, technical methodologies, and practical calculations essential for designing efficient and reliable battery systems.
 

@@ -3,7 +3,7 @@ id: state_machine
 ---
 
 
-# BMS State Machine
+# State Machine
 
 This state diagram outlines the various operating states of the Battery Management System (BMS) and the transitions between these states based on specific events and conditions.
 

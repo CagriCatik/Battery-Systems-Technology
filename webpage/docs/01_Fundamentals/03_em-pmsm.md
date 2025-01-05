@@ -1,8 +1,4 @@
----
-id: em-pmsm
----
-
-# Permanent Magnet Synchronous Motors in Automotive Applications
+# Permanent Magnet Synchronous Motors
 
 Permanent Magnet Synchronous Motors (PMSMs) have emerged as a pivotal technology in the automotive industry, particularly within electric vehicles (EVs) and hybrid electric vehicles (HEVs). Leveraging permanent magnets within their rotors, PMSMs offer unparalleled efficiency, high power density, and reliability, making them a preferred choice for modern automotive propulsion and auxiliary systems. This documentation provides a comprehensive exploration of PMSMs, detailing their principles of operation, applications, advantages, challenges, and future advancements within the automotive sector.
 
@@ -144,29 +140,7 @@ Future developments will focus on maximizing energy recovery through advanced re
 
 Manufacturers are developing more modular PMSM designs that can be easily customized to fit various vehicle platforms and power requirements. This flexibility will facilitate the adoption of PMSMs across a broader range of vehicle types, from compact city cars to heavy-duty electric trucks.
 
-## Conclusion
 
-Permanent Magnet Synchronous Motors are at the forefront of automotive electrification, offering exceptional efficiency, compact design, and high torque density that are indispensable for modern electric and hybrid vehicles. Despite challenges related to material costs and thermal management, continuous advancements in technology and materials science are addressing these issues, paving the way for broader PMSM adoption.
-
-The integration of PMSMs with advanced control algorithms, power electronics, and vehicle systems enhances their performance and reliability, making them a cornerstone of sustainable and high-performance electric mobility. As the automotive industry continues to evolve towards electrification, PMSMs will remain a critical focus area, driving innovations that contribute to more efficient, reliable, and environmentally friendly transportation solutions.
-
-# References
-
-1. **IEEE Standards**: [Institute of Electrical and Electronics Engineers](https://www.ieee.org/)
-2. **Automotive Industry Publications**: Technical whitepapers and official websites of Tesla, BMW, Nissan, and other leading EV manufacturers.
-3. **Academic Journals**: *Journal of Power Sources*, *IEEE Transactions on Vehicular Technology*, *Electric Power Systems Research*.
-4. **Industry Reports**: Publications from BloombergNEF, McKinsey & Company on EV technology trends and market analysis.
-5. **Books**:
-   - *"Electric Vehicle Technology Explained"* by James Larminie and John Lowry
-   - *"Battery Management Systems for Large Lithium-Ion Battery Packs"* by Davide Andrea
-   - *"Power Electronics in Electric Vehicles"* by Muhammad H. Rashid
-
-# Further Reading
-
-- **"Electric Vehicle Technology Explained" by James Larminie and John Lowry**: A comprehensive guide to EV technologies, including electric machines, power electronics, and battery systems.
-- **"Battery Management Systems for Large Lithium-Ion Battery Packs" by Davide Andrea**: An in-depth look at BMS design, functionality, and applications in EVs.
-- **"Power Electronics in Electric Vehicles" by Muhammad H. Rashid**: Explores the role of power electronics in EVs, covering inverters, converters, and control strategies.
-- **"Permanent Magnet Synchronous Motors: Theory and Applications" by R. Krishnan**: Detailed exploration of PMSM principles, design, and automotive applications.
 
 
 # FAQs
@@ -186,10 +160,6 @@ The integration of PMSMs with advanced control algorithms, power electronics, an
 **Q5: How is the automotive industry addressing the cost and supply chain issues associated with rare earth materials in PMSMs?**  
 *A5: The automotive industry is investing in research to develop rare earth-free PMSMs, utilizing alternative materials like ferrite magnets. Additionally, advancements in recycling technologies aim to reclaim rare earth elements from used motors, and manufacturers are exploring supply chain diversification to mitigate the impact of material shortages and price volatility.*
 
-# Acknowledgements
-
-This documentation synthesizes information from leading industry sources, academic research, and authoritative publications in the field of electric vehicle technology. Special thanks to engineers, researchers, and manufacturers who contribute to the continuous advancement of PMSM technologies and their applications in the automotive sector.
-
 # Conclusion
 
 Permanent Magnet Synchronous Motors are a cornerstone of modern automotive electrification, offering exceptional efficiency, compact design, and high torque density essential for electric and hybrid vehicles. Despite challenges related to material costs and thermal management, continuous advancements in technology and materials science are addressing these issues, paving the way for broader PMSM adoption.
@@ -197,3 +167,9 @@ Permanent Magnet Synchronous Motors are a cornerstone of modern automotive elect
 The integration of PMSMs with advanced control algorithms, power electronics, and vehicle systems enhances their performance and reliability, making them indispensable for sustainable and high-performance electric mobility. As the automotive industry continues its rapid shift towards electrification, PMSMs will remain a critical focus area, driving innovations that contribute to more efficient, reliable, and environmentally friendly transportation solutions.
 
 Understanding the roles and interactions of PMSMs within the broader context of electric drivetrains and vehicle systems is essential for engineers, manufacturers, and stakeholders invested in the future of electric mobility. With ongoing research and technological advancements, PMSMs are set to play an increasingly vital role in shaping the next generation of electric and hybrid vehicles.
+
+## Conclusion
+
+Permanent Magnet Synchronous Motors are at the forefront of automotive electrification, offering exceptional efficiency, compact design, and high torque density that are indispensable for modern electric and hybrid vehicles. Despite challenges related to material costs and thermal management, continuous advancements in technology and materials science are addressing these issues, paving the way for broader PMSM adoption.
+
+The integration of PMSMs with advanced control algorithms, power electronics, and vehicle systems enhances their performance and reliability, making them a cornerstone of sustainable and high-performance electric mobility. As the automotive industry continues to evolve towards electrification, PMSMs will remain a critical focus area, driving innovations that contribute to more efficient, reliable, and environmentally friendly transportation solutions.

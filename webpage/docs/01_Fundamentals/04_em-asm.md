@@ -1,8 +1,4 @@
----
-id: em-asm
----
-
-# Asynchronous Motors in Automotive Applications
+# Asynchronous Motors
 
 Asynchronous Motors (ASMs), also known as Induction Motors, have long been a cornerstone in various industrial applications due to their robustness, simplicity, and cost-effectiveness. In the automotive industry, ASMs play a crucial role, particularly in electric vehicles (EVs) and hybrid electric vehicles (HEVs), where their durability and adaptability make them invaluable for both propulsion and auxiliary systems. This comprehensive documentation delves into the principles of operation, applications, advantages, challenges, technological advancements, and future prospects of ASMs in the automotive sector.
 
@@ -226,25 +222,6 @@ BYD, a leading manufacturer of electric buses, employs ASMs for their propulsion
 Asynchronous Motors remain a fundamental component in the automotive industry's move towards electrification. Their mechanical simplicity, durability, and cost-effectiveness make them an enduring choice for a wide range of applications, from propulsion systems in electric and hybrid vehicles to critical auxiliary functions. While Permanent Magnet Synchronous Motors offer higher efficiency and torque density, ASMs continue to hold their ground by providing reliable and versatile solutions where cost and robustness are prioritized.
 
 Ongoing advancements in rotor design, control algorithms, and integration with power electronics are bridging the efficiency gap between ASMs and PMSMs, enhancing their performance and making them more competitive in the evolving landscape of electric mobility. As the automotive sector continues to innovate, the role of Asynchronous Motors is set to remain significant, driving forward sustainable and reliable transportation solutions for the future.
-
-# References
-
-1. **IEEE Standards**: [Institute of Electrical and Electronics Engineers](https://www.ieee.org/)
-2. **Automotive Industry Publications**: Technical whitepapers and official websites of Tesla, General Motors, Nissan, BYD, and other leading EV manufacturers.
-3. **Academic Journals**: *Journal of Power Sources*, *IEEE Transactions on Vehicular Technology*, *Electric Power Systems Research*.
-4. **Industry Reports**: Publications from BloombergNEF, McKinsey & Company on EV technology trends and market analysis.
-5. **Books**:
-   - *"Electric Machinery Fundamentals"* by Stephen J. Chapman
-   - *"Electric Vehicle Technology Explained"* by James Larminie and John Lowry
-   - *"Battery Management Systems for Large Lithium-Ion Battery Packs"* by Davide Andrea
-
-# Further Reading
-
-- **"Electric Vehicle Technology Explained" by James Larminie and John Lowry**: A comprehensive guide to EV technologies, including electric machines, power electronics, and battery systems.
-- **"Electric Machinery Fundamentals" by Stephen J. Chapman**: An in-depth exploration of electric motor theory and applications.
-- **"Battery Management Systems for Large Lithium-Ion Battery Packs" by Davide Andrea**: An extensive look at BMS design, functionality, and applications in EVs.
-- **"Power Electronics in Electric Vehicles" by Muhammad H. Rashid**: Explores the role of power electronics in EVs, covering inverters, converters, and control strategies.
-- **"Induction Motors" by R. Krishnan**: Detailed exploration of ASM principles, design, and automotive applications.
 
 # FAQs
 

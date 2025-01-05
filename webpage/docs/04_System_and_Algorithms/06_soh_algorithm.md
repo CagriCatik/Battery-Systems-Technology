@@ -6,7 +6,7 @@ sidebar_label: SoH Algorithm & Implementation
 slug: /soh-algorithm-implementation
 ---
 
-# State of Health (SoH) Algorithm and Implementation
+# State of Health Algorithm and Implementation
 
 ## Introduction
 The State of Health (SoH) algorithm is an essential component of a Battery Management System (BMS), providing insights into the battery's condition and predicting its remaining usable capacity. This documentation delves into the theory, methodology, and technical implementation of SoH estimation, incorporating best practices and addressing challenges. The focus is on creating a seamless, detailed, and practical explanation for engineers and industry professionals.
