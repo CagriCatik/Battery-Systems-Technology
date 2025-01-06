@@ -80,33 +80,27 @@ const config = {
           },
           {
             type: 'docSidebar',
-            sidebarId: 'BatterySidebar', // from sidebars.js
+            sidebarId: 'BatterySidebar',
             position: 'left',
             label: 'Battery',
           },
           {
             type: 'docSidebar',
-            sidebarId: 'AdvancedSidebar', // from sidebars.js
+            sidebarId: 'AdvancedSidebar',
             position: 'left',
             label: 'Advanced Concepts',
           },
           {
             type: 'docSidebar',
-            sidebarId: 'SystemAlgorithmSidebar', // from sidebars.js
+            sidebarId: 'SystemAlgorithmSidebar',
             position: 'left',
             label: 'System & Algorithms',
           },
           {
             type: 'docSidebar',
-            sidebarId: 'TestingValidationSidebar', // from sidebars.js
+            sidebarId: 'TestingValidationSidebar',
             position: 'left',
             label: 'Testing & Validation',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 'GlossaryValidationSidebar', // from sidebars.js
-            position: 'left',
-            label: 'Glossary',
           },
           {
             to: '/blog',
