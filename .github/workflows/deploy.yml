@@ -16,7 +16,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18' # Match your Node.js version from package.json
+          node-version: '18'
 
       - name: Install dependencies
         working-directory: ./webpage
