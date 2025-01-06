@@ -18,9 +18,6 @@ jobs:
         with:
           node-version: '18' # Match your Node.js version from package.json
 
-      - name: Navigate to Docusaurus project
-        run: cd webpage
-
       - name: Install dependencies
         working-directory: ./webpage
         run: npm install
