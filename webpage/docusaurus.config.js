@@ -77,7 +77,7 @@ const config = {
             sidebarId: 'FundamentalsSidebar',
             position: 'left',
             label: 'Fundamentals',
-          },
+          },/*
           {
             type: 'docSidebar',
             sidebarId: 'BatterySidebar',
@@ -101,7 +101,7 @@ const config = {
             sidebarId: 'TestingValidationSidebar',
             position: 'left',
             label: 'Testing & Validation',
-          },
+          },*/
           {
             to: '/blog',
             label: 'Blog',
