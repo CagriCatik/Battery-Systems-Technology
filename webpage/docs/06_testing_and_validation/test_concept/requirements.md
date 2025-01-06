@@ -1,4 +1,5 @@
-# Anforderungen an ein Battery Management System
+# Anforderungen
+
 ## Funktionale Anforderungen
 
 ### Spannungsüberwachung
@@ -8,6 +9,7 @@
 - Es muss eine Warnung ausgegeben werden, wenn die Zellspannung unter 2,5 V oder über 4,2 V liegt.
 
 #### Testspezifikation
+
 - Testfall 1.1: Überprüfen Sie die Genauigkeit der Zellspannungsmessung durch Einspeisen von Spannungen im Bereich von 2,5 V bis 4,2 V in 0,01 V-Schritten. Validieren Sie die Messwerte.
 - Testfall 1.2: Simulieren Sie eine Zellspannung unter 2,5 V und prüfen Sie, ob eine Warnung generiert wird.
 - Testfall 1.3: Simulieren Sie eine Zellspannung über 4,2 V und prüfen Sie, ob eine Warnung generiert wird.

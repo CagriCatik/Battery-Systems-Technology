@@ -54,9 +54,11 @@ The relationship between the parameters and the battery's voltage behavior can b
 - **Instantaneous Voltage Drop:**
   - Caused by $R_0$.
   - Occurs immediately after current is applied or removed.
+
 - **Exponential Voltage Decay:**
   - Governed by $R_1$ and $C_1$.
   - Represents the gradual stabilization of the voltage over time.
+  
 - **Diffusion-Limited Recovery:**
   - Indicates the long-term recovery of voltage to its open-circuit value.
 
