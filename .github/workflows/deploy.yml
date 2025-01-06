@@ -18,9 +18,20 @@ jobs:
         with:
           node-version: '18'
 
+      - name: List repository files
+        run: ls -R
+
+      - name: List webpage folder contents
+        working-directory: ./webpage
+        run: ls -R
+
       - name: Install dependencies
         working-directory: ./webpage
         run: npm install
+
+      - name: Clear cache
+        working-directory: ./webpage
+        run: npm run clear
 
       - name: Build Docusaurus site
         working-directory: ./webpage
