@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-modeling_design/soc_soh_estimation" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.3">
+<title data-rh="true">Initial SOC and SOH Estimation | Battery Management System</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://CagriCatik.github.io/BMS/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://CagriCatik.github.io/BMS/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://CagriCatik.github.io/BMS/docs/modeling_design/soc_soh_estimation"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Initial SOC and SOH Estimation | Battery Management System"><meta data-rh="true" name="description" content="Accurately estimating the State of Charge (SoC) and State of Health (SoH) of a battery is critical for the reliable operation of energy storage systems, especially in electric vehicles (EVs), renewable energy storage, and portable electronics. SoC determines the remaining capacity of a battery, while SoH assesses its overall condition and degradation over time. This document provides an in-depth analysis of the methods, challenges, and advancements in initial SoC and SoH estimation."><meta data-rh="true" property="og:description" content="Accurately estimating the State of Charge (SoC) and State of Health (SoH) of a battery is critical for the reliable operation of energy storage systems, especially in electric vehicles (EVs), renewable energy storage, and portable electronics. SoC determines the remaining capacity of a battery, while SoH assesses its overall condition and degradation over time. This document provides an in-depth analysis of the methods, challenges, and advancements in initial SoC and SoH estimation."><link data-rh="true" rel="icon" href="/BMS/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://CagriCatik.github.io/BMS/docs/modeling_design/soc_soh_estimation"><link data-rh="true" rel="alternate" href="https://CagriCatik.github.io/BMS/docs/modeling_design/soc_soh_estimation" hreflang="en"><link data-rh="true" rel="alternate" href="https://CagriCatik.github.io/BMS/docs/modeling_design/soc_soh_estimation" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/BMS/blog/rss.xml" title="Battery Management System RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/BMS/blog/atom.xml" title="Battery Management System Atom Feed">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-R4556vVJtIc0EJ3NKnM5ePcM78Zv5e+/ff+f6aZwYzZjnj84pK8i0PZyNnO+g0OQ" crossorigin="anonymous"><link rel="stylesheet" href="/BMS/assets/css/styles.a479dc71.css">
+<script src="/BMS/assets/js/runtime~main.e6ff2d1d.js" defer="defer"></script>
+<script src="/BMS/assets/js/main.72ccabb9.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/BMS/"><div class="navbar__logo"><img src="/BMS/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/BMS/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/BMS/docs/fundamentals/getting-started">Fundamentals</a><a class="navbar__item navbar__link" href="/BMS/docs/battery/getting-started">Battery</a><a class="navbar__item navbar__link" href="/BMS/docs/advanced-concepts/getting-started">Advanced Concepts</a><a class="navbar__item navbar__link" href="/BMS/docs/system_and_algorithms/getting-started">System &amp; Algorithms</a><a class="navbar__item navbar__link" href="/BMS/docs/testing_and_validation/getting-started">Testing &amp; Validation</a><a class="navbar__item navbar__link" href="/BMS/blog">Blog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/CagriCatik/BMS" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/modeling_design/getting-started">Getting Started</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/BMS/docs/modeling_design/soc_soh_estimation">Initial SOC and SOH Estimation</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/modeling_design/matlab_design">BMS Design Using MATLAB</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/modeling_design/equivalent_models">Equivalent Circuit Cell Models</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/modeling_design/diffusion_voltage">Diffusion Voltage in Battery Cells</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/modeling_design/">README</a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/BMS/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Initial SOC and SOH Estimation</span><meta itemprop="position" content="1"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Initial SOC and SOH Estimation</h1></header>
+<p>Accurately estimating the State of Charge (SoC) and State of Health (SoH) of a battery is critical for the reliable operation of energy storage systems, especially in electric vehicles (EVs), renewable energy storage, and portable electronics. SoC determines the remaining capacity of a battery, while SoH assesses its overall condition and degradation over time. This document provides an in-depth analysis of the methods, challenges, and advancements in initial SoC and SoH estimation.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="state-of-charge-soc-estimation">State of Charge (SoC) Estimation<a href="#state-of-charge-soc-estimation" class="hash-link" aria-label="Direct link to State of Charge (SoC) Estimation" title="Direct link to State of Charge (SoC) Estimation">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-definition-of-soc">1. Definition of SoC<a href="#1-definition-of-soc" class="hash-link" aria-label="Direct link to 1. Definition of SoC" title="Direct link to 1. Definition of SoC">​</a></h3>
+<p>SoC represents the percentage of available energy in a battery relative to its full capacity:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>SoC</mtext><mo>=</mo><mfrac><mtext>Remaining Capacity</mtext><mtext>Nominal Capacity</mtext></mfrac><mo>×</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">\text{SoC} = \frac{\text{Remaining Capacity}}{\text{Nominal Capacity}} \times 100</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord text"><span class="mord">SoC</span></span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:2.2408em;vertical-align:-0.8804em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em"><span style="top:-2.314em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord text"><span class="mord">Nominal Capacity</span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.677em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord text"><span class="mord">Remaining Capacity</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:0.6444em"></span><span class="mord">100</span></span></span></span></span>
+<p>It indicates the battery’s charge level, similar to a fuel gauge in vehicles.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-importance-of-soc-estimation">2. Importance of SoC Estimation<a href="#2-importance-of-soc-estimation" class="hash-link" aria-label="Direct link to 2. Importance of SoC Estimation" title="Direct link to 2. Importance of SoC Estimation">​</a></h3>
+<ul>
+<li>Operational Efficiency: Prevents overcharging or deep discharging, ensuring battery longevity.</li>
+<li>User Experience: Provides accurate range predictions for EVs and runtime estimates for devices.</li>
+<li>Safety: Maintains the battery within safe operational limits.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-methods-for-initial-soc-estimation">3. Methods for Initial SoC Estimation<a href="#3-methods-for-initial-soc-estimation" class="hash-link" aria-label="Direct link to 3. Methods for Initial SoC Estimation" title="Direct link to 3. Methods for Initial SoC Estimation">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="a-open-circuit-voltage-ocv-method">a. Open-Circuit Voltage (OCV) Method<a href="#a-open-circuit-voltage-ocv-method" class="hash-link" aria-label="Direct link to a. Open-Circuit Voltage (OCV) Method" title="Direct link to a. Open-Circuit Voltage (OCV) Method">​</a></h4>
+<ul>
+<li>Principle: Uses the direct relationship between a battery’s open-circuit voltage (OCV) and its SoC.</li>
+<li>Process:<!-- -->
+<ul>
+<li>Measure the battery’s OCV after it has rested (no load or current for several hours).</li>
+<li>Compare the measured OCV to a pre-calibrated OCV-SoC lookup table.</li>
+</ul>
+</li>
+<li>Advantages:<!-- -->
+<ul>
+<li>Simple and cost-effective.</li>
+<li>Reliable for stationary systems.</li>
+</ul>
+</li>
+<li>Limitations:<!-- -->
+<ul>
+<li>Requires a resting period, making it unsuitable for dynamic systems.</li>
+<li>Sensitive to temperature changes, which can affect voltage readings.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="b-coulomb-counting-charge-integration">b. Coulomb Counting (Charge Integration)<a href="#b-coulomb-counting-charge-integration" class="hash-link" aria-label="Direct link to b. Coulomb Counting (Charge Integration)" title="Direct link to b. Coulomb Counting (Charge Integration)">​</a></h4>
+<ul>
+<li>Principle: Tracks the flow of charge in and out of the battery over time to determine SoC.</li>
+<li>Process:<!-- -->
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>SoC</mtext><mo>=</mo><mtext>Initial SoC</mtext><mo>+</mo><mfrac><mn>1</mn><msub><mi>C</mi><mtext>rated</mtext></msub></mfrac><msubsup><mo>∫</mo><msub><mi>t</mi><mn>0</mn></msub><mi>t</mi></msubsup><mi>I</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo><mtext> </mtext><mi>d</mi><mi>t</mi></mrow><annotation encoding="application/x-tex">\text{SoC} = \text{Initial SoC} + \frac{1}{C_{\text{rated}}} \int_{t_0}^{t} I(t) \, dt</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord text"><span class="mord">SoC</span></span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:0.7778em;vertical-align:-0.0833em"></span><span class="mord text"><span class="mord">Initial SoC</span></span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:2.5555em;vertical-align:-1.012em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em"><span style="top:-2.314em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">rated</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.677em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.1667em"></span><span class="mop"><span class="mop op-symbol large-op" style="margin-right:0.44445em;position:relative;top:-0.0011em">∫</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5435em"><span style="top:-1.7881em;margin-left:-0.4445em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3173em"><span style="top:-2.357em;margin-left:0em;margin-right:0.0714em"><span class="pstrut" style="height:2.5em"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.143em"><span></span></span></span></span></span></span></span></span></span><span style="top:-3.8129em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.012em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.1667em"></span><span class="mord mathnormal" style="margin-right:0.07847em">I</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.1667em"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span></span></span></span></span>
+<!-- -->where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi><mo stretchy="false">(</mo><mi>t</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">I(t)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord mathnormal" style="margin-right:0.07847em">I</span><span class="mopen">(</span><span class="mord mathnormal">t</span><span class="mclose">)</span></span></span></span> is the current at time <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi></mrow><annotation encoding="application/x-tex">t</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6151em"></span><span class="mord mathnormal">t</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>C</mi><mtext>rated</mtext></msub></mrow><annotation encoding="application/x-tex">C_{\text{rated}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">rated</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span></span></span></span> is the nominal capacity.</li>
+<li>Advantages:<!-- -->
+<ul>
+<li>Real-time tracking during charge/discharge cycles.</li>
+<li>Effective for dynamic environments.</li>
+</ul>
+</li>
+<li>Limitations:<!-- -->
+<ul>
+<li>Requires an accurate initial SoC value.</li>
+<li>Errors accumulate over time due to sensor drift and measurement inaccuracies.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="c-model-based-methods">c. Model-Based Methods<a href="#c-model-based-methods" class="hash-link" aria-label="Direct link to c. Model-Based Methods" title="Direct link to c. Model-Based Methods">​</a></h4>
+<ul>
+<li>Principle: Combines real-time data with battery models to estimate SoC.</li>
+<li>Types:<!-- -->
+<ul>
+<li>Equivalent Circuit Models (ECM): Models battery behavior using electrical components (e.g., resistors, capacitors).</li>
+<li>Physics-Based Models: Simulates internal chemical reactions and processes.</li>
+</ul>
+</li>
+<li>Advantages:<!-- -->
+<ul>
+<li>Accounts for dynamic operating conditions.</li>
+<li>Suitable for complex battery systems like EVs.</li>
+</ul>
+</li>
+<li>Limitations:<!-- -->
+<ul>
+<li>Requires extensive calibration and computational resources.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="d-hybrid-techniques">d. Hybrid Techniques<a href="#d-hybrid-techniques" class="hash-link" aria-label="Direct link to d. Hybrid Techniques" title="Direct link to d. Hybrid Techniques">​</a></h4>
+<ul>
+<li>Principle: Integrates multiple methods to improve accuracy and reliability.</li>
+<li>Example:<!-- -->
+<ul>
+<li>Combine OCV measurements for initial calibration and Coulomb counting for real-time tracking.</li>
+<li>Use adaptive filters (e.g., Kalman filters) to refine estimates dynamically.</li>
+</ul>
+</li>
+<li>Advantages:<!-- -->
+<ul>
+<li>Balances simplicity, accuracy, and real-time capabilities.</li>
+</ul>
+</li>
+<li>Limitations:<!-- -->
+<ul>
+<li>Increased algorithm complexity.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="state-of-health-soh-estimation">State of Health (SoH) Estimation<a href="#state-of-health-soh-estimation" class="hash-link" aria-label="Direct link to State of Health (SoH) Estimation" title="Direct link to State of Health (SoH) Estimation">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-definition-of-soh">1. Definition of SoH<a href="#1-definition-of-soh" class="hash-link" aria-label="Direct link to 1. Definition of SoH" title="Direct link to 1. Definition of SoH">​</a></h3>
+<p>SoH measures the overall health of a battery relative to its original state, typically expressed as a percentage:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>SoH</mtext><mo>=</mo><mfrac><mtext>Measured Capacity</mtext><mtext>Nominal Capacity</mtext></mfrac><mo>×</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">\text{SoH} = \frac{\text{Measured Capacity}}{\text{Nominal Capacity}} \times 100</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord text"><span class="mord">SoH</span></span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:2.2519em;vertical-align:-0.8804em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em"><span style="top:-2.314em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord text"><span class="mord">Nominal Capacity</span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.677em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord text"><span class="mord">Measured Capacity</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:0.6444em"></span><span class="mord">100</span></span></span></span></span>
+<p>SoH decreases over time due to degradation caused by charge/discharge cycles, temperature, and aging.</p>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-importance-of-soh-estimation">2. Importance of SoH Estimation<a href="#2-importance-of-soh-estimation" class="hash-link" aria-label="Direct link to 2. Importance of SoH Estimation" title="Direct link to 2. Importance of SoH Estimation">​</a></h3>
+<ul>
+<li>Predictive Maintenance: Enables timely replacement of degraded batteries.</li>
+<li>Performance Monitoring: Tracks degradation and its impact on capacity.</li>
+<li>Safety Assurance: Prevents failures by monitoring critical thresholds.</li>
+</ul>
+<hr>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-methods-for-initial-soh-estimation">3. Methods for Initial SoH Estimation<a href="#3-methods-for-initial-soh-estimation" class="hash-link" aria-label="Direct link to 3. Methods for Initial SoH Estimation" title="Direct link to 3. Methods for Initial SoH Estimation">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="a-capacity-estimation">a. Capacity Estimation<a href="#a-capacity-estimation" class="hash-link" aria-label="Direct link to a. Capacity Estimation" title="Direct link to a. Capacity Estimation">​</a></h4>
+<ul>
+<li>Principle: Compares the battery’s current capacity to its nominal capacity.</li>
+<li>Process:<!-- -->
+<ul>
+<li>Fully charge and discharge the battery to measure its usable capacity.</li>
+<li>Calculate SoH using the formula:<!-- -->
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>SoH</mtext><mo>=</mo><mfrac><mtext>Measured Capacity</mtext><mtext>Rated Capacity</mtext></mfrac><mo>×</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">\text{SoH} = \frac{\text{Measured Capacity}}{\text{Rated Capacity}} \times 100</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord text"><span class="mord">SoH</span></span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:2.2519em;vertical-align:-0.8804em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3714em"><span style="top:-2.314em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord text"><span class="mord">Rated Capacity</span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.677em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord text"><span class="mord">Measured Capacity</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:0.6444em"></span><span class="mord">100</span></span></span></span></span>
+</li>
+</ul>
+</li>
+<li>Advantages:<!-- -->
+<ul>
+<li>Direct and reliable for controlled environments.</li>
+</ul>
+</li>
+<li>Limitations:<!-- -->
+<ul>
+<li>Requires full charge/discharge cycles, which may not be practical during regular operation.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="b-cycle-counting">b. Cycle Counting<a href="#b-cycle-counting" class="hash-link" aria-label="Direct link to b. Cycle Counting" title="Direct link to b. Cycle Counting">​</a></h4>
+<ul>
+<li>Principle: Tracks the number of charge/discharge cycles completed by the battery.</li>
+<li>Process:<!-- -->
+<ul>
+<li>Increment the cycle count for each full charge/discharge event.</li>
+<li>Use lookup tables to correlate cycle counts with capacity loss.</li>
+</ul>
+</li>
+<li>Advantages:<!-- -->
+<ul>
+<li>Simple to implement.</li>
+</ul>
+</li>
+<li>Limitations:<!-- -->
+<ul>
+<li>Cycle counting alone does not account for factors like partial cycles or temperature effects.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="c-internal-resistance-measurement">c. Internal Resistance Measurement<a href="#c-internal-resistance-measurement" class="hash-link" aria-label="Direct link to c. Internal Resistance Measurement" title="Direct link to c. Internal Resistance Measurement">​</a></h4>
+<ul>
+<li>Principle: Monitors the increase in internal resistance as the battery degrades.</li>
+<li>Process:<!-- -->
+<ul>
+<li>Apply a known current and measure the voltage response.</li>
+<li>Compare the measured resistance to baseline values.</li>
+</ul>
+</li>
+<li>Advantages:<!-- -->
+<ul>
+<li>Provides insights into battery aging.</li>
+</ul>
+</li>
+<li>Limitations:<!-- -->
+<ul>
+<li>Requires precise calibration and controlled testing conditions.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="d-advanced-techniques-spectroscopy">d. Advanced Techniques (Spectroscopy)<a href="#d-advanced-techniques-spectroscopy" class="hash-link" aria-label="Direct link to d. Advanced Techniques (Spectroscopy)" title="Direct link to d. Advanced Techniques (Spectroscopy)">​</a></h4>
+<ul>
+<li>Principle: Uses Electrochemical Impedance Spectroscopy (EIS) to analyze the battery’s internal processes.</li>
+<li>Process:<!-- -->
+<ul>
+<li>Apply small AC signals and measure impedance response.</li>
+<li>Identify degradation patterns at a particle level.</li>
+</ul>
+</li>
+<li>Advantages:<!-- -->
+<ul>
+<li>Highly accurate and detailed.</li>
+</ul>
+</li>
+<li>Limitations:<!-- -->
+<ul>
+<li>Requires specialized equipment and computational power.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="steps-for-initial-soc-and-soh-estimation">Steps for Initial SoC and SoH Estimation<a href="#steps-for-initial-soc-and-soh-estimation" class="hash-link" aria-label="Direct link to Steps for Initial SoC and SoH Estimation" title="Direct link to Steps for Initial SoC and SoH Estimation">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-data-acquisition">1. Data Acquisition<a href="#1-data-acquisition" class="hash-link" aria-label="Direct link to 1. Data Acquisition" title="Direct link to 1. Data Acquisition">​</a></h3>
+<ul>
+<li>Collect real-time sensor data:<!-- -->
+<ul>
+<li>Voltage.</li>
+<li>Current.</li>
+<li>Temperature.</li>
+</ul>
+</li>
+<li>Track historical usage data:<!-- -->
+<ul>
+<li>Number of charge/discharge cycles.</li>
+<li>Total energy throughput.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-algorithm-design">2. Algorithm Design<a href="#2-algorithm-design" class="hash-link" aria-label="Direct link to 2. Algorithm Design" title="Direct link to 2. Algorithm Design">​</a></h3>
+<ul>
+<li>Develop mathematical models or lookup tables based on battery chemistry and behavior.</li>
+<li>Implement dynamic correction algorithms (e.g., Kalman filters) to improve accuracy.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-calibration">3. Calibration<a href="#3-calibration" class="hash-link" aria-label="Direct link to 3. Calibration" title="Direct link to 3. Calibration">​</a></h3>
+<ul>
+<li>Calibrate the system with baseline measurements:<!-- -->
+<ul>
+<li>Voltage-SoC curves.</li>
+<li>Cycle-life SoH degradation patterns.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4-validation-and-feedback">4. Validation and Feedback<a href="#4-validation-and-feedback" class="hash-link" aria-label="Direct link to 4. Validation and Feedback" title="Direct link to 4. Validation and Feedback">​</a></h3>
+<ul>
+<li>Compare algorithm outputs with actual performance metrics.</li>
+<li>Use feedback to refine models and improve prediction accuracy.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges-in-soc-and-soh-estimation">Challenges in SoC and SoH Estimation<a href="#challenges-in-soc-and-soh-estimation" class="hash-link" aria-label="Direct link to Challenges in SoC and SoH Estimation" title="Direct link to Challenges in SoC and SoH Estimation">​</a></h2>
+<ol>
+<li>Environmental Variability:<!-- -->
+<ul>
+<li>Temperature fluctuations affect voltage readings and resistance measurements.</li>
+</ul>
+</li>
+<li>Cumulative Errors:<!-- -->
+<ul>
+<li>Sensor drift and noise accumulate over time, impacting long-term accuracy.</li>
+</ul>
+</li>
+<li>Complex Aging Mechanisms:<!-- -->
+<ul>
+<li>Battery degradation depends on factors like usage patterns, chemistry, and manufacturing inconsistencies.</li>
+</ul>
+</li>
+<li>Computational Demands:<!-- -->
+<ul>
+<li>Advanced models require significant processing power, especially for real-time applications.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="advancements-in-soc-and-soh-estimation">Advancements in SoC and SoH Estimation<a href="#advancements-in-soc-and-soh-estimation" class="hash-link" aria-label="Direct link to Advancements in SoC and SoH Estimation" title="Direct link to Advancements in SoC and SoH Estimation">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-machine-learning-and-ai">1. Machine Learning and AI<a href="#1-machine-learning-and-ai" class="hash-link" aria-label="Direct link to 1. Machine Learning and AI" title="Direct link to 1. Machine Learning and AI">​</a></h3>
+<ul>
+<li>Capabilities:<!-- -->
+<ul>
+<li>Analyze complex relationships between multiple parameters.</li>
+<li>Predict degradation trends based on historical and real-time data.</li>
+</ul>
+</li>
+<li>Applications:<!-- -->
+<ul>
+<li>Dynamic SoC/SoH prediction.</li>
+<li>Early fault detection and diagnosis.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-miniaturized-spectroscopy">2. Miniaturized Spectroscopy<a href="#2-miniaturized-spectroscopy" class="hash-link" aria-label="Direct link to 2. Miniaturized Spectroscopy" title="Direct link to 2. Miniaturized Spectroscopy">​</a></h3>
+<ul>
+<li>Integration of EIS technology into compact systems for real-time SoH estimation.</li>
+<li>Provides detailed insights into chemical degradation.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="3-hybrid-algorithms">3. Hybrid Algorithms<a href="#3-hybrid-algorithms" class="hash-link" aria-label="Direct link to 3. Hybrid Algorithms" title="Direct link to 3. Hybrid Algorithms">​</a></h3>
+<ul>
+<li>Combining Coulomb counting, OCV methods, and adaptive filters for robust estimation under varying conditions.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="4-enhanced-sensors">4. Enhanced Sensors<a href="#4-enhanced-sensors" class="hash-link" aria-label="Direct link to 4. Enhanced Sensors" title="Direct link to 4. Enhanced Sensors">​</a></h3>
+<ul>
+<li>Development of high-precision, low-cost sensors for voltage, current, and temperature measurements.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
+<p>Accurate initial SoC and SoH estimation is essential for the effective management of battery systems. While traditional methods like OCV and Coulomb counting provide foundational insights, advancements in machine learning, spectroscopy, and hybrid algorithms are driving improvements in accuracy, reliability, and scalability. These innovations ensure that modern energy storage systems can meet the growing demands of applications like electric vehicles, renewable energy integration, and portable electronics. Despite challenges such as environmental variability and computational complexity, the continuous evolution of technology promises more efficient and intelligent solutions for battery management.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/BMS/edit/main/docs/modeling_design/01_soc_soh_estimation.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/BMS/docs/modeling_design/getting-started"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Getting Started</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/BMS/docs/modeling_design/matlab_design"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">BMS Design Using MATLAB</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#state-of-charge-soc-estimation" class="table-of-contents__link toc-highlight">State of Charge (SoC) Estimation</a><ul><li><a href="#1-definition-of-soc" class="table-of-contents__link toc-highlight">1. Definition of SoC</a></li><li><a href="#2-importance-of-soc-estimation" class="table-of-contents__link toc-highlight">2. Importance of SoC Estimation</a></li><li><a href="#3-methods-for-initial-soc-estimation" class="table-of-contents__link toc-highlight">3. Methods for Initial SoC Estimation</a></li></ul></li><li><a href="#state-of-health-soh-estimation" class="table-of-contents__link toc-highlight">State of Health (SoH) Estimation</a><ul><li><a href="#1-definition-of-soh" class="table-of-contents__link toc-highlight">1. Definition of SoH</a></li><li><a href="#2-importance-of-soh-estimation" class="table-of-contents__link toc-highlight">2. Importance of SoH Estimation</a></li><li><a href="#3-methods-for-initial-soh-estimation" class="table-of-contents__link toc-highlight">3. Methods for Initial SoH Estimation</a></li></ul></li><li><a href="#steps-for-initial-soc-and-soh-estimation" class="table-of-contents__link toc-highlight">Steps for Initial SoC and SoH Estimation</a><ul><li><a href="#1-data-acquisition" class="table-of-contents__link toc-highlight">1. Data Acquisition</a></li><li><a href="#2-algorithm-design" class="table-of-contents__link toc-highlight">2. Algorithm Design</a></li><li><a href="#3-calibration" class="table-of-contents__link toc-highlight">3. Calibration</a></li><li><a href="#4-validation-and-feedback" class="table-of-contents__link toc-highlight">4. Validation and Feedback</a></li></ul></li><li><a href="#challenges-in-soc-and-soh-estimation" class="table-of-contents__link toc-highlight">Challenges in SoC and SoH Estimation</a></li><li><a href="#advancements-in-soc-and-soh-estimation" class="table-of-contents__link toc-highlight">Advancements in SoC and SoH Estimation</a><ul><li><a href="#1-machine-learning-and-ai" class="table-of-contents__link toc-highlight">1. Machine Learning and AI</a></li><li><a href="#2-miniaturized-spectroscopy" class="table-of-contents__link toc-highlight">2. Miniaturized Spectroscopy</a></li><li><a href="#3-hybrid-algorithms" class="table-of-contents__link toc-highlight">3. Hybrid Algorithms</a></li><li><a href="#4-enhanced-sensors" class="table-of-contents__link toc-highlight">4. Enhanced Sensors</a></li></ul></li><li><a href="#conclusion" class="table-of-contents__link toc-highlight">Conclusion</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 BMS</div></div></div></footer></div>
+</body>
+</html>
