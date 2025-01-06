@@ -1,4 +1,4 @@
-# Spezifikation von ISO 26262 Anforderungen
+# FuSi Anforderungen
 
 ## Spezifikation von ISO 26262 Anforderungen
 

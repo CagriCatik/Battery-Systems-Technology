@@ -1,4 +1,4 @@
-# Open Circuit Voltage (OCV) Testing
+# Open Circuit Voltage Testing
 
 **Open Circuit Voltage (OCV) Testing** is a crucial procedure for characterizing the state of charge (SoC) and internal properties of a battery. It measures the voltage across the battery terminals when no load is applied. OCV testing provides insights into the battery's behavior under non-dynamic conditions, forming the basis for several battery management system (BMS) algorithms.
 

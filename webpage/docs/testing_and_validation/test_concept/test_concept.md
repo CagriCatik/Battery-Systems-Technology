@@ -1,6 +1,6 @@
 # Test Concept
 
-# BMS - Testkonzept
+# Testkonzept
 
 ## Was ist ein Testkonzept?
 
