@@ -2,64 +2,108 @@ import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
-// 1. Update FeatureList items to describe BMS features
 const FeatureList = [
   {
-    title: 'Battery Monitoring',
-    // Swap out the SVG below for something relevant to batteries
-    //Svg: require('@site/static/img/undraw_battery_level.svg').default,
+    title: 'Fundamentals of Battery Technology',
     description: (
       <>
-        Monitor battery voltage, current, temperature, and overall health in real-time, ensuring safe and optimal performance.
+        Learn the basics of battery chemistry, structure, and functionality to understand their role in modern energy systems.
       </>
     ),
   },
   {
-    title: 'Cell Balancing',
-    //Svg: require('@site/static/img/undraw_balance.svg').default,
+    title: 'Aging and Degradation',
     description: (
       <>
-        Keep cells at a similar state of charge to maximize battery lifetime and capacity, preventing premature wear or damage.
+        Explore the factors affecting battery aging and degradation and strategies to mitigate performance losses.
       </>
     ),
   },
   {
-    title: 'Alerts & Notifications',
-    //Svg: require('@site/static/img/undraw_alert.svg').default,
+    title: 'Chemistry and Design Principles',
     description: (
       <>
-        Receive notifications for overcharge, overheating, low voltage, and other critical conditions—enabling proactive maintenance.
+        Understand various battery chemistries and principles of designing efficient battery systems.
+      </>
+    ),
+  },
+  {
+    title: 'Battery Pack Engineering',
+    description: (
+      <>
+        Dive into the design and integration of battery packs for various applications, ensuring safety and reliability.
+      </>
+    ),
+  },
+  {
+    title: 'Thermal Management',
+    description: (
+      <>
+        Learn techniques for managing heat generation and dissipation to maintain battery efficiency and safety.
+      </>
+    ),
+  },
+  {
+    title: 'Characteristics and Technical Specifications',
+    description: (
+      <>
+        Understand key technical specifications such as energy density, power density, and cycle life.
+      </>
+    ),
+  },
+  {
+    title: 'Sizing and Optimization',
+    description: (
+      <>
+        Optimize battery size and capacity to meet specific application requirements and performance goals.
+      </>
+    ),
+  },
+  {
+    title: 'Battery Management System',
+    description: (
+      <>
+        Learn about BMS features, including monitoring, balancing, and safety mechanisms for batteries.
+      </>
+    ),
+  },
+  {
+    title: 'BMS Design and Architecture',
+    description: (
+      <>
+        Explore the architecture and design considerations for developing a robust battery management system.
+      </>
+    ),
+  },
+  {
+    title: 'Modeling and Testing',
+    description: (
+      <>
+        Study methods for battery modeling and testing to predict performance and ensure quality control.
       </>
     ),
   },
 ];
 
-// 2. The Feature component can remain the same, just referencing your new data
-function Feature({ Svg, title, description }) {
+function Feature({ title, description }) {
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        {Svg && <Svg className={styles.featureSvg} role="img" />}
-      </div>
-      <div className="text--center padding-horiz--md">
-        <Heading as="h3">{title}</Heading>
-        <p>{description}</p>
+    <div className={clsx(styles.featureBox)}>
+      <div className={styles.featureContent}>
+        <Heading as="h3" className={styles.featureTitle}>
+          {title}
+        </Heading>
+        <p className={styles.featureDescription}>{description}</p>
       </div>
     </div>
   );
 }
 
-// 3. Optionally rename the exported function to "BmsFeatures" or keep it "HomepageFeatures"
 export default function BmsFeatures() {
   return (
     <section className={styles.features}>
-      <div className="container">
-        <div className="row">
-          {FeatureList.map((props, idx) => (
-            <Feature key={idx} {...props} />
-          ))}
-        </div>
-      </div>
+      {FeatureList.map((props, idx) => (
+        <Feature key={idx} {...props} />
+      ))}
     </section>
   );
 }

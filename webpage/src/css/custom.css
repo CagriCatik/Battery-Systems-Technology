@@ -28,3 +28,18 @@
   --ifm-color-primary-lightest: #4fddbf;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+.navbar {
+  display: flex; /* Use flexbox */
+  justify-content: center; /* Center items horizontally */
+  height: 100px; /* Set the height */
+  text-align: center; /* Center text within each link */
+  font-size: 13px;
+  display: flex;
+  align-items: center; /* Center items vertically */
+}
+
+.navbar__item--dropdown:hover .navbar__dropdown {
+  background-color: #333; /* Dropdown background color */
+}
+

@@ -4,15 +4,11 @@ id: ocv_vs_soc
 
 # OCV vs SOC for Chemistries
 
-## Introduction
-
 Batteries are a cornerstone of modern energy storage solutions, powering applications ranging from electric vehicles (EVs) to renewable energy systems and consumer electronics. Their operation is governed by complex electrochemical and physical principles, necessitating detailed study and precise management through Battery Management Systems (BMS). Key aspects like open circuit voltage (OCV), state of charge (SOC), and degradation trends are critical for designing efficient, reliable systems.
-
-This document delves into the relationship between OCV and SOC across different chemistries, the impact of temperature, aging mechanisms, and degradation trends. It also discusses hysteresis effects, internal resistance, and their implications for BMS design.
 
 ---
 
-## Open Circuit Voltage (OCV) and State of Charge (SOC)
+## Open Circuit Voltage and State of Charge
 
 The relationship between OCV and SOC is fundamental to battery management. It forms the basis for determining a battery’s remaining capacity and helps optimize its performance. OCV is defined as the voltage of a battery when it is not under load, while SOC represents the percentage of remaining charge relative to the battery’s maximum capacity.
 

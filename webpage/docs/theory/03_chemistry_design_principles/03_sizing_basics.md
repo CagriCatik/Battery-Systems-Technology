@@ -4,12 +4,6 @@ id: sizing_basics
 
 # Battery Sizing and Management
 
-This guide offers an extensive exploration of battery sizing and Battery Management Systems (BMS) tailored specifically for electric vehicles (EVs). Aimed at engineers and industry professionals, it delves into foundational principles, technical methodologies, and practical calculations essential for designing efficient and reliable battery systems.
-
----
-
-## Introduction
-
 Battery sizing is a fundamental aspect of designing energy storage systems for electric vehicles. The process involves determining the optimal battery capacity and configuration to meet the vehicle's operational requirements while ensuring performance, cost-efficiency, and longevity. Proper sizing accounts for various factors, including energy consumption, voltage levels, energy density, degradation over time, and usage patterns. Additionally, Battery Management Systems (BMS) play a crucial role in monitoring and maintaining battery health, safety, and efficiency. This guide integrates these concepts to provide a comprehensive understanding of battery sizing and management in the context of EVs.
 
 ---

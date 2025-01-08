@@ -8,7 +8,7 @@ import rehypeKatex from 'rehype-katex';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: 'Battery Management System', // Title for your website
+  title: ' Battery Systems and Technology', // Title for your website
   tagline: 'Bring your Knowledge to another level', // Tagline for your website
   favicon: 'img/favicon.ico',
 
@@ -64,7 +64,7 @@ const config = {
 
   themeConfig:
     ({
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/undraw_online.svg',
       navbar: {
         title: '',
         logo: {
@@ -74,33 +74,69 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'FundamentalsSidebar',
+            sidebarId: 'fundamentalsSidebar',
             position: 'left',
-            label: 'Fundamentals',
+            label: 'Fundamentals of Battery Technology',
           },
           {
             type: 'docSidebar',
-            sidebarId: 'BatterySidebar',
+            sidebarId: 'agingDegradationSidebar',
             position: 'left',
-            label: 'Battery',
+            label: 'Aging and Degradation',
           },
           {
             type: 'docSidebar',
-            sidebarId: 'AdvancedSidebar',
+            sidebarId: 'chemistrySidebar',
             position: 'left',
-            label: 'Advanced Concepts',
+            label: 'Chemistry and Design Principles',
           },
           {
             type: 'docSidebar',
-            sidebarId: 'SystemAlgorithmSidebar',
+            sidebarId: 'batteryPackSidebar',
             position: 'left',
-            label: 'System & Algorithms',
+            label: 'Battery Pack Engineering',
           },
           {
             type: 'docSidebar',
-            sidebarId: 'TestingValidationSidebar',
+            sidebarId: 'thermalManagementSidebar',
             position: 'left',
-            label: 'Testing & Validation',
+            label: 'Thermal Management',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'characteristicsSidebar',
+            position: 'left',
+            label: 'Characteristics and Technical Specifications',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'sizingOptimizationSidebar',
+            position: 'left',
+            label: 'Sizing and Optimization',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'batteryManagementSidebar',
+            position: 'left',
+            label: 'Battery Management System',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'bmsDesignArchitectureSidebar',
+            position: 'left',
+            label: 'BMS Design and Architecture',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'modelingTestingSidebar',
+            position: 'left',
+            label: 'Modeling and Testing',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'glossarySidebar',
+            position: 'left',
+            label: 'Glossary',
           },
           {
             to: '/blog',
@@ -117,7 +153,7 @@ const config = {
 
       footer: {
         style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} BMS`,
+        copyright: `Copyright © ${new Date().getFullYear()} Battery Systems and Technology`,
       },
       prism: {
         theme: prismThemes.github,
