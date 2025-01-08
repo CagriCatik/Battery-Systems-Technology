@@ -1,11 +1,5 @@
 # Cylindrical Module
 
-This document provides a detailed overview of cylindrical battery modules, including their construction, electrical and mechanical connections, cooling mechanisms, and implementation in battery packs, particularly for electric vehicles (EVs). The focus is on delivering foundational and technical insights to engineers and industry professionals involved in battery system design.
-
----
-
-## 1. Introduction
-
 Cylindrical cells have long been a cornerstone of battery technology due to their scalability, cost-effectiveness, and high energy density. Their robust design makes them a preferred choice in electric vehicles, renewable energy storage, and consumer electronics. This document delves into the design, assembly, and operational intricacies of cylindrical battery modules, emphasizing their role in high-performance applications.
 
 ---

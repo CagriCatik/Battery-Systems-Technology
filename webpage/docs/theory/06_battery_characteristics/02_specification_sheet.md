@@ -4,12 +4,6 @@ id: specification_sheet
 
 # Battery Cell Specification Sheet
 
-This part provides an in-depth explanation of battery systems and their management, focusing on specifications, sizing, and operational parameters for engineering and industrial applications. Topics include battery specification sheets, design considerations, operational guidelines, and technical nuances essential for engineers and industry professionals.
-
----
-
-## Battery Cell Specification Sheet
-
 Battery specification sheets provide critical information about cell performance, operational limits, and design constraints. These sheets are essential for engineers to select and evaluate batteries for specific applications.
 
 ### Key Specifications
