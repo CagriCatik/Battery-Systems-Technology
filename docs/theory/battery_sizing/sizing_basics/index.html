@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-theory/battery_sizing/sizing_basics" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.3">
+<title data-rh="true">Battery Sizing and Management |  Battery Systems and Technology</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://CagriCatik.github.io/BMS/img/undraw_online.svg"><meta data-rh="true" name="twitter:image" content="https://CagriCatik.github.io/BMS/img/undraw_online.svg"><meta data-rh="true" property="og:url" content="https://CagriCatik.github.io/BMS/docs/theory/battery_sizing/sizing_basics"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Battery Sizing and Management |  Battery Systems and Technology"><meta data-rh="true" name="description" content="Battery sizing is a fundamental aspect of designing energy storage systems for electric vehicles. The process involves determining the optimal battery capacity and configuration to meet the vehicle&#x27;s operational requirements while ensuring performance, cost-efficiency, and longevity. Proper sizing accounts for various factors, including energy consumption, voltage levels, energy density, degradation over time, and usage patterns. Additionally, Battery Management Systems (BMS) play a crucial role in monitoring and maintaining battery health, safety, and efficiency. This guide integrates these concepts to provide a comprehensive understanding of battery sizing and management in the context of EVs."><meta data-rh="true" property="og:description" content="Battery sizing is a fundamental aspect of designing energy storage systems for electric vehicles. The process involves determining the optimal battery capacity and configuration to meet the vehicle&#x27;s operational requirements while ensuring performance, cost-efficiency, and longevity. Proper sizing accounts for various factors, including energy consumption, voltage levels, energy density, degradation over time, and usage patterns. Additionally, Battery Management Systems (BMS) play a crucial role in monitoring and maintaining battery health, safety, and efficiency. This guide integrates these concepts to provide a comprehensive understanding of battery sizing and management in the context of EVs."><link data-rh="true" rel="icon" href="/BMS/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://CagriCatik.github.io/BMS/docs/theory/battery_sizing/sizing_basics"><link data-rh="true" rel="alternate" href="https://CagriCatik.github.io/BMS/docs/theory/battery_sizing/sizing_basics" hreflang="en"><link data-rh="true" rel="alternate" href="https://CagriCatik.github.io/BMS/docs/theory/battery_sizing/sizing_basics" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/BMS/blog/rss.xml" title=" Battery Systems and Technology RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/BMS/blog/atom.xml" title=" Battery Systems and Technology Atom Feed">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-R4556vVJtIc0EJ3NKnM5ePcM78Zv5e+/ff+f6aZwYzZjnj84pK8i0PZyNnO+g0OQ" crossorigin="anonymous"><link rel="stylesheet" href="/BMS/assets/css/styles.49f50c39.css">
+<script src="/BMS/assets/js/runtime~main.fdff60f3.js" defer="defer"></script>
+<script src="/BMS/assets/js/main.885eaadb.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/BMS/"><div class="navbar__logo"><img src="/BMS/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/BMS/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/BMS/docs/theory/fundamentals/getting-started">Fundamentals of Battery Technology</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/aging_degradation/getting-started">Aging and Degradation</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/chemistry_design_principles/getting-started">Chemistry and Design Principles</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/battery_pack/electrical_connection">Battery Pack Engineering</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/thermal_management/cooling_mechanism">Thermal Management</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/battery_characteristics/ocv_vs_soc">Characteristics and Technical Specifications</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/BMS/docs/theory/battery_sizing/sizing_basics">Sizing and Optimization</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/bms/introduction_bms">Battery Management System</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/bms_architecture/bms_architecture">BMS Design and Architecture</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/modeling_testing/equivalent_circuit">Modeling and Testing</a><a class="navbar__item navbar__link" href="/BMS/docs/glossary/A">Glossary</a><a class="navbar__item navbar__link" href="/BMS/blog">Blog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/CagriCatik/BMS" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/BMS/docs/theory/battery_sizing/sizing_basics">Battery Sizing and Management</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/theory/battery_sizing/using_excel_for_battery_sizing">using_excel_for_battery_sizing</a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/BMS/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Battery Sizing and Management</span><meta itemprop="position" content="1"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Battery Sizing and Management</h1></header>
+<p>Battery sizing is a fundamental aspect of designing energy storage systems for electric vehicles. The process involves determining the optimal battery capacity and configuration to meet the vehicle&#x27;s operational requirements while ensuring performance, cost-efficiency, and longevity. Proper sizing accounts for various factors, including energy consumption, voltage levels, energy density, degradation over time, and usage patterns. Additionally, Battery Management Systems (BMS) play a crucial role in monitoring and maintaining battery health, safety, and efficiency. This guide integrates these concepts to provide a comprehensive understanding of battery sizing and management in the context of EVs.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-concepts-in-battery-sizing">Key Concepts in Battery Sizing<a href="#key-concepts-in-battery-sizing" class="hash-link" aria-label="Direct link to Key Concepts in Battery Sizing" title="Direct link to Key Concepts in Battery Sizing">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="battery-capacity">Battery Capacity<a href="#battery-capacity" class="hash-link" aria-label="Direct link to Battery Capacity" title="Direct link to Battery Capacity">​</a></h3>
+<p>Battery capacity, measured in kilowatt-hours (kWh), represents the total energy storage available in the battery. It is a critical determinant of the vehicle&#x27;s range and overall performance. Calculating the appropriate capacity ensures that the vehicle can meet its energy demands under various operating conditions without unnecessary excess that could lead to increased costs and weight.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="voltage-levels">Voltage Levels<a href="#voltage-levels" class="hash-link" aria-label="Direct link to Voltage Levels" title="Direct link to Voltage Levels">​</a></h3>
+<p>The operating voltage of the battery system is vital for compatibility with the vehicle&#x27;s powertrain and adherence to safety standards. Voltage levels vary depending on the vehicle type, with low voltage systems (e.g., 48V or 96V) typically used in two-wheelers and small vehicles, while high voltage systems (e.g., 400V or 800V) are employed in electric buses, trucks, and advanced EV models. Selecting the appropriate voltage level involves balancing performance requirements with safety and regulatory considerations.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="energy-density">Energy Density<a href="#energy-density" class="hash-link" aria-label="Direct link to Energy Density" title="Direct link to Energy Density">​</a></h3>
+<p>Energy density refers to the amount of energy stored per unit weight (Wh/kg) or volume (Wh/L) of the battery. Higher energy density allows for longer ranges and lighter battery packs, which are advantageous for vehicle performance and efficiency. However, achieving higher energy density often involves trade-offs with cost and thermal management challenges.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="degradation-and-aging">Degradation and Aging<a href="#degradation-and-aging" class="hash-link" aria-label="Direct link to Degradation and Aging" title="Direct link to Degradation and Aging">​</a></h3>
+<p>Batteries degrade over time due to factors such as usage patterns, environmental conditions, and the number of charge-discharge cycles. Degradation affects the battery&#x27;s capacity and efficiency, necessitating the inclusion of buffers in the sizing process to compensate for capacity loss over the battery&#x27;s lifespan. Understanding degradation rates and incorporating appropriate safety margins ensures that the battery remains functional and reliable throughout its intended use period.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="battery-management-systems-bms">Battery Management Systems (BMS)<a href="#battery-management-systems-bms" class="hash-link" aria-label="Direct link to Battery Management Systems (BMS)" title="Direct link to Battery Management Systems (BMS)">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="purpose-of-bms">Purpose of BMS<a href="#purpose-of-bms" class="hash-link" aria-label="Direct link to Purpose of BMS" title="Direct link to Purpose of BMS">​</a></h3>
+<p>A Battery Management System (BMS) is integral to ensuring the optimal performance, longevity, and safety of a battery pack. The BMS performs several critical functions, including:</p>
+<ul>
+<li><strong>State of Charge (SoC) Tracking:</strong> Monitoring the battery&#x27;s charge level to prevent overcharging or deep discharging, which can degrade the battery.</li>
+<li><strong>State of Health (SoH) Assessment:</strong> Evaluating the battery&#x27;s condition and degradation over time to predict remaining useful life and schedule maintenance.</li>
+<li><strong>Thermal Management:</strong> Regulating the battery temperature to maintain optimal operating conditions and prevent overheating or freezing.</li>
+<li><strong>Cell Balancing:</strong> Ensuring uniform charge distribution across all cells in the battery pack to maximize efficiency and prevent individual cell failure.</li>
+<li><strong>Fault Detection:</strong> Identifying and mitigating potential issues such as overcurrent, short-circuiting, and thermal runaway to enhance safety.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="importance-of-bms-in-applications">Importance of BMS in Applications<a href="#importance-of-bms-in-applications" class="hash-link" aria-label="Direct link to Importance of BMS in Applications" title="Direct link to Importance of BMS in Applications">​</a></h3>
+<p>BMS is crucial across various applications, including electric vehicles, renewable energy storage systems, and portable electronics. In EVs, the BMS ensures that the battery operates within safe parameters, maintains efficiency, and prolongs the battery&#x27;s lifespan. Effective BMS implementation enhances vehicle reliability, performance, and user safety, making it an indispensable component in modern battery-powered systems.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="battery-sizing-process">Battery Sizing Process<a href="#battery-sizing-process" class="hash-link" aria-label="Direct link to Battery Sizing Process" title="Direct link to Battery Sizing Process">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-1-determine-voltage-levels">Step 1: Determine Voltage Levels<a href="#step-1-determine-voltage-levels" class="hash-link" aria-label="Direct link to Step 1: Determine Voltage Levels" title="Direct link to Step 1: Determine Voltage Levels">​</a></h3>
+<p>The initial step in battery sizing involves defining the operating voltage based on the vehicle type and performance requirements. For smaller vehicles like two-wheelers, low voltage systems (48V or 96V) are typically sufficient. In contrast, larger vehicles such as buses and trucks require high voltage systems (400V or 800V) to meet higher power demands and ensure efficient operation.</p>
+<p><strong>Calculation Example:</strong></p>
+<p>To achieve a nominal voltage of 650V using 3.7V lithium-ion cells, the number of cells connected in series is calculated as follows:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 134: … \text{ cells}
+\̲]̲" style="color:#cc0000">\[
+\text{Number of Cells in Series} = \frac{\text{Nominal Voltage}}{\text{Cell Voltage}} = \frac{650}{3.7} \approx 176 \text{ cells}
+\]</span>
+<p>This series configuration ensures that the total voltage meets the vehicle&#x27;s requirements while maintaining compatibility with the powertrain components.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-2-estimate-energy-requirements">Step 2: Estimate Energy Requirements<a href="#step-2-estimate-energy-requirements" class="hash-link" aria-label="Direct link to Step 2: Estimate Energy Requirements" title="Direct link to Step 2: Estimate Energy Requirements">​</a></h3>
+<p>Energy requirements are determined by assessing the specific energy consumption (SEC) and the desired range of the vehicle. SEC, measured in kWh/km, indicates the energy required to propel the vehicle per kilometer, analogous to fuel mileage in conventional vehicles.</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 91: …um Range (km)}
+\̲]̲" style="color:#cc0000">\[
+\text{Energy Requirement (kWh)} = \text{SEC (kWh/km)} \times \text{Maximum Range (km)}
+\]</span>
+<p><strong>Example:</strong></p>
+<p>If the SEC is 0.15 kWh/km and the desired range is 200 km:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 65: …30 \text{ kWh}
+\̲]̲" style="color:#cc0000">\[
+\text{Energy Requirement} = 0.15 \times 200 = 30 \text{ kWh}
+\]</span>
+<p>This calculation ensures that the battery can provide sufficient energy to meet the vehicle&#x27;s operational needs over the specified distance.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-3-determine-battery-capacity">Step 3: Determine Battery Capacity<a href="#step-3-determine-battery-capacity" class="hash-link" aria-label="Direct link to Step 3: Determine Battery Capacity" title="Direct link to Step 3: Determine Battery Capacity">​</a></h3>
+<p>Battery capacity in ampere-hours (Ah) is calculated by dividing the energy requirement by the operating voltage:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 86: …{Voltage (V)}}
+\̲]̲" style="color:#cc0000">\[
+\text{Capacity (Ah)} = \frac{\text{Energy Requirement (kWh)}}{\text{Voltage (V)}}
+\]</span>
+<p><strong>Example:</strong></p>
+<p>For a 30 kWh battery operating at 650V:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 66: ….15 \text{ Ah}
+\̲]̲" style="color:#cc0000">\[
+\text{Capacity} = \frac{30,000}{650} \approx 46.15 \text{ Ah}
+\]</span>
+<p>This capacity ensures that the battery can deliver the necessary energy without excessive strain, promoting longevity and reliability.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-4-define-power-and-temperature-ranges">Step 4: Define Power and Temperature Ranges<a href="#step-4-define-power-and-temperature-ranges" class="hash-link" aria-label="Direct link to Step 4: Define Power and Temperature Ranges" title="Direct link to Step 4: Define Power and Temperature Ranges">​</a></h3>
+<p>Specifying operational conditions involves determining the peak and continuous power output requirements and the temperature ranges for both operating and storage environments. These factors are critical for ensuring safety and maintaining performance under varying conditions. Proper thermal management prevents overheating, which can degrade battery performance, while adequate power output ensures the vehicle meets its acceleration and speed requirements.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-5-analyze-usage-patterns">Step 5: Analyze Usage Patterns<a href="#step-5-analyze-usage-patterns" class="hash-link" aria-label="Direct link to Step 5: Analyze Usage Patterns" title="Direct link to Step 5: Analyze Usage Patterns">​</a></h3>
+<p>Understanding usage patterns, including daily range and charging habits, is essential for accurate battery sizing. Factors such as average daily distance traveled and the frequency and depth of charging cycles influence the battery&#x27;s capacity and longevity.</p>
+<p><strong>Example:</strong></p>
+<p>For a user traveling 100 km/day with an SEC of 0.15 kWh/km:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 65: …15 \text{ kWh}
+\̲]̲" style="color:#cc0000">\[
+\text{Daily Energy Usage} = 0.15 \times 100 = 15 \text{ kWh}
+\]</span>
+<p>This information helps in designing a battery that can handle daily energy demands without frequent deep discharges, which can accelerate degradation.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-6-calculate-usable-energy">Step 6: Calculate Usable Energy<a href="#step-6-calculate-usable-energy" class="hash-link" aria-label="Direct link to Step 6: Calculate Usable Energy" title="Direct link to Step 6: Calculate Usable Energy">​</a></h3>
+<p>Usable energy accounts for the operational limits and degradation buffers necessary to maintain performance over time. It is calculated by multiplying the nominal energy by the depth of discharge (DoD) and the aging factor.</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 121: …{Aging Factor}
+\̲]̲" style="color:#cc0000">\[
+\text{Usable Energy (kWh)} = \text{Nominal Energy} \times \text{Depth of Discharge (DoD)} \times \text{Aging Factor}
+\]</span>
+<p><strong>Example:</strong></p>
+<p>For a 30 kWh battery with a DoD of 80% and an aging factor of 0.8:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 71: ….2 \text{ kWh}
+\̲]̲" style="color:#cc0000">\[
+\text{Usable Energy} = 30 \times 0.8 \times 0.8 = 19.2 \text{ kWh}
+\]</span>
+<p>This ensures that the battery can deliver the required energy even as it degrades over time.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-7-include-a-buffer-for-aging">Step 7: Include a Buffer for Aging<a href="#step-7-include-a-buffer-for-aging" class="hash-link" aria-label="Direct link to Step 7: Include a Buffer for Aging" title="Direct link to Step 7: Include a Buffer for Aging">​</a></h3>
+<p>To account for long-term capacity loss, a buffer is included in the design energy calculation. This involves dividing the usable energy by the aging factor to determine the initial design energy required.</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 82: …Aging Factor}}
+\̲]̲" style="color:#cc0000">\[
+\text{Design Energy (kWh)} = \frac{\text{Usable Energy}}{\text{Aging Factor}}
+\]</span>
+<p><strong>Example:</strong></p>
+<p>For a required usable energy of 19.2 kWh and an aging factor of 0.8:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 61: …24 \text{ kWh}
+\̲]̲" style="color:#cc0000">\[
+\text{Design Energy} = \frac{19.2}{0.8} = 24 \text{ kWh}
+\]</span>
+<p>This buffer ensures that the battery retains sufficient capacity throughout its intended lifespan, even as it experiences degradation.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-8-cost-analysis">Step 8: Cost Analysis<a href="#step-8-cost-analysis" class="hash-link" aria-label="Direct link to Step 8: Cost Analysis" title="Direct link to Step 8: Cost Analysis">​</a></h3>
+<p>Evaluating the trade-offs between additional capacity and cost is essential for optimizing the battery design. Factors such as the current cost per kWh and the total cost of ownership (TCO) are considered to balance performance with financial feasibility. This analysis helps in making informed decisions about battery size and configuration that align with budgetary constraints without compromising on essential performance metrics.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-9-iterative-optimization">Step 9: Iterative Optimization<a href="#step-9-iterative-optimization" class="hash-link" aria-label="Direct link to Step 9: Iterative Optimization" title="Direct link to Step 9: Iterative Optimization">​</a></h3>
+<p>The design process involves iterative calculations and simulations to refine the battery configuration. Engineers simulate various conditions and usage scenarios, adjusting parameters to achieve optimal safety margins, comply with regulatory requirements, and incorporate user feedback. This iterative approach ensures that the final design is robust, efficient, and tailored to real-world applications.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-10-integration-into-vehicle-design">Step 10: Integration into Vehicle Design<a href="#step-10-integration-into-vehicle-design" class="hash-link" aria-label="Direct link to Step 10: Integration into Vehicle Design" title="Direct link to Step 10: Integration into Vehicle Design">​</a></h3>
+<p>The finalized battery design must be seamlessly integrated into the vehicle&#x27;s overall architecture. This includes ensuring compatibility with the powertrain and control systems, aligning with the charging infrastructure, and incorporating necessary safety systems. Proper integration is critical for achieving a harmonious balance between the battery system and the vehicle&#x27;s operational dynamics, ultimately contributing to the vehicle&#x27;s performance and reliability.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="battery-pack-design-and-configuration">Battery Pack Design and Configuration<a href="#battery-pack-design-and-configuration" class="hash-link" aria-label="Direct link to Battery Pack Design and Configuration" title="Direct link to Battery Pack Design and Configuration">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="series-and-parallel-connections">Series and Parallel Connections<a href="#series-and-parallel-connections" class="hash-link" aria-label="Direct link to Series and Parallel Connections" title="Direct link to Series and Parallel Connections">​</a></h3>
+<p>Battery packs are composed of individual cells connected in series and parallel configurations to achieve the desired voltage and capacity. Connecting cells in series increases the overall voltage, while parallel connections increase the total capacity.</p>
+<p><strong>Example:</strong></p>
+<p>A 2S4P configuration involves connecting two cells in series and four such series strings in parallel:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 42: …es 3.6V = 7.2V
+\̲]̲" style="color:#cc0000">\[
+\text{Voltage} = 2 \times 3.6V = 7.2V
+\]</span>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 44: …s 50Ah = 200Ah
+\̲]̲" style="color:#cc0000">\[
+\text{Capacity} = 4 \times 50Ah = 200Ah
+\]</span>
+<p>This configuration allows the battery pack to deliver higher voltage and greater capacity, meeting specific performance requirements.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="modules-and-pack-assembly">Modules and Pack Assembly<a href="#modules-and-pack-assembly" class="hash-link" aria-label="Direct link to Modules and Pack Assembly" title="Direct link to Modules and Pack Assembly">​</a></h3>
+<p>Modules serve as intermediate units within a battery pack, each maintaining specific voltage and capacity limits. Multiple modules are assembled to form the complete battery pack, ensuring scalability and manageability.</p>
+<p><strong>Example:</strong></p>
+<p>Three 26 kWh modules connected in series provide:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 55: …78 \text{ kWh}
+\̲]̲" style="color:#cc0000">\[
+\text{Total Energy} = 3 \times 26 = 78 \text{ kWh}
+\]</span>
+<p>Connecting two such strings in parallel results in:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 56: …56 \text{ kWh}
+\̲]̲" style="color:#cc0000">\[
+\text{Total Energy} = 2 \times 78 = 156 \text{ kWh}
+\]</span>
+<p>This modular approach facilitates easier assembly, maintenance, and scalability of the battery pack to meet varying energy demands.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="detailed-battery-design-example-two-wheeler">Detailed Battery Design Example: Two-Wheeler<a href="#detailed-battery-design-example-two-wheeler" class="hash-link" aria-label="Direct link to Detailed Battery Design Example: Two-Wheeler" title="Direct link to Detailed Battery Design Example: Two-Wheeler">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="problem-statement">Problem Statement<a href="#problem-statement" class="hash-link" aria-label="Direct link to Problem Statement" title="Direct link to Problem Statement">​</a></h3>
+<p>Design a battery pack for a two-wheeler with the following specifications:</p>
+<ul>
+<li><strong>System Voltage:</strong> 48V</li>
+<li><strong>Required Range:</strong> 50 km</li>
+<li><strong>Specific Energy Consumption:</strong> 68 Wh/km</li>
+<li><strong>Warranty Period:</strong> 5 years</li>
+<li><strong>Average Daily Usage:</strong> 30 km</li>
+</ul>
+<p>The objective is to calculate the battery capacity ensuring the design meets the warranty requirements while addressing real-world user behavior and degradation over time.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="step-by-step-design-approach">Step-by-Step Design Approach<a href="#step-by-step-design-approach" class="hash-link" aria-label="Direct link to Step-by-Step Design Approach" title="Direct link to Step-by-Step Design Approach">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="1-understanding-the-user-profile">1. Understanding the User Profile<a href="#1-understanding-the-user-profile" class="hash-link" aria-label="Direct link to 1. Understanding the User Profile" title="Direct link to 1. Understanding the User Profile">​</a></h4>
+<p>The daily usage is 30 km, and over a warranty period of 5 years (which translates to 1,825 days), the total lifetime distance is:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 39: …750 \text{ km}
+\̲]̲" style="color:#cc0000">\[
+30 \times 1825 = 54,750 \text{ km}
+\]</span>
+<p>This profile helps in determining the total energy requirements and the battery&#x27;s durability over its expected lifespan.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="2-determining-energy-requirements">2. Determining Energy Requirements<a href="#2-determining-energy-requirements" class="hash-link" aria-label="Direct link to 2. Determining Energy Requirements" title="Direct link to 2. Determining Energy Requirements">​</a></h4>
+<p>The energy required for the two-wheeler is calculated based on the specific energy consumption and the desired range:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 111: … \, \text{kWh}
+\̲]̲" style="color:#cc0000">\[
+\text{Energy Required} = 68 \, \text{Wh/km} \times 50 \, \text{km} = 3400 \, \text{Wh} = 3.4 \, \text{kWh}
+\]</span>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="3-factoring-in-efficiency">3. Factoring in Efficiency<a href="#3-factoring-in-efficiency" class="hash-link" aria-label="Direct link to 3. Factoring in Efficiency" title="Direct link to 3. Factoring in Efficiency">​</a></h4>
+<p>Assuming a system efficiency <span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\(&#x27; in math mode at position 2: (\̲(̲\eta\))" style="color:#cc0000">(\(\eta\))</span> of 90% to account for losses in the motor and BMS:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 120: … \, \text{kWh}
+\̲]̲" style="color:#cc0000">\[
+\text{Effective Energy Required} = \frac{\text{Energy Required}}{\eta} = \frac{3.4}{0.9} \approx 3.78 \, \text{kWh}
+\]</span>
+<p>This ensures that the battery can provide the necessary energy despite inherent system inefficiencies.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="4-calculating-battery-capacity">4. Calculating Battery Capacity<a href="#4-calculating-battery-capacity" class="hash-link" aria-label="Direct link to 4. Calculating Battery Capacity" title="Direct link to 4. Calculating Battery Capacity">​</a></h4>
+<p>Using the system voltage of 48V, the required capacity in ampere-hours (Ah) is:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 119: …5 \, \text{Ah}
+\̲]̲" style="color:#cc0000">\[
+\text{Capacity (Ah)} = \frac{\text{Energy (Wh)}}{\text{Voltage (V)}} = \frac{3,780}{48} \approx 78.75 \, \text{Ah}
+\]</span>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="5-accounting-for-degradation-over-time">5. Accounting for Degradation Over Time<a href="#5-accounting-for-degradation-over-time" class="hash-link" aria-label="Direct link to 5. Accounting for Degradation Over Time" title="Direct link to 5. Accounting for Degradation Over Time">​</a></h4>
+<p>Considering a 20% degradation over 5 years, the initial battery capacity must account for this loss to ensure the battery meets the energy requirements at the end of the warranty period:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 75: …4 \, \text{Ah}
+\̲]̲" style="color:#cc0000">\[
+\text{Initial Capacity} = \frac{78.75}{0.8} \approx 98.44 \, \text{Ah}
+\]</span>
+<p>This calculation ensures that the battery retains sufficient capacity despite degradation.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="6-battery-cell-configuration">6. Battery Cell Configuration<a href="#6-battery-cell-configuration" class="hash-link" aria-label="Direct link to 6. Battery Cell Configuration" title="Direct link to 6. Battery Cell Configuration">​</a></h4>
+<p>Selecting lithium-ion cells (e.g., 18650 type) with a nominal voltage of 3.7V and a capacity of 3.5Ah, the configuration is determined as follows:</p>
+<p><strong>Series Configuration:</strong></p>
+<p>To achieve the system voltage of 48V:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 71: …, \text{cells}
+\̲]̲" style="color:#cc0000">\[
+\text{Cells in Series} = \frac{48}{3.7} \approx 13 \, \text{cells}
+\]</span>
+<p><strong>Parallel Configuration:</strong></p>
+<p>To achieve the total capacity of 98.44 Ah:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 76: …, \text{cells}
+\̲]̲" style="color:#cc0000">\[
+\text{Cells in Parallel} = \frac{98.44}{3.5} \approx 28 \, \text{cells}
+\]</span>
+<p><strong>Total Number of Cells:</strong></p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 60: …, \text{cells}
+\̲]̲" style="color:#cc0000">\[
+\text{Total Cells} = 13 \times 28 = 364 \, \text{cells}
+\]</span>
+<p>This configuration ensures that the battery pack meets both voltage and capacity requirements while maintaining efficiency and reliability.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="7-verification-of-design">7. Verification of Design<a href="#7-verification-of-design" class="hash-link" aria-label="Direct link to 7. Verification of Design" title="Direct link to 7. Verification of Design">​</a></h4>
+<p><strong>Energy Check:</strong></p>
+<p>The total energy provided by the pack is:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 44: … \, \text{kWh}
+\̲]̲" style="color:#cc0000">\[
+48V \times 98.44Ah = 4.73 \, \text{kWh}
+\]</span>
+<p>After 5 years, accounting for 75% State of Health (SoH):</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 65: … \, \text{kWh}
+\̲]̲" style="color:#cc0000">\[
+4.73 \times 0.75 = 3.55 \, \text{kWh} \geq 3.4 \, \text{kWh}
+\]</span>
+<p>This verification confirms that the design meets the range requirements even after degradation.</p>
+<p><strong>Daily Energy Check:</strong></p>
+<p>With a daily usage of 30 km at 68 Wh/km:</p>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 76: …Wh (2.04 kWh)}
+\̲]̲" style="color:#cc0000">\[
+\text{Daily Energy Usage} = 68 \times 30 = 2040 \, \text{Wh (2.04 kWh)}
+\]</span>
+<p>The battery provides 3.55 kWh after degradation, which is sufficient for the daily energy requirements, ensuring reliable performance.</p>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="8-weight-and-volume-estimate">8. Weight and Volume Estimate<a href="#8-weight-and-volume-estimate" class="hash-link" aria-label="Direct link to 8. Weight and Volume Estimate" title="Direct link to 8. Weight and Volume Estimate">​</a></h4>
+<p>Estimating the weight and volume based on energy density:</p>
+<ul>
+<li><strong>Energy Density (18650 cells):</strong> 250 Wh/kg</li>
+<li><strong>Battery Weight:</strong></li>
+</ul>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 49: …2 \, \text{kg}
+\̲]̲" style="color:#cc0000">\[
+\frac{4,730}{250} \approx 18.92 \, \text{kg}
+\]</span>
+<ul>
+<li><strong>Volume (Energy Density = 700 Wh/L):</strong></li>
+</ul>
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 47: …76 \, \text{L}
+\̲]̲" style="color:#cc0000">\[
+\frac{4,730}{700} \approx 6.76 \, \text{L}
+\]</span>
+<p>These estimates ensure that the battery pack fits within the vehicle&#x27;s design constraints without adding excessive weight or occupying too much space.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="final-design-summary">Final Design Summary<a href="#final-design-summary" class="hash-link" aria-label="Direct link to Final Design Summary" title="Direct link to Final Design Summary">​</a></h3>
+<table><thead><tr><th><strong>Parameter</strong></th><th><strong>Value</strong></th></tr></thead><tbody><tr><td>System Voltage</td><td>48V</td></tr><tr><td>Total Capacity</td><td>98.44 Ah</td></tr><tr><td>Initial Energy</td><td>4.73 kWh</td></tr><tr><td>Energy After 5 Years</td><td>3.55 kWh</td></tr><tr><td>Cells in Series</td><td>13</td></tr><tr><td>Cells in Parallel</td><td>28</td></tr><tr><td>Total Cells</td><td>364</td></tr><tr><td>Weight</td><td>~19 kg</td></tr><tr><td>Volume</td><td>~6.8 L</td></tr></tbody></table>
+<p>This battery pack design successfully meets the two-wheeler&#x27;s range, warranty, and SoH requirements, ensuring reliable and efficient operation over its intended lifespan.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
+<p>Effective battery sizing and management are paramount for the performance, safety, and longevity of electric vehicles. This comprehensive guide outlines a structured design process, beginning with understanding key concepts and progressing through detailed calculations and configurations. By integrating foundational knowledge with practical methodologies and utilizing advanced tools, engineers can design battery systems that meet stringent operational demands while accommodating long-term degradation. Moreover, robust Battery Management Systems ensure that these batteries operate efficiently and safely throughout their lifecycle, contributing to the sustainability and reliability of electric vehicles.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/BMS/edit/main/docs/theory/07_battery_sizing/01_sizing_basics.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--next" href="/BMS/docs/theory/battery_sizing/using_excel_for_battery_sizing"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">using_excel_for_battery_sizing</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#key-concepts-in-battery-sizing" class="table-of-contents__link toc-highlight">Key Concepts in Battery Sizing</a><ul><li><a href="#battery-capacity" class="table-of-contents__link toc-highlight">Battery Capacity</a></li><li><a href="#voltage-levels" class="table-of-contents__link toc-highlight">Voltage Levels</a></li><li><a href="#energy-density" class="table-of-contents__link toc-highlight">Energy Density</a></li><li><a href="#degradation-and-aging" class="table-of-contents__link toc-highlight">Degradation and Aging</a></li></ul></li><li><a href="#battery-management-systems-bms" class="table-of-contents__link toc-highlight">Battery Management Systems (BMS)</a><ul><li><a href="#purpose-of-bms" class="table-of-contents__link toc-highlight">Purpose of BMS</a></li><li><a href="#importance-of-bms-in-applications" class="table-of-contents__link toc-highlight">Importance of BMS in Applications</a></li></ul></li><li><a href="#battery-sizing-process" class="table-of-contents__link toc-highlight">Battery Sizing Process</a><ul><li><a href="#step-1-determine-voltage-levels" class="table-of-contents__link toc-highlight">Step 1: Determine Voltage Levels</a></li><li><a href="#step-2-estimate-energy-requirements" class="table-of-contents__link toc-highlight">Step 2: Estimate Energy Requirements</a></li><li><a href="#step-3-determine-battery-capacity" class="table-of-contents__link toc-highlight">Step 3: Determine Battery Capacity</a></li><li><a href="#step-4-define-power-and-temperature-ranges" class="table-of-contents__link toc-highlight">Step 4: Define Power and Temperature Ranges</a></li><li><a href="#step-5-analyze-usage-patterns" class="table-of-contents__link toc-highlight">Step 5: Analyze Usage Patterns</a></li><li><a href="#step-6-calculate-usable-energy" class="table-of-contents__link toc-highlight">Step 6: Calculate Usable Energy</a></li><li><a href="#step-7-include-a-buffer-for-aging" class="table-of-contents__link toc-highlight">Step 7: Include a Buffer for Aging</a></li><li><a href="#step-8-cost-analysis" class="table-of-contents__link toc-highlight">Step 8: Cost Analysis</a></li><li><a href="#step-9-iterative-optimization" class="table-of-contents__link toc-highlight">Step 9: Iterative Optimization</a></li><li><a href="#step-10-integration-into-vehicle-design" class="table-of-contents__link toc-highlight">Step 10: Integration into Vehicle Design</a></li></ul></li><li><a href="#battery-pack-design-and-configuration" class="table-of-contents__link toc-highlight">Battery Pack Design and Configuration</a><ul><li><a href="#series-and-parallel-connections" class="table-of-contents__link toc-highlight">Series and Parallel Connections</a></li><li><a href="#modules-and-pack-assembly" class="table-of-contents__link toc-highlight">Modules and Pack Assembly</a></li></ul></li><li><a href="#detailed-battery-design-example-two-wheeler" class="table-of-contents__link toc-highlight">Detailed Battery Design Example: Two-Wheeler</a><ul><li><a href="#problem-statement" class="table-of-contents__link toc-highlight">Problem Statement</a></li><li><a href="#step-by-step-design-approach" class="table-of-contents__link toc-highlight">Step-by-Step Design Approach</a></li><li><a href="#final-design-summary" class="table-of-contents__link toc-highlight">Final Design Summary</a></li></ul></li><li><a href="#conclusion" class="table-of-contents__link toc-highlight">Conclusion</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
+</body>
+</html>

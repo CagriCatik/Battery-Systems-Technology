@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-theory/battery_characteristics/specification_sheet" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.3">
+<title data-rh="true">Battery Cell Specification Sheet |  Battery Systems and Technology</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://CagriCatik.github.io/BMS/img/undraw_online.svg"><meta data-rh="true" name="twitter:image" content="https://CagriCatik.github.io/BMS/img/undraw_online.svg"><meta data-rh="true" property="og:url" content="https://CagriCatik.github.io/BMS/docs/theory/battery_characteristics/specification_sheet"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Battery Cell Specification Sheet |  Battery Systems and Technology"><meta data-rh="true" name="description" content="Battery specification sheets provide critical information about cell performance, operational limits, and design constraints. These sheets are essential for engineers to select and evaluate batteries for specific applications."><meta data-rh="true" property="og:description" content="Battery specification sheets provide critical information about cell performance, operational limits, and design constraints. These sheets are essential for engineers to select and evaluate batteries for specific applications."><link data-rh="true" rel="icon" href="/BMS/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://CagriCatik.github.io/BMS/docs/theory/battery_characteristics/specification_sheet"><link data-rh="true" rel="alternate" href="https://CagriCatik.github.io/BMS/docs/theory/battery_characteristics/specification_sheet" hreflang="en"><link data-rh="true" rel="alternate" href="https://CagriCatik.github.io/BMS/docs/theory/battery_characteristics/specification_sheet" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/BMS/blog/rss.xml" title=" Battery Systems and Technology RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/BMS/blog/atom.xml" title=" Battery Systems and Technology Atom Feed">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-R4556vVJtIc0EJ3NKnM5ePcM78Zv5e+/ff+f6aZwYzZjnj84pK8i0PZyNnO+g0OQ" crossorigin="anonymous"><link rel="stylesheet" href="/BMS/assets/css/styles.49f50c39.css">
+<script src="/BMS/assets/js/runtime~main.fdff60f3.js" defer="defer"></script>
+<script src="/BMS/assets/js/main.885eaadb.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/BMS/"><div class="navbar__logo"><img src="/BMS/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/BMS/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/BMS/docs/theory/fundamentals/getting-started">Fundamentals of Battery Technology</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/aging_degradation/getting-started">Aging and Degradation</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/chemistry_design_principles/getting-started">Chemistry and Design Principles</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/battery_pack/electrical_connection">Battery Pack Engineering</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/thermal_management/cooling_mechanism">Thermal Management</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/BMS/docs/theory/battery_characteristics/ocv_vs_soc">Characteristics and Technical Specifications</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/battery_sizing/sizing_basics">Sizing and Optimization</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/bms/introduction_bms">Battery Management System</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/bms_architecture/bms_architecture">BMS Design and Architecture</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/modeling_testing/equivalent_circuit">Modeling and Testing</a><a class="navbar__item navbar__link" href="/BMS/docs/glossary/A">Glossary</a><a class="navbar__item navbar__link" href="/BMS/blog">Blog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/CagriCatik/BMS" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/theory/battery_characteristics/ocv_vs_soc">OCV vs SOC for Chemistries</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/BMS/docs/theory/battery_characteristics/specification_sheet">Battery Cell Specification Sheet</a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/BMS/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Battery Cell Specification Sheet</span><meta itemprop="position" content="1"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Battery Cell Specification Sheet</h1></header>
+<p>Battery specification sheets provide critical information about cell performance, operational limits, and design constraints. These sheets are essential for engineers to select and evaluate batteries for specific applications.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-specifications">Key Specifications<a href="#key-specifications" class="hash-link" aria-label="Direct link to Key Specifications" title="Direct link to Key Specifications">​</a></h3>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="1-nominal-voltage">1. Nominal Voltage<a href="#1-nominal-voltage" class="hash-link" aria-label="Direct link to 1. Nominal Voltage" title="Direct link to 1. Nominal Voltage">​</a></h4>
+<p>The nominal voltage represents the average voltage of a cell during discharge under standard operating conditions. It is determined by the battery chemistry. For example, Lithium Iron Phosphate (LiFePO₄) cells typically have a nominal voltage of 3.3 V, while Lithium Nickel Manganese Cobalt Oxide (NMC) cells exhibit nominal voltages around 3.6–3.7 V. This parameter is foundational in defining the operating voltage of a battery pack.</p>
+<ul>
+<li>Indicates the typical operating voltage of the battery under standard conditions.</li>
+<li>Examples:<!-- -->
+<ul>
+<li>Lithium Iron Phosphate (LiFePO₄): 3.3 V</li>
+<li>Lithium Nickel Manganese Cobalt Oxide (NMC): 3.6–3.7 V</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="2-capacity">2. Capacity<a href="#2-capacity" class="hash-link" aria-label="Direct link to 2. Capacity" title="Direct link to 2. Capacity">​</a></h4>
+<p>The capacity of a battery, expressed in ampere-hours (Ah), quantifies the amount of charge it can deliver under specified conditions. Temperature significantly influences capacity; for instance, a cell rated at 2.6 Ah at 23°C may deliver reduced capacity when exposed to extreme cold or heat. Manufacturers standardize capacity ratings at a defined temperature to provide consistency in specification.</p>
+<ul>
+<li>Measured in ampere-hours (Ah), representing the total charge a battery can deliver at a given temperature.</li>
+<li>Temperature Dependence:<!-- -->
+<ul>
+<li>Example: A battery rated at 2.6 Ah at 23°C might exhibit reduced performance at lower or higher temperatures.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="3-energy-and-specific-power">3. Energy and Specific Power<a href="#3-energy-and-specific-power" class="hash-link" aria-label="Direct link to 3. Energy and Specific Power" title="Direct link to 3. Energy and Specific Power">​</a></h4>
+<p>Battery energy is the product of its nominal voltage and capacity, measured in watt-hours (Wh). This metric provides insight into the total energy storage capability of the cell. Specific power, defined as power per unit mass (W/kg), indicates how quickly a cell can deliver energy relative to its weight. It is an essential consideration in applications requiring high power output, such as electric vehicles.</p>
+<ul>
+<li>Defined as voltage × capacity (Wh).</li>
+<li>Example: A 3.3 V battery with a 2.6 Ah capacity provides ~8.58 Wh of energy.</li>
+<li>Power per unit mass (W/kg), indicating the battery&#x27;s capability to deliver energy quickly.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="4-impedance">4. Impedance<a href="#4-impedance" class="hash-link" aria-label="Direct link to 4. Impedance" title="Direct link to 4. Impedance">​</a></h4>
+<p>Battery impedance includes both DC resistance and AC impedance. DC resistance measures the steady-state resistive losses during current flow, while AC impedance accounts for resistive, inductive, and capacitive effects at varying frequencies. For example, a cell may have an AC impedance of 6 mΩ at 1 kHz. It is critical to specify the frequency at which AC impedance is measured, as impedance values vary with frequency.</p>
+<ul>
+<li>Includes DC Resistance and AC Impedance:<!-- -->
+<ul>
+<li>DC resistance reflects resistive losses in steady-state current.</li>
+<li>AC impedance includes resistive, inductive, and capacitive effects and varies with frequency.</li>
+</ul>
+</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="5-cycle-life">5. Cycle Life<a href="#5-cycle-life" class="hash-link" aria-label="Direct link to 5. Cycle Life" title="Direct link to 5. Cycle Life">​</a></h4>
+<p>Cycle life defines the number of charge-discharge cycles a battery can endure before its capacity falls below a specified threshold, typically 80% of its initial value. For example, a cell rated for 4000 cycles at a 1C charge/discharge rate can provide reliable performance for years under standard operating conditions.</p>
+<ul>
+<li>Defines the number of charge-discharge cycles a battery can endure before capacity falls below a threshold (e.g., 80% of original capacity).</li>
+<li>Example: 1C charging/discharging yields 4000 cycles for some cells.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="6-discharge-parameters">6. Discharge Parameters<a href="#6-discharge-parameters" class="hash-link" aria-label="Direct link to 6. Discharge Parameters" title="Direct link to 6. Discharge Parameters">​</a></h4>
+<p>Manufacturers specify discharge characteristics, including continuous discharge current and pulse discharge current. Continuous discharge current represents the maximum current a cell can sustain without adverse effects. Pulse discharge current refers to the higher currents a cell can handle for short durations (e.g., 10 seconds). For instance, a cell rated at a continuous discharge of 50 A may allow pulse discharges up to 100 A.</p>
+<ul>
+<li>Continuous Discharge Current: Maximum current the battery can deliver continuously.</li>
+<li>Pulse Discharge Current: Higher currents permissible for short durations, e.g., 10 seconds.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="7-operating-temperature-range">7. Operating Temperature Range<a href="#7-operating-temperature-range" class="hash-link" aria-label="Direct link to 7. Operating Temperature Range" title="Direct link to 7. Operating Temperature Range">​</a></h4>
+<p>The operational temperature range of a battery is vital for ensuring performance and safety. For example, a cell may be rated to operate between -30°C and 55°C. Extreme temperatures can adversely affect battery life and performance. Additionally, charging at low temperatures (-20°C or lower) can result in the formation of dendrites, leading to short circuits and thermal runaway.</p>
+<ul>
+<li>Example: -30°C to 55°C for optimal performance.</li>
+<li>Batteries often require thermal management to prevent degradation at extreme temperatures.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="8-charging-parameters">8. Charging Parameters<a href="#8-charging-parameters" class="hash-link" aria-label="Direct link to 8. Charging Parameters" title="Direct link to 8. Charging Parameters">​</a></h4>
+<p>Charging parameters include the recommended charge current, maximum charge current, and cutoff voltage. Slow charging typically occurs at the recommended charge current, while fast charging involves the maximum charge current, often used for DC fast charging. The cutoff voltage defines the point at which charging must cease to prevent overcharging. For instance, a cell may have a cutoff voltage of 3.6 V.</p>
+<ul>
+<li>Recommended Charge Current: Standard charge rate for optimal longevity.</li>
+<li>Maximum Charge Current: For fast charging, e.g., DC fast charging.</li>
+<li>Cutoff Voltage: Voltage at which charging must stop to prevent overcharging.</li>
+</ul>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="9-safety-certifications">9. Safety Certifications<a href="#9-safety-certifications" class="hash-link" aria-label="Direct link to 9. Safety Certifications" title="Direct link to 9. Safety Certifications">​</a></h4>
+<p>Battery cells must meet stringent safety standards, often validated through certifications. These certifications require passing tests such as nail penetration (to simulate internal short circuits), vibration tests, and thermal stability assessments. Certification ensures that the cells are safe for transport and use under defined conditions. For example, cells transported by air must often be discharged to 30% state-of-charge to minimize risks during transit.</p>
+<ul>
+<li>Batteries must pass tests like nail penetration, vibration, and thermal stability for compliance with international standards.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="battery-management-systems">Battery Management Systems<a href="#battery-management-systems" class="hash-link" aria-label="Direct link to Battery Management Systems" title="Direct link to Battery Management Systems">​</a></h2>
+<p>A BMS ensures safe and efficient operation of battery packs by monitoring and controlling key parameters.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-functions">Key Functions<a href="#key-functions" class="hash-link" aria-label="Direct link to Key Functions" title="Direct link to Key Functions">​</a></h3>
+<p>Voltage monitoring is a core function of a BMS. It ensures that individual cells within a pack remain within safe voltage limits, preventing conditions that could lead to cell degradation or catastrophic failure. Additionally, the BMS monitors temperature to prevent operation in unsafe thermal conditions. At excessively high or low temperatures, the BMS may reduce charge and discharge rates or shut down the system entirely.</p>
+<p>State of Charge (SoC) estimation allows users to understand the remaining energy available in the battery pack. The BMS achieves this through algorithms that account for voltage, current, and temperature readings. Cell balancing ensures uniform performance across the pack, equalizing voltage disparities among cells to enhance overall efficiency and longevity.</p>
+<p>A BMS also provides safety protections by implementing overcurrent, overvoltage, and thermal cutoffs. It continuously logs operational data, which can be used for diagnostics, predictive maintenance, and performance optimization.</p>
+<ol>
+<li>
+<p>Voltage Monitoring</p>
+<ul>
+<li>Ensures cells remain within safe operating ranges to prevent overcharging or over-discharging.</li>
+</ul>
+</li>
+<li>
+<p>Temperature Management</p>
+<ul>
+<li>Prevents overheating or operation at excessively low temperatures to avoid thermal runaway or dendrite formation.</li>
+</ul>
+</li>
+<li>
+<p>State of Charge (SoC) Estimation</p>
+<ul>
+<li>Tracks the remaining charge to optimize battery usage and longevity.</li>
+</ul>
+</li>
+<li>
+<p>Balancing</p>
+<ul>
+<li>Equalizes cell voltages to ensure uniform performance across the pack.</li>
+</ul>
+</li>
+<li>
+<p>Safety Protections</p>
+<ul>
+<li>Implements cutoffs for overvoltage, undervoltage, overcurrent, and thermal events.</li>
+</ul>
+</li>
+<li>
+<p>Data Logging and Diagnostics</p>
+<ul>
+<li>Records operational data for maintenance and performance analysis.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="battery-sizing-and-design">Battery Sizing and Design<a href="#battery-sizing-and-design" class="hash-link" aria-label="Direct link to Battery Sizing and Design" title="Direct link to Battery Sizing and Design">​</a></h2>
+<p>Battery sizing involves determining the appropriate capacity, voltage, and configuration for a given application. This process requires balancing technical requirements, cost constraints, and long-term performance considerations.</p>
+<p>The first step in battery sizing is defining the operating voltage, which depends on the application. For example, a two-wheeler may use a 48 V system, while an electric bus might require an 800 V system. The nominal voltage of individual cells dictates the number of cells needed in series to achieve the desired system voltage.</p>
+<p>Energy requirements are estimated based on the specific energy consumption of the application, often expressed in Wh/km. For instance, if an electric vehicle consumes 150 Wh/km and has a target range of 200 km, it would require a battery pack with an energy capacity of 30 kWh.</p>
+<p>Once the energy requirement is established, the capacity (Ah) can be calculated by dividing the total energy by the system voltage. For example, a 30 kWh system operating at 400 V would require a capacity of 75 Ah.</p>
+<p>Aging and degradation must be factored into the design to ensure long-term reliability. Engineers typically reserve a portion of the battery’s capacity, known as a buffer, to compensate for performance loss over time. For instance, a battery might be designed with an additional 20% capacity to account for aging.</p>
+<p>Thermal management and operational conditions, such as temperature and load profiles, are critical design considerations. For example, batteries used in cold climates may require integrated heating elements to prevent dendrite formation during charging.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="sizing-steps">Sizing Steps<a href="#sizing-steps" class="hash-link" aria-label="Direct link to Sizing Steps" title="Direct link to Sizing Steps">​</a></h3>
+<ol>
+<li>
+<p>Voltage Determination</p>
+<ul>
+<li>Select nominal voltage based on application (e.g., 48 V for two-wheelers, 800 V for buses).</li>
+<li>Calculate required cell count:<!-- -->
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 87: …Cell Voltage}}
+\̲]̲" style="color:#cc0000">\[
+\text{Number of cells} = \frac{\text{System Voltage}}{\text{Nominal Cell Voltage}}
+\]</span>
+</li>
+</ul>
+</li>
+<li>
+<p>Energy Estimation</p>
+<ul>
+<li>Calculate required energy (kWh) based on range and specific energy consumption (Wh/km).<br>
+<!-- -->Example:<!-- -->
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 82: …nergy (Wh/km)}
+\̲]̲" style="color:#cc0000">\[
+\text{Energy (kWh)} = \text{Range (km)} \times \text{Specific Energy (Wh/km)}
+\]</span>
+</li>
+</ul>
+</li>
+<li>
+<p>Capacity Calculation</p>
+<ul>
+<li>Divide energy by system voltage:<!-- -->
+<span class="katex-error" title="ParseError: KaTeX parse error: Can&#x27;t use function &#x27;\]&#x27; in math mode at position 81: … Voltage (V)}}
+\̲]̲" style="color:#cc0000">\[
+\text{Capacity (Ah)} = \frac{\text{Energy (kWh)}}{\text{System Voltage (V)}}
+\]</span>
+</li>
+</ul>
+</li>
+<li>
+<p>Buffer and Aging Factors</p>
+<ul>
+<li>Reserve ~20% capacity to account for aging and ensure long-term performance.</li>
+</ul>
+</li>
+<li>
+<p>Temperature Considerations</p>
+<ul>
+<li>Design systems for optimal operation in expected temperature ranges.</li>
+</ul>
+</li>
+<li>
+<p>Power and Load Profiles</p>
+<ul>
+<li>Assess continuous and peak power requirements to ensure the battery can handle dynamic loads.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="challenges-in-battery-design">Challenges in Battery Design<a href="#challenges-in-battery-design" class="hash-link" aria-label="Direct link to Challenges in Battery Design" title="Direct link to Challenges in Battery Design">​</a></h2>
+<p>Battery design faces several challenges, including aging, cost optimization, safety, and environmental conditions. Aging and degradation affect both capacity and power output, necessitating the inclusion of buffer capacity. Cost optimization involves balancing the initial investment with long-term performance, often requiring trade-offs between capacity, energy density, and cycle life.</p>
+<p>Safety concerns, particularly the risk of thermal runaway, require meticulous attention to cell chemistry, thermal management, and system integration. Environmental conditions, such as extreme temperatures and humidity, further complicate design considerations, particularly for applications in diverse geographical regions.</p>
+<ol>
+<li>
+<p>Aging and Degradation</p>
+<ul>
+<li>Capacity loss over time affects performance and range.</li>
+</ul>
+</li>
+<li>
+<p>Cost Optimization</p>
+<ul>
+<li>Higher capacity increases cost; balance between range and affordability is critical.</li>
+</ul>
+</li>
+<li>
+<p>Safety</p>
+<ul>
+<li>Addressing thermal runaway risks, particularly at low temperatures where dendrite formation can cause internal short circuits.</li>
+</ul>
+</li>
+<li>
+<p>Environmental Conditions</p>
+<ul>
+<li>Designing for varying climates, from freezing to tropical conditions.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="tables">Tables<a href="#tables" class="hash-link" aria-label="Direct link to Tables" title="Direct link to Tables">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="example-battery-specifications">Example Battery Specifications<a href="#example-battery-specifications" class="hash-link" aria-label="Direct link to Example Battery Specifications" title="Direct link to Example Battery Specifications">​</a></h3>
+<table><thead><tr><th>Parameter</th><th>Value</th><th>Notes</th></tr></thead><tbody><tr><td>Nominal Voltage</td><td>3.7 V</td><td>Lithium NMC chemistry.</td></tr><tr><td>Capacity</td><td>2.6 Ah</td><td>Measured at 23°C.</td></tr><tr><td>Energy</td><td>9.62 Wh</td><td>Voltage × Capacity.</td></tr><tr><td>Continuous Discharge Current</td><td>50 A</td><td>Maximum sustained output.</td></tr><tr><td>Pulse Discharge Current</td><td>100 A (10 s)</td><td>Short bursts.</td></tr><tr><td>Operating Temperature Range</td><td>-30°C to 55°C</td><td>Requires thermal management.</td></tr><tr><td>Recommended Charge Current</td><td>3 A</td><td>For slow charging.</td></tr><tr><td>Maximum Charge Current</td><td>6 A</td><td>For fast charging.</td></tr><tr><td>Cutoff Voltage</td><td>3.6 V</td><td>Prevent overcharging.</td></tr></tbody></table>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
+<p>Understanding battery specification sheets, management systems, and design principles is crucial for engineers developing electric vehicles and other battery-powered systems. By balancing technical performance, cost, and safety, batteries can be optimized for diverse applications, ensuring reliability and efficiency.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/BMS/edit/main/docs/theory/06_battery_characteristics/02_specification_sheet.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/BMS/docs/theory/battery_characteristics/ocv_vs_soc"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">OCV vs SOC for Chemistries</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#key-specifications" class="table-of-contents__link toc-highlight">Key Specifications</a></li><li><a href="#battery-management-systems" class="table-of-contents__link toc-highlight">Battery Management Systems</a><ul><li><a href="#key-functions" class="table-of-contents__link toc-highlight">Key Functions</a></li></ul></li><li><a href="#battery-sizing-and-design" class="table-of-contents__link toc-highlight">Battery Sizing and Design</a><ul><li><a href="#sizing-steps" class="table-of-contents__link toc-highlight">Sizing Steps</a></li></ul></li><li><a href="#challenges-in-battery-design" class="table-of-contents__link toc-highlight">Challenges in Battery Design</a></li><li><a href="#tables" class="table-of-contents__link toc-highlight">Tables</a><ul><li><a href="#example-battery-specifications" class="table-of-contents__link toc-highlight">Example Battery Specifications</a></li></ul></li><li><a href="#conclusion" class="table-of-contents__link toc-highlight">Conclusion</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
+</body>
+</html>
