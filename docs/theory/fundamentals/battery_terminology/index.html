@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-theory/fundamentals/battery_terminology" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.3">
+<title data-rh="true">Battery Terminology |  Battery Systems and Technology</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://CagriCatik.github.io/BMS/img/undraw_online.svg"><meta data-rh="true" name="twitter:image" content="https://CagriCatik.github.io/BMS/img/undraw_online.svg"><meta data-rh="true" property="og:url" content="https://CagriCatik.github.io/BMS/docs/theory/fundamentals/battery_terminology"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Battery Terminology |  Battery Systems and Technology"><meta data-rh="true" name="description" content="Battery Management Systems rely on specific technical terminologies to monitor, analyze, and optimize battery performance, safety, and reliability. A deep understanding of these terms is essential for professionals in electric vehicle (EV) development and energy storage systems. This guide provides an in-depth exploration of battery terminology, offering precise definitions, equations, examples, and their relevance to battery technology."><meta data-rh="true" property="og:description" content="Battery Management Systems rely on specific technical terminologies to monitor, analyze, and optimize battery performance, safety, and reliability. A deep understanding of these terms is essential for professionals in electric vehicle (EV) development and energy storage systems. This guide provides an in-depth exploration of battery terminology, offering precise definitions, equations, examples, and their relevance to battery technology."><link data-rh="true" rel="icon" href="/BMS/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://CagriCatik.github.io/BMS/docs/theory/fundamentals/battery_terminology"><link data-rh="true" rel="alternate" href="https://CagriCatik.github.io/BMS/docs/theory/fundamentals/battery_terminology" hreflang="en"><link data-rh="true" rel="alternate" href="https://CagriCatik.github.io/BMS/docs/theory/fundamentals/battery_terminology" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/BMS/blog/rss.xml" title=" Battery Systems and Technology RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/BMS/blog/atom.xml" title=" Battery Systems and Technology Atom Feed">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-R4556vVJtIc0EJ3NKnM5ePcM78Zv5e+/ff+f6aZwYzZjnj84pK8i0PZyNnO+g0OQ" crossorigin="anonymous"><link rel="stylesheet" href="/BMS/assets/css/styles.f2b5edad.css">
+<script src="/BMS/assets/js/runtime~main.e12dac1d.js" defer="defer"></script>
+<script src="/BMS/assets/js/main.b3960b30.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/BMS/"><div class="navbar__logo"><img src="/BMS/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/BMS/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/BMS/docs/theory/fundamentals/getting-started">Fundamentals of Battery Technology</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/aging_degradation/getting-started">Aging and Degradation</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/chemistry_design_principles/getting-started">Chemistry and Design Principles</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/battery_pack/electrical_connection">Battery Pack Engineering</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/thermal_management/cooling_mechanism">Thermal Management</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/battery_characteristics/01_">Characteristics and Technical Specifications</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/battery_sizing/01_">Sizing and Optimization</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/bms/01_">Battery Management System</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/bms_architecture/01_">BMS Design and Architecture</a><a class="navbar__item navbar__link" href="/BMS/docs/theory/modeling_testing/01_">Modeling and Testing</a><a class="navbar__item navbar__link" href="/BMS/docs/glossary/A">Glossary</a><a class="navbar__item navbar__link" href="/BMS/blog">Blog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/CagriCatik/BMS" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/theory/fundamentals/getting-started">Getting Started</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/theory/fundamentals/bms-in-ev">Introduction</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/theory/fundamentals/importance_of_battery">Importance of Battery and Battery Management Systems</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/theory/fundamentals/components">Components of Electric Vehicles</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/theory/fundamentals/why_lithium_battery">Why Choose Lithium-Ion Batteries Over Alternatives?</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/theory/fundamentals/em-pmsm">Permanent Magnet Synchronous Motors</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/theory/fundamentals/how_lithium_battery_works">How Does Lithium Battery Work?</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/BMS/docs/theory/fundamentals/battery_terminology">Battery Terminology</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/theory/fundamentals/em-asm">Asynchronous Motors</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/theory/fundamentals/pe">Power Electronics</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/BMS/docs/theory/fundamentals/bms">Battery Management Systems</a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/BMS/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Battery Terminology</span><meta itemprop="position" content="1"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Battery Terminology</h1></header>
+<p>Battery Management Systems rely on specific technical terminologies to monitor, analyze, and optimize battery performance, safety, and reliability. A deep understanding of these terms is essential for professionals in electric vehicle (EV) development and energy storage systems. This guide provides an in-depth exploration of battery terminology, offering precise definitions, equations, examples, and their relevance to battery technology.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="state-of-charge-soc">State of Charge (SoC)<a href="#state-of-charge-soc" class="hash-link" aria-label="Direct link to State of Charge (SoC)" title="Direct link to State of Charge (SoC)">​</a></h2>
+<p>The State of Charge (SoC) quantifies the remaining energy in a battery as a percentage of its full capacity.</p>
+<ul>
+<li>
+<p><strong>Definition:</strong></p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mi>O</mi><mi>C</mi><mo>=</mo><mfrac><mtext>Remaining Capacity (Ah)</mtext><mtext>Full Capacity (Ah)</mtext></mfrac><mo>×</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">SOC = \frac{\text{Remaining Capacity (Ah)}}{\text{Full Capacity (Ah)}} \times 100 </annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.07153em">SOC</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em"><span style="top:-2.314em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord text"><span class="mord">Full Capacity (Ah)</span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.677em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord text"><span class="mord">Remaining Capacity (Ah)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:0.6444em"></span><span class="mord">100</span></span></span></span></span>
+</li>
+<li>
+<p><strong>Example:</strong><br>
+<!-- -->For a battery with a total capacity of 100 Ah and 40 Ah remaining:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mi>O</mi><mi>C</mi><mo>=</mo><mfrac><mn>40</mn><mn>100</mn></mfrac><mo>×</mo><mn>100</mn><mo>=</mo><mn>40</mn><mi mathvariant="normal">%</mi></mrow><annotation encoding="application/x-tex">SOC = \frac{40}{100} \times 100 = 40\%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.07153em">SOC</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:2.0074em;vertical-align:-0.686em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3214em"><span style="top:-2.314em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord">100</span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.677em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord">40</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.686em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:0.6444em"></span><span class="mord">100</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:0.8056em;vertical-align:-0.0556em"></span><span class="mord">40%</span></span></span></span></span>
+</li>
+<li>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li>SoC is dynamic, varying with usage and charging conditions.</li>
+<li>Indicates how much energy is still available for use.</li>
+</ul>
+</li>
+<li>
+<p><strong>Importance:</strong><br>
+<!-- -->SoC acts as a fuel gauge for batteries, helping users understand energy availability in real-time.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="state-of-health-soh">State of Health (SoH)<a href="#state-of-health-soh" class="hash-link" aria-label="Direct link to State of Health (SoH)" title="Direct link to State of Health (SoH)">​</a></h2>
+<p>The State of Health (SoH) represents the overall condition of a battery relative to its original state.</p>
+<ul>
+<li>
+<p><strong>Definition:</strong><br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>O</mi><mi>H</mi><mo>=</mo><mfrac><mtext>Current Usable Capacity (Ah)</mtext><mtext>Initial Full Capacity (Ah)</mtext></mfrac><mo>×</mo><mn>100</mn></mrow><annotation encoding="application/x-tex">SOH = \frac{\text{Current Usable Capacity (Ah)}}{\text{Initial Full Capacity (Ah)}} \times 100</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.02778em">SO</span><span class="mord mathnormal" style="margin-right:0.08125em">H</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:1.53em;vertical-align:-0.52em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em"><span style="top:-2.655em"><span class="pstrut" style="height:3em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">Initial Full Capacity (Ah)</span></span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.485em"><span class="pstrut" style="height:3em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">Current Usable Capacity (Ah)</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:0.6444em"></span><span class="mord">100</span></span></span></span></p>
+</li>
+<li>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li>SoH decreases over time due to chemical degradation and operational wear.</li>
+<li>Common replacement threshold in EVs is at 80% SoH.</li>
+</ul>
+</li>
+<li>
+<p><strong>Example:</strong><br>
+<!-- -->A new battery with 100 Ah capacity degrades to 80 Ah:<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>O</mi><mi>H</mi><mo>=</mo><mfrac><mn>80</mn><mn>100</mn></mfrac><mo>×</mo><mn>100</mn><mo>=</mo><mn>80</mn><mi mathvariant="normal">%</mi></mrow><annotation encoding="application/x-tex">SOH = \frac{80}{100} \times 100 = 80\%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.02778em">SO</span><span class="mord mathnormal" style="margin-right:0.08125em">H</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em"><span style="top:-2.655em"><span class="pstrut" style="height:3em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">100</span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.394em"><span class="pstrut" style="height:3em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">80</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:0.6444em"></span><span class="mord">100</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:0.8056em;vertical-align:-0.0556em"></span><span class="mord">80%</span></span></span></span></p>
+</li>
+<li>
+<p><strong>Importance:</strong><br>
+<!-- -->SoH is critical for predicting remaining useful life and scheduling maintenance.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="depth-of-discharge-dod">Depth of Discharge (DOD)<a href="#depth-of-discharge-dod" class="hash-link" aria-label="Direct link to Depth of Discharge (DOD)" title="Direct link to Depth of Discharge (DOD)">​</a></h2>
+<p>The Depth of Discharge (DOD) measures the percentage of energy removed from a battery relative to its full capacity.</p>
+<ul>
+<li>
+<p><strong>Definition:</strong><br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>O</mi><mi>D</mi><mo>=</mo><mn>100</mn><mi mathvariant="normal">%</mi><mo>−</mo><mi>S</mi><mi>O</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">DOD = 100\% - SOC</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.02778em">D</span><span class="mord mathnormal" style="margin-right:0.02778em">O</span><span class="mord mathnormal" style="margin-right:0.02778em">D</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.0833em"></span><span class="mord">100%</span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.07153em">SOC</span></span></span></span></p>
+</li>
+<li>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li>High DOD reduces cycle life.</li>
+<li>Managing DOD improves battery longevity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Example:</strong><br>
+<!-- -->If a battery has 40% SoC remaining, then:<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><mi>O</mi><mi>D</mi><mo>=</mo><mn>100</mn><mi mathvariant="normal">%</mi><mo>−</mo><mn>40</mn><mi mathvariant="normal">%</mi><mo>=</mo><mn>60</mn><mi mathvariant="normal">%</mi></mrow><annotation encoding="application/x-tex">DOD = 100\% - 40\% = 60\%</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.02778em">D</span><span class="mord mathnormal" style="margin-right:0.02778em">O</span><span class="mord mathnormal" style="margin-right:0.02778em">D</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.0833em"></span><span class="mord">100%</span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:0.8056em;vertical-align:-0.0556em"></span><span class="mord">40%</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:0.8056em;vertical-align:-0.0556em"></span><span class="mord">60%</span></span></span></span></p>
+</li>
+<li>
+<p><strong>Importance:</strong><br>
+<!-- -->DOD directly impacts battery life and performance.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="cycle-life">Cycle Life<a href="#cycle-life" class="hash-link" aria-label="Direct link to Cycle Life" title="Direct link to Cycle Life">​</a></h2>
+<p>The Cycle Life defines the number of complete charge-discharge cycles a battery can undergo before its capacity drops to a predefined threshold (e.g., 80% SoH).</p>
+<ul>
+<li>
+<p><strong>Definition of a Cycle:</strong><br>
+<!-- -->A single cycle consists of one full discharge (100% to 0%) and one full recharge (0% to 100%).</p>
+</li>
+<li>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li>Dependent on Depth of Discharge (DOD).</li>
+<li>Higher cycle life corresponds to increased durability.</li>
+</ul>
+</li>
+<li>
+<p><strong>Example:</strong><br>
+<!-- -->A battery rated for 3000 cycles can sustain 3000 full charge-discharge cycles before significant capacity loss.</p>
+</li>
+<li>
+<p><strong>Importance:</strong><br>
+<!-- -->Cycle life defines battery longevity and cost-effectiveness.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="c-rate">C-Rate<a href="#c-rate" class="hash-link" aria-label="Direct link to C-Rate" title="Direct link to C-Rate">​</a></h2>
+<p>The C-Rate indicates the charge or discharge rate relative to a battery&#x27;s capacity.</p>
+<ul>
+<li>
+<p><strong>Formula:</strong><br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mtext>-Rate</mtext><mo>=</mo><mfrac><mtext>Current (A)</mtext><mtext>Battery Capacity (Ah)</mtext></mfrac></mrow><annotation encoding="application/x-tex">C\text{-Rate} = \frac{\text{Current (A)}}{\text{Battery Capacity (Ah)}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.07153em">C</span><span class="mord text"><span class="mord">-Rate</span></span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:1.53em;vertical-align:-0.52em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.01em"><span style="top:-2.655em"><span class="pstrut" style="height:3em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">Battery Capacity (Ah)</span></span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.485em"><span class="pstrut" style="height:3em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord text mtight"><span class="mord mtight">Current (A)</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></p>
+</li>
+<li>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li>A 1C rate discharges the battery fully in 1 hour.</li>
+<li>High C-Rates result in heat generation and faster degradation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Example:</strong><br>
+<!-- -->For a 100 Ah battery, a discharge current of 200 A corresponds to:<br>
+<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mtext>-Rate</mtext><mo>=</mo><mfrac><mn>200</mn><mn>100</mn></mfrac><mo>=</mo><mn>2</mn><mi>C</mi></mrow><annotation encoding="application/x-tex">C\text{-Rate} = \frac{200}{100} = 2C</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.07153em">C</span><span class="mord text"><span class="mord">-Rate</span></span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em"><span style="top:-2.655em"><span class="pstrut" style="height:3em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">100</span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.394em"><span class="pstrut" style="height:3em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">200</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord">2</span><span class="mord mathnormal" style="margin-right:0.07153em">C</span></span></span></span></p>
+</li>
+<li>
+<p><strong>Importance:</strong><br>
+<!-- -->C-Rate impacts battery safety, efficiency, and thermal management.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="self-discharge">Self-Discharge<a href="#self-discharge" class="hash-link" aria-label="Direct link to Self-Discharge" title="Direct link to Self-Discharge">​</a></h2>
+<p>Self-Discharge is the natural reduction in battery capacity over time due to internal chemical reactions, even when the battery is not in use.</p>
+<ul>
+<li>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li>Affected by battery chemistry and storage conditions.</li>
+<li>Lithium-ion batteries exhibit lower self-discharge compared to older technologies.</li>
+</ul>
+</li>
+<li>
+<p><strong>Example:</strong><br>
+<!-- -->A fully charged battery loses 10–15% of its charge after 6 months of storage.</p>
+</li>
+<li>
+<p><strong>Importance:</strong><br>
+<!-- -->Understanding self-discharge is essential for long-term storage and efficiency.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="calendar-life">Calendar Life<a href="#calendar-life" class="hash-link" aria-label="Direct link to Calendar Life" title="Direct link to Calendar Life">​</a></h2>
+<p>The Calendar Life is the duration a battery can be stored under specified conditions before performance degrades.</p>
+<ul>
+<li>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li>Affected by storage temperature, SoC, and chemical composition.</li>
+<li>Measured in years for lithium-ion batteries.</li>
+</ul>
+</li>
+<li>
+<p><strong>Example:</strong><br>
+<!-- -->A lithium-ion battery stored at 50% SoC and 25°C may have a calendar life of 10 years.</p>
+</li>
+<li>
+<p><strong>Importance:</strong><br>
+<!-- -->Calendar life considerations are vital for backup power systems and seasonal storage.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="internal-resistance">Internal Resistance<a href="#internal-resistance" class="hash-link" aria-label="Direct link to Internal Resistance" title="Direct link to Internal Resistance">​</a></h2>
+<p>Internal Resistance measures the opposition to current flow within a battery.</p>
+<ul>
+<li>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li>Increases with age and affects power output.</li>
+<li>Varies with SoC, temperature, and usage.</li>
+</ul>
+</li>
+<li>
+<p><strong>Example:</strong><br>
+<!-- -->A new battery may have 10 mΩ resistance, which increases to 15 mΩ over time due to aging.</p>
+</li>
+<li>
+<p><strong>Importance:</strong><br>
+<!-- -->Impacts energy efficiency and heat generation during operation.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="specific-energy-and-energy-density">Specific Energy and Energy Density<a href="#specific-energy-and-energy-density" class="hash-link" aria-label="Direct link to Specific Energy and Energy Density" title="Direct link to Specific Energy and Energy Density">​</a></h2>
+<ul>
+<li>
+<p><strong>Specific Energy:</strong><br>
+<!-- -->Energy output per unit mass, expressed as:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>Specific Energy (Wh/kg)</mtext><mo>=</mo><mfrac><mtext>Total Energy (Wh)</mtext><mtext>Mass (kg)</mtext></mfrac></mrow><annotation encoding="application/x-tex">\text{Specific Energy (Wh/kg)} = \frac{\text{Total Energy (Wh)}}{\text{Mass (kg)}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord text"><span class="mord">Specific Energy (Wh/kg)</span></span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em"><span style="top:-2.314em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord text"><span class="mord">Mass (kg)</span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.677em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord text"><span class="mord">Total Energy (Wh)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+</li>
+<li>
+<p><strong>Energy Density:</strong><br>
+<!-- -->Energy output per unit volume, expressed as:</p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mtext>Energy Density (Wh/L)</mtext><mo>=</mo><mfrac><mtext>Total Energy (Wh)</mtext><mtext>Volume (L)</mtext></mfrac></mrow><annotation encoding="application/x-tex">\text{Energy Density (Wh/L)} = \frac{\text{Total Energy (Wh)}}{\text{Volume (L)}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em"></span><span class="mord text"><span class="mord">Energy Density (Wh/L)</span></span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:2.363em;vertical-align:-0.936em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.427em"><span style="top:-2.314em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord text"><span class="mord">Volume (L)</span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.677em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord text"><span class="mord">Total Energy (Wh)</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.936em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+</li>
+<li>
+<p><strong>Example:</strong><br>
+<!-- -->A lithium-ion battery has a specific energy of 200 Wh/kg and an energy density of 500 Wh/L.</p>
+</li>
+<li>
+<p><strong>Importance:</strong><br>
+<!-- -->Essential for lightweight, compact designs in EVs and portable devices.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="open-circuit-voltage-ocv">Open Circuit Voltage (OCV)<a href="#open-circuit-voltage-ocv" class="hash-link" aria-label="Direct link to Open Circuit Voltage (OCV)" title="Direct link to Open Circuit Voltage (OCV)">​</a></h2>
+<p>Open Circuit Voltage (OCV) is the voltage measured across battery terminals when no current flows.</p>
+<ul>
+<li>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li>Directly correlates with SoC.</li>
+<li>Provides insight into battery health.</li>
+</ul>
+</li>
+<li>
+<p><strong>Example:</strong><br>
+<!-- -->A fully charged lithium-ion battery may have an OCV of 4.2V, while a discharged battery shows 3.0V.</p>
+</li>
+<li>
+<p><strong>Importance:</strong><br>
+<!-- -->OCV is used to estimate SoC and validate battery health.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="nominal-voltage">Nominal Voltage<a href="#nominal-voltage" class="hash-link" aria-label="Direct link to Nominal Voltage" title="Direct link to Nominal Voltage">​</a></h2>
+<p>Nominal Voltage is the average voltage at which a battery operates under typical conditions.</p>
+<ul>
+<li>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li>Specific to battery chemistry.</li>
+<li>Lower than the maximum voltage.</li>
+</ul>
+</li>
+<li>
+<p><strong>Example:</strong><br>
+<!-- -->A lithium-ion battery with a maximum voltage of 4.2V has a nominal voltage of 3.7V.</p>
+</li>
+<li>
+<p><strong>Importance:</strong><br>
+<!-- -->Used as a design parameter for system compatibility.</p>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="depth-of-discharge-dod-vs-state-of-charge-soc">Depth of Discharge (DOD) vs. State of Charge (SoC)<a href="#depth-of-discharge-dod-vs-state-of-charge-soc" class="hash-link" aria-label="Direct link to Depth of Discharge (DOD) vs. State of Charge (SoC)" title="Direct link to Depth of Discharge (DOD) vs. State of Charge (SoC)">​</a></h2>
+<ul>
+<li>
+<p><strong>Relationship:</strong></p>
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>D</mi><mi>O</mi><mi>D</mi><mo>=</mo><mn>100</mn><mi mathvariant="normal">%</mi><mo>−</mo><mi>S</mi><mi>O</mi><mi>C</mi></mrow><annotation encoding="application/x-tex">DOD = 100\% - SOC</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.02778em">D</span><span class="mord mathnormal" style="margin-right:0.02778em">O</span><span class="mord mathnormal" style="margin-right:0.02778em">D</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.0833em"></span><span class="mord">100%</span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.07153em">SOC</span></span></span></span></span>
+</li>
+<li>
+<p><strong>Key Characteristics:</strong></p>
+<ul>
+<li>SoC reflects remaining capacity, while DOD indicates usage.</li>
+<li>Managing both ensures optimal performance and longevity.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion">Conclusion<a href="#conclusion" class="hash-link" aria-label="Direct link to Conclusion" title="Direct link to Conclusion">​</a></h2>
+<p>This guide emphasizes the precise definitions and significance of key battery terminologies, equipping engineers and professionals with the knowledge to design, analyze, and optimize battery systems for various applications. These concepts are foundational for enhancing the safety, performance, and lifespan of modern battery technologies.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/BMS/edit/main/docs/theory/01_fundamentals/04_battery_terminology.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/BMS/docs/theory/fundamentals/how_lithium_battery_works"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">How Does Lithium Battery Work?</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/BMS/docs/theory/fundamentals/em-asm"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Asynchronous Motors</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#state-of-charge-soc" class="table-of-contents__link toc-highlight">State of Charge (SoC)</a></li><li><a href="#state-of-health-soh" class="table-of-contents__link toc-highlight">State of Health (SoH)</a></li><li><a href="#depth-of-discharge-dod" class="table-of-contents__link toc-highlight">Depth of Discharge (DOD)</a></li><li><a href="#cycle-life" class="table-of-contents__link toc-highlight">Cycle Life</a></li><li><a href="#c-rate" class="table-of-contents__link toc-highlight">C-Rate</a></li><li><a href="#self-discharge" class="table-of-contents__link toc-highlight">Self-Discharge</a></li><li><a href="#calendar-life" class="table-of-contents__link toc-highlight">Calendar Life</a></li><li><a href="#internal-resistance" class="table-of-contents__link toc-highlight">Internal Resistance</a></li><li><a href="#specific-energy-and-energy-density" class="table-of-contents__link toc-highlight">Specific Energy and Energy Density</a></li><li><a href="#open-circuit-voltage-ocv" class="table-of-contents__link toc-highlight">Open Circuit Voltage (OCV)</a></li><li><a href="#nominal-voltage" class="table-of-contents__link toc-highlight">Nominal Voltage</a></li><li><a href="#depth-of-discharge-dod-vs-state-of-charge-soc" class="table-of-contents__link toc-highlight">Depth of Discharge (DOD) vs. State of Charge (SoC)</a></li><li><a href="#conclusion" class="table-of-contents__link toc-highlight">Conclusion</a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
+</body>
+</html>
