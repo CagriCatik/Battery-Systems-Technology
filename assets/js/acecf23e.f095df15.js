@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkBMS=self.webpackChunkBMS||[]).push([[1903],{1912:s=>{s.exports=JSON.parse('{"blogBasePath":"/BMS/blog","blogTitle":"Blog","authorsListPath":"/BMS/blog/authors"}')}}]);
