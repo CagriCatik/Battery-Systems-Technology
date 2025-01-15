@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Importance of Battery and Battery Management Systems
 
 Battery Management Systems are vital for ensuring the safe, efficient, and durable operation of battery packs, especially in electric vehicles (EVs). As the control center of the battery system, the BMS plays a critical role in monitoring, protecting, and managing the performance of high-voltage batteries. These systems are used extensively in passenger vehicles, light commercial vehicles (LCVs), buses, and other electrified applications. This document offers an in-depth exploration of the importance of batteries, their management systems, and the technical and operational frameworks that support them.

@@ -1,7 +1,3 @@
----
-sidebar_position: 8
----
-
 # Battery Form Factors
 
 Batteries and Battery Management Systems (BMS) are critical components in modern energy storage and management systems. Their applications span a wide range, including consumer electronics, electric vehicles (EVs), and large-scale energy storage solutions. Understanding battery form factors—their physical shapes and dimensions—and their associated advantages and limitations is essential for engineers and designers involved in creating efficient and reliable battery packs.

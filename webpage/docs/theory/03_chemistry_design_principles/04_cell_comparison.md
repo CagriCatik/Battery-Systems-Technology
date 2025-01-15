@@ -1,7 +1,3 @@
----
-sidebar_position: 10
----
-
 # Types of Cell Comparison
 
 In the landscape of modern technology, batteries play an indispensable role, powering everything from handheld consumer electronics to the burgeoning electric vehicle (EV) market. Central to the effective deployment of these energy storage systems is the Battery Management System (BMS), which oversees the safe and efficient operation of batteries by continuously monitoring and managing their performance parameters. This documentation delves into the diverse types of battery cells, their distinct form factors, and the criteria essential for selecting the appropriate cell type based on specific application requirements. It is meticulously crafted for engineers and industry professionals who seek both foundational insights and advanced technical knowledge in the realm of battery technology.

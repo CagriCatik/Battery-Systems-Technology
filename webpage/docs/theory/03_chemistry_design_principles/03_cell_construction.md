@@ -1,7 +1,3 @@
----
-sidebar_position: 9
----
-
 # Cell Construction
 
 Battery cells serve as the foundational elements within a battery pack, dictating the overall performance, efficiency, and safety of the energy storage system. The intricate design, structural integrity, and precise arrangement of these cells are paramount in determining how effectively a battery operates under various conditions. This comprehensive exploration delves into the internal construction of both cylindrical and prismatic cells, elucidating their components, design philosophies, and functional attributes through the lens of advanced battery technology.

@@ -1,7 +1,3 @@
----
-id: specification_sheet
----
-
 # Battery Cell Specification Sheet
 
 Battery specification sheets provide critical information about cell performance, operational limits, and design constraints. These sheets are essential for engineers to select and evaluate batteries for specific applications.

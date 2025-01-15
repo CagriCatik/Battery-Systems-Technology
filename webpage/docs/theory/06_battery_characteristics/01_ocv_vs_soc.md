@@ -1,7 +1,3 @@
----
-id: ocv_vs_soc
----
-
 # OCV vs SOC for Chemistries
 
 Batteries are a cornerstone of modern energy storage solutions, powering applications ranging from electric vehicles (EVs) to renewable energy systems and consumer electronics. Their operation is governed by complex electrochemical and physical principles, necessitating detailed study and precise management through Battery Management Systems (BMS). Key aspects like open circuit voltage (OCV), state of charge (SOC), and degradation trends are critical for designing efficient, reliable systems.

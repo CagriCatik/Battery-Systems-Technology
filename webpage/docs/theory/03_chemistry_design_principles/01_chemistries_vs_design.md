@@ -1,7 +1,3 @@
----
-sidebar_position: 7
----
-
 # Types of Chemistries vs. Battery Design Methodologies
 
 Battery chemistries fundamentally determine the performance, safety, and suitability of batteries for various applications. Among these, lithium-ion (Li-ion) batteries have become the industry standard due to their exceptional energy density, versatility, and performance. This section explores the different Li-ion battery chemistries, compares their key parameters, examines design trade-offs, and highlights future trends shaping battery technology.

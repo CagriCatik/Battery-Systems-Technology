@@ -1,6 +1,6 @@
-# Battery Management System
+# Battery Systems Technology
 
-This repository provides comprehensive resources, scripts, and documentation for simulating, designing, and analyzing **Battery Management Systems**.
+This repository provides comprehensive resources, scripts, and documentation for simulating, designing, and analyzing **Battery Systems Technology**.
 
 ---
 

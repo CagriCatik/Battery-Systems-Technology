@@ -36,13 +36,13 @@ const config = {
       ({
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/CagriCatik/BMS/edit/main/',
+          editUrl: 'https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/',
           remarkPlugins: [remarkMath],
           rehypePlugins: [rehypeKatex],
         },
         blog: {
           showReadingTime: true,
-          editUrl: 'https://github.com/CagriCatik/BMS/edit/main/',
+          editUrl: 'https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -144,7 +144,7 @@ const config = {
             position: 'left',
           },
           {
-            href: 'https://github.com/CagriCatik/BMS',
+            href: 'https://github.com/CagriCatik/Battery-Systems-Technology',
             label: 'GitHub',
             position: 'right',
           },

@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Battery Terminology
 
 Battery Management Systems rely on specific technical terminologies to monitor, analyze, and optimize battery performance, safety, and reliability. A deep understanding of these terms is essential for professionals in electric vehicle (EV) development and energy storage systems. This guide provides an in-depth exploration of battery terminology, offering precise definitions, equations, examples, and their relevance to battery technology.
