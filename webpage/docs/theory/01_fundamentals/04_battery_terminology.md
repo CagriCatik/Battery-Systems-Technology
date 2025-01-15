@@ -4,7 +4,7 @@ Battery Management Systems rely on specific technical terminologies to monitor, 
 
 ---
 
-## State of Charge (SoC)
+## State of Charge
 
 The State of Charge (SoC) quantifies the remaining energy in a battery as a percentage of its full capacity.
 
@@ -29,7 +29,7 @@ The State of Charge (SoC) quantifies the remaining energy in a battery as a perc
 
 ---
 
-## State of Health (SoH)
+## State of Health
 
 The State of Health (SoH) represents the overall condition of a battery relative to its original state.
 
@@ -178,7 +178,7 @@ Internal Resistance measures the opposition to current flow within a battery.
 
 ---
 
-## Open Circuit Voltage (OCV)
+## Open Circuit Voltage
 
 Open Circuit Voltage (OCV) is the voltage measured across battery terminals when no current flows.
 
@@ -210,7 +210,7 @@ Nominal Voltage is the average voltage at which a battery operates under typical
 
 ---
 
-## Depth of Discharge (DOD) vs. State of Charge (SoC)
+## Depth of Discharge vs. State of Charge
 
 - **Relationship:**  
   $$

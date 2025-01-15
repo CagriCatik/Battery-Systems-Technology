@@ -2,8 +2,6 @@
 
 Battery Management Systems are vital for ensuring the safe, efficient, and durable operation of battery packs, especially in electric vehicles (EVs). As the control center of the battery system, the BMS plays a critical role in monitoring, protecting, and managing the performance of high-voltage batteries. These systems are used extensively in passenger vehicles, light commercial vehicles (LCVs), buses, and other electrified applications. This document offers an in-depth exploration of the importance of batteries, their management systems, and the technical and operational frameworks that support them.
 
----
-
 ## Why Batteries?
 
 Batteries are indispensable in energy storage applications, particularly for electric vehicles, due to their unique ability to balance specific energy (capacity to store energy) and specific power (ability to deliver power). They outperform alternative energy storage solutions such as capacitors and fuel cells in terms of versatility and practical application.
@@ -24,7 +22,6 @@ A water bottle serves as an excellent analogy for understanding specific energy 
 - A gym water bottle with a wide neck allows faster water extraction, just as high specific power enables rapid energy delivery.
 - A bottle with a narrow neck restricts flow, similar to a system with low specific power.
 
----
 
 ## Key Functions of a Battery Management System
 
@@ -64,8 +61,6 @@ Advanced diagnostics systems identify potential faults and predict failures. Thi
 
 ### 6. Communication
 The BMS communicates with the vehicle’s control systems using protocols like CAN (Controller Area Network) or LIN (Local Interconnect Network). This enables seamless integration with other vehicle systems.
-
----
 
 ## Technical Components of a BMS
 
@@ -114,7 +109,6 @@ A Battery Management System (BMS) integrates hardware and software to ensure saf
 - Passive cooling: Incorporates heat sinks or conductive materials to dissipate heat.
 - Ensures cells operate within their optimal temperature range to maximize lifespan and performance.
 
----
 
 ## Safety Standards for BMS
 
@@ -141,7 +135,6 @@ A Battery Management System (BMS) integrates hardware and software to ensure saf
   - Abuse testing (thermal, mechanical, and electrical stress).
   - Validation of safety mechanisms under extreme conditions.
 
----
 
 ## Diagnostics and Prognostics in BMS
 
@@ -159,8 +152,6 @@ A Battery Management System (BMS) integrates hardware and software to ensure saf
   - State of Power (SOP): Maximum deliverable power under given conditions.
   - Remaining Useful Life (RUL): Time before pack replacement is required.
 - Enables predictive maintenance, minimizing downtime and lifecycle costs.
-
----
 
 ## Conclusion
 
