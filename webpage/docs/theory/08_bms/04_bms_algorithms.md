@@ -2,8 +2,6 @@
 
 Battery Management Systems (BMS) are pivotal in the operation of lithium-ion batteries, ensuring their safety, optimizing performance, and extending battery life. Central to a BMS are algorithms that monitor and manage various battery parameters. This documentation delves into the primary algorithms employed in BMS, providing detailed explanations and relevant code snippets to enhance understanding.
 
-## Introduction
-
 A **Battery Management System (BMS)** is an advanced electronic system that oversees the operation of rechargeable batteries, particularly lithium-ion types. The BMS ensures that batteries operate within their specified parameters, safeguarding against potential hazards while maximizing performance and longevity. At the heart of the BMS's functionality are sophisticated algorithms that process data, estimate battery states, and make real-time decisions to maintain optimal battery health.
 
 Understanding these algorithms is essential for engineers, developers, and users who aim to design, implement, or utilize battery-powered systems effectively. This chapter explores the core algorithms used in BMS, including State of Charge (SoC) estimation, State of Health (SoH) assessment, and State of Power (SoP) estimation, among others. Each algorithm is accompanied by detailed explanations and code snippets to illustrate practical implementations.
