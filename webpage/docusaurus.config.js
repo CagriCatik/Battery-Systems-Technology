@@ -16,10 +16,10 @@ const config = {
   url: 'https://CagriCatik.github.io',
   
   // Assuming you're deploying a project site
-  baseUrl: '/BMS/',
+  baseUrl: '/Battery-Systems-Technology/',
 
   organizationName: 'CagriCatik', // GitHub org/user name
-  projectName: 'BMS', // Repo name
+  projectName: 'Battery-Systems-Technology', // Repo name
   deploymentBranch: 'gh-pages',
 
   onBrokenLinks: 'warn',
