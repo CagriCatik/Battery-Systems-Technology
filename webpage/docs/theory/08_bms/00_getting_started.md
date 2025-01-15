@@ -2,9 +2,8 @@
 
 A Battery Management System is a critical component in modern energy storage solutions. It is responsible for ensuring the safe, efficient, and reliable operation of rechargeable batteries, typically found in electric vehicles (EVs), energy storage systems, and portable devices.
 
----
-
 ## Key Features of a BMS:
+
 1. **Monitoring**:
    - Tracks key parameters such as voltage, current, and temperature of individual cells and the entire battery pack.
    

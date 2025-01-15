@@ -17,3 +17,7 @@
 - **Silicon Carbide (SiC)**: A wide bandgap semiconductor material used in high-efficiency power electronics.
 
 - **Space Vector Modulation (SVM)**: An advanced pulse-width modulation (PWM) technique used to minimize harmonic distortion and maximize inverter efficiency.
+
+- **State of Charge (SoC)**: A measure of the battery's current charge level as a percentage of its total capacity.
+
+- **State of Health (SoH)**: An indicator of the overall condition and remaining lifespan of the battery.  

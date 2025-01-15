@@ -1,18 +1,5 @@
 # Getting Started
 
-This resource is designed to provide a comprehensive repository of information about Battery Management System, serving as a centralized hub for engineers, researchers, and enthusiasts. Whether you're exploring the fundamentals or diving deep into specific aspects of BMS technology, this knowledge base aims to support your journey.
-
-**Purpose of This Knowledge Base**
-
-The goal of this knowledge base is to:
-- Provide a clear understanding of the role and importance of BMS in modern applications, especially in electric vehicles.
-- Offer detailed explanations of key concepts, components, and technologies used in BMS.
-- Serve as a reference guide for professionals working on BMS-related projects.
-
-**What You’ll Find Here**
-
-The fundamental is structured into the following sections:
-
 1. **Introduction**  
    A high-level overview of BMS, its significance, and its applications.
 

@@ -1,19 +1,5 @@
 # Getting Started
 
-This resource is designed to provide a detailed and structured overview of key topics related to Battery Management Systems (BMS) and the broader battery ecosystem. It aims to serve as a centralized knowledge hub for professionals, engineers, and enthusiasts exploring the intricacies of batteries and their management systems in modern applications, especially electric vehicles.
-
-**Purpose of This Knowledge Base**
-
-The primary goals of this knowledge base are to:
-
-- Offer insights into the essential concepts and terminologies of battery systems and BMS.
-- Provide detailed explanations of critical topics such as battery chemistry, form factors, and design methodologies.
-- Serve as a comprehensive guide for understanding and implementing effective BMS solutions in real-world applications.
-
-**What You’ll Find Here**
-
-This resource is structured into the following sections:
-
 1. **Importance of Battery and Battery Management Systems**  
    An overview of the critical role batteries and BMS play in modern technology, particularly in EVs and energy storage.
 
