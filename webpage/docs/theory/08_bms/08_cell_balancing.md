@@ -1,4 +1,4 @@
-# Cell Balancing in Battery Management Systems
+# Cell Balancing
 
 In the realm of modern energy storage, particularly within electric vehicles (EVs) and renewable energy systems, **Cell Balancing** emerges as a pivotal function of the **Battery Management System (BMS)**. This document delves into the intricacies of cell balancing, contrasting **Passive Cell Balancing** with **Active Cell Balancing**, and elucidating their respective principles, advantages, and challenges. By providing a detailed analysis, this overview aims to equip engineers, researchers, and industry professionals with a profound understanding of cell balancing techniques essential for optimizing battery performance, safety, and longevity.
 
