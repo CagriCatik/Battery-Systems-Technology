@@ -8,9 +8,9 @@ The equations implemented in the Kalman Filter model can be derived from its com
 The Kalman Filter relies on the state-space model of a system, which is defined as:
 
 1. **State Prediction:**
-   \[
+   $$
    x_k = A \cdot x_{k-1} + B \cdot u_k + w_k
-   \]
+   $$
    - \(x_k\): Predicted state at time step \(k\).
    - \(A\): State transition matrix.
    - \(x_{k-1}\): Previous state.
@@ -19,9 +19,9 @@ The Kalman Filter relies on the state-space model of a system, which is defined 
    - \(w_k\): Process noise, assumed to be Gaussian with covariance \(Q\).
 
 2. **Measurement Model:**
-   \[
+   $$
    z_k = C \cdot x_k + v_k
-   \]
+   $$
    - \(z_k\): Measurement at time step \(k\).
    - \(C\): Measurement matrix.
    - \(x_k\): Current state.
@@ -33,49 +33,49 @@ The Kalman Filter relies on the state-space model of a system, which is defined 
 
 ### **Prediction Step**
 1. **State Prediction:**
-   \[
+   $$
    \hat{x}_k^- = A \cdot \hat{x}_{k-1} + B \cdot u_k
-   \]
+   $$
    - \(\hat{x}_k^-\): Predicted state estimate before incorporating the measurement.
    - \(\hat{x}_{k-1}\): Previous state estimate.
 
 2. **Error Covariance Prediction:**
-   \[
+   $$
    P_k^- = A \cdot P_{k-1} \cdot A^T + Q
-   \]
+   $$
    - \(P_k^-\): Predicted error covariance matrix.
    - \(P_{k-1}\): Previous error covariance matrix.
    - \(Q\): Process noise covariance matrix.
 
 ### **Update Step**
 1. **Innovation or Residual:**
-   \[
+   $$
    y_k = z_k - C \cdot \hat{x}_k^-
-   \]
+   $$
    - \(y_k\): Innovation (difference between the actual measurement and predicted measurement).
 
 2. **Innovation Covariance:**
-   \[
+   $$
    S_k = C \cdot P_k^- \cdot C^T + R
-   \]
+   $$
    - \(S_k\): Covariance of the innovation.
 
 3. **Kalman Gain:**
-   \[
+   $$
    K_k = P_k^- \cdot C^T \cdot S_k^{-1}
-   \]
+   $$
    - \(K_k\): Kalman gain, which determines how much the prediction should be adjusted based on the measurement.
 
 4. **State Update:**
-   \[
+   $$
    \hat{x}_k = \hat{x}_k^- + K_k \cdot y_k
-   \]
+   $$
    - \(\hat{x}_k\): Updated state estimate after incorporating the measurement.
 
 5. **Error Covariance Update:**
-   \[
+   $$
    P_k = (I - K_k \cdot C) \cdot P_k^-
-   \]
+   $$
    - \(P_k\): Updated error covariance matrix.
    - \(I\): Identity matrix.
 

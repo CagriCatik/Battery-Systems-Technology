@@ -125,24 +125,24 @@ Thermal management and operational conditions, such as temperature and load prof
    - Select nominal voltage based on application (e.g., 48 V for two-wheelers, 800 V for buses).  
    - Calculate required cell count:  
      $$
-     \[
+     
      \text{Number of cells} = \frac{\text{System Voltage}}{\text{Nominal Cell Voltage}}
-     \]
+     
       $$
 2. Energy Estimation  
    - Calculate required energy (kWh) based on range and specific energy consumption (Wh/km).  
      Example:
      $$
-     \[
+     
      \text{Energy (kWh)} = \text{Range (km)} \times \text{Specific Energy (Wh/km)}
-     \]
+     
       $$
 3. Capacity Calculation  
    - Divide energy by system voltage:  
      $$
-     \[
+     
      \text{Capacity (Ah)} = \frac{\text{Energy (kWh)}}{\text{System Voltage (V)}}
-     \]
+     
      $$
 4. Buffer and Aging Factors  
    - Reserve ~20% capacity to account for aging and ensure long-term performance.

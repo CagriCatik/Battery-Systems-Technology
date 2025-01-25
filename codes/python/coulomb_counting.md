@@ -20,15 +20,15 @@ Below, I'll provide a comprehensive example of implementing Coulomb counting in 
 
 **Coulomb Counting** estimates the SOC by tracking the cumulative charge (in Ampere-hours, Ah) flowing in and out of the battery. The basic principle can be summarized by the following equation:
 
-\[
+$$
 \text{SOC}(t) = \text{SOC}(t_0) - \frac{1}{C_{\text{nominal}}} \int_{t_0}^{t} I(\tau) \, d\tau
-\]
+$$
 
 Where:
-- \( \text{SOC}(t) \) is the state of charge at time \( t \).
-- \( \text{SOC}(t_0) \) is the initial state of charge at reference time \( t_0 \).
-- \( C_{\text{nominal}} \) is the nominal capacity of the battery (in Ah).
-- \( I(\tau) \) is the current at time \( \tau \). Positive current typically indicates discharge, and negative indicates charge.
+- $ \text{SOC}(t) $ is the state of charge at time $ t $.
+- $ \text{SOC}(t_0) $ is the initial state of charge at reference time $ t_0 $.
+- $ C_{\text{nominal}} $ is the nominal capacity of the battery (in Ah).
+- $ I(\tau) $ is the current at time $ \tau $. Positive current typically indicates discharge, and negative indicates charge.
 
 In discrete terms, especially for digital implementations, the integral is approximated by summing the current measurements over discrete time intervals.
 
@@ -36,36 +36,36 @@ In discrete terms, especially for digital implementations, the integral is appro
 
 Given discrete current measurements at regular intervals, the SOC can be updated iteratively using:
 
-\[
+$$
 \text{SOC}_{n} = \text{SOC}_{n-1} - \frac{I_n \times \Delta t}{C_{\text{nominal}}}
-\]
+$$
 
 Where:
-- \( \text{SOC}_{n} \) is the SOC at the current time step.
-- \( \text{SOC}_{n-1} \) is the SOC at the previous time step.
-- \( I_n \) is the current at the current time step.
-- \( \Delta t \) is the time interval between measurements.
+- $ \text{SOC}_{n} $ is the SOC at the current time step.
+- $ \text{SOC}_{n-1} $ is the SOC at the previous time step.
+- $ I_n $ is the current at the current time step.
+- $ \Delta t $ is the time interval between measurements.
 
-This approach assumes that the current is constant over each interval \( \Delta t \).
+This approach assumes that the current is constant over each interval $ \Delta t $.
 
 ## Implementation Example in Python
 
 ### Assumptions
 
 1. **Battery Characteristics**:
-   - Nominal capacity (\( C_{\text{nominal}} \)) is known.
+   - Nominal capacity ($ C_{\text{nominal}} $) is known.
    - Initial SOC is known (commonly set to 100% if starting from a fully charged state).
 
 2. **Current Measurements**:
    - Collected at regular intervals (e.g., every second).
    - Positive current indicates discharge; negative indicates charge.
 
-3. **Time Interval (\( \Delta t \))**:
+3. **Time Interval ($ \Delta t $)**:
    - Fixed and known (e.g., 1 second).
 
 4. **Units**:
-   - Current (\( I \)) in Amperes (A).
-   - Time (\( \Delta t \)) in hours (h) for consistency with Ah.
+   - Current ($ I $) in Amperes (A).
+   - Time ($ \Delta t $) in hours (h) for consistency with Ah.
 
 ### Code Implementation
 
