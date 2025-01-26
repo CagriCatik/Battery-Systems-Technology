@@ -1,7 +1,5 @@
 # Test Concept
 
-## Introduction
-
 A **Test Concept** is a comprehensive and structured plan that outlines all relevant information and strategies for conducting tests. It serves as a guiding framework to ensure that tests are targeted, traceable, and efficiently executed. This document provides an enhanced and well-structured overview of developing a test concept, particularly focused on a Battery Management System (BMS) within the automotive sector. Additionally, it includes a detailed and comprehensive documentation template to support the implementation of the test concept.
 
 ## What is a Test Concept?

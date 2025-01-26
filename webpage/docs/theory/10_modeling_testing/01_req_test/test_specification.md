@@ -1,7 +1,5 @@
 # Functional Safety Requirements
 
-## Introduction
-
 Functional safety is paramount in the automotive industry to ensure that systems operate correctly and safely under all conditions. Adhering to standards such as ISO 26262 is essential for developing reliable and safe automotive systems. This document outlines the specification of ISO 26262 requirements and the creation of automated test case scripts to ensure comprehensive coverage and compliance. Additionally, it provides a detailed and comprehensive documentation template to facilitate the implementation of functional safety requirements.
 
 ## Specification of ISO 26262 Requirements

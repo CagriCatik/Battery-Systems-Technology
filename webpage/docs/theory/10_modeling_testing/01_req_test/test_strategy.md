@@ -1,7 +1,5 @@
 # Test Strategies
 
-## Introduction
-
 This document provides a comprehensive overview of the test strategies and requirements for a Battery Management System (BMS). The objective is to address both functional and non-functional aspects to ensure the system's reliability and safety under realistic operating conditions. Emphasis is placed on validating safety-critical functions such as cell monitoring, thermal management, balancing, fault detection, and communication.
 
 ---
