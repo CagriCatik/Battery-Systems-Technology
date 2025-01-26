@@ -32,7 +32,7 @@
 .navbar {
   display: flex; /* Use flexbox */
   justify-content: center; /* Center items horizontally */
-  height: 100px; /* Set the height */
+  height: 90px; /* Set the height */
   text-align: center; /* Center text within each link */
   font-size: 13px;
   display: flex;

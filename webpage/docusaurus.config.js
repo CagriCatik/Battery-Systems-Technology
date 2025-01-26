@@ -138,23 +138,28 @@ const config = {
             position: 'left',
             label: 'Glossary',
           },
-          {
-            to: '/blog',
-            label: 'Blog',
-            position: 'left',
-          },
-          {
-            href: 'https://github.com/CagriCatik/Battery-Systems-Technology',
-            label: 'GitHub',
-            position: 'right',
-          },
+
         ],
       },
 
       footer: {
         style: 'dark',
         copyright: `Copyright © ${new Date().getFullYear()} Battery Systems and Technology`,
+        links: [
+          {
+            label: 'GitHub',
+            href: 'https://github.com/CagriCatik/Battery-Systems-Technology',
+          },
+
+          {
+            to: '/blog',
+            label: 'Blog',
+            position: 'left',
+          },
+        ],
       },
+      
+      
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,

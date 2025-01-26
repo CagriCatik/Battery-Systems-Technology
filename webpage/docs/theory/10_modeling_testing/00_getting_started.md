@@ -1,6 +1,6 @@
 # Getting Started Guide
 
-## **Requirements and Testing**
+**Requirements and Testing**
 This section provides the foundational elements of requirements and strategies for testing.
 
 1. **Requirements**:  
@@ -17,7 +17,7 @@ This section provides the foundational elements of requirements and strategies f
 
 ---
 
-## **Modeling**
+**Modeling**
 This section covers the modeling techniques used in system development.
 
 1. **equivalent_circuit**:  
@@ -34,7 +34,7 @@ This section covers the modeling techniques used in system development.
 
 ---
 
-## **MATLAB/Simulink**
+**MATLAB/Simulink**
 This section focuses on using MATLAB/Simulink for testing and modeling systems effectively.
 
 1. **Battery Management System in Simulink**:  
