@@ -1,10 +1,10 @@
-# Closed-Loop Testing 
+# Closed-Loop Testing
 
 ## **1. Introduction to Closed-Loop Testing**  
 Closed-loop testing validates the **entire BMS ECU** against the plant model (e.g., battery pack, charger, load) to ensure system-level functionality and safety. This approach:  
-- Tests interactions between the BMS controller and physical components.  
-- Validates real-world scenarios (e.g., charging, discharging, fault handling).  
-- Uses **observers** to monitor internal signals without modifying model interfaces.  
+- **Tests Interactions**: Validates the interactions between the BMS controller and physical components.  
+- **Real-World Scenarios**: Simulates real-world scenarios such as charging, discharging, and fault handling.  
+- **Non-Intrusive Monitoring**: Uses **observers** to monitor internal signals without modifying model interfaces.  
 
 ---
 
@@ -22,7 +22,7 @@ Closed-loop testing validates the **entire BMS ECU** against the plant model (e.
        Step 2: Transition to DRIVING when SOC > 30%.  
        Step 3: Trigger FAULT if cell_temp > 45°C.  
        ```  
-   - **Signal Builder**: Pre-recorded test scenarios (e.g., aggressive drive cycles).  
+   - **Signal Builder**: Use pre-recorded test scenarios (e.g., aggressive drive cycles) for consistent testing.  
 
 ### **2.2 Visualizing Results**  
 - **Dashboard Blocks**:  
@@ -114,16 +114,16 @@ Closed-loop testing validates the **entire BMS ECU** against the plant model (e.
 ---
 
 ## **8. Benefits of Closed-Loop Testing**  
-1. **System Validation**: Test interactions between BMS logic and plant dynamics.  
-2. **Non-Intrusive Monitoring**: Observe internal signals without redesigning models.  
-3. **Automated Checks**: Use `verify` statements to enforce safety constraints.  
+1. **System Validation**: Test interactions between BMS logic and plant dynamics, ensuring system-level functionality.  
+2. **Non-Intrusive Monitoring**: Observe internal signals without redesigning models, reducing development time.  
+3. **Automated Checks**: Use `verify` statements to enforce safety constraints, ensuring compliance with design requirements.  
 
 ---
 
 ## **Summary**  
 Closed-loop testing for BMS involves:  
-1. Creating a test harness with **Test Sequence** or **Signal Builder** blocks.  
-2. Using **observers** to monitor internal signals (e.g., current limits).  
-3. Validating behavior with **Test Assessment** blocks and the **Diagnostic Viewer**.  
+1. **Creating a Test Harness**: Use **Test Sequence** or **Signal Builder** blocks to define test scenarios.  
+2. **Monitoring Signals**: Use **observers** to monitor internal signals (e.g., current limits) without modifying the model.  
+3. **Validating Behavior**: Use **Test Assessment** blocks and the **Diagnostic Viewer** to enforce safety constraints and validate system behavior.  
 
-For advanced workflows, integrate **Simulink Coverage** to measure test completeness and ensure compliance with ISO 26262.
+For advanced workflows, integrate **Simulink Coverage** to measure test completeness and ensure compliance with standards like ISO 26262. This approach ensures robust and reliable BMS software, ready for real-world deployment.
