@@ -481,5 +481,3 @@ Managing BMS requirements in Simulink encompasses a comprehensive set of practic
 - **Adhering to Certification Standards**:
   - **Compliance**: Utilize Simulink’s Certification Kits and workflows to ensure adherence to safety-critical standards such as ISO 26262 and IEC 61508.
   - **Certification Readiness**: Prepare and submit necessary documentation and evidence to achieve recognized safety certifications, enhancing market acceptance and regulatory approval.
-
-By effectively managing requirements within Simulink, developers can ensure that their BMS designs are robust, reliable, and compliant with industry standards. This integrated approach not only enhances the quality and safety of the BMS but also streamlines the development process, reducing time and costs associated with manual requirements management and error rectification. Leveraging Simulink’s powerful requirements management tools empowers engineers and researchers to deliver high-performing Battery Management Systems that meet the evolving demands of the automotive and energy storage industries.

@@ -629,5 +629,3 @@ The Battery Management System (BMS) model developed in Simulink stands as a robu
 - **Scalability**:
   - **Support**: Accommodates both small (6-cell) and large (96-cell) battery packs, facilitating comprehensive testing across various system sizes.
   - **Flexibility**: Enables the model to adapt to different application requirements, from electric vehicles to stationary energy storage systems.
-
-Through its detailed modeling, advanced algorithm integration, and systematic validation workflow, the Simulink-based BMS model empowers users to develop safe, efficient, and high-performing battery management solutions.

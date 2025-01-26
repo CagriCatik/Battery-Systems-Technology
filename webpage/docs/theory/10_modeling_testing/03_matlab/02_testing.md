@@ -509,7 +509,3 @@ Testing BMS software in Simulink is a multifaceted process that ensures the syst
 - **Aligning with Certification Standards**:
   - **Compliance**: Ensuring the BMS meets safety-critical standards such as ISO 26262, IEC 61508, and DO-178C.
   - **Certification**: Utilizing certification kits and adhering to approved workflows to achieve recognized safety certifications.
-
-This comprehensive testing framework not only enhances the reliability and safety of the BMS but also optimizes development time and costs. By adopting Simulink-based Model-Based Design and rigorous V&V techniques, developers can create advanced BMS solutions that meet the highest industry standards, ensuring their suitability for deployment in modern battery-powered applications.
-
-Through meticulous modeling, systematic testing, and adherence to certification standards, the Simulink-based approach empowers engineers and researchers to develop safe, efficient, and high-performing Battery Management Systems tailored to the evolving demands of the automotive and energy storage industries.

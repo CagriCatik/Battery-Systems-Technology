@@ -1088,7 +1088,6 @@ Implementing closed-loop testing for the BMS ECU offers numerous advantages that
 
 **Summary of Benefits**:
 
-```plaintext
 - System Validation: Ensures integrated system functionality.
 - Non-Intrusive Monitoring: Enables detailed internal signal observation.
 - Automated Checks: Enforces safety and performance constraints automatically.
@@ -1098,7 +1097,6 @@ Implementing closed-loop testing for the BMS ECU offers numerous advantages that
 - Risk Mitigation: Addresses potential issues early in development.
 - Efficiency and Automation: Streamlines testing processes, saving time and resources.
 - Quality Assurance: Guarantees high-quality, reliable software delivery.
-```
 
 By incorporating closed-loop testing into the BMS development workflow, developers can achieve a high level of confidence in the system's reliability, safety, and performance, ensuring its readiness for deployment in demanding and safety-critical environments.
 
@@ -1145,9 +1143,3 @@ Closed-loop testing is an essential component of the Battery Management System (
 9. **Integrating with Certification Processes**:
    - **Purpose**: Ensure that the BMS meets industry safety and reliability standards.
    - **Implementation**: Align closed-loop testing practices with standards like ISO 26262 and DO-178C, facilitating smooth certification and deployment.
-
-### **Conclusion**
-
-Closed-loop testing provides a robust and comprehensive approach to validating Battery Management Systems, ensuring that both the control algorithms and their interactions with physical components function seamlessly together. By systematically creating test harnesses, monitoring critical signals, automating assessments, and analyzing results, developers can achieve high levels of system reliability, safety, and performance. This rigorous testing methodology not only enhances the quality of the BMS but also streamlines the development process, reducing time and costs associated with manual testing and error rectification.
-
-For advanced workflows, integrating **Simulink Coverage** and **Simulink Test Manager** ensures that testing efforts are thorough and aligned with industry standards, paving the way for successful deployment in real-world, safety-critical applications.

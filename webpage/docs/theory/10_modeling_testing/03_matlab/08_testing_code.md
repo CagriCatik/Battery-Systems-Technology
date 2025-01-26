@@ -918,4 +918,3 @@ Testing the generated BMS code is a critical phase that bridges the gap between 
    - **Enhanced Traceability**: Maintains clear links between requirements, models, and code, supporting audits and compliance checks.
    - **Quality Assurance**: Guarantees high-quality, reliable software delivery through comprehensive validation.
 
-By integrating SIL and PIL testing methodologies into the development workflow, developers can achieve a high level of confidence in the generated BMS code, ensuring that it is both functionally accurate and performant in its intended embedded environment. This comprehensive testing approach not only enhances the reliability and safety of the BMS but also streamlines the development process, reducing time and costs associated with manual testing and error rectification.
