@@ -9,188 +9,407 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-R4556vVJtIc0EJ3NKnM5ePcM78Zv5e+/ff+f6aZwYzZjnj84pK8i0PZyNnO+g0OQ" crossorigin="anonymous"><link rel="stylesheet" href="/Battery-Systems-Technology/assets/css/styles.49f50c39.css">
-<script src="/Battery-Systems-Technology/assets/js/runtime~main.6d352b01.js" defer="defer"></script>
+<script src="/Battery-Systems-Technology/assets/js/runtime~main.9fb8f1af.js" defer="defer"></script>
 <script src="/Battery-Systems-Technology/assets/js/main.73514512.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/Battery-Systems-Technology/"><div class="navbar__logo"><img src="/Battery-Systems-Technology/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/Battery-Systems-Technology/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/fundamentals/getting-started">Fundamentals of Battery Technology</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/aging_degradation/getting-started">Aging and Degradation</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/chemistry_design_principles/getting-started">Chemistry and Design Principles</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_pack/getting_started">Battery Pack Engineering</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/thermal_management/getting_started">Thermal Management</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_characteristics/getting_started">Characteristics and Technical Specifications</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_sizing/getting_started">Sizing and Optimization</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/bms/getting_started">Battery Management System</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/bms_architecture/getting_started">BMS Design and Architecture</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/Battery-Systems-Technology/docs/theory/modeling_testing/getting_started">Modeling and Testing</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/glossary/electrical_concepts">Glossary</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/blog">Blog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/CagriCatik/Battery-Systems-Technology" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Battery-Systems-Technology/docs/theory/modeling_testing/getting_started">Getting Started</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/Battery-Systems-Technology/docs/category/requirements-and-testing">Requirements and Testing</a><button aria-label="Expand sidebar category &#x27;Requirements and Testing&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/Battery-Systems-Technology/docs/category/modeling">Modeling</a><button aria-label="Expand sidebar category &#x27;Modeling&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/Battery-Systems-Technology/docs/category/matlabsimulink">MATLAB/Simulink</a><button aria-label="Collapse sidebar category &#x27;MATLAB/Simulink&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/intro">Battery Management System in Simulink</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing">Testing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/requirements">Managing Requirements</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/unit-testing">Unit Testing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/managing_tests">Managing Tests in Simulink</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/measuring">Measuring and Improving Test Coverage</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/generating_code">Generating Code</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing_code">Testing Generated Code</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/closed_loop">Closed-Loop Testing</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/Battery-Systems-Technology/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/Battery-Systems-Technology/docs/category/matlabsimulink"><span itemprop="name">MATLAB/Simulink</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Managing Requirements</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Managing Requirements</h1></header>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-introduction-to-requirements-management"><strong>1. Introduction to Requirements Management</strong><a href="#1-introduction-to-requirements-management" class="hash-link" aria-label="Direct link to 1-introduction-to-requirements-management" title="Direct link to 1-introduction-to-requirements-management">​</a></h2>
-<p>Effective requirements management is critical for Battery Management System (BMS) development to avoid project failures caused by incomplete, inconsistent, or ambiguous specifications. <strong>Simulink</strong> streamlines this process by:</p>
+<p>Effective requirements management is paramount in the development of a Battery Management System (BMS) to ensure project success and prevent failures stemming from incomplete, inconsistent, or ambiguous specifications. <strong>Simulink</strong> offers a robust framework to streamline this process by providing tools and features that facilitate seamless integration, traceability, and synchronization of requirements throughout the development lifecycle. The key advantages of using Simulink for requirements management include:</p>
 <ul>
-<li><strong>Direct Import/Export</strong>: Enables seamless integration with external tools such as Microsoft Word, Excel, and IBM DOORS.</li>
-<li><strong>Bi-Directional Traceability</strong>: Supports linking requirements to design elements and vice versa, ensuring consistency.</li>
-<li><strong>Real-Time Synchronization</strong>: Automatically detects and synchronizes updates from external sources, keeping the model aligned with the latest requirements.</li>
+<li>
+<p><strong>Direct Import/Export</strong>: Facilitates seamless integration with external tools such as Microsoft Word, Excel, and IBM DOORS, allowing for efficient handling of requirements documents.</p>
+</li>
+<li>
+<p><strong>Bi-Directional Traceability</strong>: Enables linking of requirements to corresponding design elements and vice versa, ensuring consistency and coherence between specifications and implementation.</p>
+</li>
+<li>
+<p><strong>Real-Time Synchronization</strong>: Automatically detects and synchronizes updates from external sources, maintaining alignment between the model and the latest requirements.</p>
+</li>
 </ul>
+<p>By leveraging these capabilities, Simulink ensures that all project stakeholders maintain a clear and consistent understanding of the system requirements, thereby enhancing the overall quality and reliability of the BMS.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-importing-and-exporting-requirements"><strong>2. Importing and Exporting Requirements</strong><a href="#2-importing-and-exporting-requirements" class="hash-link" aria-label="Direct link to 2-importing-and-exporting-requirements" title="Direct link to 2-importing-and-exporting-requirements">​</a></h2>
+<p>Managing requirements effectively involves the ability to import them from various external sources and export them as needed for documentation, analysis, or integration with other tools. Simulink supports a range of formats and provides intuitive processes for importing and exporting requirements.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="21-supported-formats"><strong>2.1 Supported Formats</strong><a href="#21-supported-formats" class="hash-link" aria-label="Direct link to 21-supported-formats" title="Direct link to 21-supported-formats">​</a></h3>
+<p>Simulink accommodates multiple formats to ensure compatibility with commonly used requirements management tools and standards:</p>
 <ul>
-<li><strong>External Sources</strong>: Microsoft Word, Excel, and IBM DOORS.</li>
-<li><strong>Standard Format</strong>: ReqIF (Requirements Interchange Format) for compatibility with most tools.</li>
+<li>
+<p><strong>External Sources</strong>:</p>
+<ul>
+<li><strong>Microsoft Word</strong>: Allows for importing and exporting requirements documented in Word.</li>
+<li><strong>Excel</strong>: Facilitates handling requirements listed in Excel spreadsheets.</li>
+<li><strong>IBM DOORS</strong>: Supports integration with IBM&#x27;s Requirements Management tool, enabling advanced traceability and collaboration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Standard Format</strong>:</p>
+<ul>
+<li><strong>ReqIF (Requirements Interchange Format)</strong>: A standardized format that ensures compatibility with a wide range of requirements management tools, promoting interoperability and ease of data exchange.</li>
+</ul>
+</li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="22-import-process"><strong>2.2 Import Process</strong><a href="#22-import-process" class="hash-link" aria-label="Direct link to 22-import-process" title="Direct link to 22-import-process">​</a></h3>
+<p>Importing requirements into Simulink involves a straightforward process that ensures requirements are accurately captured and integrated into the model.</p>
 <ol>
-<li><strong>Open Requirements Manager</strong>:<!-- -->
+<li>
+<p><strong>Open Requirements Manager</strong>:</p>
 <ul>
-<li>Navigate to <em>Apps &gt; Model Verification, Validation, and Test &gt; Requirements Manager</em>.</li>
+<li><strong>Navigation</strong>: Go to the Simulink environment and navigate to <em>Apps &gt; Model Verification, Validation, and Test &gt; Requirements Manager</em>.</li>
 </ul>
 </li>
-<li><strong>Import Requirements</strong>:<!-- -->
+<li>
+<p><strong>Import Requirements</strong>:</p>
 <ul>
-<li>Select <em>Import &gt; Browse</em> to choose a Word, Excel, or DOORS file.</li>
-<li>Choose <strong>Rich Text</strong> or <strong>Plain Text</strong> formatting for the imported requirements.</li>
-<li>Name the requirement set and enable updates from the source to ensure real-time synchronization.</li>
+<li><strong>Selection</strong>: Click on <em>Import &gt; Browse</em> to locate and select the desired requirements file (Word, Excel, or DOORS).</li>
+<li><strong>Formatting Options</strong>: Choose between <strong>Rich Text</strong> or <strong>Plain Text</strong> formatting based on the source document&#x27;s structure and content.</li>
+<li><strong>Naming</strong>: Assign a meaningful name to the requirement set to facilitate easy identification and management within Simulink.</li>
+<li><strong>Enable Updates</strong>: Activate the option to enable updates from the source, ensuring that any changes made to the external document are reflected in real-time within Simulink.</li>
 </ul>
 </li>
-<li><strong>Synchronize Changes</strong>:<!-- -->
+<li>
+<p><strong>Synchronize Changes</strong>:</p>
 <ul>
-<li>Simulink detects updates in the source document (e.g., a modified Word file) and displays an update icon.</li>
-<li>Click <em>Update</em> to synchronize changes in Simulink, ensuring the model reflects the latest requirements.</li>
+<li><strong>Detection</strong>: Simulink automatically detects updates in the source document (e.g., modifications in a Word file) and displays an update icon adjacent to the requirement set.</li>
+<li><strong>Update Action</strong>: Click on the <em>Update</em> icon to synchronize the changes within Simulink, ensuring that the model remains aligned with the latest requirements.</li>
 </ul>
 </li>
 </ol>
+<p><strong>Import Process Illustration</strong>:</p>
+<p><img decoding="async" loading="lazy" src="#" alt="Import Requirements" class="img_ev3q"></p>
+<p><em>Figure 1: Importing Requirements into Simulink</em></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="23-exporting-requirements"><strong>2.3 Exporting Requirements</strong><a href="#23-exporting-requirements" class="hash-link" aria-label="Direct link to 23-exporting-requirements" title="Direct link to 23-exporting-requirements">​</a></h3>
+<p>Exporting requirements from Simulink is essential for sharing updates with stakeholders, integrating changes into external tools, or maintaining comprehensive documentation.</p>
 <ul>
-<li><strong>Export Process</strong>: Modified or new requirements created in Simulink can be exported back to ReqIF or the original formats (e.g., Word, Excel).</li>
-<li><strong>Use Case</strong>: Useful for sharing updated requirements with stakeholders or integrating changes into external tools.</li>
+<li>
+<p><strong>Export Process</strong>:</p>
+<ul>
+<li><strong>Selection</strong>: Identify the modified or newly created requirements within Simulink that need to be exported.</li>
+<li><strong>Export Action</strong>: Use the <em>Export</em> feature to transfer these requirements back to ReqIF or the original formats (Word, Excel).</li>
+<li><strong>Customization</strong>: Configure export settings to include necessary attributes, formatting, and traceability links as required by the target platform or documentation standards.</li>
 </ul>
+</li>
+<li>
+<p><strong>Use Case</strong>:</p>
+<ul>
+<li><strong>Stakeholder Communication</strong>: Share updated requirements with project stakeholders to ensure alignment and gather feedback.</li>
+<li><strong>Tool Integration</strong>: Integrate changes into external requirements management tools for enhanced collaboration and traceability.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Export Process Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Exporting Requirements to ReqIF</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">model = &#x27;bms_model&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">requirements_set = &#x27;BMS_Requirements&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Specify export format</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">export_format = &#x27;ReqIF&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Export requirements</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Requirements.exportRequirements(model, requirements_set, export_format, &#x27;ExportFile&#x27;, &#x27;BMS_Requirements.reqif&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 2: MATLAB Code for Exporting Requirements to ReqIF</em></p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-authoring-requirements-in-simulink"><strong>3. Authoring Requirements in Simulink</strong><a href="#3-authoring-requirements-in-simulink" class="hash-link" aria-label="Direct link to 3-authoring-requirements-in-simulink" title="Direct link to 3-authoring-requirements-in-simulink">​</a></h2>
+<p>Creating and managing requirements directly within Simulink enhances traceability and ensures that requirements are seamlessly integrated with the system design. This section outlines the process of authoring new requirements and linking them to both external and internal elements.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="31-creating-requirements"><strong>3.1 Creating Requirements</strong><a href="#31-creating-requirements" class="hash-link" aria-label="Direct link to 31-creating-requirements" title="Direct link to 31-creating-requirements">​</a></h3>
+<p>Authoring requirements within Simulink involves establishing a structured and hierarchical framework that captures all necessary specifications for the BMS.</p>
 <ol>
-<li><strong>New Requirement Set</strong>:<!-- -->
+<li>
+<p><strong>New Requirement Set</strong>:</p>
 <ul>
-<li>In the <em>Requirements Editor</em>, select <em>Add &gt; Requirement Set</em> to create a new set of requirements.</li>
+<li><strong>Action</strong>: In the <em>Requirements Editor</em>, select <em>Add &gt; Requirement Set</em> to initiate the creation of a new set of requirements.</li>
+<li><strong>Naming</strong>: Assign a descriptive name to the requirement set to reflect its scope and purpose.</li>
 </ul>
 </li>
-<li><strong>Define Hierarchy</strong>:<!-- -->
+<li>
+<p><strong>Define Hierarchy</strong>:</p>
 <ul>
-<li>Add parent and child requirements to create a structured hierarchy.</li>
-<li>Example:<!-- -->
-<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">BMS_Requirements (Parent)  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├─ Input_Interfaces (Child)  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  ├─ Voltage_Sensor_Range  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  └─ Temperature_Sensor_Accuracy  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└─ State_Machine_Logic (Child)  </span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<li><strong>Structure</strong>: Organize requirements into a hierarchical structure with parent and child relationships to reflect dependencies and categorizations.</li>
+<li><strong>Example Hierarchy</strong>:<!-- -->
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">BMS_Requirements (Parent)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├─ Input_Interfaces (Child)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  ├─ Voltage_Sensor_Range</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  └─ Temperature_Sensor_Accuracy</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└─ State_Machine_Logic (Child)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
+<li><strong>Implementation</strong>: Use the <em>Requirements Editor</em> to add parent and child requirements, ensuring a clear and organized structure.</li>
 </ul>
 </li>
-<li><strong>Add Attributes</strong>:<!-- -->
+<li>
+<p><strong>Add Attributes</strong>:</p>
 <ul>
-<li>Include detailed descriptions, units, min/max values, or custom fields to provide context and clarity.</li>
+<li><strong>Details</strong>: Enhance requirements with additional attributes such as detailed descriptions, units of measurement, minimum and maximum values, or custom fields to provide context and clarity.</li>
+<li><strong>Purpose</strong>: These attributes aid in understanding the requirements and facilitate accurate implementation and verification.</li>
 </ul>
 </li>
 </ol>
+<p><strong>Creating Requirements Example</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">BMS_Requirements (Parent)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">├─ Input_Interfaces (Child)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  ├─ Voltage_Sensor_Range</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">│  └─ Temperature_Sensor_Accuracy</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">└─ State_Machine_Logic (Child)</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-linking-external-and-internal-requirements"><strong>3.2 Linking External and Internal Requirements</strong><a href="#32-linking-external-and-internal-requirements" class="hash-link" aria-label="Direct link to 32-linking-external-and-internal-requirements" title="Direct link to 32-linking-external-and-internal-requirements">​</a></h3>
+<p>Establishing bi-directional traceability between external requirements and internal design elements ensures consistency and facilitates comprehensive verification.</p>
 <ul>
-<li><strong>Bi-Directional Traceability</strong>:<!-- -->
+<li>
+<p><strong>Bi-Directional Traceability</strong>:</p>
 <ol>
-<li>Right-click a Simulink requirement and select <em>Link to</em>.</li>
-<li>Choose the corresponding external requirement (e.g., from an imported Word document).</li>
-<li>Verify links in the <em>Requirements Perspective</em> to ensure proper alignment.</li>
+<li><strong>Linking Action</strong>:<!-- -->
+<ul>
+<li><strong>Procedure</strong>: Right-click on a Simulink requirement within the <em>Requirements Browser</em> and select <em>Link to</em>.</li>
+<li><strong>Selection</strong>: Choose the corresponding external requirement from the imported sources (e.g., Word document).</li>
+</ul>
+</li>
+<li><strong>Verification</strong>:<!-- -->
+<ul>
+<li><strong>Check Links</strong>: Use the <em>Requirements Perspective</em> to review and verify that all links are correctly established, ensuring that each requirement is appropriately associated with its design elements.</li>
+</ul>
+</li>
 </ol>
 </li>
+<li>
+<p><strong>Benefits</strong>:</p>
+<ul>
+<li><strong>Consistency</strong>: Maintains alignment between documented requirements and their implementation within the model.</li>
+<li><strong>Traceability</strong>: Facilitates impact analysis and ensures that all requirements are addressed in the design.</li>
 </ul>
+</li>
+</ul>
+<p><strong>Linking Requirements Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Linking External Requirement to Simulink Block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function linkRequirementToBlock(requirement_id, block_path)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Locate the requirement</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    req = Simulink.Requirements.getRequirementByID(requirement_id);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Locate the Simulink block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    blk = get_param(block_path, &#x27;Handle&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Create the link</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    Simulink.Requirements.link(req, blk);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    disp([&#x27;Requirement &#x27; requirement_id &#x27; linked to block &#x27; block_path]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="4-requirements-perspective-in-simulink"><strong>4. Requirements Perspective in Simulink</strong><a href="#4-requirements-perspective-in-simulink" class="hash-link" aria-label="Direct link to 4-requirements-perspective-in-simulink" title="Direct link to 4-requirements-perspective-in-simulink">​</a></h2>
+<p>The <em>Requirements Perspective</em> in Simulink provides an integrated view of requirements and their associated design elements, enhancing navigation, visualization, and management of requirements throughout the development process.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="41-integrated-view"><strong>4.1 Integrated View</strong><a href="#41-integrated-view" class="hash-link" aria-label="Direct link to 41-integrated-view" title="Direct link to 41-integrated-view">​</a></h3>
+<p>The integrated view offers a comprehensive interface to visualize and manage requirements alongside their linked design elements.</p>
 <ul>
-<li><strong>Enable Perspective</strong>:<!-- -->
+<li>
+<p><strong>Enable Perspective</strong>:</p>
 <ul>
-<li>Click the <em>Requirements Perspective</em> badge in the lower-right corner or open:<!-- -->
+<li><strong>Access</strong>: Click the <em>Requirements Perspective</em> badge located in the lower-right corner of the Simulink environment or navigate to <em>View &gt; Requirements Perspective</em>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Components</strong>:</p>
 <ul>
-<li><em>Requirements Browser</em> (left panel): Lists all requirements.</li>
-<li><em>Property Inspector</em> (right panel): Displays detailed information about the selected requirement.</li>
+<li>
+<p><strong>Requirements Browser (Left Panel)</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Lists all requirements in a structured hierarchy, allowing for easy navigation and management.</li>
+<li><strong>Features</strong>: Supports filtering, searching, and organizing requirements based on various criteria.</li>
+</ul>
+</li>
+<li>
+<p><strong>Property Inspector (Right Panel)</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Displays detailed information about the selected requirement, including descriptions, attributes, and linked design elements.</li>
+<li><strong>Features</strong>: Enables editing of requirement details and viewing of traceability links.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>Visualize Requirements and Design</strong>:<!-- -->
+<li>
+<p><strong>Visualization</strong>:</p>
 <ul>
-<li>Select a requirement to highlight linked Simulink blocks or Stateflow states (indicated by a pink highlight).</li>
+<li><strong>Highlighting</strong>: Selecting a requirement highlights the linked Simulink blocks or Stateflow states in the model, indicated by a pink highlight.</li>
+<li><strong>Benefit</strong>: Facilitates quick identification of the design elements associated with specific requirements, enhancing understanding and traceability.</li>
 </ul>
 </li>
 </ul>
+<p><strong>Integrated View Illustration</strong>:</p>
+<p><img decoding="async" loading="lazy" src="#" alt="Requirements Perspective" class="img_ev3q"></p>
+<p><em>Figure 3: Integrated Requirements Perspective in Simulink</em></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="42-navigation"><strong>4.2 Navigation</strong><a href="#42-navigation" class="hash-link" aria-label="Direct link to 42-navigation" title="Direct link to 42-navigation">​</a></h3>
+<p>Efficient navigation within the Requirements Perspective ensures that users can quickly access and manage requirements and their associated design elements.</p>
 <ul>
-<li><strong>Jump to Source</strong>: Right-click a requirement and select <em>Show Document</em> to view its origin (e.g., a specific section in a Word document).</li>
-<li><strong>Expand/Collapse</strong>: Organize requirements hierarchically for better readability and management.</li>
+<li>
+<p><strong>Jump to Source</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Right-click on a requirement in the <em>Requirements Browser</em> and select <em>Show Document</em>.</li>
+<li><strong>Result</strong>: Opens the origin document (e.g., a specific section in a Word document), allowing users to review or edit the original requirement.</li>
 </ul>
+</li>
+<li>
+<p><strong>Expand/Collapse</strong>:</p>
+<ul>
+<li><strong>Functionality</strong>: Organize requirements hierarchically by expanding or collapsing parent and child requirements.</li>
+<li><strong>Benefit</strong>: Enhances readability and management of large and complex requirement sets, making it easier to focus on specific sections.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Navigation Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Jump to Source Document</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function jumpToSource(requirement_id)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    req = Simulink.Requirements.getRequirementByID(requirement_id);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if ~isempty(req)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        req.showSource();</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        disp([&#x27;Jumped to source of requirement &#x27; requirement_id]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    else</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        disp([&#x27;Requirement &#x27; requirement_id &#x27; not found&#x27;]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    end</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="5-linking-requirements-to-design-elements"><strong>5. Linking Requirements to Design Elements</strong><a href="#5-linking-requirements-to-design-elements" class="hash-link" aria-label="Direct link to 5-linking-requirements-to-design-elements" title="Direct link to 5-linking-requirements-to-design-elements">​</a></h2>
+<p>Establishing strong links between requirements and design elements is essential for ensuring that all specifications are accurately implemented and validated within the BMS model. Simulink provides intuitive methods for creating and verifying these links, enhancing traceability and facilitating efficient verification and validation processes.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="51-drag-and-drop-linking"><strong>5.1 Drag-and-Drop Linking</strong><a href="#51-drag-and-drop-linking" class="hash-link" aria-label="Direct link to 51-drag-and-drop-linking" title="Direct link to 51-drag-and-drop-linking">​</a></h3>
+<p>Simulink supports a user-friendly drag-and-drop mechanism to link requirements directly to design elements such as Simulink blocks or Stateflow states.</p>
 <ol>
 <li><strong>Link Blocks/States</strong>:<!-- -->
 <ul>
-<li>Drag a requirement from the <em>Requirements Browser</em> onto a Simulink block or Stateflow state.</li>
-<li>A link icon (📎) appears on the block or state, indicating a successful link.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li><strong>Action</strong>: Drag a requirement from the <em>Requirements Browser</em> and drop it onto a Simulink block or a Stateflow state within the model.</li>
+<li><strong>Indicator</strong>: A link icon (📎) appears on the targeted block or state, confirming a successful link.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>Verify Links</strong>:<!-- -->
 <ul>
-<li>Select a block or state, and the <em>Property Inspector</em> will display the linked requirements.</li>
+<li><strong>Action</strong>: Select the linked block or state to view the associated requirements in the <em>Property Inspector</em>.</li>
+<li><strong>Confirmation</strong>: Ensure that the displayed requirements match the intended specifications, verifying the integrity of the link.</li>
 </ul>
 </li>
 </ol>
+<p><strong>Drag-and-Drop Linking Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Drag-and-Drop Linking Simulation</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function dragAndDropLink(requirement_id, block_path)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Locate the requirement</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    req = Simulink.Requirements.getRequirementByID(requirement_id);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Locate the Simulink block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    blk = get_param(block_path, &#x27;Handle&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Perform drag-and-drop linking</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    Simulink.Requirements.link(req, blk);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    disp([&#x27;Requirement &#x27; requirement_id &#x27; linked to block &#x27; block_path &#x27; via drag-and-drop&#x27;]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="52-stateflow-integration"><strong>5.2 Stateflow Integration</strong><a href="#52-stateflow-integration" class="hash-link" aria-label="Direct link to 52-stateflow-integration" title="Direct link to 52-stateflow-integration">​</a></h3>
+<p>Integrating requirements with Stateflow states and transitions ensures that operational logic is directly tied to specified behaviors and safety conditions.</p>
 <ul>
 <li><strong>Link States/Transitions</strong>:<!-- -->
 <ul>
-<li>Example: Link a requirement like <em>&quot;Fault Mode Activation&quot;</em> to a Stateflow fault state.</li>
-<li>Use <em>Highlight Dependencies</em> in the toolstrip to visualize all linked elements.</li>
+<li><strong>Example</strong>: Link a requirement such as <em>&quot;Fault Mode Activation&quot;</em> to a specific fault state within a Stateflow chart.</li>
+</ul>
+</li>
+<li><strong>Visualization</strong>:<!-- -->
+<ul>
+<li><strong>Highlight Dependencies</strong>: Use the <em>Highlight Dependencies</em> feature in the toolstrip to visualize all linked elements, providing a clear overview of how requirements are mapped to the design.</li>
 </ul>
 </li>
 </ul>
+<p><strong>Stateflow Integration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Linking Requirement to Stateflow State</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function linkRequirementToState(requirement_id, state_name, chart_path)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Locate the requirement</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    req = Simulink.Requirements.getRequirementByID(requirement_id);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Locate the Stateflow chart and state</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    chart = sfroot.find(&#x27;-isa&#x27;, &#x27;Stateflow.Chart&#x27;, &#x27;-and&#x27;, &#x27;Path&#x27;, chart_path);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    state = chart.find(&#x27;-isa&#x27;, &#x27;Stateflow.State&#x27;, &#x27;-and&#x27;, &#x27;Name&#x27;, state_name);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if ~isempty(state) &amp;&amp; ~isempty(req)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        Simulink.Requirements.link(req, state);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        disp([&#x27;Requirement &#x27; requirement_id &#x27; linked to Stateflow state &#x27; state_name]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    else</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        disp(&#x27;State or Requirement not found&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    end</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="53-consistency-checks"><strong>5.3 Consistency Checks</strong><a href="#53-consistency-checks" class="hash-link" aria-label="Direct link to 53-consistency-checks" title="Direct link to 53-consistency-checks">​</a></h3>
+<p>Ensuring that all linked requirements are consistently implemented in the design elements is crucial for maintaining system integrity and compliance.</p>
 <ul>
 <li><strong>Validate Properties</strong>:<!-- -->
 <ul>
-<li>Ensure block parameters (e.g., input ranges, units) match the requirement specifications.</li>
-<li>Use Simulink Check™ to enforce modeling standards and identify inconsistencies.</li>
+<li><strong>Action</strong>: Compare block parameters (e.g., input ranges, units) against the linked requirement specifications to ensure alignment.</li>
+<li><strong>Tool</strong>: Utilize Simulink Check™ to automate the enforcement of modeling standards and identify any inconsistencies or deviations.</li>
+</ul>
+</li>
+<li><strong>Outcome</strong>:<!-- -->
+<ul>
+<li><strong>Consistency</strong>: Guarantees that the design accurately reflects the specified requirements.</li>
+<li><strong>Error Detection</strong>: Identifies mismatches or omissions that could lead to functional discrepancies or safety issues.</li>
 </ul>
 </li>
 </ul>
+<p><strong>Consistency Check Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Validating Block Parameters Against Requirements</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function validateBlockParameters(block_path, requirement_id, expected_params)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Locate the Simulink block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    blk = get_param(block_path, &#x27;Handle&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Retrieve linked requirements</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    reqs = Simulink.Requirements.getLinkedRequirements(blk);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Find the specific requirement</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    req = reqs(strcmp({reqs.ID}, requirement_id));</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if isempty(req)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        disp([&#x27;No requirement linked to block &#x27; block_path]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        return;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    end</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Compare block parameters with expected parameters from requirement</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    param_names = fieldnames(expected_params);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    for i = 1:length(param_names)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        param = param_names{i};</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        expected_value = expected_params.(param);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        actual_value = get_param(blk, param);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        if ~isequal(actual_value, expected_value)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            fprintf(&#x27;Parameter mismatch in %s: Expected %s, Found %s\n&#x27;, param, num2str(expected_value), num2str(actual_value));</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        else</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            fprintf(&#x27;Parameter %s matches expected value.\n&#x27;, param);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        end</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    end</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="6-tracking-implementation-progress"><strong>6. Tracking Implementation Progress</strong><a href="#6-tracking-implementation-progress" class="hash-link" aria-label="Direct link to 6-tracking-implementation-progress" title="Direct link to 6-tracking-implementation-progress">​</a></h2>
+<p>Monitoring the progress of requirement implementation is essential for ensuring that all specifications are adequately addressed and that the project remains on schedule. Simulink provides tools to track the status of each requirement and generate comprehensive reports for auditing and certification purposes.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="61-status-monitoring"><strong>6.1 Status Monitoring</strong><a href="#61-status-monitoring" class="hash-link" aria-label="Direct link to 61-status-monitoring" title="Direct link to 61-status-monitoring">​</a></h3>
+<p>Simulink allows users to track the implementation status of each requirement, providing a clear overview of progress and identifying areas that require attention.</p>
 <ul>
-<li><strong>Implementation Status Column</strong>:<!-- -->
+<li>
+<p><strong>Implementation Status Column</strong>:</p>
 <ul>
-<li>Right-click in the <em>Requirements Browser</em> and select <em>Add Column &gt; Implementation Status</em>.</li>
-<li>Track progress with status indicators:<!-- -->
+<li><strong>Action</strong>: In the <em>Requirements Browser</em>, right-click and select <em>Add Column &gt; Implementation Status</em>.</li>
+<li><strong>Status Indicators</strong>:<!-- -->
 <ul>
-<li><strong>Implemented</strong>: Linked to design elements.</li>
-<li><strong>Not Implemented</strong>: Missing links or pending validation.</li>
+<li><strong>Implemented</strong>: Requirements that are linked to design elements, indicating completion.</li>
+<li><strong>Not Implemented</strong>: Requirements that lack links or are pending validation, highlighting incomplete aspects.</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><strong>Example</strong>:<!-- -->
-<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Chapter 4.3 (State Machine Logic) → 60% Complete  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Input_Interfaces → 100% Implemented  </span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<li>
+<p><strong>Example Status Tracking</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Chapter 4.3 (State Machine Logic) → 60% Complete</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Input_Interfaces → 100% Implemented</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 </ul>
+<p><strong>Status Monitoring Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Updating Implementation Status</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function updateImplementationStatus(requirement_id, status)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Locate the requirement</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    req = Simulink.Requirements.getRequirementByID(requirement_id);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if ~isempty(req)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        % Update the implementation status attribute</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        req.ImplementationStatus = status;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        disp([&#x27;Implementation status of requirement &#x27; requirement_id &#x27; updated to &#x27; status]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    else</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        disp([&#x27;Requirement &#x27; requirement_id &#x27; not found&#x27;]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    end</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="62-reporting"><strong>6.2 Reporting</strong><a href="#62-reporting" class="hash-link" aria-label="Direct link to 62-reporting" title="Direct link to 62-reporting">​</a></h3>
+<p>Generating detailed reports on requirement traceability and implementation status is crucial for audits, certifications, and stakeholder communication.</p>
 <ul>
-<li><strong>Generate Traceability Matrix</strong>:<!-- -->
+<li>
+<p><strong>Generate Traceability Matrix</strong>:</p>
 <ul>
-<li>Automatically map requirements to design elements for audits or certifications (e.g., ISO 26262).</li>
-<li>Use the traceability matrix to ensure all requirements are addressed and validated.</li>
+<li><strong>Function</strong>: Automatically maps requirements to their corresponding design elements, providing a comprehensive overview of coverage and compliance.</li>
+<li><strong>Use Cases</strong>:<!-- -->
+<ul>
+<li><strong>Audits</strong>: Demonstrates that all requirements have been addressed and implemented.</li>
+<li><strong>Certifications</strong>: Provides necessary documentation for compliance with industry standards such as ISO 26262.</li>
 </ul>
 </li>
 </ul>
+</li>
+<li>
+<p><strong>Tool</strong>: Utilize Simulink&#x27;s built-in reporting tools to create and export traceability matrices in various formats (e.g., HTML, PDF, Excel).</p>
+</li>
+</ul>
+<p><strong>Traceability Matrix Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Generating Traceability Matrix</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function generateTraceabilityMatrix(model, report_format)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Define the model</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    mdl = load_system(model);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Generate the traceability matrix</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    trace_matrix = Simulink.Requirements.getTraceabilityMatrix(mdl);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Export the traceability matrix</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    switch lower(report_format)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        case &#x27;html&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            export_matrix(trace_matrix, &#x27;TraceabilityMatrix.html&#x27;, &#x27;Format&#x27;, &#x27;HTML&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        case &#x27;pdf&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            export_matrix(trace_matrix, &#x27;TraceabilityMatrix.pdf&#x27;, &#x27;Format&#x27;, &#x27;PDF&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        case &#x27;excel&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            export_matrix(trace_matrix, &#x27;TraceabilityMatrix.xlsx&#x27;, &#x27;Format&#x27;, &#x27;Excel&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        otherwise</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            disp(&#x27;Unsupported report format. Choose HTML, PDF, or Excel.&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    end</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    disp([&#x27;Traceability matrix exported as &#x27; report_format]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Helper Function: Export Matrix</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function export_matrix(matrix, filename, varargin)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    p = inputParser;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    addParameter(p, &#x27;Format&#x27;, &#x27;HTML&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    parse(p, varargin{:});</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    format = p.Results.Format;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    switch format</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        case &#x27;HTML&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            writetable(matrix, filename, &#x27;FileType&#x27;, &#x27;text&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        case &#x27;PDF&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            % Requires additional implementation for PDF export</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            disp(&#x27;PDF export not implemented in this example.&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        case &#x27;Excel&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            writetable(matrix, filename);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        otherwise</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            error(&#x27;Unsupported format.&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    end</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 4: MATLAB Code for Generating a Traceability Matrix</em></p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="7-key-benefits"><strong>7. Key Benefits</strong><a href="#7-key-benefits" class="hash-link" aria-label="Direct link to 7-key-benefits" title="Direct link to 7-key-benefits">​</a></h2>
+<p>Implementing effective requirements management within Simulink offers numerous advantages that enhance the development process, improve system quality, and ensure compliance with industry standards. The key benefits include:</p>
 <ol>
-<li><strong>Risk Mitigation</strong>: Early detection of gaps between requirements and design, reducing the likelihood of project failures.</li>
-<li><strong>Efficiency</strong>: Centralized management of requirements and design in one environment, streamlining the development process.</li>
-<li><strong>Compliance</strong>: Simplified workflows for meeting standards such as ISO 26262 or DO-178C, ensuring certification readiness.</li>
-<li><strong>Collaboration</strong>: Synchronize changes across teams using external and internal tools, improving collaboration and consistency.</li>
+<li>
+<p><strong>Risk Mitigation</strong>:</p>
+<ul>
+<li><strong>Early Detection</strong>: Identifies gaps and inconsistencies between requirements and design early in the development process, reducing the likelihood of project failures.</li>
+<li><strong>Error Reduction</strong>: Minimizes the risk of overlooking critical requirements, ensuring comprehensive coverage and adherence to specifications.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficiency</strong>:</p>
+<ul>
+<li><strong>Centralized Management</strong>: Consolidates requirements and design elements within a single environment, streamlining the development workflow.</li>
+<li><strong>Automated Processes</strong>: Leverages Simulink&#x27;s automation features for importing, exporting, and synchronizing requirements, reducing manual effort and errors.</li>
+</ul>
+</li>
+<li>
+<p><strong>Compliance</strong>:</p>
+<ul>
+<li><strong>Standards Alignment</strong>: Facilitates adherence to industry standards such as ISO 26262 and DO-178C through built-in tools and certification kits.</li>
+<li><strong>Documentation Readiness</strong>: Simplifies the generation of compliance documentation, aiding in the certification process and ensuring regulatory approval.</li>
+</ul>
+</li>
+<li>
+<p><strong>Collaboration</strong>:</p>
+<ul>
+<li><strong>Synchronized Changes</strong>: Ensures that all team members work with the latest requirements through real-time synchronization with external sources.</li>
+<li><strong>Traceability Links</strong>: Enhances collaboration by maintaining clear traceability between requirements and design elements, enabling transparent communication among stakeholders.</li>
+</ul>
+</li>
+<li>
+<p><strong>Quality Assurance</strong>:</p>
+<ul>
+<li><strong>Consistent Implementation</strong>: Ensures that all requirements are accurately implemented and validated within the design, enhancing overall system reliability.</li>
+<li><strong>Comprehensive Testing</strong>: Facilitates thorough testing and validation of requirements through integrated tools and traceability features.</li>
+</ul>
+</li>
 </ol>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary"><strong>Summary</strong><a href="#summary" class="hash-link" aria-label="Direct link to summary" title="Direct link to summary">​</a></h2>
-<p>Managing BMS requirements in Simulink involves:</p>
+<p>Managing BMS requirements in Simulink encompasses a comprehensive set of practices and tools designed to ensure that all specifications are accurately captured, implemented, and validated. The key aspects of this approach include:</p>
 <ul>
-<li><strong>Importing and Authoring Requirements</strong>: Seamlessly integrate external requirements and create new ones within Simulink.</li>
-<li><strong>Using the Requirements Perspective</strong>: Gain an integrated view of requirements and design elements for better analysis and management.</li>
-<li><strong>Linking Requirements to Design</strong>: Ensure traceability by linking requirements to Simulink blocks and Stateflow states.</li>
-<li><strong>Tracking Progress</strong>: Monitor implementation status and generate traceability matrices for audits and certifications.</li>
+<li>
+<p><strong>Importing and Authoring Requirements</strong>:</p>
+<ul>
+<li><strong>Seamless Integration</strong>: Import external requirements from tools like Microsoft Word, Excel, and IBM DOORS, and author new requirements directly within Simulink.</li>
+<li><strong>Structured Hierarchy</strong>: Organize requirements into a clear and logical hierarchy, facilitating easy management and traceability.</li>
 </ul>
-<p>For advanced workflows, leverage Simulink’s <strong>Requirements Toolbox</strong> and <strong>DO Qualification Kit</strong> to create certification-ready documentation and ensure compliance with industry standards.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/docs/theory/10_modeling_testing/03_matlab/03_requirements.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Testing</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/unit-testing"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Unit Testing</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-introduction-to-requirements-management" class="table-of-contents__link toc-highlight"><strong>1. Introduction to Requirements Management</strong></a></li><li><a href="#2-importing-and-exporting-requirements" class="table-of-contents__link toc-highlight"><strong>2. Importing and Exporting Requirements</strong></a><ul><li><a href="#21-supported-formats" class="table-of-contents__link toc-highlight"><strong>2.1 Supported Formats</strong></a></li><li><a href="#22-import-process" class="table-of-contents__link toc-highlight"><strong>2.2 Import Process</strong></a></li><li><a href="#23-exporting-requirements" class="table-of-contents__link toc-highlight"><strong>2.3 Exporting Requirements</strong></a></li></ul></li><li><a href="#3-authoring-requirements-in-simulink" class="table-of-contents__link toc-highlight"><strong>3. Authoring Requirements in Simulink</strong></a><ul><li><a href="#31-creating-requirements" class="table-of-contents__link toc-highlight"><strong>3.1 Creating Requirements</strong></a></li><li><a href="#32-linking-external-and-internal-requirements" class="table-of-contents__link toc-highlight"><strong>3.2 Linking External and Internal Requirements</strong></a></li></ul></li><li><a href="#4-requirements-perspective-in-simulink" class="table-of-contents__link toc-highlight"><strong>4. Requirements Perspective in Simulink</strong></a><ul><li><a href="#41-integrated-view" class="table-of-contents__link toc-highlight"><strong>4.1 Integrated View</strong></a></li><li><a href="#42-navigation" class="table-of-contents__link toc-highlight"><strong>4.2 Navigation</strong></a></li></ul></li><li><a href="#5-linking-requirements-to-design-elements" class="table-of-contents__link toc-highlight"><strong>5. Linking Requirements to Design Elements</strong></a><ul><li><a href="#51-drag-and-drop-linking" class="table-of-contents__link toc-highlight"><strong>5.1 Drag-and-Drop Linking</strong></a></li><li><a href="#52-stateflow-integration" class="table-of-contents__link toc-highlight"><strong>5.2 Stateflow Integration</strong></a></li><li><a href="#53-consistency-checks" class="table-of-contents__link toc-highlight"><strong>5.3 Consistency Checks</strong></a></li></ul></li><li><a href="#6-tracking-implementation-progress" class="table-of-contents__link toc-highlight"><strong>6. Tracking Implementation Progress</strong></a><ul><li><a href="#61-status-monitoring" class="table-of-contents__link toc-highlight"><strong>6.1 Status Monitoring</strong></a></li><li><a href="#62-reporting" class="table-of-contents__link toc-highlight"><strong>6.2 Reporting</strong></a></li></ul></li><li><a href="#7-key-benefits" class="table-of-contents__link toc-highlight"><strong>7. Key Benefits</strong></a></li><li><a href="#summary" class="table-of-contents__link toc-highlight"><strong>Summary</strong></a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
+</li>
+<li>
+<p><strong>Using the Requirements Perspective</strong>:</p>
+<ul>
+<li><strong>Integrated View</strong>: Access a unified interface that combines the <em>Requirements Browser</em> and <em>Property Inspector</em> for efficient management and visualization.</li>
+<li><strong>Enhanced Navigation</strong>: Quickly navigate between requirements and their associated design elements, ensuring a cohesive understanding of system specifications.</li>
+</ul>
+</li>
+<li>
+<p><strong>Linking Requirements to Design</strong>:</p>
+<ul>
+<li><strong>Bi-Directional Traceability</strong>: Establish and maintain links between requirements and Simulink blocks or Stateflow states, ensuring consistency and facilitating verification.</li>
+<li><strong>Consistency Checks</strong>: Validate that design elements adhere to requirement specifications, maintaining system integrity and reliability.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking Progress</strong>:</p>
+<ul>
+<li><strong>Status Monitoring</strong>: Monitor the implementation status of each requirement, identifying completed and pending tasks.</li>
+<li><strong>Reporting</strong>: Generate traceability matrices and other reports to support audits, certifications, and stakeholder communication.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adhering to Certification Standards</strong>:</p>
+<ul>
+<li><strong>Compliance</strong>: Utilize Simulink’s Certification Kits and workflows to ensure adherence to safety-critical standards such as ISO 26262 and IEC 61508.</li>
+<li><strong>Certification Readiness</strong>: Prepare and submit necessary documentation and evidence to achieve recognized safety certifications, enhancing market acceptance and regulatory approval.</li>
+</ul>
+</li>
+</ul>
+<p>By effectively managing requirements within Simulink, developers can ensure that their BMS designs are robust, reliable, and compliant with industry standards. This integrated approach not only enhances the quality and safety of the BMS but also streamlines the development process, reducing time and costs associated with manual requirements management and error rectification. Leveraging Simulink’s powerful requirements management tools empowers engineers and researchers to deliver high-performing Battery Management Systems that meet the evolving demands of the automotive and energy storage industries.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/docs/theory/10_modeling_testing/03_matlab/03_requirements.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Testing</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/unit-testing"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Unit Testing</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-introduction-to-requirements-management" class="table-of-contents__link toc-highlight"><strong>1. Introduction to Requirements Management</strong></a></li><li><a href="#2-importing-and-exporting-requirements" class="table-of-contents__link toc-highlight"><strong>2. Importing and Exporting Requirements</strong></a><ul><li><a href="#21-supported-formats" class="table-of-contents__link toc-highlight"><strong>2.1 Supported Formats</strong></a></li><li><a href="#22-import-process" class="table-of-contents__link toc-highlight"><strong>2.2 Import Process</strong></a></li><li><a href="#23-exporting-requirements" class="table-of-contents__link toc-highlight"><strong>2.3 Exporting Requirements</strong></a></li></ul></li><li><a href="#3-authoring-requirements-in-simulink" class="table-of-contents__link toc-highlight"><strong>3. Authoring Requirements in Simulink</strong></a><ul><li><a href="#31-creating-requirements" class="table-of-contents__link toc-highlight"><strong>3.1 Creating Requirements</strong></a></li><li><a href="#32-linking-external-and-internal-requirements" class="table-of-contents__link toc-highlight"><strong>3.2 Linking External and Internal Requirements</strong></a></li></ul></li><li><a href="#4-requirements-perspective-in-simulink" class="table-of-contents__link toc-highlight"><strong>4. Requirements Perspective in Simulink</strong></a><ul><li><a href="#41-integrated-view" class="table-of-contents__link toc-highlight"><strong>4.1 Integrated View</strong></a></li><li><a href="#42-navigation" class="table-of-contents__link toc-highlight"><strong>4.2 Navigation</strong></a></li></ul></li><li><a href="#5-linking-requirements-to-design-elements" class="table-of-contents__link toc-highlight"><strong>5. Linking Requirements to Design Elements</strong></a><ul><li><a href="#51-drag-and-drop-linking" class="table-of-contents__link toc-highlight"><strong>5.1 Drag-and-Drop Linking</strong></a></li><li><a href="#52-stateflow-integration" class="table-of-contents__link toc-highlight"><strong>5.2 Stateflow Integration</strong></a></li><li><a href="#53-consistency-checks" class="table-of-contents__link toc-highlight"><strong>5.3 Consistency Checks</strong></a></li></ul></li><li><a href="#6-tracking-implementation-progress" class="table-of-contents__link toc-highlight"><strong>6. Tracking Implementation Progress</strong></a><ul><li><a href="#61-status-monitoring" class="table-of-contents__link toc-highlight"><strong>6.1 Status Monitoring</strong></a></li><li><a href="#62-reporting" class="table-of-contents__link toc-highlight"><strong>6.2 Reporting</strong></a></li></ul></li><li><a href="#7-key-benefits" class="table-of-contents__link toc-highlight"><strong>7. Key Benefits</strong></a></li><li><a href="#summary" class="table-of-contents__link toc-highlight"><strong>Summary</strong></a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
 </body>
 </html>

@@ -9,193 +9,635 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-R4556vVJtIc0EJ3NKnM5ePcM78Zv5e+/ff+f6aZwYzZjnj84pK8i0PZyNnO+g0OQ" crossorigin="anonymous"><link rel="stylesheet" href="/Battery-Systems-Technology/assets/css/styles.49f50c39.css">
-<script src="/Battery-Systems-Technology/assets/js/runtime~main.6d352b01.js" defer="defer"></script>
+<script src="/Battery-Systems-Technology/assets/js/runtime~main.9fb8f1af.js" defer="defer"></script>
 <script src="/Battery-Systems-Technology/assets/js/main.73514512.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/Battery-Systems-Technology/"><div class="navbar__logo"><img src="/Battery-Systems-Technology/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/Battery-Systems-Technology/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/fundamentals/getting-started">Fundamentals of Battery Technology</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/aging_degradation/getting-started">Aging and Degradation</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/chemistry_design_principles/getting-started">Chemistry and Design Principles</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_pack/getting_started">Battery Pack Engineering</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/thermal_management/getting_started">Thermal Management</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_characteristics/getting_started">Characteristics and Technical Specifications</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_sizing/getting_started">Sizing and Optimization</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/bms/getting_started">Battery Management System</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/bms_architecture/getting_started">BMS Design and Architecture</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/Battery-Systems-Technology/docs/theory/modeling_testing/getting_started">Modeling and Testing</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/glossary/electrical_concepts">Glossary</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/blog">Blog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/CagriCatik/Battery-Systems-Technology" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Battery-Systems-Technology/docs/theory/modeling_testing/getting_started">Getting Started</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/Battery-Systems-Technology/docs/category/requirements-and-testing">Requirements and Testing</a><button aria-label="Expand sidebar category &#x27;Requirements and Testing&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/Battery-Systems-Technology/docs/category/modeling">Modeling</a><button aria-label="Expand sidebar category &#x27;Modeling&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/Battery-Systems-Technology/docs/category/matlabsimulink">MATLAB/Simulink</a><button aria-label="Collapse sidebar category &#x27;MATLAB/Simulink&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/intro">Battery Management System in Simulink</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing">Testing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/requirements">Managing Requirements</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/unit-testing">Unit Testing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/managing_tests">Managing Tests in Simulink</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/measuring">Measuring and Improving Test Coverage</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/generating_code">Generating Code</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing_code">Testing Generated Code</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/closed_loop">Closed-Loop Testing</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/Battery-Systems-Technology/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/Battery-Systems-Technology/docs/category/matlabsimulink"><span itemprop="name">MATLAB/Simulink</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Battery Management System in Simulink</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Battery Management System in Simulink</h1></header>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-system-overview"><strong>1. System Overview</strong><a href="#1-system-overview" class="hash-link" aria-label="Direct link to 1-system-overview" title="Direct link to 1-system-overview">​</a></h2>
-<p>The Battery Management System (BMS) model in Simulink is designed to facilitate <strong>desktop simulations</strong> for evaluating system responses under various conditions such as temperature extremes, aggressive drive cycles, and State of Charge (SOC) variations. The primary objectives of the BMS model include:</p>
+<p>The Battery Management System (BMS) model developed in Simulink serves as a comprehensive tool for simulating and analyzing the behavior of battery systems under various operational conditions. Designed for desktop simulations, this model enables engineers and researchers to evaluate system responses to temperature extremes, aggressive driving cycles, and State of Charge (SOC) fluctuations without the need for physical hardware. The primary objectives of the BMS model include:</p>
 <ul>
-<li><strong>Preventing Unsafe Conditions</strong>: Monitoring and mitigating risks such as over/under-voltage and over-temperature scenarios.</li>
-<li><strong>Validating BMS Algorithms</strong>: Testing and refining algorithms for cell balancing, SOC estimation, and state transitions.</li>
-<li><strong>Ensuring Compliance</strong>: Adhering to electrical and thermal limits to ensure safe and efficient operation.</li>
+<li>
+<p><strong>Preventing Unsafe Conditions</strong>: Continuously monitoring critical parameters such as voltage and temperature to mitigate risks like over-voltage, under-voltage, and overheating.</p>
+</li>
+<li>
+<p><strong>Validating BMS Algorithms</strong>: Testing and refining essential algorithms related to cell balancing, SOC estimation, and state transitions to ensure optimal performance.</p>
+</li>
+<li>
+<p><strong>Ensuring Compliance</strong>: Adhering to predefined electrical and thermal limits to maintain safe and efficient battery operation.</p>
+</li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="11-model-structure"><strong>1.1 Model Structure</strong><a href="#11-model-structure" class="hash-link" aria-label="Direct link to 11-model-structure" title="Direct link to 11-model-structure">​</a></h3>
-<p>The BMS model is structured into several key components:</p>
+<p>The BMS model is meticulously structured into several key components, each responsible for specific functionalities:</p>
+<ol>
+<li>
+<p><strong>Test Scenarios (<code>Source</code> Subsystem)</strong>:</p>
 <ul>
-<li><strong>Test Scenarios</strong>: Defined in the <code>Source</code> subsystem (bottom left), these include driving and charging profiles to simulate real-world conditions.</li>
-<li><strong>Battery Pack</strong>: Modeled using Simscape, this component captures multi-domain physics, including electrical and thermal behaviors.</li>
-<li><strong>BMS ECU</strong>: This subsystem contains monitoring and control algorithms, as well as state machines implemented using Stateflow.</li>
-<li><strong>Fault Indicators</strong>: Visual indicators (green/red lights) are used to signal faults such as cell over-temperature or over-voltage conditions.</li>
+<li><strong>Description</strong>: This subsystem defines various driving and charging profiles that emulate real-world conditions.</li>
+<li><strong>Functionality</strong>: By simulating different operational scenarios, it provides a dynamic environment to test the BMS&#x27;s robustness and adaptability.</li>
+<li><strong>Implementation</strong>: Configured using Simulink blocks that generate time-based signals representing different drive cycles and charging patterns.</li>
 </ul>
+</li>
+<li>
+<p><strong>Battery Pack</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Modeled using Simscape, the Battery Pack component captures the multi-domain physics of the battery, including both electrical and thermal behaviors.</li>
+<li><strong>Functionality</strong>: Simulates the intricate interactions within the battery cells, accounting for factors like internal resistance, heat generation, and energy storage dynamics.</li>
+<li><strong>Implementation</strong>: Utilizes Simscape Electrical and Simscape Thermal blocks to create a detailed representation of the battery&#x27;s physical properties.</li>
+</ul>
+</li>
+<li>
+<p><strong>BMS ECU (Electronic Control Unit)</strong>:</p>
+<ul>
+<li><strong>Description</strong>: This subsystem houses the monitoring and control algorithms that govern the BMS&#x27;s operations.</li>
+<li><strong>Functionality</strong>: Implements state machines using Stateflow to manage different operational states and respond to varying conditions.</li>
+<li><strong>Implementation</strong>: Combines MATLAB Function blocks and Stateflow charts to execute complex control logic and decision-making processes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fault Indicators</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Visual indicators such as green and red lights are integrated to signal the presence of faults.</li>
+<li><strong>Functionality</strong>: Provide immediate visual feedback on the system&#x27;s status, alerting users to conditions like cell over-temperature or over-voltage.</li>
+<li><strong>Implementation</strong>: Configured using Simulink’s visualization blocks, which change states based on fault detection logic.</li>
+</ul>
+</li>
+</ol>
+<p>The modular architecture of the BMS model ensures scalability and ease of maintenance, allowing for seamless integration of additional features or modifications as required.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-battery-pack-modeling"><strong>2. Battery Pack Modeling</strong><a href="#2-battery-pack-modeling" class="hash-link" aria-label="Direct link to 2-battery-pack-modeling" title="Direct link to 2-battery-pack-modeling">​</a></h2>
+<p>A critical component of the BMS model is the accurate representation of the battery pack. This section delves into the various aspects of battery pack modeling within Simulink.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="21-battery-configurations"><strong>2.1 Battery Configurations</strong><a href="#21-battery-configurations" class="hash-link" aria-label="Direct link to 21-battery-configurations" title="Direct link to 21-battery-configurations">​</a></h3>
-<p>The BMS model supports two primary battery configurations:</p>
-<ul>
-<li><strong>Small Pack</strong>: Consists of 6 cells in series, ideal for rapid prototyping and initial testing.</li>
-<li><strong>Large Pack</strong>: Comprises 96 cells arranged in 16 modules of 6 cells each, designed for scalability and more comprehensive testing.</li>
-</ul>
-<h4 class="anchor anchorWithStickyNavbar_LWe7" id="thermal-layout"><strong>Thermal Layout</strong><a href="#thermal-layout" class="hash-link" aria-label="Direct link to thermal-layout" title="Direct link to thermal-layout">​</a></h4>
-<p>The thermal design of the battery pack is <strong>asymmetric</strong>:</p>
-<ul>
-<li><strong>Cell 6 (Bottom)</strong>: Insulated, which limits heat dissipation and leads to higher temperatures.</li>
-<li><strong>Cell 1 (Top)</strong>: Exposed to ambient convection, resulting in lower temperatures compared to Cell 6.</li>
-<li><strong>Impact</strong>: This asymmetry causes significant temperature differences between cells, with Cell 6 degrading faster due to higher thermal stress.</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="22-cell-equivalent-circuit"><strong>2.2 Cell Equivalent Circuit</strong><a href="#22-cell-equivalent-circuit" class="hash-link" aria-label="Direct link to 22-cell-equivalent-circuit" title="Direct link to 22-cell-equivalent-circuit">​</a></h3>
-<p>The battery cell is modeled using an equivalent circuit approach, which represents lithium-ion chemistry (e.g., NMC) with parameters that depend on temperature and SOC.</p>
-<ul>
-<li><strong>Components</strong>: The circuit includes resistors, capacitors, and voltage sources to mimic real-world battery behavior.</li>
-<li><strong>Behavior</strong>: The model captures the dynamic response of the battery under various operating conditions, including charge/discharge cycles and temperature variations.</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="23-peripheral-circuits"><strong>2.3 Peripheral Circuits</strong><a href="#23-peripheral-circuits" class="hash-link" aria-label="Direct link to 23-peripheral-circuits" title="Direct link to 23-peripheral-circuits">​</a></h3>
-<p>The BMS model includes several peripheral circuits to simulate real-world battery management scenarios:</p>
+<p>The BMS model is versatile, supporting two primary battery configurations to cater to different testing requirements:</p>
 <ol>
-<li><strong>Passive Balancing</strong>:<!-- -->
+<li>
+<p><strong>Small Pack</strong>:</p>
 <ul>
-<li><strong>Mechanism</strong>: High-SOC cells are discharged through resistors using boolean <code>balance_commands</code> to activate specific cell resistors.</li>
-<li><strong>Purpose</strong>: Ensures uniform charge utilization across all cells in the pack.</li>
+<li><strong>Description</strong>: Comprises 6 cells connected in series.</li>
+<li><strong>Use Case</strong>: Ideal for rapid prototyping and initial testing phases where quick iterations are essential.</li>
+<li><strong>Advantages</strong>:<!-- -->
+<ul>
+<li>Lower complexity, facilitating easier debugging and validation.</li>
+<li>Reduced computational load, enabling faster simulation times.</li>
 </ul>
 </li>
-<li><strong>Pre-Charge Contactor Logic</strong>:<!-- -->
-<ul>
-<li><strong>Function</strong>: A resistor is connected in series with the battery pack to avoid inrush current during charging.</li>
-<li><strong>Benefit</strong>: Protects the battery and connected electronics from damage due to sudden current surges.</li>
 </ul>
 </li>
-<li><strong>Charger/Load</strong>:<!-- -->
+<li>
+<p><strong>Large Pack</strong>:</p>
 <ul>
-<li><strong>Modeling</strong>: Chargers and loads are modeled as current sources that follow predefined test profiles.</li>
+<li><strong>Description</strong>: Consists of 96 cells arranged in 16 modules, with each module containing 6 cells in series.</li>
+<li><strong>Use Case</strong>: Designed for scalability and comprehensive testing scenarios, mimicking larger battery systems used in electric vehicles and energy storage systems.</li>
+<li><strong>Advantages</strong>:<!-- -->
+<ul>
+<li>Enhanced realism, providing insights into the behavior of extensive battery systems.</li>
+<li>Facilitates testing of advanced BMS functionalities like hierarchical control and modular balancing.</li>
 </ul>
+</li>
+</ul>
+</li>
+</ol>
+<h4 class="anchor anchorWithStickyNavbar_LWe7" id="thermal-layout"><strong>Thermal Layout</strong><a href="#thermal-layout" class="hash-link" aria-label="Direct link to thermal-layout" title="Direct link to thermal-layout">​</a></h4>
+<p>The thermal design of the battery pack is intentionally <strong>asymmetric</strong>, a deliberate choice to study the effects of uneven heat distribution on battery performance and longevity.</p>
+<ul>
+<li>
+<p><strong>Cell 6 (Bottom)</strong>:</p>
+<ul>
+<li><strong>Characteristics</strong>: Insulated to limit heat dissipation.</li>
+<li><strong>Implications</strong>: Elevated temperatures due to restricted heat flow, leading to accelerated degradation and potential safety hazards.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cell 1 (Top)</strong>:</p>
+<ul>
+<li><strong>Characteristics</strong>: Exposed to ambient convection.</li>
+<li><strong>Implications</strong>: Lower operating temperatures as a result of effective heat dissipation, enhancing cell longevity and performance.</li>
+</ul>
+</li>
+<li>
+<p><strong>Impact</strong>:</p>
+<ul>
+<li><strong>Temperature Variance</strong>: The significant temperature difference between Cell 6 and Cell 1 highlights the challenges in maintaining uniform thermal conditions across the battery pack.</li>
+<li><strong>Degradation Patterns</strong>: Elevated temperatures in insulated cells can lead to non-uniform aging, reducing the overall lifespan of the battery pack.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Visual Representation</strong>:</p>
+<p><img decoding="async" loading="lazy" src="#" alt="Thermal Layout" class="img_ev3q"></p>
+<p><em>Figure 1: Asymmetric Thermal Layout of the Battery Pack</em></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="22-cell-equivalent-circuit"><strong>2.2 Cell Equivalent Circuit</strong><a href="#22-cell-equivalent-circuit" class="hash-link" aria-label="Direct link to 22-cell-equivalent-circuit" title="Direct link to 22-cell-equivalent-circuit">​</a></h3>
+<p>Accurate simulation of individual battery cells is paramount for realistic BMS behavior. The cell is modeled using an equivalent circuit approach, capturing the essential electrical characteristics of lithium-ion chemistry (e.g., Nickel Manganese Cobalt Oxide - NMC).</p>
+<ul>
+<li>
+<p><strong>Components</strong>:</p>
+<ul>
+<li><strong>Resistors</strong>: Represent internal resistance and charge transfer resistance.</li>
+<li><strong>Capacitors</strong>: Model the double-layer capacitance, accounting for energy storage at the electrode-electrolyte interface.</li>
+<li><strong>Voltage Sources</strong>: Mimic the open-circuit voltage (OCV) of the cell, which varies with SOC and temperature.</li>
+</ul>
+</li>
+<li>
+<p><strong>Behavior</strong>:</p>
+<ul>
+<li><strong>Dynamic Response</strong>: The model accurately simulates the cell’s response to varying load conditions, including charge and discharge cycles.</li>
+<li><strong>Temperature Dependency</strong>: Parameters such as resistance and capacitance are functions of temperature and SOC, enabling the simulation of temperature-induced performance variations.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Equivalent Circuit Diagram</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Creating an Equivalent Circuit for a Battery Cell</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define cell parameters</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">R_internal = 0.05; % Ohms</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">C_dl = 1000;       % Farads</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">V_oc = @(SOC, Temp) 3.7 + 0.1*SOC - 0.005*(Temp - 25); % Example OCV function</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Create Simulink model for the equivalent circuit</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">open_system(&#x27;bms_model&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add resistor</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_block(&#x27;simulink/Elements/Resistor&#x27;, &#x27;bms_model/Cell/R_internal&#x27;, ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;Resistance&#x27;, &#x27;0.05&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add capacitor</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_block(&#x27;simulink/Elements/Capacitor&#x27;, &#x27;bms_model/Cell/C_dl&#x27;, ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;Capacitance&#x27;, &#x27;1000&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add voltage source</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_block(&#x27;simulink/Elements/VoltageSource&#x27;, &#x27;bms_model/Cell/V_oc&#x27;, ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;Voltage&#x27;, &#x27;V_oc(SOC, Temp)&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Connect the components</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_line(&#x27;bms_model/Cell&#x27;, &#x27;V_oc/1&#x27;, &#x27;R_internal/1&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_line(&#x27;bms_model/Cell&#x27;, &#x27;R_internal/2&#x27;, &#x27;C_dl/1&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_line(&#x27;bms_model/Cell&#x27;, &#x27;C_dl/2&#x27;, &#x27;V_oc/2&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 2: MATLAB Code for Creating a Cell Equivalent Circuit in Simulink</em></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="23-peripheral-circuits"><strong>2.3 Peripheral Circuits</strong><a href="#23-peripheral-circuits" class="hash-link" aria-label="Direct link to 23-peripheral-circuits" title="Direct link to 23-peripheral-circuits">​</a></h3>
+<p>Beyond the core battery cell modeling, the BMS incorporates several peripheral circuits to emulate real-world battery management functionalities:</p>
+<ol>
+<li>
+<p><strong>Passive Balancing</strong>:</p>
+<ul>
+<li><strong>Mechanism</strong>:<!-- -->
+<ul>
+<li><strong>Operation</strong>: High-SOC cells are selectively discharged through resistors.</li>
+<li><strong>Control</strong>: Utilizes boolean <code>balance_commands</code> to activate specific cell resistors, ensuring uniform charge distribution.</li>
+</ul>
+</li>
+<li><strong>Purpose</strong>: Prevents individual cells from becoming overcharged, promoting balanced utilization and extending the overall battery life.</li>
+</ul>
+<p><strong>Implementation Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Passive Balancing Logic</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function balance_commands = passiveBalancing(SOC, SOC_threshold)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % SOC: Vector of current State of Charge for each cell</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % SOC_threshold: Desired SOC level for balancing</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    balance_commands = SOC &gt; SOC_threshold;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p><strong>Pre-Charge Contactor Logic</strong>:</p>
+<ul>
+<li><strong>Function</strong>:<!-- -->
+<ul>
+<li><strong>Operation</strong>: Incorporates a resistor in series with the battery pack during the initial phase of charging.</li>
+<li><strong>Purpose</strong>: Mitigates inrush current, protecting both the battery and connected electronics from potential damage caused by sudden current surges.</li>
+</ul>
+</li>
+<li><strong>Benefit</strong>: Enhances the longevity and reliability of the charging system by ensuring a controlled current ramp-up.</li>
+</ul>
+</li>
+<li>
+<p><strong>Charger/Load Modeling</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Simulates chargers and loads as current sources that adhere to predefined test profiles.</li>
+<li><strong>Functionality</strong>: Enables the evaluation of BMS performance under various charging and discharging conditions, reflecting real-world usage patterns.</li>
+</ul>
+<p><strong>Charger Model Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Charger Current Profile</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">time = 0:0.1:3600; % Simulation time in seconds</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">charge_current = 10 * ones(size(time)); % Constant 10A charging current</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Create a Simulink signal for the charger</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">charger_signal = timeseries(charge_current, time);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 </li>
 </ol>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-bms-algorithm-components"><strong>3. BMS Algorithm Components</strong><a href="#3-bms-algorithm-components" class="hash-link" aria-label="Direct link to 3-bms-algorithm-components" title="Direct link to 3-bms-algorithm-components">​</a></h2>
+<p>The efficacy of a BMS is largely determined by the sophistication of its underlying algorithms. This section explores the core algorithmic components implemented within the Simulink-based BMS model.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="31-current-limiting-logic"><strong>3.1 Current Limiting Logic</strong><a href="#31-current-limiting-logic" class="hash-link" aria-label="Direct link to 31-current-limiting-logic" title="Direct link to 31-current-limiting-logic">​</a></h3>
-<p>The BMS includes logic to limit current based on voltage and temperature thresholds:</p>
-<ul>
-<li><strong>Voltage-Based Threshold</strong>:<!-- -->
-<ul>
-<li><strong>Calculation</strong>: The maximum allowable current is determined by the formula:<!-- -->
-<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>I</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo>=</mo><mfrac><mrow><msub><mi>V</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>−</mo><msub><mi>V</mi><mrow><mi>c</mi><mi>u</mi><mi>t</mi><mi>o</mi><mi>f</mi><mi>f</mi></mrow></msub></mrow><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub></mfrac></mrow><annotation encoding="application/x-tex">I_{max} = \frac{V_{min} - V_{cutoff}}{R_{max}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:2.1963em;vertical-align:-0.836em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em"><span style="top:-2.314em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.677em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight" style="margin-right:0.10764em">ff</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
-<!-- -->where <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">V_{min}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span></span></span></span> is the minimum cell voltage, <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>c</mi><mi>u</mi><mi>t</mi><mi>o</mi><mi>f</mi><mi>f</mi></mrow></msub></mrow><annotation encoding="application/x-tex">V_{cutoff}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight" style="margin-right:0.10764em">ff</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em"><span></span></span></span></span></span></span></span></span></span> is the cutoff voltage, and <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{max}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span></span></span></span> is the maximum resistance.</li>
-<li><strong>Purpose</strong>: Prevents over-voltage conditions during charging.</li>
-</ul>
-</li>
-<li><strong>Temperature-Based Threshold</strong>:<!-- -->
-<ul>
-<li><strong>Implementation</strong>: Uses lookup tables with S-shaped profiles to limit current at extreme temperatures.</li>
-<li><strong>Application</strong>: Prevents damage during charging at low temperatures and discharging at high temperatures.</li>
-</ul>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-state-machine-stateflow"><strong>3.2 State Machine (Stateflow)</strong><a href="#32-state-machine-stateflow" class="hash-link" aria-label="Direct link to 32-state-machine-stateflow" title="Direct link to 32-state-machine-stateflow">​</a></h3>
-<p>The BMS state machine, implemented using Stateflow, operates in four parallel states:</p>
+<p>To safeguard the battery system, the BMS incorporates current limiting mechanisms based on voltage and temperature thresholds. This ensures that the system operates within safe electrical and thermal boundaries.</p>
 <ol>
-<li><strong>Main Operational States</strong>:<!-- -->
+<li>
+<p><strong>Voltage-Based Threshold</strong>:</p>
 <ul>
-<li><code>Standby</code>: The system is idle, waiting for a command to start charging or discharging.</li>
-<li><code>Driving</code>: The battery is discharging to power the vehicle.</li>
-<li><code>Charging</code>: The battery is being charged, with Constant Current (CC) and Constant Voltage (CV) stages.</li>
-<li><code>Fault</code>: The system enters this state when a fault condition is detected.</li>
+<li><strong>Calculation</strong>:<!-- -->
+<ul>
+<li>The maximum allowable current (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>I</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">I_{max}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span></span></span></span>) is computed using the formula:<!-- -->
+<span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><msub><mi>I</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub><mo>=</mo><mfrac><mrow><msub><mi>V</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>−</mo><msub><mi>V</mi><mrow><mi>c</mi><mi>u</mi><mi>t</mi><mi>o</mi><mi>f</mi><mi>f</mi></mrow></msub></mrow><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub></mfrac></mrow><annotation encoding="application/x-tex">I_{max} = \frac{V_{min} - V_{cutoff}}{R_{max}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07847em">I</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em"><span style="top:-2.55em;margin-left:-0.0785em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:2.1963em;vertical-align:-0.836em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.3603em"><span style="top:-2.314em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.677em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight" style="margin-right:0.10764em">ff</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em"><span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.836em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
+<ul>
+<li><strong>Variables</strong>:<!-- -->
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>m</mi><mi>i</mi><mi>n</mi></mrow></msub></mrow><annotation encoding="application/x-tex">V_{min}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3117em"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">min</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span></span></span></span>: Minimum permissible cell voltage.</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>V</mi><mrow><mi>c</mi><mi>u</mi><mi>t</mi><mi>o</mi><mi>f</mi><mi>f</mi></mrow></msub></mrow><annotation encoding="application/x-tex">V_{cutoff}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.9694em;vertical-align:-0.2861em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.22222em">V</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em"><span style="top:-2.55em;margin-left:-0.2222em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">c</span><span class="mord mathnormal mtight">u</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">o</span><span class="mord mathnormal mtight" style="margin-right:0.10764em">ff</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.2861em"><span></span></span></span></span></span></span></span></span></span>: Cutoff voltage threshold.</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>R</mi><mrow><mi>m</mi><mi>a</mi><mi>x</mi></mrow></msub></mrow><annotation encoding="application/x-tex">R_{max}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.00773em">R</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.1514em"><span style="top:-2.55em;margin-left:-0.0077em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ma</span><span class="mord mathnormal mtight">x</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span></span></span></span>: Maximum allowable resistance.</li>
 </ul>
 </li>
-<li><strong>Fault Monitoring</strong>:<!-- -->
-<ul>
-<li><strong>Triggers</strong>: Over-current, over-voltage, or over-temperature conditions.</li>
-<li><strong>Response</strong>: The system transitions to the <code>Fault</code> state and takes appropriate protective actions.</li>
 </ul>
 </li>
-<li><strong>Contactor Control</strong>:<!-- -->
+</ul>
+</li>
+<li><strong>Purpose</strong>: Prevents over-voltage conditions during the charging process by limiting the charging current based on cell voltage measurements.</li>
+</ul>
+<p><strong>Implementation Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Voltage-Based Current Limiting</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function I_max = voltageCurrentLimit(V_min, V_cutoff, R_max)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    I_max = (V_min - V_cutoff) / R_max;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p><strong>Temperature-Based Threshold</strong>:</p>
 <ul>
-<li><strong>Function</strong>: Manages the sequence of charger and inverter contactor operations to prevent inrush currents.</li>
+<li><strong>Implementation</strong>:<!-- -->
+<ul>
+<li>Utilizes lookup tables with S-shaped profiles to determine permissible current levels at extreme temperatures.</li>
+<li><strong>Profiles</strong>: Define how the current limit varies with temperature, reducing current at low temperatures during charging and at high temperatures during discharging.</li>
+</ul>
+</li>
+<li><strong>Application</strong>: Ensures that the battery operates within safe thermal conditions, preventing thermal runaway and degradation.</li>
+</ul>
+<p><strong>Lookup Table Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Temperature-Based Current Limit Lookup</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">temperature = -20:5:60; % Temperature range in Celsius</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">current_limit = [0, 2, 5, 10, 15, 10, 5, 2, 0]; % Corresponding current limits</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Create a lookup table</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">temp_current_map = interp1(temperature, current_limit, &#x27;spline&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Function to get current limit based on temperature</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function I_max_temp = tempCurrentLimit(current, temp)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    I_max_temp = interp1(temperature, current_limit, temp, &#x27;spline&#x27;, 0);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-state-machine-stateflow"><strong>3.2 State Machine (Stateflow)</strong><a href="#32-state-machine-stateflow" class="hash-link" aria-label="Direct link to 32-state-machine-stateflow" title="Direct link to 32-state-machine-stateflow">​</a></h3>
+<p>The BMS employs a state machine, implemented using Stateflow, to manage its operational states and respond to varying conditions dynamically. This hierarchical state machine operates concurrently in four primary states:</p>
+<ol>
+<li>
+<p><strong>Main Operational States</strong>:</p>
+<ul>
+<li><strong>Standby</strong>:<!-- -->
+<ul>
+<li><strong>Description</strong>: The system remains idle, awaiting commands to initiate charging or discharging.</li>
+<li><strong>Transitions</strong>: Moves to <code>Charging</code> or <code>Driving</code> states based on external inputs or system triggers.</li>
+</ul>
+</li>
+<li><strong>Driving</strong>:<!-- -->
+<ul>
+<li><strong>Description</strong>: Represents the battery discharging to power the vehicle.</li>
+<li><strong>Behavior</strong>: Monitors load demand and adjusts discharge rates accordingly.</li>
+</ul>
+</li>
+<li><strong>Charging</strong>:<!-- -->
+<ul>
+<li><strong>Description</strong>: The battery undergoes charging, encompassing both Constant Current (CC) and Constant Voltage (CV) phases.</li>
+<li><strong>Behavior</strong>: Controls the charging process to optimize efficiency and battery health.</li>
+</ul>
+</li>
+<li><strong>Fault</strong>:<!-- -->
+<ul>
+<li><strong>Description</strong>: The system enters this state upon detecting any fault conditions.</li>
+<li><strong>Behavior</strong>: Initiates protective actions such as limiting current or shutting down certain functionalities to prevent damage.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Fault Monitoring</strong>:</p>
+<ul>
+<li><strong>Triggers</strong>:<!-- -->
+<ul>
+<li><strong>Over-Current</strong>: Excessive current flow beyond safe operational limits.</li>
+<li><strong>Over-Voltage</strong>: Cell voltages exceeding maximum thresholds.</li>
+<li><strong>Over-Temperature</strong>: Elevated temperatures threatening battery integrity.</li>
+</ul>
+</li>
+<li><strong>Response</strong>:<!-- -->
+<ul>
+<li><strong>Transition to Fault State</strong>: Upon detection of any fault, the system immediately transitions to the <code>Fault</code> state.</li>
+<li><strong>Protective Actions</strong>: Executes predefined safety measures like reducing current flow or isolating affected cells.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Contactor Control</strong>:</p>
+<ul>
+<li><strong>Function</strong>:<!-- -->
+<ul>
+<li><strong>Operation Sequence</strong>: Manages the activation and deactivation of charger and inverter contactors.</li>
+<li><strong>Purpose</strong>: Prevents inrush currents that can occur during the initial connection or disconnection of high-power components.</li>
+</ul>
+</li>
+<li><strong>Implementation</strong>:<!-- -->
+<ul>
+<li><strong>Sequential Control</strong>: Ensures that contactors are engaged or disengaged in a specific order to maintain system stability.</li>
+<li><strong>Safety Interlocks</strong>: Incorporates interlocks to prevent simultaneous engagement of conflicting contactors.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
+<p><strong>Stateflow Diagram Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Stateflow Diagram for BMS States</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define states: Standby, Driving, Charging, Fault</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sf = Stateflow.Chart;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Standby State</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">standby = Stateflow.State(sf);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">standby.Name = &#x27;Standby&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">standby.Position = [100 100 60 60];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Driving State</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">driving = Stateflow.State(sf);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">driving.Name = &#x27;Driving&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">driving.Position = [300 100 60 60];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Charging State</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">charging = Stateflow.State(sf);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">charging.Name = &#x27;Charging&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">charging.Position = [300 200 60 60];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Fault State</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">fault = Stateflow.State(sf);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">fault.Name = &#x27;Fault&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">fault.Position = [500 150 60 60];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Transitions</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition1 = Stateflow.Transition(standby, driving);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition1.LabelString = &#x27;StartDriving&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition2 = Stateflow.Transition(standby, charging);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition2.LabelString = &#x27;StartCharging&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition3 = Stateflow.Transition(driving, standby);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition3.LabelString = &#x27;StopDriving&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition4 = Stateflow.Transition(charging, standby);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition4.LabelString = &#x27;StopCharging&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition5 = Stateflow.Transition(standby, fault);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition5.LabelString = &#x27;FaultDetected&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition6 = Stateflow.Transition(driving, fault);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition6.LabelString = &#x27;FaultDetected&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition7 = Stateflow.Transition(charging, fault);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition7.LabelString = &#x27;FaultDetected&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition8 = Stateflow.Transition(fault, standby);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition8.LabelString = &#x27;Reset&#x27;;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 3: MATLAB Code for Creating a Stateflow Diagram</em></p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="4-soc-estimation-methods"><strong>4. SOC Estimation Methods</strong><a href="#4-soc-estimation-methods" class="hash-link" aria-label="Direct link to 4-soc-estimation-methods" title="Direct link to 4-soc-estimation-methods">​</a></h2>
+<p>Accurate estimation of the State of Charge (SOC) is pivotal for effective battery management. The BMS model incorporates multiple SOC estimation techniques, each with its advantages and limitations.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="41-coulomb-counting"><strong>4.1 Coulomb Counting</strong><a href="#41-coulomb-counting" class="hash-link" aria-label="Direct link to 41-coulomb-counting" title="Direct link to 41-coulomb-counting">​</a></h3>
+<p>Coulomb Counting is a fundamental method for SOC estimation based on the principle of charge conservation.</p>
 <ul>
-<li><strong>Principle</strong>: The SOC is estimated by integrating the current over time:<!-- -->
+<li>
+<p><strong>Principle</strong>:</p>
+<ul>
+<li><strong>Integration</strong>: SOC is estimated by integrating the current over time, starting from a known initial SOC value.<!-- -->
 <span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>S</mi><mi>O</mi><mi>C</mi><mo>=</mo><mi>S</mi><mi>O</mi><msub><mi>C</mi><mrow><mi>i</mi><mi>n</mi><mi>i</mi><mi>t</mi><mi>i</mi><mi>a</mi><mi>l</mi></mrow></msub><mo>+</mo><mfrac><mrow><mo>∫</mo><mi>I</mi><mtext> </mtext><mi>d</mi><mi>t</mi></mrow><mrow><mi>C</mi><mi>a</mi><mi>p</mi><mi>a</mi><mi>c</mi><mi>i</mi><mi>t</mi><mi>y</mi></mrow></mfrac></mrow><annotation encoding="application/x-tex">SOC = SOC_{initial} + \frac{\int I \, dt}{Capacity}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.07153em">SOC</span><span class="mspace" style="margin-right:0.2778em"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em"></span></span><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em"></span><span class="mord mathnormal" style="margin-right:0.02778em">SO</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ini</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">ia</span><span class="mord mathnormal mtight" style="margin-right:0.01968em">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em"></span></span><span class="base"><span class="strut" style="height:2.3816em;vertical-align:-0.8804em"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.5011em"><span style="top:-2.314em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em">C</span><span class="mord mathnormal">a</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal">c</span><span class="mord mathnormal">i</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.03588em">y</span></span></span><span style="top:-3.23em"><span class="pstrut" style="height:3em"></span><span class="frac-line" style="border-bottom-width:0.04em"></span></span><span style="top:-3.6961em"><span class="pstrut" style="height:3em"></span><span class="mord"><span class="mop op-symbol small-op" style="margin-right:0.19445em;position:relative;top:-0.0006em">∫</span><span class="mspace" style="margin-right:0.1667em"></span><span class="mord mathnormal" style="margin-right:0.07847em">I</span><span class="mspace" style="margin-right:0.1667em"></span><span class="mord mathnormal">d</span><span class="mord mathnormal">t</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.8804em"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span>
-</li>
-<li><strong>Advantages</strong>: Simple to implement and computationally inexpensive.</li>
-<li><strong>Disadvantages</strong>: Accumulates sensor errors over time and lacks feedback to correct initial SOC inaccuracies.</li>
+<ul>
+<li><strong>Variables</strong>:<!-- -->
+<ul>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mi>O</mi><msub><mi>C</mi><mrow><mi>i</mi><mi>n</mi><mi>i</mi><mi>t</mi><mi>i</mi><mi>a</mi><mi>l</mi></mrow></msub></mrow><annotation encoding="application/x-tex">SOC_{initial}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8333em;vertical-align:-0.15em"></span><span class="mord mathnormal" style="margin-right:0.02778em">SO</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361em"><span style="top:-2.55em;margin-left:-0.0715em;margin-right:0.05em"><span class="pstrut" style="height:2.7em"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">ini</span><span class="mord mathnormal mtight">t</span><span class="mord mathnormal mtight">ia</span><span class="mord mathnormal mtight" style="margin-right:0.01968em">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em"><span></span></span></span></span></span></span></span></span></span>: The initial State of Charge at the start of measurement.</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>I</mi></mrow><annotation encoding="application/x-tex">I</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em"></span><span class="mord mathnormal" style="margin-right:0.07847em">I</span></span></span></span>: Current flowing into or out of the battery.</li>
+<li><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>a</mi><mi>p</mi><mi>a</mi><mi>c</mi><mi>i</mi><mi>t</mi><mi>y</mi></mrow><annotation encoding="application/x-tex">Capacity</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8778em;vertical-align:-0.1944em"></span><span class="mord mathnormal" style="margin-right:0.07153em">C</span><span class="mord mathnormal">a</span><span class="mord mathnormal">p</span><span class="mord mathnormal">a</span><span class="mord mathnormal">c</span><span class="mord mathnormal">i</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.03588em">y</span></span></span></span>: The rated capacity of the battery.</li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Advantages</strong>:</p>
+<ul>
+<li><strong>Simplicity</strong>: Easy to implement with minimal computational resources.</li>
+<li><strong>Cost-Effective</strong>: Requires only current measurement sensors, reducing overall system complexity.</li>
+</ul>
+</li>
+<li>
+<p><strong>Disadvantages</strong>:</p>
+<ul>
+<li><strong>Accumulation of Errors</strong>: Sensor inaccuracies and integration errors can accumulate over time, leading to significant SOC estimation drift.</li>
+<li><strong>Lack of Feedback Mechanism</strong>: Does not inherently correct for discrepancies between estimated and actual SOC, especially in the absence of external references.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Implementation Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Coulomb Counting SOC Estimation</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function SOC = coulombCounting(I, dt, SOC_initial, Capacity)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    SOC = SOC_initial + (I * dt) / Capacity;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="42-kalman-filters"><strong>4.2 Kalman Filters</strong><a href="#42-kalman-filters" class="hash-link" aria-label="Direct link to 42-kalman-filters" title="Direct link to 42-kalman-filters">​</a></h3>
-<p>The BMS model employs two types of Kalman filters for SOC estimation:</p>
+<p>To overcome the limitations of Coulomb Counting, the BMS model integrates advanced estimation techniques using Kalman Filters, enhancing SOC accuracy through predictive modeling and measurement updates.</p>
 <ol>
-<li><strong>Extended Kalman Filter (EKF)</strong>:<!-- -->
+<li>
+<p><strong>Extended Kalman Filter (EKF)</strong>:</p>
 <ul>
-<li><strong>Method</strong>: Linearizes the cell model for state prediction and correction.</li>
-<li><strong>Use Case</strong>: Suitable for systems with mild non-linearities, such as the SOC vs. Open Circuit Voltage (OCV) curve.</li>
+<li><strong>Method</strong>:<!-- -->
+<ul>
+<li><strong>Linearization</strong>: Approximates the non-linear cell model by linearizing it around the current estimate, facilitating state prediction and correction.</li>
+<li><strong>State Prediction</strong>: Uses the battery model to predict the next state based on current inputs.</li>
+<li><strong>Measurement Update</strong>: Incorporates actual voltage measurements to correct the predicted SOC.</li>
 </ul>
 </li>
-<li><strong>Unscented Kalman Filter (UKF)</strong>:<!-- -->
+<li><strong>Use Case</strong>: Effective for systems with mild non-linearities, such as the SOC vs. Open Circuit Voltage (OCV) relationship.</li>
+</ul>
+</li>
+<li>
+<p><strong>Unscented Kalman Filter (UKF)</strong>:</p>
 <ul>
-<li><strong>Method</strong>: Handles non-linearities without requiring linearization.</li>
-<li><strong>Use Case</strong>: More accurate than EKF for highly non-linear systems but computationally heavier.</li>
+<li><strong>Method</strong>:<!-- -->
+<ul>
+<li><strong>Non-Linear Handling</strong>: Utilizes the Unscented Transform to capture the mean and covariance estimates more accurately without explicit linearization.</li>
+<li><strong>Sigma Points</strong>: Generates a set of sample points (sigma points) to represent the probability distribution, improving estimation accuracy in highly non-linear systems.</li>
+</ul>
+</li>
+<li><strong>Use Case</strong>: Preferred for systems with significant non-linearities, offering superior accuracy compared to EKF at the expense of higher computational demands.</li>
 </ul>
 </li>
 </ol>
 <ul>
-<li><strong>Both Methods</strong>:<!-- -->
+<li><strong>Common Features</strong>:<!-- -->
 <ul>
-<li><strong>Feedback</strong>: Use cell terminal voltage measurements to correct SOC predictions.</li>
-<li><strong>Performance</strong>: Outperform Coulomb counting in scenarios with initial SOC mismatches, providing faster and more accurate error recovery.</li>
+<li><strong>Feedback Incorporation</strong>: Both EKF and UKF leverage cell terminal voltage measurements to refine SOC predictions, enabling real-time adjustments and error corrections.</li>
+<li><strong>Performance</strong>: Demonstrates enhanced resilience against initial SOC estimation errors, rapidly converging to accurate SOC values even in the presence of significant initial discrepancies.</li>
 </ul>
 </li>
 </ul>
+<p><strong>EKF Implementation Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Extended Kalman Filter for SOC Estimation</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function [SOC, P] = extendedKalmanFilter(SOC_prev, P_prev, I, V_meas, dt, Capacity, R, C, V_oc_func)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Predict Step</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    SOC_pred = SOC_prev + (I * dt) / Capacity;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    P_pred = P_prev + dt; % Process noise covariance</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Measurement Update</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    V_pred = V_oc_func(SOC_pred) - I * R;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    K = P_pred / (P_pred + 0.01); % Kalman Gain</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    SOC = SOC_pred + K * (V_meas - V_pred);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    P = (1 - K) * P_pred;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><strong>UKF Implementation Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Unscented Kalman Filter for SOC Estimation</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function [SOC, P] = unscentedKalmanFilter(SOC_prev, P_prev, I, V_meas, dt, Capacity, R, C, V_oc_func)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Define sigma points</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    alpha = 1e-3;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    kappa = 0;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    beta = 2;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    n = 1; % Number of states</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    lambda = alpha^2 * (n + kappa) - n;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    sigma_points = [SOC_prev; SOC_prev + sqrt((lambda + n) * P_prev)];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Predict sigma points</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    sigma_pred = sigma_points + (I * dt) / Capacity;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Predict mean and covariance</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    SOC_pred = sum(sigma_pred) / 2;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    P_pred = sum((sigma_pred - SOC_pred).^2) / 2 + 0.01;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Measurement prediction</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    V_pred = V_oc_func(SOC_pred) - I * R;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Kalman Gain</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    K = P_pred / (P_pred + 0.01);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Update state</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    SOC = SOC_pred + K * (V_meas - V_pred);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    P = (1 - K) * P_pred;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="5-simulation-results"><strong>5. Simulation Results</strong><a href="#5-simulation-results" class="hash-link" aria-label="Direct link to 5-simulation-results" title="Direct link to 5-simulation-results">​</a></h2>
+<p>The BMS model&#x27;s effectiveness is validated through a series of simulations that demonstrate its capability to manage battery performance under various conditions. This section presents the key findings from these simulations.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="51-voltage-and-balancing"><strong>5.1 Voltage and Balancing</strong><a href="#51-voltage-and-balancing" class="hash-link" aria-label="Direct link to 51-voltage-and-balancing" title="Direct link to 51-voltage-and-balancing">​</a></h3>
 <ul>
-<li><strong>Cell Voltages</strong>: During balancing, cell voltages converge, reducing SOC imbalances across the pack.</li>
-<li><strong>Balancing Logic</strong>: The BMS activates resistors for high-SOC cells, ensuring uniform charge utilization and prolonging battery life.</li>
+<li><strong>Cell Voltages</strong>:<!-- -->
+<ul>
+<li><strong>Observation</strong>: During the balancing process, individual cell voltages converge towards uniform levels.</li>
+<li><strong>Result</strong>: This convergence reduces SOC imbalances across the battery pack, ensuring that all cells are utilized evenly.</li>
 </ul>
+</li>
+<li><strong>Balancing Logic</strong>:<!-- -->
+<ul>
+<li><strong>Mechanism</strong>: The BMS activates resistors for cells with higher SOC, dissipating excess energy as heat.</li>
+<li><strong>Impact</strong>:<!-- -->
+<ul>
+<li><strong>Uniform Charge Utilization</strong>: Ensures that no single cell is overcharged or undercharged, promoting balanced energy distribution.</li>
+<li><strong>Battery Longevity</strong>: Prolongs the overall lifespan of the battery pack by preventing uneven wear and degradation.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Simulation Graph</strong>:</p>
+<p><img decoding="async" loading="lazy" src="#" alt="Voltage Balancing" class="img_ev3q"></p>
+<p><em>Figure 4: Cell Voltage Convergence During Balancing</em></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="52-temperature-dynamics"><strong>5.2 Temperature Dynamics</strong><a href="#52-temperature-dynamics" class="hash-link" aria-label="Direct link to 52-temperature-dynamics" title="Direct link to 52-temperature-dynamics">​</a></h3>
 <ul>
-<li><strong>Cell 6 vs. Cell 1</strong>:<!-- -->
+<li>
+<p><strong>Cell 6 vs. Cell 1</strong>:</p>
 <ul>
-<li><strong>Cell 6 (Insulated)</strong>: Reaches higher temperatures due to limited heat dissipation, leading to accelerated degradation.</li>
-<li><strong>Cell 1 (Exposed)</strong>: Maintains lower temperatures due to better heat dissipation.</li>
-<li><strong>Implication</strong>: Highlights the need for active thermal management solutions, such as cooling plates or liquid cooling systems.</li>
+<li><strong>Cell 6 (Insulated)</strong>:<!-- -->
+<ul>
+<li><strong>Behavior</strong>: Exhibits higher temperatures due to limited heat dissipation.</li>
+<li><strong>Consequence</strong>: Experiences accelerated degradation, reducing its operational lifespan.</li>
+</ul>
+</li>
+<li><strong>Cell 1 (Exposed)</strong>:<!-- -->
+<ul>
+<li><strong>Behavior</strong>: Maintains lower temperatures thanks to effective ambient convection.</li>
+<li><strong>Consequence</strong>: Demonstrates slower degradation rates, enhancing its durability.</li>
 </ul>
 </li>
 </ul>
+</li>
+<li>
+<p><strong>Implications</strong>:</p>
+<ul>
+<li><strong>Thermal Management Necessity</strong>: The significant temperature disparity underscores the critical need for active thermal management solutions.</li>
+<li><strong>Potential Solutions</strong>:<!-- -->
+<ul>
+<li><strong>Cooling Plates</strong>: Implementing conductive materials to facilitate uniform heat distribution.</li>
+<li><strong>Liquid Cooling Systems</strong>: Utilizing coolant fluids to actively remove excess heat from critical areas.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Temperature Profile Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Plotting Temperature Dynamics</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">time = 0:60:3600; % Time in seconds</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">temp_cell6 = 25 + 0.05 * time; % Example temperature increase</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">temp_cell1 = 25 + 0.02 * time; % Slower temperature increase</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">figure;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">plot(time, temp_cell6, &#x27;r&#x27;, &#x27;LineWidth&#x27;, 2);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">hold on;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">plot(time, temp_cell1, &#x27;b&#x27;, &#x27;LineWidth&#x27;, 2);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">xlabel(&#x27;Time (s)&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">ylabel(&#x27;Temperature (°C)&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">title(&#x27;Temperature Dynamics of Cell 6 vs. Cell 1&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">legend(&#x27;Cell 6 (Insulated)&#x27;, &#x27;Cell 1 (Exposed)&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">grid on;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 5: Temperature Evolution of Insulated vs. Exposed Cells</em></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="53-soc-estimation-comparison"><strong>5.3 SOC Estimation Comparison</strong><a href="#53-soc-estimation-comparison" class="hash-link" aria-label="Direct link to 53-soc-estimation-comparison" title="Direct link to 53-soc-estimation-comparison">​</a></h3>
+<p>A comparative analysis of SOC estimation methods highlights the strengths and weaknesses of each approach under different scenarios.</p>
 <ul>
-<li><strong>Coulomb Counting</strong>: Fails to recover from an initial 80% SOC error due to the lack of feedback.</li>
-<li><strong>EKF/UKF</strong>: Both filters correct the SOC to the true value of 75% within 1 hour, with EKF being slightly faster.</li>
+<li>
+<p><strong>Coulomb Counting</strong>:</p>
+<ul>
+<li><strong>Scenario</strong>: Begins with an initial SOC error of 80%.</li>
+<li><strong>Performance</strong>:<!-- -->
+<ul>
+<li><strong>Result</strong>: Fails to correct the initial SOC discrepancy over time.</li>
+<li><strong>Reason</strong>: Absence of a feedback mechanism prevents the system from adjusting erroneous SOC estimates.</li>
 </ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Extended Kalman Filter (EKF) and Unscented Kalman Filter (UKF)</strong>:</p>
+<ul>
+<li><strong>Scenario</strong>: Begins with the same initial SOC error of 80%.</li>
+<li><strong>Performance</strong>:<!-- -->
+<ul>
+<li><strong>Result</strong>: Both filters successfully correct the SOC to the true value of 75% within approximately 1 hour.</li>
+<li><strong>EKF vs. UKF</strong>: EKF exhibits slightly faster convergence compared to UKF, though both achieve accurate SOC tracking.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Conclusion</strong>:</p>
+<ul>
+<li><strong>Coulomb Counting</strong>: Suitable for simple applications where long-term accuracy is less critical.</li>
+<li><strong>Kalman Filters</strong>: Preferred for applications requiring high precision and reliability in SOC estimation, especially in dynamic and non-linear operating conditions.</li>
+</ul>
+</li>
+</ul>
+<p><strong>SOC Estimation Graph</strong>:</p>
+<p><img decoding="async" loading="lazy" src="#" alt="SOC Estimation" class="img_ev3q"></p>
+<p><em>Figure 6: SOC Estimation Accuracy Comparison</em></p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="54-fault-handling"><strong>5.4 Fault Handling</strong><a href="#54-fault-handling" class="hash-link" aria-label="Direct link to 54-fault-handling" title="Direct link to 54-fault-handling">​</a></h3>
+<p>Effective fault detection and handling are crucial for maintaining battery safety and integrity. The simulation demonstrates the BMS&#x27;s capability to manage fault conditions seamlessly.</p>
 <ul>
-<li><strong>Over-Voltage Protection</strong>: The BMS limits charging current when cell voltage approaches 4.4V, preventing over-voltage conditions.</li>
+<li><strong>Over-Voltage Protection</strong>:<!-- -->
+<ul>
+<li><strong>Condition</strong>: Cell voltage approaches the upper limit of 4.4V.</li>
+<li><strong>Response</strong>:<!-- -->
+<ul>
+<li><strong>Action</strong>: The BMS actively limits the charging current to prevent the cell voltage from exceeding the safe threshold.</li>
+<li><strong>Outcome</strong>: Prevents over-voltage conditions, safeguarding the battery from potential damage or safety hazards.</li>
 </ul>
+</li>
+</ul>
+</li>
+<li><strong>Fault Indicators</strong>:<!-- -->
+<ul>
+<li><strong>Visual Feedback</strong>: Red lights illuminate to indicate the presence of over-voltage conditions, alerting users to take corrective actions.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Fault Handling Flowchart</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Over-Voltage Fault Handling</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if V_cell &gt; 4.4</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    I_charge = I_charge * 0.5; % Reduce charging current by 50%</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    fault_indicator = &#x27;Red&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 7: Over-Voltage Protection Logic</em></p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="6-key-tools-and-workflow"><strong>6. Key Tools and Workflow</strong><a href="#6-key-tools-and-workflow" class="hash-link" aria-label="Direct link to 6-key-tools-and-workflow" title="Direct link to 6-key-tools-and-workflow">​</a></h2>
-<ul>
-<li><strong>Simscape</strong>: Used for multi-domain modeling, capturing electrical and thermal behaviors of the battery pack.</li>
-<li><strong>Stateflow</strong>: Enables the design of state machines for operational and fault modes.</li>
-<li><strong>Control System Toolbox</strong>: Implements Kalman filters for accurate SOC estimation.</li>
-<li><strong>Simulation Workflow</strong>:<!-- -->
+<p>The development and simulation of the BMS model in Simulink leverage a suite of specialized tools and a structured workflow to ensure comprehensive testing and validation.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-tools"><strong>Key Tools</strong><a href="#key-tools" class="hash-link" aria-label="Direct link to key-tools" title="Direct link to key-tools">​</a></h3>
 <ol>
-<li><strong>Define Test Scenarios</strong>: Specify drive cycles, ambient conditions, and initial SOC levels.</li>
-<li><strong>Simulate BMS Response</strong>: Evaluate the system&#x27;s performance under edge cases, such as high temperatures or low initial SOC.</li>
-<li><strong>Validate Compliance</strong>: Ensure the BMS meets safety and performance requirements under all tested conditions.</li>
-</ol>
+<li>
+<p><strong>Simscape</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Facilitates multi-domain modeling, allowing for the accurate simulation of both electrical and thermal behaviors of the battery pack.</li>
+<li><strong>Features</strong>:<!-- -->
+<ul>
+<li><strong>Physical Modeling</strong>: Enables the creation of detailed physical models using predefined components and custom configurations.</li>
+<li><strong>Integration</strong>: Seamlessly integrates with Simulink, allowing for synchronized simulations of complex systems.</li>
+</ul>
 </li>
 </ul>
+</li>
+<li>
+<p><strong>Stateflow</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Empowers the design and implementation of state machines governing the BMS&#x27;s operational and fault modes.</li>
+<li><strong>Features</strong>:<!-- -->
+<ul>
+<li><strong>Graphical Representation</strong>: Provides an intuitive interface for designing complex state transitions and logic.</li>
+<li><strong>Event Handling</strong>: Supports event-driven programming, enabling responsive and adaptive system behavior.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Control System Toolbox</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Implements advanced control algorithms, including Kalman filters for accurate SOC estimation.</li>
+<li><strong>Features</strong>:<!-- -->
+<ul>
+<li><strong>Filter Design</strong>: Offers tools for designing and tuning various types of filters.</li>
+<li><strong>System Analysis</strong>: Provides functionalities for analyzing and optimizing control system performance.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="simulation-workflow"><strong>Simulation Workflow</strong><a href="#simulation-workflow" class="hash-link" aria-label="Direct link to simulation-workflow" title="Direct link to simulation-workflow">​</a></h3>
+<p>A systematic workflow ensures that the BMS model is thoroughly tested and validated across all intended scenarios.</p>
+<ol>
+<li>
+<p><strong>Define Test Scenarios</strong>:</p>
+<ul>
+<li><strong>Components</strong>:<!-- -->
+<ul>
+<li><strong>Drive Cycles</strong>: Simulate different driving patterns, such as urban, highway, and mixed cycles, to evaluate discharge behavior.</li>
+<li><strong>Ambient Conditions</strong>: Incorporate varying temperatures to assess thermal management strategies.</li>
+<li><strong>Initial SOC Levels</strong>: Test the BMS&#x27;s response to different starting SOC values, including edge cases like low or high SOC.</li>
+</ul>
+</li>
+<li><strong>Implementation</strong>:<!-- -->
+<ul>
+<li>Utilize Simulink’s signal generation blocks to create realistic and diverse test inputs.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Test Scenario Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Defining a Driving Cycle</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">time = 0:1:3600; % 1-hour drive cycle</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">speed = 50 + 10*sin(2*pi*time/3600); % Simulated speed profile</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Create a timeseries object for speed</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">drive_cycle = timeseries(speed, time);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add to Simulink model</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param(&#x27;bms_model/Source/DriveCycle&#x27;, &#x27;Time&#x27;, &#x27;time&#x27;, &#x27;Data&#x27;, &#x27;speed&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li>
+<p><strong>Simulate BMS Response</strong>:</p>
+<ul>
+<li><strong>Objective</strong>: Assess how the BMS manages the battery system under various test conditions, including extreme scenarios.</li>
+<li><strong>Edge Cases</strong>:<!-- -->
+<ul>
+<li><strong>High Temperatures</strong>: Evaluate the BMS&#x27;s ability to prevent overheating and manage thermal stress.</li>
+<li><strong>Low Initial SOC</strong>: Test SOC estimation accuracy and charging efficiency when starting from a deeply discharged state.</li>
+</ul>
+</li>
+<li><strong>Analysis</strong>:<!-- -->
+<ul>
+<li>Monitor key parameters such as cell voltages, temperatures, SOC, and fault indicators to determine system performance.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Validate Compliance</strong>:</p>
+<ul>
+<li><strong>Safety Requirements</strong>:<!-- -->
+<ul>
+<li>Ensure that the BMS prevents conditions like over-voltage, over-temperature, and excessive current flow.</li>
+</ul>
+</li>
+<li><strong>Performance Standards</strong>:<!-- -->
+<ul>
+<li>Verify that the BMS maintains accurate SOC estimation and efficient cell balancing under all tested scenarios.</li>
+</ul>
+</li>
+<li><strong>Regulatory Adherence</strong>:<!-- -->
+<ul>
+<li>Confirm that the system meets relevant industry standards and regulations pertaining to battery safety and performance.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Workflow Diagram</strong>:</p>
+<p><img decoding="async" loading="lazy" src="#" alt="Simulation Workflow" class="img_ev3q"></p>
+<p><em>Figure 8: Structured Simulation Workflow for BMS Validation</em></p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary"><strong>Summary</strong><a href="#summary" class="hash-link" aria-label="Direct link to summary" title="Direct link to summary">​</a></h2>
-<p>The BMS model in Simulink provides a robust platform for:</p>
+<p>The Battery Management System (BMS) model developed in Simulink stands as a robust and versatile platform for the simulation, testing, and validation of battery systems. Its comprehensive design caters to both risk-free algorithm validation and in-depth performance analysis, making it an invaluable tool for engineers and researchers alike.</p>
 <ul>
-<li><strong>Risk-Free Testing</strong>: Validating BMS algorithms without the need for physical hardware.</li>
-<li><strong>Accurate SOC Estimation</strong>: Combining Coulomb counting with advanced Kalman filters for precise SOC tracking.</li>
-<li><strong>Thermal Insights</strong>: Identifying design flaws, such as asymmetric heat dissipation, and guiding improvements.</li>
-<li><strong>Scalability</strong>: Supporting both small (6-cell) and large (96-cell) battery packs for comprehensive testing and validation.</li>
-</ul></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/docs/theory/10_modeling_testing/03_matlab/01_intro.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/Battery-Systems-Technology/docs/category/matlabsimulink"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">MATLAB/Simulink</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Testing</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-system-overview" class="table-of-contents__link toc-highlight"><strong>1. System Overview</strong></a><ul><li><a href="#11-model-structure" class="table-of-contents__link toc-highlight"><strong>1.1 Model Structure</strong></a></li></ul></li><li><a href="#2-battery-pack-modeling" class="table-of-contents__link toc-highlight"><strong>2. Battery Pack Modeling</strong></a><ul><li><a href="#21-battery-configurations" class="table-of-contents__link toc-highlight"><strong>2.1 Battery Configurations</strong></a></li><li><a href="#22-cell-equivalent-circuit" class="table-of-contents__link toc-highlight"><strong>2.2 Cell Equivalent Circuit</strong></a></li><li><a href="#23-peripheral-circuits" class="table-of-contents__link toc-highlight"><strong>2.3 Peripheral Circuits</strong></a></li></ul></li><li><a href="#3-bms-algorithm-components" class="table-of-contents__link toc-highlight"><strong>3. BMS Algorithm Components</strong></a><ul><li><a href="#31-current-limiting-logic" class="table-of-contents__link toc-highlight"><strong>3.1 Current Limiting Logic</strong></a></li><li><a href="#32-state-machine-stateflow" class="table-of-contents__link toc-highlight"><strong>3.2 State Machine (Stateflow)</strong></a></li></ul></li><li><a href="#4-soc-estimation-methods" class="table-of-contents__link toc-highlight"><strong>4. SOC Estimation Methods</strong></a><ul><li><a href="#41-coulomb-counting" class="table-of-contents__link toc-highlight"><strong>4.1 Coulomb Counting</strong></a></li><li><a href="#42-kalman-filters" class="table-of-contents__link toc-highlight"><strong>4.2 Kalman Filters</strong></a></li></ul></li><li><a href="#5-simulation-results" class="table-of-contents__link toc-highlight"><strong>5. Simulation Results</strong></a><ul><li><a href="#51-voltage-and-balancing" class="table-of-contents__link toc-highlight"><strong>5.1 Voltage and Balancing</strong></a></li><li><a href="#52-temperature-dynamics" class="table-of-contents__link toc-highlight"><strong>5.2 Temperature Dynamics</strong></a></li><li><a href="#53-soc-estimation-comparison" class="table-of-contents__link toc-highlight"><strong>5.3 SOC Estimation Comparison</strong></a></li><li><a href="#54-fault-handling" class="table-of-contents__link toc-highlight"><strong>5.4 Fault Handling</strong></a></li></ul></li><li><a href="#6-key-tools-and-workflow" class="table-of-contents__link toc-highlight"><strong>6. Key Tools and Workflow</strong></a></li><li><a href="#summary" class="table-of-contents__link toc-highlight"><strong>Summary</strong></a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
+<li><strong>Risk-Free Testing</strong>:<!-- -->
+<ul>
+<li><strong>Capability</strong>: Validates BMS algorithms and system responses without necessitating physical hardware, reducing development costs and time.</li>
+</ul>
+</li>
+<li><strong>Accurate SOC Estimation</strong>:<!-- -->
+<ul>
+<li><strong>Techniques</strong>: Combines fundamental methods like Coulomb Counting with advanced Kalman filters (EKF and UKF) to achieve precise SOC tracking.</li>
+<li><strong>Benefit</strong>: Ensures reliable battery state monitoring, enhancing system efficiency and longevity.</li>
+</ul>
+</li>
+<li><strong>Thermal Insights</strong>:<!-- -->
+<ul>
+<li><strong>Analysis</strong>: Identifies critical design flaws, such as asymmetric heat dissipation, highlighting areas for thermal management improvements.</li>
+<li><strong>Guidance</strong>: Informs the implementation of active cooling solutions to maintain uniform thermal conditions across the battery pack.</li>
+</ul>
+</li>
+<li><strong>Scalability</strong>:<!-- -->
+<ul>
+<li><strong>Support</strong>: Accommodates both small (6-cell) and large (96-cell) battery packs, facilitating comprehensive testing across various system sizes.</li>
+<li><strong>Flexibility</strong>: Enables the model to adapt to different application requirements, from electric vehicles to stationary energy storage systems.</li>
+</ul>
+</li>
+</ul>
+<p>Through its detailed modeling, advanced algorithm integration, and systematic validation workflow, the Simulink-based BMS model empowers users to develop safe, efficient, and high-performing battery management solutions.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/docs/theory/10_modeling_testing/03_matlab/01_intro.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/Battery-Systems-Technology/docs/category/matlabsimulink"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">MATLAB/Simulink</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Testing</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-system-overview" class="table-of-contents__link toc-highlight"><strong>1. System Overview</strong></a><ul><li><a href="#11-model-structure" class="table-of-contents__link toc-highlight"><strong>1.1 Model Structure</strong></a></li></ul></li><li><a href="#2-battery-pack-modeling" class="table-of-contents__link toc-highlight"><strong>2. Battery Pack Modeling</strong></a><ul><li><a href="#21-battery-configurations" class="table-of-contents__link toc-highlight"><strong>2.1 Battery Configurations</strong></a></li><li><a href="#22-cell-equivalent-circuit" class="table-of-contents__link toc-highlight"><strong>2.2 Cell Equivalent Circuit</strong></a></li><li><a href="#23-peripheral-circuits" class="table-of-contents__link toc-highlight"><strong>2.3 Peripheral Circuits</strong></a></li></ul></li><li><a href="#3-bms-algorithm-components" class="table-of-contents__link toc-highlight"><strong>3. BMS Algorithm Components</strong></a><ul><li><a href="#31-current-limiting-logic" class="table-of-contents__link toc-highlight"><strong>3.1 Current Limiting Logic</strong></a></li><li><a href="#32-state-machine-stateflow" class="table-of-contents__link toc-highlight"><strong>3.2 State Machine (Stateflow)</strong></a></li></ul></li><li><a href="#4-soc-estimation-methods" class="table-of-contents__link toc-highlight"><strong>4. SOC Estimation Methods</strong></a><ul><li><a href="#41-coulomb-counting" class="table-of-contents__link toc-highlight"><strong>4.1 Coulomb Counting</strong></a></li><li><a href="#42-kalman-filters" class="table-of-contents__link toc-highlight"><strong>4.2 Kalman Filters</strong></a></li></ul></li><li><a href="#5-simulation-results" class="table-of-contents__link toc-highlight"><strong>5. Simulation Results</strong></a><ul><li><a href="#51-voltage-and-balancing" class="table-of-contents__link toc-highlight"><strong>5.1 Voltage and Balancing</strong></a></li><li><a href="#52-temperature-dynamics" class="table-of-contents__link toc-highlight"><strong>5.2 Temperature Dynamics</strong></a></li><li><a href="#53-soc-estimation-comparison" class="table-of-contents__link toc-highlight"><strong>5.3 SOC Estimation Comparison</strong></a></li><li><a href="#54-fault-handling" class="table-of-contents__link toc-highlight"><strong>5.4 Fault Handling</strong></a></li></ul></li><li><a href="#6-key-tools-and-workflow" class="table-of-contents__link toc-highlight"><strong>6. Key Tools and Workflow</strong></a><ul><li><a href="#key-tools" class="table-of-contents__link toc-highlight"><strong>Key Tools</strong></a></li><li><a href="#simulation-workflow" class="table-of-contents__link toc-highlight"><strong>Simulation Workflow</strong></a></li></ul></li><li><a href="#summary" class="table-of-contents__link toc-highlight"><strong>Summary</strong></a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
 </body>
 </html>

@@ -9,142 +9,396 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-R4556vVJtIc0EJ3NKnM5ePcM78Zv5e+/ff+f6aZwYzZjnj84pK8i0PZyNnO+g0OQ" crossorigin="anonymous"><link rel="stylesheet" href="/Battery-Systems-Technology/assets/css/styles.49f50c39.css">
-<script src="/Battery-Systems-Technology/assets/js/runtime~main.6d352b01.js" defer="defer"></script>
+<script src="/Battery-Systems-Technology/assets/js/runtime~main.9fb8f1af.js" defer="defer"></script>
 <script src="/Battery-Systems-Technology/assets/js/main.73514512.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/Battery-Systems-Technology/"><div class="navbar__logo"><img src="/Battery-Systems-Technology/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/Battery-Systems-Technology/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/fundamentals/getting-started">Fundamentals of Battery Technology</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/aging_degradation/getting-started">Aging and Degradation</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/chemistry_design_principles/getting-started">Chemistry and Design Principles</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_pack/getting_started">Battery Pack Engineering</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/thermal_management/getting_started">Thermal Management</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_characteristics/getting_started">Characteristics and Technical Specifications</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_sizing/getting_started">Sizing and Optimization</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/bms/getting_started">Battery Management System</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/bms_architecture/getting_started">BMS Design and Architecture</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/Battery-Systems-Technology/docs/theory/modeling_testing/getting_started">Modeling and Testing</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/glossary/electrical_concepts">Glossary</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/blog">Blog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/CagriCatik/Battery-Systems-Technology" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Battery-Systems-Technology/docs/theory/modeling_testing/getting_started">Getting Started</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/Battery-Systems-Technology/docs/category/requirements-and-testing">Requirements and Testing</a><button aria-label="Expand sidebar category &#x27;Requirements and Testing&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/Battery-Systems-Technology/docs/category/modeling">Modeling</a><button aria-label="Expand sidebar category &#x27;Modeling&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/Battery-Systems-Technology/docs/category/matlabsimulink">MATLAB/Simulink</a><button aria-label="Collapse sidebar category &#x27;MATLAB/Simulink&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/intro">Battery Management System in Simulink</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing">Testing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/requirements">Managing Requirements</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/unit-testing">Unit Testing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/managing_tests">Managing Tests in Simulink</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/measuring">Measuring and Improving Test Coverage</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/generating_code">Generating Code</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing_code">Testing Generated Code</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/closed_loop">Closed-Loop Testing</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/Battery-Systems-Technology/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/Battery-Systems-Technology/docs/category/matlabsimulink"><span itemprop="name">MATLAB/Simulink</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Testing</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Testing</h1></header>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-system-overview"><strong>1. System Overview</strong><a href="#1-system-overview" class="hash-link" aria-label="Direct link to 1-system-overview" title="Direct link to 1-system-overview">​</a></h2>
-<p>A Battery Management System (BMS) is critical for ensuring the safe and efficient operation of battery packs. The system is divided into two primary components:</p>
+<p>Testing is a critical phase in the development of a Battery Management System (BMS), ensuring that the system operates safely, efficiently, and reliably under various conditions. A robust testing framework not only validates the functionality of the BMS but also ensures compliance with industry standards and certifications. This section provides an overview of the BMS architecture, emphasizing the distinction between its primary components and outlining the foundational elements necessary for comprehensive testing.</p>
+<p>The BMS is divided into two primary components:</p>
 <ul>
-<li><strong>Controller (BMS ECU)</strong>: Implements control logic for balancing, state-of-charge (SOC) estimation, and state transitions.</li>
-<li><strong>Plant</strong>: Includes the battery pack, pre-charge circuit, charger, and load.</li>
+<li>
+<p><strong>Controller (BMS ECU)</strong>: Responsible for implementing control logic, including balancing, State of Charge (SOC) estimation, and managing state transitions based on system conditions.</p>
+</li>
+<li>
+<p><strong>Plant</strong>: Comprises the physical elements such as the battery pack, pre-charge circuit, charger, and load, which interact with the environment and the controller to perform charging and discharging operations.</p>
+</li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="11-plant-components"><strong>1.1 Plant Components</strong><a href="#11-plant-components" class="hash-link" aria-label="Direct link to 11-plant-components" title="Direct link to 11-plant-components">​</a></h3>
+<p>The Plant section of the BMS encompasses all the hardware components that interact directly with the battery pack. Each component plays a vital role in ensuring the safe and efficient operation of the battery system.</p>
 <ol>
-<li><strong>Battery Pack</strong>:<!-- -->
+<li>
+<p><strong>Battery Pack</strong>:</p>
 <ul>
-<li><strong>Configuration</strong>: Six cells connected in series.</li>
-<li><strong>Thermal Behavior</strong>: Modeled via convection to simulate temperature dynamics.</li>
-<li><strong>Cell Monitoring Unit (CMU)</strong>: Controls switching devices to balance cell SOC, ensuring uniform charge distribution.</li>
+<li><strong>Configuration</strong>: The battery pack consists of six cells connected in series, forming a robust structure capable of delivering the required voltage and current for various applications.</li>
+<li><strong>Thermal Behavior</strong>: The thermal dynamics of the battery pack are modeled using convection, which simulates the heat exchange between the battery cells and the surrounding environment. This modeling is essential for predicting temperature changes and preventing thermal runaway.</li>
+<li><strong>Cell Monitoring Unit (CMU)</strong>: The CMU is integral to the BMS, controlling switching devices that balance the SOC across individual cells. By ensuring uniform charge distribution, the CMU enhances the longevity and performance of the battery pack.</li>
 </ul>
 </li>
-<li><strong>Pre-Charge Circuit</strong>:<!-- -->
+<li>
+<p><strong>Pre-Charge Circuit</strong>:</p>
 <ul>
-<li><strong>Function</strong>: Contains six switching devices to prevent voltage spikes when connecting or disconnecting the battery to the charger or load.</li>
-<li><strong>Benefit</strong>: Protects the battery and connected electronics from damage due to sudden voltage changes.</li>
+<li><strong>Function</strong>: The pre-charge circuit incorporates six switching devices designed to manage the initial connection and disconnection of the battery pack to the charger or load. This mechanism prevents voltage spikes that can occur during these transitions.</li>
+<li><strong>Benefit</strong>: By mitigating sudden voltage changes, the pre-charge circuit safeguards both the battery and connected electronics from potential damage, enhancing the overall reliability of the system.</li>
 </ul>
 </li>
-<li><strong>Charger and Load</strong>:<!-- -->
+<li>
+<p><strong>Charger and Load</strong>:</p>
 <ul>
-<li><strong>Interfaces</strong>: Provide the means for charging and discharging the battery pack, simulating real-world usage scenarios.</li>
+<li><strong>Interfaces</strong>: The charger and load interfaces facilitate the charging and discharging processes of the battery pack, respectively. They simulate real-world usage scenarios, allowing the BMS to manage energy flow effectively.</li>
+<li><strong>Functionality</strong>: These components are modeled to reflect various operational conditions, enabling the assessment of the BMS&#x27;s performance under different charging rates and load demands.</li>
 </ul>
 </li>
 </ol>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="12-controller-bms-ecu"><strong>1.2 Controller (BMS ECU)</strong><a href="#12-controller-bms-ecu" class="hash-link" aria-label="Direct link to 12-controller-bms-ecu" title="Direct link to 12-controller-bms-ecu">​</a></h3>
-<p>The BMS ECU is structured into four model references in Simulink:</p>
+<p>The Controller, or BMS ECU (Electronic Control Unit), is the brain of the BMS, orchestrating the system&#x27;s operations through a series of interconnected modules. Structured into four model references within Simulink, the BMS ECU ensures seamless interaction between the controller and the plant components.</p>
 <ol>
-<li><strong>Balancing Logic</strong>: Manages cell SOC equilibrium by discharging high-SOC cells through resistors.</li>
-<li><strong>SOC Estimation</strong>: Estimates the state of charge for individual cells using methods such as Coulomb counting and Kalman filters.</li>
-<li><strong>State Machine (Stateflow)</strong>: Implements operational modes and fault handling, ensuring safe transitions between states.</li>
-<li><strong>Contactor Control</strong>: Manages switching devices to avoid electrical spikes, with separate logic for inverter and charger contactors.</li>
+<li>
+<p><strong>Balancing Logic</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Maintains SOC equilibrium among individual cells by selectively discharging cells with higher SOC through resistors.</li>
+<li><strong>Operation</strong>: Utilizes control algorithms to identify and manage high-SOC cells, ensuring uniform charge distribution and preventing overcharging of specific cells.</li>
+</ul>
+</li>
+<li>
+<p><strong>SOC Estimation</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Accurately determines the SOC of each cell using methodologies such as Coulomb Counting and Kalman Filters.</li>
+<li><strong>Importance</strong>: Precise SOC estimation is crucial for optimal battery performance, enabling informed decision-making regarding charging and discharging cycles.</li>
+</ul>
+</li>
+<li>
+<p><strong>State Machine (Stateflow)</strong>:</p>
+<ul>
+<li><strong>Role</strong>: Implements the operational modes and fault handling mechanisms, ensuring safe transitions between different states based on system conditions.</li>
+<li><strong>Capabilities</strong>: Manages states such as Standby, Charging, Driving, and Fault Mode, responding dynamically to changes in voltage, temperature, and current.</li>
+</ul>
+</li>
+<li>
+<p><strong>Contactor Control</strong>:</p>
+<ul>
+<li><strong>Functionality</strong>: Manages the switching devices to prevent electrical spikes during state transitions.</li>
+<li><strong>Logic</strong>: Incorporates separate control logic for inverter and charger contactors, ensuring sequential operations that mitigate inrush currents and voltage spikes.</li>
+</ul>
+</li>
 </ol>
+<p>The modular architecture of the BMS ECU facilitates ease of testing and validation, allowing each component to be individually assessed before integration into the complete system.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-bms-state-machine-in-stateflow"><strong>2. BMS State Machine in Stateflow</strong><a href="#2-bms-state-machine-in-stateflow" class="hash-link" aria-label="Direct link to 2-bms-state-machine-in-stateflow" title="Direct link to 2-bms-state-machine-in-stateflow">​</a></h2>
-<p>The core logic of the BMS is implemented as a Stateflow chart with parallel states:</p>
+<p>The State Machine is a pivotal component of the BMS, governing the system&#x27;s operational modes and ensuring safe and efficient transitions between states. Implemented using Stateflow in Simulink, the state machine provides a graphical and intuitive representation of the BMS&#x27;s logic, facilitating easier design, simulation, and testing.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="21-main-operational-modes"><strong>2.1 Main Operational Modes</strong><a href="#21-main-operational-modes" class="hash-link" aria-label="Direct link to 21-main-operational-modes" title="Direct link to 21-main-operational-modes">​</a></h3>
+<p>The BMS operates through four primary states, each representing a distinct mode of operation. These states are managed concurrently to handle various aspects of the system&#x27;s functionality.</p>
 <ol>
-<li><strong>Main Operational Modes</strong>:<!-- -->
+<li>
+<p><strong>Standby</strong>:</p>
 <ul>
-<li><code>Standby</code>: The initial state with no active charging or discharging.</li>
-<li><code>Charging</code>: Manages battery charging, including Constant Current (CC) and Constant Voltage (CV) stages.</li>
-<li><code>Driving</code>: Handles discharge during load operation, ensuring the battery provides power efficiently.</li>
-<li><code>Fault Mode</code>: Activated when critical failures such as over-voltage, over-temperature, or over-current are detected.</li>
+<li><strong>Description</strong>: The default state where the system remains inactive, awaiting commands to initiate charging or discharging.</li>
+<li><strong>Behavior</strong>: Monitors system parameters to detect any anomalies or triggers that necessitate a state transition.</li>
+<li><strong>Transition Triggers</strong>: Activation commands or detection of a fault condition.</li>
 </ul>
 </li>
-<li><strong>Fault Monitoring</strong>:<!-- -->
+<li>
+<p><strong>Charging</strong>:</p>
 <ul>
-<li><strong>Function</strong>: Continuously monitors for faults in current, temperature, or cell voltages.</li>
-<li><strong>Response</strong>: Triggers the <code>Fault Mode</code> and takes protective actions to prevent damage.</li>
+<li><strong>Description</strong>: Manages the process of charging the battery pack.</li>
+<li><strong>Stages</strong>:<!-- -->
+<ul>
+<li><strong>Constant Current (CC)</strong>: Applies a steady current to charge the battery until it reaches a predetermined voltage threshold.</li>
+<li><strong>Constant Voltage (CV)</strong>: Maintains a constant voltage while the current gradually decreases, ensuring the battery is fully charged without overcharging.</li>
 </ul>
 </li>
-<li><strong>Contactor Control Sub-States</strong>:<!-- -->
+<li><strong>Control Logic</strong>: Adjusts charging parameters based on real-time SOC and temperature measurements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Driving</strong>:</p>
 <ul>
-<li><strong>Inverter and Charger Logic</strong>: Ensures safe transitions between states by managing the sequence of contactor operations, preventing inrush currents and voltage spikes.</li>
+<li><strong>Description</strong>: Handles the discharge process when the battery is supplying power to a load, such as an electric vehicle.</li>
+<li><strong>Functionality</strong>: Ensures that the battery delivers power efficiently while monitoring SOC and temperature to prevent excessive discharge rates.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fault Mode</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Activated when critical failures are detected, such as over-voltage, over-temperature, or over-current conditions.</li>
+<li><strong>Behavior</strong>: Initiates protective actions, such as limiting current flow or isolating faulty cells, to prevent damage to the battery pack and connected systems.</li>
 </ul>
 </li>
 </ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="22-fault-monitoring"><strong>2.2 Fault Monitoring</strong><a href="#22-fault-monitoring" class="hash-link" aria-label="Direct link to 22-fault-monitoring" title="Direct link to 22-fault-monitoring">​</a></h3>
+<p>Continuous monitoring is essential to detect and respond to fault conditions promptly. The Fault Monitoring subsystem plays a crucial role in maintaining the safety and reliability of the BMS.</p>
+<ul>
+<li><strong>Function</strong>: Continuously assesses critical parameters like current, temperature, and cell voltages to identify any deviations from safe operating limits.</li>
+<li><strong>Response Mechanism</strong>:<!-- -->
+<ul>
+<li><strong>Detection</strong>: Identifies fault conditions based on predefined thresholds and triggers.</li>
+<li><strong>Action</strong>: Transitions the system into Fault Mode and executes protective measures to mitigate the identified issue.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Fault Detection Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Fault Detection Logic</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function [fault_detected, fault_type] = detectFault(V_cell, I, Temp, V_threshold, I_threshold, Temp_threshold)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    if any(V_cell &gt; V_threshold)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        fault_detected = true;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        fault_type = &#x27;Over-Voltage&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    elseif any(I &gt; I_threshold)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        fault_detected = true;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        fault_type = &#x27;Over-Current&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    elseif any(Temp &gt; Temp_threshold)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        fault_detected = true;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        fault_type = &#x27;Over-Temperature&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    else</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        fault_detected = false;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        fault_type = &#x27;None&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    end</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="23-contactor-control-sub-states"><strong>2.3 Contactor Control Sub-States</strong><a href="#23-contactor-control-sub-states" class="hash-link" aria-label="Direct link to 23-contactor-control-sub-states" title="Direct link to 23-contactor-control-sub-states">​</a></h3>
+<p>Managing contactor operations is vital to prevent electrical anomalies during state transitions. The Contactor Control subsystem ensures that the engagement and disengagement of contactors occur in a controlled and sequential manner.</p>
+<ul>
+<li><strong>Inverter and Charger Logic</strong>:<!-- -->
+<ul>
+<li><strong>Sequence Management</strong>: Controls the order in which inverter and charger contactors are activated or deactivated to avoid simultaneous switching that could lead to inrush currents.</li>
+<li><strong>Preventative Measures</strong>: Implements delays and interlocks to ensure that voltage spikes do not occur during transitions.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Contactor Control Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Contactor Control Logic</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function [inverter_contactor, charger_contactor] = controlContactors(state, previous_state)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    switch state</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        case &#x27;Charging&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            inverter_contactor = false;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            charger_contactor = true;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        case &#x27;Driving&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            charger_contactor = false;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            inverter_contactor = true;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        case &#x27;Standby&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            inverter_contactor = false;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            charger_contactor = false;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        case &#x27;Fault&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            inverter_contactor = false;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            charger_contactor = false;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">        otherwise</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            inverter_contactor = false;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">            charger_contactor = false;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    end</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><strong>Stateflow Diagram Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Stateflow Diagram for BMS States</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">sf = Stateflow.Chart;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define states</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">standby = Stateflow.State(sf);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">standby.Name = &#x27;Standby&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">standby.Position = [100 100 60 60];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">charging = Stateflow.State(sf);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">charging.Name = &#x27;Charging&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">charging.Position = [300 100 60 60];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">driving = Stateflow.State(sf);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">driving.Name = &#x27;Driving&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">driving.Position = [300 200 60 60];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">fault = Stateflow.State(sf);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">fault.Name = &#x27;Fault Mode&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">fault.Position = [500 150 80 60];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define transitions</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition1 = Stateflow.Transition(standby, charging);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition1.LabelString = &#x27;StartCharging&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition2 = Stateflow.Transition(standby, driving);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition2.LabelString = &#x27;StartDriving&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition3 = Stateflow.Transition(charging, standby);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition3.LabelString = &#x27;StopCharging&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition4 = Stateflow.Transition(driving, standby);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition4.LabelString = &#x27;StopDriving&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition5 = Stateflow.Transition([standby, charging, driving], fault);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition5.LabelString = &#x27;FaultDetected&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition6 = Stateflow.Transition(fault, standby);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">transition6.LabelString = &#x27;Reset&#x27;;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 1: Stateflow Diagram Representing BMS Operational States</em></p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-model-based-design-workflow"><strong>3. Model-Based Design Workflow</strong><a href="#3-model-based-design-workflow" class="hash-link" aria-label="Direct link to 3-model-based-design-workflow" title="Direct link to 3-model-based-design-workflow">​</a></h2>
+<p>Model-Based Design (MBD) is a systematic approach that leverages models throughout the development lifecycle, enhancing efficiency, accuracy, and collaboration. In the context of BMS development, MBD facilitates early validation, streamlined testing, and seamless integration of control logic with the physical plant.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="31-traditional-vs-simulink-based-approach"><strong>3.1 Traditional vs. Simulink-Based Approach</strong><a href="#31-traditional-vs-simulink-based-approach" class="hash-link" aria-label="Direct link to 31-traditional-vs-simulink-based-approach" title="Direct link to 31-traditional-vs-simulink-based-approach">​</a></h3>
-<table><thead><tr><th><strong>Traditional Process</strong></th><th><strong>Simulink-Based Process</strong></th></tr></thead><tbody><tr><td>Requirements → Design → Code (manual translation).</td><td>Requirements → Executable Simulink model → Auto-generated code.</td></tr><tr><td>Errors detected late (post-deployment).</td><td>Early validation via simulation.</td></tr><tr><td>High cost to fix bugs in later stages.</td><td>Reduced costs via systematic testing.</td></tr></tbody></table>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-key-advantages-of-simulink"><strong>3.2 Key Advantages of Simulink</strong><a href="#32-key-advantages-of-simulink" class="hash-link" aria-label="Direct link to 32-key-advantages-of-simulink" title="Direct link to 32-key-advantages-of-simulink">​</a></h3>
+<p>The following table contrasts the traditional development process with the Simulink-based approach, highlighting the advantages of adopting MBD for BMS development.</p>
+<table><thead><tr><th><strong>Traditional Process</strong></th><th><strong>Simulink-Based Process</strong></th></tr></thead><tbody><tr><td><strong>Requirements</strong> → Design → Code (manual translation).</td><td><strong>Requirements</strong> → Executable Simulink model → Auto-generated code.</td></tr><tr><td><strong>Errors detected late</strong> (post-deployment).</td><td><strong>Early validation</strong> via simulation.</td></tr><tr><td><strong>High cost to fix bugs</strong> in later stages.</td><td><strong>Reduced costs</strong> via systematic testing.</td></tr></tbody></table>
+<p><strong>Key Differences</strong>:</p>
 <ul>
-<li><strong>Executable Specifications</strong>: Models replace ambiguous text with precise graphical representations, reducing the risk of misinterpretation.</li>
-<li><strong>Early Validation</strong>: Simulate and verify system behavior before hardware is available, enabling early detection of design flaws.</li>
-<li><strong>Automatic Code Generation</strong>: Generate ISO 26262-compliant code for embedded targets, reducing manual coding errors and speeding up development.</li>
+<li>
+<p><strong>Development Efficiency</strong>: Simulink allows for rapid iteration and modification of models, significantly speeding up the development process compared to manual coding.</p>
+</li>
+<li>
+<p><strong>Error Detection</strong>: Early detection of design flaws through simulation minimizes the risk of costly errors during deployment.</p>
+</li>
+<li>
+<p><strong>Code Generation</strong>: Automated code generation ensures consistency between the model and the deployed system, reducing the likelihood of discrepancies.</p>
+</li>
 </ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-key-advantages-of-simulink"><strong>3.2 Key Advantages of Simulink</strong><a href="#32-key-advantages-of-simulink" class="hash-link" aria-label="Direct link to 32-key-advantages-of-simulink" title="Direct link to 32-key-advantages-of-simulink">​</a></h3>
+<p>Simulink offers a range of benefits that make it an ideal platform for BMS development and testing.</p>
+<ul>
+<li>
+<p><strong>Executable Specifications</strong>:</p>
+<ul>
+<li><strong>Clarity</strong>: Models provide precise graphical representations of system behavior, eliminating ambiguities often associated with textual descriptions.</li>
+<li><strong>Visualization</strong>: Enhances understanding of complex interactions within the BMS through visual schematics.</li>
+</ul>
+</li>
+<li>
+<p><strong>Early Validation</strong>:</p>
+<ul>
+<li><strong>Simulation Capability</strong>: Allows for comprehensive testing of system behavior under various scenarios before physical prototypes are built.</li>
+<li><strong>Design Refinement</strong>: Facilitates the identification and correction of design issues early in the development process.</li>
+</ul>
+</li>
+<li>
+<p><strong>Automatic Code Generation</strong>:</p>
+<ul>
+<li><strong>Compliance</strong>: Generates ISO 26262-compliant code suitable for embedded targets, ensuring adherence to automotive safety standards.</li>
+<li><strong>Efficiency</strong>: Streamlines the transition from model to deployment, reducing development time and minimizing manual coding errors.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Automatic Code Generation Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Generating Code from Simulink Model</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">model = &#x27;bms_controller_model&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">open_system(model);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Configure code generation parameters</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param(model, &#x27;SystemTargetFile&#x27;, &#x27;ert.tlc&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param(model, &#x27;GenerateCodeOnly&#x27;, &#x27;on&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Generate code</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">rtwbuild(model);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 2: MATLAB Code for Automatic Code Generation</em></p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="4-verification-and-validation-vv-techniques"><strong>4. Verification and Validation (V&amp;V) Techniques</strong><a href="#4-verification-and-validation-vv-techniques" class="hash-link" aria-label="Direct link to 4-verification-and-validation-vv-techniques" title="Direct link to 4-verification-and-validation-vv-techniques">​</a></h2>
+<p>Ensuring the reliability and safety of the BMS requires a rigorous Verification and Validation (V&amp;V) framework. V&amp;V encompasses a variety of techniques designed to assess the correctness, performance, and compliance of the BMS under different conditions.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="41-componentsystem-testing"><strong>4.1 Component/System Testing</strong><a href="#41-componentsystem-testing" class="hash-link" aria-label="Direct link to 41-componentsystem-testing" title="Direct link to 41-componentsystem-testing">​</a></h3>
+<p>Testing is conducted at both the component and system levels to ensure that individual modules function correctly and that the integrated system behaves as expected.</p>
+<ul>
+<li>
+<p><strong>Component Testing</strong>:</p>
+<ul>
+<li><strong>Focus</strong>: Validates the functionality of individual modules such as Balancing Logic, SOC Estimation, and Contactor Control.</li>
+<li><strong>Methodology</strong>: Employs unit tests and simulation scenarios specific to each component to verify correct operation.</li>
+</ul>
+</li>
+<li>
+<p><strong>System Testing</strong>:</p>
+<ul>
+<li><strong>Focus</strong>: Assesses the integrated behavior of the entire BMS under various operating conditions.</li>
+<li><strong>Methodology</strong>: Simulates real-world scenarios, including charging, discharging, and fault conditions, to evaluate system performance and robustness.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Component Testing Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Script: Unit Test for Balancing Logic</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function testBalancingLogic()</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    SOC = [75, 80, 70, 85, 65, 90]; % Example SOC values for 6 cells</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    SOC_threshold = 80;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    expected_commands = [false, true, false, true, false, true];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    balance_commands = passiveBalancing(SOC, SOC_threshold);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    assert(isequal(balance_commands, expected_commands), &#x27;Balancing Logic Test Failed&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    disp(&#x27;Balancing Logic Test Passed&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="42-static-analysis"><strong>4.2 Static Analysis</strong><a href="#42-static-analysis" class="hash-link" aria-label="Direct link to 42-static-analysis" title="Direct link to 42-static-analysis">​</a></h3>
+<p>Static analysis involves examining the model without executing it to identify potential issues such as design inconsistencies, compliance violations, or adherence to coding standards.</p>
+<ul>
+<li><strong>Tools</strong>: Utilizes Simulink Check™ to enforce modeling standards and detect common errors.</li>
+<li><strong>Purpose</strong>: Ensures that the model adheres to best practices, follows industry guidelines (e.g., MAAB), and is free from syntactical or structural issues that could compromise system integrity.</li>
+</ul>
+<p><strong>Static Analysis Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Running Simulink Check™</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">model = &#x27;bms_controller_model&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">results = Simulink.checkModel(model, &#x27;Checks&#x27;, &#x27;all&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Display results</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(results);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="43-equivalence-testing"><strong>4.3 Equivalence Testing</strong><a href="#43-equivalence-testing" class="hash-link" aria-label="Direct link to 43-equivalence-testing" title="Direct link to 43-equivalence-testing">​</a></h3>
+<p>Equivalence Testing ensures that the behavior of the auto-generated code matches that of the Simulink model, maintaining consistency and reliability across development stages.</p>
+<ul>
+<li><strong>Method</strong>: Compares outputs from the Simulink model simulation and the generated code under identical input conditions.</li>
+<li><strong>Benefit</strong>: Confirms that the transition from model to code preserves intended functionalities and performance characteristics.</li>
+</ul>
+<p><strong>Equivalence Testing Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Function: Equivalence Testing Between Model and Code</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">function equivalenceTest(model, generated_code)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Simulate Simulink model</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    simOut = sim(model);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    model_output = simOut.get(&#x27;yout&#x27;).signals.values;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Run generated code</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    code_output = generated_code(input_data);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    % Compare outputs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    assert(isequal(model_output, code_output), &#x27;Equivalence Test Failed&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    disp(&#x27;Equivalence Test Passed&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="44-requirements-traceability"><strong>4.4 Requirements Traceability</strong><a href="#44-requirements-traceability" class="hash-link" aria-label="Direct link to 44-requirements-traceability" title="Direct link to 44-requirements-traceability">​</a></h3>
+<p>Maintaining traceability between system requirements and model elements ensures that all specifications are adequately addressed and facilitates compliance with industry standards.</p>
+<ul>
+<li>
+<p><strong>Process</strong>:</p>
+<ul>
+<li><strong>Linking</strong>: Associates each model element with corresponding system requirements.</li>
+<li><strong>Tracking</strong>: Monitors the fulfillment of requirements throughout the development lifecycle.</li>
+</ul>
+</li>
+<li>
+<p><strong>Standards Supported</strong>:</p>
+<ul>
+<li><strong>DO-178C</strong>: Focuses on software considerations in airborne systems.</li>
+<li><strong>ISO 26262</strong>: Pertains to functional safety in automotive systems.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Requirements Traceability Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Linking Model Elements to Requirements</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">requirements = {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;REQ-001&#x27;, &#x27;Balancing Logic must maintain SOC within ±5% of target.&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;REQ-002&#x27;, &#x27;SOC estimation accuracy must be within ±2%.&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;REQ-003&#x27;, &#x27;System must enter Fault Mode within 100ms of fault detection.&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">};</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">model_elements = {</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;BalancingLogic&#x27;, &#x27;REQ-001&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;SOCEstimator&#x27;, &#x27;REQ-002&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;StateMachine&#x27;, &#x27;REQ-003&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">};</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Display traceability</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">for i = 1:size(model_elements, 1)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    req_id = model_elements{i, 2};</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    req_desc = requirements(strcmp(requirements(:,1), req_id), 2);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    fprintf(&#x27;Model Element: %s\nRequirement: %s\n\n&#x27;, model_elements{i,1}, req_desc{1});</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="5-certification-and-standards"><strong>5. Certification and Standards</strong><a href="#5-certification-and-standards" class="hash-link" aria-label="Direct link to 5-certification-and-standards" title="Direct link to 5-certification-and-standards">​</a></h2>
+<p>Adhering to industry standards and obtaining relevant certifications are paramount for the deployment of BMS in safety-critical applications. Compliance ensures that the system meets the required safety, reliability, and performance criteria, facilitating market acceptance and regulatory approval.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="51-iec-certification-kitdo-qualification-kit"><strong>5.1 IEC Certification Kit/DO Qualification Kit</strong><a href="#51-iec-certification-kitdo-qualification-kit" class="hash-link" aria-label="Direct link to 51-iec-certification-kitdo-qualification-kit" title="Direct link to 51-iec-certification-kitdo-qualification-kit">​</a></h3>
+<p>The IEC Certification Kit and DO Qualification Kit provide comprehensive artifacts and workflows tailored for compliance with key safety standards:</p>
+<ul>
+<li>
+<p><strong>IEC 61508</strong>:</p>
+<ul>
+<li><strong>Scope</strong>: Functional safety of electrical/electronic/programmable electronic safety-related systems.</li>
+<li><strong>Application</strong>: Ensures that the BMS meets stringent safety requirements for industrial and automotive applications.</li>
+</ul>
+</li>
+<li>
+<p><strong>DO-178C</strong>:</p>
+<ul>
+<li><strong>Scope</strong>: Software considerations in airborne systems and equipment.</li>
+<li><strong>Application</strong>: Validates that the BMS software adheres to aviation safety standards, crucial for use in unmanned aerial vehicles (UAVs) and other aviation-related applications.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Certification Workflow Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Initiating Certification Workflow</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">model = &#x27;bms_controller_model&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load Certification Kit</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">certificationKit = &#x27;DO_178C_Kit&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">load(certificationKit);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Apply certification procedures</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">applyCertificationProcedures(model, certificationKit);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Generate compliance reports</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">generateComplianceReport(model, certificationKit);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="52-iso-26262-automotive"><strong>5.2 ISO 26262 (Automotive)</strong><a href="#52-iso-26262-automotive" class="hash-link" aria-label="Direct link to 52-iso-26262-automotive" title="Direct link to 52-iso-26262-automotive">​</a></h3>
+<p>ISO 26262 is the international standard for functional safety in automotive systems, outlining requirements for the entire lifecycle of automotive safety-related systems.</p>
+<ul>
+<li><strong>Support in Simulink</strong>:<!-- -->
+<ul>
+<li><strong>ASIL-D Workflows</strong>: Simulink supports Automotive Safety Integrity Level D (ASIL-D), the highest safety level, ensuring that the BMS meets the most stringent safety requirements.</li>
+<li><strong>Example</strong>: LG successfully achieved ISO 26262 certification for an AUTOSAR-compliant BMS codebase using Simulink, demonstrating the platform&#x27;s efficacy in meeting automotive safety standards.</li>
+</ul>
+</li>
+</ul>
+<p><strong>ISO 26262 Compliance Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring ASIL-D Workflow</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">model = &#x27;bms_controller_model&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Set ASIL Level</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param(model, &#x27;DataConstraints&#x27;, &#x27;ASIL_D&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Validate compliance</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">validateISO26262(model, &#x27;ASIL_D&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Generate certification documentation</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">generateISO26262Docs(model, &#x27;ASIL_D&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="53-tuv-certification"><strong>5.3 TUV Certification</strong><a href="#53-tuv-certification" class="hash-link" aria-label="Direct link to 53-tuv-certification" title="Direct link to 53-tuv-certification">​</a></h3>
+<p>TUV SUD is a globally recognized certification body that reviews and approves MathWorks workflows for safety-critical systems.</p>
+<ul>
+<li><strong>Process</strong>:<!-- -->
+<ul>
+<li><strong>Review</strong>: TUV SUD assesses the modeling, simulation, and code generation processes to ensure compliance with safety standards.</li>
+<li><strong>Approval</strong>: Upon successful evaluation, workflows are approved, providing additional assurance of system safety and reliability.</li>
+</ul>
+</li>
+</ul>
+<p><strong>TUV Certification Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Preparing for TUV Certification</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">model = &#x27;bms_controller_model&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Apply TUV-approved workflows</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">applyTUVWorkflows(model);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Submit for certification</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">submitForTUVCertification(model);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 3: Certification Workflow for ISO 26262 and TUV Standards</em></p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="6-case-study-lgs-certified-bms"><strong>6. Case Study: LG’s Certified BMS</strong><a href="#6-case-study-lgs-certified-bms" class="hash-link" aria-label="Direct link to 6-case-study-lgs-certified-bms" title="Direct link to 6-case-study-lgs-certified-bms">​</a></h2>
+<p>To illustrate the practical application of the testing and certification processes, we examine a case study involving LG&#x27;s development of a certified BMS for hybrid vehicles.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="61-objective"><strong>6.1 Objective</strong><a href="#61-objective" class="hash-link" aria-label="Direct link to 61-objective" title="Direct link to 61-objective">​</a></h3>
+<p>The primary objective was to develop a Battery Management System (BMS) compliant with ISO 26262 ASIL-D standards, suitable for integration into hybrid vehicles. The focus was on ensuring the highest levels of safety, reliability, and performance.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="62-workflow"><strong>6.2 Workflow</strong><a href="#62-workflow" class="hash-link" aria-label="Direct link to 62-workflow" title="Direct link to 62-workflow">​</a></h3>
+<p>LG adopted a Model-Based Design approach using Simulink to streamline development and certification processes. The workflow encompassed the following steps:</p>
 <ol>
-<li><strong>Component/System Testing</strong>:<!-- -->
+<li>
+<p><strong>Model-Based Design</strong>:</p>
 <ul>
-<li><strong>Component Testing</strong>: Validate individual modules such as balancing logic, SOC estimation, and contactor control.</li>
-<li><strong>System Testing</strong>: Verify the integrated system behavior under various operating conditions.</li>
+<li><strong>Action</strong>: Utilized Simulink to create an executable model of the BMS, encompassing all control logic and plant interactions.</li>
+<li><strong>Benefit</strong>: Enabled early validation and iterative design improvements through simulation.</li>
 </ul>
 </li>
-<li><strong>Static Analysis</strong>:<!-- -->
+<li>
+<p><strong>Automated Code Generation</strong>:</p>
 <ul>
-<li><strong>Tools</strong>: Use Simulink Check™ to enforce modeling standards (e.g., MAAB guidelines).</li>
-<li><strong>Purpose</strong>: Ensure the model adheres to best practices and is free from common errors.</li>
+<li><strong>Action</strong>: Generated AUTOSAR-compliant code automatically from the Simulink model using Simulink Coder.</li>
+<li><strong>Benefit</strong>: Ensured consistency between the model and the deployed software, reducing manual coding errors and accelerating development timelines.</li>
 </ul>
 </li>
-<li><strong>Equivalence Testing</strong>:<!-- -->
+<li>
+<p><strong>Systematic Testing</strong>:</p>
 <ul>
-<li><strong>Method</strong>: Compare results from model simulation and generated code to ensure consistency.</li>
-<li><strong>Benefit</strong>: Confirms that the auto-generated code behaves as expected.</li>
+<li><strong>Action</strong>: Employed Simulink Test™ to conduct comprehensive testing, including unit tests, integration tests, and coverage analysis.</li>
+<li><strong>Benefit</strong>: Achieved high test coverage and early detection of defects, enhancing overall system robustness.</li>
 </ul>
 </li>
-<li><strong>Requirements Traceability</strong>:<!-- -->
+<li>
+<p><strong>Certification</strong>:</p>
 <ul>
-<li><strong>Process</strong>: Link model elements to requirements for compliance tracking.</li>
-<li><strong>Standards</strong>: Supports compliance with standards such as DO-178C and ISO 26262.</li>
+<li><strong>Action</strong>: Leveraged IEC Certification Kit and ISO 26262 workflows to prepare and submit required documentation and evidence for certification.</li>
+<li><strong>Benefit</strong>: Successfully obtained certification with reduced validation time and costs, demonstrating compliance with stringent safety standards.</li>
 </ul>
 </li>
 </ol>
-<hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="5-certification-and-standards"><strong>5. Certification and Standards</strong><a href="#5-certification-and-standards" class="hash-link" aria-label="Direct link to 5-certification-and-standards" title="Direct link to 5-certification-and-standards">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="63-outcome"><strong>6.3 Outcome</strong><a href="#63-outcome" class="hash-link" aria-label="Direct link to 63-outcome" title="Direct link to 63-outcome">​</a></h3>
+<p>The outcome of LG&#x27;s certified BMS development showcased the effectiveness of the Simulink-based Model-Based Design approach:</p>
 <ul>
-<li><strong>IEC Certification Kit/DO Qualification Kit</strong>: Provides artifacts and workflows for compliance with IEC 61508 and DO-178C, ensuring the BMS meets safety and reliability standards.</li>
-<li><strong>ISO 26262 (Automotive)</strong>:<!-- -->
+<li>
+<p><strong>Certification Achievement</strong>: Secured ISO 26262 ASIL-D certification, affirming the BMS&#x27;s compliance with the highest automotive safety standards.</p>
+</li>
+<li>
+<p><strong>Efficiency Gains</strong>:</p>
 <ul>
-<li><strong>Support</strong>: Simulink supports ASIL-D workflows, the highest Automotive Safety Integrity Level.</li>
-<li><strong>Example</strong>: LG achieved ISO 26262 certification for AUTOSAR-compliant BMS code using Simulink.</li>
+<li><strong>Reduced Validation Time</strong>: Streamlined testing and certification processes accelerated the development cycle.</li>
+<li><strong>Cost Savings</strong>: Minimizing manual interventions and early error detection led to significant cost reductions.</li>
 </ul>
 </li>
-<li><strong>TUV Certification</strong>: MathWorks workflows are reviewed and approved by TUV SUD for safety-critical systems, providing additional assurance of compliance.</li>
-</ul>
-<hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="6-case-study-lgs-certified-bms"><strong>6. Case Study: LG’s Certified BMS</strong><a href="#6-case-study-lgs-certified-bms" class="hash-link" aria-label="Direct link to 6-case-study-lgs-certified-bms" title="Direct link to 6-case-study-lgs-certified-bms">​</a></h2>
-<ul>
-<li><strong>Objective</strong>: Develop an ISO 26262 ASIL-D compliant BMS for hybrid vehicles.</li>
-<li><strong>Workflow</strong>:<!-- -->
-<ul>
-<li><strong>Model-Based Design</strong>: Use Simulink to create an executable model of the BMS.</li>
-<li><strong>Automated Code Generation</strong>: Generate AUTOSAR-compliant code automatically from the Simulink model.</li>
-<li><strong>Systematic Testing</strong>: Use Simulink Test™ for comprehensive testing and coverage analysis.</li>
-</ul>
+<li>
+<p><strong>Performance Validation</strong>: Comprehensive testing confirmed the BMS&#x27;s ability to manage SOC accurately, balance cell voltages effectively, and handle fault conditions reliably under various operational scenarios.</p>
 </li>
-<li><strong>Outcome</strong>: Achieved certification with reduced validation time and cost, demonstrating the effectiveness of the Simulink-based workflow.</li>
 </ul>
+<p><strong>Case Study Diagram</strong>:</p>
+<p><img decoding="async" loading="lazy" src="#" alt="LG&#x27;s Certified BMS Workflow" class="img_ev3q"></p>
+<p><em>Figure 4: Workflow Overview of LG’s Certified BMS Development</em></p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary"><strong>Summary</strong><a href="#summary" class="hash-link" aria-label="Direct link to summary" title="Direct link to summary">​</a></h2>
-<p>Testing BMS software in Simulink involves:</p>
+<p>Testing BMS software in Simulink is a multifaceted process that ensures the system&#x27;s safety, reliability, and efficiency. The key aspects of this approach include:</p>
 <ul>
-<li><strong>Modeling the Plant and Controller</strong>: Accurately representing the battery pack, circuits, and control logic.</li>
-<li><strong>Leveraging Model-Based Design</strong>: Enabling early validation and verification through simulation.</li>
-<li><strong>Adopting Systematic Testing Techniques</strong>: Using static analysis, equivalence testing, and requirements traceability to ensure robustness.</li>
-<li><strong>Aligning with Certification Standards</strong>: Ensuring compliance with safety-critical standards such as ISO 26262 and IEC 61508.</li>
+<li>
+<p><strong>Modeling the Plant and Controller</strong>:</p>
+<ul>
+<li><strong>Accuracy</strong>: Precisely representing the battery pack, pre-charge circuit, charger, load, and control logic within Simulink.</li>
+<li><strong>Integration</strong>: Seamlessly integrating these components to simulate real-world interactions and system behavior.</li>
 </ul>
-<p>This approach not only enhances the reliability and safety of the BMS but also reduces development time and costs, making it a preferred method for modern battery management systems.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/docs/theory/10_modeling_testing/03_matlab/02_testing.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/intro"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Battery Management System in Simulink</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/requirements"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Managing Requirements</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-system-overview" class="table-of-contents__link toc-highlight"><strong>1. System Overview</strong></a><ul><li><a href="#11-plant-components" class="table-of-contents__link toc-highlight"><strong>1.1 Plant Components</strong></a></li><li><a href="#12-controller-bms-ecu" class="table-of-contents__link toc-highlight"><strong>1.2 Controller (BMS ECU)</strong></a></li></ul></li><li><a href="#2-bms-state-machine-in-stateflow" class="table-of-contents__link toc-highlight"><strong>2. BMS State Machine in Stateflow</strong></a></li><li><a href="#3-model-based-design-workflow" class="table-of-contents__link toc-highlight"><strong>3. Model-Based Design Workflow</strong></a><ul><li><a href="#31-traditional-vs-simulink-based-approach" class="table-of-contents__link toc-highlight"><strong>3.1 Traditional vs. Simulink-Based Approach</strong></a></li><li><a href="#32-key-advantages-of-simulink" class="table-of-contents__link toc-highlight"><strong>3.2 Key Advantages of Simulink</strong></a></li></ul></li><li><a href="#4-verification-and-validation-vv-techniques" class="table-of-contents__link toc-highlight"><strong>4. Verification and Validation (V&amp;V) Techniques</strong></a></li><li><a href="#5-certification-and-standards" class="table-of-contents__link toc-highlight"><strong>5. Certification and Standards</strong></a></li><li><a href="#6-case-study-lgs-certified-bms" class="table-of-contents__link toc-highlight"><strong>6. Case Study: LG’s Certified BMS</strong></a></li><li><a href="#summary" class="table-of-contents__link toc-highlight"><strong>Summary</strong></a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
+</li>
+<li>
+<p><strong>Leveraging Model-Based Design</strong>:</p>
+<ul>
+<li><strong>Early Validation</strong>: Utilizing simulation to identify and rectify design issues before physical prototyping.</li>
+<li><strong>Efficiency</strong>: Streamlining the development process through graphical modeling and automated code generation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adopting Systematic Testing Techniques</strong>:</p>
+<ul>
+<li><strong>Static Analysis</strong>: Ensuring model adherence to best practices and standards using tools like Simulink Check™.</li>
+<li><strong>Equivalence Testing</strong>: Verifying consistency between model simulations and generated code.</li>
+<li><strong>Requirements Traceability</strong>: Linking model elements to system requirements to maintain compliance and facilitate certification.</li>
+</ul>
+</li>
+<li>
+<p><strong>Aligning with Certification Standards</strong>:</p>
+<ul>
+<li><strong>Compliance</strong>: Ensuring the BMS meets safety-critical standards such as ISO 26262, IEC 61508, and DO-178C.</li>
+<li><strong>Certification</strong>: Utilizing certification kits and adhering to approved workflows to achieve recognized safety certifications.</li>
+</ul>
+</li>
+</ul>
+<p>This comprehensive testing framework not only enhances the reliability and safety of the BMS but also optimizes development time and costs. By adopting Simulink-based Model-Based Design and rigorous V&amp;V techniques, developers can create advanced BMS solutions that meet the highest industry standards, ensuring their suitability for deployment in modern battery-powered applications.</p>
+<p>Through meticulous modeling, systematic testing, and adherence to certification standards, the Simulink-based approach empowers engineers and researchers to develop safe, efficient, and high-performing Battery Management Systems tailored to the evolving demands of the automotive and energy storage industries.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/docs/theory/10_modeling_testing/03_matlab/02_testing.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/intro"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Battery Management System in Simulink</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/requirements"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Managing Requirements</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-system-overview" class="table-of-contents__link toc-highlight"><strong>1. System Overview</strong></a><ul><li><a href="#11-plant-components" class="table-of-contents__link toc-highlight"><strong>1.1 Plant Components</strong></a></li><li><a href="#12-controller-bms-ecu" class="table-of-contents__link toc-highlight"><strong>1.2 Controller (BMS ECU)</strong></a></li></ul></li><li><a href="#2-bms-state-machine-in-stateflow" class="table-of-contents__link toc-highlight"><strong>2. BMS State Machine in Stateflow</strong></a><ul><li><a href="#21-main-operational-modes" class="table-of-contents__link toc-highlight"><strong>2.1 Main Operational Modes</strong></a></li><li><a href="#22-fault-monitoring" class="table-of-contents__link toc-highlight"><strong>2.2 Fault Monitoring</strong></a></li><li><a href="#23-contactor-control-sub-states" class="table-of-contents__link toc-highlight"><strong>2.3 Contactor Control Sub-States</strong></a></li></ul></li><li><a href="#3-model-based-design-workflow" class="table-of-contents__link toc-highlight"><strong>3. Model-Based Design Workflow</strong></a><ul><li><a href="#31-traditional-vs-simulink-based-approach" class="table-of-contents__link toc-highlight"><strong>3.1 Traditional vs. Simulink-Based Approach</strong></a></li><li><a href="#32-key-advantages-of-simulink" class="table-of-contents__link toc-highlight"><strong>3.2 Key Advantages of Simulink</strong></a></li></ul></li><li><a href="#4-verification-and-validation-vv-techniques" class="table-of-contents__link toc-highlight"><strong>4. Verification and Validation (V&amp;V) Techniques</strong></a><ul><li><a href="#41-componentsystem-testing" class="table-of-contents__link toc-highlight"><strong>4.1 Component/System Testing</strong></a></li><li><a href="#42-static-analysis" class="table-of-contents__link toc-highlight"><strong>4.2 Static Analysis</strong></a></li><li><a href="#43-equivalence-testing" class="table-of-contents__link toc-highlight"><strong>4.3 Equivalence Testing</strong></a></li><li><a href="#44-requirements-traceability" class="table-of-contents__link toc-highlight"><strong>4.4 Requirements Traceability</strong></a></li></ul></li><li><a href="#5-certification-and-standards" class="table-of-contents__link toc-highlight"><strong>5. Certification and Standards</strong></a><ul><li><a href="#51-iec-certification-kitdo-qualification-kit" class="table-of-contents__link toc-highlight"><strong>5.1 IEC Certification Kit/DO Qualification Kit</strong></a></li><li><a href="#52-iso-26262-automotive" class="table-of-contents__link toc-highlight"><strong>5.2 ISO 26262 (Automotive)</strong></a></li><li><a href="#53-tuv-certification" class="table-of-contents__link toc-highlight"><strong>5.3 TUV Certification</strong></a></li></ul></li><li><a href="#6-case-study-lgs-certified-bms" class="table-of-contents__link toc-highlight"><strong>6. Case Study: LG’s Certified BMS</strong></a><ul><li><a href="#61-objective" class="table-of-contents__link toc-highlight"><strong>6.1 Objective</strong></a></li><li><a href="#62-workflow" class="table-of-contents__link toc-highlight"><strong>6.2 Workflow</strong></a></li><li><a href="#63-outcome" class="table-of-contents__link toc-highlight"><strong>6.3 Outcome</strong></a></li></ul></li><li><a href="#summary" class="table-of-contents__link toc-highlight"><strong>Summary</strong></a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
 </body>
 </html>

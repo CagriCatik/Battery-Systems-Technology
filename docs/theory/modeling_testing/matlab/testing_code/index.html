@@ -9,157 +9,836 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-R4556vVJtIc0EJ3NKnM5ePcM78Zv5e+/ff+f6aZwYzZjnj84pK8i0PZyNnO+g0OQ" crossorigin="anonymous"><link rel="stylesheet" href="/Battery-Systems-Technology/assets/css/styles.49f50c39.css">
-<script src="/Battery-Systems-Technology/assets/js/runtime~main.6d352b01.js" defer="defer"></script>
+<script src="/Battery-Systems-Technology/assets/js/runtime~main.9fb8f1af.js" defer="defer"></script>
 <script src="/Battery-Systems-Technology/assets/js/main.73514512.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/Battery-Systems-Technology/"><div class="navbar__logo"><img src="/Battery-Systems-Technology/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/Battery-Systems-Technology/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/fundamentals/getting-started">Fundamentals of Battery Technology</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/aging_degradation/getting-started">Aging and Degradation</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/chemistry_design_principles/getting-started">Chemistry and Design Principles</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_pack/getting_started">Battery Pack Engineering</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/thermal_management/getting_started">Thermal Management</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_characteristics/getting_started">Characteristics and Technical Specifications</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_sizing/getting_started">Sizing and Optimization</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/bms/getting_started">Battery Management System</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/bms_architecture/getting_started">BMS Design and Architecture</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/Battery-Systems-Technology/docs/theory/modeling_testing/getting_started">Modeling and Testing</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/glossary/electrical_concepts">Glossary</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/blog">Blog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/CagriCatik/Battery-Systems-Technology" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Battery-Systems-Technology/docs/theory/modeling_testing/getting_started">Getting Started</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/Battery-Systems-Technology/docs/category/requirements-and-testing">Requirements and Testing</a><button aria-label="Expand sidebar category &#x27;Requirements and Testing&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/Battery-Systems-Technology/docs/category/modeling">Modeling</a><button aria-label="Expand sidebar category &#x27;Modeling&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/Battery-Systems-Technology/docs/category/matlabsimulink">MATLAB/Simulink</a><button aria-label="Collapse sidebar category &#x27;MATLAB/Simulink&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/intro">Battery Management System in Simulink</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing">Testing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/requirements">Managing Requirements</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/unit-testing">Unit Testing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/managing_tests">Managing Tests in Simulink</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/measuring">Measuring and Improving Test Coverage</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/generating_code">Generating Code</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing_code">Testing Generated Code</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/closed_loop">Closed-Loop Testing</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/Battery-Systems-Technology/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/Battery-Systems-Technology/docs/category/matlabsimulink"><span itemprop="name">MATLAB/Simulink</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Testing Generated Code</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Testing Generated Code</h1></header>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-introduction-to-code-validation"><strong>1. Introduction to Code Validation</strong><a href="#1-introduction-to-code-validation" class="hash-link" aria-label="Direct link to 1-introduction-to-code-validation" title="Direct link to 1-introduction-to-code-validation">​</a></h2>
-<p>After generating code from a Battery Management System (BMS) model, validation ensures the code behaves identically to the original Simulink design. Two key methods are used:</p>
+<p>After generating code from a Battery Management System (BMS) model in Simulink, it is imperative to validate the generated code to ensure that it faithfully replicates the behavior of the original model. Code validation serves as a bridge between model-based design and its implementation in embedded systems, guaranteeing that the transition maintains the system&#x27;s integrity, performance, and compliance with safety standards. Two fundamental methods employed in code validation are:</p>
 <ul>
-<li><strong>Software-in-the-Loop (SIL)</strong>: Executes generated code on a host PC, validating functional correctness.</li>
-<li><strong>Processor-in-the-Loop (PIL)</strong>: Runs code on the target embedded hardware (e.g., BeagleBone Black), measuring performance and real-time behavior.</li>
+<li>
+<p><strong>Software-in-the-Loop (SIL)</strong>: This method involves executing the generated code on a host computer, allowing for the validation of functional correctness by comparing the code&#x27;s behavior against the Simulink model&#x27;s simulation results.</p>
+</li>
+<li>
+<p><strong>Processor-in-the-Loop (PIL)</strong>: PIL testing takes code validation a step further by running the generated code on the actual target embedded hardware (e.g., BeagleBone Black). This approach assesses both performance metrics and real-time behavior, ensuring that the code operates as intended in the intended hardware environment.</p>
+</li>
 </ul>
+<p>Implementing both SIL and PIL testing provides a comprehensive validation framework, ensuring that the BMS software is not only functionally accurate but also performant and reliable in real-world applications.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-software-in-the-loop-sil-testing"><strong>2. Software-in-the-Loop (SIL) Testing</strong><a href="#2-software-in-the-loop-sil-testing" class="hash-link" aria-label="Direct link to 2-software-in-the-loop-sil-testing" title="Direct link to 2-software-in-the-loop-sil-testing">​</a></h2>
+<p>Software-in-the-Loop (SIL) testing is a critical phase in validating the functional correctness of the generated code. By executing the code on a host PC, developers can ensure that the software behaves identically to the Simulink model before deploying it to embedded hardware.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="21-workflow"><strong>2.1 Workflow</strong><a href="#21-workflow" class="hash-link" aria-label="Direct link to 21-workflow" title="Direct link to 21-workflow">​</a></h3>
+<p>The SIL testing workflow involves several key steps that bridge the gap between model-based design and code validation:</p>
 <ol>
-<li><strong>Generate Code</strong>: Use Embedded Coder to produce <code>.c</code> and <code>.h</code> files from the BMS model.</li>
-<li><strong>Reuse Existing Tests</strong>: Leverage test harnesses created for the Simulink model to validate the generated code.</li>
-<li><strong>Configure SIL Mode</strong>:<!-- -->
+<li>
+<p><strong>Generate Code</strong>:</p>
 <ul>
-<li>In <strong>Simulink Test Manager</strong>, select <em>Simulation Mode &gt; Software-in-the-Loop</em>.</li>
-<li>This replaces the Simulink model with the compiled object code during simulation.</li>
+<li><strong>Action</strong>: Utilize Embedded Coder to produce <code>.c</code> and <code>.h</code> files from the validated BMS Simulink model.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Open the Simulink model.</li>
+<li>Navigate to <em>Code &gt; Embedded Coder</em>.</li>
+<li>Configure code generation settings as per model requirements.</li>
+<li>Click <em>Generate Code</em> to produce the source files.</li>
 </ul>
+</li>
+<li><strong>Outcome</strong>: Generated code files (e.g., <code>BMS_StateMachine.c</code>, <code>BMS_StateMachine.h</code>) ready for validation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Reuse Existing Tests</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Leverage the test harnesses created during the model-based testing phase to validate the generated code.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Ensure that test harnesses are configured to interface with the generated code.</li>
+<li>Import or reference the test cases within the Simulink Test Manager.</li>
+</ul>
+</li>
+<li><strong>Benefit</strong>: Streamlines the testing process by reusing established test scenarios, ensuring consistency between model and code validation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Configure SIL Mode</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Set up the Simulink Test Manager to execute tests in SIL mode.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Open <strong>Simulink Test Manager</strong>.</li>
+<li>Select the desired test suite or test case.</li>
+<li>Navigate to <em>Simulation Mode</em> and choose <strong>Software-in-the-Loop</strong>.</li>
+<li>Configure any additional SIL settings as required.</li>
+</ul>
+</li>
+<li><strong>Outcome</strong>: The simulation environment replaces the Simulink model with the compiled object code during test execution, enabling direct validation of the code&#x27;s functionality.</li>
+</ul>
+<p><strong>SIL Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring SIL Mode in Test Manager</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_SIL_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.selectTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Set simulation mode to SIL</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setSimulationMode(testSuite, &#x27;SIL&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp([&#x27;Simulation mode set to SIL for test suite: &#x27; testSuite]);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 1: MATLAB Code for Configuring SIL Mode</em></p>
 </li>
 </ol>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="22-equivalence-testing"><strong>2.2 Equivalence Testing</strong><a href="#22-equivalence-testing" class="hash-link" aria-label="Direct link to 22-equivalence-testing" title="Direct link to 22-equivalence-testing">​</a></h3>
+<p>Equivalence testing is a method used to ensure that the behavior of the generated code (SIL) matches that of the original Simulink model (Model-in-the-Loop, MIL). This comparison is crucial for validating that the code accurately represents the model&#x27;s logic and functionality.</p>
 <ul>
-<li><strong>Objective</strong>: Compare results from <strong>Model-in-the-Loop (MIL)</strong> and <strong>SIL</strong> simulations to ensure the generated code matches the model behavior.</li>
-<li><strong>Steps</strong>:<!-- -->
+<li>
+<p><strong>Objective</strong>: Verify that outputs from SIL tests (generated code) are identical to those from MIL tests (Simulink model simulations).</p>
+</li>
+<li>
+<p><strong>Steps</strong>:</p>
 <ol>
-<li>Run MIL tests (original Simulink model).</li>
-<li>Run SIL tests (generated code).</li>
-<li>Use <strong>Simulink Test Manager</strong> to validate equivalence (pass/fail).</li>
-</ol>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="23-analyzing-results"><strong>2.3 Analyzing Results</strong><a href="#23-analyzing-results" class="hash-link" aria-label="Direct link to 23-analyzing-results" title="Direct link to 23-analyzing-results">​</a></h3>
+<li><strong>Run MIL Tests</strong>:<!-- -->
 <ul>
-<li><strong>Simulation Data Inspector</strong>:<!-- -->
+<li><strong>Action</strong>: Execute the test suite in MIL mode to obtain baseline simulation results.</li>
+<li><strong>Procedure</strong>:<!-- -->
 <ul>
-<li>Compare logged signals (e.g., contactor states, fault flags) between MIL and SIL runs.</li>
-<li>Example: <code>Error = 0</code> indicates identical behavior.</li>
-</ul>
-</li>
-<li><strong>Code Coverage</strong>:<!-- -->
-<ul>
-<li>Enable coverage metrics (e.g., MCDC) in SIL mode to validate code execution paths and ensure comprehensive testing.</li>
+<li>Open <strong>Simulink Test Manager</strong>.</li>
+<li>Select the test suite and ensure the simulation mode is set to MIL.</li>
+<li>Run the tests and log the results.</li>
 </ul>
 </li>
 </ul>
-<hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-processor-in-the-loop-pil-testing"><strong>3. Processor-in-the-Loop (PIL) Testing</strong><a href="#3-processor-in-the-loop-pil-testing" class="hash-link" aria-label="Direct link to 3-processor-in-the-loop-pil-testing" title="Direct link to 3-processor-in-the-loop-pil-testing">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="31-pil-setup"><strong>3.1 PIL Setup</strong><a href="#31-pil-setup" class="hash-link" aria-label="Direct link to 31-pil-setup" title="Direct link to 31-pil-setup">​</a></h3>
-<ol>
-<li><strong>Target Configuration</strong>:<!-- -->
+</li>
+<li><strong>Run SIL Tests</strong>:<!-- -->
 <ul>
-<li>Select the embedded hardware (e.g., BeagleBone Black) in <em>Simulink &gt; Hardware Settings</em>.</li>
-<li>Cross-compile code for the target processor.</li>
+<li><strong>Action</strong>: Execute the same test suite in SIL mode to obtain generated code results.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Change the simulation mode to SIL as outlined in Section 2.1.</li>
+<li>Run the tests and log the results.</li>
 </ul>
 </li>
-<li><strong>Configure PIL Mode</strong>:<!-- -->
-<ul>
-<li>In the <strong>SIL/PIL Manager</strong>, enable <em>Processor-in-the-Loop</em>.</li>
-</ul>
-</li>
-</ol>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-execution-time-measurement"><strong>3.2 Execution Time Measurement</strong><a href="#32-execution-time-measurement" class="hash-link" aria-label="Direct link to 32-execution-time-measurement" title="Direct link to 32-execution-time-measurement">​</a></h3>
-<ul>
-<li><strong>Task Execution Time</strong>:<!-- -->
-<ul>
-<li>Measure how long the BMS code takes to execute on the target hardware.</li>
-<li>Example: <code>3.9 µs</code> per cycle (as reported in the <strong>Simulation Data Inspector</strong>).</li>
-</ul>
-</li>
-</ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="33-workflow"><strong>3.3 Workflow</strong><a href="#33-workflow" class="hash-link" aria-label="Direct link to 33-workflow" title="Direct link to 33-workflow">​</a></h3>
-<ol>
-<li><strong>Run PIL Tests</strong>:<!-- -->
-<ul>
-<li>Execute tests on the target hardware via the <strong>SIL/PIL Manager</strong>.</li>
 </ul>
 </li>
 <li><strong>Compare Results</strong>:<!-- -->
 <ul>
-<li>Validate equivalence between MIL, SIL, and PIL outputs to ensure consistency across all testing stages.</li>
+<li><strong>Action</strong>: Use <strong>Simulink Test Manager</strong> to compare MIL and SIL results for equivalence.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>
+<p>Navigate to the <em>Comparison</em> tool within Simulink Test Manager.</p>
+</li>
+<li>
+<p>Select the corresponding MIL and SIL test runs.</p>
+</li>
+<li>
+<p>Execute the comparison to identify discrepancies.</p>
+</li>
 </ul>
 </li>
-<li><strong>Generate Report</strong>:<!-- -->
-<ul>
-<li>Includes task execution time, memory usage, and signal comparisons for detailed analysis.</li>
 </ul>
 </li>
 </ol>
+<ul>
+<li><strong>Outcome</strong>: A pass/fail status for each test iteration based on the equivalence of outputs between MIL and SIL.</li>
+</ul>
+<p><strong>Equivalence Testing Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Performing Equivalence Testing</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">milResults = Simulink.Test.TestManager.runTestSuite(&#x27;BMS_MIL_Test_Suite&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">silResults = Simulink.Test.TestManager.runTestSuite(&#x27;BMS_SIL_Test_Suite&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Compare MIL and SIL results</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">equivalence = Simulink.Test.TestManager.compareTestResults(milResults, silResults);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if all(equivalence.Pass)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    disp(&#x27;All SIL tests passed; code behavior matches the Simulink model.&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">else</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    disp(&#x27;SIL tests failed; discrepancies detected between code and model.&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 2: MATLAB Code for Performing Equivalence Testing</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="23-analyzing-results"><strong>2.3 Analyzing Results</strong><a href="#23-analyzing-results" class="hash-link" aria-label="Direct link to 23-analyzing-results" title="Direct link to 23-analyzing-results">​</a></h3>
+<p>Post-execution analysis is essential to interpret the outcomes of SIL tests, identify any discrepancies, and ensure that the generated code aligns with the model&#x27;s intended behavior.</p>
+<ul>
+<li>
+<p><strong>Simulation Data Inspector</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Provides a graphical interface to compare logged signals between MIL and SIL runs.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Open the <strong>Simulation Data Inspector</strong> after running SIL and MIL tests.</li>
+<li>Load the corresponding data logs from both test runs.</li>
+<li>Overlay signals (e.g., contactor states, fault flags) to visually inspect for differences.</li>
+</ul>
+</li>
+<li><strong>Example</strong>:<!-- -->
+<ul>
+<li>If a specific signal (e.g., <code>Error</code>) shows <code>0</code> across both MIL and SIL runs, it indicates identical behavior.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Analyzing Simulation Data Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Loading and Comparing Simulation Data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load MIL simulation data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">milData = load(&#x27;BMS_MIL_Test_Suite.mat&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load SIL simulation data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">silData = load(&#x27;BMS_SIL_Test_Suite.mat&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Open Simulation Data Inspector</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.sdi.view;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Compare specific signals</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.sdi.compare(&#x27;Error&#x27;, milData.Error, silData.Error);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Display comparison results</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">if silData.Error == milData.Error</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    disp(&#x27;Error signal matches between MIL and SIL.&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">else</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    disp(&#x27;Discrepancy detected in Error signal between MIL and SIL.&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">end</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 3: MATLAB Code for Comparing Simulation Data</em></p>
+</li>
+<li>
+<p><strong>Code Coverage</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Measures the extent to which the generated code executes various code paths during SIL testing.</li>
+<li><strong>Configuration</strong>:<!-- -->
+<ul>
+<li>Enable coverage metrics (e.g., Decision Coverage, Condition Coverage, MCDC) in SIL mode within Simulink Test Manager.</li>
+<li>Run the SIL test suite to collect coverage data.</li>
+</ul>
+</li>
+<li><strong>Benefit</strong>: Ensures that all critical execution paths in the code are tested, identifying untested or partially tested areas.</li>
+</ul>
+<p><strong>Enabling Code Coverage in SIL Mode Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Enabling Coverage Metrics for SIL Testing</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_SIL_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Select the test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.selectTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Enable coverage metrics</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setCoverageSettings(testSuite, ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;Decision&#x27;, true, &#x27;Condition&#x27;, true, &#x27;MCDC&#x27;, true);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp([&#x27;Coverage metrics enabled for test suite: &#x27; testSuite]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run the test suite with coverage enabled</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Display coverage results</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">coverageResults = Simulink.Test.TestManager.getCoverage(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(coverageResults);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 4: MATLAB Code for Enabling and Running Coverage Metrics</em></p>
+</li>
+</ul>
+<p>By meticulously analyzing SIL test results using tools like the Simulation Data Inspector and Code Coverage, developers can ensure that the generated code not only matches the model&#x27;s functional behavior but also adheres to rigorous testing standards, paving the way for reliable and safe embedded BMS implementations.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-processor-in-the-loop-pil-testing"><strong>3. Processor-in-the-Loop (PIL) Testing</strong><a href="#3-processor-in-the-loop-pil-testing" class="hash-link" aria-label="Direct link to 3-processor-in-the-loop-pil-testing" title="Direct link to 3-processor-in-the-loop-pil-testing">​</a></h2>
+<p>Processor-in-the-Loop (PIL) testing is an advanced validation technique that evaluates the performance and real-time behavior of the generated code on the target embedded hardware. This method bridges the gap between SIL testing and final deployment, ensuring that the BMS operates correctly within its intended hardware environment.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="31-pil-setup"><strong>3.1 PIL Setup</strong><a href="#31-pil-setup" class="hash-link" aria-label="Direct link to 31-pil-setup" title="Direct link to 31-pil-setup">​</a></h3>
+<p>Setting up PIL testing involves configuring the target hardware, cross-compiling the generated code, and preparing the testing environment to execute the code on the embedded system.</p>
+<ol>
+<li>
+<p><strong>Target Configuration</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Select and configure the embedded hardware platform (e.g., BeagleBone Black) within Simulink.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Open the Simulink model.</li>
+<li>Navigate to <em>Simulation &gt; Hardware Configuration &gt; Hardware Board</em>.</li>
+<li>Select the appropriate hardware (e.g., BeagleBone Black) from the list.</li>
+<li>Configure any additional hardware-specific settings, such as communication interfaces or memory allocations.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Target Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring Target Hardware</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">hardware = &#x27;BeagleBone Black&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param(&#x27;BMS_Model&#x27;, &#x27;SystemTargetFile&#x27;, &#x27;ert.tlc&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param(&#x27;BMS_Model&#x27;, &#x27;HardwareBoard&#x27;, hardware);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp([&#x27;Target hardware configured to: &#x27; hardware]);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 5: MATLAB Code for Configuring Target Hardware</em></p>
+</li>
+<li>
+<p><strong>Configure PIL Mode</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Enable Processor-in-the-Loop mode within the SIL/PIL Manager.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Open <strong>Simulink Test Manager</strong>.</li>
+<li>Select the desired test suite or test case.</li>
+<li>Navigate to <em>Simulation Mode</em> and choose <strong>Processor-in-the-Loop</strong>.</li>
+<li>Configure PIL-specific settings, such as connection parameters and data logging options.</li>
+</ul>
+</li>
+</ul>
+<p><strong>PIL Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring PIL Mode</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_PIL_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.selectTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Set simulation mode to PIL</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setSimulationMode(testSuite, &#x27;PIL&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp([&#x27;Simulation mode set to PIL for test suite: &#x27; testSuite]);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 6: MATLAB Code for Configuring PIL Mode</em></p>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-execution-time-measurement"><strong>3.2 Execution Time Measurement</strong><a href="#32-execution-time-measurement" class="hash-link" aria-label="Direct link to 32-execution-time-measurement" title="Direct link to 32-execution-time-measurement">​</a></h3>
+<p>Measuring the execution time of the BMS code on the target hardware is crucial for validating real-time performance and ensuring that the system meets its timing requirements.</p>
+<ul>
+<li>
+<p><strong>Task Execution Time</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Assess how long each task or control loop cycle takes to execute on the embedded processor.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Utilize profiling tools provided by the embedded hardware or external profilers.</li>
+<li>Log execution times during PIL tests to identify performance bottlenecks.</li>
+</ul>
+</li>
+<li><strong>Example</strong>:<!-- -->
+<ul>
+<li>A task executing in <code>3.9 µs</code> per cycle indicates efficient performance, suitable for real-time applications.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Execution Time Measurement Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Measuring Execution Time in PIL Mode</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_PIL_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run the PIL test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">simOut = Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Extract execution time data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">executionTime = simOut.getDiagnosticData(&#x27;ExecutionTime&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Display execution time</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">fprintf(&#x27;Average Execution Time per Cycle: %.2f µs\n&#x27;, executionTime);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 7: MATLAB Code for Measuring Execution Time in PIL Mode</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="33-workflow"><strong>3.3 Workflow</strong><a href="#33-workflow" class="hash-link" aria-label="Direct link to 33-workflow" title="Direct link to 33-workflow">​</a></h3>
+<p>The PIL testing workflow encompasses running tests on the target hardware, comparing results with MIL and SIL simulations, and generating comprehensive reports to document performance and compliance.</p>
+<ol>
+<li>
+<p><strong>Run PIL Tests</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Execute the configured test suite on the target embedded hardware via the SIL/PIL Manager.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Ensure that the hardware is connected and properly configured.</li>
+<li>In <strong>Simulink Test Manager</strong>, select the test suite set to PIL mode.</li>
+<li>Click the <em>Run</em> button to initiate the tests on the hardware.</li>
+</ul>
+</li>
+<li><strong>Outcome</strong>: Tests are executed on the embedded system, and results are logged for analysis.</li>
+</ul>
+</li>
+<li>
+<p><strong>Compare Results</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Validate the equivalence of results across MIL, SIL, and PIL testing stages.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Use <strong>Simulink Test Manager</strong> to overlay and compare simulation logs from MIL, SIL, and PIL runs.</li>
+<li>Identify and investigate any discrepancies in signal behaviors or system responses.</li>
+</ul>
+</li>
+<li><strong>Benefit</strong>: Ensures consistency and reliability of the BMS software across different testing environments.</li>
+</ul>
+</li>
+<li>
+<p><strong>Generate Report</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Compile a detailed report encompassing execution times, memory usage, signal comparisons, and overall test outcomes.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Use <strong>Simulink Test Manager</strong>&#x27;s reporting tools to generate structured reports.</li>
+<li>Include performance metrics and visualizations to facilitate comprehensive analysis.</li>
+</ul>
+</li>
+<li><strong>Outcome</strong>: A thorough documentation of PIL test results, suitable for internal review and certification purposes.</li>
+</ul>
+<p><strong>Report Generation Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Generating a PIL Test Report</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_PIL_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">reportFormat = &#x27;pdf&#x27;; % Options: &#x27;pdf&#x27;, &#x27;html&#x27;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Generate the PIL test report</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.Report.generateTestReport(testSuite, ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;Format&#x27;, reportFormat, &#x27;OutputFile&#x27;, &#x27;PIL_Test_Report.pdf&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;PIL test report generated as PIL_Test_Report.pdf.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 8: MATLAB Code for Generating a PIL Test Report</em></p>
+</li>
+</ol>
+<p>By meticulously executing SIL and PIL tests, developers can ensure that the generated BMS code not only matches the Simulink model&#x27;s functional behavior but also performs efficiently and reliably on the target hardware, laying the groundwork for successful deployment in real-world applications.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="4-key-tools-and-workflow"><strong>4. Key Tools and Workflow</strong><a href="#4-key-tools-and-workflow" class="hash-link" aria-label="Direct link to 4-key-tools-and-workflow" title="Direct link to 4-key-tools-and-workflow">​</a></h2>
+<p>Achieving robust validation of generated BMS code necessitates the effective use of specialized tools and adherence to a structured workflow. Simulink provides a suite of tools that facilitate the testing and validation process, ensuring that the generated code meets both functional and performance requirements.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="41-simulink-test-manager"><strong>4.1 Simulink Test Manager</strong><a href="#41-simulink-test-manager" class="hash-link" aria-label="Direct link to 41-simulink-test-manager" title="Direct link to 41-simulink-test-manager">​</a></h3>
+<p><strong>Simulink Test Manager</strong> is an integrated environment that streamlines the creation, execution, and management of test cases. It provides comprehensive functionalities to automate equivalence testing, manage test suites, and integrate coverage metrics.</p>
 <ul>
-<li><strong>Equivalence Tests</strong>: Automate MIL vs. SIL/PIL comparisons to ensure functional correctness.</li>
-<li><strong>Batch Execution</strong>: Run multiple iterations (e.g., 11 test scenarios) to validate edge cases.</li>
-<li><strong>Coverage Integration</strong>: Track code coverage metrics during SIL/PIL runs to ensure comprehensive testing.</li>
+<li>
+<p><strong>Equivalence Tests</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Automate the comparison between MIL, SIL, and PIL test results to ensure functional correctness.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Define equivalence criteria within test cases.</li>
+<li>Automatically execute comparisons and generate pass/fail statuses based on defined metrics.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Batch Execution</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Run multiple test iterations sequentially or in parallel, enhancing testing efficiency.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Select a group of test cases or suites.</li>
+<li>Initiate batch runs to execute all selected tests in one operation.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Coverage Integration</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Track and report code coverage metrics (e.g., MCDC) during SIL and PIL test executions.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Enable coverage settings within test suites.</li>
+<li>Monitor coverage progress and identify gaps in test coverage.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Simulink Test Manager Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Managing Tests with Simulink Test Manager</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_Equivalence_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Select the test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.selectTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run the test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Retrieve and display test results</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testResults = Simulink.Test.TestManager.getTestResults(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(testResults);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 9: MATLAB Code for Managing Tests with Test Manager</em></p>
+</li>
 </ul>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="42-silpil-manager"><strong>4.2 SIL/PIL Manager</strong><a href="#42-silpil-manager" class="hash-link" aria-label="Direct link to 42-silpil-manager" title="Direct link to 42-silpil-manager">​</a></h3>
+<p>The <strong>SIL/PIL Manager</strong> is a specialized tool within Simulink that facilitates the configuration and execution of SIL and PIL tests. It manages the integration between the generated code and the testing environment, ensuring seamless execution and result logging.</p>
+<ul>
+<li>
+<p><strong>Hardware Integration</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Supports a variety of embedded hardware platforms, including BeagleBone Black, Arduino, and custom targets.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Select and configure the target hardware within the SIL/PIL Manager.</li>
+<li>Establish communication interfaces between Simulink and the hardware for real-time data exchange.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Automated Back-to-Back Testing</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Enables the validation of code against the model without manual intervention, reducing the potential for human errors.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Set up automated scripts to execute tests in SIL and PIL modes.</li>
+<li>Compare results automatically to identify discrepancies.</li>
+</ul>
+</li>
+</ul>
+<p><strong>SIL/PIL Manager Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring and Running SIL/PIL Tests</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_SIL_PIL_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Select the test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.selectTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Configure PIL settings</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setHardwarePlatform(testSuite, &#x27;BeagleBone Black&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run SIL tests</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setSimulationMode(testSuite, &#x27;SIL&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run PIL tests</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setSimulationMode(testSuite, &#x27;PIL&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;SIL and PIL tests executed successfully.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 10: MATLAB Code for Configuring and Running SIL/PIL Tests</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="43-simulation-data-inspector"><strong>4.3 Simulation Data Inspector</strong><a href="#43-simulation-data-inspector" class="hash-link" aria-label="Direct link to 43-simulation-data-inspector" title="Direct link to 43-simulation-data-inspector">​</a></h3>
+<p>The <strong>Simulation Data Inspector (SDI)</strong> is a versatile tool that allows developers to visualize, compare, and analyze simulation data from MIL, SIL, and PIL runs. It provides a graphical interface to overlay and inspect signal behaviors across different testing stages.</p>
+<ul>
+<li>
+<p><strong>Signal Comparison</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Overlay signals from MIL, SIL, and PIL runs to detect discrepancies and ensure consistency.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Load data logs from different test runs into SDI.</li>
+<li>Use the overlay feature to visually compare signal trajectories.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Execution Time Profiling</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Visualize task execution times to assess performance metrics and real-time compliance.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Plot execution times against simulation time to identify performance bottlenecks.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Simulation Data Inspector Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Using Simulation Data Inspector for Signal Comparison</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load MIL data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">milData = sdiCollection(&#x27;BMS_MIL_Data.sdi&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load SIL data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">silData = sdiCollection(&#x27;BMS_SIL_Data.sdi&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load PIL data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">pilData = sdiCollection(&#x27;BMS_PIL_Data.sdi&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Open SDI</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.sdi.view;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Compare Error signal across MIL, SIL, and PIL</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.sdi.compare(milData, silData, pilData, &#x27;Error&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Signal comparison completed in Simulation Data Inspector.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 11: MATLAB Code for Using Simulation Data Inspector</em></p>
+</li>
+</ul>
+<p>By leveraging these tools and adhering to a structured workflow, developers can ensure that the generated BMS code is both functionally accurate and performant, meeting the stringent requirements of safety-critical applications.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="5-benefits"><strong>5. Benefits</strong><a href="#5-benefits" class="hash-link" aria-label="Direct link to 5-benefits" title="Direct link to 5-benefits">​</a></h2>
+<p>Implementing thorough testing of generated code using SIL and PIL methodologies offers numerous advantages that enhance the reliability, performance, and compliance of Battery Management Systems (BMS). The key benefits include:</p>
+<ol>
+<li>
+<p><strong>Functional Correctness</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Ensures that the generated code behaves identically to the Simulink model, reducing the risk of discrepancies that could lead to system malfunctions.</li>
+<li><strong>Benefit</strong>: Enhances the overall reliability of the BMS by verifying that all functional requirements are met.</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance Metrics</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Measures execution time and memory usage on the target hardware, validating that the system meets real-time performance and resource constraints.</li>
+<li><strong>Benefit</strong>: Guarantees that the BMS operates efficiently within the embedded environment, preventing issues like latency or resource exhaustion.</li>
+</ul>
+</li>
+<li>
+<p><strong>Certification Readiness</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Aligns testing practices with safety standards such as ISO 26262 and DO-178C, ensuring that the generated code is suitable for certification in safety-critical applications.</li>
+<li><strong>Benefit</strong>: Facilitates the certification process, enabling the deployment of the BMS in regulated industries like automotive and aerospace.</li>
+</ul>
+</li>
+<li>
+<p><strong>Risk Mitigation</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Identifies and addresses potential errors and performance bottlenecks early in the development process through rigorous testing.</li>
+<li><strong>Benefit</strong>: Reduces the likelihood of costly post-deployment fixes and enhances the safety and reliability of the BMS.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficiency and Automation</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Automates repetitive testing tasks and leverages existing test harnesses, saving time and reducing manual effort.</li>
+<li><strong>Benefit</strong>: Accelerates the development cycle, allowing developers to focus on more complex and critical aspects of the system.</li>
+</ul>
+</li>
+<li>
+<p><strong>Enhanced Traceability</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Maintains clear bi-directional links between requirements, model elements, and generated code, facilitating audits and compliance checks.</li>
+<li><strong>Benefit</strong>: Improves accountability and ensures that all system specifications are adequately addressed in the implementation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Quality Assurance</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Provides comprehensive validation of both functional and performance aspects of the generated code, ensuring high-quality software delivery.</li>
+<li><strong>Benefit</strong>: Enhances user confidence in the BMS, contributing to better system performance and longevity.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Summary of Benefits</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">- Functional Correctness: Ensures code matches model behavior.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Performance Metrics: Validates real-time operation and resource usage.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Certification Readiness: Aligns with safety and industry standards.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Risk Mitigation: Identifies and resolves potential issues early.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Efficiency and Automation: Streamlines testing processes.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Enhanced Traceability: Facilitates audits and compliance.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Quality Assurance: Guarantees high-quality, reliable software.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>By embracing SIL and PIL testing methodologies, developers can achieve a high level of confidence in the generated BMS code, ensuring that it is both functionally accurate and performant in its intended embedded environment.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="6-example-beaglebone-black-pil-test"><strong>6. Example: BeagleBone Black PIL Test</strong><a href="#6-example-beaglebone-black-pil-test" class="hash-link" aria-label="Direct link to 6-example-beaglebone-black-pil-test" title="Direct link to 6-example-beaglebone-black-pil-test">​</a></h2>
+<p>To illustrate the practical application of Processor-in-the-Loop (PIL) testing, consider a case study involving the BeagleBone Black embedded board. This example demonstrates the setup, execution, and analysis of PIL tests to validate the performance and real-time behavior of the generated BMS code.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="61-setup"><strong>6.1 Setup</strong><a href="#61-setup" class="hash-link" aria-label="Direct link to 61-setup" title="Direct link to 61-setup">​</a></h3>
+<ul>
+<li><strong>Target</strong>: BeagleBone Black board.</li>
+<li><strong>Test Harness</strong>: Reuse existing signal editor scenarios designed for fault conditions to maintain consistency across testing stages.</li>
+<li><strong>Metrics</strong>:<!-- -->
+<ul>
+<li><strong>Execution Time</strong>: Measure the time taken per control cycle (e.g., <code>3 µs</code> per cycle).</li>
+<li><strong>Signal Accuracy</strong>: Ensure that the outputs from PIL tests match those from MIL and SIL tests, confirming consistency.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Setup Steps</strong>:</p>
+<ol>
+<li>
+<p><strong>Configure Hardware</strong>:</p>
+<ul>
+<li>Connect the BeagleBone Black to the host PC via USB or Ethernet.</li>
+<li>Install necessary drivers and software to facilitate communication between Simulink and the hardware.</li>
+</ul>
+</li>
+<li>
+<p><strong>Prepare Test Harness</strong>:</p>
+<ul>
+<li>Ensure that the test harness is configured to interface with the generated code.</li>
+<li>Load the signal editor scenarios that simulate various fault conditions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Enable PIL Mode</strong>:</p>
+<ul>
+<li>Open <strong>Simulink Test Manager</strong>.</li>
+<li>Select the appropriate test suite.</li>
+<li>Set the simulation mode to <strong>Processor-in-the-Loop</strong>.</li>
+<li>Configure hardware-specific settings as outlined in Section 3.1.</li>
+</ul>
+<p><strong>PIL Setup Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Setting Up PIL for BeagleBone Black</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_PIL_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.selectTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Set simulation mode to PIL and select hardware</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setSimulationMode(testSuite, &#x27;PIL&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setHardwarePlatform(testSuite, &#x27;BeagleBone Black&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp([&#x27;PIL mode configured for test suite: &#x27; testSuite &#x27; on BeagleBone Black&#x27;]);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 12: MATLAB Code for Setting Up PIL</em></p>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="62-results"><strong>6.2 Results</strong><a href="#62-results" class="hash-link" aria-label="Direct link to 62-results" title="Direct link to 62-results">​</a></h3>
+<p>Upon executing the PIL tests, the following outcomes are observed:</p>
+<ul>
+<li><strong>Pass Criteria</strong>:<!-- -->
+<ul>
+<li>All 11 test iterations pass, with <code>Error = 0</code>, indicating identical behavior between MIL, SIL, and PIL tests.</li>
+</ul>
+</li>
+<li><strong>Coverage</strong>:<!-- -->
+<ul>
+<li>Achieves <strong>100% MCDC</strong> coverage through the combination of MIL, SIL, and PIL testing, ensuring comprehensive validation of all logical pathways and conditions.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Results Overview</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">PIL Test Results:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Total Iterations: 11</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Passed: 11</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Failed: 0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Average Execution Time per Cycle: 3 µs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- MCDC Coverage: 100%</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><strong>Analysis</strong>:</p>
+<ol>
+<li>
+<p><strong>Execution Time</strong>:</p>
+<ul>
+<li>The measured execution time of <code>3 µs</code> per cycle confirms that the BMS code operates efficiently within the real-time constraints of the BeagleBone Black hardware.</li>
+</ul>
+</li>
+<li>
+<p><strong>Signal Accuracy</strong>:</p>
+<ul>
+<li>All signal outputs from the PIL tests match those from MIL and SIL runs, validating the functional correctness and consistency of the generated code across different testing environments.</li>
+</ul>
+</li>
+<li>
+<p><strong>Coverage Achievement</strong>:</p>
+<ul>
+<li>Attaining 100% MCDC coverage ensures that every condition within decision statements independently influences the decision outcome, fulfilling the stringent requirements for safety-critical systems.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Example PIL Test Report</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">PIL Test Report</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">---------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">1. Test Summary</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Total Iterations: 11</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Passed: 11</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Failed: 0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Overall MCDC Coverage: 100%</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">2. Execution Metrics</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Average Execution Time per Cycle: 3 µs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Memory Usage: 48 bytes</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">3. Signal Comparisons</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Error Signal: MIL vs. SIL vs. PIL - All match (Error = 0)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Contactor States: No discrepancies detected</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Fault Flags: Consistent across all tests</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">4. Coverage Details</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Decision Coverage: 100%</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Condition Coverage: 100%</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - MCDC Coverage: 100%</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">5. Recommendations</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Proceed with deployment as all tests have passed successfully.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Maintain regular PIL testing to monitor performance on target hardware.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 13: Sample PIL Test Report Structure</em></p>
+<p>This case study exemplifies the effectiveness of combining SIL and PIL testing to achieve comprehensive validation of generated BMS code, ensuring both functional accuracy and real-time performance on embedded hardware.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="7-key-tools-and-workflow"><strong>7. Key Tools and Workflow</strong><a href="#7-key-tools-and-workflow" class="hash-link" aria-label="Direct link to 7-key-tools-and-workflow" title="Direct link to 7-key-tools-and-workflow">​</a></h2>
+<p>Achieving robust validation of generated BMS code requires the seamless integration of various tools and a well-defined workflow. Simulink offers a suite of tools that facilitate this process, ensuring that the testing and validation phases are efficient, comprehensive, and compliant with industry standards.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="71-simulink-test-manager"><strong>7.1 Simulink Test Manager</strong><a href="#71-simulink-test-manager" class="hash-link" aria-label="Direct link to 71-simulink-test-manager" title="Direct link to 71-simulink-test-manager">​</a></h3>
+<p><strong>Simulink Test Manager</strong> is the central hub for creating, managing, and executing test cases. It provides functionalities that streamline equivalence testing, batch execution, and coverage tracking.</p>
+<ul>
+<li><strong>Equivalence Tests</strong>:<!-- -->
+<ul>
+<li><strong>Function</strong>: Automate the comparison between MIL, SIL, and PIL test runs to ensure functional correctness.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Define equivalence criteria within test cases.</li>
+<li>Execute tests and automatically evaluate pass/fail statuses based on defined metrics.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Batch Execution</strong>:<!-- -->
+<ul>
+<li><strong>Function</strong>: Run multiple test iterations or entire test suites in a single operation, enhancing testing efficiency.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Select the desired test cases or suites.</li>
+<li>Initiate batch runs to execute all selected tests sequentially or in parallel.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Coverage Integration</strong>:<!-- -->
+<ul>
+<li><strong>Function</strong>: Track and report code coverage metrics (e.g., MCDC) during SIL and PIL test executions.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Enable coverage settings within test suites.</li>
+<li>Monitor coverage progress and identify areas needing additional testing.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>Simulink Test Manager Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Managing Tests with Simulink Test Manager</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_Equivalence_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Select the test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.selectTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run the test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Retrieve and display test results</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testResults = Simulink.Test.TestManager.getTestResults(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(testResults);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 14: MATLAB Code for Managing Tests with Test Manager</em></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="72-silpil-manager"><strong>7.2 SIL/PIL Manager</strong><a href="#72-silpil-manager" class="hash-link" aria-label="Direct link to 72-silpil-manager" title="Direct link to 72-silpil-manager">​</a></h3>
+<p>The <strong>SIL/PIL Manager</strong> is instrumental in configuring and executing SIL and PIL tests. It manages the interactions between Simulink, the generated code, and the target hardware, ensuring that tests are executed smoothly and results are accurately captured.</p>
 <ul>
 <li><strong>Hardware Integration</strong>:<!-- -->
 <ul>
-<li>Supports BeagleBone Black, Arduino, and custom targets for flexible testing.</li>
+<li><strong>Function</strong>: Supports a variety of embedded hardware platforms, enabling flexible testing environments.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Select the target hardware (e.g., BeagleBone Black, Arduino).</li>
+<li>Configure communication settings and data exchange protocols between Simulink and the hardware.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li><strong>Automated Back-to-Back Testing</strong>:<!-- -->
 <ul>
-<li>Validate code against the model without manual intervention, reducing errors and saving time.</li>
+<li><strong>Function</strong>: Facilitates the automated execution of SIL and PIL tests, reducing manual intervention and enhancing testing consistency.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Set up automated scripts to run SIL and PIL tests in succession.</li>
+<li>Automatically compare results and log discrepancies for further analysis.</li>
 </ul>
 </li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="43-simulation-data-inspector"><strong>4.3 Simulation Data Inspector</strong><a href="#43-simulation-data-inspector" class="hash-link" aria-label="Direct link to 43-simulation-data-inspector" title="Direct link to 43-simulation-data-inspector">​</a></h3>
-<ul>
-<li><strong>Signal Comparison</strong>: Overlay MIL, SIL, and PIL signals to detect discrepancies and ensure consistency.</li>
-<li><strong>Execution Time Profiling</strong>: Visualize task timing for performance optimization and real-time compliance.</li>
+</li>
 </ul>
+<p><strong>SIL/PIL Manager Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring and Running SIL/PIL Tests</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_SIL_PIL_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Select the test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.selectTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Configure hardware platform for PIL</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setHardwarePlatform(testSuite, &#x27;BeagleBone Black&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run SIL tests</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setSimulationMode(testSuite, &#x27;SIL&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run PIL tests</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setSimulationMode(testSuite, &#x27;PIL&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;SIL and PIL tests executed successfully.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 15: MATLAB Code for Configuring and Running SIL/PIL Tests</em></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="73-simulation-data-inspector"><strong>7.3 Simulation Data Inspector</strong><a href="#73-simulation-data-inspector" class="hash-link" aria-label="Direct link to 73-simulation-data-inspector" title="Direct link to 73-simulation-data-inspector">​</a></h3>
+<p>The <strong>Simulation Data Inspector (SDI)</strong> is a versatile tool that allows developers to visualize, compare, and analyze simulation data from different test runs. It is essential for identifying discrepancies and ensuring consistency across MIL, SIL, and PIL tests.</p>
+<ul>
+<li>
+<p><strong>Signal Comparison</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Overlay signals from MIL, SIL, and PIL runs to detect discrepancies and validate consistency.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Load data logs from MIL, SIL, and PIL tests into SDI.</li>
+<li>Use the overlay feature to visually compare signal behaviors.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Execution Time Profiling</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Visualize task execution times to assess performance metrics and real-time compliance.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Plot execution times against simulation time to identify performance bottlenecks.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Simulation Data Inspector Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Using Simulation Data Inspector for Signal Comparison</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load MIL data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">milData = sdiCollection(&#x27;BMS_MIL_Data.sdi&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load SIL data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">silData = sdiCollection(&#x27;BMS_SIL_Data.sdi&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load PIL data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">pilData = sdiCollection(&#x27;BMS_PIL_Data.sdi&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Open SDI</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.sdi.view;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Compare specific signals</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.sdi.compare(milData, silData, pilData, &#x27;Error&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Signal comparison completed in Simulation Data Inspector.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 16: MATLAB Code for Using Simulation Data Inspector</em></p>
+</li>
+</ul>
+<p>By effectively utilizing these tools and adhering to a structured workflow, developers can ensure that the generated BMS code is both functionally accurate and performant, meeting the stringent requirements of safety-critical applications.</p>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="5-benefits"><strong>5. Benefits</strong><a href="#5-benefits" class="hash-link" aria-label="Direct link to 5-benefits" title="Direct link to 5-benefits">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="8-benefits"><strong>8. Benefits</strong><a href="#8-benefits" class="hash-link" aria-label="Direct link to 8-benefits" title="Direct link to 8-benefits">​</a></h2>
+<p>Testing the generated BMS code using SIL and PIL methodologies offers numerous advantages that significantly enhance the development process, system reliability, and compliance with industry standards. The key benefits include:</p>
 <ol>
-<li><strong>Functional Correctness</strong>: Ensure the generated code matches the model behavior, reducing the risk of errors.</li>
-<li><strong>Performance Metrics</strong>: Measure execution time and memory usage to validate real-time performance.</li>
-<li><strong>Certification Readiness</strong>: SIL/PIL tests align with safety standards like ISO 26262 and DO-178C, ensuring compliance.</li>
+<li>
+<p><strong>Functional Correctness</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Ensures that the generated code behaves identically to the Simulink model, validating that all functional requirements are met.</li>
+<li><strong>Benefit</strong>: Reduces the risk of discrepancies that could lead to system malfunctions, enhancing overall reliability.</li>
+</ul>
+</li>
+<li>
+<p><strong>Performance Metrics</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Measures execution time and memory usage on the target hardware, ensuring that the BMS operates within real-time constraints and resource limitations.</li>
+<li><strong>Benefit</strong>: Guarantees that the system performs efficiently, preventing issues like latency or resource exhaustion that could compromise functionality.</li>
+</ul>
+</li>
+<li>
+<p><strong>Certification Readiness</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Aligns testing practices with safety and reliability standards such as ISO 26262 and DO-178C, ensuring that the generated code is suitable for certification in safety-critical applications.</li>
+<li><strong>Benefit</strong>: Facilitates the certification process, enabling the deployment of the BMS in regulated industries like automotive and aerospace.</li>
+</ul>
+</li>
+<li>
+<p><strong>Risk Mitigation</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Identifies and addresses potential errors and performance bottlenecks early in the development cycle through rigorous testing.</li>
+<li><strong>Benefit</strong>: Minimizes the likelihood of costly post-deployment fixes and enhances the safety and reliability of the BMS.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficiency and Automation</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Automates repetitive testing tasks and leverages existing test harnesses, saving time and reducing manual effort.</li>
+<li><strong>Benefit</strong>: Accelerates the development cycle, allowing developers to focus on more complex and critical aspects of the system.</li>
+</ul>
+</li>
+<li>
+<p><strong>Enhanced Traceability</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Maintains clear bi-directional links between requirements, models, and code, facilitating audits and compliance checks.</li>
+<li><strong>Benefit</strong>: Improves accountability and ensures that all system specifications are adequately addressed in the implementation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Quality Assurance</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Provides comprehensive validation of both functional and performance aspects of the generated code, ensuring high-quality software delivery.</li>
+<li><strong>Benefit</strong>: Enhances user confidence in the BMS, contributing to better system performance and longevity.</li>
+</ul>
+</li>
 </ol>
+<p><strong>Summary of Benefits</strong>:</p>
+<ul>
+<li>Functional Correctness: Validates that code matches model behavior.</li>
+<li>Performance Metrics: Ensures real-time operation and resource efficiency.</li>
+<li>Certification Readiness: Aligns with safety and industry standards.</li>
+<li>Risk Mitigation: Identifies and resolves potential issues early.</li>
+<li>Efficiency and Automation: Streamlines testing processes and saves time.</li>
+<li>Enhanced Traceability: Facilitates audits and compliance through clear links.</li>
+<li>Quality Assurance: Guarantees high-quality, reliable software delivery.</li>
+</ul>
+<p>By integrating SIL and PIL testing methodologies, developers can achieve a high level of confidence in the generated BMS code, ensuring that it is both functionally accurate and performant in its intended embedded environment.</p>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="6-example-beaglebone-black-pil-test"><strong>6. Example: BeagleBone Black PIL Test</strong><a href="#6-example-beaglebone-black-pil-test" class="hash-link" aria-label="Direct link to 6-example-beaglebone-black-pil-test" title="Direct link to 6-example-beaglebone-black-pil-test">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="61-setup"><strong>6.1 Setup</strong><a href="#61-setup" class="hash-link" aria-label="Direct link to 61-setup" title="Direct link to 61-setup">​</a></h3>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="9-example-beaglebone-black-pil-test"><strong>9. Example: BeagleBone Black PIL Test</strong><a href="#9-example-beaglebone-black-pil-test" class="hash-link" aria-label="Direct link to 9-example-beaglebone-black-pil-test" title="Direct link to 9-example-beaglebone-black-pil-test">​</a></h2>
+<p>To provide a concrete example of Processor-in-the-Loop (PIL) testing, consider the following case study involving the BeagleBone Black embedded board. This example demonstrates the setup, execution, and analysis of PIL tests to validate the performance and real-time behavior of the generated BMS code.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="91-setup"><strong>9.1 Setup</strong><a href="#91-setup" class="hash-link" aria-label="Direct link to 91-setup" title="Direct link to 91-setup">​</a></h3>
 <ul>
 <li><strong>Target</strong>: BeagleBone Black board.</li>
-<li><strong>Test Harness</strong>: Reuse signal editor scenarios (e.g., fault conditions) for consistent testing.</li>
+<li><strong>Test Harness</strong>: Reuse signal editor scenarios designed for fault conditions to maintain consistency across testing stages.</li>
 <li><strong>Metrics</strong>:<!-- -->
 <ul>
-<li><strong>Execution Time</strong>: 3 µs per cycle.</li>
-<li><strong>Signal Accuracy</strong>: Matches MIL/SIL results, ensuring consistency across testing stages.</li>
+<li><strong>Execution Time</strong>: Measure the time taken per control cycle (e.g., <code>3 µs</code> per cycle).</li>
+<li><strong>Signal Accuracy</strong>: Ensure that outputs from PIL tests match those from MIL and SIL tests, confirming consistency.</li>
 </ul>
 </li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="62-results"><strong>6.2 Results</strong><a href="#62-results" class="hash-link" aria-label="Direct link to 62-results" title="Direct link to 62-results">​</a></h3>
-<ul>
-<li><strong>Pass Criteria</strong>: All 11 iterations pass with <code>Error = 0</code>, indicating identical behavior across MIL, SIL, and PIL tests.</li>
-<li><strong>Coverage</strong>: 100% MCDC achieved via hybrid MIL/SIL/PIL testing, ensuring comprehensive validation.</li>
-</ul>
-<hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary"><strong>Summary</strong><a href="#summary" class="hash-link" aria-label="Direct link to summary" title="Direct link to summary">​</a></h2>
-<p>Testing BMS-generated code involves:</p>
+<p><strong>Setup Steps</strong>:</p>
 <ol>
-<li><strong>SIL Testing</strong>: Validate code on a host PC against Simulink results to ensure functional correctness.</li>
-<li><strong>PIL Testing</strong>: Measure performance on target hardware (e.g., BeagleBone) to validate real-time behavior.</li>
-<li><strong>Equivalence Checks</strong>: Use the <strong>Simulink Test Manager</strong> for automated comparisons between MIL, SIL, and PIL results.</li>
+<li>
+<p><strong>Configure Hardware</strong>:</p>
+<ul>
+<li>Connect the BeagleBone Black to the host PC via USB or Ethernet.</li>
+<li>Install necessary drivers and software to facilitate communication between Simulink and the hardware.</li>
+</ul>
+</li>
+<li>
+<p><strong>Prepare Test Harness</strong>:</p>
+<ul>
+<li>Ensure that the test harness is configured to interface with the generated code.</li>
+<li>Load the signal editor scenarios that simulate various fault conditions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Enable PIL Mode</strong>:</p>
+<ul>
+<li>Open <strong>Simulink Test Manager</strong>.</li>
+<li>Select the appropriate test suite.</li>
+<li>Set the simulation mode to <strong>Processor-in-the-Loop</strong>.</li>
+<li>Configure hardware-specific settings as outlined in Section 3.1.</li>
+</ul>
+<p><strong>PIL Setup Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Setting Up PIL for BeagleBone Black</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_PIL_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.selectTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Set simulation mode to PIL and select hardware</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setSimulationMode(testSuite, &#x27;PIL&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setHardwarePlatform(testSuite, &#x27;BeagleBone Black&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp([&#x27;PIL mode configured for test suite: &#x27; testSuite &#x27; on BeagleBone Black&#x27;]);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 17: MATLAB Code for Setting Up PIL for BeagleBone Black</em></p>
+</li>
 </ol>
-<p>For advanced workflows, leverage <strong>Simulink Coverage</strong> and <strong>Embedded Coder</strong> to meet safety-critical standards like ISO 26262 ASIL-D, ensuring robust and compliant BMS software.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/docs/theory/10_modeling_testing/03_matlab/08_testing_code.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/generating_code"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Generating Code</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/closed_loop"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Closed-Loop Testing</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-introduction-to-code-validation" class="table-of-contents__link toc-highlight"><strong>1. Introduction to Code Validation</strong></a></li><li><a href="#2-software-in-the-loop-sil-testing" class="table-of-contents__link toc-highlight"><strong>2. Software-in-the-Loop (SIL) Testing</strong></a><ul><li><a href="#21-workflow" class="table-of-contents__link toc-highlight"><strong>2.1 Workflow</strong></a></li><li><a href="#22-equivalence-testing" class="table-of-contents__link toc-highlight"><strong>2.2 Equivalence Testing</strong></a></li><li><a href="#23-analyzing-results" class="table-of-contents__link toc-highlight"><strong>2.3 Analyzing Results</strong></a></li></ul></li><li><a href="#3-processor-in-the-loop-pil-testing" class="table-of-contents__link toc-highlight"><strong>3. Processor-in-the-Loop (PIL) Testing</strong></a><ul><li><a href="#31-pil-setup" class="table-of-contents__link toc-highlight"><strong>3.1 PIL Setup</strong></a></li><li><a href="#32-execution-time-measurement" class="table-of-contents__link toc-highlight"><strong>3.2 Execution Time Measurement</strong></a></li><li><a href="#33-workflow" class="table-of-contents__link toc-highlight"><strong>3.3 Workflow</strong></a></li></ul></li><li><a href="#4-key-tools-and-workflow" class="table-of-contents__link toc-highlight"><strong>4. Key Tools and Workflow</strong></a><ul><li><a href="#41-simulink-test-manager" class="table-of-contents__link toc-highlight"><strong>4.1 Simulink Test Manager</strong></a></li><li><a href="#42-silpil-manager" class="table-of-contents__link toc-highlight"><strong>4.2 SIL/PIL Manager</strong></a></li><li><a href="#43-simulation-data-inspector" class="table-of-contents__link toc-highlight"><strong>4.3 Simulation Data Inspector</strong></a></li></ul></li><li><a href="#5-benefits" class="table-of-contents__link toc-highlight"><strong>5. Benefits</strong></a></li><li><a href="#6-example-beaglebone-black-pil-test" class="table-of-contents__link toc-highlight"><strong>6. Example: BeagleBone Black PIL Test</strong></a><ul><li><a href="#61-setup" class="table-of-contents__link toc-highlight"><strong>6.1 Setup</strong></a></li><li><a href="#62-results" class="table-of-contents__link toc-highlight"><strong>6.2 Results</strong></a></li></ul></li><li><a href="#summary" class="table-of-contents__link toc-highlight"><strong>Summary</strong></a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="92-results"><strong>9.2 Results</strong><a href="#92-results" class="hash-link" aria-label="Direct link to 92-results" title="Direct link to 92-results">​</a></h3>
+<p>Upon executing the PIL tests, the following outcomes are observed:</p>
+<ul>
+<li><strong>Pass Criteria</strong>:<!-- -->
+<ul>
+<li>All 11 test iterations pass, with <code>Error = 0</code>, indicating identical behavior between MIL, SIL, and PIL tests.</li>
+</ul>
+</li>
+<li><strong>Coverage</strong>:<!-- -->
+<ul>
+<li>Achieves <strong>100% MCDC</strong> coverage through the combination of MIL, SIL, and PIL testing, ensuring comprehensive validation of all logical pathways and conditions.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Results Overview</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">PIL Test Results:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Total Iterations: 11</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Passed: 11</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Failed: 0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Average Execution Time per Cycle: 3 µs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- MCDC Coverage: 100%</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><strong>Analysis</strong>:</p>
+<ol>
+<li>
+<p><strong>Execution Time</strong>:</p>
+<ul>
+<li>The measured execution time of <code>3 µs</code> per cycle confirms that the BMS code operates efficiently within the real-time constraints of the BeagleBone Black hardware.</li>
+</ul>
+</li>
+<li>
+<p><strong>Signal Accuracy</strong>:</p>
+<ul>
+<li>All signal outputs from the PIL tests match those from MIL and SIL runs, validating the functional correctness and consistency of the generated code across different testing environments.</li>
+</ul>
+</li>
+<li>
+<p><strong>Coverage Achievement</strong>:</p>
+<ul>
+<li>Attaining 100% MCDC coverage ensures that every condition within decision statements independently influences the decision outcome, fulfilling the stringent requirements for safety-critical systems.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Example PIL Test Report</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">PIL Test Report</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">---------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">1. Test Summary</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Total Iterations: 11</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Passed: 11</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Failed: 0</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Overall MCDC Coverage: 100%</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">2. Execution Metrics</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Average Execution Time per Cycle: 3 µs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Memory Usage: 48 bytes</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">3. Signal Comparisons</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Error Signal: MIL vs. SIL vs. PIL - All match (Error = 0)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Contactor States: No discrepancies detected</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Fault Flags: Consistent across all tests</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">4. Coverage Details</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Decision Coverage: 100%</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Condition Coverage: 100%</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - MCDC Coverage: 100%</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">5. Recommendations</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Proceed with deployment as all tests have passed successfully.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Maintain regular PIL testing to monitor performance on target hardware.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 18: Sample PIL Test Report Structure</em></p>
+<p>This case study exemplifies the effectiveness of combining SIL and PIL testing to achieve comprehensive validation of generated BMS code, ensuring both functional accuracy and real-time performance on embedded hardware.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="10-summary"><strong>10. Summary</strong><a href="#10-summary" class="hash-link" aria-label="Direct link to 10-summary" title="Direct link to 10-summary">​</a></h2>
+<p>Testing the generated BMS code is a critical phase that bridges the gap between model-based design and deployment in embedded systems. By implementing Software-in-the-Loop (SIL) and Processor-in-the-Loop (PIL) testing methodologies, developers can ensure that the generated code not only replicates the Simulink model&#x27;s functional behavior but also performs efficiently and reliably on target hardware. The key aspects of this approach include:</p>
+<ol>
+<li>
+<p><strong>SIL Testing</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Validate functional correctness of the generated code by executing it on a host PC and comparing results with the Simulink model.</li>
+<li><strong>Benefits</strong>: Identifies discrepancies early, ensuring that the code accurately represents the model.</li>
+</ul>
+</li>
+<li>
+<p><strong>PIL Testing</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Assess the performance and real-time behavior of the generated code on embedded hardware.</li>
+<li><strong>Benefits</strong>: Ensures that the BMS operates within real-time constraints and meets performance requirements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Equivalence Checks</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Compare MIL (Model-in-the-Loop), SIL, and PIL results to confirm consistency and correctness across different testing stages.</li>
+<li><strong>Benefits</strong>: Guarantees that the system behaves as intended in both simulation and real-world environments.</li>
+</ul>
+</li>
+<li>
+<p><strong>Key Tools and Workflow</strong>:</p>
+<ul>
+<li><strong>Simulink Test Manager</strong>: Centralizes test case management, equivalence testing, batch execution, and coverage tracking.</li>
+<li><strong>SIL/PIL Manager</strong>: Facilitates the configuration and execution of SIL and PIL tests on various hardware platforms.</li>
+<li><strong>Simulation Data Inspector</strong>: Provides tools for visual comparison and analysis of simulation data across different test runs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Benefits</strong>:</p>
+<ul>
+<li><strong>Functional Correctness</strong>: Ensures code matches model behavior, reducing the risk of errors.</li>
+<li><strong>Performance Metrics</strong>: Validates real-time operation and resource efficiency on target hardware.</li>
+<li><strong>Certification Readiness</strong>: Aligns testing practices with safety standards, facilitating compliance and certification.</li>
+<li><strong>Risk Mitigation</strong>: Identifies and resolves potential issues early, enhancing system reliability.</li>
+<li><strong>Efficiency and Automation</strong>: Streamlines testing processes, saving time and reducing manual effort.</li>
+<li><strong>Enhanced Traceability</strong>: Maintains clear links between requirements, models, and code, supporting audits and compliance checks.</li>
+<li><strong>Quality Assurance</strong>: Guarantees high-quality, reliable software delivery through comprehensive validation.</li>
+</ul>
+</li>
+</ol>
+<p>By integrating SIL and PIL testing methodologies into the development workflow, developers can achieve a high level of confidence in the generated BMS code, ensuring that it is both functionally accurate and performant in its intended embedded environment. This comprehensive testing approach not only enhances the reliability and safety of the BMS but also streamlines the development process, reducing time and costs associated with manual testing and error rectification.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/docs/theory/10_modeling_testing/03_matlab/08_testing_code.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/generating_code"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Generating Code</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/closed_loop"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Closed-Loop Testing</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-introduction-to-code-validation" class="table-of-contents__link toc-highlight"><strong>1. Introduction to Code Validation</strong></a></li><li><a href="#2-software-in-the-loop-sil-testing" class="table-of-contents__link toc-highlight"><strong>2. Software-in-the-Loop (SIL) Testing</strong></a><ul><li><a href="#21-workflow" class="table-of-contents__link toc-highlight"><strong>2.1 Workflow</strong></a></li><li><a href="#22-equivalence-testing" class="table-of-contents__link toc-highlight"><strong>2.2 Equivalence Testing</strong></a></li><li><a href="#23-analyzing-results" class="table-of-contents__link toc-highlight"><strong>2.3 Analyzing Results</strong></a></li></ul></li><li><a href="#3-processor-in-the-loop-pil-testing" class="table-of-contents__link toc-highlight"><strong>3. Processor-in-the-Loop (PIL) Testing</strong></a><ul><li><a href="#31-pil-setup" class="table-of-contents__link toc-highlight"><strong>3.1 PIL Setup</strong></a></li><li><a href="#32-execution-time-measurement" class="table-of-contents__link toc-highlight"><strong>3.2 Execution Time Measurement</strong></a></li><li><a href="#33-workflow" class="table-of-contents__link toc-highlight"><strong>3.3 Workflow</strong></a></li></ul></li><li><a href="#4-key-tools-and-workflow" class="table-of-contents__link toc-highlight"><strong>4. Key Tools and Workflow</strong></a><ul><li><a href="#41-simulink-test-manager" class="table-of-contents__link toc-highlight"><strong>4.1 Simulink Test Manager</strong></a></li><li><a href="#42-silpil-manager" class="table-of-contents__link toc-highlight"><strong>4.2 SIL/PIL Manager</strong></a></li><li><a href="#43-simulation-data-inspector" class="table-of-contents__link toc-highlight"><strong>4.3 Simulation Data Inspector</strong></a></li></ul></li><li><a href="#5-benefits" class="table-of-contents__link toc-highlight"><strong>5. Benefits</strong></a></li><li><a href="#6-example-beaglebone-black-pil-test" class="table-of-contents__link toc-highlight"><strong>6. Example: BeagleBone Black PIL Test</strong></a><ul><li><a href="#61-setup" class="table-of-contents__link toc-highlight"><strong>6.1 Setup</strong></a></li><li><a href="#62-results" class="table-of-contents__link toc-highlight"><strong>6.2 Results</strong></a></li></ul></li><li><a href="#7-key-tools-and-workflow" class="table-of-contents__link toc-highlight"><strong>7. Key Tools and Workflow</strong></a><ul><li><a href="#71-simulink-test-manager" class="table-of-contents__link toc-highlight"><strong>7.1 Simulink Test Manager</strong></a></li><li><a href="#72-silpil-manager" class="table-of-contents__link toc-highlight"><strong>7.2 SIL/PIL Manager</strong></a></li><li><a href="#73-simulation-data-inspector" class="table-of-contents__link toc-highlight"><strong>7.3 Simulation Data Inspector</strong></a></li></ul></li><li><a href="#8-benefits" class="table-of-contents__link toc-highlight"><strong>8. Benefits</strong></a></li><li><a href="#9-example-beaglebone-black-pil-test" class="table-of-contents__link toc-highlight"><strong>9. Example: BeagleBone Black PIL Test</strong></a><ul><li><a href="#91-setup" class="table-of-contents__link toc-highlight"><strong>9.1 Setup</strong></a></li><li><a href="#92-results" class="table-of-contents__link toc-highlight"><strong>9.2 Results</strong></a></li></ul></li><li><a href="#10-summary" class="table-of-contents__link toc-highlight"><strong>10. Summary</strong></a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
 </body>
 </html>

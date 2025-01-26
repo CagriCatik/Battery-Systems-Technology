@@ -9,168 +9,888 @@
 
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-R4556vVJtIc0EJ3NKnM5ePcM78Zv5e+/ff+f6aZwYzZjnj84pK8i0PZyNnO+g0OQ" crossorigin="anonymous"><link rel="stylesheet" href="/Battery-Systems-Technology/assets/css/styles.49f50c39.css">
-<script src="/Battery-Systems-Technology/assets/js/runtime~main.6d352b01.js" defer="defer"></script>
+<script src="/Battery-Systems-Technology/assets/js/runtime~main.9fb8f1af.js" defer="defer"></script>
 <script src="/Battery-Systems-Technology/assets/js/main.73514512.js" defer="defer"></script>
 </head>
 <body class="navigation-with-keyboard">
 <script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/Battery-Systems-Technology/"><div class="navbar__logo"><img src="/Battery-Systems-Technology/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/Battery-Systems-Technology/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/fundamentals/getting-started">Fundamentals of Battery Technology</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/aging_degradation/getting-started">Aging and Degradation</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/chemistry_design_principles/getting-started">Chemistry and Design Principles</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_pack/getting_started">Battery Pack Engineering</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/thermal_management/getting_started">Thermal Management</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_characteristics/getting_started">Characteristics and Technical Specifications</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_sizing/getting_started">Sizing and Optimization</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/bms/getting_started">Battery Management System</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/bms_architecture/getting_started">BMS Design and Architecture</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/Battery-Systems-Technology/docs/theory/modeling_testing/getting_started">Modeling and Testing</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/glossary/electrical_concepts">Glossary</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/blog">Blog</a></div><div class="navbar__items navbar__items--right"><a href="https://github.com/CagriCatik/Battery-Systems-Technology" target="_blank" rel="noopener noreferrer" class="navbar__item navbar__link">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Battery-Systems-Technology/docs/theory/modeling_testing/getting_started">Getting Started</a></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/Battery-Systems-Technology/docs/category/requirements-and-testing">Requirements and Testing</a><button aria-label="Expand sidebar category &#x27;Requirements and Testing&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item menu__list-item--collapsed"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist" href="/Battery-Systems-Technology/docs/category/modeling">Modeling</a><button aria-label="Expand sidebar category &#x27;Modeling&#x27;" aria-expanded="false" type="button" class="clean-btn menu__caret"></button></div></li><li class="theme-doc-sidebar-item-category theme-doc-sidebar-item-category-level-1 menu__list-item"><div class="menu__list-item-collapsible"><a class="menu__link menu__link--sublist menu__link--active" href="/Battery-Systems-Technology/docs/category/matlabsimulink">MATLAB/Simulink</a><button aria-label="Collapse sidebar category &#x27;MATLAB/Simulink&#x27;" aria-expanded="true" type="button" class="clean-btn menu__caret"></button></div><ul style="display:block;overflow:visible;height:auto" class="menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/intro">Battery Management System in Simulink</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing">Testing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/requirements">Managing Requirements</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/unit-testing">Unit Testing</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/managing_tests">Managing Tests in Simulink</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/measuring">Measuring and Improving Test Coverage</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/generating_code">Generating Code</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing_code">Testing Generated Code</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-2 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" tabindex="0" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/closed_loop">Closed-Loop Testing</a></li></ul></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/Battery-Systems-Technology/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item"><a class="breadcrumbs__link" itemprop="item" href="/Battery-Systems-Technology/docs/category/matlabsimulink"><span itemprop="name">MATLAB/Simulink</span></a><meta itemprop="position" content="1"></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Closed-Loop Testing</span><meta itemprop="position" content="2"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>Closed-Loop Testing</h1></header>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="1-introduction-to-closed-loop-testing"><strong>1. Introduction to Closed-Loop Testing</strong><a href="#1-introduction-to-closed-loop-testing" class="hash-link" aria-label="Direct link to 1-introduction-to-closed-loop-testing" title="Direct link to 1-introduction-to-closed-loop-testing">​</a></h2>
-<p>Closed-loop testing validates the <strong>entire BMS ECU</strong> against the plant model (e.g., battery pack, charger, load) to ensure system-level functionality and safety. This approach:</p>
+<p>Closed-loop testing is a comprehensive validation approach that ensures the entire Battery Management System (BMS) Electronic Control Unit (ECU) operates correctly within its intended environment. By integrating the BMS ECU with a plant model—comprising components such as the battery pack, charger, and load—closed-loop testing simulates real-world interactions and scenarios. This method is pivotal for verifying system-level functionality, safety, and performance, particularly in safety-critical applications like electric vehicles and energy storage systems.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-objectives-of-closed-loop-testing"><strong>Key Objectives of Closed-Loop Testing</strong><a href="#key-objectives-of-closed-loop-testing" class="hash-link" aria-label="Direct link to key-objectives-of-closed-loop-testing" title="Direct link to key-objectives-of-closed-loop-testing">​</a></h3>
+<ol>
+<li>
+<p><strong>Test Interactions</strong>:</p>
 <ul>
-<li><strong>Tests Interactions</strong>: Validates the interactions between the BMS controller and physical components.</li>
-<li><strong>Real-World Scenarios</strong>: Simulates real-world scenarios such as charging, discharging, and fault handling.</li>
-<li><strong>Non-Intrusive Monitoring</strong>: Uses <strong>observers</strong> to monitor internal signals without modifying model interfaces.</li>
+<li><strong>Function</strong>: Validates the dynamic interactions between the BMS controller and physical components (e.g., battery cells, chargers).</li>
+<li><strong>Importance</strong>: Ensures that commands from the BMS lead to expected responses from the hardware, maintaining system stability and safety.</li>
 </ul>
+</li>
+<li>
+<p><strong>Real-World Scenarios</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Simulates various operational scenarios such as charging, discharging, and fault conditions.</li>
+<li><strong>Importance</strong>: Tests the BMS&#x27;s ability to handle typical and extreme conditions, ensuring robust performance under diverse circumstances.</li>
+</ul>
+</li>
+<li>
+<p><strong>Non-Intrusive Monitoring</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Utilizes observers to monitor internal signals and states without altering the model&#x27;s interfaces.</li>
+<li><strong>Importance</strong>: Allows for detailed inspection and validation of the system&#x27;s internal logic and behavior without impacting its operational integrity.</li>
+</ul>
+</li>
+</ol>
+<p>By implementing closed-loop testing, developers can achieve a holistic validation of the BMS, ensuring that both the control algorithms and their interactions with physical components function seamlessly together.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="2-closed-loop-test-harness-setup"><strong>2. Closed-Loop Test Harness Setup</strong><a href="#2-closed-loop-test-harness-setup" class="hash-link" aria-label="Direct link to 2-closed-loop-test-harness-setup" title="Direct link to 2-closed-loop-test-harness-setup">​</a></h2>
+<p>Creating an effective closed-loop test harness is fundamental to simulating the interaction between the BMS ECU and the plant model. This setup allows for the execution of comprehensive test scenarios that mimic real-world operations and fault conditions.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="21-creating-the-test-harness"><strong>2.1 Creating the Test Harness</strong><a href="#21-creating-the-test-harness" class="hash-link" aria-label="Direct link to 21-creating-the-test-harness" title="Direct link to 21-creating-the-test-harness">​</a></h3>
+<p>Setting up a closed-loop test harness involves integrating the BMS ECU with the plant model and defining the necessary inputs and monitoring mechanisms. The following steps outline the process using Simulink Test:</p>
 <ol>
-<li><strong>Isolate the Closed-Loop System</strong>:<!-- -->
+<li>
+<p><strong>Isolate the Closed-Loop System</strong>:</p>
 <ul>
-<li>Combine the BMS ECU and plant model (battery pack, pre-charge circuit).</li>
-<li>Use <strong>Simulink Test</strong> to create a test harness:<!-- -->
+<li><strong>Action</strong>: Combine the BMS ECU with the plant components, such as the battery pack and pre-charge circuit, to form an integrated closed-loop system.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Open the Simulink model containing the BMS ECU and plant components.</li>
+<li>Ensure that all connections between the ECU and plant components are correctly configured to enable two-way communication.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Use Simulink Test to Create a Test Harness</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Utilize Simulink Test to generate a test harness that encapsulates the closed-loop system.</li>
+<li><strong>Procedure</strong>:<!-- -->
 <ul>
 <li>Navigate to <em>Apps &gt; Simulink Test &gt; Create Test Harness</em>.</li>
+<li>Select the appropriate subsystem (e.g., BMS ECU and plant model) to include in the harness.</li>
+<li>Configure the harness settings, specifying inputs and outputs as needed.</li>
 </ul>
 </li>
+<li><strong>Outcome</strong>: A dedicated test harness that facilitates the injection of test inputs and the monitoring of system outputs without affecting the main model.</li>
 </ul>
 </li>
-<li><strong>Define Test Inputs</strong>:<!-- -->
+<li>
+<p><strong>Define Test Inputs</strong>:</p>
 <ul>
-<li><strong>Test Sequence Block</strong>: Inject state requests (e.g., <code>DRIVING</code>, <code>CHARGING</code>, <code>BALANCING</code>).<!-- -->
+<li><strong>Action</strong>: Specify the inputs that drive the test scenarios, including state transitions and environmental conditions.</li>
+<li><strong>Tools</strong>:<!-- -->
 <ul>
-<li>Example:<!-- -->
-<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Step 1: Set State = STANDBY for 10 sec.  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Step 2: Transition to DRIVING when SOC &gt; 30%.  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Step 3: Trigger FAULT if cell_temp &gt; 45°C.  </span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-</li>
+<li><strong>Test Sequence Block</strong>: Defines temporal sequences of events and state transitions.</li>
+<li><strong>Signal Builder</strong>: Provides pre-recorded test scenarios for consistent and repeatable testing.</li>
 </ul>
 </li>
-<li><strong>Signal Builder</strong>: Use pre-recorded test scenarios (e.g., aggressive drive cycles) for consistent testing.</li>
 </ul>
+<p><strong>Test Sequence Block Example</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Step 1: Set State = STANDBY for 10 sec.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Step 2: Transition to DRIVING when SOC &gt; 30%.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Step 3: Trigger FAULT if cell_temp &gt; 45°C.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><strong>Signal Builder Example</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Injects complex and realistic drive cycles to test the BMS under various load conditions.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Open the Signal Builder block within the test harness.</li>
+<li>Import or create drive cycle data representing aggressive acceleration, steady-state driving, and regenerative braking.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Code Snippet: Configuring Test Inputs Using Signal Builder</strong></p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring Test Inputs with Signal Builder</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define test sequence steps</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSequence = [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 0, &#x27;State&#x27;, &#x27;STANDBY&#x27;),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 10, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 31),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 20, &#x27;State&#x27;, &#x27;FAULT&#x27;, &#x27;cell_temp&#x27;, 46)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Configure Test Sequence Block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param([testHarness, &#x27;/Test_Sequence&#x27;], &#x27;Sequence&#x27;, testSequence);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Test Sequence configured for closed-loop testing.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 1: Creating a Test Harness in Simulink Test</em></p>
 </li>
 </ol>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="22-visualizing-results"><strong>2.2 Visualizing Results</strong><a href="#22-visualizing-results" class="hash-link" aria-label="Direct link to 22-visualizing-results" title="Direct link to 22-visualizing-results">​</a></h3>
+<p>Effective visualization of test results is crucial for interpreting the behavior of the closed-loop system. Simulink provides various dashboard blocks that offer real-time monitoring and feedback during simulation runs.</p>
+<ol>
+<li>
+<p><strong>Add Dashboard Blocks</strong>:</p>
 <ul>
-<li><strong>Dashboard Blocks</strong>:<!-- -->
+<li><strong>Function</strong>: Display key signals and states in an intuitive and interactive manner.</li>
+<li><strong>Components</strong>:<!-- -->
 <ul>
-<li>Add gauges, lamps, and displays to monitor:<!-- -->
-<ul>
-<li>Cell temperatures, SOC, pack current/voltage.</li>
-<li>Fault indicators (e.g., over-temperature, over-voltage).</li>
+<li><strong>Gauges</strong>: Visual indicators for real-time values (e.g., cell temperatures, State of Charge (SOC)).</li>
+<li><strong>Lamps</strong>: Status indicators for critical flags (e.g., fault conditions).</li>
+<li><strong>Displays</strong>: Numerical displays for precise monitoring of signal values.</li>
 </ul>
 </li>
 </ul>
 </li>
+<li>
+<p><strong>Monitor Key Signals</strong>:</p>
+<ul>
+<li><strong>Examples</strong>:<!-- -->
+<ul>
+<li><strong>Cell Temperatures</strong>: Gauge displaying the temperature of individual battery cells.</li>
+<li><strong>SOC</strong>: Gauge indicating the current State of Charge of the battery pack.</li>
+<li><strong>Pack Current/Voltage</strong>: Gauges showing the overall current and voltage levels.</li>
+<li><strong>Fault Indicators</strong>: Lamps indicating the presence of over-temperature or over-voltage conditions.</li>
 </ul>
+</li>
+</ul>
+<p><strong>Dashboard Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring Dashboard Blocks</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add a Gauge for SOC</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_block(&#x27;simulink/Commonly Used Blocks/Gauge&#x27;, [testHarness, &#x27;/SOC_Gauge&#x27;]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param([testHarness, &#x27;/SOC_Gauge&#x27;], &#x27;GaugeFormat&#x27;, &#x27;Percentage&#x27;, ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">          &#x27;Position&#x27;, [100, 100, 150, 150]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add a Lamp for Fault Indicator</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_block(&#x27;simulink/Commonly Used Blocks/Lamp&#x27;, [testHarness, &#x27;/Fault_Lamp&#x27;]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param([testHarness, &#x27;/Fault_Lamp&#x27;], &#x27;Position&#x27;, [200, 100, 250, 150]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Dashboard blocks added for result visualization.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 2: Adding Dashboard Blocks for Monitoring</em></p>
+</li>
+</ol>
+<p>By incorporating dashboard blocks, developers can gain real-time insights into the system&#x27;s performance and promptly identify any anomalies or deviations from expected behavior during testing.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="3-observing-internal-signals-without-interface-changes"><strong>3. Observing Internal Signals Without Interface Changes</strong><a href="#3-observing-internal-signals-without-interface-changes" class="hash-link" aria-label="Direct link to 3-observing-internal-signals-without-interface-changes" title="Direct link to 3-observing-internal-signals-without-interface-changes">​</a></h2>
+<p>A critical aspect of closed-loop testing is the ability to monitor internal signals and states within the BMS ECU without altering the model&#x27;s external interfaces. This non-intrusive monitoring is achieved using observers, which provide visibility into the system&#x27;s internal operations.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="31-using-observers"><strong>3.1 Using Observers</strong><a href="#31-using-observers" class="hash-link" aria-label="Direct link to 31-using-observers" title="Direct link to 31-using-observers">​</a></h3>
+<p>Observers allow developers to monitor specific internal signals and states, facilitating detailed analysis and validation without impacting the system&#x27;s functional interfaces.</p>
 <ol>
-<li><strong>Add an Observer</strong>:<!-- -->
+<li>
+<p><strong>Add an Observer</strong>:</p>
 <ul>
-<li>Right-click the test harness canvas → <em>Observers &gt; Add Observer</em>.</li>
+<li><strong>Action</strong>: Incorporate an observer block into the test harness to monitor internal signals.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Right-click on the test harness canvas.</li>
+<li>Select <em>Observers &gt; Add Observer</em>.</li>
+<li>Position the observer block appropriately within the harness.</li>
 </ul>
 </li>
-<li><strong>Select Internal Signals</strong>:<!-- -->
-<ul>
-<li>Click the observer’s badge (🔍) to explore the model hierarchy.</li>
-<li>Example: Monitor <code>Charge_Current_Limit</code> and <code>Discharge_Current_Limit</code> within the BMS ECU.<!-- -->
-<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Path: BMS_ECU → Current_Power_Limits → Charge_Current_Limit  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Path: BMS_ECU → Current_Power_Limits → Discharge_Current_Limit  </span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-</li>
-<li>Click the Wi-Fi icon (📶) to add signals to the observer.</li>
 </ul>
+<p><strong>Observer Addition Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Adding an Observer to the Test Harness</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add Observer Block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_block(&#x27;simulink/Commonly Used Blocks/Observer&#x27;, [testHarness, &#x27;/Internal_Observer&#x27;]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Observer block added to the test harness.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 3: Adding an Observer Block</em></p>
+</li>
+<li>
+<p><strong>Select Internal Signals</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Specify which internal signals to monitor using the observer.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Click on the observer’s badge (🔍) to explore the model hierarchy.</li>
+<li>Navigate through the model to locate desired internal signals.</li>
+<li>Select signals such as <code>Charge_Current_Limit</code> and <code>Discharge_Current_Limit</code> within the BMS ECU.</li>
+<li>Click the Wi-Fi icon (📶) to add the selected signals to the observer.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Signal Selection Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Selecting Internal Signals for Observation</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define signal paths</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">chargeCurrentPath = &#x27;BMS_ECU/Current_Power_Limits/Charge_Current_Limit&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">dischargeCurrentPath = &#x27;BMS_ECU/Current_Power_Limits/Discharge_Current_Limit&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add signals to observer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Observer.addSignal(testHarness, &#x27;Internal_Observer&#x27;, chargeCurrentPath);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Observer.addSignal(testHarness, &#x27;Internal_Observer&#x27;, dischargeCurrentPath);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Internal signals added to the observer.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 4: Selecting Internal Signals for Observation</em></p>
 </li>
 </ol>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="32-observer-output"><strong>3.2 Observer Output</strong><a href="#32-observer-output" class="hash-link" aria-label="Direct link to 32-observer-output" title="Direct link to 32-observer-output">​</a></h3>
+<p>Observers capture and display the monitored internal signals, allowing developers to analyze system behavior in detail without altering the model&#x27;s operational interfaces.</p>
+<ol>
+<li>
+<p><strong>Observer Outputs</strong>:</p>
 <ul>
-<li>Observer outputs appear as non-intrusive signals in the test harness.</li>
-<li>Example:<!-- -->
-<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Observer_Outputs:  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  - Charge_Current_Limit  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  - Discharge_Current_Limit  </span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<li><strong>Function</strong>: Provide non-intrusive access to internal signals, enabling comprehensive monitoring and validation.</li>
+<li><strong>Example Outputs</strong>:<!-- -->
+<ul>
+<li><code>Charge_Current_Limit</code>: Tracks the maximum allowable charge current to prevent overcharging.</li>
+<li><code>Discharge_Current_Limit</code>: Monitors the minimum discharge current to avoid deep discharging.</li>
+</ul>
 </li>
 </ul>
+<p><strong>Observer Output Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring Observer Outputs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Retrieve observed signals</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">observedSignals = Simulink.Observer.getObservedSignals(testHarness, &#x27;Internal_Observer&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Display observed signals</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Observer Outputs:&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(observedSignals);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 5: Displaying Observer Outputs</em></p>
+</li>
+<li>
+<p><strong>Visualization</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Present observed signals in an organized and easily interpretable format within the test harness.</li>
+<li><strong>Usage</strong>:<!-- -->
+<ul>
+<li>Connect observer outputs to display blocks or logging mechanisms for real-time monitoring.</li>
+</ul>
+</li>
+</ul>
+<p><strong>Observer Output Visualization Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Visualizing Observer Outputs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Connect Charge_Current_Limit to a Display Block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_block(&#x27;simulink/Commonly Used Blocks/Display&#x27;, [testHarness, &#x27;/Charge_Current_Display&#x27;]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_line(testHarness, &#x27;Internal_Observer/1&#x27;, &#x27;Charge_Current_Display/1&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Connect Discharge_Current_Limit to a Display Block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_block(&#x27;simulink/Commonly Used Blocks/Display&#x27;, [testHarness, &#x27;/Discharge_Current_Display&#x27;]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_line(testHarness, &#x27;Internal_Observer/2&#x27;, &#x27;Discharge_Current_Display/1&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Observer outputs connected to display blocks for visualization.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 6: Connecting Observer Outputs to Display Blocks</em></p>
+</li>
+</ol>
+<p>By utilizing observers, developers gain deep insights into the BMS&#x27;s internal operations, enabling the identification and rectification of issues that may not be apparent through external monitoring alone.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="4-defining-test-assessments"><strong>4. Defining Test Assessments</strong><a href="#4-defining-test-assessments" class="hash-link" aria-label="Direct link to 4-defining-test-assessments" title="Direct link to 4-defining-test-assessments">​</a></h2>
+<p>Test assessments are automated checks that validate whether the BMS operates within predefined safety and performance parameters. By integrating assessment blocks into the test harness, developers can enforce and verify critical system constraints.</p>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="41-test-assessment-blocks"><strong>4.1 Test Assessment Blocks</strong><a href="#41-test-assessment-blocks" class="hash-link" aria-label="Direct link to 41-test-assessment-blocks" title="Direct link to 41-test-assessment-blocks">​</a></h3>
+<p>Test assessment blocks allow for the automation of verification processes by defining logical conditions that system signals must satisfy during testing.</p>
 <ol>
-<li><strong>Add Assessment Block</strong>:<!-- -->
+<li>
+<p><strong>Add Assessment Block</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Incorporate a Test Assessment block into the observer to define verification conditions.</li>
+<li><strong>Procedure</strong>:<!-- -->
 <ul>
 <li>From the <em>Simulink Test Library</em>, drag a <strong>Test Assessment</strong> block into the observer.</li>
+<li>Connect the assessment block to the relevant observed signals.</li>
 </ul>
 </li>
-<li><strong>Define Verify Statements</strong>:<!-- -->
+</ul>
+<p><strong>Adding Assessment Block Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Adding a Test Assessment Block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add Test Assessment Block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_block(&#x27;simulink/Commonly Used Blocks/Test Assessment&#x27;, [testHarness, &#x27;/Current_Limits_Assessment&#x27;]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Connect assessment block to observer outputs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_line(testHarness, &#x27;Internal_Observer/1&#x27;, &#x27;Current_Limits_Assessment/1&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">add_line(testHarness, &#x27;Internal_Observer/2&#x27;, &#x27;Current_Limits_Assessment/2&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Test Assessment block added and connected to observer outputs.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 7: Adding a Test Assessment Block</em></p>
+</li>
+<li>
+<p><strong>Define Verify Statements</strong>:</p>
 <ul>
-<li>Use logical conditions to validate signals.</li>
-<li>Example:<!-- -->
-<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% Check charge/discharge limits  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">verify(Charge_Current_Limit &lt; 50);  % Must stay below 50A  </span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">verify(Discharge_Current_Limit &gt; 10); % Must stay above 10A  </span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<li><strong>Function</strong>: Specify logical conditions that the monitored signals must satisfy.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Open the Test Assessment block&#x27;s parameters.</li>
+<li>Define <code>verify</code> statements that represent safety and performance constraints.</li>
+</ul>
 </li>
 </ul>
+<p><strong>Define Verify Statements Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Defining Verify Statements in Test Assessment</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define verification conditions</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">assessmentBlock = [testHarness, &#x27;/Current_Limits_Assessment&#x27;];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add verify statements</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.Assessment.addVerify(assessmentBlock, &#x27;Charge_Current_Limit &lt; 50&#x27;, &#x27;Must stay below 50A&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.Assessment.addVerify(assessmentBlock, &#x27;Discharge_Current_Limit &gt; 10&#x27;, &#x27;Must stay above 10A&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Verify statements defined in Test Assessment block.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 8: Defining Verify Statements in Test Assessment</em></p>
 </li>
 </ol>
 <h3 class="anchor anchorWithStickyNavbar_LWe7" id="42-analyzing-results"><strong>4.2 Analyzing Results</strong><a href="#42-analyzing-results" class="hash-link" aria-label="Direct link to 42-analyzing-results" title="Direct link to 42-analyzing-results">​</a></h3>
+<p>Post-test analysis involves reviewing the outcomes of the assessment blocks to determine whether the BMS meets the defined safety and performance criteria.</p>
+<ol>
+<li>
+<p><strong>Diagnostic Viewer</strong>:</p>
 <ul>
-<li><strong>Diagnostic Viewer</strong>:<!-- -->
+<li><strong>Function</strong>: Provides a detailed view of the pass/fail status for each <code>verify</code> statement.</li>
+<li><strong>Usage</strong>:<!-- -->
 <ul>
-<li>Displays pass/fail status for each <code>verify</code> statement.</li>
-<li>Example failure:<!-- -->
-<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">FAIL: Charge_Current_Limit exceeded 50A at t=12.5s.  </span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
-</li>
+<li>Open the <strong>Diagnostic Viewer</strong> after test execution to inspect assessment results.</li>
+<li>Identify any failed assessments and analyze the corresponding conditions.</li>
 </ul>
 </li>
 </ul>
+<p><strong>Diagnostic Viewer Analysis Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Analyzing Assessment Results</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_ClosedLoop_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run the test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Open Diagnostic Viewer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.openDiagnosticViewer(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Diagnostic Viewer opened for assessment result analysis.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 9: Opening Diagnostic Viewer for Assessment Results</em></p>
+</li>
+<li>
+<p><strong>Failure Diagnostics</strong>:</p>
+<ul>
+<li><strong>Function</strong>: Highlights specific instances where <code>verify</code> conditions were not met.</li>
+<li><strong>Example Failure</strong>:<!-- -->
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">FAIL: Charge_Current_Limit exceeded 50A at t=12.5s.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+</li>
+<li><strong>Action</strong>: Investigate the cause of the failure, which may involve reviewing the model logic, adjusting thresholds, or refining control algorithms.</li>
+</ul>
+<p><strong>Failure Diagnostics Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Retrieving Failure Diagnostics</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_ClosedLoop_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Retrieve diagnostics</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">diagnostics = Simulink.Test.TestManager.getDiagnosticReport(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Display diagnostics</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Diagnostics Report:&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(diagnostics);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 10: Retrieving and Displaying Diagnostics Report</em></p>
+</li>
+</ol>
+<p>By systematically defining and analyzing test assessments, developers can ensure that the BMS operates within safe and efficient parameters, thereby enhancing system reliability and compliance with safety standards.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="5-workflow-summary"><strong>5. Workflow Summary</strong><a href="#5-workflow-summary" class="hash-link" aria-label="Direct link to 5-workflow-summary" title="Direct link to 5-workflow-summary">​</a></h2>
+<p>A structured workflow is essential for conducting effective closed-loop testing. The following steps outline a comprehensive approach to validating the BMS ECU within a closed-loop environment.</p>
 <ol>
-<li><strong>Simulate Closed-Loop System</strong>:<!-- -->
+<li>
+<p><strong>Simulate Closed-Loop System</strong>:</p>
 <ul>
-<li>Run the test harness with state requests (e.g., charging → driving → fault).</li>
+<li><strong>Action</strong>: Execute the test harness with predefined state requests and test scenarios.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Run simulations that transition the system through various states (e.g., STANDBY, DRIVING, FAULT).</li>
+<li>Ensure that test inputs are accurately defined to reflect real-world operational conditions.</li>
 </ul>
 </li>
-<li><strong>Monitor Signals</strong>:<!-- -->
-<ul>
-<li>Use dashboard blocks for high-level visualization.</li>
 </ul>
 </li>
-<li><strong>Validate Internal Logic</strong>:<!-- -->
+<li>
+<p><strong>Monitor Signals</strong>:</p>
 <ul>
-<li>Leverage observers and test assessments to check hidden signals.</li>
+<li><strong>Action</strong>: Use dashboard blocks and observers to track critical signals and system states in real-time.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Observe key metrics such as cell temperatures, SOC, pack current/voltage, and fault indicators.</li>
+<li>Utilize observers to monitor internal signals without altering the model&#x27;s interfaces.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Validate Internal Logic</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Employ test assessments and diagnostic tools to verify that internal logic adheres to safety and performance constraints.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Define <code>verify</code> statements to enforce conditions like charge/discharge limits.</li>
+<li>Analyze assessment results using the Diagnostic Viewer to identify and rectify any violations.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate and Refine</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Based on test outcomes, refine the model and test scenarios to address identified issues.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Modify control algorithms or adjust thresholds as needed.</li>
+<li>Re-run tests to validate the effectiveness of the refinements.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Ensure Coverage</strong>:</p>
+<ul>
+<li><strong>Action</strong>: Integrate Simulink Coverage to measure and enhance test completeness.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Enable coverage metrics (e.g., MCDC) within the test harness.</li>
+<li>Analyze coverage reports to identify untested paths and develop additional test cases accordingly.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
+<p><strong>Workflow Diagram</strong>:</p>
+<p><img decoding="async" loading="lazy" src="#" alt="Closed-Loop Testing Workflow" class="img_ev3q"></p>
+<p><em>Figure 11: Structured Workflow for Closed-Loop Testing</em></p>
+<p>By following this workflow, developers can systematically validate the BMS ECU&#x27;s performance and safety within a simulated operational environment, ensuring readiness for deployment in real-world applications.</p>
 <hr>
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="6-key-tools"><strong>6. Key Tools</strong><a href="#6-key-tools" class="hash-link" aria-label="Direct link to 6-key-tools" title="Direct link to 6-key-tools">​</a></h2>
-<table><thead><tr><th><strong>Tool</strong></th><th><strong>Purpose</strong></th></tr></thead><tbody><tr><td><strong>Test Sequence Block</strong></td><td>Define state transitions and temporal logic for test scenarios.</td></tr><tr><td><strong>Signal Builder</strong></td><td>Inject pre-recorded test inputs (e.g., drive cycles, fault triggers).</td></tr><tr><td><strong>Observers</strong></td><td>Monitor internal signals without modifying model interfaces.</td></tr><tr><td><strong>Test Assessment</strong></td><td>Automate verification of signal conditions (e.g., thresholds, timing).</td></tr></tbody></table>
-<hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="7-example-validating-current-limits"><strong>7. Example: Validating Current Limits</strong><a href="#7-example-validating-current-limits" class="hash-link" aria-label="Direct link to 7-example-validating-current-limits" title="Direct link to 7-example-validating-current-limits">​</a></h2>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="71-test-scenario"><strong>7.1 Test Scenario</strong><a href="#71-test-scenario" class="hash-link" aria-label="Direct link to 71-test-scenario" title="Direct link to 71-test-scenario">​</a></h3>
+<p>Simulink offers a suite of tools that facilitate the implementation and execution of closed-loop testing. These tools streamline the testing process, enhance monitoring capabilities, and ensure comprehensive validation of the BMS ECU.</p>
+<table><thead><tr><th><strong>Tool</strong></th><th><strong>Purpose</strong></th></tr></thead><tbody><tr><td><strong>Test Sequence Block</strong></td><td>Define state transitions and temporal logic for test scenarios.</td></tr><tr><td><strong>Signal Builder</strong></td><td>Inject pre-recorded test inputs (e.g., drive cycles, fault triggers).</td></tr><tr><td><strong>Observers</strong></td><td>Monitor internal signals without modifying model interfaces.</td></tr><tr><td><strong>Test Assessment</strong></td><td>Automate verification of signal conditions (e.g., thresholds, timing).</td></tr><tr><td><strong>Diagnostic Viewer</strong></td><td>Analyze pass/fail status of assessments and identify failure points.</td></tr><tr><td><strong>Simulation Data Inspector</strong></td><td>Compare and visualize signals across different test runs (MIL, SIL, PIL).</td></tr><tr><td><strong>Simulink Coverage</strong></td><td>Measure and report test coverage metrics to ensure comprehensive testing.</td></tr></tbody></table>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="61-test-sequence-block"><strong>6.1 Test Sequence Block</strong><a href="#61-test-sequence-block" class="hash-link" aria-label="Direct link to 61-test-sequence-block" title="Direct link to 61-test-sequence-block">​</a></h3>
 <ul>
-<li><strong>Objective</strong>: Ensure charge/discharge currents stay within safe limits during driving.</li>
-<li><strong>Steps</strong>:<!-- -->
-<ol>
-<li>Inject a drive cycle with aggressive acceleration.</li>
-<li>Use observers to monitor <code>Charge_Current_Limit</code> and <code>Discharge_Current_Limit</code>.</li>
-<li>Verify limits via test assessment blocks.</li>
-</ol>
+<li>
+<p><strong>Function</strong>: Defines a sequence of events and state transitions to simulate various operational scenarios.</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Create step-by-step test scenarios that transition the system through different states (e.g., STANDBY → DRIVING → FAULT).</li>
+<li>Specify temporal conditions and triggers for state transitions.</li>
+</ul>
+<p><strong>Test Sequence Block Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring Test Sequence Block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define test sequence steps</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSequence = [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 0, &#x27;State&#x27;, &#x27;STANDBY&#x27;),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 10, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 31),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 20, &#x27;State&#x27;, &#x27;FAULT&#x27;, &#x27;cell_temp&#x27;, 46)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Set Test Sequence parameters</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param([testHarness, &#x27;/Test_Sequence&#x27;], &#x27;Sequence&#x27;, testSequence);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Test Sequence configured with state transitions.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 12: Configuring Test Sequence Block</em></p>
 </li>
 </ul>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="72-results"><strong>7.2 Results</strong><a href="#72-results" class="hash-link" aria-label="Direct link to 72-results" title="Direct link to 72-results">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="62-signal-builder"><strong>6.2 Signal Builder</strong><a href="#62-signal-builder" class="hash-link" aria-label="Direct link to 62-signal-builder" title="Direct link to 62-signal-builder">​</a></h3>
 <ul>
-<li><strong>Pass</strong>: Currents stay within bounds (e.g., charge &lt; 50A, discharge &gt; 10A).</li>
-<li><strong>Fail</strong>: Diagnostic Viewer reports violations (e.g., over-current during acceleration).</li>
+<li>
+<p><strong>Function</strong>: Provides pre-recorded or custom-defined signal scenarios to simulate complex operational conditions.</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Import drive cycle data that reflects realistic and aggressive driving patterns.</li>
+<li>Define fault scenarios to test the BMS&#x27;s response to abnormal conditions.</li>
 </ul>
+<p><strong>Signal Builder Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring Signal Builder for Test Inputs</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load drive cycle data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">load(&#x27;Aggressive_Drive_Cycle.mat&#x27;); % Contains predefined signal data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Set Signal Builder parameters</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param([testHarness, &#x27;/Signal_Builder&#x27;], &#x27;Data&#x27;, driveCycleData);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Signal Builder configured with aggressive drive cycle data.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 13: Configuring Signal Builder with Drive Cycle Data</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="63-observers"><strong>6.3 Observers</strong><a href="#63-observers" class="hash-link" aria-label="Direct link to 63-observers" title="Direct link to 63-observers">​</a></h3>
+<ul>
+<li>
+<p><strong>Function</strong>: Monitor and log internal signals without altering the model&#x27;s external interfaces.</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Add observers to track critical internal variables like <code>Charge_Current_Limit</code> and <code>Discharge_Current_Limit</code>.</li>
+<li>Configure observers to output data for real-time monitoring and post-test analysis.</li>
+</ul>
+<p><strong>Observer Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring Observers</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define signal paths</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">chargeCurrentPath = &#x27;BMS_ECU/Current_Power_Limits/Charge_Current_Limit&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">dischargeCurrentPath = &#x27;BMS_ECU/Current_Power_Limits/Discharge_Current_Limit&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add signals to observer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Observer.addSignal(testHarness, &#x27;Internal_Observer&#x27;, chargeCurrentPath);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Observer.addSignal(testHarness, &#x27;Internal_Observer&#x27;, dischargeCurrentPath);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Internal signals added to observer for monitoring.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 14: Configuring Observers for Internal Signal Monitoring</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="64-test-assessment"><strong>6.4 Test Assessment</strong><a href="#64-test-assessment" class="hash-link" aria-label="Direct link to 64-test-assessment" title="Direct link to 64-test-assessment">​</a></h3>
+<ul>
+<li>
+<p><strong>Function</strong>: Automates the verification of signal conditions to enforce safety and performance constraints.</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Define logical <code>verify</code> statements to ensure signals remain within specified limits.</li>
+<li>Automatically evaluate these conditions during test execution and report pass/fail statuses.</li>
+</ul>
+<p><strong>Test Assessment Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Defining Test Assessments</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define assessment block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">assessmentBlock = [testHarness, &#x27;/Current_Limits_Assessment&#x27;];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add verify statements</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.Assessment.addVerify(assessmentBlock, &#x27;Charge_Current_Limit &lt; 50&#x27;, &#x27;Must stay below 50A&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.Assessment.addVerify(assessmentBlock, &#x27;Discharge_Current_Limit &gt; 10&#x27;, &#x27;Must stay above 10A&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Test Assessments defined for current limits.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 15: Defining Test Assessments for Current Limits</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="65-diagnostic-viewer"><strong>6.5 Diagnostic Viewer</strong><a href="#65-diagnostic-viewer" class="hash-link" aria-label="Direct link to 65-diagnostic-viewer" title="Direct link to 65-diagnostic-viewer">​</a></h3>
+<ul>
+<li>
+<p><strong>Function</strong>: Analyzes and displays the outcomes of test assessments, highlighting any failures or violations.</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Open the Diagnostic Viewer after test execution to review assessment results.</li>
+<li>Investigate specific failures to identify and rectify underlying issues.</li>
+</ul>
+<p><strong>Diagnostic Viewer Usage Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Opening Diagnostic Viewer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_ClosedLoop_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run the test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Open Diagnostic Viewer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.openDiagnosticViewer(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Diagnostic Viewer opened for result analysis.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 16: Opening Diagnostic Viewer for Test Analysis</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="66-simulation-data-inspector"><strong>6.6 Simulation Data Inspector</strong><a href="#66-simulation-data-inspector" class="hash-link" aria-label="Direct link to 66-simulation-data-inspector" title="Direct link to 66-simulation-data-inspector">​</a></h3>
+<ul>
+<li>
+<p><strong>Function</strong>: Facilitates the comparison and visualization of simulation data across different test runs (e.g., MIL, SIL, PIL).</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Load and overlay signals from multiple test runs to detect discrepancies.</li>
+<li>Analyze signal trajectories and timing to ensure consistency and correctness.</li>
+</ul>
+<p><strong>Simulation Data Inspector Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Using Simulation Data Inspector for Signal Comparison</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load MIL data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">milData = sdiCollection(&#x27;BMS_MIL_Data.sdi&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load SIL data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">silData = sdiCollection(&#x27;BMS_SIL_Data.sdi&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load PIL data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">pilData = sdiCollection(&#x27;BMS_PIL_Data.sdi&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Open Simulation Data Inspector</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.sdi.view;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Compare specific signals across MIL, SIL, and PIL</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.sdi.compare(milData, silData, pilData, &#x27;Error&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Signal comparison completed in Simulation Data Inspector.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 17: Comparing Signals in Simulation Data Inspector</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="67-simulink-coverage"><strong>6.7 Simulink Coverage</strong><a href="#67-simulink-coverage" class="hash-link" aria-label="Direct link to 67-simulink-coverage" title="Direct link to 67-simulink-coverage">​</a></h3>
+<ul>
+<li>
+<p><strong>Function</strong>: Measures and reports the extent to which the model has been exercised by the test cases.</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Enable coverage metrics such as Decision Coverage, Condition Coverage, and MCDC.</li>
+<li>Analyze coverage reports to identify untested paths and enhance test suites accordingly.</li>
+</ul>
+<p><strong>Simulink Coverage Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Enabling Simulink Coverage</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_ClosedLoop_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Select the test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.selectTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Enable coverage metrics</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setCoverageSettings(testSuite, ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;Decision&#x27;, true, &#x27;Condition&#x27;, true, &#x27;MCDC&#x27;, true);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp([&#x27;Coverage metrics enabled for test suite: &#x27; testSuite]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run the test suite with coverage enabled</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Retrieve and display coverage results</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">coverageResults = Simulink.Test.TestManager.getCoverage(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Coverage Results:&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(coverageResults);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 18: Enabling and Running Simulink Coverage</em></p>
+</li>
+</ul>
+<p>By leveraging these tools, developers can create a robust closed-loop testing environment that ensures comprehensive validation of the BMS ECU within its operational context.</p>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="8-benefits-of-closed-loop-testing"><strong>8. Benefits of Closed-Loop Testing</strong><a href="#8-benefits-of-closed-loop-testing" class="hash-link" aria-label="Direct link to 8-benefits-of-closed-loop-testing" title="Direct link to 8-benefits-of-closed-loop-testing">​</a></h2>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="7-example-validating-current-limits"><strong>7. Example: Validating Current Limits</strong><a href="#7-example-validating-current-limits" class="hash-link" aria-label="Direct link to 7-example-validating-current-limits" title="Direct link to 7-example-validating-current-limits">​</a></h2>
+<p>To illustrate the application of closed-loop testing, consider an example focused on validating the BMS&#x27;s charge and discharge current limits. This example demonstrates how to set up test scenarios, monitor internal signals, define assessments, and analyze results to ensure that the BMS operates within safe and efficient parameters.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="71-test-scenario"><strong>7.1 Test Scenario</strong><a href="#71-test-scenario" class="hash-link" aria-label="Direct link to 71-test-scenario" title="Direct link to 71-test-scenario">​</a></h3>
+<p><strong>Objective</strong>: Ensure that the BMS maintains charge and discharge currents within specified safe limits during driving operations.</p>
+<p><strong>Steps</strong>:</p>
 <ol>
-<li><strong>System Validation</strong>: Test interactions between BMS logic and plant dynamics, ensuring system-level functionality.</li>
-<li><strong>Non-Intrusive Monitoring</strong>: Observe internal signals without redesigning models, reducing development time.</li>
-<li><strong>Automated Checks</strong>: Use <code>verify</code> statements to enforce safety constraints, ensuring compliance with design requirements.</li>
+<li><strong>Inject a Drive Cycle with Aggressive Acceleration</strong>:<!-- -->
+<ul>
+<li><strong>Action</strong>: Use the Test Sequence Block to define a drive cycle that includes rapid acceleration phases to test the BMS&#x27;s ability to handle high current demands.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Set the system state to <code>DRIVING</code> with SOC starting above 30%.</li>
+<li>Simulate aggressive acceleration events that demand higher charge and discharge currents.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Use Observers to Monitor Current Limits</strong>:<!-- -->
+<ul>
+<li><strong>Action</strong>: Observe the <code>Charge_Current_Limit</code> and <code>Discharge_Current_Limit</code> signals to ensure they remain within predefined thresholds.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Connect observers to the relevant internal signals within the BMS ECU.</li>
+<li>Ensure that these signals are logged and available for assessment.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Verify Limits via Test Assessment Blocks</strong>:<!-- -->
+<ul>
+<li><strong>Action</strong>: Define and execute <code>verify</code> statements to automatically check that current limits are not exceeded during the test run.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Configure Test Assessment blocks with conditions like <code>Charge_Current_Limit &lt; 50A</code> and <code>Discharge_Current_Limit &gt; 10A</code>.</li>
+<li>Run the test harness and monitor assessment results for compliance.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
+<p><strong>Test Scenario Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring Test Scenario for Current Limits</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define aggressive acceleration drive cycle</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">driveCycleData = [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 0, &#x27;State&#x27;, &#x27;STANDBY&#x27;, &#x27;SOC&#x27;, 35, &#x27;cell_temp&#x27;, 40),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 10, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 35, &#x27;cell_temp&#x27;, 40),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 20, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 34, &#x27;cell_temp&#x27;, 42),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 30, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 33, &#x27;cell_temp&#x27;, 43),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 40, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 32, &#x27;cell_temp&#x27;, 44),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 50, &#x27;State&#x27;, &#x27;FAULT&#x27;, &#x27;SOC&#x27;, 32, &#x27;cell_temp&#x27;, 46)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Configure Test Sequence Block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param([testHarness, &#x27;/Test_Sequence&#x27;], &#x27;Sequence&#x27;, driveCycleData);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add Verify Statements for Current Limits</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">assessmentBlock = [testHarness, &#x27;/Current_Limits_Assessment&#x27;];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.Assessment.addVerify(assessmentBlock, &#x27;Charge_Current_Limit &lt; 50&#x27;, &#x27;Must stay below 50A&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.Assessment.addVerify(assessmentBlock, &#x27;Discharge_Current_Limit &gt; 10&#x27;, &#x27;Must stay above 10A&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Test scenario configured for validating current limits.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 19: Configuring Test Scenario for Current Limits</em></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="72-results"><strong>7.2 Results</strong><a href="#72-results" class="hash-link" aria-label="Direct link to 72-results" title="Direct link to 72-results">​</a></h3>
+<p>Upon executing the test scenario, the following outcomes are observed:</p>
+<ol>
+<li><strong>Pass Criteria</strong>:<!-- -->
+<ul>
+<li><strong>Condition</strong>: All <code>verify</code> statements are satisfied; <code>Charge_Current_Limit</code> remains below 50A and <code>Discharge_Current_Limit</code> stays above 10A.</li>
+<li><strong>Outcome</strong>: The BMS operates within safe current limits, passing the test case.</li>
+</ul>
+</li>
+<li><strong>Fail Criteria</strong>:<!-- -->
+<ul>
+<li><strong>Condition</strong>: Any <code>verify</code> statement fails (e.g., <code>Charge_Current_Limit</code> exceeds 50A).</li>
+<li><strong>Outcome</strong>: The test case fails, and the Diagnostic Viewer reports the specific condition violation.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Test Results Overview</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Test Results:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">--------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Test Case: Validate Current Limits</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  - Charge_Current_Limit: 48A (Pass)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  - Discharge_Current_Limit: 12A (Pass)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  - Overall Result: PASS</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><strong>Analysis</strong>:</p>
+<ol>
+<li><strong>Execution Time</strong>:<!-- -->
+<ul>
+<li><strong>Observation</strong>: The system maintained real-time performance, with control loops executing within the required time constraints.</li>
+</ul>
+</li>
+<li><strong>Signal Accuracy</strong>:<!-- -->
+<ul>
+<li><strong>Observation</strong>: All observed signals matched the expected values, indicating consistent behavior across MIL, SIL, and PIL testing stages.</li>
+</ul>
+</li>
+<li><strong>Coverage Achievement</strong>:<!-- -->
+<ul>
+<li><strong>Observation</strong>: The test scenario contributed to achieving full MCDC coverage, ensuring that all logical conditions within the current limit checks were thoroughly exercised.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Example Diagnostic Report</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Diagnostic Viewer Report</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Test Case: Validate Current Limits</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">1. Charge_Current_Limit Verification</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Condition: Charge_Current_Limit &lt; 50A</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Actual Value: 48A</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Status: PASS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">2. Discharge_Current_Limit Verification</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Condition: Discharge_Current_Limit &gt; 10A</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Actual Value: 12A</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Status: PASS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Overall Test Result: PASS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Recommendations:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Continue monitoring current limits during diverse operational scenarios.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Consider testing additional fault conditions to further validate BMS robustness.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 20: Sample Diagnostic Viewer Report</em></p>
+<p>This example demonstrates how closed-loop testing effectively validates critical aspects of the BMS, ensuring that it operates safely and efficiently within its intended operational parameters.</p>
 <hr>
-<h2 class="anchor anchorWithStickyNavbar_LWe7" id="summary"><strong>Summary</strong><a href="#summary" class="hash-link" aria-label="Direct link to summary" title="Direct link to summary">​</a></h2>
-<p>Closed-loop testing for BMS involves:</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="8-key-tools"><strong>8. Key Tools</strong><a href="#8-key-tools" class="hash-link" aria-label="Direct link to 8-key-tools" title="Direct link to 8-key-tools">​</a></h2>
+<p>Implementing closed-loop testing effectively requires the integration of several specialized tools within the Simulink environment. These tools facilitate the creation of test harnesses, define test scenarios, monitor internal signals, automate assessments, and analyze results.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="81-test-sequence-block"><strong>8.1 Test Sequence Block</strong><a href="#81-test-sequence-block" class="hash-link" aria-label="Direct link to 81-test-sequence-block" title="Direct link to 81-test-sequence-block">​</a></h3>
+<ul>
+<li>
+<p><strong>Function</strong>: Defines a sequence of state transitions and temporal events to simulate various operational scenarios.</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Create step-by-step test sequences that transition the system through different states (e.g., STANDBY → DRIVING → FAULT).</li>
+<li>Specify timing and conditions for each state transition to mimic real-world operations.</li>
+</ul>
+<p><strong>Test Sequence Block Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Defining a Test Sequence for State Transitions</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define sequence steps</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSequence = [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 0, &#x27;State&#x27;, &#x27;STANDBY&#x27;, &#x27;SOC&#x27;, 35, &#x27;cell_temp&#x27;, 40),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 10, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 35, &#x27;cell_temp&#x27;, 40),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 20, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 34, &#x27;cell_temp&#x27;, 42),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 30, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 33, &#x27;cell_temp&#x27;, 43),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 40, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 32, &#x27;cell_temp&#x27;, 44),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 50, &#x27;State&#x27;, &#x27;FAULT&#x27;, &#x27;SOC&#x27;, 32, &#x27;cell_temp&#x27;, 46)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Set Test Sequence parameters</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param([testHarness, &#x27;/Test_Sequence&#x27;], &#x27;Sequence&#x27;, testSequence);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Test Sequence defined for closed-loop testing.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 21: Defining Test Sequence for State Transitions</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="82-signal-builder"><strong>8.2 Signal Builder</strong><a href="#82-signal-builder" class="hash-link" aria-label="Direct link to 82-signal-builder" title="Direct link to 82-signal-builder">​</a></h3>
+<ul>
+<li>
+<p><strong>Function</strong>: Provides a mechanism to inject complex and pre-defined signal scenarios into the test harness.</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Import or create drive cycle data that simulates realistic and aggressive driving patterns.</li>
+<li>Define fault scenarios that trigger specific BMS responses, ensuring comprehensive testing of fault handling mechanisms.</li>
+</ul>
+<p><strong>Signal Builder Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring Signal Builder with Drive Cycles</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load predefined drive cycle data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">load(&#x27;Aggressive_Drive_Cycle.mat&#x27;); % Contains driveCycleData structure</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Configure Signal Builder block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param([testHarness, &#x27;/Signal_Builder&#x27;], &#x27;Data&#x27;, driveCycleData);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Signal Builder configured with predefined drive cycles.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 22: Configuring Signal Builder with Drive Cycle Data</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="83-observers"><strong>8.3 Observers</strong><a href="#83-observers" class="hash-link" aria-label="Direct link to 83-observers" title="Direct link to 83-observers">​</a></h3>
+<ul>
+<li>
+<p><strong>Function</strong>: Monitor and log internal signals and states within the BMS ECU without altering external interfaces.</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Add observers to track critical internal variables like <code>Charge_Current_Limit</code> and <code>Discharge_Current_Limit</code>.</li>
+<li>Configure observers to output data for real-time monitoring and post-test analysis.</li>
+</ul>
+<p><strong>Observer Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Adding and Configuring Observers</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define signal paths for observation</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">chargeCurrentPath = &#x27;BMS_ECU/Current_Power_Limits/Charge_Current_Limit&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">dischargeCurrentPath = &#x27;BMS_ECU/Current_Power_Limits/Discharge_Current_Limit&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add signals to observer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Observer.addSignal(testHarness, &#x27;Internal_Observer&#x27;, chargeCurrentPath);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Observer.addSignal(testHarness, &#x27;Internal_Observer&#x27;, dischargeCurrentPath);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Observers configured for monitoring internal current limits.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 23: Configuring Observers for Internal Signal Monitoring</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="84-test-assessment"><strong>8.4 Test Assessment</strong><a href="#84-test-assessment" class="hash-link" aria-label="Direct link to 84-test-assessment" title="Direct link to 84-test-assessment">​</a></h3>
+<ul>
+<li>
+<p><strong>Function</strong>: Automates the verification of signal conditions to ensure compliance with safety and performance standards.</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Define logical conditions (<code>verify</code> statements) that system signals must satisfy during testing.</li>
+<li>Automate the evaluation of these conditions to generate pass/fail outcomes.</li>
+</ul>
+<p><strong>Test Assessment Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Defining Verify Statements in Test Assessment</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define assessment block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">assessmentBlock = [testHarness, &#x27;/Current_Limits_Assessment&#x27;];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add verify statements</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.Assessment.addVerify(assessmentBlock, &#x27;Charge_Current_Limit &lt; 50&#x27;, &#x27;Must stay below 50A&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.Assessment.addVerify(assessmentBlock, &#x27;Discharge_Current_Limit &gt; 10&#x27;, &#x27;Must stay above 10A&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Verify statements defined in Test Assessment block.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 24: Defining Verify Statements in Test Assessment</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="85-diagnostic-viewer"><strong>8.5 Diagnostic Viewer</strong><a href="#85-diagnostic-viewer" class="hash-link" aria-label="Direct link to 85-diagnostic-viewer" title="Direct link to 85-diagnostic-viewer">​</a></h3>
+<ul>
+<li>
+<p><strong>Function</strong>: Analyzes and displays the outcomes of test assessments, highlighting any failures or violations.</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Open the Diagnostic Viewer after test execution to review assessment results.</li>
+<li>Investigate specific failures to identify and rectify underlying issues.</li>
+</ul>
+<p><strong>Diagnostic Viewer Usage Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Opening Diagnostic Viewer for Test Analysis</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_ClosedLoop_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run the test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Open Diagnostic Viewer</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.openDiagnosticViewer(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Diagnostic Viewer opened for assessment result analysis.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 25: Opening Diagnostic Viewer for Test Analysis</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="86-simulation-data-inspector"><strong>8.6 Simulation Data Inspector</strong><a href="#86-simulation-data-inspector" class="hash-link" aria-label="Direct link to 86-simulation-data-inspector" title="Direct link to 86-simulation-data-inspector">​</a></h3>
+<ul>
+<li>
+<p><strong>Function</strong>: Facilitates the comparison and visualization of simulation data from multiple test runs (e.g., MIL, SIL, PIL).</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Load and overlay signals from different test runs to detect discrepancies and ensure consistency.</li>
+<li>Analyze signal trajectories and timing to validate system behavior.</li>
+</ul>
+<p><strong>Simulation Data Inspector Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Using Simulation Data Inspector for Signal Comparison</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load MIL data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">milData = sdiCollection(&#x27;BMS_MIL_Data.sdi&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load SIL data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">silData = sdiCollection(&#x27;BMS_SIL_Data.sdi&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Load PIL data</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">pilData = sdiCollection(&#x27;BMS_PIL_Data.sdi&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Open Simulation Data Inspector</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.sdi.view;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Compare specific signals across MIL, SIL, and PIL</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.sdi.compare(milData, silData, pilData, &#x27;Error&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Signal comparison completed in Simulation Data Inspector.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 26: Comparing Signals in Simulation Data Inspector</em></p>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="87-simulink-coverage"><strong>8.7 Simulink Coverage</strong><a href="#87-simulink-coverage" class="hash-link" aria-label="Direct link to 87-simulink-coverage" title="Direct link to 87-simulink-coverage">​</a></h3>
+<ul>
+<li>
+<p><strong>Function</strong>: Measures and reports the extent to which the model has been exercised by the test cases.</p>
+</li>
+<li>
+<p><strong>Usage</strong>:</p>
+<ul>
+<li>Enable coverage metrics such as Decision Coverage, Condition Coverage, and Modified Condition/Decision Coverage (MCDC) within the test harness.</li>
+<li>Analyze coverage reports to identify untested paths and enhance test suites accordingly.</li>
+</ul>
+<p><strong>Simulink Coverage Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Enabling and Running Simulink Coverage</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testSuite = &#x27;BMS_ClosedLoop_Test_Suite&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Select the test suite</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.selectTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Enable coverage metrics</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.setCoverageSettings(testSuite, ...</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    &#x27;Decision&#x27;, true, &#x27;Condition&#x27;, true, &#x27;MCDC&#x27;, true);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp([&#x27;Coverage metrics enabled for test suite: &#x27; testSuite]);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Run the test suite with coverage enabled</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.TestManager.runTestSuite(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Retrieve and display coverage results</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">coverageResults = Simulink.Test.TestManager.getCoverage(testSuite);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Coverage Results:&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(coverageResults);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 27: Enabling and Running Simulink Coverage</em></p>
+</li>
+</ul>
+<p>By effectively utilizing these tools, developers can create a robust closed-loop testing environment that ensures comprehensive validation of the BMS ECU within its operational context.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="9-example-validating-current-limits"><strong>9. Example: Validating Current Limits</strong><a href="#9-example-validating-current-limits" class="hash-link" aria-label="Direct link to 9-example-validating-current-limits" title="Direct link to 9-example-validating-current-limits">​</a></h2>
+<p>To demonstrate the practical application of closed-loop testing, consider an example focused on validating the BMS&#x27;s charge and discharge current limits. This example showcases how to set up test scenarios, monitor internal signals, define assessments, and analyze results to ensure that the BMS operates within safe and efficient parameters.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="91-test-scenario"><strong>9.1 Test Scenario</strong><a href="#91-test-scenario" class="hash-link" aria-label="Direct link to 91-test-scenario" title="Direct link to 91-test-scenario">​</a></h3>
+<p><strong>Objective</strong>: Ensure that the BMS maintains charge and discharge currents within specified safe limits during driving operations.</p>
+<p><strong>Steps</strong>:</p>
 <ol>
-<li><strong>Creating a Test Harness</strong>: Use <strong>Test Sequence</strong> or <strong>Signal Builder</strong> blocks to define test scenarios.</li>
-<li><strong>Monitoring Signals</strong>: Use <strong>observers</strong> to monitor internal signals (e.g., current limits) without modifying the model.</li>
-<li><strong>Validating Behavior</strong>: Use <strong>Test Assessment</strong> blocks and the <strong>Diagnostic Viewer</strong> to enforce safety constraints and validate system behavior.</li>
+<li><strong>Inject a Drive Cycle with Aggressive Acceleration</strong>:<!-- -->
+<ul>
+<li><strong>Action</strong>: Use the Test Sequence Block to define a drive cycle that includes rapid acceleration phases to test the BMS&#x27;s ability to handle high current demands.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Set the system state to <code>DRIVING</code> with SOC starting above 30%.</li>
+<li>Simulate aggressive acceleration events that demand higher charge and discharge currents.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Use Observers to Monitor Current Limits</strong>:<!-- -->
+<ul>
+<li><strong>Action</strong>: Observe the <code>Charge_Current_Limit</code> and <code>Discharge_Current_Limit</code> signals to ensure they remain within predefined thresholds.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Connect observers to the relevant internal signals within the BMS ECU.</li>
+<li>Ensure that these signals are logged and available for assessment.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Verify Limits via Test Assessment Blocks</strong>:<!-- -->
+<ul>
+<li><strong>Action</strong>: Define and execute <code>verify</code> statements to automatically check that current limits are not exceeded during the test run.</li>
+<li><strong>Procedure</strong>:<!-- -->
+<ul>
+<li>Configure Test Assessment blocks with conditions like <code>Charge_Current_Limit &lt; 50A</code> and <code>Discharge_Current_Limit &gt; 10A</code>.</li>
+<li>Run the test harness and monitor assessment results for compliance.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ol>
-<p>For advanced workflows, integrate <strong>Simulink Coverage</strong> to measure test completeness and ensure compliance with standards like ISO 26262. This approach ensures robust and reliable BMS software, ready for real-world deployment.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/docs/theory/10_modeling_testing/03_matlab/09_closed_loop.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing_code"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Testing Generated Code</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-introduction-to-closed-loop-testing" class="table-of-contents__link toc-highlight"><strong>1. Introduction to Closed-Loop Testing</strong></a></li><li><a href="#2-closed-loop-test-harness-setup" class="table-of-contents__link toc-highlight"><strong>2. Closed-Loop Test Harness Setup</strong></a><ul><li><a href="#21-creating-the-test-harness" class="table-of-contents__link toc-highlight"><strong>2.1 Creating the Test Harness</strong></a></li><li><a href="#22-visualizing-results" class="table-of-contents__link toc-highlight"><strong>2.2 Visualizing Results</strong></a></li></ul></li><li><a href="#3-observing-internal-signals-without-interface-changes" class="table-of-contents__link toc-highlight"><strong>3. Observing Internal Signals Without Interface Changes</strong></a><ul><li><a href="#31-using-observers" class="table-of-contents__link toc-highlight"><strong>3.1 Using Observers</strong></a></li><li><a href="#32-observer-output" class="table-of-contents__link toc-highlight"><strong>3.2 Observer Output</strong></a></li></ul></li><li><a href="#4-defining-test-assessments" class="table-of-contents__link toc-highlight"><strong>4. Defining Test Assessments</strong></a><ul><li><a href="#41-test-assessment-blocks" class="table-of-contents__link toc-highlight"><strong>4.1 Test Assessment Blocks</strong></a></li><li><a href="#42-analyzing-results" class="table-of-contents__link toc-highlight"><strong>4.2 Analyzing Results</strong></a></li></ul></li><li><a href="#5-workflow-summary" class="table-of-contents__link toc-highlight"><strong>5. Workflow Summary</strong></a></li><li><a href="#6-key-tools" class="table-of-contents__link toc-highlight"><strong>6. Key Tools</strong></a></li><li><a href="#7-example-validating-current-limits" class="table-of-contents__link toc-highlight"><strong>7. Example: Validating Current Limits</strong></a><ul><li><a href="#71-test-scenario" class="table-of-contents__link toc-highlight"><strong>7.1 Test Scenario</strong></a></li><li><a href="#72-results" class="table-of-contents__link toc-highlight"><strong>7.2 Results</strong></a></li></ul></li><li><a href="#8-benefits-of-closed-loop-testing" class="table-of-contents__link toc-highlight"><strong>8. Benefits of Closed-Loop Testing</strong></a></li><li><a href="#summary" class="table-of-contents__link toc-highlight"><strong>Summary</strong></a></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
+<p><strong>Test Scenario Configuration Example</strong>:</p>
+<div class="language-matlab codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-matlab codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">% MATLAB Code Snippet: Configuring Test Scenario for Current Limits</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">testHarness = &#x27;BMS_ClosedLoop_Test_Harness&#x27;;</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Define aggressive acceleration drive cycle</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">driveCycleData = [</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 0, &#x27;State&#x27;, &#x27;STANDBY&#x27;, &#x27;SOC&#x27;, 35, &#x27;cell_temp&#x27;, 40),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 10, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 35, &#x27;cell_temp&#x27;, 40),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 20, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 34, &#x27;cell_temp&#x27;, 42),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 30, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 33, &#x27;cell_temp&#x27;, 43),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 40, &#x27;State&#x27;, &#x27;DRIVING&#x27;, &#x27;SOC&#x27;, 32, &#x27;cell_temp&#x27;, 44),</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    struct(&#x27;time&#x27;, 50, &#x27;State&#x27;, &#x27;FAULT&#x27;, &#x27;SOC&#x27;, 32, &#x27;cell_temp&#x27;, 46)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Configure Test Sequence Block</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">set_param([testHarness, &#x27;/Test_Sequence&#x27;], &#x27;Sequence&#x27;, driveCycleData);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">% Add Verify Statements for Current Limits</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">assessmentBlock = [testHarness, &#x27;/Current_Limits_Assessment&#x27;];</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.Assessment.addVerify(assessmentBlock, &#x27;Charge_Current_Limit &lt; 50&#x27;, &#x27;Must stay below 50A&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Simulink.Test.Assessment.addVerify(assessmentBlock, &#x27;Discharge_Current_Limit &gt; 10&#x27;, &#x27;Must stay above 10A&#x27;);</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">disp(&#x27;Test scenario configured for validating current limits.&#x27;);</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 28: Configuring Test Scenario for Current Limits</em></p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="92-results"><strong>9.2 Results</strong><a href="#92-results" class="hash-link" aria-label="Direct link to 92-results" title="Direct link to 92-results">​</a></h3>
+<p>Upon executing the test scenario, the following outcomes are observed:</p>
+<ol>
+<li><strong>Pass Criteria</strong>:<!-- -->
+<ul>
+<li><strong>Condition</strong>: All <code>verify</code> statements are satisfied; <code>Charge_Current_Limit</code> remains below 50A and <code>Discharge_Current_Limit</code> stays above 10A.</li>
+<li><strong>Outcome</strong>: The BMS operates within safe current limits, passing the test case.</li>
+</ul>
+</li>
+<li><strong>Fail Criteria</strong>:<!-- -->
+<ul>
+<li><strong>Condition</strong>: Any <code>verify</code> statement fails (e.g., <code>Charge_Current_Limit</code> exceeds 50A).</li>
+<li><strong>Outcome</strong>: The test case fails, and the Diagnostic Viewer reports the specific condition violation.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Test Results Overview</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Test Results:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">--------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Test Case: Validate Current Limits</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  - Charge_Current_Limit: 48A (Pass)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  - Discharge_Current_Limit: 12A (Pass)</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">  - Overall Result: PASS</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><strong>Analysis</strong>:</p>
+<ol>
+<li><strong>Execution Time</strong>:<!-- -->
+<ul>
+<li><strong>Observation</strong>: The system maintained real-time performance, with control loops executing within the required time constraints.</li>
+</ul>
+</li>
+<li><strong>Signal Accuracy</strong>:<!-- -->
+<ul>
+<li><strong>Observation</strong>: All observed signals matched the expected values, indicating consistent behavior across MIL, SIL, and PIL testing stages.</li>
+</ul>
+</li>
+<li><strong>Coverage Achievement</strong>:<!-- -->
+<ul>
+<li><strong>Observation</strong>: The test scenario contributed to achieving full MCDC coverage, ensuring that all logical conditions within the current limit checks were thoroughly exercised.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Example Diagnostic Report</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">Diagnostic Viewer Report</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">------------------------</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Test Case: Validate Current Limits</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">1. Charge_Current_Limit Verification</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Condition: Charge_Current_Limit &lt; 50A</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Actual Value: 48A</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Status: PASS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">2. Discharge_Current_Limit Verification</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Condition: Discharge_Current_Limit &gt; 10A</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Actual Value: 12A</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">   - Status: PASS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Overall Test Result: PASS</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain" style="display:inline-block"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">Recommendations:</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Continue monitoring current limits during diverse operational scenarios.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Consider testing additional fault conditions to further validate BMS robustness.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p><em>Figure 29: Sample Diagnostic Viewer Report</em></p>
+<p>This example demonstrates how closed-loop testing effectively validates critical aspects of the BMS, ensuring that it operates safely and efficiently within its intended operational parameters.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="9-benefits-of-closed-loop-testing"><strong>9. Benefits of Closed-Loop Testing</strong><a href="#9-benefits-of-closed-loop-testing" class="hash-link" aria-label="Direct link to 9-benefits-of-closed-loop-testing" title="Direct link to 9-benefits-of-closed-loop-testing">​</a></h2>
+<p>Implementing closed-loop testing for the BMS ECU offers numerous advantages that significantly enhance system validation, reliability, and compliance with safety standards. The key benefits include:</p>
+<ol>
+<li>
+<p><strong>System Validation</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Tests the interactions between the BMS controller and plant dynamics, ensuring that all components work harmoniously.</li>
+<li><strong>Benefit</strong>: Confirms that the integrated system functions as intended, maintaining stability and performance under various operational conditions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Non-Intrusive Monitoring</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Utilizes observers to monitor internal signals without modifying the model&#x27;s external interfaces.</li>
+<li><strong>Benefit</strong>: Enables detailed inspection and validation of internal logic and behavior without impacting system functionality or introducing potential errors.</li>
+</ul>
+</li>
+<li>
+<p><strong>Automated Checks</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Employs <code>verify</code> statements within Test Assessment blocks to enforce safety constraints and performance metrics.</li>
+<li><strong>Benefit</strong>: Automates the verification process, reducing manual oversight and ensuring consistent adherence to predefined conditions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Real-World Scenario Simulation</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Simulates real-world operational scenarios such as aggressive driving, charging, discharging, and fault conditions.</li>
+<li><strong>Benefit</strong>: Tests the BMS&#x27;s ability to handle typical and extreme conditions, ensuring robust performance and safety in real-world applications.</li>
+</ul>
+</li>
+<li>
+<p><strong>Comprehensive Coverage</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Integrates Simulink Coverage to measure and ensure that all critical execution paths are tested.</li>
+<li><strong>Benefit</strong>: Identifies untested areas within the model, allowing developers to enhance test suites for thorough validation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Enhanced Traceability</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Maintains clear bi-directional links between requirements, model elements, and test cases.</li>
+<li><strong>Benefit</strong>: Facilitates audits and compliance checks by ensuring that all requirements are adequately addressed and validated through testing.</li>
+</ul>
+</li>
+<li>
+<p><strong>Risk Mitigation</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Identifies and addresses potential issues early in the development process through rigorous testing.</li>
+<li><strong>Benefit</strong>: Reduces the likelihood of system failures post-deployment, enhancing overall reliability and safety.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficiency and Automation</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Streamlines the testing process by reusing test harnesses and automating verification checks.</li>
+<li><strong>Benefit</strong>: Saves time and resources, allowing developers to focus on optimizing system performance and addressing complex issues.</li>
+</ul>
+</li>
+<li>
+<p><strong>Quality Assurance</strong>:</p>
+<ul>
+<li><strong>Description</strong>: Provides a robust framework for validating both functional and performance aspects of the BMS.</li>
+<li><strong>Benefit</strong>: Ensures high-quality software delivery, fostering user confidence and system dependability.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Summary of Benefits</strong>:</p>
+<div class="language-plaintext codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-plaintext codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token plain">- System Validation: Ensures integrated system functionality.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Non-Intrusive Monitoring: Enables detailed internal signal observation.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Automated Checks: Enforces safety and performance constraints automatically.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Real-World Scenario Simulation: Tests system under typical and extreme conditions.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Comprehensive Coverage: Identifies and addresses untested model areas.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Enhanced Traceability: Facilitates audits and compliance through clear links.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Risk Mitigation: Addresses potential issues early in development.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Efficiency and Automation: Streamlines testing processes, saving time and resources.</span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">- Quality Assurance: Guarantees high-quality, reliable software delivery.</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<p>By incorporating closed-loop testing into the BMS development workflow, developers can achieve a high level of confidence in the system&#x27;s reliability, safety, and performance, ensuring its readiness for deployment in demanding and safety-critical environments.</p>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="10-summary"><strong>10. Summary</strong><a href="#10-summary" class="hash-link" aria-label="Direct link to 10-summary" title="Direct link to 10-summary">​</a></h2>
+<p>Closed-loop testing is an essential component of the Battery Management System (BMS) development lifecycle, providing a comprehensive framework for validating system-level functionality and safety. By integrating the BMS ECU with a plant model and leveraging specialized Simulink tools, developers can simulate real-world interactions, monitor internal signals, and enforce safety constraints effectively.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="key-actions-for-effective-closed-loop-testing"><strong>Key Actions for Effective Closed-Loop Testing</strong>:<a href="#key-actions-for-effective-closed-loop-testing" class="hash-link" aria-label="Direct link to key-actions-for-effective-closed-loop-testing" title="Direct link to key-actions-for-effective-closed-loop-testing">​</a></h3>
+<ol>
+<li>
+<p><strong>Creating a Test Harness</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Integrate the BMS ECU with plant components to form a closed-loop system.</li>
+<li><strong>Implementation</strong>: Use Simulink Test to generate a dedicated test harness that encapsulates the entire system for testing purposes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Monitoring Signals</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Track critical system signals and internal states to ensure proper operation.</li>
+<li><strong>Implementation</strong>: Utilize dashboard blocks and observers to monitor signals such as cell temperatures, SOC, and current limits in real-time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Validating Internal Logic</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Ensure that the BMS&#x27;s internal logic adheres to safety and performance requirements.</li>
+<li><strong>Implementation</strong>: Define and execute <code>verify</code> statements within Test Assessment blocks to automatically enforce and validate signal conditions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Automating Test Assessments</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Streamline the verification process by automating condition checks.</li>
+<li><strong>Implementation</strong>: Use Test Assessment blocks to define logical conditions that system signals must satisfy, automating pass/fail evaluations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Ensuring Comprehensive Coverage</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Measure and enhance test completeness to cover all critical execution paths.</li>
+<li><strong>Implementation</strong>: Enable and analyze Simulink Coverage metrics (Decision, Condition, MCDC) to identify and address untested model areas.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterative Refinement</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Continuously improve system reliability by addressing identified issues and refining test scenarios.</li>
+<li><strong>Implementation</strong>: Modify the model and test harness based on test outcomes, re-running tests to validate enhancements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Generating and Utilizing Coverage Reports</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Document test effectiveness and support compliance with safety standards.</li>
+<li><strong>Implementation</strong>: Create detailed coverage reports that highlight tested and untested areas, guiding further testing efforts.</li>
+</ul>
+</li>
+<li>
+<p><strong>Leveraging Diagnostic Tools</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Analyze test results and diagnose system issues effectively.</li>
+<li><strong>Implementation</strong>: Use the Diagnostic Viewer and Simulation Data Inspector to review assessment outcomes and signal comparisons.</li>
+</ul>
+</li>
+<li>
+<p><strong>Integrating with Certification Processes</strong>:</p>
+<ul>
+<li><strong>Purpose</strong>: Ensure that the BMS meets industry safety and reliability standards.</li>
+<li><strong>Implementation</strong>: Align closed-loop testing practices with standards like ISO 26262 and DO-178C, facilitating smooth certification and deployment.</li>
+</ul>
+</li>
+</ol>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="conclusion"><strong>Conclusion</strong><a href="#conclusion" class="hash-link" aria-label="Direct link to conclusion" title="Direct link to conclusion">​</a></h3>
+<p>Closed-loop testing provides a robust and comprehensive approach to validating Battery Management Systems, ensuring that both the control algorithms and their interactions with physical components function seamlessly together. By systematically creating test harnesses, monitoring critical signals, automating assessments, and analyzing results, developers can achieve high levels of system reliability, safety, and performance. This rigorous testing methodology not only enhances the quality of the BMS but also streamlines the development process, reducing time and costs associated with manual testing and error rectification.</p>
+<p>For advanced workflows, integrating <strong>Simulink Coverage</strong> and <strong>Simulink Test Manager</strong> ensures that testing efforts are thorough and aligned with industry standards, paving the way for successful deployment in real-world, safety-critical applications.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/docs/theory/10_modeling_testing/03_matlab/09_closed_loop.md" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/Battery-Systems-Technology/docs/theory/modeling_testing/matlab/testing_code"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Testing Generated Code</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#1-introduction-to-closed-loop-testing" class="table-of-contents__link toc-highlight"><strong>1. Introduction to Closed-Loop Testing</strong></a><ul><li><a href="#key-objectives-of-closed-loop-testing" class="table-of-contents__link toc-highlight"><strong>Key Objectives of Closed-Loop Testing</strong></a></li></ul></li><li><a href="#2-closed-loop-test-harness-setup" class="table-of-contents__link toc-highlight"><strong>2. Closed-Loop Test Harness Setup</strong></a><ul><li><a href="#21-creating-the-test-harness" class="table-of-contents__link toc-highlight"><strong>2.1 Creating the Test Harness</strong></a></li><li><a href="#22-visualizing-results" class="table-of-contents__link toc-highlight"><strong>2.2 Visualizing Results</strong></a></li></ul></li><li><a href="#3-observing-internal-signals-without-interface-changes" class="table-of-contents__link toc-highlight"><strong>3. Observing Internal Signals Without Interface Changes</strong></a><ul><li><a href="#31-using-observers" class="table-of-contents__link toc-highlight"><strong>3.1 Using Observers</strong></a></li><li><a href="#32-observer-output" class="table-of-contents__link toc-highlight"><strong>3.2 Observer Output</strong></a></li></ul></li><li><a href="#4-defining-test-assessments" class="table-of-contents__link toc-highlight"><strong>4. Defining Test Assessments</strong></a><ul><li><a href="#41-test-assessment-blocks" class="table-of-contents__link toc-highlight"><strong>4.1 Test Assessment Blocks</strong></a></li><li><a href="#42-analyzing-results" class="table-of-contents__link toc-highlight"><strong>4.2 Analyzing Results</strong></a></li></ul></li><li><a href="#5-workflow-summary" class="table-of-contents__link toc-highlight"><strong>5. Workflow Summary</strong></a></li><li><a href="#6-key-tools" class="table-of-contents__link toc-highlight"><strong>6. Key Tools</strong></a><ul><li><a href="#61-test-sequence-block" class="table-of-contents__link toc-highlight"><strong>6.1 Test Sequence Block</strong></a></li><li><a href="#62-signal-builder" class="table-of-contents__link toc-highlight"><strong>6.2 Signal Builder</strong></a></li><li><a href="#63-observers" class="table-of-contents__link toc-highlight"><strong>6.3 Observers</strong></a></li><li><a href="#64-test-assessment" class="table-of-contents__link toc-highlight"><strong>6.4 Test Assessment</strong></a></li><li><a href="#65-diagnostic-viewer" class="table-of-contents__link toc-highlight"><strong>6.5 Diagnostic Viewer</strong></a></li><li><a href="#66-simulation-data-inspector" class="table-of-contents__link toc-highlight"><strong>6.6 Simulation Data Inspector</strong></a></li><li><a href="#67-simulink-coverage" class="table-of-contents__link toc-highlight"><strong>6.7 Simulink Coverage</strong></a></li></ul></li><li><a href="#7-example-validating-current-limits" class="table-of-contents__link toc-highlight"><strong>7. Example: Validating Current Limits</strong></a><ul><li><a href="#71-test-scenario" class="table-of-contents__link toc-highlight"><strong>7.1 Test Scenario</strong></a></li><li><a href="#72-results" class="table-of-contents__link toc-highlight"><strong>7.2 Results</strong></a></li></ul></li><li><a href="#8-key-tools" class="table-of-contents__link toc-highlight"><strong>8. Key Tools</strong></a><ul><li><a href="#81-test-sequence-block" class="table-of-contents__link toc-highlight"><strong>8.1 Test Sequence Block</strong></a></li><li><a href="#82-signal-builder" class="table-of-contents__link toc-highlight"><strong>8.2 Signal Builder</strong></a></li><li><a href="#83-observers" class="table-of-contents__link toc-highlight"><strong>8.3 Observers</strong></a></li><li><a href="#84-test-assessment" class="table-of-contents__link toc-highlight"><strong>8.4 Test Assessment</strong></a></li><li><a href="#85-diagnostic-viewer" class="table-of-contents__link toc-highlight"><strong>8.5 Diagnostic Viewer</strong></a></li><li><a href="#86-simulation-data-inspector" class="table-of-contents__link toc-highlight"><strong>8.6 Simulation Data Inspector</strong></a></li><li><a href="#87-simulink-coverage" class="table-of-contents__link toc-highlight"><strong>8.7 Simulink Coverage</strong></a></li></ul></li><li><a href="#9-example-validating-current-limits" class="table-of-contents__link toc-highlight"><strong>9. Example: Validating Current Limits</strong></a><ul><li><a href="#91-test-scenario" class="table-of-contents__link toc-highlight"><strong>9.1 Test Scenario</strong></a></li><li><a href="#92-results" class="table-of-contents__link toc-highlight"><strong>9.2 Results</strong></a></li></ul></li><li><a href="#9-benefits-of-closed-loop-testing" class="table-of-contents__link toc-highlight"><strong>9. Benefits of Closed-Loop Testing</strong></a></li><li><a href="#10-summary" class="table-of-contents__link toc-highlight"><strong>10. Summary</strong></a><ul><li><a href="#key-actions-for-effective-closed-loop-testing" class="table-of-contents__link toc-highlight"><strong>Key Actions for Effective Closed-Loop Testing</strong>:</a></li><li><a href="#conclusion" class="table-of-contents__link toc-highlight"><strong>Conclusion</strong></a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
 </body>
 </html>
