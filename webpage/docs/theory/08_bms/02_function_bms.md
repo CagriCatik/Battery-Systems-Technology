@@ -1,4 +1,4 @@
-# Functions of Battery Management System
+# Functions
 
 A **Battery Management System (BMS)** is a pivotal component in a wide array of battery-powered applications, ranging from compact consumer electronics like smartphones to large-scale electric vehicles (EVs) and cutting-edge electric flight technologies such as electric Vertical Take-Off and Landing (eVTOL) aircraft. The primary role of a BMS is to oversee and manage the performance, safety, and longevity of battery packs by executing a series of critical functions. These functions ensure that batteries operate within their specified parameters, optimize their performance, extend their usable life, and maintain safety standards across various operating conditions.
 

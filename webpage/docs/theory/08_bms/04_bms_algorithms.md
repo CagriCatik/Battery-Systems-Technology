@@ -1,4 +1,4 @@
-# BMS Algorithms
+# Algorithms
 
 Battery Management Systems (BMS) are pivotal in the operation of lithium-ion batteries, ensuring their safety, optimizing performance, and extending battery life. Central to a BMS are algorithms that monitor and manage various battery parameters. This documentation delves into the primary algorithms employed in BMS, providing detailed explanations and relevant code snippets to enhance understanding.
 
