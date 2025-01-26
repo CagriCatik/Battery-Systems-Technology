@@ -1,45 +1,62 @@
 .features {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
-  gap: 2rem 2rem; /* Row and column spacing */
+  gap: 1rem; /* Decrease the row and column spacing */
   justify-content: center; /* Center the grid horizontally */
-  padding: 2rem 1rem; /* Add padding around the grid */
+  padding: 1rem 1rem; /* Add padding around the grid */
 }
 
 .featureBox {
   background: #ffffff; /* Clean white background */
   border: 1px solid #e0e0e0; /* Subtle border for separation */
-  border-radius: 12px; /* Smooth rounded corners */
-  padding: 2rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Add a slight shadow for depth */
+  border-radius: 10px; /* Slightly smaller rounded corners */
+  padding: 1.5rem; /* Decrease padding inside the box */
+  margin: 0.5rem; /* Reduce margins around each box */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* Slightly reduced shadow for depth */
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
 }
 
 .featureBox:hover {
-  transform: translateY(-5px); /* Lift effect on hover */
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+  transform: translateY(-3px); /* Subtle lift effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly reduced shadow on hover */
 }
 
 .featureContent {
-  text-align: center; /* Align content to the left */
+  text-align: center; /* Center the content */
 }
 
 .featureTitle {
-  font-size: 1 rem; /* Increase title size */
+  font-size: 0.9rem; /* Smaller title font size */
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.8rem; /* Reduced margin for a more compact layout */
   color: #333333; /* Darker color for titles */
 }
 
 .featureDescription {
-  font-size: 1.1rem;
-  line-height: 1.8; /* Better readability */
+  font-size: 0.9rem; /* Smaller description font size */
+  line-height: 1.6; /* Adjust line height for tighter spacing */
   color: #666666; /* Subtle color for description */
 }
 
 @media (max-width: 768px) {
   .features {
     grid-template-columns: 1fr; /* Single column for smaller screens */
-    gap: 2rem; /* Adjust spacing for smaller screens */
+    gap: 1.5rem; /* Adjust spacing for smaller screens */
+    padding: 1rem; /* Restore padding for smaller screens for readability */
+  }
+
+  .featureBox {
+    padding: 1rem; /* Reduced padding for mobile view */
+    border-radius: 8px; /* Slightly smaller rounded corners for mobile */
+  }
+
+  .featureTitle {
+    font-size: 0.9rem; /* Smaller title font for mobile */
+    margin-bottom: 0.5rem; /* Compact spacing for mobile */
+  }
+
+  .featureDescription {
+    font-size: 0.9rem; /* Smaller font for description on mobile */
+    line-height: 1.4; /* Compact line-height for mobile */
   }
 }

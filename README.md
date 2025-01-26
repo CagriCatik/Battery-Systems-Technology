@@ -40,32 +40,22 @@ The repository explores the following core aspects of battery systems:
 
 This repository includes detailed documentation built with **Docusaurus**, providing insights into using and extending the available tools and models.
 
-### Setup Instructions
+**Serve the Documentation Locally**  
+   To preview the documentation locally, follow these steps:
+   
+   1. Change to the documentation directory:
+      ```bash
+      cd webpage
+      ```
+   
+   2. Install dependencies (if not already done):
+      ```bash
+      npm install
+      ```
 
-1. **Install Docusaurus CLI**  
-   Install the Docusaurus CLI tool globally using npm or yarn:  
-   Example with `npm`:
-   ```bash
-   npm install --global docusaurus-init
-   ```
+   3. Start the local server:
+      ```bash
+      npm run start
+      ```
 
-2. **Initialize the Documentation**  
-   Navigate to your project directory and initialize a new Docusaurus site:
-   ```bash
-   npx docusaurus-init
-   ```
-   Follow the prompts to set up your documentation structure.
-
-3. **Build the Documentation**  
-   Navigate to the documentation directory (e.g., `docs`) and build the documentation:
-   ```bash
-   npm run build
-   ```
-   The generated files will be available in the `build` directory.
-
-4. **Serve the Documentation Locally**  
-   Preview the documentation locally by running:
-   ```bash
-   npm run start
-   ```
-   Open your browser and go to `http://localhost:3000`.
+   4. Open your browser and navigate to `http://localhost:3000`.
