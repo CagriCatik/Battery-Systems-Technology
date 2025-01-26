@@ -27,7 +27,7 @@ To begin managing tests for your BMS model in Simulink, follow these steps:
    - **Navigation**: Alternatively, navigate through the menu: *Apps > Simulink Test*.
    - **Interface**: Selecting *Test Manager* will open the Test Manager interface, providing access to test organization and execution tools.
    
-   ![Accessing Test Manager](path_to_accessing_test_manager_image)
+   ![Accessing Test Manager](#)
    
    *Figure 1: Accessing the Test Manager Interface*
 
@@ -40,7 +40,7 @@ To begin managing tests for your BMS model in Simulink, follow these steps:
        - **Equivalence Test**: Compares results across different test harnesses or operating conditions to ensure consistent behavior.
        - **Simulation Test**: Utilizes logical and temporal assessments to validate system behavior under various scenarios.
    
-   ![Creating a Test File](path_to_creating_test_file_image)
+   ![Creating a Test File](#)
    
    *Figure 2: Creating a New Test File from the Model*
 

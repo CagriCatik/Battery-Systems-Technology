@@ -483,7 +483,7 @@ The outcome of LG's certified BMS development showcased the effectiveness of the
 
 **Case Study Diagram**:
 
-![LG's Certified BMS Workflow](path_to_case_study_diagram)
+![LG's Certified BMS Workflow](#)
 
 *Figure 4: Workflow Overview of LG’s Certified BMS Development*
 

@@ -49,7 +49,7 @@ Importing requirements into Simulink involves a straightforward process that ens
 
 **Import Process Illustration**:
 
-![Import Requirements](path_to_import_requirements_image)
+![Import Requirements](#)
 
 *Figure 1: Importing Requirements into Simulink*
 
@@ -184,7 +184,7 @@ The integrated view offers a comprehensive interface to visualize and manage req
 
 **Integrated View Illustration**:
 
-![Requirements Perspective](path_to_requirements_perspective_image)
+![Requirements Perspective](#)
 
 *Figure 3: Integrated Requirements Perspective in Simulink*
 

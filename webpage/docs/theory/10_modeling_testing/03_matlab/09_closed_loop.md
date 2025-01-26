@@ -385,7 +385,7 @@ A structured workflow is essential for conducting effective closed-loop testing.
 
 **Workflow Diagram**:
 
-![Closed-Loop Testing Workflow](path_to_closed_loop_testing_workflow_diagram_image)
+![Closed-Loop Testing Workflow](#)
 
 *Figure 11: Structured Workflow for Closed-Loop Testing*
 

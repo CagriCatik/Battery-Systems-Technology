@@ -78,7 +78,7 @@ The thermal design of the battery pack is intentionally **asymmetric**, a delibe
   
 **Visual Representation**:
 
-![Thermal Layout](path_to_thermal_layout_image)
+![Thermal Layout](#)
 
 *Figure 1: Asymmetric Thermal Layout of the Battery Pack*
 
@@ -442,7 +442,7 @@ The BMS model's effectiveness is validated through a series of simulations that 
 
 **Simulation Graph**:
 
-![Voltage Balancing](path_to_voltage_balancing_graph)
+![Voltage Balancing](#)
 
 *Figure 4: Cell Voltage Convergence During Balancing*
 
@@ -506,7 +506,7 @@ A comparative analysis of SOC estimation methods highlights the strengths and we
 
 **SOC Estimation Graph**:
 
-![SOC Estimation](path_to_soc_estimation_graph)
+![SOC Estimation](#)
 
 *Figure 6: SOC Estimation Accuracy Comparison*
 
@@ -605,7 +605,7 @@ A systematic workflow ensures that the BMS model is thoroughly tested and valida
 
 **Workflow Diagram**:
 
-![Simulation Workflow](path_to_workflow_diagram)
+![Simulation Workflow](#)
 
 *Figure 8: Structured Simulation Workflow for BMS Validation*
 

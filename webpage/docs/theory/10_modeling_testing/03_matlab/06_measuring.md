@@ -122,7 +122,7 @@ disp('Coverage visualization has been generated.');
 ```
 *Figure 3: MATLAB Code for Generating Coverage Visualization*
 
-![Model Highlighting](path_to_model_highlighting_image)
+![Model Highlighting](#)
 
 *Figure 4: Model Highlighting with Coverage Colors*
 
@@ -619,7 +619,7 @@ A structured workflow ensures that coverage analysis and test generation are per
    - **Benefit**: Ensures continuous improvement and thorough validation of the BMS model.
 
 **Workflow Diagram**:
-![Coverage Improvement Workflow](path_to_coverage_improvement_workflow_diagram_image)
+![Coverage Improvement Workflow](#)
 
 *Figure 15: Structured Workflow for Measuring and Improving Test Coverage*
 

@@ -35,7 +35,7 @@ To initiate the code generation process, developers must access the Code Perspec
    - **Alternative Access**: Alternatively, select *Apps > Embedded Coder* from the Simulink menu.
    - **Outcome**: This action opens the Code Perspective, presenting tools and interfaces dedicated to code generation.
 
-   ![Accessing Code Perspective](path_to_code_perspective_image)
+   ![Accessing Code Perspective](#)
 
    *Figure 1: Accessing the Code Perspective in Simulink*
 
@@ -144,7 +144,7 @@ The Code Generator Advisor provides recommendations and optimizations to enhance
      - Follow the advisor's recommendations to optimize the model for code generation.
    - **Outcome**: The advisor identifies areas for improvement, such as memory alignment, MISRA compliance, and optimization opportunities.
 
-   ![Code Generator Advisor](path_to_code_generator_advisor_image)
+   ![Code Generator Advisor](#)
 
    *Figure 6: Running the Code Generator Advisor*
 
@@ -237,7 +237,7 @@ Ensuring consistency between the Simulink model and the generated code is vital 
   
   *Figure 9: MATLAB Code for Navigating Between Model and Code*
 
-  ![Integrated Code-Model View](path_to_integrated_code_model_view_image)
+  ![Integrated Code-Model View](#)
 
   *Figure 10: Integrated Code-Model Traceability View*
 
@@ -363,7 +363,7 @@ The **IEC Certification Kit** in Simulink provides comprehensive resources and w
     - **TUV SUD Certificate**: Confirms the qualification of the code generator (Embedded Coder) for ISO 26262 compliance.
     - **Tool Qualification Pack**: Maps Simulink workflows to the requirements of ISO 26262 tables (Parts 6 and 8), providing a clear pathway for achieving ASIL-D compliance.
   
-  ![IEC Certification Kit](path_to_iec_certification_kit_image)
+  ![IEC Certification Kit](#)
 
   *Figure 15: Accessing the IEC Certification Kit*
 

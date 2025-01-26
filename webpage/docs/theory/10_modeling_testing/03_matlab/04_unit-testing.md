@@ -26,7 +26,7 @@ Setting up a test harness involves creating a dedicated simulation environment t
    - **Action**: Open the BMS model in Simulink.
    - **Access**: Go to the *Simulink Toolstrip > Apps > Simulink Test*.
    
-   ![Navigate to Simulink Test](path_to_simulink_test_image)
+   ![Navigate to Simulink Test](#)
    
    *Figure 1: Accessing Simulink Test from the Toolstrip*
 
@@ -36,7 +36,7 @@ Setting up a test harness involves creating a dedicated simulation environment t
      - **Naming**: Assign a descriptive name to the harness, such as `StateMachine_Test`.
      - **Storage Location**: Specify the directory where the harness will be stored.
    
-   ![Generate Test Harness](path_to_generate_test_harness_image)
+   ![Generate Test Harness](#)
    
    *Figure 2: Generating a Test Harness in Simulink*
 
@@ -159,7 +159,7 @@ Incorporating dashboard blocks such as switches, knobs, and gauges into the test
    
    **Interactive Simulation Example**:
    
-   ![Interactive Dashboard](path_to_interactive_dashboard_image)
+   ![Interactive Dashboard](#)
    
    *Figure 7: Interactive Dashboard for Manual Testing*
 
@@ -315,7 +315,7 @@ Simulink Test provides a range of features tailored for creating, managing, and 
 
 **Simulink Test Features Example**:
    
-![Simulink Test Features](path_to_simulink_test_features_image)
+![Simulink Test Features](#)
 
 *Figure 12: Overview of Simulink Test Features*
 
@@ -341,7 +341,7 @@ A systematic workflow enhances the effectiveness and efficiency of unit testing,
 
 **Workflow Diagram**:
    
-![Unit Testing Workflow](path_to_unit_testing_workflow_diagram_image)
+![Unit Testing Workflow](#)
 
 *Figure 13: Structured Workflow for Unit Testing in Simulink*
 
