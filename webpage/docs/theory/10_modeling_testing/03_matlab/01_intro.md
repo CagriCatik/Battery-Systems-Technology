@@ -50,10 +50,10 @@ The BMS model includes several peripheral circuits to simulate real-world batter
 The BMS includes logic to limit current based on voltage and temperature thresholds:  
 - **Voltage-Based Threshold**:  
   - **Calculation**: The maximum allowable current is determined by the formula:  
-    \[
+    $$
     I_{max} = \frac{V_{min} - V_{cutoff}}{R_{max}}
-    \]
-    where \(V_{min}\) is the minimum cell voltage, \(V_{cutoff}\) is the cutoff voltage, and \(R_{max}\) is the maximum resistance.  
+    $$
+    where $V_{min}$ is the minimum cell voltage, $V_{cutoff}$ is the cutoff voltage, and $R_{max}$ is the maximum resistance.  
   - **Purpose**: Prevents over-voltage conditions during charging.  
 - **Temperature-Based Threshold**:  
   - **Implementation**: Uses lookup tables with S-shaped profiles to limit current at extreme temperatures.  
@@ -77,9 +77,9 @@ The BMS state machine, implemented using Stateflow, operates in four parallel st
 ## **4. SOC Estimation Methods**  
 ### **4.1 Coulomb Counting**  
 - **Principle**: The SOC is estimated by integrating the current over time:  
-  \[
+  $$
   SOC = SOC_{initial} + \frac{\int I \, dt}{Capacity}
-  \]
+  $$
 - **Advantages**: Simple to implement and computationally inexpensive.  
 - **Disadvantages**: Accumulates sensor errors over time and lacks feedback to correct initial SOC inaccuracies.  
 
