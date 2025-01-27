@@ -44,6 +44,8 @@ Calendar aging encompasses the chemical and physical deterioration of a battery'
 
 ## Factors Influencing Calendar Aging
 
+![alt text](image.png)
+
 ### Storage Temperature
 
 Temperature is the most critical factor affecting calendar aging:
@@ -63,6 +65,8 @@ Temperature is the most critical factor affecting calendar aging:
 | 15–25                | Minimal degradation, optimal performance range.|
 | 25–40                | Moderate degradation, manageable impact.        |
 | >40                  | Rapid degradation, significant capacity loss.   |
+
+![alt text](image-1.png)
 
 ### State of Charge (SOC)
 

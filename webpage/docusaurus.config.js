@@ -124,7 +124,7 @@ const config = {
             type: 'docSidebar',
             sidebarId: 'bmsDesignArchitectureSidebar',
             position: 'left',
-            label: 'BMS Design and Architecture',
+            label: 'Design and Architecture',
           },
           {
             type: 'docSidebar',
