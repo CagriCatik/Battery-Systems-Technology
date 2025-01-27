@@ -6,7 +6,7 @@ Open Circuit Voltage (OCV) testing is a fundamental procedure in evaluating the 
 
 OCV testing serves multiple purposes:
 
-- **State of Charge (SOC) Estimation:** Determines the current charge level of the battery.
+- **SOC Estimation:** Determines the current charge level of the battery.
 - **Battery Health Assessment:** Identifies degradation, capacity loss, and potential faults.
 - **Model Calibration:** Enhances the accuracy of battery models used in simulations and control systems.
 - **Quality Control:** Ensures batteries meet specified performance standards before deployment.
