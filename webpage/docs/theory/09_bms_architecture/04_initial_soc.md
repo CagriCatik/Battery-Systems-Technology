@@ -1,4 +1,4 @@
-# Initial SoC & SoH Estimation in Battery Management Systems (BMS)
+# Initial SoC & SoH Estimation
 
 The State of Charge (SoC) and State of Health (SoH) are fundamental parameters in Battery Management Systems (BMS). Accurate estimation of these metrics is crucial for ensuring the optimal performance, safety, and longevity of battery systems used in applications such as electric vehicles (EVs), renewable energy storage, and portable electronics. This chapter provides a comprehensive exploration of the methods and algorithms employed for initial SoC and SoH estimation, detailing the mathematical and logical processes involved.
 
