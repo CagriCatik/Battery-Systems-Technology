@@ -4,13 +4,13 @@ The field of Battery Management Systems (BMS) is experiencing rapid advancements
 
 ---
 
-## 1. Algorithm Optimization
+## Algorithm Optimization
 
 Algorithms are the cornerstone of a BMS, responsible for executing critical functions such as state estimation, cell balancing, and thermal management. The efficiency and accuracy of these algorithms significantly influence the overall performance and reliability of the battery system. Recent trends in algorithm optimization focus on enhancing precision, incorporating advanced estimation techniques, and developing adaptive algorithms to cater to dynamic battery conditions.
 
 ### Key Trends in Algorithm Development
 
-#### 1.1 Improved Accuracy
+#### Improved Accuracy
 
 Enhancing the precision of state estimation algorithms is paramount for accurate battery management. Precision in estimating parameters like State of Charge (SOC) and State of Health (SOH) ensures optimal battery utilization and extends battery lifespan.
 
@@ -18,7 +18,7 @@ Enhancing the precision of state estimation algorithms is paramount for accurate
   
 - **Advanced Filtering Techniques**: Implementing sophisticated filtering methods like Extended Kalman Filters (EKF) and Unscented Kalman Filters (UKF) enhances the accuracy of state estimations by better handling non-linearities and uncertainties in battery behavior.
 
-#### 1.2 Advanced Estimation Techniques
+#### Advanced Estimation Techniques
 
 Incorporating cutting-edge estimation techniques is revolutionizing BMS functionalities.
 

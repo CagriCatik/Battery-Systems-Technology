@@ -609,23 +609,3 @@ A systematic workflow ensures that the BMS model is thoroughly tested and valida
 
 *Figure 8: Structured Simulation Workflow for BMS Validation*
 
----
-
-## **Summary**
-
-The Battery Management System (BMS) model developed in Simulink stands as a robust and versatile platform for the simulation, testing, and validation of battery systems. Its comprehensive design caters to both risk-free algorithm validation and in-depth performance analysis, making it an invaluable tool for engineers and researchers alike.
-
-- **Risk-Free Testing**:
-  - **Capability**: Validates BMS algorithms and system responses without necessitating physical hardware, reducing development costs and time.
-  
-- **Accurate SOC Estimation**:
-  - **Techniques**: Combines fundamental methods like Coulomb Counting with advanced Kalman filters (EKF and UKF) to achieve precise SOC tracking.
-  - **Benefit**: Ensures reliable battery state monitoring, enhancing system efficiency and longevity.
-  
-- **Thermal Insights**:
-  - **Analysis**: Identifies critical design flaws, such as asymmetric heat dissipation, highlighting areas for thermal management improvements.
-  - **Guidance**: Informs the implementation of active cooling solutions to maintain uniform thermal conditions across the battery pack.
-  
-- **Scalability**:
-  - **Support**: Accommodates both small (6-cell) and large (96-cell) battery packs, facilitating comprehensive testing across various system sizes.
-  - **Flexibility**: Enables the model to adapt to different application requirements, from electric vehicles to stationary energy storage systems.

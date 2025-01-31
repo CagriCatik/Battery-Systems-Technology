@@ -1,8 +1,8 @@
 # Testing Generated Code
 
-## **1. Introduction to Code Validation**
+## **Introduction to Code Validation**
 
-After generating code from a Battery Management System (BMS) model in Simulink, it is imperative to validate the generated code to ensure that it faithfully replicates the behavior of the original model. Code validation serves as a bridge between model-based design and its implementation in embedded systems, guaranteeing that the transition maintains the system's integrity, performance, and compliance with safety standards. Two fundamental methods employed in code validation are:
+After generating code from a BMS model in Simulink, it is imperative to validate the generated code to ensure that it faithfully replicates the behavior of the original model. Code validation serves as a bridge between model-based design and its implementation in embedded systems, guaranteeing that the transition maintains the system's integrity, performance, and compliance with safety standards. Two fundamental methods employed in code validation are:
 
 - **Software-in-the-Loop (SIL)**: This method involves executing the generated code on a host computer, allowing for the validation of functional correctness by comparing the code's behavior against the Simulink model's simulation results.
 
@@ -10,13 +10,11 @@ After generating code from a Battery Management System (BMS) model in Simulink, 
 
 Implementing both SIL and PIL testing provides a comprehensive validation framework, ensuring that the BMS software is not only functionally accurate but also performant and reliable in real-world applications.
 
----
-
-## **2. Software-in-the-Loop (SIL) Testing**
+## **Software-in-the-Loop (SIL) Testing**
 
 Software-in-the-Loop (SIL) testing is a critical phase in validating the functional correctness of the generated code. By executing the code on a host PC, developers can ensure that the software behaves identically to the Simulink model before deploying it to embedded hardware.
 
-### **2.1 Workflow**
+### **Workflow**
 
 The SIL testing workflow involves several key steps that bridge the gap between model-based design and code validation:
 
@@ -854,7 +852,7 @@ PIL Test Results:
 
 **Example PIL Test Report**:
    
-```plaintext
+```markdown
 PIL Test Report
 ---------------
 1. Test Summary
@@ -885,36 +883,3 @@ PIL Test Report
 *Figure 18: Sample PIL Test Report Structure*
 
 This case study exemplifies the effectiveness of combining SIL and PIL testing to achieve comprehensive validation of generated BMS code, ensuring both functional accuracy and real-time performance on embedded hardware.
-
----
-
-## **10. Summary**
-
-Testing the generated BMS code is a critical phase that bridges the gap between model-based design and deployment in embedded systems. By implementing Software-in-the-Loop (SIL) and Processor-in-the-Loop (PIL) testing methodologies, developers can ensure that the generated code not only replicates the Simulink model's functional behavior but also performs efficiently and reliably on target hardware. The key aspects of this approach include:
-
-1. **SIL Testing**:
-   - **Purpose**: Validate functional correctness of the generated code by executing it on a host PC and comparing results with the Simulink model.
-   - **Benefits**: Identifies discrepancies early, ensuring that the code accurately represents the model.
-
-2. **PIL Testing**:
-   - **Purpose**: Assess the performance and real-time behavior of the generated code on embedded hardware.
-   - **Benefits**: Ensures that the BMS operates within real-time constraints and meets performance requirements.
-
-3. **Equivalence Checks**:
-   - **Purpose**: Compare MIL (Model-in-the-Loop), SIL, and PIL results to confirm consistency and correctness across different testing stages.
-   - **Benefits**: Guarantees that the system behaves as intended in both simulation and real-world environments.
-
-4. **Key Tools and Workflow**:
-   - **Simulink Test Manager**: Centralizes test case management, equivalence testing, batch execution, and coverage tracking.
-   - **SIL/PIL Manager**: Facilitates the configuration and execution of SIL and PIL tests on various hardware platforms.
-   - **Simulation Data Inspector**: Provides tools for visual comparison and analysis of simulation data across different test runs.
-
-5. **Benefits**:
-   - **Functional Correctness**: Ensures code matches model behavior, reducing the risk of errors.
-   - **Performance Metrics**: Validates real-time operation and resource efficiency on target hardware.
-   - **Certification Readiness**: Aligns testing practices with safety standards, facilitating compliance and certification.
-   - **Risk Mitigation**: Identifies and resolves potential issues early, enhancing system reliability.
-   - **Efficiency and Automation**: Streamlines testing processes, saving time and reducing manual effort.
-   - **Enhanced Traceability**: Maintains clear links between requirements, models, and code, supporting audits and compliance checks.
-   - **Quality Assurance**: Guarantees high-quality, reliable software delivery through comprehensive validation.
-

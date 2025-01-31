@@ -8,7 +8,7 @@ In the landscape of modern technology, batteries play an indispensable role, pow
 
 Battery cells come in a variety of types and form factors, each engineered to meet the demands of different applications through their unique properties. The selection process for an appropriate battery cell type hinges on several critical parameters, including energy density, safety, cost, and the physical dimensions of the cell. Understanding these attributes is crucial for optimizing performance and ensuring the longevity and reliability of the battery system in its intended application.
 
-### 1. Cylindrical Cells
+### Cylindrical Cells
 
 Cylindrical cells are characterized by their round, metal-cased structure, making them a ubiquitous choice in both consumer electronics and electric vehicles. These cells are renowned for their high energy density, which allows them to store a significant amount of energy relative to their size. This makes cylindrical cells particularly advantageous in applications where space and weight are at a premium. Additionally, their uniform thermal performance contributes to excellent safety profiles, as the even distribution of heat minimizes the risk of thermal runaway, a common concern in battery safety.
 
@@ -29,7 +29,7 @@ Cylindrical cells find their applications across a broad spectrum, including pow
 
 ---
 
-### 2. Prismatic Cells
+### Prismatic Cells
 
 Prismatic cells distinguish themselves with their rectangular, notebook-like form factor, optimized for space-efficient packing within devices. Unlike cylindrical cells, prismatic cells utilize hard outer casings made from materials such as plastic or cardboard-like composites, which provide structural integrity and facilitate the stacking of multiple cells in a compact arrangement. This design is particularly beneficial in applications where maximizing the use of available space is essential, such as in portable electronics and electric vehicles striving for extended ranges without increasing the overall size of the battery pack.
 
@@ -49,7 +49,7 @@ The manufacturing complexity of prismatic cells is higher, which translates to i
 
 ---
 
-### 3. Pouch Cells
+### Pouch Cells
 
 Pouch cells represent a flexible alternative to both cylindrical and prismatic designs, utilizing a flexible, laminated casing instead of a rigid outer shell. This flexibility grants pouch cells a lightweight and adaptable form factor, making them ideal for applications that demand both portability and customization, such as consumer electronics, drones, and certain automotive applications. The high gravimetric energy density of pouch cells ensures that they can store a significant amount of energy relative to their weight, which is crucial for applications where reducing weight is a priority.
 
@@ -108,19 +108,19 @@ Cost is invariably a decisive factor in battery selection. Cylindrical cells are
 
 When selecting a battery for a specific application, it is crucial to weigh different factors, such as energy requirements, physical constraints, cost, and safety priorities. Below are the key considerations:
 
-### 1. Energy Density
+### Energy Density
 - High Priority: Cylindrical cells are recommended due to their superior energy density.
 - Secondary Options: Pouch cells can also be considered for lightweight applications.
 
-### 2. Safety
+###  Safety
 - High Priority: Cylindrical cells offer the best safety due to their robust design.
 - Secondary Options: Prismatic cells provide moderate safety, followed by pouch cells.
 
-### 3. Size and Shape
+### Size and Shape
 - Compact Designs: Pouch cells are ideal due to their flexibility and ability to fit irregular spaces.
 - Standardized Designs: Prismatic cells offer a balance between space efficiency and durability.
 
-### 4. Cost
+### Cost
 - Low Budget: Cylindrical cells are the most cost-effective due to their mass production.
 - Higher Budgets: Prismatic or pouch cells may be chosen for specific design needs.
 

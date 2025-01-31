@@ -1,6 +1,6 @@
 # Managing Requirements
 
-## **1. Introduction to Requirements Management**
+## **Introduction to Requirements Management**
 
 Effective requirements management is paramount in the development of a Battery Management System (BMS) to ensure project success and prevent failures stemming from incomplete, inconsistent, or ambiguous specifications. **Simulink** offers a robust framework to streamline this process by providing tools and features that facilitate seamless integration, traceability, and synchronization of requirements throughout the development lifecycle. The key advantages of using Simulink for requirements management include:
 
@@ -14,11 +14,11 @@ By leveraging these capabilities, Simulink ensures that all project stakeholders
 
 ---
 
-## **2. Importing and Exporting Requirements**
+## **Importing and Exporting Requirements**
 
 Managing requirements effectively involves the ability to import them from various external sources and export them as needed for documentation, analysis, or integration with other tools. Simulink supports a range of formats and provides intuitive processes for importing and exporting requirements.
 
-### **2.1 Supported Formats**
+### **Supported Formats**
 
 Simulink accommodates multiple formats to ensure compatibility with commonly used requirements management tools and standards:
 

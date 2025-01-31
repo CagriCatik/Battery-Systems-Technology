@@ -1,6 +1,6 @@
 # Closed-Loop Testing
 
-## **1. Introduction to Closed-Loop Testing**
+## **Introduction to Closed-Loop Testing**
 
 Closed-loop testing is a comprehensive validation approach that ensures the entire Battery Management System (BMS) Electronic Control Unit (ECU) operates correctly within its intended environment. By integrating the BMS ECU with a plant model—comprising components such as the battery pack, charger, and load—closed-loop testing simulates real-world interactions and scenarios. This method is pivotal for verifying system-level functionality, safety, and performance, particularly in safety-critical applications like electric vehicles and energy storage systems.
 
@@ -22,11 +22,11 @@ By implementing closed-loop testing, developers can achieve a holistic validatio
 
 ---
 
-## **2. Closed-Loop Test Harness Setup**
+## **Closed-Loop Test Harness Setup**
 
 Creating an effective closed-loop test harness is fundamental to simulating the interaction between the BMS ECU and the plant model. This setup allows for the execution of comprehensive test scenarios that mimic real-world operations and fault conditions.
 
-### **2.1 Creating the Test Harness**
+### **Creating the Test Harness**
 
 Setting up a closed-loop test harness involves integrating the BMS ECU with the plant model and defining the necessary inputs and monitoring mechanisms. The following steps outline the process using Simulink Test:
 
@@ -52,7 +52,7 @@ Setting up a closed-loop test harness involves integrating the BMS ECU with the 
 
    **Test Sequence Block Example**:
    
-   ```plaintext
+   ```markdown
    Step 1: Set State = STANDBY for 10 sec.
    Step 2: Transition to DRIVING when SOC > 30%.
    Step 3: Trigger FAULT if cell_temp > 45°C.
@@ -86,7 +86,7 @@ Setting up a closed-loop test harness involves integrating the BMS ECU with the 
    
    *Figure 1: Creating a Test Harness in Simulink Test*
 
-### **2.2 Visualizing Results**
+### **Visualizing Results**
 
 Effective visualization of test results is crucial for interpreting the behavior of the closed-loop system. Simulink provides various dashboard blocks that offer real-time monitoring and feedback during simulation runs.
 
@@ -128,11 +128,11 @@ By incorporating dashboard blocks, developers can gain real-time insights into t
 
 ---
 
-## **3. Observing Internal Signals Without Interface Changes**
+## **Observing Internal Signals Without Interface Changes**
 
 A critical aspect of closed-loop testing is the ability to monitor internal signals and states within the BMS ECU without altering the model's external interfaces. This non-intrusive monitoring is achieved using observers, which provide visibility into the system's internal operations.
 
-### **3.1 Using Observers**
+### **Using Observers**
 
 Observers allow developers to monitor specific internal signals and states, facilitating detailed analysis and validation without impacting the system's functional interfaces.
 
@@ -184,7 +184,7 @@ Observers allow developers to monitor specific internal signals and states, faci
    
    *Figure 4: Selecting Internal Signals for Observation*
 
-### **3.2 Observer Output**
+### **Observer Output**
 
 Observers capture and display the monitored internal signals, allowing developers to analyze system behavior in detail without altering the model's operational interfaces.
 
@@ -238,11 +238,11 @@ By utilizing observers, developers gain deep insights into the BMS's internal op
 
 ---
 
-## **4. Defining Test Assessments**
+## **Defining Test Assessments**
 
 Test assessments are automated checks that validate whether the BMS operates within predefined safety and performance parameters. By integrating assessment blocks into the test harness, developers can enforce and verify critical system constraints.
 
-### **4.1 Test Assessment Blocks**
+### **Test Assessment Blocks**
 
 Test assessment blocks allow for the automation of verification processes by defining logical conditions that system signals must satisfy during testing.
 
@@ -294,7 +294,7 @@ Test assessment blocks allow for the automation of verification processes by def
    
    *Figure 8: Defining Verify Statements in Test Assessment*
 
-### **4.2 Analyzing Results**
+### **Analyzing Results**
 
 Post-test analysis involves reviewing the outcomes of the assessment blocks to determine whether the BMS meets the defined safety and performance criteria.
 
@@ -349,7 +349,7 @@ By systematically defining and analyzing test assessments, developers can ensure
 
 ---
 
-## **5. Workflow Summary**
+## **Workflow Summary**
 
 A structured workflow is essential for conducting effective closed-loop testing. The following steps outline a comprehensive approach to validating the BMS ECU within a closed-loop environment.
 
@@ -393,7 +393,7 @@ By following this workflow, developers can systematically validate the BMS ECU's
 
 ---
 
-## **6. Key Tools**
+## **Key Tools**
 
 Simulink offers a suite of tools that facilitate the implementation and execution of closed-loop testing. These tools streamline the testing process, enhance monitoring capabilities, and ensure comprehensive validation of the BMS ECU.
 
@@ -407,7 +407,7 @@ Simulink offers a suite of tools that facilitate the implementation and executio
 | **Simulation Data Inspector** | Compare and visualize signals across different test runs (MIL, SIL, PIL).  |
 | **Simulink Coverage**    | Measure and report test coverage metrics to ensure comprehensive testing.    |
 
-### **6.1 Test Sequence Block**
+### **Test Sequence Block**
 
 - **Function**: Defines a sequence of events and state transitions to simulate various operational scenarios.
 - **Usage**:
@@ -435,7 +435,7 @@ Simulink offers a suite of tools that facilitate the implementation and executio
   
   *Figure 12: Configuring Test Sequence Block*
 
-### **6.2 Signal Builder**
+### **Signal Builder**
 
 - **Function**: Provides pre-recorded or custom-defined signal scenarios to simulate complex operational conditions.
 - **Usage**:
@@ -459,7 +459,7 @@ Simulink offers a suite of tools that facilitate the implementation and executio
   
   *Figure 13: Configuring Signal Builder with Drive Cycle Data*
 
-### **6.3 Observers**
+### **Observers**
 
 - **Function**: Monitor and log internal signals without altering the model's external interfaces.
 - **Usage**:
@@ -485,7 +485,7 @@ Simulink offers a suite of tools that facilitate the implementation and executio
   
   *Figure 14: Configuring Observers for Internal Signal Monitoring*
 
-### **6.4 Test Assessment**
+### **Test Assessment**
 
 - **Function**: Automates the verification of signal conditions to enforce safety and performance constraints.
 - **Usage**:
@@ -510,7 +510,7 @@ Simulink offers a suite of tools that facilitate the implementation and executio
   
   *Figure 15: Defining Test Assessments for Current Limits*
 
-### **6.5 Diagnostic Viewer**
+### **Diagnostic Viewer**
 
 - **Function**: Analyzes and displays the outcomes of test assessments, highlighting any failures or violations.
 - **Usage**:
@@ -534,7 +534,7 @@ Simulink offers a suite of tools that facilitate the implementation and executio
   
   *Figure 16: Opening Diagnostic Viewer for Test Analysis*
 
-### **6.6 Simulation Data Inspector**
+### **Simulation Data Inspector**
 
 - **Function**: Facilitates the comparison and visualization of simulation data across different test runs (e.g., MIL, SIL, PIL).
 - **Usage**:
@@ -565,7 +565,7 @@ Simulink offers a suite of tools that facilitate the implementation and executio
   
   *Figure 17: Comparing Signals in Simulation Data Inspector*
 
-### **6.7 Simulink Coverage**
+### **Simulink Coverage**
 
 - **Function**: Measures and reports the extent to which the model has been exercised by the test cases.
 - **Usage**:
@@ -602,11 +602,11 @@ By leveraging these tools, developers can create a robust closed-loop testing en
 
 ---
 
-## **7. Example: Validating Current Limits**
+## **Example: Validating Current Limits**
 
 To illustrate the application of closed-loop testing, consider an example focused on validating the BMS's charge and discharge current limits. This example demonstrates how to set up test scenarios, monitor internal signals, define assessments, and analyze results to ensure that the BMS operates within safe and efficient parameters.
 
-### **7.1 Test Scenario**
+### **Test Scenario**
 
 **Objective**: Ensure that the BMS maintains charge and discharge currents within specified safe limits during driving operations.
 
@@ -659,7 +659,7 @@ disp('Test scenario configured for validating current limits.');
 
 *Figure 19: Configuring Test Scenario for Current Limits*
 
-### **7.2 Results**
+### **Results**
 
 Upon executing the test scenario, the following outcomes are observed:
 
@@ -723,11 +723,11 @@ This example demonstrates how closed-loop testing effectively validates critical
 
 ---
 
-## **8. Key Tools**
+## **Key Tools**
 
 Implementing closed-loop testing effectively requires the integration of several specialized tools within the Simulink environment. These tools facilitate the creation of test harnesses, define test scenarios, monitor internal signals, automate assessments, and analyze results.
 
-### **8.1 Test Sequence Block**
+### **Test Sequence Block**
 
 - **Function**: Defines a sequence of state transitions and temporal events to simulate various operational scenarios.
 - **Usage**:
@@ -758,7 +758,7 @@ Implementing closed-loop testing effectively requires the integration of several
   
   *Figure 21: Defining Test Sequence for State Transitions*
 
-### **8.2 Signal Builder**
+### **Signal Builder**
 
 - **Function**: Provides a mechanism to inject complex and pre-defined signal scenarios into the test harness.
 - **Usage**:
@@ -782,7 +782,7 @@ Implementing closed-loop testing effectively requires the integration of several
   
   *Figure 22: Configuring Signal Builder with Drive Cycle Data*
 
-### **8.3 Observers**
+### **Observers**
 
 - **Function**: Monitor and log internal signals and states within the BMS ECU without altering external interfaces.
 - **Usage**:
@@ -808,7 +808,7 @@ Implementing closed-loop testing effectively requires the integration of several
   
   *Figure 23: Configuring Observers for Internal Signal Monitoring*
 
-### **8.4 Test Assessment**
+### **Test Assessment**
 
 - **Function**: Automates the verification of signal conditions to ensure compliance with safety and performance standards.
 - **Usage**:
@@ -833,7 +833,7 @@ Implementing closed-loop testing effectively requires the integration of several
   
   *Figure 24: Defining Verify Statements in Test Assessment*
 
-### **8.5 Diagnostic Viewer**
+### **Diagnostic Viewer**
 
 - **Function**: Analyzes and displays the outcomes of test assessments, highlighting any failures or violations.
 - **Usage**:
@@ -857,7 +857,7 @@ Implementing closed-loop testing effectively requires the integration of several
   
   *Figure 25: Opening Diagnostic Viewer for Test Analysis*
 
-### **8.6 Simulation Data Inspector**
+### **Simulation Data Inspector**
 
 - **Function**: Facilitates the comparison and visualization of simulation data from multiple test runs (e.g., MIL, SIL, PIL).
 - **Usage**:
@@ -888,7 +888,7 @@ Implementing closed-loop testing effectively requires the integration of several
   
   *Figure 26: Comparing Signals in Simulation Data Inspector*
 
-### **8.7 Simulink Coverage**
+### **Simulink Coverage**
 
 - **Function**: Measures and reports the extent to which the model has been exercised by the test cases.
 - **Usage**:
@@ -925,11 +925,11 @@ By effectively utilizing these tools, developers can create a robust closed-loop
 
 ---
 
-## **9. Example: Validating Current Limits**
+## **Example: Validating Current Limits**
 
 To demonstrate the practical application of closed-loop testing, consider an example focused on validating the BMS's charge and discharge current limits. This example showcases how to set up test scenarios, monitor internal signals, define assessments, and analyze results to ensure that the BMS operates within safe and efficient parameters.
 
-### **9.1 Test Scenario**
+### **Test Scenario**
 
 **Objective**: Ensure that the BMS maintains charge and discharge currents within specified safe limits during driving operations.
 
@@ -982,7 +982,7 @@ disp('Test scenario configured for validating current limits.');
 
 *Figure 28: Configuring Test Scenario for Current Limits*
 
-### **9.2 Results**
+### **Results**
 
 Upon executing the test scenario, the following outcomes are observed:
 
@@ -1046,7 +1046,7 @@ This example demonstrates how closed-loop testing effectively validates critical
 
 ---
 
-## **9. Benefits of Closed-Loop Testing**
+## **Benefits of Closed-Loop Testing**
 
 Implementing closed-loop testing for the BMS ECU offers numerous advantages that significantly enhance system validation, reliability, and compliance with safety standards. The key benefits include:
 
@@ -1085,61 +1085,3 @@ Implementing closed-loop testing for the BMS ECU offers numerous advantages that
 9. **Quality Assurance**:
    - **Description**: Provides a robust framework for validating both functional and performance aspects of the BMS.
    - **Benefit**: Ensures high-quality software delivery, fostering user confidence and system dependability.
-
-**Summary of Benefits**:
-
-- System Validation: Ensures integrated system functionality.
-- Non-Intrusive Monitoring: Enables detailed internal signal observation.
-- Automated Checks: Enforces safety and performance constraints automatically.
-- Real-World Scenario Simulation: Tests system under typical and extreme conditions.
-- Comprehensive Coverage: Identifies and addresses untested model areas.
-- Enhanced Traceability: Facilitates audits and compliance through clear links.
-- Risk Mitigation: Addresses potential issues early in development.
-- Efficiency and Automation: Streamlines testing processes, saving time and resources.
-- Quality Assurance: Guarantees high-quality, reliable software delivery.
-
-By incorporating closed-loop testing into the BMS development workflow, developers can achieve a high level of confidence in the system's reliability, safety, and performance, ensuring its readiness for deployment in demanding and safety-critical environments.
-
----
-
-## **10. Summary**
-
-Closed-loop testing is an essential component of the Battery Management System (BMS) development lifecycle, providing a comprehensive framework for validating system-level functionality and safety. By integrating the BMS ECU with a plant model and leveraging specialized Simulink tools, developers can simulate real-world interactions, monitor internal signals, and enforce safety constraints effectively.
-
-### **Key Actions for Effective Closed-Loop Testing**:
-
-1. **Creating a Test Harness**:
-   - **Purpose**: Integrate the BMS ECU with plant components to form a closed-loop system.
-   - **Implementation**: Use Simulink Test to generate a dedicated test harness that encapsulates the entire system for testing purposes.
-
-2. **Monitoring Signals**:
-   - **Purpose**: Track critical system signals and internal states to ensure proper operation.
-   - **Implementation**: Utilize dashboard blocks and observers to monitor signals such as cell temperatures, SOC, and current limits in real-time.
-
-3. **Validating Internal Logic**:
-   - **Purpose**: Ensure that the BMS's internal logic adheres to safety and performance requirements.
-   - **Implementation**: Define and execute `verify` statements within Test Assessment blocks to automatically enforce and validate signal conditions.
-
-4. **Automating Test Assessments**:
-   - **Purpose**: Streamline the verification process by automating condition checks.
-   - **Implementation**: Use Test Assessment blocks to define logical conditions that system signals must satisfy, automating pass/fail evaluations.
-
-5. **Ensuring Comprehensive Coverage**:
-   - **Purpose**: Measure and enhance test completeness to cover all critical execution paths.
-   - **Implementation**: Enable and analyze Simulink Coverage metrics (Decision, Condition, MCDC) to identify and address untested model areas.
-
-6. **Iterative Refinement**:
-   - **Purpose**: Continuously improve system reliability by addressing identified issues and refining test scenarios.
-   - **Implementation**: Modify the model and test harness based on test outcomes, re-running tests to validate enhancements.
-
-7. **Generating and Utilizing Coverage Reports**:
-   - **Purpose**: Document test effectiveness and support compliance with safety standards.
-   - **Implementation**: Create detailed coverage reports that highlight tested and untested areas, guiding further testing efforts.
-
-8. **Leveraging Diagnostic Tools**:
-   - **Purpose**: Analyze test results and diagnose system issues effectively.
-   - **Implementation**: Use the Diagnostic Viewer and Simulation Data Inspector to review assessment outcomes and signal comparisons.
-
-9. **Integrating with Certification Processes**:
-   - **Purpose**: Ensure that the BMS meets industry safety and reliability standards.
-   - **Implementation**: Align closed-loop testing practices with standards like ISO 26262 and DO-178C, facilitating smooth certification and deployment.

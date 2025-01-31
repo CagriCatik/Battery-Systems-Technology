@@ -90,7 +90,7 @@ The Cycle Life defines the number of complete charge-discharge cycles a battery 
 
 ## C-Rate
 
-The C-Rate indicates the charge or discharge rate relative to a battery's capacity.
+The C-Rate indicates the **charge** or **discharge** rate relative to a battery's capacity.
 
 - **Formula:**  
   $$ C\text{-Rate} = \frac{\text{Current (A)}}{\text{Battery Capacity (Ah)}} $$
@@ -220,9 +220,3 @@ Nominal Voltage is the average voltage at which a battery operates under typical
 - **Key Characteristics:**  
   - SoC reflects remaining capacity, while DOD indicates usage.  
   - Managing both ensures optimal performance and longevity.
-
----
-
-## Conclusion
-
-This guide emphasizes the precise definitions and significance of key battery terminologies, equipping engineers and professionals with the knowledge to design, analyze, and optimize battery systems for various applications. These concepts are foundational for enhancing the safety, performance, and lifespan of modern battery technologies.

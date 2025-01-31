@@ -1,11 +1,5 @@
 # Control System
 
-The control system of a Battery Management System (BMS) is pivotal in ensuring the safe, efficient, and reliable performance of battery packs in electric vehicles (EVs) and other applications. It manages the battery's state, enforces operational limits, and communicates with other vehicle systems to optimize overall performance and safety. This chapter provides a comprehensive overview of the BMS control system, detailing its types, key components, operational logic, and practical implementation scenarios to cater to both beginners and advanced users.
-
----
-
-## 1. Overview of BMS Control
-
 The BMS control system is the cornerstone of battery management, responsible for monitoring, managing, and optimizing the performance of the battery pack. It operates in tandem with other vehicle systems, such as the Vehicle Control Unit (VCU), motor controller, and charger, to ensure seamless and efficient operation. The BMS control system can be broadly categorized into two primary types:
 
 - **Open-Loop Control**
@@ -360,9 +354,3 @@ float calculateMaxChargeCurrent() {
     }
 }
 ```
-
----
-
-## 6. Summary of BMS Control
-
-The BMS control system is a sophisticated mechanism designed to ensure the safe and efficient operation of battery packs in electric vehicles. By leveraging closed-loop control methodologies and real-time feedback, the BMS maintains optimal battery performance, extends battery life, and safeguards against potential hazards. Below is a summary of the key aspects of the BMS control system.

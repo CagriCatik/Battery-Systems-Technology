@@ -1,11 +1,5 @@
 # Architecture
 
-The Battery Management System is an essential component in modern battery-powered systems, especially in electric vehicles (EVs). It ensures the safe, efficient, and reliable operation of battery packs by monitoring, controlling, and optimizing the performance of individual battery cells and modules. This documentation provides a comprehensive overview of BMS architecture, detailing its key components and functionalities to cater to both beginners and advanced users.
-
----
-
-## 1. Overview of BMS Architecture
-
 The BMS functions as the brain of the battery system, orchestrating various operations to maintain optimal battery performance. Unlike traditional engine control units (ECUs) that typically rely on a single hardware board, the BMS employs a **distributed architecture**. This architecture comprises multiple interconnected components, primarily categorized into **slave units** and a **master controller**. The distributed nature allows for precise monitoring and control of individual battery modules and cells, enhancing both performance and safety.
 
 ### Distributed vs. Centralized Architecture
@@ -15,13 +9,11 @@ The BMS functions as the brain of the battery system, orchestrating various oper
 
 The distributed architecture is preferred in modern EVs due to its ability to handle complex battery configurations and provide robust fault tolerance.
 
----
-
-## 2. Key Components of BMS Architecture
+## Key Components of BMS Architecture
 
 The BMS architecture is composed of several critical components, each responsible for specific functions essential to the overall system's performance and safety.
 
-### 2.1 Slave Units
+### Slave Units
 
 **Slave units** are compact printed circuit boards (PCBs) dedicated to monitoring and managing individual battery modules within the battery pack. Each module in a battery pack is assigned a dedicated slave unit, enabling localized control and monitoring.
 
@@ -50,7 +42,7 @@ The BMS architecture is composed of several critical components, each responsibl
 
 In an EV with a battery pack comprising 20 modules, there would be 20 slave units, each managing one module. These slave units communicate with the master controller to provide a comprehensive overview of the battery pack's status.
 
-### 2.2 Master Controller
+### Master Controller
 
 The **master controller** serves as the central processing unit of the BMS, overseeing the entire battery system's operation. It is typically a more powerful microcontroller or microprocessor compared to the slave units, enabling it to handle complex computations and decision-making tasks.
 
@@ -83,9 +75,7 @@ The **master controller** serves as the central processing unit of the BMS, over
 
 In a Tesla vehicle, the master controller aggregates data from multiple slave units managing different battery modules. It processes this data to estimate SOC, SOH, and SOP, and communicates with the VCU to adjust vehicle performance parameters accordingly.
 
----
-
-## 3. Communication Between Slave Units and Master Controller
+## Communication Between Slave Units and Master Controller
 
 Effective communication between slave units and the master controller is paramount for the BMS's functionality. The BMS typically employs the **Controller Area Network (CAN) bus** protocol to facilitate this communication.
 
@@ -120,9 +110,7 @@ typedef struct {
 
 This structure ensures that each voltage reading is accurately timestamped and associated with the correct slave unit, facilitating precise data processing by the master controller.
 
----
-
-## 4. Software Architecture
+## Software Architecture
 
 The BMS software, embedded within the master controller, orchestrates the system's core functionalities. It is designed to handle real-time operations efficiently, ensuring timely responses to dynamic battery conditions.
 
@@ -176,9 +164,7 @@ float estimate_SOC(float current, float delta_time, float initial_SOC, float bat
 
 This function calculates the SOC by accounting for the charge consumed or added over a specific time interval, providing a continuous estimate of the battery's charge level.
 
----
-
-## 5. Practical Implementation in Electric Vehicles
+## Practical Implementation in Electric Vehicles
 
 In electric vehicles, the BMS architecture is meticulously implemented to ensure optimal battery performance, safety, and longevity. The integration involves several steps and considerations to accommodate the specific demands of automotive applications.
 
@@ -203,10 +189,3 @@ In electric vehicles, the BMS architecture is meticulously implemented to ensure
 ### Example: Tesla's BMS Implementation
 
 In a Tesla electric vehicle, the battery pack is divided into multiple modules, each managed by a slave unit. These slave units continuously monitor their respective modules and communicate data to the master controller via the CAN bus. The master controller processes this data to estimate SOC, SOH, and SOP, and manages charging and discharging cycles accordingly. Additionally, it interfaces with the VCU to adjust vehicle performance based on the battery's status, ensuring seamless and efficient operation.
-
----
-
-## 6. Summary of BMS Architecture
-
-The BMS architecture is a sophisticated system designed to ensure the safe and efficient operation of battery packs in electric vehicles. Its distributed nature, comprising slave units and a master controller, allows for precise monitoring and control of individual battery modules and cells. Below is a summary of the key components and their roles within the BMS architecture.
-

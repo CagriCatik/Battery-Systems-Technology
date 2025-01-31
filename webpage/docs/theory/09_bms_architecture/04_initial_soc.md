@@ -4,25 +4,25 @@ The State of Charge (SoC) and State of Health (SoH) are fundamental parameters i
 
 ---
 
-## 1. Overview of SoC and SoH Estimation
+## Overview of SoC and SoH Estimation
 
 Understanding the State of Charge (SoC) and State of Health (SoH) is essential for effective battery management. These parameters provide insights into the battery's current capacity and its ability to perform over time.
 
-### 1.1 State of Charge (SoC)
+### State of Charge (SoC)
 
 **State of Charge (SoC)** represents the remaining capacity of the battery as a percentage of its maximum capacity. It indicates how much energy is left in the battery at any given time and is crucial for applications like EVs to predict driving range and manage charging cycles effectively.
 
-### 1.2 State of Health (SoH)
+### State of Health (SoH)
 
 **State of Health (SoH)** reflects the overall condition of the battery, indicating its ability to store and deliver energy compared to its original capacity. SoH accounts for factors such as capacity loss, internal resistance increase, and overall degradation due to aging and usage patterns.
 
 ---
 
-## 2. Initial SoC Estimation
+## Initial SoC Estimation
 
 Accurate initial SoC estimation is vital for the BMS to provide reliable battery status from the outset. Various methods are employed to determine the initial SoC, each with its advantages and limitations.
 
-### 2.1 Open-Circuit Voltage (OCV) Method
+### Open-Circuit Voltage (OCV) Method
 
 The Open-Circuit Voltage (OCV) method estimates SoC based on the relationship between the battery's voltage and its SoC when the battery is at rest (i.e., no load or charge is applied). This method is straightforward but requires the battery to be in a rested state to obtain accurate readings.
 
@@ -55,7 +55,7 @@ float estimate_SOC_OCV(float ocv) {
 
 *Note: The OCV-SoC relationship varies with battery chemistry and temperature. Calibration is essential for accurate estimation.*
 
-### 2.2 Coulomb Counting Method
+### Coulomb Counting Method
 
 Coulomb counting estimates SoC by integrating the current flowing into or out of the battery over time. This method provides dynamic SoC estimation but requires an accurate initial SoC value and precise current measurements to minimize cumulative errors.
 
@@ -96,11 +96,11 @@ float estimate_SOC(float current, float delta_time, float initial_SOC, float bat
 
 ---
 
-## 3. Initial SoH Estimation
+## Initial SoH Estimation
 
 State of Health (SoH) estimation evaluates the battery's condition and predicts its remaining useful life. Accurate SoH assessment helps in proactive maintenance and ensures reliability in applications.
 
-### 3.1 Capacity Loss Calculation
+### Capacity Loss Calculation
 
 Capacity loss quantifies the reduction in the battery's ability to store energy compared to its original capacity. It is influenced by factors like the number of charge-discharge cycles, depth of discharge, and operating temperatures.
 
@@ -126,7 +126,7 @@ float estimate_SOH(float current_capacity, float original_capacity) {
 }
 ```
 
-### 3.2 Cycle Counting
+### Cycle Counting
 
 Cycle counting involves tracking the number of charge-discharge cycles a battery has experienced. Each cycle contributes to the gradual degradation of the battery's capacity and overall health.
 
@@ -153,11 +153,11 @@ float estimate_SOH_cycles(int total_cycles, float capacity_loss_per_cycle) {
 
 ---
 
-## 4. Mathematical and Logical Steps for SoC and SoH Estimation
+## Mathematical and Logical Steps for SoC and SoH Estimation
 
 Accurate SoC and SoH estimation involves a systematic approach that integrates data collection, processing, and algorithmic analysis.
 
-### 4.1 Data Collection
+### Data Collection
 
 Effective estimation begins with the acquisition of accurate and reliable data from the battery system.
 
@@ -166,7 +166,7 @@ Effective estimation begins with the acquisition of accurate and reliable data f
 - **Temperature**: Track the battery temperature using temperature sensors.
 - **Open-Circuit Voltage (OCV)**: Measure OCV when the battery is at rest for the OCV-based SoC estimation.
 
-### 4.2 Cycle Counting and Capacity Loss Estimation
+### Cycle Counting and Capacity Loss Estimation
 
 1. **Calculate Depth of Discharge (DoD)**:
    
@@ -210,7 +210,7 @@ Effective estimation begins with the acquisition of accurate and reliable data f
    }
    ```
 
-### 4.4 SoH Estimation
+### SoH Estimation
 
 1. **Calculate Current Capacity**:
    
@@ -228,7 +228,7 @@ Effective estimation begins with the acquisition of accurate and reliable data f
 
 ---
 
-## 5. Practical Implementation in BMS
+## Practical Implementation in BMS
 
 Implementing SoC and SoH estimation within a BMS involves integrating the aforementioned algorithms into the system's software architecture. The following steps outline the practical workflow:
 
@@ -305,7 +305,7 @@ void loop() {
 
 ---
 
-## 6. Summary of SoC and SoH Estimation
+## Summary of SoC and SoH Estimation
 
 Understanding and accurately estimating SoC and SoH are pivotal for effective battery management. The methods outlined ensure that the BMS can provide reliable information for optimal battery operation and longevity.
 
@@ -318,41 +318,31 @@ Understanding and accurately estimating SoC and SoH are pivotal for effective ba
 
 ---
 
-## 7. Challenges and Future Directions
+## Challenges and Future Directions
 
 While significant advancements have been made in SoC and SoH estimation, several challenges persist that require ongoing research and development.
 
-### 7.1 Accuracy
+### Accuracy
 
 - **Sensor Precision**: High-precision sensors are essential for minimizing errors in voltage and current measurements.
 - **Algorithm Calibration**: Continuous calibration of estimation algorithms is necessary to account for changes in battery behavior over time and under varying conditions.
 
-### 7.2 Aging Effects
+### Aging Effects
 
 - **Dynamic Modeling**: Developing models that accurately reflect the aging process of batteries to improve SoH estimation.
 - **Adaptive Algorithms**: Implementing algorithms that adapt to the changing characteristics of the battery as it ages.
 
-### 7.3 Real-Time Implementation
+### Real-Time Implementation
 
 - **Computational Efficiency**: Designing algorithms that can run efficiently on embedded systems with limited processing power.
 - **Latency Reduction**: Ensuring that SoC and SoH estimations are updated promptly to reflect real-time battery states.
 
-### 7.4 Environmental Factors
+### Environmental Factors
 
 - **Temperature Variations**: Accounting for the impact of temperature on battery performance and measurement accuracy.
 - **Load Fluctuations**: Managing rapid changes in load conditions to maintain accurate SoC and SoH estimates.
 
-### 7.5 Integration with Advanced Technologies
+### Integration with Advanced Technologies
 
 - **Machine Learning and AI**: Leveraging advanced machine learning techniques to enhance the accuracy and adaptability of SoC and SoH estimation algorithms.
 - **IoT Integration**: Utilizing IoT platforms for remote monitoring and data analysis to improve estimation accuracy and enable predictive maintenance.
-
----
-
-By addressing these challenges and leveraging emerging technologies, future BMS designs will achieve greater accuracy, reliability, and efficiency in SoC and SoH estimation, thereby enhancing the overall performance and lifespan of battery systems.
-
----
-
-## 8. Conclusion
-
-Accurate initial estimation of State of Charge (SoC) and State of Health (SoH) is fundamental to effective battery management. By employing methods such as the Open-Circuit Voltage (OCV) method and Coulomb counting for SoC, and capacity loss calculation and cycle counting for SoH, BMS can provide reliable insights into battery performance and longevity. Integrating these estimation techniques into the BMS design enhances battery utilization, ensures safety, and prolongs battery life, which is critical for applications ranging from electric vehicles to renewable energy storage systems.

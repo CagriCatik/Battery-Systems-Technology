@@ -10,13 +10,13 @@ This documentation is aimed at professionals, engineers, and enthusiasts seeking
 
 ---
 
-## 1. Fundamentals of Battery Management in the Automotive Sector
+## Fundamentals of Battery Management
 
-### 1.1 What is a Battery Management System (BMS)?
+### Definition
 
 A **Battery Management System (BMS)** is an electronic control unit used in electric and hybrid vehicles to optimize the performance, safety, and lifespan of the battery. It continuously monitors the state of the battery, controls charging and discharging processes, protects against potential hazards, and communicates with other systems within the vehicle.
 
-#### 1.1.1 Objectives of a BMS
+#### Objectives of a BMS
 
 The primary objectives of a BMS include:
 
@@ -25,9 +25,9 @@ The primary objectives of a BMS include:
 - **Lifespan Extension**: Minimizing aging effects through optimal operating conditions.
 - **System Integration**: Communicating seamlessly with other control units and systems for overall vehicle optimization.
 
-### 1.2 Main Functions of a BMS
+### Main Functions of a BMS
 
-#### 1.2.1 Monitoring
+#### Monitoring
 
 Monitoring is one of the core functions of a BMS and involves the continuous collection and analysis of various parameters:
 
@@ -39,7 +39,7 @@ Monitoring is one of the core functions of a BMS and involves the continuous col
 
 *Example*: In the **Tesla Model S**, thousands of cells are monitored to provide an accurate SoC indication and to utilize the battery optimally.
 
-#### 1.2.2 Cell Balancing
+#### Cell Balancing
 
 Cell balancing ensures that all cells within the battery pack are uniformly charged to guarantee maximum performance and longevity.
 
@@ -48,7 +48,7 @@ Cell balancing ensures that all cells within the battery pack are uniformly char
 
 *Example*: The **Porsche Taycan** employs active balancing to meet high-performance requirements and maximize the battery's lifespan.
 
-#### 1.2.3 Protection
+#### Protection
 
 The BMS implements various protection mechanisms to safeguard the battery from hazardous conditions:
 
@@ -59,7 +59,7 @@ The BMS implements various protection mechanisms to safeguard the battery from h
 
 *Example*: The **Chevrolet Bolt** features a BMS that reduces the charging speed at high temperatures to protect the battery.
 
-#### 1.2.4 Diagnostics and Fault Handling
+#### Diagnostics and Fault Handling
 
 The BMS continuously monitors the system's state and can detect and manage faults.
 
@@ -69,7 +69,7 @@ The BMS continuously monitors the system's state and can detect and manage fault
 
 *Example*: The **Nissan Leaf** generates a fault code upon detecting a cell issue and alerts the driver through a warning light.
 
-#### 1.2.5 Communication
+#### Communication
 
 The BMS communicates with various systems within the vehicle:
 
@@ -79,9 +79,9 @@ The BMS communicates with various systems within the vehicle:
 
 *Example*: The **Plug & Charge** system in the **Porsche Taycan** allows automatic authentication and payment at compatible charging stations through direct communication between the BMS and the charging infrastructure.
 
-### 1.3 Key Components of a BMS
+### Key Components of a BMS
 
-#### 1.3.1 Sensors
+#### Sensors
 
 A BMS relies on various sensors to gather necessary data:
 
@@ -91,7 +91,7 @@ A BMS relies on various sensors to gather necessary data:
 
 *Example*: The **Audi e-tron** is equipped with multiple temperature sensors distributed throughout the battery to enable precise thermal management.
 
-#### 1.3.2 Control Unit
+#### Control Unit
 
 The control unit comprises microcontrollers and processors that:
 
@@ -101,7 +101,7 @@ The control unit comprises microcontrollers and processors that:
 
 *Example*: **Tesla** utilizes powerful processors and proprietary software algorithms to ensure precise control and monitoring of the battery.
 
-#### 1.3.3 Power Electronics
+#### Power Electronics
 
 Power electronics within the BMS include:
 
@@ -110,7 +110,7 @@ Power electronics within the BMS include:
 
 *Example*: The **BMW i3** employs power electronics to achieve active cell balancing and implement protection functions.
 
-#### 1.3.4 Communication Interfaces
+#### Communication Interfaces
 
 Communication interfaces involve bus systems and diagnostic connectors:
 
@@ -121,19 +121,19 @@ Communication interfaces involve bus systems and diagnostic connectors:
 
 ---
 
-## 2. Specific Requirements for BMS Systems
+## Specific Requirements for BMS Systems
 
-### 2.1 Functional Safety
+### Functional Safety
 
 Functional safety is paramount because failures in the BMS can lead to dangerous situations. **ISO 26262** is the international standard for the functional safety of road vehicles.
 
-#### 2.1.1 ISO 26262 Compliance
+#### ISO 26262 Compliance
 
 A BMS must meet the safety standards defined in **ISO 26262**. Safety-critical functions are classified according to the Automotive Safety Integrity Level (ASIL), ranging from ASIL A (lowest requirement) to ASIL D (highest requirement).
 
 *Example*: Safety-critical functions such as overcharge protection in the BMS of a **Mercedes-Benz EQC** must comply with ASIL-D requirements.
 
-#### 2.1.2 Safety Mechanisms
+#### Safety Mechanisms
 
 Safety mechanisms include:
 
@@ -143,7 +143,7 @@ Safety mechanisms include:
 
 *Example*: In the **Audi e-tron**, a dual safety concept ensures that if one component fails, the other can take over its function.
 
-### 2.2 Precise and Fast Measurements
+### Precise and Fast Measurements
 
 The accuracy and speed of measurements impact the BMS's performance and safety.
 
@@ -153,7 +153,7 @@ The accuracy and speed of measurements impact the BMS's performance and safety.
 
 *Example*: **Tesla** utilizes specific calibration procedures during production and maintenance to guarantee the accuracy of SoC estimations.
 
-### 2.3 Efficient Cell Balancing
+### Efficient Cell Balancing
 
 Effective cell balancing is crucial for the battery's performance and lifespan.
 
@@ -163,7 +163,7 @@ Effective cell balancing is crucial for the battery's performance and lifespan.
 
 *Example*: The **Jaguar I-PACE** uses a combination of active and passive balancing to achieve both efficiency and cost-effectiveness.
 
-### 2.4 Communication Robustness
+### Communication Robustness
 
 Reliable communication between the BMS and other systems is essential for safe operation.
 
@@ -173,7 +173,7 @@ Reliable communication between the BMS and other systems is essential for safe o
 
 *Example*: In modern vehicles like the **Volkswagen ID.4**, Time-Sensitive Networking (TSN) over Ethernet is employed to ensure deterministic and reliable communication.
 
-### 2.5 Thermal Management
+### Thermal Management
 
 Thermal management directly affects the battery's performance, safety, and lifespan.
 
@@ -185,7 +185,7 @@ Thermal management directly affects the battery's performance, safety, and lifes
 
 ---
 
-## 3. Test Strategies for BMS Systems
+## Test Strategies for BMS Systems
 
 Validating and verifying the BMS is a critical step in the development process to ensure functionality and safety.
 

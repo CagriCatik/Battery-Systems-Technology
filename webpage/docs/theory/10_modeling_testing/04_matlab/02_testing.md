@@ -487,25 +487,3 @@ The outcome of LG's certified BMS development showcased the effectiveness of the
 
 *Figure 4: Workflow Overview of LG’s Certified BMS Development*
 
----
-
-## **Summary**
-
-Testing BMS software in Simulink is a multifaceted process that ensures the system's safety, reliability, and efficiency. The key aspects of this approach include:
-
-- **Modeling the Plant and Controller**:
-  - **Accuracy**: Precisely representing the battery pack, pre-charge circuit, charger, load, and control logic within Simulink.
-  - **Integration**: Seamlessly integrating these components to simulate real-world interactions and system behavior.
-
-- **Leveraging Model-Based Design**:
-  - **Early Validation**: Utilizing simulation to identify and rectify design issues before physical prototyping.
-  - **Efficiency**: Streamlining the development process through graphical modeling and automated code generation.
-
-- **Adopting Systematic Testing Techniques**:
-  - **Static Analysis**: Ensuring model adherence to best practices and standards using tools like Simulink Check™.
-  - **Equivalence Testing**: Verifying consistency between model simulations and generated code.
-  - **Requirements Traceability**: Linking model elements to system requirements to maintain compliance and facilitate certification.
-
-- **Aligning with Certification Standards**:
-  - **Compliance**: Ensuring the BMS meets safety-critical standards such as ISO 26262, IEC 61508, and DO-178C.
-  - **Certification**: Utilizing certification kits and adhering to approved workflows to achieve recognized safety certifications.

@@ -2,8 +2,6 @@
 
 Battery chemistries fundamentally determine the performance, safety, and suitability of batteries for various applications. Among these, lithium-ion (Li-ion) batteries have become the industry standard due to their exceptional energy density, versatility, and performance. This section explores the different Li-ion battery chemistries, compares their key parameters, examines design trade-offs, and highlights future trends shaping battery technology.
 
----
-
 ## Key Lithium-Ion Battery Chemistries
 
 Understanding the various Li-ion battery chemistries is crucial for selecting the right battery for specific applications. Below is an overview of the primary Li-ion chemistries:
@@ -163,8 +161,6 @@ Different battery chemistries are preferred for various applications based on th
 - **NMC Batteries:**
   - **Global Adoption:** Widely used by international manufacturers, including Tesla and Panasonic, for their balance of performance and cost.
   - **Market Drivers:** Increasing demand for high-performance batteries in the global EV market.
-
----
 
 ## Conclusion
 
