@@ -1,6 +1,6 @@
 # BMS Software with SiL
 
-Testing the software component of a Battery Management System (BMS) is essential for ensuring the performance, reliability, and safety of electric vehicles. The BMS is responsible for tasks such as state-of-charge estimation, pre-charge control, and cell balancing, all of which directly impact battery lifespan and vehicle performance. Using Software-in-the-Loop (SIL) technology allows for early and cost-effective testing by replacing hardware components with virtual models. This approach enables developers to simulate and analyze BMS software behavior under various conditions before the final hardware is available.
+Testing the software component of a Battery Management System (BMS) is essential for ensuring the performance, reliability, and safety of electric vehicles. The BMS is responsible for tasks such as state-of-charge estimation, pre-charge control, and cell balancing, all of which directly impact battery lifespan and vehicle performance. Using Software-in-the-Loop technology allows for early and cost-effective testing by replacing hardware components with virtual models. This approach enables developers to simulate and analyze BMS software behavior under various conditions before the final hardware is available.
 
 ---
 
@@ -27,12 +27,12 @@ There are several approaches to testing BMS functionality:
 2. **Hardware-in-the-Loop (HIL) Testing:**  
    Uses the actual electronic control unit (ECU) in a simulated vehicle environment. While HIL testing provides high fidelity, it focuses on the integration of hardware and software rather than on software behavior alone.
 
-3. **Software-in-the-Loop (SIL) Testing:**  
+3. **Software-in-the-Loop  Testing:**  
    Focuses exclusively on the BMS software by replacing hardware components with virtual models. SIL offers a flexible, faster, and less costly alternative, allowing for variable simulation speeds and detailed step-by-step analysis of software behavior.
 
 ---
 
-## Software-in-the-Loop (SIL) Testing Methodology
+## Software-in-the-Loop Testing Methodology
 
 ### Advantages of SIL Testing
 
@@ -113,7 +113,3 @@ Testing BMS software with Software-in-the-Loop technology offers a highly flexib
   The combination of the ASM Battery library, VEOS, and ControlDesk provides a complete environment for developing, simulating, and automating BMS tests.
 
 By leveraging SIL testing, engineers can thoroughly validate BMS software early in the development process, optimize performance, and ensure that safety and reliability standards are met before transitioning to hardware-in-the-loop or real-world testing.
-
---- 
-
-This documentation provides a detailed overview of how SIL technology is used to test BMS software, emphasizing the advantages of virtual simulation environments, flexible testing strategies, and integrated communication protocol verification. For further details or assistance with setting up SIL tests, please refer to the additional resources or contact dSPACE for expert support in simulation and validation.

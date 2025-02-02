@@ -250,7 +250,7 @@ if __name__ == "__main__":
 - **DoD Calculation:** Upon completing a charge-discharge cycle, it calculates the Depth of Discharge (DoD) and accumulates it towards equivalent full cycles.
 - **Equivalent Full Cycles:** Partial cycles are summed based on their DoD to provide an aggregated cycle count.
 
-### 2. Depth of Discharge (DoD) Calculation
+### 2. Depth of Discharge Calculation
 
 This snippet calculates the Depth of Discharge (DoD) for each detected cycle.
 

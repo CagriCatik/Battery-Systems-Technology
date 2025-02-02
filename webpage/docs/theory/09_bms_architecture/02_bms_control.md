@@ -7,7 +7,7 @@ The BMS control system is the cornerstone of battery management, responsible for
 
 Understanding the distinction between these control types is essential for appreciating the sophistication and reliability of modern BMS implementations.
 
-### Distributed vs. Centralized Control
+## Distributed vs. Centralized Control
 
 Similar to BMS architecture, the control system can be either distributed or centralized:
 
@@ -18,11 +18,11 @@ Modern BMS implementations typically favor **closed-loop distributed control sys
 
 ---
 
-## 2. Types of Control Systems
+## Types of Control Systems
 
 The control system within a BMS can operate using different methodologies, primarily categorized into open-loop and closed-loop control systems. Each type has its unique characteristics, advantages, and applications.
 
-### 2.1 Open-Loop Control
+### Open-Loop Control
 
 In an open-loop control system, the controller sends commands to the system without receiving any feedback regarding the output. This type of control is simpler and less resource-intensive but lacks the ability to correct errors or adapt to changes in the system.
 
@@ -57,7 +57,7 @@ void loop() {
 
 *Note: This simplistic example does not account for motor load or speed variations.*
 
-### 2.2 Closed-Loop Control
+### Closed-Loop Control
 
 In contrast, a closed-loop control system incorporates feedback from the system's output to adjust its commands dynamically. This approach ensures that the system operates as intended, even in the presence of disturbances or changes in operating conditions.
 
@@ -100,7 +100,7 @@ void loop() {
 
 ---
 
-## 3. BMS Control System in Electric Vehicles
+## BMS Control System in Electric Vehicles
 
 In electric vehicles, the BMS control system operates as a closed-loop system, leveraging real-time feedback from various sensors and interfaces to manage the battery pack effectively. The system comprises three primary components:
 
@@ -114,11 +114,11 @@ The BMS control system interacts closely with the VCU and other vehicle componen
 
 ---
 
-## 4. Operational Logic of BMS Control
+## Operational Logic of BMS Control
 
 The BMS control system follows a structured operational logic to maintain optimal battery performance, safety, and longevity. The process involves several key steps:
 
-### 4.1 Mode Request
+### Mode Request
 
 The VCU initiates the control process by sending a **mode request** to the BMS, specifying the desired operating state of the battery. The primary modes include:
 
@@ -159,7 +159,7 @@ void executeMode(BMS_Mode mode) {
 }
 ```
 
-### 4.2 Data Collection and Processing
+### Data Collection and Processing
 
 Upon receiving a mode request, the BMS undertakes the following actions:
 
@@ -181,7 +181,7 @@ float new_SOC = estimate_SOC(current, delta_time, initial_SOC, battery_capacity)
 updateSOC(new_SOC);
 ```
 
-### 4.3 Control Actions
+### Control Actions
 
 Based on the processed data, the BMS performs several control actions to maintain optimal battery performance and safety:
 
@@ -233,7 +233,7 @@ void updateBatteryStates() {
 }
 ```
 
-### 4.4 Communication with Other Systems
+### Communication with Other Systems
 
 Effective communication between the BMS and other vehicle systems is essential for coordinated operation. The BMS interfaces with:
 
@@ -263,11 +263,11 @@ void sendStatusToVCU(BatteryStatus status) {
 
 ---
 
-## 5. Example Scenarios
+## Example Scenarios
 
 Understanding practical scenarios helps illustrate how the BMS control system operates in real-world conditions. Below are two common scenarios: discharge and charge.
 
-### 5.1 Discharge Scenario
+### Discharge Scenario
 
 **Objective**: Ensure the battery supplies power safely to the motor and other vehicle systems without exceeding operational limits.
 
@@ -303,7 +303,7 @@ void dischargeMode() {
 }
 ```
 
-### 5.2 Charge Scenario
+### Charge Scenario
 
 **Objective**: Safely charge the battery while preventing overcharging and managing thermal conditions.
 

@@ -64,7 +64,7 @@ Temperature is the most critical factor affecting calendar aging:
 | 0–15                 | Slows degradation, ideal for long-term storage. |
 | 15–25                | Minimal degradation, optimal performance range.|
 | 25–40                | Moderate degradation, manageable impact.        |
-| >40                  | Rapid degradation, significant capacity loss.   |
+| > 40                  | Rapid degradation, significant capacity loss.   |
 
 ![alt text](image-1.png)
 

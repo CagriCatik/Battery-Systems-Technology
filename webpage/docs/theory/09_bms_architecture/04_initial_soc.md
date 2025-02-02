@@ -8,11 +8,11 @@ The State of Charge (SoC) and State of Health (SoH) are fundamental parameters i
 
 Understanding the State of Charge (SoC) and State of Health (SoH) is essential for effective battery management. These parameters provide insights into the battery's current capacity and its ability to perform over time.
 
-### State of Charge (SoC)
+### State of Charge
 
 **State of Charge (SoC)** represents the remaining capacity of the battery as a percentage of its maximum capacity. It indicates how much energy is left in the battery at any given time and is crucial for applications like EVs to predict driving range and manage charging cycles effectively.
 
-### State of Health (SoH)
+### State of Health
 
 **State of Health (SoH)** reflects the overall condition of the battery, indicating its ability to store and deliver energy compared to its original capacity. SoH accounts for factors such as capacity loss, internal resistance increase, and overall degradation due to aging and usage patterns.
 
@@ -22,7 +22,7 @@ Understanding the State of Charge (SoC) and State of Health (SoH) is essential f
 
 Accurate initial SoC estimation is vital for the BMS to provide reliable battery status from the outset. Various methods are employed to determine the initial SoC, each with its advantages and limitations.
 
-### Open-Circuit Voltage (OCV) Method
+### Open-Circuit Voltage Method
 
 The Open-Circuit Voltage (OCV) method estimates SoC based on the relationship between the battery's voltage and its SoC when the battery is at rest (i.e., no load or charge is applied). This method is straightforward but requires the battery to be in a rested state to obtain accurate readings.
 
@@ -190,7 +190,7 @@ Effective estimation begins with the acquisition of accurate and reliable data f
    
    Apply the capacity loss to calculate SoH.
 
-### 4.3 SoC Estimation
+### SoC Estimation
 
 1. **Initial SoC Estimation**:
    
@@ -305,19 +305,6 @@ void loop() {
 
 ---
 
-## Summary of SoC and SoH Estimation
-
-Understanding and accurately estimating SoC and SoH are pivotal for effective battery management. The methods outlined ensure that the BMS can provide reliable information for optimal battery operation and longevity.
-
-| **Parameter**       | **Method**                          | **Key Steps**                                                                 |
-|---------------------|-------------------------------------|-------------------------------------------------------------------------------|
-| **State of Charge (SoC)** | Open-Circuit Voltage (OCV) Method  | Measure OCV, use lookup table to estimate SoC.                                |
-|                     | Coulomb Counting Method            | Integrate current over time, update SoC based on initial value.               |
-| **State of Health (SoH)** | Capacity Loss Estimation           | Track cycles, estimate capacity loss, compute SoH as current/original capacity.|
-|                     | Cycle Counting                      | Measure DoD, accumulate equivalent cycles, map to capacity loss.             |
-
----
-
 ## Challenges and Future Directions
 
 While significant advancements have been made in SoC and SoH estimation, several challenges persist that require ongoing research and development.
@@ -346,3 +333,16 @@ While significant advancements have been made in SoC and SoH estimation, several
 
 - **Machine Learning and AI**: Leveraging advanced machine learning techniques to enhance the accuracy and adaptability of SoC and SoH estimation algorithms.
 - **IoT Integration**: Utilizing IoT platforms for remote monitoring and data analysis to improve estimation accuracy and enable predictive maintenance.
+
+---
+
+## Summary of SoC and SoH Estimation
+
+Understanding and accurately estimating SoC and SoH are pivotal for effective battery management. The methods outlined ensure that the BMS can provide reliable information for optimal battery operation and longevity.
+
+| **Parameter**       | **Method**                          | **Key Steps**                                                                 |
+|---------------------|-------------------------------------|-------------------------------------------------------------------------------|
+| **State of Charge (SoC)** | Open-Circuit Voltage (OCV) Method  | Measure OCV, use lookup table to estimate SoC.                                |
+|                     | Coulomb Counting Method            | Integrate current over time, update SoC based on initial value.               |
+| **State of Health (SoH)** | Capacity Loss Estimation           | Track cycles, estimate capacity loss, compute SoH as current/original capacity.|
+|                     | Cycle Counting                      | Measure DoD, accumulate equivalent cycles, map to capacity loss.             |

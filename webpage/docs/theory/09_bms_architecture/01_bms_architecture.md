@@ -2,7 +2,7 @@
 
 The BMS functions as the brain of the battery system, orchestrating various operations to maintain optimal battery performance. Unlike traditional engine control units (ECUs) that typically rely on a single hardware board, the BMS employs a **distributed architecture**. This architecture comprises multiple interconnected components, primarily categorized into **slave units** and a **master controller**. The distributed nature allows for precise monitoring and control of individual battery modules and cells, enhancing both performance and safety.
 
-### Distributed vs. Centralized Architecture
+## Distributed vs. Centralized Architecture
 
 - **Distributed Architecture**: Utilizes multiple slave units to manage different sections of the battery pack, allowing for scalability and localized control.
 - **Centralized Architecture**: Relies on a single controller to manage all aspects of the battery pack, which can be simpler but less flexible and scalable.
@@ -13,11 +13,11 @@ The distributed architecture is preferred in modern EVs due to its ability to ha
 
 The BMS architecture is composed of several critical components, each responsible for specific functions essential to the overall system's performance and safety.
 
-### Slave Units
+## Slave Units
 
 **Slave units** are compact printed circuit boards (PCBs) dedicated to monitoring and managing individual battery modules within the battery pack. Each module in a battery pack is assigned a dedicated slave unit, enabling localized control and monitoring.
 
-#### Responsibilities of Slave Units
+### Responsibilities of Slave Units
 
 1. **Sensor Integration**: 
    - **Temperature Sensors**: Monitor the thermal conditions of the module to prevent overheating.
@@ -32,21 +32,21 @@ The BMS architecture is composed of several critical components, each responsibl
    - Gathers real-time data from integrated sensors.
    - Transmits collected data to the master controller via a communication interface, typically a CAN bus.
 
-#### Key Features of Slave Units
+### Key Features of Slave Units
 
 - **Dedicated Management**: Each slave unit manages a single battery module, ensuring focused and efficient control.
 - **Data Collection Points**: Act as localized data hubs, aggregating sensor data for the master controller.
 - **Communication Interface**: Connected to the master controller through a CAN wiring harness, facilitating reliable data transmission.
 
-#### Example Configuration
+### Example Configuration
 
 In an EV with a battery pack comprising 20 modules, there would be 20 slave units, each managing one module. These slave units communicate with the master controller to provide a comprehensive overview of the battery pack's status.
 
-### Master Controller
+## Master Controller
 
 The **master controller** serves as the central processing unit of the BMS, overseeing the entire battery system's operation. It is typically a more powerful microcontroller or microprocessor compared to the slave units, enabling it to handle complex computations and decision-making tasks.
 
-#### Responsibilities of the Master Controller
+### Responsibilities of the Master Controller
 
 1. **Data Aggregation**:
    - Collects voltage, current, and temperature data from all slave units.
@@ -65,13 +65,13 @@ The **master controller** serves as the central processing unit of the BMS, over
 4. **Communication**:
    - Interfaces with other vehicle systems, including the Vehicle Control Unit (VCU) and infotainment systems, to relay battery status and receive operational commands.
 
-#### Key Features of the Master Controller
+### Key Features of the Master Controller
 
 - **Core BMS Software**: Hosts the primary software responsible for BMS functionalities, typically embedded or flashed into the microcontroller.
 - **Computational Power**: Capable of performing complex calculations and real-time data processing.
 - **System Interface**: Acts as the main bridge between the BMS and other vehicle systems, ensuring seamless integration and operation.
 
-#### Example Implementation
+### Example Implementation
 
 In a Tesla vehicle, the master controller aggregates data from multiple slave units managing different battery modules. It processes this data to estimate SOC, SOH, and SOP, and communicates with the VCU to adjust vehicle performance parameters accordingly.
 
@@ -79,7 +79,7 @@ In a Tesla vehicle, the master controller aggregates data from multiple slave un
 
 Effective communication between slave units and the master controller is paramount for the BMS's functionality. The BMS typically employs the **Controller Area Network (CAN) bus** protocol to facilitate this communication.
 
-### CAN Bus Overview
+## CAN Bus Overview
 
 - **Protocol**: A robust vehicle bus standard designed to allow microcontrollers and devices to communicate without a host computer.
 - **Advantages**:
@@ -87,7 +87,7 @@ Effective communication between slave units and the master controller is paramou
   - **Efficiency**: Supports high-speed data transmission with minimal latency.
   - **Scalability**: Easily accommodates additional nodes (slave units) without significant reconfiguration.
 
-### Communication Components
+## Communication Components
 
 1. **CAN Wiring Harness**:
    - The physical network that connects all slave units to the master controller.
@@ -97,7 +97,7 @@ Effective communication between slave units and the master controller is paramou
    - **From Slave Units**: Slave units send raw sensor data, including voltage, current, and temperature readings, to the master controller.
    - **From Master Controller**: Processes the incoming data and sends back control commands, such as adjusting charging rates or activating safety mechanisms.
 
-### Example CAN Message Structure
+## Example CAN Message Structure
 
 ```c
 // Example CAN message structure for voltage data from a slave unit
@@ -114,7 +114,7 @@ This structure ensures that each voltage reading is accurately timestamped and a
 
 The BMS software, embedded within the master controller, orchestrates the system's core functionalities. It is designed to handle real-time operations efficiently, ensuring timely responses to dynamic battery conditions.
 
-### Core Components of BMS Software
+## Core Components of BMS Software
 
 1. **Data Acquisition**:
    - Interfaces with the CAN bus to receive data from slave units.
@@ -133,7 +133,7 @@ The BMS software, embedded within the master controller, orchestrates the system
    - Manages data exchange with other vehicle systems, ensuring seamless integration and operation.
    - Implements protocols for sending battery status updates and receiving operational commands.
 
-### Software Implementation
+## Software Implementation
 
 The BMS software is typically written in **C** or a similar low-level programming language, chosen for its performance and efficiency in real-time applications. Below is an illustrative example of a simple SOC estimation function using Coulomb counting:
 
@@ -168,7 +168,7 @@ This function calculates the SOC by accounting for the charge consumed or added 
 
 In electric vehicles, the BMS architecture is meticulously implemented to ensure optimal battery performance, safety, and longevity. The integration involves several steps and considerations to accommodate the specific demands of automotive applications.
 
-### Implementation Steps
+## Implementation Steps
 
 1. **Module Integration**:
    - Each battery module within the EV's battery pack is equipped with a dedicated slave unit.
@@ -186,6 +186,6 @@ In electric vehicles, the BMS architecture is meticulously implemented to ensure
    - The BMS undergoes rigorous calibration to ensure accurate sensor readings and reliable state estimations.
    - Extensive testing is conducted to validate the BMS's response to various operating conditions and fault scenarios.
 
-### Example: Tesla's BMS Implementation
+## Example: Tesla's BMS Implementation
 
 In a Tesla electric vehicle, the battery pack is divided into multiple modules, each managed by a slave unit. These slave units continuously monitor their respective modules and communicate data to the master controller via the CAN bus. The master controller processes this data to estimate SOC, SOH, and SOP, and manages charging and discharging cycles accordingly. Additionally, it interfaces with the VCU to adjust vehicle performance based on the battery's status, ensuring seamless and efficient operation.

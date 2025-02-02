@@ -56,7 +56,7 @@ Incorporating cutting-edge estimation techniques is revolutionizing BMS function
   model.fit(X_train, y_train, epochs=100, batch_size=32, validation_split=0.2)
   ```
 
-#### 1.3 Adaptive Algorithms
+#### Adaptive Algorithms
 
 Adaptive algorithms dynamically adjust their parameters in response to changing battery conditions, ensuring consistent performance over the battery's lifespan.
 
@@ -72,13 +72,13 @@ Adaptive algorithms dynamically adjust their parameters in response to changing 
 
 ---
 
-## 2. Hardware Advancements
+## Hardware Advancements
 
 The hardware components of a BMS, including sensors, microcontrollers, and communication interfaces, are undergoing significant enhancements to support more sophisticated algorithms and meet the increasing demands of modern applications. These advancements aim to make BMS systems more compact, efficient, and capable of handling complex computations.
 
 ### Key Trends in Hardware Development
 
-#### 2.1 Miniaturization
+#### Miniaturization
 
 Reducing the physical size of BMS hardware is essential for fitting into increasingly compact battery packs and vehicles.
 
@@ -86,7 +86,7 @@ Reducing the physical size of BMS hardware is essential for fitting into increas
   
 - **Integration of Components**: Combining multiple functionalities into single chips or modules reduces the overall footprint and simplifies the design.
 
-#### 2.2 High-Performance Microcontrollers
+#### High-Performance Microcontrollers
 
 Modern BMS require microcontrollers capable of executing complex algorithms and processing large volumes of data in real-time.
 
@@ -113,7 +113,7 @@ Modern BMS require microcontrollers capable of executing complex algorithms and 
   }
   ```
 
-#### 2.3 Enhanced Sensors
+#### Enhanced Sensors
 
 The accuracy and reliability of sensors are critical for precise battery management. Recent trends focus on integrating more advanced sensors.
 
@@ -121,7 +121,7 @@ The accuracy and reliability of sensors are critical for precise battery managem
   
 - **Advanced Temperature Sensors**: Enhanced thermal sensors provide better spatial resolution and faster thermal response, aiding in more effective thermal management.
 
-#### 2.4 Modular Design
+#### Modular Design
 
 Modular BMS architectures facilitate scalability and customization, allowing systems to be tailored to various battery configurations and applications.
 
@@ -135,13 +135,13 @@ Tesla and other leading EV manufacturers are at the forefront of hardware advanc
 
 ---
 
-## 3. Over-the-Air (OTA) Updates
+## Over-the-Air (OTA) Updates
 
 Over-the-air (OTA) updates are transforming the way BMS software is maintained and enhanced, offering remote capabilities similar to those found in smartphones. This trend enhances the flexibility, efficiency, and user experience associated with BMS operations.
 
 ### Key Trends in OTA Updates
 
-#### 3.1 Remote Calibration
+#### Remote Calibration
 
 OTA updates enable manufacturers to remotely calibrate BMS software, ensuring optimal performance without the need for physical intervention.
 
@@ -149,7 +149,7 @@ OTA updates enable manufacturers to remotely calibrate BMS software, ensuring op
   
 - **Bug Fixes and Security Patches**: Addressing software bugs and implementing security measures remotely reduces the need for vehicle recalls and enhances system security.
 
-#### 3.2 Enhanced User Experience
+#### Enhanced User Experience
 
 Regular OTA updates keep the BMS software up-to-date with the latest features and improvements, providing users with a continually improving experience.
 
@@ -157,7 +157,7 @@ Regular OTA updates keep the BMS software up-to-date with the latest features an
   
 - **Performance Improvements**: Optimizing existing features to provide better efficiency, accuracy, and reliability.
 
-#### 3.3 Cost Efficiency
+#### Cost Efficiency
 
 OTA updates significantly reduce the costs associated with maintaining and upgrading BMS systems.
 
@@ -171,13 +171,13 @@ Tesla's implementation of OTA updates allows the company to push software improv
 
 ---
 
-## 4. Wireless BMS
+## Wireless BMS
 
 Wireless BMS technology is an emerging innovation aimed at reducing or eliminating the need for extensive wiring between slave units and the master controller. This advancement is particularly beneficial for applications where wiring is challenging, costly, or impractical.
 
 ### Key Trends in Wireless BMS
 
-#### 4.1 Wireless Communication
+#### Wireless Communication
 
 Adopting wireless communication protocols facilitates seamless data transmission between slave units and the master controller without physical connections.
 
@@ -185,7 +185,7 @@ Adopting wireless communication protocols facilitates seamless data transmission
   
 - **Custom Wireless Protocols**: Developing proprietary wireless communication standards tailored to the specific needs of BMS applications ensures reliable and secure data transfer.
 
-#### 4.2 Reduced Complexity
+#### Reduced Complexity
 
 Eliminating extensive wiring harnesses simplifies the installation process and reduces the overall complexity of the BMS architecture.
 
@@ -193,7 +193,7 @@ Eliminating extensive wiring harnesses simplifies the installation process and r
   
 - **Enhanced Reliability**: Wireless systems are less susceptible to wear and tear caused by vibrations and environmental factors, enhancing long-term reliability.
 
-#### 4.3 Scalability
+#### Scalability
 
 Wireless BMS systems are inherently more scalable, allowing for easy expansion or modification of the battery pack without significant redesigns.
 
@@ -228,13 +228,13 @@ In electric buses, where battery packs are often mounted on the roof, running lo
 
 ---
 
-## 5. Integration with IoT and Cloud Computing
+## Integration with IoT and Cloud Computing
 
 The convergence of BMS with IoT and cloud computing is revolutionizing battery management by enabling real-time monitoring, data analytics, and predictive maintenance. This integration opens up new possibilities for enhanced functionality and operational efficiency.
 
 ### Key Trends in IoT and Cloud Integration
 
-#### 5.1 Real-Time Monitoring
+#### Real-Time Monitoring
 
 Connecting BMS to cloud-based platforms through IoT enables continuous tracking of battery performance and health.
 
@@ -242,7 +242,7 @@ Connecting BMS to cloud-based platforms through IoT enables continuous tracking 
   
 - **Remote Diagnostics**: Cloud connectivity allows for remote diagnostics, enabling quick identification and resolution of issues without physical intervention.
 
-#### 5.2 Predictive Maintenance
+#### Predictive Maintenance
 
 Utilizing data analytics and machine learning models, BMS can predict potential issues before they escalate into failures.
 
@@ -269,7 +269,7 @@ Utilizing data analytics and machine learning models, BMS can predict potential 
   predictions = model.predict(new_data[['temperature', 'voltage', 'current', 'cycles']])
   ```
 
-#### 5.3 Fleet Management
+#### Fleet Management
 
 For commercial applications, such as electric vehicle fleets, IoT-enabled BMS systems provide centralized monitoring and management.
 
@@ -283,7 +283,7 @@ Fleet operators managing a large number of electric delivery vehicles can utiliz
 
 ---
 
-## 6. Summary of Development Trends
+## Summary of Development Trends
 
 The landscape of Battery Management Systems is rapidly evolving, with several key trends driving innovation and enhancing system capabilities. Below is a summary of the primary development trends in BMS:
 

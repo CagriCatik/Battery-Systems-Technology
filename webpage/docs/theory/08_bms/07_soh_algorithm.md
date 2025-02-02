@@ -369,7 +369,7 @@ if __name__ == "__main__":
 - **Equivalent Full Cycles:** Partial cycles are summed based on their DoD to provide an aggregated cycle count.
 - **Usage Example:** Simulates a series of SoC readings that include both full and partial cycles, demonstrating how equivalent full cycles are accumulated.
 
-### Depth of Discharge (DoD) Calculation
+### Depth of Discharge Calculation
 
 This snippet calculates the **Depth of Discharge (DoD)** for each detected cycle.
 

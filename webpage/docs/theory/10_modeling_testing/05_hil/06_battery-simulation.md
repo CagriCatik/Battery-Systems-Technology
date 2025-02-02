@@ -1,6 +1,6 @@
-# [Battery Simulation](https://www.youtube.com/watch?v=o1B0N50ocB0)
+# Battery Simulation
 
-The dSPACE battery simulation product is designed to enhance battery management system (BMS) testing by providing a state-of-the-art simulation model that integrates seamlessly into various test environments. Under the ASM (Automotive Simulation Models) banner, this solution is not limited to automotive applications but extends to electric aircraft, power supplies, and other domains. The goal is to facilitate early controller tests—even before the final hardware is available—by offering a simulation setup that is ready for both HIL and SIL testing as well as test automation.
+The [dSPACE](https://www.youtube.com/watch?v=o1B0N50ocB0)battery simulation product is designed to enhance battery management system (BMS) testing by providing a state-of-the-art simulation model that integrates seamlessly into various test environments. Under the ASM (Automotive Simulation Models) banner, this solution is not limited to automotive applications but extends to electric aircraft, power supplies, and other domains. The goal is to facilitate early controller tests—even before the final hardware is available—by offering a simulation setup that is ready for both HIL and SIL testing as well as test automation.
 
 ---
 
