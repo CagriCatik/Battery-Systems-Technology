@@ -4,9 +4,9 @@ Cylindrical cells have long been a cornerstone of battery technology due to thei
 
 ---
 
-## 2. Cylindrical Battery Modules
+## Cylindrical Battery Modules
 
-### 2.1 Components of a Cylindrical Module
+### Components of a Cylindrical Module
 
 Cylindrical battery modules are assemblies of individual cells and associated components, structured to deliver desired voltage and capacity. Key components include:
 
@@ -27,7 +27,7 @@ Cylindrical battery modules are assemblies of individual cells and associated co
 
 ---
 
-### 2.2 Electrical Connections
+### Electrical Connections
 
 The electrical design of cylindrical modules determines the performance and safety of the battery pack.
 
@@ -42,7 +42,7 @@ The electrical design of cylindrical modules determines the performance and safe
 
 ---
 
-### 2.3 Mechanical Design
+### Mechanical Design
 
 Mechanical stability is critical for maintaining cell alignment and integrity under various operational conditions.
 
@@ -55,11 +55,11 @@ Mechanical stability is critical for maintaining cell alignment and integrity un
 
 ---
 
-## 3. Thermal Management
+## Thermal Management
 
 Effective thermal management is a cornerstone of cylindrical module design, directly impacting safety, performance, and longevity.
 
-### 3.1 Cooling Plate Design
+### Cooling Plate Design
 
 Cooling plates are integral to battery packs, designed to dissipate heat generated during charging and discharging.
 
@@ -73,7 +73,7 @@ Cooling plates are integral to battery packs, designed to dissipate heat generat
 
 ---
 
-### 3.2 Cooling Mechanism
+### Cooling Mechanism
 
 The cooling process involves direct thermal conduction from cells to cooling plates.
 
@@ -89,7 +89,7 @@ The cooling process involves direct thermal conduction from cells to cooling pla
 
 ---
 
-### 3.3 Industry Adoption
+### Industry Adoption
 
 - Conventional Systems:
   - Most EV manufacturers (except Tesla) use cooling plates with embedded ducts.
@@ -99,11 +99,11 @@ The cooling process involves direct thermal conduction from cells to cooling pla
 
 ---
 
-## 4. Battery Management System (BMS)
+## Battery Management System (BMS)
 
 The BMS is critical for monitoring and controlling cylindrical battery modules.
 
-### 4.1 Voltage Sensing
+### Voltage Sensing
 
 - Each series connection in the pack is monitored by a voltage sensor.
 - Voltage data is used for:
@@ -112,16 +112,16 @@ The BMS is critical for monitoring and controlling cylindrical battery modules.
 
 ---
 
-### 4.2 Thermal Monitoring
+### Thermal Monitoring
 
 - Integrated temperature sensors track cell and module temperatures.
 - Data informs the cooling system to optimize thermal performance.
 
 ---
 
-## 5. Assembly Process
+## Assembly Process
 
-### 5.1 Steps to Assemble a Cylindrical Battery Pack
+### Steps to Assemble a Cylindrical Battery Pack
 
 1. Cell Preparation:
    - Verify cell quality and consistency.
@@ -138,7 +138,7 @@ The BMS is critical for monitoring and controlling cylindrical battery modules.
 
 ---
 
-### 5.2 Cooling Plate Integration
+### Cooling Plate Integration
 
 - Cooling plates are positioned beneath or around the cells.
 - Ducts within the plates channel coolant to extract heat.
@@ -146,7 +146,7 @@ The BMS is critical for monitoring and controlling cylindrical battery modules.
 
 ---
 
-## 6. Comparison of Cylindrical and Prismatic Cells
+## Comparison of Cylindrical and Prismatic Cells
 
 | Aspect                | Cylindrical Cells              | Prismatic Cells                   |
 |---------------------------|------------------------------------|---------------------------------------|
@@ -159,7 +159,7 @@ The BMS is critical for monitoring and controlling cylindrical battery modules.
 
 ---
 
-## 7. Advantages of Cylindrical Cells
+## Advantages of Cylindrical Cells
 
 - Modularity: Easy to configure for different applications.
 - Robust Design: Tolerates mechanical and thermal stresses.
@@ -168,7 +168,7 @@ The BMS is critical for monitoring and controlling cylindrical battery modules.
 
 ---
 
-## 8. Challenges and Considerations
+## Challenges and Considerations
 
 - Thermal Management:
   - Overheating risks in high-load conditions.
@@ -180,6 +180,6 @@ The BMS is critical for monitoring and controlling cylindrical battery modules.
 
 ---
 
-## 9. Conclusion
+## Conclusion
 
 Cylindrical battery modules offer a versatile, efficient, and scalable solution for modern energy storage requirements. By integrating advanced thermal management systems and robust mechanical designs, they provide high reliability and performance. While proprietary systems like Tesla's have advanced unique approaches, cylindrical modules remain a standard across most industries due to their balance of performance, cost, and manufacturability.

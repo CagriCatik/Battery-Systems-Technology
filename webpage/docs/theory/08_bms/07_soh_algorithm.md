@@ -20,7 +20,7 @@ SoH estimation algorithms can be broadly categorized into three main types:
 
 Each category employs different methodologies to assess battery health, offering varying degrees of accuracy, complexity, and applicability.
 
-### 1. Experimental Approaches
+### Experimental Approaches
 
 **Experimental methods** involve direct measurement of battery parameters under controlled conditions. These techniques often require specialized equipment and can be time-consuming and costly. Despite their high accuracy, their practicality is limited for real-time SoH monitoring in dynamic applications.
 
@@ -40,7 +40,7 @@ Each category employs different methodologies to assess battery health, offering
 - Interrupts normal battery operation.
 - Not suitable for real-time SoH estimation in active applications.
 
-### 2. Model-Based Methods
+### Model-Based Methods
 
 **Model-based methods** utilize mathematical representations of battery behavior to estimate SoH by comparing model predictions with actual measurements. These methods often involve complex algorithms and require accurate battery modeling.
 
@@ -60,7 +60,7 @@ Each category employs different methodologies to assess battery health, offering
 - Computationally intensive, especially for detailed electrochemical models.
 - Sensitive to model parameter inaccuracies.
 
-### 3. Data-Driven Techniques
+### Data-Driven Techniques
 
 **Data-driven techniques** leverage machine learning and artificial intelligence to estimate SoH based on historical and real-time data. These methods can identify complex patterns and relationships within the data, offering high flexibility and adaptability.
 
@@ -106,7 +106,7 @@ To account for partial cycles, the concept of **equivalent full cycles** is empl
 
 Implementing a **Cycle Counting** algorithm involves several critical steps to ensure accurate SoH estimation. Below are the detailed steps required for effective cycle counting.
 
-#### 1. Data Acquisition
+#### Data Acquisition
 
 **Objective:** Continuously monitor and record the battery's operational parameters, such as voltage, current, and temperature.
 
@@ -122,7 +122,7 @@ Implementing a **Cycle Counting** algorithm involves several critical steps to e
 - **Sampling Rate:** Choose an appropriate sampling rate to capture rapid changes without overwhelming the system.
 - **Data Logging:** Implement efficient data storage solutions for real-time processing and historical analysis.
 
-#### 2. SoC Calculation
+#### SoC Calculation
 
 **Objective:** Estimate the battery's **State of Charge (SoC)** using reliable methods such as Coulomb Counting or Open Circuit Voltage (OCV).
 
@@ -136,7 +136,7 @@ Implementing a **Cycle Counting** algorithm involves several critical steps to e
 - **Initial SoC Determination:** Accurate initial SoC is crucial to prevent error accumulation.
 - **Temperature Compensation:** Adjust SoC calculations based on temperature variations affecting battery performance.
 
-#### 3. Cycle Identification
+#### Cycle Identification
 
 **Objective:** Detect charge and discharge events by analyzing changes in SoC to identify completed cycles.
 
@@ -147,7 +147,7 @@ Implementing a **Cycle Counting** algorithm involves several critical steps to e
 - **Debouncing:** Implement mechanisms to avoid false cycle detections due to transient SoC fluctuations.
 - **Noise Filtering:** Apply filters to smooth out SoC data for accurate event detection.
 
-#### 4. Depth of Discharge (DoD) Assessment
+#### Depth of Discharge (DoD) Assessment
 
 **Objective:** Determine the **Depth of Discharge (DoD)** for each cycle, as deeper discharges can accelerate battery degradation.
 
@@ -186,7 +186,7 @@ Where:
 - **Cumulative Tracking:** Maintain a running total of equivalent full cycles for accurate SoH estimation.
 - **Cycle Reset Mechanism:** Implement mechanisms to reset cycle counts if necessary, such as after maintenance or calibration.
 
-#### 6. SoH Estimation
+#### SoH Estimation
 
 **Objective:** Utilize the cycle count, DoD information, and manufacturer-provided degradation curves to estimate the current SoH.
 
@@ -227,7 +227,7 @@ To enhance the accuracy of the Cycle Counting Method, it is often combined with 
 
 To overcome the limitations of the basic Cycle Counting Method and improve SoH estimation accuracy, several enhancements and advanced techniques can be integrated.
 
-### 1. Coulombic Efficiency Monitoring
+### Coulombic Efficiency Monitoring
 
 **Definition:** The ratio of charge output during discharge to charge input during charging.
 
@@ -242,7 +242,7 @@ $$
 - **Data Tracking:** Record the total charge input and output over cycles.
 - **Efficiency Calculation:** Continuously calculate Coulombic efficiency to detect anomalies and degradation trends.
 
-### 2. Internal Resistance Measurement
+### Internal Resistance Measurement
 
 **Impact:** Increased internal resistance is indicative of battery aging, as it correlates with capacity loss and reduced efficiency.
 
@@ -251,7 +251,7 @@ $$
 - **Measurement Techniques:** Utilize Electrochemical Impedance Spectroscopy (EIS) or conduct resistance measurements during specific operating conditions.
 - **Data Integration:** Incorporate internal resistance data into SoH estimation models to enhance accuracy.
 
-### 3. Machine Learning Models
+### Machine Learning Models
 
 **Advantage:** Data-driven models can analyze complex patterns in battery usage and degradation data, improving SoH predictions beyond linear or rule-based methods.
 
@@ -263,7 +263,7 @@ $$
 
 **Example:** Combining meta-learning with Convolutional Neural Networks (CNN) and Long Short-Term Memory (LSTM) architectures has shown improved generalization in lithium-ion battery SoH estimation.
 
-### 4. Hybrid Models
+### Hybrid Models
 
 **Approach:** Combine model-based and data-driven techniques to leverage the strengths of both methodologies, offering enhanced accuracy and reliability.
 
@@ -276,7 +276,7 @@ $$
 
 To illustrate the practical aspects of the Cycle Counting Method and SoH estimation, the following Python code snippets demonstrate key algorithms and processes essential for effective battery health management.
 
-### 1. Cycle Identification and Counting
+### Cycle Identification and Counting
 
 This example demonstrates how to identify charge and discharge events based on SoC thresholds and count equivalent full cycles.
 
@@ -369,7 +369,7 @@ if __name__ == "__main__":
 - **Equivalent Full Cycles:** Partial cycles are summed based on their DoD to provide an aggregated cycle count.
 - **Usage Example:** Simulates a series of SoC readings that include both full and partial cycles, demonstrating how equivalent full cycles are accumulated.
 
-### 2. Depth of Discharge (DoD) Calculation
+### Depth of Discharge (DoD) Calculation
 
 This snippet calculates the **Depth of Discharge (DoD)** for each detected cycle.
 
@@ -398,7 +398,7 @@ if __name__ == "__main__":
 - **DoD Calculation:** Determines the percentage of battery capacity utilized during a charge-discharge cycle.
 - **Usage:** Essential for weighting partial cycles in equivalent full cycle calculations.
 
-### 3. SoH Estimation Based on Cycle Count and DoD
+### SoH Estimation Based on Cycle Count and DoD
 
 This example demonstrates how to estimate SoH using accumulated equivalent full cycles and manufacturer-provided degradation curves.
 

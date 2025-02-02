@@ -1,4 +1,4 @@
-# Integration with Vehicle HVAC Systems
+# Integration with HVAC Systems
 
 Integrating Battery Management Systems (**BMS**) with a vehicle's Heating, Ventilation, and Air Conditioning (**HVAC**) system offers a unified approach to thermal management, enhancing both efficiency and performance. This chapter explores the methodologies, benefits, challenges, and future prospects of integrating BMS with HVAC systems, providing insights for automotive engineers, researchers, and industry professionals aiming to optimize thermal management in electric vehicles (EVs) and other battery-dependent applications.
 

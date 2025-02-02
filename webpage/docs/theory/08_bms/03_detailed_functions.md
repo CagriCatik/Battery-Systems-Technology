@@ -15,11 +15,11 @@ The functions of a BMS are multifaceted, addressing various aspects of battery o
 
 Each category encompasses specific functionalities that work in tandem to maintain the battery's optimal performance and safety.
 
-### 1. Performance Management
+### Performance Management
 
 **Performance Management** focuses on maximizing the efficiency and effectiveness of the battery system. It involves monitoring and controlling various parameters to ensure that the battery operates within its optimal performance range.
 
-#### a. Data Collection
+#### Data Collection
 
 - **Function:** The BMS continuously gathers data from an array of sensors that monitor critical parameters such as voltage, current, and temperature across individual cells and the entire battery pack.
   
@@ -29,7 +29,7 @@ Each category encompasses specific functionalities that work in tandem to mainta
   - **Sensors:** Utilize voltage sensors, current sensors (e.g., shunt resistors, Hall effect sensors), and temperature sensors (e.g., thermistors, RTDs) strategically placed to capture accurate readings.
   - **Data Acquisition Systems:** Employ microcontrollers or dedicated BMS ICs to process and transmit sensor data for further analysis.
 
-#### b. Charge Control
+#### Charge Control
 
 - **Function:** Managing the charging process is essential to prevent overcharging or undercharging, both of which can degrade battery health and reduce lifespan.
   
@@ -39,7 +39,7 @@ Each category encompasses specific functionalities that work in tandem to mainta
 
 - **Example:** In fast-charging scenarios, the BMS dynamically adjusts the current to balance charging speed with thermal considerations, preventing excessive heat generation.
 
-#### c. Cell Balancing
+#### Cell Balancing
 
 - **Function:** In multi-cell configurations, individual cells may exhibit slight variations in capacity or voltage. The BMS performs cell balancing to equalize these differences, ensuring uniform charge and discharge cycles.
   
@@ -92,7 +92,7 @@ Each category encompasses specific functionalities that work in tandem to mainta
   - **Balancing Logic:** The `balance_cells` method identifies cells that exceed the voltage difference threshold and initiates the discharge process for those cells.
   - **Discharge Action:** The `discharge_cell` method simulates the discharging action, which in a real-world scenario would involve connecting a resistor to dissipate excess energy as heat.
 
-#### d. State Estimation
+#### State Estimation
 
 - **Function:** Accurately estimating the **State of Charge (SoC)** and **State of Health (SoH)** is essential for reliable battery operation.
   
@@ -102,11 +102,11 @@ Each category encompasses specific functionalities that work in tandem to mainta
 
 - **Importance:** Reliable state estimation informs users and systems about the battery's current status, enabling effective energy management and maintenance planning.
 
-### 2. Application Management
+### Application Management
 
 **Application Management** involves overseeing specific operational aspects of the battery system tailored to the application's requirements. This category ensures that the battery performs optimally within its intended use case.
 
-#### a. Thermal Management
+#### Thermal Management
 
 - **Function:** Maintaining optimal temperature ranges is critical for battery safety and efficiency.
   
@@ -120,7 +120,7 @@ Each category encompasses specific functionalities that work in tandem to mainta
 
 - **Example:** In electric vehicles, thermal management systems activate during heavy acceleration to prevent battery overheating, ensuring consistent performance and safety.
 
-#### b. Contactor Control
+#### Contactor Control
 
 - **Function:** Manages electrical contactors or relays that connect or disconnect the battery from the load or charger.
   
@@ -185,11 +185,11 @@ Each category encompasses specific functionalities that work in tandem to mainta
   - **Engage/Disengage Methods:** Methods to engage or disengage the contactor, simulating the connection or disconnection of the battery.
   - **Status Update:** The `update_status` method decides whether to engage or disengage the contactor based on safety conditions determined by the BMS.
 
-### 3. Interface Management
+### Interface Management
 
 **Interface Management** pertains to how the BMS communicates with external systems, users, and other controllers. Effective interface management ensures seamless integration, data exchange, and user interaction.
 
-#### a. Communication
+#### Communication
 
 - **Function:** Interfaces with other vehicle or system controllers, such as the Engine Control Unit (ECU) in electric vehicles, through standardized communication protocols.
   
@@ -264,7 +264,7 @@ Each category encompasses specific functionalities that work in tandem to mainta
   - **Sending Messages:** The `send_message` method constructs and sends CAN messages with a given arbitration ID and data payload.
   - **Receiving Messages:** The `receive_message` method listens for incoming CAN messages and processes them accordingly.
 
-#### b. Data Logging
+#### Data Logging
 
 - **Function:** Storing historical data on battery performance, usage patterns, and environmental conditions enables trend analysis and predictive maintenance.
   
@@ -325,7 +325,7 @@ Each category encompasses specific functionalities that work in tandem to mainta
   - **Initialization:** The `DataLogger` class sets up a CSV file with predefined headers to store battery data.
   - **Logging Method:** The `log_data` method appends new data entries with timestamps to the CSV file, facilitating historical data analysis.
 
-#### c. Display Interface
+#### Display Interface
 
 - **Function:** Providing real-time information to users or operators is essential for monitoring battery status and making informed decisions.
   
@@ -371,11 +371,11 @@ Each category encompasses specific functionalities that work in tandem to mainta
   - **Initialization:** The `SOCDisplay` class starts with an initial SoC value.
   - **Update and Display:** The `update_soc` method updates the SoC value, ensuring it remains within valid bounds, and then displays it to the user.
 
-### 4. Protection Mechanisms
+### Protection Mechanisms
 
 **Protection Mechanisms** are fundamental to the BMS's role in safeguarding the battery pack from conditions that could lead to damage, reduced performance, or safety hazards. These mechanisms implement safety protocols to detect and respond to abnormal conditions.
 
-#### a. Safety Protocols
+#### Safety Protocols
 
 - **Function:** Ensuring safety is a core responsibility of the BMS. It implements protective measures against various hazardous conditions, including short circuits, overcurrent, overvoltage, undervoltage, and overheating.
   

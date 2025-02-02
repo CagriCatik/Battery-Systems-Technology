@@ -2,8 +2,6 @@
 
 In battery manufacturing, transitioning from individual cells to a complete pack involves multiple stages. These stages ensure safety, scalability, and manufacturability while meeting application-specific requirements. The cell-to-pack integration process often includes intermediate stages such as cell-to-module (CTM) and module-to-pack (MTP). This modular approach addresses challenges related to electrical safety, thermal management, and structural integrity.
 
----
-
 ## Overview of Cell to Pack Integration
 
 ### Process Stages
@@ -16,8 +14,6 @@ The integration process typically follows these steps:
    - Modules are interconnected to create a full battery pack.
    - The pack is designed to achieve the desired voltage, capacity, and power output.
 
----
-
 ### Examples of CTP Integration
 
 - Tesla:
@@ -26,8 +22,6 @@ The integration process typically follows these steps:
   - Employs prismatic cells for modular assembly.
 - Nissan Leaf:
   - Utilizes pouch cells, transitioning from modules to packs.
-
----
 
 ## Why Modular Design is Essential
 
@@ -38,15 +32,11 @@ The integration process typically follows these steps:
 - Intermediate Voltage Modules:
   - Modules are designed with safer voltage levels (e.g., 30–60 V) to simplify handling and assembly.
 
----
-
 ### Thermal Safety
 - Thermal Runaway:
   - A single cell failure can cause overheating, potentially leading to a chain reaction (thermal runaway).
 - Modular Containment:
   - Modular design confines thermal events to the affected module, isolating the issue and preventing damage to the entire pack.
-
----
 
 ### Manufacturing Efficiency
 - Scalability:
@@ -54,8 +44,6 @@ The integration process typically follows these steps:
   - Allows parallel manufacturing of modules and final integration into packs.
 - Fault Isolation:
   - Damaged modules can be identified and replaced, reducing production losses.
-
----
 
 ## Modular Design Principles
 
@@ -71,8 +59,6 @@ The integration process typically follows these steps:
 ### Structural Integrity
 - Modules are enclosed in protective casings to provide mechanical support and thermal isolation.
 - Compression plates and cooling systems are integrated to manage thermal expansion and maintain module integrity.
-
----
 
 ## Safety Enhancements in CTP Integration
 
@@ -94,8 +80,6 @@ The integration process typically follows these steps:
 - Fire-Resistant Materials:
   - Use of fireproof barriers and casings enhances safety.
 
----
-
 ## Cell to Pack Integration by Battery Type
 
 ###  Cylindrical Cells
@@ -113,8 +97,6 @@ The integration process typically follows these steps:
   - Pouch cells require compression plates to manage swelling.
   - Modules incorporate thermal barriers to isolate individual cells.
 
----
-
 ## Comparison: Direct Pack vs. Modular Design
 
 | Aspect              | Direct Pack Design                  | Modular Design                      |
@@ -124,7 +106,6 @@ The integration process typically follows these steps:
 | Manufacturing       | Complex and less flexible                | Standardized and scalable               |
 | Maintenance         | Difficult to isolate faults              | Fault isolation and module replacement  |
 
----
 
 ## Challenges in CTP Integration
 
@@ -136,8 +117,6 @@ The integration process typically follows these steps:
 
 ### Cost
 - Modular systems may increase manufacturing costs due to additional components.
-
----
 
 ## Future Trends in CTP Integration
 
@@ -152,8 +131,6 @@ The integration process typically follows these steps:
 ### Enhanced Safety Features
 - Development of materials and designs to contain thermal runaway more effectively.
 - Improved battery management systems for predictive safety measures.
-
----
 
 ## Conclusion
 

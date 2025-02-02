@@ -2,8 +2,6 @@
 
 Prismatic cells are one of the simplest formats for constructing battery packs. Encased in a rigid metal or hard plastic enclosure, prismatic cells offer a flat and compact design, making them ideal for high-density applications. Their modularity and ease of assembly contribute to their popularity in automotive and stationary energy storage solutions.
 
----
-
 ## Prismatic Battery Modules
 
 ### Components of a Prismatic Module
@@ -23,8 +21,6 @@ A prismatic module consists of the following key components:
 - Module Enclosure:
   - Protects the assembly from external impacts and environmental conditions.
 
----
-
 ### Electrical Connections
 
 Electrical connections in prismatic modules are straightforward:
@@ -38,8 +34,6 @@ Electrical connections in prismatic modules are straightforward:
   - Sensors measure voltage and temperature across cells.
   - Data is relayed to the Battery Management System (BMS) for analysis.
 
----
-
 ### Mechanical Design
 
 Prismatic cells are inherently robust due to their rigid casing, reducing the need for complex mechanical structures.
@@ -51,8 +45,6 @@ Prismatic cells are inherently robust due to their rigid casing, reducing the ne
   - Modules are housed in compact casings for additional mechanical protection.
 - Stacking Configurations:
   - Cells can be stacked vertically or horizontally, depending on space and design requirements.
-
----
 
 ## Thermal Management
 
@@ -68,8 +60,6 @@ Thermal management is critical to ensure safety and maintain performance in pris
 - Material:
   - High thermal conductivity materials like aluminum or copper are used.
 
----
-
 ### Cooling Process
 
 1. Heat Transfer:
@@ -79,8 +69,6 @@ Thermal management is critical to ensure safety and maintain performance in pris
    - Optimized duct paths ensure uniform cooling across the plate.
 3. Cooling Efficiency:
    - Thermal gradients are minimized, preventing hotspots and maintaining cell lifespan.
-
----
 
 ## Assembly Process
 
@@ -99,16 +87,12 @@ Thermal management is critical to ensure safety and maintain performance in pris
 6. Enclosure:
    - Secure the assembly within a protective casing.
 
----
-
 ### Cooling Plate Integration
 
 Cooling plates are essential for thermal management:
 - Positioned adjacent to or beneath the cells.
 - Designed with internal ducts to channel coolant efficiently.
 - Enable uniform heat dissipation across the module.
-
----
 
 ## Advantages of Prismatic Cells
 
@@ -119,8 +103,6 @@ Cooling plates are essential for thermal management:
 | Robust Enclosure       | Protective casing reduces the need for additional support.|
 | High Energy Density    | Suitable for applications requiring compact power sources.|
 
----
-
 ## Challenges of Prismatic Cells
 
 | Challenge              | Mitigation Strategy                                   |
@@ -128,8 +110,6 @@ Cooling plates are essential for thermal management:
 | Swelling                | Use compression plates in high-stress applications.      |
 | Thermal Management      | Incorporate efficient cooling systems with optimized duct design. |
 | Higher Cost             | Minimize waste and optimize manufacturing processes.     |
-
----
 
 ## Comparison of Prismatic, Cylindrical, and Pouch Cells
 
@@ -141,8 +121,6 @@ Cooling plates are essential for thermal management:
 | Mechanical Stability  | High                             | Naturally robust                 | Requires compression systems    |
 | Ease of Assembly      | Simplified connections           | Moderate                         | Complex                         |
 
----
-
 ## Industry Adoption
 
 - Automotive Applications:
@@ -151,8 +129,6 @@ Cooling plates are essential for thermal management:
   - Common in grid-level and renewable energy applications.
 - Consumer Electronics:
   - Less common due to their larger size compared to cylindrical and pouch cells.
-
----
 
 ## Conclusion
 

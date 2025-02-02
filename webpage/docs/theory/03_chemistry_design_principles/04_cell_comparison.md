@@ -2,8 +2,6 @@
 
 In the landscape of modern technology, batteries play an indispensable role, powering everything from handheld consumer electronics to the burgeoning electric vehicle (EV) market. Central to the effective deployment of these energy storage systems is the Battery Management System (BMS), which oversees the safe and efficient operation of batteries by continuously monitoring and managing their performance parameters. This documentation delves into the diverse types of battery cells, their distinct form factors, and the criteria essential for selecting the appropriate cell type based on specific application requirements. It is meticulously crafted for engineers and industry professionals who seek both foundational insights and advanced technical knowledge in the realm of battery technology.
 
----
-
 ## Types of Battery Cells
 
 Battery cells come in a variety of types and form factors, each engineered to meet the demands of different applications through their unique properties. The selection process for an appropriate battery cell type hinges on several critical parameters, including energy density, safety, cost, and the physical dimensions of the cell. Understanding these attributes is crucial for optimizing performance and ensuring the longevity and reliability of the battery system in its intended application.
@@ -27,8 +25,6 @@ Cylindrical cells find their applications across a broad spectrum, including pow
 - Applications:
   - Power tools, laptops, electric vehicles.
 
----
-
 ### Prismatic Cells
 
 Prismatic cells distinguish themselves with their rectangular, notebook-like form factor, optimized for space-efficient packing within devices. Unlike cylindrical cells, prismatic cells utilize hard outer casings made from materials such as plastic or cardboard-like composites, which provide structural integrity and facilitate the stacking of multiple cells in a compact arrangement. This design is particularly beneficial in applications where maximizing the use of available space is essential, such as in portable electronics and electric vehicles striving for extended ranges without increasing the overall size of the battery pack.
@@ -47,8 +43,6 @@ The manufacturing complexity of prismatic cells is higher, which translates to i
 - Applications:
   - Electric vehicles, energy storage systems.
 
----
-
 ### Pouch Cells
 
 Pouch cells represent a flexible alternative to both cylindrical and prismatic designs, utilizing a flexible, laminated casing instead of a rigid outer shell. This flexibility grants pouch cells a lightweight and adaptable form factor, making them ideal for applications that demand both portability and customization, such as consumer electronics, drones, and certain automotive applications. The high gravimetric energy density of pouch cells ensures that they can store a significant amount of energy relative to their weight, which is crucial for applications where reducing weight is a priority.
@@ -66,8 +60,6 @@ Pouch cells excel in scenarios where weight and form factor flexibility are crit
   - Complex thermal management requirements.
 - Applications:
   - Consumer electronics, drones, automotive applications.
-
----
 
 ## Comparison of Battery Cell Types
 
@@ -91,8 +83,6 @@ The selection of a cell type depends on the priority features of the application
 | Thermal Management | Excellent             | Moderate              | Challenging         |
 | Cost               | Low                   | Moderate              | Moderate to High    |
 | Durability         | High                  | Moderate              | Low                 |
-
----
 
 ## Application-Based Battery Selection
 
@@ -124,8 +114,6 @@ When selecting a battery for a specific application, it is crucial to weigh diff
 - Low Budget: Cylindrical cells are the most cost-effective due to their mass production.
 - Higher Budgets: Prismatic or pouch cells may be chosen for specific design needs.
 
----
-
 ## Form Factor Priority Mapping
 
 To facilitate informed decision-making in battery cell selection, it is beneficial to map out the priority of various form factors against key performance criteria. This priority mapping serves as a guide, helping engineers and professionals align their selection with the most critical aspects of their application.
@@ -142,8 +130,6 @@ To make an informed choice, the following priority map can guide decision-making
 | Safety                  | Cylindrical > Prismatic > Pouch            |
 | Size/Shape Flexibility  | Pouch > Prismatic > Cylindrical            |
 | Cost Sensitivity        | Cylindrical > Prismatic > Pouch            |
-
----
 
 ## Key Takeaways
 

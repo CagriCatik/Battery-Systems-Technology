@@ -21,7 +21,7 @@ Battery cells—whether cylindrical, prismatic, or pouch—must be interconnecte
 
 Understanding the various ways to connect battery cells is fundamental to designing effective battery systems. The primary configurations are series connections, parallel connections, and a combination of both.
 
-### 1. Series Connections
+### Series Connections
 
 **Principle:**  
 In a series connection, the positive terminal of one cell is connected to the negative terminal of the next cell. This arrangement effectively stacks the cells to increase the overall voltage of the battery pack.
@@ -74,7 +74,7 @@ Total Voltage: 14.4 V
 Total Capacity: 3400 mAh
 ```
 
-### 2. Parallel Connections
+### Parallel Connections
 
 **Principle:**  
 In a parallel connection, all positive terminals are connected together, and all negative terminals are connected together. This configuration allows the battery pack to increase its current capacity while maintaining the same voltage as a single cell.
@@ -127,7 +127,7 @@ Total Voltage: 3.6 V
 Total Capacity: 10200 mAh
 ```
 
-### 3. Series-Parallel Combination
+### Series-Parallel Combination
 
 **Principle:**  
 A series-parallel combination leverages both series and parallel connections to achieve higher voltage and increased current capacity simultaneously. This hybrid approach allows for flexible and scalable battery pack designs.
@@ -189,7 +189,7 @@ Total Capacity: 6800 mAh
 
 Designing cell-to-cell connections requires meticulous attention to various factors to ensure optimal performance, safety, and longevity of the battery pack. Below are critical considerations that engineers must address during the design phase.
 
-### 1. Matching Cell Characteristics
+### Matching Cell Characteristics
 
 **Series Connections:**
 - **Uniformity:** Cells must have identical capacity and voltage ratings to prevent imbalances.
@@ -203,7 +203,7 @@ Designing cell-to-cell connections requires meticulous attention to various fact
 - **Cell Selection:** Use cells from the same manufacturer and batch.
 - **Pre-Assembly Testing:** Verify that all cells have matching electrical characteristics before assembly.
 
-### 2. Thermal Management
+### Thermal Management
 
 Effective thermal management is essential to maintain battery performance and prevent safety hazards such as thermal runaway.
 
@@ -233,7 +233,7 @@ battery_pack = BatteryPack(cells=cell_array, cooling_system=cooling_system)
 battery_pack.monitor_temperature()
 ```
 
-### 3. Connection Materials
+### Connection Materials
 
 The choice of materials for electrical connections directly impacts the efficiency and reliability of the battery pack.
 
@@ -264,7 +264,7 @@ Copper is suitable for low-resistance connections.
 Steel is not recommended for high-conductivity applications.
 ```
 
-### 4. Fault Tolerance
+### Fault Tolerance
 
 Incorporating fault-tolerant designs is crucial to prevent failures from propagating through the battery pack.
 
@@ -293,13 +293,11 @@ battery_pack = BatteryPack(cells=cell_array, protection_circuit=protection_circu
 battery_pack.check_faults()
 ```
 
----
-
 ## Practical Considerations in Cell-to-Cell Connections
 
 Beyond the theoretical design principles, practical considerations play a significant role in the implementation and operation of cell-to-cell connections within battery packs.
 
-### 1. Safety in High-Voltage Systems
+### Safety in High-Voltage Systems
 
 High-voltage battery systems pose significant safety risks, including severe electrical hazards and the potential for thermal runaway, especially in lithium-ion (Li-ion) cells.
 
@@ -327,7 +325,7 @@ void activate_protection_circuit() {
 }
 ```
 
-### 2. Efficiency in Low-Voltage Systems
+### Efficiency in Low-Voltage Systems
 
 Low-voltage systems, commonly found in consumer electronics, emphasize efficiency, compactness, and lightweight design.
 
@@ -383,7 +381,7 @@ Different applications require specific battery configurations to meet their uni
 
 High-voltage battery systems demand sophisticated architectures to ensure efficiency, safety, and scalability. Advanced design approaches facilitate the management of complex electrical and thermal dynamics inherent in such systems.
 
-### 1. String Architecture
+### String Architecture
 
 **Definition:**  
 A "string" refers to a series-connected group of cells. Multiple strings can be connected in parallel to achieve the desired voltage and capacity.
@@ -426,7 +424,7 @@ print(f"Pack Voltage: {battery_pack.pack_voltage()} V")
 print(f"Pack Capacity: {battery_pack.pack_capacity()} mAh")
 ```
 
-### 2. Modular Design
+### Modular Design
 
 **Definition:**  
 Modular design divides the battery pack into smaller, manageable modules, each with its own series-parallel configuration. This approach enhances flexibility, maintenance, and fault isolation.
@@ -472,7 +470,7 @@ print(f"Pack Voltage: {battery_pack.pack_voltage()} V")
 print(f"Pack Capacity: {battery_pack.pack_capacity()} mAh")
 ```
 
-### 3. High Voltage Best Practices
+### High Voltage Best Practices
 
 Designing battery systems with voltages exceeding 800 V requires adherence to stringent best practices to ensure safety and performance.
 
@@ -510,7 +508,7 @@ high_voltage_strings = connect_high_voltage(cells=cell_array, n_parallel=4, n_se
 
 Ensuring the reliability and safety of cell-to-cell connections necessitates rigorous testing and validation procedures. Comprehensive testing identifies potential issues and verifies that the battery pack meets all performance and safety standards.
 
-### 1. Electrical Testing
+### Electrical Testing
 
 **Objectives:**
 
@@ -546,7 +544,7 @@ for cell in battery_pack.cells:
     print(f"Cell {cell.id}: {cell.capacity} mAh")
 ```
 
-### 2. Thermal Testing
+### Thermal Testing
 
 **Objectives:**
 
@@ -598,7 +596,7 @@ battery_pack = BatteryPack(sensors=sensors, cooling_system=cooling_system)
 battery_pack.monitor_thermal()
 ```
 
-### 3. Safety Standards
+### Safety Standards
 
 Compliance with established safety standards is non-negotiable in battery pack design, ensuring that systems are robust and safe for their intended applications.
 

@@ -8,11 +8,11 @@ Understanding the functions of a BMS is essential for both developers and users 
 
 A BMS performs several essential functions that can be broadly categorized into Safety Assurance, Performance Optimization, Longevity Management, and Diagnostic and Prognostic Capabilities. Each of these categories encompasses specific tasks and processes that collectively ensure the optimal operation of battery systems.
 
-### 1. Safety Assurance
+### Safety Assurance
 
 **Safety Assurance** is the foremost function of a BMS, focusing on preventing conditions that could lead to battery failure or hazardous situations. This involves a combination of protective measures and real-time monitoring to maintain safe operating conditions.
 
-#### a. Overcharge and Overdischarge Protection
+#### Overcharge and Overdischarge Protection
 
 - **Overcharge Protection:**
   - **Function:** Prevents the battery cells from being charged beyond their maximum voltage threshold.
@@ -24,7 +24,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 
 *Example:* In an electric vehicle, overcharging can cause overheating of cells, while overdischarging can lead to a sudden drop in performance and potential battery failure. The BMS monitors voltage levels continuously to prevent these scenarios.
 
-#### b. Thermal Management
+#### Thermal Management
 
 - **Temperature Monitoring:**
   - **Function:** Continuously measures the temperature of individual cells and the overall battery pack.
@@ -36,7 +36,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 
 *Example:* During high-load operations, such as rapid acceleration in an EV, the BMS activates cooling systems to dissipate excess heat, maintaining the battery's temperature within safe limits.
 
-#### c. Fault Detection
+#### Fault Detection
 
 - **Anomaly Identification:**
   - **Function:** Detects irregularities such as short circuits, ground faults, or unexpected voltage spikes.
@@ -48,11 +48,11 @@ A BMS performs several essential functions that can be broadly categorized into 
 
 *Example:* In a consumer electronic device, the BMS can detect a short circuit and immediately cut off the power supply to prevent device damage or user injury.
 
-### 2. Performance Optimization
+### Performance Optimization
 
 **Performance Optimization** involves enhancing the efficiency and effectiveness of the battery system to meet the operational demands of the application. This includes accurate state estimations and ensuring balanced cell operations.
 
-#### a. State of Charge (SoC) Estimation
+#### State of Charge (SoC) Estimation
 
 - **Function:** Calculates the remaining battery capacity, typically expressed as a percentage.
 - **Impact:** Informs users and systems about the current charge level, aiding in energy management and usage planning.
@@ -63,7 +63,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 
 *Example:* In a smartphone, accurate SoC estimation allows users to monitor battery life and manage charging cycles effectively.
 
-#### b. State of Health (SoH) Assessment
+#### State of Health (SoH) Assessment
 
 - **Function:** Evaluates the overall condition and remaining capacity of the battery compared to its original specifications.
 - **Impact:** Predicts the battery's lifespan and performance degradation, enabling proactive maintenance and replacement.
@@ -74,7 +74,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 
 *Example:* In an EV, SoH assessment helps in determining when battery packs need servicing or replacement, ensuring consistent vehicle performance.
 
-#### c. Cell Balancing
+#### Cell Balancing
 
 - **Function:** Ensures uniform charge levels across all cells within a battery pack.
 - **Impact:** Maximizes overall pack efficiency, prevents individual cell degradation, and extends the battery's usable life.
@@ -85,11 +85,11 @@ A BMS performs several essential functions that can be broadly categorized into 
 
 *Example:* In high-capacity battery packs used in electric buses, cell balancing prevents discrepancies that could lead to reduced performance and shortened battery life.
 
-### 3. Longevity Management
+### Longevity Management
 
 **Longevity Management** focuses on extending the usable life of the battery by analyzing usage patterns and providing actionable insights to optimize battery performance over time.
 
-#### a. Life Cycle Prediction
+#### Life Cycle Prediction
 
 - **Function:** Analyzes historical usage data to forecast the battery's lifespan.
 - **Impact:** Enables scheduling of maintenance and replacement before critical degradation occurs, minimizing downtime and operational costs.
@@ -100,7 +100,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 
 *Example:* In renewable energy storage systems, life cycle prediction helps in planning maintenance schedules, ensuring uninterrupted energy supply.
 
-#### b. Usage Recommendations
+#### Usage Recommendations
 
 - **Function:** Provides guidelines to users based on current battery health and performance data.
 - **Impact:** Educates users on optimal charging practices, usage habits, and maintenance actions to prolong battery life.
@@ -111,11 +111,11 @@ A BMS performs several essential functions that can be broadly categorized into 
 
 *Example:* In portable medical devices, usage recommendations ensure that critical equipment remains operational without frequent battery replacements.
 
-### 4. Diagnostic and Prognostic Capabilities
+### Diagnostic and Prognostic Capabilities
 
 **Diagnostic and Prognostic Capabilities** enable the BMS to not only monitor current battery conditions but also anticipate future issues, allowing for proactive management and maintenance.
 
-#### a. Real-Time Monitoring
+#### Real-Time Monitoring
 
 - **Function:** Continuously observes key battery parameters such as voltage, current, temperature, and SoC.
 - **Impact:** Detects potential issues as they arise, facilitating immediate corrective actions to maintain system stability.
@@ -126,7 +126,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 
 *Example:* In electric forklifts, real-time monitoring ensures that batteries operate efficiently during heavy-duty operations, preventing unexpected failures.
 
-#### b. Predictive Analysis
+#### Predictive Analysis
 
 - **Function:** Utilizes data trends and historical information to forecast potential faults and performance issues.
 - **Impact:** Enables proactive interventions, reducing the likelihood of unexpected failures and enhancing overall system reliability.
@@ -141,7 +141,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 
 The functions of a BMS are tailored to meet the specific demands of different applications, each with its unique operational requirements and safety standards. Understanding these considerations is crucial for designing effective BMS solutions that align with the intended use case.
 
-### 1. Consumer Electronics (e.g., Smartphones)
+### Consumer Electronics (e.g., Smartphones)
 
 - **Focus Areas:**
   - **Safety:** Prevents overheating and overcharging, ensuring user safety.
@@ -153,7 +153,7 @@ The functions of a BMS are tailored to meet the specific demands of different ap
 
 *Example:* In smartphones, the BMS ensures that charging cycles are managed to prevent battery swelling and extends battery life through efficient power management.
 
-### 2. Electric Vehicles (EVs)
+### Electric Vehicles (EVs)
 
 - **Focus Areas:**
   - **Safety:** Robust protection mechanisms to handle high-capacity battery packs.
@@ -166,7 +166,7 @@ The functions of a BMS are tailored to meet the specific demands of different ap
 
 *Example:* In EVs, the BMS balances the charge across thousands of cells, manages thermal conditions during long drives, and provides real-time data to the vehicle's control systems to optimize energy usage.
 
-### 3. Electric Flight (e.g., eVTOL Aircraft)
+### Electric Flight (e.g., eVTOL Aircraft)
 
 - **Focus Areas:**
   - **Stringent Safety Requirements:** Ensures airworthiness and prevents in-flight battery failures.

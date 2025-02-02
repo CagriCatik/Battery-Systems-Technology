@@ -32,7 +32,7 @@ Battery packs are composed of multiple cells, each contributing to the overall v
 
 Cell balancing techniques are broadly categorized into **Passive Cell Balancing** and **Active Cell Balancing**. Each method employs distinct mechanisms to equalize cell SoCs, with varying implications for efficiency, cost, and complexity.
 
-### **1. Passive Cell Balancing**
+### **Passive Cell Balancing**
 
 **Principle:**
 Passive cell balancing operates by dissipating excess energy from cells with higher SoCs as heat through resistive elements until all cells converge at the SoC of the weakest cell. This method is straightforward and widely implemented due to its simplicity.
@@ -58,7 +58,7 @@ In a passive balancing scenario:
 - **Thermal Management Needs:** Generated heat necessitates effective cooling solutions to prevent overheating.
 - **Limited Capacity Utilization:** The overall capacity is constrained to that of the weakest cell, reducing the total usable energy.
 
-### **2. Active Cell Balancing**
+### **Active Cell Balancing**
 
 **Principle:**
 Active cell balancing transfers energy from cells with higher SoCs to those with lower SoCs using energy transfer components such as capacitors, inductors, or DC-DC converters. This method promotes energy redistribution within the battery pack.
@@ -170,7 +170,7 @@ Cell balancing techniques are integral to various applications where battery per
 
 To overcome the limitations of the basic cell balancing methods and improve SoH estimation accuracy, several enhancements and advanced techniques can be integrated.
 
-### **1. Hybrid Balancing Methods**
+### **Hybrid Balancing Methods**
 
 **Approach:**
 Hybrid balancing combines passive and active balancing techniques to leverage the strengths of both methods while mitigating their weaknesses.
@@ -183,7 +183,7 @@ Hybrid balancing combines passive and active balancing techniques to leverage th
 - Balances cost and efficiency.
 - Provides flexibility in managing different cell conditions within the same battery pack.
 
-### **2. Smart Balancing Algorithms**
+### **Smart Balancing Algorithms**
 
 **Approach:**
 Incorporate intelligent algorithms that dynamically adjust balancing parameters based on real-time cell data and operating conditions.
@@ -197,7 +197,7 @@ Incorporate intelligent algorithms that dynamically adjust balancing parameters 
 - Reduces unnecessary energy dissipation.
 - Prolongs battery lifespan by preventing severe imbalances.
 
-### **3. Integration with SoH Estimation**
+### **Integration with SoH Estimation**
 
 **Approach:**
 Combine cell balancing data with SoH estimation algorithms to provide a more comprehensive assessment of battery health.
@@ -210,7 +210,7 @@ Combine cell balancing data with SoH estimation algorithms to provide a more com
 - Provides deeper insights into battery degradation mechanisms.
 - Improves the accuracy of SoH predictions by leveraging additional data sources.
 
-### **4. Machine Learning Integration**
+### **Machine Learning Integration**
 
 **Approach:**
 Leverage machine learning models to analyze complex patterns in balancing data and predict SoH more accurately.
@@ -229,7 +229,7 @@ Leverage machine learning models to analyze complex patterns in balancing data a
 
 To illustrate the practical aspects of cell balancing, the following Python code snippets demonstrate key algorithms and processes essential for effective battery health management.
 
-### **1. Cycle Identification and Counting**
+### **Cycle Identification and Counting**
 
 This example demonstrates how to identify charge and discharge events based on SoC thresholds and count equivalent full cycles.
 
@@ -322,7 +322,7 @@ if __name__ == "__main__":
 - **Equivalent Full Cycles:** Partial cycles are summed based on their DoD to provide an aggregated cycle count.
 - **Usage Example:** Simulates a series of SoC readings that include both full and partial cycles, demonstrating how equivalent full cycles are accumulated.
 
-### **2. Depth of Discharge (DoD) Calculation**
+### **Depth of Discharge (DoD) Calculation**
 
 This snippet calculates the **Depth of Discharge (DoD)** for each detected cycle.
 
@@ -351,7 +351,7 @@ if __name__ == "__main__":
 - **DoD Calculation:** Determines the percentage of battery capacity utilized during a charge-discharge cycle.
 - **Usage:** Essential for weighting partial cycles in equivalent full cycle calculations.
 
-### **3. SoH Estimation Based on Cycle Count and DoD**
+### **SoH Estimation Based on Cycle Count and DoD**
 
 This example demonstrates how to estimate SoH using accumulated equivalent full cycles and manufacturer-provided degradation curves.
 
@@ -574,7 +574,7 @@ if __name__ == "__main__":
 - **Battery Class:** Integrates the CycleCounter and SoHEstimator to provide a comprehensive SoH estimation based on real-time SoC readings.
 - **Usage Example:** Simulates a series of SoC readings, including both full and partial cycles, demonstrating how equivalent full cycles are accumulated and how SoH is estimated accordingly.
 
-### **4. Cell Balancing Control Algorithm**
+### **Cell Balancing Control Algorithm**
 
 Implementing a control algorithm for cell balancing involves monitoring cell voltages and managing the balancing process based on predefined thresholds. Below is an example of a simple passive cell balancing control algorithm.
 
