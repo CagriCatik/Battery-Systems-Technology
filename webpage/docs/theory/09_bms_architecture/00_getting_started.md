@@ -1,7 +1,7 @@
 # Getting Started
 
 1. **BMS Architecture**  
-   - Dive into the overall structure and framework of a Battery Management System (BMS).  
+   - Dive into the overall structure and framework of a Battery Management System. 
    - Learn about hardware and software layers, communication protocols, and how subsystems integrate to ensure safety and performance.  
 
 2. **BMS Control**  

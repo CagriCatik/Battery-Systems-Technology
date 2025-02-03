@@ -3,24 +3,74 @@
 BMS:
   label: Battery Management System
   permalink: /tags/bms
-  description: Battery Management Systems in Electric Vehicles
+  description: Battery Management Systems, components, and control strategies in electric and hybrid vehicles.
 
 EV:
   label: Electric Vehicle
   permalink: /tags/ev
-  description: Electric Vehicles and their Technologies
+  description: Electric vehicles, battery technologies, infrastructure, and innovations in sustainable transportation.
 
 ICE:
   label: Internal Combustion Engine
   permalink: /tags/ice
-  description: Internal Combustion Engines and Their Control Units
+  description: Internal combustion engine technology, control systems, and performance optimization.
 
 Automotive Technology:
   label: Automotive Technology
   permalink: /tags/automotive-technology
-  description: Various Technologies Used in the Automotive Industry
+  description: Advanced technologies and innovations used in modern automotive design, manufacturing, and diagnostics.
 
 Sustainable Mobility:
   label: Sustainable Mobility
   permalink: /tags/sustainable-mobility
-  description: Innovations Promoting Sustainable Transportation
+  description: Innovations and strategies promoting eco-friendly, sustainable, and efficient transportation systems.
+
+Battery Safety:
+  label: Battery Safety
+  permalink: /tags/battery-safety
+  description: Safety measures, risks, and management systems related to battery technologies in vehicles and devices.
+
+Energy Storage:
+  label: Energy Storage
+  permalink: /tags/energy-storage
+  description: Technologies and methods for storing energy, including batteries, ultracapacitors, and energy management systems.
+
+Thermal Management:
+  label: Thermal Management
+  permalink: /tags/thermal-management
+  description: Techniques and systems for controlling temperature in automotive and battery systems to ensure optimal performance.
+
+Vehicle Electronics:
+  label: Vehicle Electronics
+  permalink: /tags/vehicle-electronics
+  description: Electronic control units, sensors, and wiring systems used in vehicles for automation and performance enhancement.
+
+Diagnostics:
+  label: Diagnostics
+  permalink: /tags/diagnostics
+  description: Vehicle diagnostic technologies, including Onboard Diagnostics (OBD), Unified Diagnostic Services (UDS), and system monitoring.
+
+Charging Infrastructure:
+  label: Charging Infrastructure
+  permalink: /tags/charging-infrastructure
+  description: Electric vehicle charging systems, standards, and innovations in fast and wireless charging technologies.
+
+Sustainability:
+  label: Sustainability
+  permalink: /tags/sustainability
+  description: Practices, policies, and technologies aimed at reducing carbon emissions and improving resource efficiency.
+
+Battery Chemistry:
+  label: Battery Chemistry
+  permalink: /tags/battery-chemistry
+  description: Chemical compositions, reactions, and advancements in battery technology for energy storage and EVs.
+
+Functional Safety:
+  label: Functional Safety
+  permalink: /tags/functional-safety
+  description: Safety measures and protocols in automotive systems to prevent hazards caused by system failures (ISO 26262).
+
+Vehicle Dynamics:
+  label: Vehicle Dynamics
+  permalink: /tags/vehicle-dynamics
+  description: Studies and applications related to vehicle motion, handling, stability, and control systems.
