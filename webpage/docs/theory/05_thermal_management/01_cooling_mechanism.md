@@ -4,7 +4,7 @@ Thermal management in electric vehicle (EV) batteries is paramount due to the su
 
 ## Cooling Mechanisms for EV Batteries
 
-### 1. Passive Cooling
+### Passive Cooling
 
 **Description:**
 Passive cooling leverages natural heat dissipation without the aid of active cooling systems. This method typically involves air circulation or the use of basic heat spreaders to manage thermal loads.
@@ -26,7 +26,7 @@ Passive cooling leverages natural heat dissipation without the aid of active coo
 - **Limited Cooling Capacity:** Ineffective for high-performance EVs that generate significant heat.
 - **Inability to Rapidly Adjust:** Cannot respond swiftly to sudden temperature spikes during high-current applications.
 
-### 2. Air Cooling
+### Air Cooling
 
 Air cooling employs the movement of air to dissipate heat from battery cells. This method can be further categorized into passive and active air cooling, with active air cooling being more prevalent in EV applications.
 
@@ -56,7 +56,7 @@ Active air cooling utilizes fans or blowers to forcefully circulate air around b
 **Efficiency Considerations:**
 Air cooling is effective for managing heat in scenarios with moderate thermal loads. However, its efficiency diminishes under high-speed or high-load conditions where the rate of heat generation surpasses the cooling capacity of forced air.
 
-### 3. Liquid Cooling
+### Liquid Cooling
 
 Liquid cooling is favored in high-performance EVs due to its superior thermal conductivity compared to air. This method involves circulating a liquid coolant through the battery pack to absorb and remove heat effectively.
 
@@ -105,7 +105,7 @@ Direct liquid cooling involves the coolant making direct contact with the batter
 **Application Scenarios:**
 Best suited for extreme performance applications where rapid and efficient cooling is essential to prevent thermal runaway and maintain battery integrity.
 
-### 4. Refrigerant-Based Cooling
+### Refrigerant-Based Cooling
 
 Refrigerant-based cooling systems utilize refrigerants directly as the cooling medium, bypassing the need for intermediate coolant loops.
 
@@ -130,7 +130,7 @@ This method involves the use of refrigerants, which undergo phase changes (from 
 **Application Scenarios:**
 Suitable for advanced EVs where high-efficiency cooling is required without the added complexity of traditional liquid cooling loops.
 
-### 5. Phase-Change Materials (PCM)
+### Phase-Change Materials (PCM)
 
 Phase-Change Materials (PCM) utilize materials that absorb and release heat through phase transitions, typically from solid to liquid and vice versa.
 
