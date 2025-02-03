@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="docs-wrapper plugin-docs plugin-id-default docs-version-current docs-doc-page docs-doc-id-theory/bms_architecture/bms-architecture" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.6.3">
+<title data-rh="true">Architecture |  Battery Systems and Technology</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://CagriCatik.github.io/Battery-Systems-Technology/img/undraw_online.svg"><meta data-rh="true" name="twitter:image" content="https://CagriCatik.github.io/Battery-Systems-Technology/img/undraw_online.svg"><meta data-rh="true" property="og:url" content="https://CagriCatik.github.io/Battery-Systems-Technology/docs/theory/bms_architecture/bms-architecture"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docusaurus_version" content="current"><meta data-rh="true" name="docusaurus_tag" content="docs-default-current"><meta data-rh="true" name="docsearch:version" content="current"><meta data-rh="true" name="docsearch:docusaurus_tag" content="docs-default-current"><meta data-rh="true" property="og:title" content="Architecture |  Battery Systems and Technology"><meta data-rh="true" name="description" content="The Battery Management System (BMS) serves as the brain of the battery pack, orchestrating operations to ensure optimal performance and safety. Unlike traditional ECUs that rely on a single hardware board, the BMS employs a distributed architecture—dividing responsibilities between multiple slave units and a central master controller. This distributed approach enables precise monitoring and control over individual battery modules and cells."><meta data-rh="true" property="og:description" content="The Battery Management System (BMS) serves as the brain of the battery pack, orchestrating operations to ensure optimal performance and safety. Unlike traditional ECUs that rely on a single hardware board, the BMS employs a distributed architecture—dividing responsibilities between multiple slave units and a central master controller. This distributed approach enables precise monitoring and control over individual battery modules and cells."><link data-rh="true" rel="icon" href="/Battery-Systems-Technology/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://CagriCatik.github.io/Battery-Systems-Technology/docs/theory/bms_architecture/bms-architecture"><link data-rh="true" rel="alternate" href="https://CagriCatik.github.io/Battery-Systems-Technology/docs/theory/bms_architecture/bms-architecture" hreflang="en"><link data-rh="true" rel="alternate" href="https://CagriCatik.github.io/Battery-Systems-Technology/docs/theory/bms_architecture/bms-architecture" hreflang="x-default"><link rel="alternate" type="application/rss+xml" href="/Battery-Systems-Technology/blog/rss.xml" title=" Battery Systems and Technology RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/Battery-Systems-Technology/blog/atom.xml" title=" Battery Systems and Technology Atom Feed">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.3/dist/katex.min.css" integrity="sha384-R4556vVJtIc0EJ3NKnM5ePcM78Zv5e+/ff+f6aZwYzZjnj84pK8i0PZyNnO+g0OQ" crossorigin="anonymous"><link rel="stylesheet" href="/Battery-Systems-Technology/assets/css/styles.5765a3ec.css">
+<script src="/Battery-Systems-Technology/assets/js/runtime~main.a899c096.js" defer="defer"></script>
+<script src="/Battery-Systems-Technology/assets/js/main.2e5554c5.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<script>!function(){function t(t){document.documentElement.setAttribute("data-theme",t)}var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();t(null!==e?e:"light")}(),function(){try{const n=new URLSearchParams(window.location.search).entries();for(var[t,e]of n)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_fXgn" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="navbar navbar--fixed-top"><div class="navbar__inner"><div class="navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/Battery-Systems-Technology/"><div class="navbar__logo"><img src="/Battery-Systems-Technology/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--light_NVdE"><img src="/Battery-Systems-Technology/img/logo.png" alt="" class="themedComponent_mlkZ themedComponent--dark_xIcU"></div><b class="navbar__title text--truncate"></b></a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/fundamentals/getting-started">Fundamentals of Battery Technology</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/aging_degradation/getting-started">Aging and Degradation</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/chemistry_design_principles/getting-started">Chemistry and Design Principles</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_pack/getting_started">Battery Pack Engineering</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/thermal_management/getting_started">Thermal Management</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_characteristics/getting_started">Characteristics and Technical Specifications</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/battery_sizing/getting_started">Sizing and Optimization</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/bms/getting_started">Battery Management System</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/Battery-Systems-Technology/docs/theory/bms_architecture/getting_started">Design and Architecture</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/theory/modeling_testing/getting_started">Modeling and Testing</a><a class="navbar__item navbar__link" href="/Battery-Systems-Technology/docs/glossary/electrical_concepts">Glossary</a></div><div class="navbar__items navbar__items--right"><div class="toggle_vylO colorModeToggle_DEke"><button class="clean-btn toggleButton_gllP toggleButtonDisabled_aARS" type="button" disabled="" title="Switch between dark and light mode (currently light mode)" aria-label="Switch between dark and light mode (currently light mode)" aria-live="polite" aria-pressed="false"><svg viewBox="0 0 24 24" width="24" height="24" class="lightToggleIcon_pyhR"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" class="darkToggleIcon_wfgR"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg></button></div><div class="navbarSearchContainer_Bca1"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="main-wrapper mainWrapper_z2l0"><div class="docsWrapper_hBAB"><button aria-label="Scroll back to top" class="clean-btn theme-back-to-top-button backToTopButton_sjWU" type="button"></button><div class="docRoot_UBD9"><aside class="theme-doc-sidebar-container docSidebarContainer_YfHR"><div class="sidebarViewport_aRkj"><div class="sidebar_njMd"><nav aria-label="Docs sidebar" class="menu thin-scrollbar menu_SIkG"><ul class="theme-doc-sidebar-menu menu__list"><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Battery-Systems-Technology/docs/theory/bms_architecture/getting_started">Getting Started</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link menu__link--active" aria-current="page" href="/Battery-Systems-Technology/docs/theory/bms_architecture/bms-architecture">Architecture</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Battery-Systems-Technology/docs/theory/bms_architecture/bms-control-system">Control System</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Battery-Systems-Technology/docs/theory/bms_architecture/development_trends">Development Trends</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Battery-Systems-Technology/docs/theory/bms_architecture/initial_soc">Initial SoC &amp; SoH Estimation</a></li><li class="theme-doc-sidebar-item-link theme-doc-sidebar-item-link-level-1 menu__list-item"><a class="menu__link" href="/Battery-Systems-Technology/docs/theory/bms_architecture/bms-design">BMS Design</a></li></ul></nav></div></div></aside><main class="docMainContainer_TBSr"><div class="container padding-top--md padding-bottom--lg"><div class="row"><div class="col docItemCol_VOVn"><div class="docItemContainer_Djhp"><article><nav class="theme-doc-breadcrumbs breadcrumbsContainer_Z_bl" aria-label="Breadcrumbs"><ul class="breadcrumbs" itemscope="" itemtype="https://schema.org/BreadcrumbList"><li class="breadcrumbs__item"><a aria-label="Home page" class="breadcrumbs__link" href="/Battery-Systems-Technology/"><svg viewBox="0 0 24 24" class="breadcrumbHomeIcon_YNFT"><path d="M10 19v-5h4v5c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-7h1.7c.46 0 .68-.57.33-.87L12.67 3.6c-.38-.34-.96-.34-1.34 0l-8.36 7.53c-.34.3-.13.87.33.87H5v7c0 .55.45 1 1 1h3c.55 0 1-.45 1-1z" fill="currentColor"></path></svg></a></li><li itemscope="" itemprop="itemListElement" itemtype="https://schema.org/ListItem" class="breadcrumbs__item breadcrumbs__item--active"><span class="breadcrumbs__link" itemprop="name">Architecture</span><meta itemprop="position" content="1"></li></ul></nav><div class="tocCollapsible_ETCw theme-doc-toc-mobile tocMobile_ITEo"><button type="button" class="clean-btn tocCollapsibleButton_TO0P">On this page</button></div><div class="theme-doc-markdown markdown"><header><h1>BMS Architecture Documentation</h1></header>
+<p>The Battery Management System (BMS) serves as the brain of the battery pack, orchestrating operations to ensure optimal performance and safety. Unlike traditional ECUs that rely on a single hardware board, the BMS employs a <strong>distributed architecture</strong>—dividing responsibilities between multiple <strong>slave units</strong> and a central <strong>master controller</strong>. This distributed approach enables precise monitoring and control over individual battery modules and cells.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="distributed-vs-centralized-architecture">Distributed vs. Centralized Architecture<a href="#distributed-vs-centralized-architecture" class="hash-link" aria-label="Direct link to Distributed vs. Centralized Architecture" title="Direct link to Distributed vs. Centralized Architecture">​</a></h2>
+<ul>
+<li><strong>Distributed Architecture</strong>: Uses multiple slave units to manage different sections of the battery pack. This approach supports scalability, localized control, and robust fault tolerance.</li>
+<li><strong>Centralized Architecture</strong>: Relies on a single controller for the entire battery pack. While simpler, it is less flexible and scalable.</li>
+</ul>
+<p>Modern electric vehicles (EVs) favor distributed architectures for their enhanced capability to manage complex battery configurations and maintain system safety.</p>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="overall-bms-architecture">Overall BMS Architecture<a href="#overall-bms-architecture" class="hash-link" aria-label="Direct link to Overall BMS Architecture" title="Direct link to Overall BMS Architecture">​</a></h2>
+<p>The following diagram illustrates the overall BMS architecture. Multiple slave units communicate via a CAN Bus with the central master controller, which in turn interfaces with other systems such as the Vehicle Control Unit (VCU).</p>
+<div class="plantuml-diagram"><img src="https://www.plantuml.com/plantuml/svg/ZP8zRuD038Rt-nKMKp8aLM3BK2LSrh1Gs2smACgT3zsPIb7L_rwLZw2M3bdVvx5zjawTWg2NtXeLRYrtwD52vMpdc5XokHi2JvKWDuQKwh2wOKCGfIX2_WvNP6p84Wlazo1aOPDUysq4dqgngmcYtE07GS6jm2423304XpMD5nglQRBGPABx_Nu9Bqx2kYfRX6n-a3vdaFPX8FgSfNsOoHM3a0VjMBmpXlpWZEaIAZLk0BlTwzG0Zl3caODj1NBYu3nSK70KusV5v5anUq9K4_un_su0HpWtZQS6XUfHNoc_9amvQ6SjSXtKrtooajxRoj336Aw-ANMn7MvNwkB_rgKkXhxMzjnMA0JpZye5fGylZr4duhgtvXi0" alt="PlantUML diagram"></div>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="key-components-of-the-bms">Key Components of the BMS<a href="#key-components-of-the-bms" class="hash-link" aria-label="Direct link to Key Components of the BMS" title="Direct link to Key Components of the BMS">​</a></h2>
+<p>The BMS architecture comprises two main types of components:</p>
+<ul>
+<li><strong>Slave Units</strong>: Dedicated PCBs that monitor and manage individual battery modules.</li>
+<li><strong>Master Controller</strong>: The central unit that aggregates data, estimates battery state (SOC, SOH, SOP), and executes control actions.</li>
+</ul>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="slave-units">Slave Units<a href="#slave-units" class="hash-link" aria-label="Direct link to Slave Units" title="Direct link to Slave Units">​</a></h2>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="responsibilities-of-slave-units">Responsibilities of Slave Units<a href="#responsibilities-of-slave-units" class="hash-link" aria-label="Direct link to Responsibilities of Slave Units" title="Direct link to Responsibilities of Slave Units">​</a></h3>
+<ol>
+<li>
+<p><strong>Sensor Integration</strong></p>
+<ul>
+<li><strong>Temperature Sensors</strong>: Monitor module thermal conditions.</li>
+<li><strong>Current Sensors</strong>: Measure current flow.</li>
+<li><strong>Voltage Sensors</strong>: Track cell or module voltage levels.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cell Balancing</strong></p>
+<ul>
+<li><strong>Passive Balancing</strong>: Uses resistors to discharge higher-voltage cells.</li>
+<li><strong>Active Balancing</strong>: Transfers charge to equalize cell voltages.</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Collection</strong></p>
+<ul>
+<li>Aggregates sensor data.</li>
+<li>Transmits data to the master controller via the CAN bus.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li>Dedicated management of individual battery modules.</li>
+<li>Localized data collection and processing.</li>
+<li>Reliable communication through a CAN wiring harness.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="slave-unit-component-diagram">Slave Unit Component Diagram<a href="#slave-unit-component-diagram" class="hash-link" aria-label="Direct link to Slave Unit Component Diagram" title="Direct link to Slave Unit Component Diagram">​</a></h3>
+<div class="plantuml-diagram"><img src="https://www.plantuml.com/plantuml/svg/XP4zQyD038Pt_GgHgHto1pAKkExIeI6Gj8lf8CwgENAdCtToe9J-z-AlE7O36U_Lymhqt3OfHMsyWtIoKbCaZoRuEWYB7lJRCKOsIb8v1gZ9dAXYN1qSdHdVnUeAVm2A8_kQ8saJ6GyiASHFf8Hjt3-Xo9iOMVHwF4GZyH6SjjklY24Q22Zsb98zCpwJ8p5MgeuQqai8HMRqFzQ74mN52obX7fnZepO8leMoSTp1xMYQ01HvyBuHQwWZNqKvVf5XVCYptMD_Jl3-aWDCn-Dw_RHOY1lSnt2s9VUMHdaj1JClTygZrguuqtMdEDhkYh3WskhIAcxQdodxmWr-eNU6t-9dkd23nqYIl5NCgYfoHSf3-HUsB6NZtHy0" alt="PlantUML diagram"></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="master-controller">Master Controller<a href="#master-controller" class="hash-link" aria-label="Direct link to Master Controller" title="Direct link to Master Controller">​</a></h2>
+<p>The master controller aggregates data from all slave units and performs several key functions:</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="responsibilities-of-the-master-controller">Responsibilities of the Master Controller<a href="#responsibilities-of-the-master-controller" class="hash-link" aria-label="Direct link to Responsibilities of the Master Controller" title="Direct link to Responsibilities of the Master Controller">​</a></h3>
+<ol>
+<li>
+<p><strong>Data Aggregation</strong>:</p>
+<ul>
+<li>Collects sensor data (voltage, current, temperature) from slave units.</li>
+<li>Forms a complete overview of the battery pack status.</li>
+</ul>
+</li>
+<li>
+<p><strong>State Estimation</strong>:</p>
+<ul>
+<li><strong>State of Charge (SOC)</strong>: Estimates the remaining battery charge.</li>
+<li><strong>State of Health (SOH)</strong>: Assesses battery longevity and condition.</li>
+<li><strong>State of Power (SOP)</strong>: Evaluates the battery&#x27;s capability to deliver power.</li>
+</ul>
+</li>
+<li>
+<p><strong>Control Actions</strong>:</p>
+<ul>
+<li>Manages charging/discharging cycles.</li>
+<li>Activates safety protocols (e.g., thermal shutdown).</li>
+<li>Oversees system-level cell balancing.</li>
+</ul>
+</li>
+<li>
+<p><strong>Communication</strong>:</p>
+<ul>
+<li>Interfaces with the Vehicle Control Unit (VCU) and other vehicle systems.</li>
+<li>Sends battery status updates and receives operational commands.</li>
+</ul>
+</li>
+</ol>
+<p><strong>Key Features</strong>:</p>
+<ul>
+<li>Hosts the core BMS software.</li>
+<li>Provides high computational power for real-time processing.</li>
+<li>Serves as the main system interface.</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="master-controller-component-diagram">Master Controller Component Diagram<a href="#master-controller-component-diagram" class="hash-link" aria-label="Direct link to Master Controller Component Diagram" title="Direct link to Master Controller Component Diagram">​</a></h3>
+<div class="plantuml-diagram"><img src="https://www.plantuml.com/plantuml/svg/VL7BQYCn4BphAugSD_YUGqYO1B8GCmQnUp4vD59R8wo7aNeSpBB_leo8uycOx4K8LNKzr0zLgCWOWwfxdmvKACBaUCY9asWv1KPX8vHSOAKEPFRa63Thgi85NKvISWXSRl17gUqJ2U7HkSAEnEU4TRPZu3TGnOJD8BNLGi9uhkBZ5RbX5qXjFvpmcfqtS-O7qDxLLf-gS4INOnoJDzUw3PzWfHQ1S7jxl_J57JOb7xtbprPiMnErP4xJyoopKTrtAzs_h7I_ETVbghwGc_TdDjn1Sx9dlTNaDTRMYfAjIgKiZEBT8CYxgv_59Mo5dLQoApc2Ga0DT6ICoKjLayCaj9HR_ZtGKJ1ZQ7Awxtv0zo_JiVbMuijIW3KbSbnX1YhE9xUolfxle6HHQSTomg5aoIQ7_sIxx0_ucOJBZWnNl7iPyBlxrTIo35nmvC6RmAXjP2RvLprmicCC_m00" alt="PlantUML diagram"></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="communication-between-slave-units-and-master-controller">Communication Between Slave Units and Master Controller<a href="#communication-between-slave-units-and-master-controller" class="hash-link" aria-label="Direct link to Communication Between Slave Units and Master Controller" title="Direct link to Communication Between Slave Units and Master Controller">​</a></h2>
+<p>The BMS employs the <strong>Controller Area Network (CAN) bus</strong> for reliable communication.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="can-bus-overview">CAN Bus Overview<a href="#can-bus-overview" class="hash-link" aria-label="Direct link to CAN Bus Overview" title="Direct link to CAN Bus Overview">​</a></h3>
+<ul>
+<li><strong>Protocol</strong>: Designed for robust communication between microcontrollers without a host computer.</li>
+<li><strong>Advantages</strong>:<!-- -->
+<ul>
+<li>High resistance to electrical noise.</li>
+<li>Efficient, high-speed data transmission.</li>
+<li>Scalable to support additional nodes.</li>
+</ul>
+</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="communication-components">Communication Components<a href="#communication-components" class="hash-link" aria-label="Direct link to Communication Components" title="Direct link to Communication Components">​</a></h3>
+<ol>
+<li>
+<p><strong>CAN Wiring Harness</strong>:</p>
+<ul>
+<li>Connects all slave units to the master controller.</li>
+<li>Ensures consistent data transmission.</li>
+</ul>
+</li>
+<li>
+<p><strong>Data Transmission Process</strong>:</p>
+<ul>
+<li><strong>From Slave Units</strong>: Transmits raw sensor data (voltage, current, temperature).</li>
+<li><strong>From Master Controller</strong>: Sends back control commands (e.g., adjust charging rates).</li>
+</ul>
+</li>
+</ol>
+<p><em>Example CAN Message Structure</em>:</p>
+<div class="language-c codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-c codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// Example CAN message structure for voltage data from a slave unit</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">typedef</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">struct</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token class-name">uint32_t</span><span class="token plain"> timestamp</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain">     </span><span class="token comment" style="color:#999988;font-style:italic">// Time of data transmission</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token class-name">uint8_t</span><span class="token plain"> slave_id</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain">       </span><span class="token comment" style="color:#999988;font-style:italic">// Identifier for the slave unit</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">float</span><span class="token plain"> cell_voltage</span><span class="token punctuation" style="color:#393A34">[</span><span class="token number" style="color:#36acaa">16</span><span class="token punctuation" style="color:#393A34">]</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"> </span><span class="token comment" style="color:#999988;font-style:italic">// Voltage readings for 16 cells in the module</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><span class="token plain"> CAN_Message_Voltage</span><span class="token punctuation" style="color:#393A34">;</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="software-architecture">Software Architecture<a href="#software-architecture" class="hash-link" aria-label="Direct link to Software Architecture" title="Direct link to Software Architecture">​</a></h2>
+<p>The BMS software, embedded in the master controller, handles real-time data processing and control functions.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="core-components-of-the-bms-software">Core Components of the BMS Software<a href="#core-components-of-the-bms-software" class="hash-link" aria-label="Direct link to Core Components of the BMS Software" title="Direct link to Core Components of the BMS Software">​</a></h3>
+<ol>
+<li>
+<p><strong>Data Acquisition</strong>:</p>
+<ul>
+<li>Interfaces with the CAN bus to collect sensor data.</li>
+</ul>
+</li>
+<li>
+<p><strong>State Estimation Algorithms</strong>:</p>
+<ul>
+<li><strong>SOC Estimation</strong>: Uses methods such as Coulomb counting or Kalman filtering.</li>
+<li><strong>SOH Estimation</strong>: Assesses battery health based on capacity fade and internal resistance.</li>
+<li><strong>SOP Estimation</strong>: Evaluates the battery’s power delivery capability.</li>
+</ul>
+</li>
+<li>
+<p><strong>Control Logic</strong>:</p>
+<ul>
+<li>Implements decision-making to manage charging/discharging cycles, safety protocols, and cell balancing.</li>
+</ul>
+</li>
+<li>
+<p><strong>Communication Protocols</strong>:</p>
+<ul>
+<li>Manages data exchange with vehicle systems (e.g., VCU).</li>
+<li>Sends status updates and receives commands.</li>
+</ul>
+</li>
+</ol>
+<p><em>Software Implementation Example</em>:</p>
+<div class="language-c codeBlockContainer_Ckt0 theme-code-block" style="--prism-color:#393A34;--prism-background-color:#f6f8fa"><div class="codeBlockContent_biex"><pre tabindex="0" class="prism-code language-c codeBlock_bY9V thin-scrollbar" style="color:#393A34;background-color:#f6f8fa"><code class="codeBlockLines_e6Vv"><span class="token-line" style="color:#393A34"><span class="token comment" style="color:#999988;font-style:italic">// Function to estimate State of Charge (SOC) using Coulomb Counting</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token keyword" style="color:#00009f">float</span><span class="token plain"> </span><span class="token function" style="color:#d73a49">estimate_SOC</span><span class="token punctuation" style="color:#393A34">(</span><span class="token keyword" style="color:#00009f">float</span><span class="token plain"> current</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">float</span><span class="token plain"> delta_time</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">float</span><span class="token plain"> initial_SOC</span><span class="token punctuation" style="color:#393A34">,</span><span class="token plain"> </span><span class="token keyword" style="color:#00009f">float</span><span class="token plain"> battery_capacity</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">{</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">// Convert battery capacity (Ah) to coulombs</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">float</span><span class="token plain"> battery_capacity_coulombs </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> battery_capacity </span><span class="token operator" style="color:#393A34">*</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">3600.0</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">// Calculate the change in charge over the time interval</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">float</span><span class="token plain"> delta_charge </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> current </span><span class="token operator" style="color:#393A34">*</span><span class="token plain"> delta_time</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">// Update SOC based on the charge change</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">float</span><span class="token plain"> new_SOC </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> initial_SOC </span><span class="token operator" style="color:#393A34">-</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">delta_charge </span><span class="token operator" style="color:#393A34">/</span><span class="token plain"> battery_capacity_coulombs</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> </span><span class="token operator" style="color:#393A34">*</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">100.0</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token comment" style="color:#999988;font-style:italic">// Clamp SOC between 0% and 100%</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">if</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">new_SOC </span><span class="token operator" style="color:#393A34">&gt;</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">100.0</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> new_SOC </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">100.0</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">if</span><span class="token plain"> </span><span class="token punctuation" style="color:#393A34">(</span><span class="token plain">new_SOC </span><span class="token operator" style="color:#393A34">&lt;</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0.0</span><span class="token punctuation" style="color:#393A34">)</span><span class="token plain"> new_SOC </span><span class="token operator" style="color:#393A34">=</span><span class="token plain"> </span><span class="token number" style="color:#36acaa">0.0</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain">    </span><span class="token keyword" style="color:#00009f">return</span><span class="token plain"> new_SOC</span><span class="token punctuation" style="color:#393A34">;</span><span class="token plain"></span><br></span><span class="token-line" style="color:#393A34"><span class="token plain"></span><span class="token punctuation" style="color:#393A34">}</span><br></span></code></pre><div class="buttonGroup__atx"><button type="button" aria-label="Copy code to clipboard" title="Copy" class="clean-btn"><span class="copyButtonIcons_eSgA" aria-hidden="true"><svg viewBox="0 0 24 24" class="copyButtonIcon_y97N"><path fill="currentColor" d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z"></path></svg><svg viewBox="0 0 24 24" class="copyButtonSuccessIcon_LjdS"><path fill="currentColor" d="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z"></path></svg></span></button></div></div></div>
+<hr>
+<h2 class="anchor anchorWithStickyNavbar_LWe7" id="practical-implementation-in-electric-vehicles">Practical Implementation in Electric Vehicles<a href="#practical-implementation-in-electric-vehicles" class="hash-link" aria-label="Direct link to Practical Implementation in Electric Vehicles" title="Direct link to Practical Implementation in Electric Vehicles">​</a></h2>
+<p>In EVs, the BMS is implemented with careful integration and testing to ensure safety and performance.</p>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="implementation-steps">Implementation Steps<a href="#implementation-steps" class="hash-link" aria-label="Direct link to Implementation Steps" title="Direct link to Implementation Steps">​</a></h3>
+<ol>
+<li>
+<p><strong>Module Integration</strong>:</p>
+<ul>
+<li>Equip each battery module with a dedicated slave unit.</li>
+<li>Position slave units to monitor temperature, voltage, and current.</li>
+</ul>
+</li>
+<li>
+<p><strong>Communication Network Setup</strong>:</p>
+<ul>
+<li>Connect all slave units via a CAN bus.</li>
+<li>Design the wiring harness to withstand automotive conditions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Master Controller Placement</strong>:</p>
+<ul>
+<li>Place the master controller centrally for efficient communication.</li>
+<li>Interface with the Vehicle Control Unit (VCU) and infotainment systems.</li>
+</ul>
+</li>
+<li>
+<p><strong>System Calibration and Testing</strong>:</p>
+<ul>
+<li>Calibrate sensor readings and state estimation algorithms.</li>
+<li>Test system responses under various conditions and fault scenarios.</li>
+</ul>
+</li>
+</ol>
+<p><em>Example</em>: In a Tesla vehicle, the battery pack is divided into multiple modules, each managed by a dedicated slave unit. The slave units continuously send sensor data via the CAN bus to the master controller, which processes the data to estimate SOC, SOH, and SOP. The master controller then communicates with the VCU to adjust vehicle performance in real-time.</p></div><footer class="theme-doc-footer docusaurus-mt-lg"><div class="row margin-top--sm theme-doc-footer-edit-meta-row"><div class="col"><a href="https://github.com/CagriCatik/Battery-Systems-Technology/edit/main/docs/theory/09_bms_architecture/01_bms_architecture.mdx" target="_blank" rel="noopener noreferrer" class="theme-edit-this-page"><svg fill="currentColor" height="20" width="20" viewBox="0 0 40 40" class="iconEdit_Z9Sw" aria-hidden="true"><g><path d="m34.5 11.7l-3 3.1-6.3-6.3 3.1-3q0.5-0.5 1.2-0.5t1.1 0.5l3.9 3.9q0.5 0.4 0.5 1.1t-0.5 1.2z m-29.5 17.1l18.4-18.5 6.3 6.3-18.4 18.4h-6.3v-6.2z"></path></g></svg>Edit this page</a></div><div class="col lastUpdated_JAkA"></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Docs pages"><a class="pagination-nav__link pagination-nav__link--prev" href="/Battery-Systems-Technology/docs/theory/bms_architecture/getting_started"><div class="pagination-nav__sublabel">Previous</div><div class="pagination-nav__label">Getting Started</div></a><a class="pagination-nav__link pagination-nav__link--next" href="/Battery-Systems-Technology/docs/theory/bms_architecture/bms-control-system"><div class="pagination-nav__sublabel">Next</div><div class="pagination-nav__label">Control System</div></a></nav></div></div><div class="col col--3"><div class="tableOfContents_bqdL thin-scrollbar theme-doc-toc-desktop"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#distributed-vs-centralized-architecture" class="table-of-contents__link toc-highlight">Distributed vs. Centralized Architecture</a></li><li><a href="#overall-bms-architecture" class="table-of-contents__link toc-highlight">Overall BMS Architecture</a></li><li><a href="#key-components-of-the-bms" class="table-of-contents__link toc-highlight">Key Components of the BMS</a></li><li><a href="#slave-units" class="table-of-contents__link toc-highlight">Slave Units</a><ul><li><a href="#responsibilities-of-slave-units" class="table-of-contents__link toc-highlight">Responsibilities of Slave Units</a></li><li><a href="#slave-unit-component-diagram" class="table-of-contents__link toc-highlight">Slave Unit Component Diagram</a></li></ul></li><li><a href="#master-controller" class="table-of-contents__link toc-highlight">Master Controller</a><ul><li><a href="#responsibilities-of-the-master-controller" class="table-of-contents__link toc-highlight">Responsibilities of the Master Controller</a></li><li><a href="#master-controller-component-diagram" class="table-of-contents__link toc-highlight">Master Controller Component Diagram</a></li></ul></li><li><a href="#communication-between-slave-units-and-master-controller" class="table-of-contents__link toc-highlight">Communication Between Slave Units and Master Controller</a><ul><li><a href="#can-bus-overview" class="table-of-contents__link toc-highlight">CAN Bus Overview</a></li><li><a href="#communication-components" class="table-of-contents__link toc-highlight">Communication Components</a></li></ul></li><li><a href="#software-architecture" class="table-of-contents__link toc-highlight">Software Architecture</a><ul><li><a href="#core-components-of-the-bms-software" class="table-of-contents__link toc-highlight">Core Components of the BMS Software</a></li></ul></li><li><a href="#practical-implementation-in-electric-vehicles" class="table-of-contents__link toc-highlight">Practical Implementation in Electric Vehicles</a><ul><li><a href="#implementation-steps" class="table-of-contents__link toc-highlight">Implementation Steps</a></li></ul></li></ul></div></div></div></div></main></div></div></div><footer class="footer footer--dark"><div class="container container-fluid"><div class="footer__links text--center"><div class="footer__links"><a href="https://github.com/CagriCatik/Battery-Systems-Technology" target="_blank" rel="noopener noreferrer" class="footer__link-item">GitHub<svg width="13.5" height="13.5" aria-hidden="true" viewBox="0 0 24 24" class="iconExternalLink_nPIU"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"></path></svg></a><span class="footer__link-separator">·</span><a class="footer__link-item" position="left" href="/Battery-Systems-Technology/blog">Blog</a></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2025 Battery Systems and Technology</div></div></div></footer></div>
+</body>
+</html>
