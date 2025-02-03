@@ -58,7 +58,7 @@
 <h2 class="anchor anchorWithStickyNavbar_LWe7" id="types-of-cell-balancing-techniques"><strong>Types of Cell Balancing Techniques</strong><a href="https://cagricatik.github.io/Battery-Systems-Technology/blog/2025/02/07/index#types-of-cell-balancing-techniques" class="hash-link" aria-label="Direct link to types-of-cell-balancing-techniques" title="Direct link to types-of-cell-balancing-techniques">​</a></h2>
 <p>Cell balancing is categorized into two primary methods: <strong>passive</strong> and <strong>active</strong> balancing.</p>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="1-passive-balancing"><strong>1. Passive Balancing</strong><a href="https://cagricatik.github.io/Battery-Systems-Technology/blog/2025/02/07/index#1-passive-balancing" class="hash-link" aria-label="Direct link to 1-passive-balancing" title="Direct link to 1-passive-balancing">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="passive-balancing"><strong>Passive Balancing</strong><a href="https://cagricatik.github.io/Battery-Systems-Technology/blog/2025/02/07/index#passive-balancing" class="hash-link" aria-label="Direct link to passive-balancing" title="Direct link to passive-balancing">​</a></h3>
 <p>In passive balancing, excess energy from higher-voltage cells is dissipated as heat through resistors. This technique is simple but energy-inefficient.</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="working-principle"><strong>Working Principle:</strong><a href="https://cagricatik.github.io/Battery-Systems-Technology/blog/2025/02/07/index#working-principle" class="hash-link" aria-label="Direct link to working-principle" title="Direct link to working-principle">​</a></h4>
 <ul>
@@ -76,7 +76,7 @@
 <li>Generates heat, which may require thermal management (Einhorn et al., 2011).</li>
 </ul>
 <hr>
-<h3 class="anchor anchorWithStickyNavbar_LWe7" id="2-active-balancing"><strong>2. Active Balancing</strong><a href="https://cagricatik.github.io/Battery-Systems-Technology/blog/2025/02/07/index#2-active-balancing" class="hash-link" aria-label="Direct link to 2-active-balancing" title="Direct link to 2-active-balancing">​</a></h3>
+<h3 class="anchor anchorWithStickyNavbar_LWe7" id="active-balancing"><strong>Active Balancing</strong><a href="https://cagricatik.github.io/Battery-Systems-Technology/blog/2025/02/07/index#active-balancing" class="hash-link" aria-label="Direct link to active-balancing" title="Direct link to active-balancing">​</a></h3>
 <p>Active balancing redistributes excess energy from high-voltage cells to low-voltage cells. This method is more efficient but requires complex circuitry.</p>
 <h4 class="anchor anchorWithStickyNavbar_LWe7" id="working-principle-1"><strong>Working Principle:</strong><a href="https://cagricatik.github.io/Battery-Systems-Technology/blog/2025/02/07/index#working-principle-1" class="hash-link" aria-label="Direct link to working-principle-1" title="Direct link to working-principle-1">​</a></h4>
 <ul>
