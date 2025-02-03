@@ -1,4 +1,4 @@
-# Getting Started Guide
+# Getting Started
 
 **Requirements and Testing**
 This section provides the foundational elements of requirements and strategies for testing.

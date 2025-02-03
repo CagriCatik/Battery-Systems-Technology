@@ -1,0 +1,276 @@
+---
+id: bms-control-system
+title: "Control System"
+---
+
+import plantumlEncoder from 'plantuml-encoder';
+import PlantUML from '@site/src/components/PlantUML';
+
+# BMS Control System
+
+The BMS control system is the cornerstone of battery management. It monitors, manages, and optimizes battery performance while coordinating with other vehicle systems—such as the Vehicle Control Unit (VCU), motor controller, and charger—to ensure efficient operation. The control system can be implemented in two primary ways:
+
+- **Open-Loop Control**
+- **Closed-Loop Control**
+
+Understanding these approaches is essential to appreciating modern BMS sophistication and reliability.
+
+---
+
+## Distributed vs. Centralized Control
+
+Similar to overall BMS architecture, the control system can be either distributed or centralized:
+
+- **Distributed Control**: Multiple controllers manage different aspects or sections of the battery system, enhancing scalability and fault tolerance.
+- **Centralized Control**: A single controller oversees all control actions, simplifying the design but potentially limiting scalability.
+
+Modern BMS implementations often favor **closed-loop distributed control systems** to combine feedback accuracy with distributed robustness.
+
+---
+
+## Types of Control Systems
+
+### Open-Loop Control
+
+In an open-loop control system, commands are issued without any feedback from the output. This approach is simpler and requires fewer resources, but it cannot correct errors or adapt to disturbances.
+
+#### Characteristics
+
+- **No Feedback Mechanism**: The controller does not verify the outcome of its commands.
+- **Command-Based Operation**: Actions follow predetermined inputs or schedules.
+- **Simplicity**: Fewer components and lower computational needs.
+- **Limited Accuracy**: Vulnerable to disturbances since no corrective adjustments are made.
+
+#### Suitable Applications
+
+Open-loop control is used in systems where precision is less critical or operating conditions are stable and predictable.
+
+> **Example**: A basic motor control where a fixed pulse drives the motor at a constant speed, without adjustments for load changes.
+
+```c
+// Example of Open-Loop Motor Control
+#define MOTOR_PIN 9
+
+void setup() {
+    pinMode(MOTOR_PIN, OUTPUT);
+}
+
+void loop() {
+    analogWrite(MOTOR_PIN, 128); // Set motor speed to 50%
+    delay(1000);
+}
+```
+
+---
+
+### Closed-Loop Control
+
+Closed-loop control systems incorporate feedback from the system's output to adjust commands in real time. This results in higher accuracy and stability, even under varying operating conditions.
+
+#### Characteristics
+
+- **Feedback Mechanism**: Continuously monitors system output (e.g., voltage, current, temperature) and adjusts control actions.
+- **Corrective Actions**: Compensates for deviations between desired and actual performance.
+- **Higher Complexity**: Requires additional sensors and more complex processing.
+- **Enhanced Accuracy and Stability**: Maintains desired performance despite external disturbances.
+
+#### Suitable Applications
+
+Closed-loop control is ideal for critical applications requiring precise and reliable operation, such as battery charging, discharging, and thermal management.
+
+> **Example**: The BMS control system itself uses a closed-loop approach—utilizing sensor data to dynamically adjust charging rates, manage discharge currents, and control thermal conditions.
+
+```c
+// Example of Closed-Loop Control for Battery Charging
+float desired_voltage = 4.2; // Desired cell voltage in volts
+float current_voltage;
+float error;
+float kp = 0.5; // Proportional gain
+
+void setup() {
+    // Initialize communication with sensors and charger
+}
+
+void loop() {
+    current_voltage = readVoltageSensor(); // Read current voltage
+    error = desired_voltage - current_voltage;
+    float control_signal = kp * error;
+    setChargerVoltage(desired_voltage + control_signal); // Adjust charger voltage
+    delay(100); // Control loop interval
+}
+```
+
+---
+
+## Overall Control System Architecture
+
+In electric vehicles, the BMS control system functions as a closed-loop system. It interacts with multiple components:
+
+- **Battery Pack**: The physical assembly of cells and modules.
+- **BMS Controller**: Monitors sensor data and executes control actions.
+- **Vehicle Control Unit (VCU)**: Oversees overall vehicle operations and communicates mode requests.
+- **Motor Controller & Charger**: Adjust power delivery based on BMS commands.
+- **Infotainment Systems**: Display battery status to the user.
+
+The following diagram illustrates the overall architecture of the BMS control system:
+
+<PlantUML code={`@startuml
+skinparam componentStyle rectangle
+
+package "BMS Control System" {
+  [BMS Controller] as BMS
+  [Sensor Array] as Sensors
+  [Data Processing & Control Logic] as Logic
+  [Thermal Management] as Thermal
+}
+
+[Battery Pack] as BP
+[Vehicle Control Unit (VCU)] as VCU
+[Motor Controller] as MC
+[Charger] as Charger
+[Infotainment] as Info
+
+VCU --> BMS : Mode Request & Commands
+BP --> Sensors : Provides Voltage, Current, Temp Data
+Sensors --> Logic : Sensor Data
+Logic --> BMS : Processed Data & Decisions
+BMS --> MC : Set Discharge Limits
+BMS --> Charger : Set Charging Parameters
+BMS --> Thermal : Activate Cooling/Heating
+BMS --> VCU : Status Updates
+BMS --> Info : Display Battery Status
+@enduml`} />
+
+---
+
+## Operational Logic of the BMS Control System
+
+The BMS control system follows a structured logic to maintain optimal battery performance:
+
+1. **Mode Request**:  
+   The VCU sends a mode request (discharge, charge, or idle) to the BMS.  
+   > *Example*:  
+   ```c
+   typedef enum {
+       MODE_DISCHARGE,
+       MODE_CHARGE,
+       MODE_IDLE
+   } BMS_Mode;
+
+   void receiveModeRequest(BMS_Mode mode) {
+       current_mode = mode;
+       executeMode(current_mode);
+   }
+   ```
+2. **Data Collection & Processing**:  
+   The system gathers real-time sensor data (voltage, current, temperature) and estimates key parameters like State of Charge (SOC) and State of Health (SOH).  
+   > *Example*:  
+   ```c
+   float new_SOC = estimate_SOC(current, delta_time, initial_SOC, battery_capacity);
+   updateSOC(new_SOC);
+   ```
+3. **Control Actions**:  
+   Based on processed data, the BMS applies control actions such as current limiting, thermal management, and state estimation updates.  
+   > *Examples*:  
+   ```c
+   if(current_discharge > max_discharge_current) {
+       setMotorControllerCurrentLimit(max_discharge_current);
+   }
+   if(current_temperature > max_temperature) {
+       activateCoolingSystem();
+   }
+   ```
+4. **Communication with Other Systems**:  
+   The BMS sends updates and receives further commands from the VCU, motor controller, charger, and infotainment systems.  
+   > *Example*:  
+   ```c
+   BatteryStatus status = getBatteryStatus();
+   sendStatusToVCU(status);
+   ```
+
+The following diagram illustrates the closed-loop control process within the BMS:
+
+<PlantUML code={`@startuml
+skinparam componentStyle rectangle
+
+component "Sensor Array" as Sensors
+component "Control Algorithm" as Control
+component "Actuators" as Actuators
+
+Sensors --> Control : Feedback (Voltage, Current, Temperature)
+Control --> Actuators : Control Signal (e.g., adjust charging, limit current)
+Actuators --> Sensors : System Response Feedback
+
+@enduml`} />
+
+---
+
+## Example Scenarios
+
+### Discharge Scenario
+
+**Objective**: Ensure safe power delivery to the motor while respecting operational limits.
+
+1. **Mode Request**: VCU requests discharge mode.
+2. **Data Collection**: BMS collects sensor data from the battery pack.
+3. **Data Processing**: SOC, SOH, and maximum allowable discharge current are computed.
+4. **Control Action**:  
+   - If the requested current exceeds the limit, the BMS instructs the motor controller to reduce it.
+   - Thermal management is activated if needed.
+5. **Communication**: The BMS sends status updates to the VCU.
+
+> *Example Implementation*:
+> ```c
+> void dischargeMode() {
+>     receiveModeRequest(MODE_DISCHARGE);
+>     updateBatteryStates();
+>     
+>     float max_discharge_current = getMaxDischargeCurrent();
+>     float requested_current = getRequestedDischargeCurrent();
+>     
+>     if(requested_current > max_discharge_current) {
+>         setMotorControllerCurrentLimit(max_discharge_current);
+>     } else {
+>         setMotorControllerCurrentLimit(requested_current);
+>     }
+>     
+>     manageThermalConditions();
+>     communicateWithVCU();
+> }
+> ```
+
+### Charge Scenario
+
+**Objective**: Safely charge the battery without overcharging or thermal damage.
+
+1. **Mode Request**: VCU requests charge mode.
+2. **Data Collection**: Sensor data is gathered.
+3. **Data Processing**: The BMS assesses SOC, SOH, and thermal state.
+4. **Control Action**:  
+   - Adjusts charging current based on battery temperature.
+   - Activates thermal management as required.
+5. **Communication**: The BMS updates both the charger and VCU with the current status.
+
+> *Example Implementation*:
+> ```c
+> void chargeMode() {
+>     receiveModeRequest(MODE_CHARGE);
+>     updateBatteryStates();
+>     
+>     float max_charge_current = calculateMaxChargeCurrent();
+>     float requested_charge_current = getRequestedChargeCurrent();
+>     
+>     if(requested_charge_current > max_charge_current) {
+>         setChargerCurrentLimit(max_charge_current);
+>     } else {
+>         setChargerCurrentLimit(requested_charge_current);
+>     }
+>     
+>     manageThermalConditions();
+>     communicateWithVCU();
+> }
+> ```
+
+---
+
+This documentation, complete with embedded PlantUML diagrams, provides a comprehensive overview of the BMS control system—from the basic types of control (open-loop and closed-loop) to the operational logic and interaction with vehicle systems. Enjoy integrating these concepts into your documentation!

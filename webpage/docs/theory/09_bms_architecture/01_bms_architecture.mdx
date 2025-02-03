@@ -1,0 +1,279 @@
+---
+id: bms-architecture
+title: "Architecture"
+---
+
+import plantumlEncoder from 'plantuml-encoder';
+import PlantUML from '@site/src/components/PlantUML';
+
+# BMS Architecture Documentation
+
+The Battery Management System (BMS) serves as the brain of the battery pack, orchestrating operations to ensure optimal performance and safety. Unlike traditional ECUs that rely on a single hardware board, the BMS employs a **distributed architecture**—dividing responsibilities between multiple **slave units** and a central **master controller**. This distributed approach enables precise monitoring and control over individual battery modules and cells.
+
+## Distributed vs. Centralized Architecture
+
+- **Distributed Architecture**: Uses multiple slave units to manage different sections of the battery pack. This approach supports scalability, localized control, and robust fault tolerance.
+- **Centralized Architecture**: Relies on a single controller for the entire battery pack. While simpler, it is less flexible and scalable.
+
+Modern electric vehicles (EVs) favor distributed architectures for their enhanced capability to manage complex battery configurations and maintain system safety.
+
+## Overall BMS Architecture
+
+The following diagram illustrates the overall BMS architecture. Multiple slave units communicate via a CAN Bus with the central master controller, which in turn interfaces with other systems such as the Vehicle Control Unit (VCU).
+
+<PlantUML code={`
+@startuml
+skinparam componentStyle rectangle
+
+package "Battery Management System (BMS)" {
+  
+  node "Slave Unit 1" as Slave1
+  node "Slave Unit 2" as Slave2
+  node "Slave Unit 3" as Slave3
+  node "..." as SlaveDots
+  node "Slave Unit N" as SlaveN
+  
+  node "CAN Bus" as CANBus
+  
+  node "Master Controller" as MasterController
+  
+  Slave1 --> CANBus : Transmit Sensor Data
+  Slave2 --> CANBus : Transmit Sensor Data
+  Slave3 --> CANBus : Transmit Sensor Data
+  SlaveN --> CANBus : Transmit Sensor Data
+  
+  CANBus --> MasterController : Aggregated Data
+  MasterController --> CANBus : Control Commands
+}
+
+node "Vehicle Control Unit (VCU)" as VCU
+MasterController --> VCU : Communicate Battery Status/Commands
+@enduml`} />
+
+## Key Components of the BMS
+
+The BMS architecture comprises two main types of components:
+
+- **Slave Units**: Dedicated PCBs that monitor and manage individual battery modules.
+- **Master Controller**: The central unit that aggregates data, estimates battery state (SOC, SOH, SOP), and executes control actions.
+
+---
+
+## Slave Units
+
+### Responsibilities of Slave Units
+
+1. **Sensor Integration**  
+   - **Temperature Sensors**: Monitor module thermal conditions.
+   - **Current Sensors**: Measure current flow.
+   - **Voltage Sensors**: Track cell or module voltage levels.
+
+2. **Cell Balancing**  
+   - **Passive Balancing**: Uses resistors to discharge higher-voltage cells.
+   - **Active Balancing**: Transfers charge to equalize cell voltages.
+
+3. **Data Collection**  
+   - Aggregates sensor data.
+   - Transmits data to the master controller via the CAN bus.
+
+**Key Features**:  
+- Dedicated management of individual battery modules.  
+- Localized data collection and processing.  
+- Reliable communication through a CAN wiring harness.
+
+### Slave Unit Component Diagram
+
+<PlantUML code={`@startuml
+skinparam componentStyle rectangle
+
+package "Slave Unit" {
+  
+  [Temperature Sensor] as TempSensor
+  [Current Sensor] as CurrentSensor
+  [Voltage Sensor] as VoltageSensor
+  
+  [Passive Balancing] as PassiveBalancing
+  [Active Balancing] as ActiveBalancing
+  
+  [Data Collection Module] as DataCollection
+  
+  [Communication Interface (CAN)] as CommInterface
+  
+  TempSensor --> DataCollection : Provides Temperature Data
+  CurrentSensor --> DataCollection : Provides Current Data
+  VoltageSensor --> DataCollection : Provides Voltage Data
+  
+  DataCollection --> PassiveBalancing : Send Data
+  DataCollection --> ActiveBalancing : Send Data
+  
+  DataCollection --> CommInterface : Transmit Aggregated Data
+}
+@enduml`} />
+
+---
+
+## Master Controller
+
+The master controller aggregates data from all slave units and performs several key functions:
+
+### Responsibilities of the Master Controller
+
+1. **Data Aggregation**:  
+   - Collects sensor data (voltage, current, temperature) from slave units.
+   - Forms a complete overview of the battery pack status.
+
+2. **State Estimation**:  
+   - **State of Charge (SOC)**: Estimates the remaining battery charge.
+   - **State of Health (SOH)**: Assesses battery longevity and condition.
+   - **State of Power (SOP)**: Evaluates the battery's capability to deliver power.
+
+3. **Control Actions**:  
+   - Manages charging/discharging cycles.
+   - Activates safety protocols (e.g., thermal shutdown).
+   - Oversees system-level cell balancing.
+
+4. **Communication**:  
+   - Interfaces with the Vehicle Control Unit (VCU) and other vehicle systems.
+   - Sends battery status updates and receives operational commands.
+
+**Key Features**:  
+- Hosts the core BMS software.  
+- Provides high computational power for real-time processing.  
+- Serves as the main system interface.
+
+### Master Controller Component Diagram
+
+<PlantUML code={`@startuml
+skinparam componentStyle rectangle
+
+package "Master Controller" {
+
+  [Data Aggregation Module] as DataAggregation
+  [State Estimation Module] as StateEstimation
+  [Control Logic Module] as ControlLogic
+  [System Communication Module] as SystemComm
+
+  DataAggregation --> StateEstimation : Provide Aggregated Data
+  StateEstimation --> ControlLogic : Provide SOC/SOH/SOP Estimates
+  ControlLogic --> SystemComm : Send Control/Status Commands
+  
+  note right of DataAggregation
+    Aggregates data from all slave units
+  end note
+  
+  note right of StateEstimation
+    Calculates SOC, SOH, SOP
+  end note
+  
+  note right of ControlLogic
+    Manages charging/discharging and safety protocols
+  end note
+  
+  note right of SystemComm
+    Interfaces with VCU and other vehicle systems
+  end note
+}
+@enduml`} />
+
+---
+
+## Communication Between Slave Units and Master Controller
+
+The BMS employs the **Controller Area Network (CAN) bus** for reliable communication.
+
+### CAN Bus Overview
+
+- **Protocol**: Designed for robust communication between microcontrollers without a host computer.
+- **Advantages**:  
+  - High resistance to electrical noise.  
+  - Efficient, high-speed data transmission.  
+  - Scalable to support additional nodes.
+
+### Communication Components
+
+1. **CAN Wiring Harness**:  
+   - Connects all slave units to the master controller.
+   - Ensures consistent data transmission.
+
+2. **Data Transmission Process**:  
+   - **From Slave Units**: Transmits raw sensor data (voltage, current, temperature).  
+   - **From Master Controller**: Sends back control commands (e.g., adjust charging rates).
+
+*Example CAN Message Structure*:
+
+```c
+// Example CAN message structure for voltage data from a slave unit
+typedef struct {
+    uint32_t timestamp;     // Time of data transmission
+    uint8_t slave_id;       // Identifier for the slave unit
+    float cell_voltage[16]; // Voltage readings for 16 cells in the module
+} CAN_Message_Voltage;
+```
+
+---
+
+## Software Architecture
+
+The BMS software, embedded in the master controller, handles real-time data processing and control functions.
+
+### Core Components of the BMS Software
+
+1. **Data Acquisition**:  
+   - Interfaces with the CAN bus to collect sensor data.
+
+2. **State Estimation Algorithms**:  
+   - **SOC Estimation**: Uses methods such as Coulomb counting or Kalman filtering.
+   - **SOH Estimation**: Assesses battery health based on capacity fade and internal resistance.
+   - **SOP Estimation**: Evaluates the battery’s power delivery capability.
+
+3. **Control Logic**:  
+   - Implements decision-making to manage charging/discharging cycles, safety protocols, and cell balancing.
+
+4. **Communication Protocols**:  
+   - Manages data exchange with vehicle systems (e.g., VCU).
+   - Sends status updates and receives commands.
+
+*Software Implementation Example*:
+
+```c
+// Function to estimate State of Charge (SOC) using Coulomb Counting
+float estimate_SOC(float current, float delta_time, float initial_SOC, float battery_capacity) {
+    // Convert battery capacity (Ah) to coulombs
+    float battery_capacity_coulombs = battery_capacity * 3600.0;
+    // Calculate the change in charge over the time interval
+    float delta_charge = current * delta_time;
+    // Update SOC based on the charge change
+    float new_SOC = initial_SOC - (delta_charge / battery_capacity_coulombs) * 100.0;
+    // Clamp SOC between 0% and 100%
+    if (new_SOC > 100.0) new_SOC = 100.0;
+    if (new_SOC < 0.0) new_SOC = 0.0;
+    return new_SOC;
+}
+```
+
+---
+
+## Practical Implementation in Electric Vehicles
+
+In EVs, the BMS is implemented with careful integration and testing to ensure safety and performance.
+
+### Implementation Steps
+
+1. **Module Integration**:  
+   - Equip each battery module with a dedicated slave unit.
+   - Position slave units to monitor temperature, voltage, and current.
+
+2. **Communication Network Setup**:  
+   - Connect all slave units via a CAN bus.
+   - Design the wiring harness to withstand automotive conditions.
+
+3. **Master Controller Placement**:  
+   - Place the master controller centrally for efficient communication.
+   - Interface with the Vehicle Control Unit (VCU) and infotainment systems.
+
+4. **System Calibration and Testing**:  
+   - Calibrate sensor readings and state estimation algorithms.
+   - Test system responses under various conditions and fault scenarios.
+
+*Example*: In a Tesla vehicle, the battery pack is divided into multiple modules, each managed by a dedicated slave unit. The slave units continuously send sensor data via the CAN bus to the master controller, which processes the data to estimate SOC, SOH, and SOP. The master controller then communicates with the VCU to adjust vehicle performance in real-time.
+

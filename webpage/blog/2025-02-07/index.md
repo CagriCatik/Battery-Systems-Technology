@@ -1,5 +1,5 @@
 ---
-title: Cell Balancing in Battery Management Systems
+title: Cell Balancing
 description: Cell balancing in Battery Management Systems, covering its purpose, mechanisms, and implementation techniques.
 slug: cell-balancing-in-bms
 authors: [catik]

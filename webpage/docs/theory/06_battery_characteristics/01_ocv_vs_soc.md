@@ -1,6 +1,6 @@
 # OCV vs SOC for Chemistries
 
-Batteries are pivotal to modern energy storage, underpinning a vast array of applications from electric vehicles (EVs) and renewable energy systems to consumer electronics. The efficient and reliable operation of these batteries hinges on sophisticated Battery Management Systems (BMS) that meticulously monitor and manage key parameters. Among these, Open Circuit Voltage (OCV) and State of Charge (SOC) are fundamental metrics that inform battery performance, capacity, and longevity. This documentation delves into the intricate relationship between OCV and SOC across various battery chemistries, explores battery aging and degradation mechanisms, and examines the impact of hysteresis on battery management.
+Batteries are pivotal to modern energy storage, underpinning a vast array of applications from electric vehicles. The efficient and reliable operation of these batteries hinges on sophisticated Battery Management Systems that meticulously monitor and manage key parameters. Among these, Open Circuit Voltage (OCV) and State of Charge (SOC) are fundamental metrics that inform battery performance, capacity, and longevity. This documentation delves into the intricate relationship between OCV and SOC across various battery chemistries, explores battery aging and degradation mechanisms, and examines the impact of hysteresis on battery management.
 
 ## Open Circuit Voltage and State of Charge
 
@@ -61,7 +61,6 @@ estimated_soc = estimate_soc(measured_ocv)
 print(f"Estimated SOC: {estimated_soc*100:.1f}%")
 ```
 
-*Note: This example uses a simplified OCV-SOC mapping for illustrative purposes. Actual implementations require more detailed curves and temperature compensation.*
 
 ## Battery Chemistries and Their Characteristics
 
@@ -224,8 +223,6 @@ measured_ocv = 3.7
 estimated_soc = battery_soc.estimate_soc(measured_ocv)
 print(f"Estimated SOC during discharging: {estimated_soc*100:.1f}%")
 ```
-
-*Note: This simplified example demonstrates the concept of handling hysteresis by maintaining separate OCV-SOC curves for charging and discharging phases.*
 
 ## Degradation Mechanisms
 
