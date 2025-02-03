@@ -20,17 +20,17 @@ This section provides the foundational elements of requirements and strategies f
 **Modeling**
 This section covers the modeling techniques used in system development.
 
-1. **equivalent_circuit**:  
+1. **Equivalent Circuit**:  
    - A guide to creating equivalent circuit models for battery systems or other components.  
 
-2. **diffusion_voltage**:  
+2. **Diffusion Voltage**:  
    - Understand and simulate diffusion voltage behavior in models.  
 
-3. **ballparking_parameters**:  
+3. **Ballparking Parameters**:  
    - Learn how to estimate parameters efficiently to build initial models.  
 
-4. **ocv_testing**:  
-   - Explore open-circuit voltage (OCV) testing methodologies and integrate the results into models.
+4. **OCV Testing**:  
+   - Explore open-circuit voltage testing methodologies and integrate the results into models.
 
 ---
 
@@ -63,5 +63,3 @@ This section focuses on using MATLAB/Simulink for testing and modeling systems e
 
 9. **Closed-Loop Testing**:  
    - Simulate closed-loop systems to validate system responses and interactions.
-
-

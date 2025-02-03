@@ -1,8 +1,6 @@
 ---
-slug: welcome
 title: The Future of Mobility
 authors: [catik]
-tags: [BMS, EV]
 ---
 
 The global mobility landscape is undergoing a seismic shift as governments, corporations, and individuals grapple with the urgent need to decarbonize transportation. The battle between Battery Electric Vehicles and Fuel Cell Vehicles has taken center stage in this transition. 

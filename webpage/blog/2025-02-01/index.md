@@ -1,15 +1,11 @@
 ---
 title: Overcharging and Over-discharging EV Batteries
-description: Explore the chemical and physical effects of overcharging and over-discharging batteries in electric vehicles and learn why these conditions are hazardous.
-slug: dangers-of-overcharging-over-discharging-batteries
 authors: [catik]
-tags: [EV, batteries, battery safety, electric vehicles]
-date: 2025-02-03
 ---
 
 Electric vehicles (EVs) rely heavily on lithium-ion batteries to provide efficient and sustainable transportation. However, improper handling of these batteries, particularly **overcharging** and **over-discharging**, can lead to serious safety hazards. In this post, we’ll dive into the **chemical** and **physical effects** that occur when these limits are exceeded and explain why battery management is crucial.
 
----
+<!-- truncate -->
 
 ## 1. Chemical Effects of Overcharging
 

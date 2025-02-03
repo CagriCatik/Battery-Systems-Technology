@@ -1,15 +1,12 @@
 ---
 title: Cell Balancing
-description: Cell balancing in Battery Management Systems, covering its purpose, mechanisms, and implementation techniques.
-slug: cell-balancing-in-bms
 authors: [catik]
-tags: [BMS, battery-safety, energy-storage, EV]
-date: 2025-02-03
 ---
 
-Battery packs in electric vehicles (EVs), renewable energy systems, and other high-power applications require **cell balancing** to ensure safety, performance, and longevity. Variations in cell capacity, state of charge (SoC), and internal resistance can lead to imbalances, which—if not corrected—can result in overcharging, over-discharging, and reduced battery capacity. In this post, we explore cell balancing, its working principles, and the techniques used in **Battery Management Systems (BMS)**.
 
----
+Battery packs in electric vehicles require **cell balancing** to ensure safety, performance, and longevity. Variations in cell capacity, state of charge (SoC), and internal resistance can lead to imbalances, which—if not corrected—can result in overcharging, over-discharging, and reduced battery capacity. In this post, we explore cell balancing, its working principles, and the techniques used in **Battery Management Systems**.
+
+<!-- truncate -->
 
 ## **The Importance of Cell Balancing**
 

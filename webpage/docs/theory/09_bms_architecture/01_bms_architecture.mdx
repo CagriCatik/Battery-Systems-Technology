@@ -6,9 +6,11 @@ title: "Architecture"
 import plantumlEncoder from 'plantuml-encoder';
 import PlantUML from '@site/src/components/PlantUML';
 
-# BMS Architecture Documentation
+# Architecture
 
-The Battery Management System (BMS) serves as the brain of the battery pack, orchestrating operations to ensure optimal performance and safety. Unlike traditional ECUs that rely on a single hardware board, the BMS employs a **distributed architecture**—dividing responsibilities between multiple **slave units** and a central **master controller**. This distributed approach enables precise monitoring and control over individual battery modules and cells.
+The Battery Management System (BMS) serves as the brain of the battery pack, orchestrating operations to ensure optimal performance and safety. 
+Unlike traditional ECUs that rely on a single hardware board, the BMS employs a **distributed architecture**—dividing responsibilities between multiple **slave units** and a central **master controller**. 
+This distributed approach enables precise monitoring and control over individual battery modules and cells.
 
 ## Distributed vs. Centralized Architecture
 
@@ -20,6 +22,8 @@ Modern electric vehicles (EVs) favor distributed architectures for their enhance
 ## Overall BMS Architecture
 
 The following diagram illustrates the overall BMS architecture. Multiple slave units communicate via a CAN Bus with the central master controller, which in turn interfaces with other systems such as the Vehicle Control Unit (VCU).
+
+
 
 <PlantUML code={`
 @startuml

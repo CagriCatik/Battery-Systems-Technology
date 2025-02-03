@@ -1,3 +1,12 @@
+---
+id: bms-introduction
+title: "Introduction"
+---
+
+import plantumlEncoder from 'plantuml-encoder';
+import PlantUML from '@site/src/components/PlantUML';
+
+
 # Introduction
 
 A **Battery Management System (BMS)** is a critical component in the operation of battery packs, particularly those utilizing lithium-ion technology. Serving as the central control unit, a BMS ensures the safe, efficient, and reliable performance of battery systems by overseeing various operational parameters. Its primary functions encompass monitoring, protection, optimization, and communication, all aimed at maximizing battery longevity and performance while safeguarding against potential hazards.
@@ -27,6 +36,55 @@ A BMS performs several essential functions to manage and maintain battery health
   - **Charge and Discharge Currents:** Tracks the flow of current into and out of the battery to manage energy usage.
   
   *Example:* Accurate current measurement is vital for implementing charge protocols that prevent overcurrent conditions, which can lead to thermal runaway.
+
+<PlantUML code={`
+@startuml BMS_Component_Diagram
+skinparam componentStyle rectangle
+
+component "Monitoring" as MON {
+  [Voltage Sensors]
+  [Temperature Sensors]
+  [Current Sensors]
+}
+component "State Estimation" as SE {
+  [SoC Module]
+  [SoH Module]
+  [SoP Module]
+  [SoE Module]
+}
+component "Protection" as PROT {
+  [Over-Charge/Over-Discharge]
+  [Over-Current Protection]
+  [Thermal Management]
+}
+component "Balancing" as BAL {
+  [Passive Balancing]
+  [Active Balancing]
+}
+component "Communication" as COMM {
+  [CAN Bus]
+  [SMBus / I²C / UART]
+  [Wireless Interfaces]
+}
+component "Advanced Features" as ADV {
+  [Machine Learning]
+  [Predictive Maintenance]
+  [Energy Optimization]
+}
+
+MON --> SE : Provides sensor data
+SE --> PROT : Informs protection decisions
+PROT --> BAL : May trigger cell balancing
+MON --> COMM : Transmits raw data
+SE --> COMM : Sends state info
+PROT --> COMM : Sends alerts/diagnostics
+ADV --> SE : Improves estimation (ML)
+ADV --> PROT : Predicts faults
+ADV --> COMM : Enables remote monitoring
+
+@enduml`} />
+
+
 
 ### 2. State Estimation
 
@@ -70,6 +128,25 @@ A BMS performs several essential functions to manage and maintain battery health
   - Ensures the battery operates within safe temperature ranges through cooling or heating systems.
   
   *Strategy:* Implements active cooling (e.g., liquid cooling) or passive cooling (e.g., heat sinks) based on temperature readings.
+
+
+<PlantUML code={`
+@startuml Battery_State_Machine
+[*] --> Idle
+
+Idle --> Charging : Start Charging
+Charging --> Idle : Charge Complete
+Idle --> Discharging : Begin Discharge
+Discharging --> Idle : Discharge Complete
+
+Idle --> Fault : Error Detected
+Charging --> Fault : Overvoltage/Overcurrent
+Discharging --> Fault : Undervoltage/Overcurrent
+
+Fault --> Idle : Reset/Recovery
+@enduml`} />
+
+
 
 ### 4. Balancing
 

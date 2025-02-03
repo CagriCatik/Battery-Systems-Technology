@@ -1,15 +1,77 @@
 ---
 id: bms-design
-title: "BMS Design"
+title: "Design of BMS"
 ---
 
 import plantumlEncoder from 'plantuml-encoder';
 import PlantUML from '@site/src/components/PlantUML';
 
 
-# BMS Design
+# Desing of BMS
 
 The design of a Battery Management System (BMS) is a multifaceted process that integrates hardware, software, and control algorithms to ensure the safe, efficient, and reliable operation of battery systems. Effective BMS design is crucial for optimizing battery performance, extending lifespan, and ensuring safety in applications such as electric vehicles (EVs), renewable energy storage, and portable electronics. This chapter provides an in-depth exploration of the BMS design process, focusing on input/output architecture, control logic, and the implementation of key functionalities such as State of Charge (SoC) and State of Health (SoH) estimation.
+
+
+<PlantUML code={`
+@startuml
+skinparam componentStyle rectangle
+
+' Main Modules
+component "Battery Pack" as BatteryPack
+component "Cell Monitoring Module" as CellMon
+component "Balancing Module" as Balancer
+component "Control Module" as Control
+component "Communication Module" as Communication
+component "Power Distribution Module" as PowerDistribution
+
+' Battery Pack provides inputs to the modules
+BatteryPack --> CellMon : Provides voltage/current
+BatteryPack --> Balancer : Supplies power for balancing
+
+' Grouping Cell Monitoring Sensors
+package "Cell Monitoring Sensors" {
+    [Voltage Sensor] as VoltageSensor
+    [Temperature Sensor] as TemperatureSensor
+    [Current Sensor] as CurrentSensor
+}
+CellMon --> VoltageSensor
+CellMon --> TemperatureSensor
+CellMon --> CurrentSensor
+
+' Grouping Balancing Methods
+package "Balancing Methods" {
+    [Passive Balancer] as PassiveBalancer
+    [Active Balancer] as ActiveBalancer
+}
+Balancer --> PassiveBalancer
+Balancer --> ActiveBalancer
+
+' Grouping Control Processing Elements
+package "Control Processing" {
+    [Algorithm Processor] as AlgorithmProcessor
+    [Safety & Diagnostics] as SafetyDiagnostics
+}
+Control --> AlgorithmProcessor
+Control --> SafetyDiagnostics
+
+' Grouping Communication Interfaces
+package "Communication Interfaces" {
+    [CAN Bus] as CANBus
+}
+Communication --> CANBus
+
+' Data Flow Between Modules
+CellMon --> Control : Sends sensor data
+Balancer --> Control : Provides balancing status
+Control --> Balancer : Issues balancing commands
+Control --> PowerDistribution : Triggers power control signals
+Control --> Communication : Transmits status & logs
+PowerDistribution --> Control : Feedback voltage/current
+SafetyDiagnostics --> CellMon : Diagnostic requests
+
+@enduml`} />
+
+
 
 ---
 
@@ -419,55 +481,4 @@ Designing an effective BMS involves addressing several challenges that impact ac
 
 - **Data Integrity**: Ensuring the integrity and reliability of data transmitted between slave units and the master controller is vital for accurate monitoring and control.
 - **Interference and Noise**: Mitigating the effects of electrical noise and interference, especially in automotive environments, is necessary to maintain reliable communication.
-
-<PlantUML code={`
-@startuml
-skinparam componentStyle rectangle
-
-component "Battery Pack" as A
-component "Cell Monitoring Module" as B
-component "Balancing Module" as C
-component "Control Module" as D
-component "Communication Module" as E
-component "Power Distribution Module" as F
-
-A --> B : Provides voltage/current
-A --> C : Supplies power for balancing
-
-node "Cell Monitoring Sensors" {
-    component "Voltage Sensor" as B1
-    component "Temperature Sensor" as B2
-    component "Current Sensor" as B3
-}
-B --> B1
-B --> B2
-B --> B3
-
-node "Balancing Methods" {
-    component "Passive Balancer" as C1
-    component "Active Balancer" as C2
-}
-C --> C1
-C --> C2
-
-node "Control Processing" {
-    component "Algorithm Processor" as D1
-    component "Safety & Diagnostics" as D2
-}
-D --> D1
-D --> D2
-
-node "Communication Interfaces" {
-    component "CAN Bus" as E1
-}
-E --> E1
-
-B --> D : Sends sensor data
-C --> D : Provides balancing status
-D --> C : Issues balancing commands
-D --> F : Triggers power control signals
-D --> E : Transmits status & logs
-F --> D : Feedback voltage/current
-D2 --> B : Diagnostic requests
-@enduml`} />
 

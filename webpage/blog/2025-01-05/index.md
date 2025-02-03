@@ -1,8 +1,6 @@
 ---
-slug: electric-vs-conventional-vehicle-analogy
 title: Drawing Parallels Between BMS and ICE
 authors: [catik]
-tags: [BMS, EV, ICE]
 ---
 
 # Electric Vehicles vs. Conventional Vehicles: Drawing Parallels Between BMS and ICE Control Units
