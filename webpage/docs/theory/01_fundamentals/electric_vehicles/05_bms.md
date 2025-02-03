@@ -2,21 +2,13 @@
 
 Battery Management Systems (BMS) are the unsung heroes of electric and hybrid vehicles, ensuring that batteries operate safely, efficiently, and reliably. As electric mobility gains momentum, the role of BMS becomes increasingly critical in optimizing battery performance, extending lifespan, and safeguarding against potential hazards. This comprehensive documentation provides an in-depth exploration of Battery Management Systems in the automotive sector, covering their fundamentals, functions, components, requirements, challenges, technological advancements, and future prospects.
 
-## Introduction
-
-Electromobility has experienced tremendous growth in recent years, becoming a central component of the modern automotive industry. Vehicles such as the **Tesla Model S**, the **Nissan Leaf**, and the **BMW i3** demonstrate that electric vehicles (EVs) can be not only environmentally friendly but also powerful and practical for everyday use. At the core of these vehicles lies the battery as an energy storage system, whose efficient utilization and safety are crucial for the success of electromobility. A **Battery Management System (BMS)** is indispensable in this context, as it handles the monitoring, control, and protection of the battery.
-
-This documentation is aimed at professionals, engineers, and enthusiasts seeking an in-depth understanding of the functionality, requirements, and challenges of Battery Management Systems in the automotive sector. It covers all relevant aspects, from the fundamentals of battery technology to current challenges and future developments.
-
----
-
 ## Fundamentals of Battery Management
 
 ### Definition
 
 A **Battery Management System (BMS)** is an electronic control unit used in electric and hybrid vehicles to optimize the performance, safety, and lifespan of the battery. It continuously monitors the state of the battery, controls charging and discharging processes, protects against potential hazards, and communicates with other systems within the vehicle.
 
-#### Objectives of a BMS
+### Objectives of a BMS
 
 The primary objectives of a BMS include:
 

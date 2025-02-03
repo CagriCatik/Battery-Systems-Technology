@@ -51,7 +51,7 @@ Cell balancing is categorized into two primary methods: **passive** and **active
 
 ---
 
-### **1. Passive Balancing**
+### **Passive Balancing**
 
 In passive balancing, excess energy from higher-voltage cells is dissipated as heat through resistors. This technique is simple but energy-inefficient.
 
@@ -69,7 +69,7 @@ In passive balancing, excess energy from higher-voltage cells is dissipated as h
 
 ---
 
-### **2. Active Balancing**
+### **Active Balancing**
 
 Active balancing redistributes excess energy from high-voltage cells to low-voltage cells. This method is more efficient but requires complex circuitry.
 

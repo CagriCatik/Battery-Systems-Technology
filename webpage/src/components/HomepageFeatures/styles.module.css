@@ -1,24 +1,40 @@
+:root {
+  --box-padding: 1rem;
+  --box-margin: 0.5rem;
+  --max-box-width: 400px;
+}
+
 .features {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Two equal-width columns */
-  gap: 1rem; /* Decrease the row and column spacing */
+  gap: 1rem; /* Row and column spacing */
   justify-content: center; /* Center the grid horizontally */
-  padding: 1rem 1rem; /* Add padding around the grid */
+  padding: 1rem; /* Padding around the grid */
+  margin: 0 auto;
+  max-width: 1200px; /* Center and limit max width */
 }
 
 .featureBox {
   background: #ffffff; /* Clean white background */
-  border: 1px solid #e0e0e0; /* Subtle border for separation */
-  border-radius: 10px; /* Slightly smaller rounded corners */
-  padding: 1.5rem; /* Decrease padding inside the box */
-  margin: 0.5rem; /* Reduce margins around each box */
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* Slightly reduced shadow for depth */
+  border: 4px solid #e0e0e0; /* Subtle border for separation */
+  border-radius: 5px; /* Rounded corners */
+  padding: var(--box-padding); /* Adjustable padding */
+  margin: var(--box-margin); /* Adjustable margin */
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  
+  width: 100%;       /* Fills grid column */
+  max-width: var(--max-box-width); /* Prevents boxes from becoming too wide */
+  height: auto;      /* Dynamic height based on content */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Ensures spacing inside the box */
 }
 
 .featureBox:hover {
   transform: translateY(-3px); /* Subtle lift effect on hover */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Slightly reduced shadow on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Hover shadow */
 }
 
 .featureContent {
@@ -34,29 +50,37 @@
 
 .featureDescription {
   font-size: 0.9rem; /* Smaller description font size */
-  line-height: 1.6; /* Adjust line height for tighter spacing */
+  line-height: 1.6; /* Adjust line height */
   color: #666666; /* Subtle color for description */
 }
 
-@media (max-width: 768px) {
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1024px) {
   .features {
-    grid-template-columns: 1fr; /* Single column for smaller screens */
-    gap: 1.5rem; /* Adjust spacing for smaller screens */
-    padding: 1rem; /* Restore padding for smaller screens for readability */
+    grid-template-columns: repeat(1, 1fr); /* One column for tablets */
+    gap: 1.5rem; /* Increased spacing for smaller screens */
+    padding: 1rem; /* Padding for readability */
   }
 
   .featureBox {
-    padding: 1rem; /* Reduced padding for mobile view */
-    border-radius: 8px; /* Slightly smaller rounded corners for mobile */
+    padding: 0.8rem; /* Reduced padding */
+    border-radius: 8px; /* Rounded corners for mobile */
   }
 
   .featureTitle {
-    font-size: 0.9rem; /* Smaller title font for mobile */
-    margin-bottom: 0.5rem; /* Compact spacing for mobile */
+    font-size: 0.9rem; /* Smaller title font */
+    margin-bottom: 0.5rem; /* Compact spacing */
   }
 
   .featureDescription {
-    font-size: 0.9rem; /* Smaller font for description on mobile */
-    line-height: 1.4; /* Compact line-height for mobile */
+    font-size: 0.9rem; /* Smaller font for mobile */
+    line-height: 1.4; /* Compact line-height */
+  }
+}
+
+/* Responsive for larger screens */
+@media (min-width: 1200px) {
+  .features {
+    grid-template-columns: repeat(3, 1fr); /* Three columns on larger screens */
   }
 }
