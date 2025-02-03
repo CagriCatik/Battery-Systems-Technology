@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkBMS=self.webpackChunkBMS||[]).push([[9866],{6580:e=>{e.exports=JSON.parse('{"metadata":{"permalink":"/Battery-Systems-Technology/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
