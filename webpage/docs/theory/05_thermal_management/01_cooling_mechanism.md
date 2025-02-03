@@ -1,6 +1,8 @@
-# Cooling Mechanisms for EV Batteries
+# Cooling Mechanisms
 
-Thermal management in electric vehicle (EV) batteries is paramount due to the substantial heat generated during charging and discharging cycles. Effective cooling ensures safety, optimizes performance, and extends the lifespan of the battery packs. This document categorizes and elucidates various cooling mechanisms employed in lithium-ion battery systems, detailing their advantages, limitations, and suitable application scenarios.
+Thermal management in electric vehicle (EV) battery systems is a critical factor influencing both operational efficiency and safety. During charging and discharging cycles, lithium-ion batteries generate significant amounts of heat due to internal resistance and electrochemical processes. If not effectively managed, excessive thermal accumulation can lead to performance degradation, accelerated aging, and even thermal runaway, posing safety hazards.
+
+This document provides a systematic classification and in-depth analysis of the cooling strategies implemented in EV battery packs. It explores passive and active cooling methods, including air, liquid, and phase-change material (PCM)-based systems. Each mechanism is examined in terms of thermal conductivity, heat dissipation efficiency, design complexity, and scalability. Additionally, the advantages and drawbacks of each approach are discussed, highlighting their impact on energy density, system integration, and cost considerations. Application scenarios are also presented to guide the selection of appropriate thermal management solutions for various vehicle architectures and operating conditions.
 
 ## Cooling Mechanisms for EV Batteries
 

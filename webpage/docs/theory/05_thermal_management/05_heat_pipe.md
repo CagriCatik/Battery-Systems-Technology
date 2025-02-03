@@ -37,10 +37,6 @@ In Battery Management Systems, heat pipes are strategically placed to transfer h
 - **Orientation:** Heat pipes can be oriented vertically, horizontally, or at angles, depending on the battery pack design and cooling requirements.
 - **Thermal Interface Materials (TIM):** To enhance thermal conductivity between heat pipes and battery cells, TIMs are used to fill microscopic air gaps, ensuring efficient heat transfer.
 
-### Example: Tesla Model S
-
-The Tesla Model S employs heat pipes as part of its comprehensive thermal management strategy. Integrated between battery cells and cooling plates, the heat pipes efficiently transfer heat to the liquid cooling system, maintaining uniform temperatures and preventing hotspots. This integration has contributed to the Model S's high performance and extended battery life.
-
 ## Use in Conjunction with Air or Liquid Cooling Systems
 
 ### Hybrid Cooling Systems
@@ -128,19 +124,6 @@ High-power electric buses utilize heat pipes to manage the substantial heat gene
 - **Modular Design:** Designing heat pipes in modular units allows for easier integration and scalability across different battery pack sizes.
 - **Thermal Interface Engineering:** Optimizing the thermal interface between heat pipes and battery cells using advanced TIMs enhances heat transfer efficiency.
 
-## Case Studies
-
-### 1. Tesla Model S
-
-Tesla's Model S employs heat pipes as part of its battery thermal management strategy. Integrated between battery cells and cooling plates, the heat pipes efficiently transfer heat to the liquid cooling system, maintaining uniform temperatures and preventing hotspots. This integration has contributed to the Model S's high performance and extended battery life.
-
-### 2. 3M Direct Liquid Cooling System
-
-3M has developed a direct liquid cooling system for electric vehicles that incorporates heat pipes to enhance thermal transfer. By embedding heat pipes within the battery pack, 3M achieves rapid and uniform heat dissipation, supporting high-power applications and improving overall battery safety and efficiency.
-
-### 3. High-Power Electric Buses
-
-Electric buses utilizing heat pipe technology have demonstrated improved thermal management under heavy load conditions. The integration of heat pipes with liquid cooling systems ensures consistent temperature distribution, enhancing battery performance and reducing maintenance needs.
 
 ## Comparison of Heat Pipe Technology with Other Thermal Management Strategies
 

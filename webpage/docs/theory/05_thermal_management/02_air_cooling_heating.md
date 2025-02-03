@@ -48,7 +48,7 @@ Air cooling and heating systems can be broadly classified into three main types:
 
 Each type offers distinct advantages and is suited to different operational scenarios.
 
-### 1. Passive Air Cooling and Heating
+### Passive Air Cooling and Heating
 
 #### Principle:
 Passive air cooling and heating rely solely on the movement of air—either ambient or cabin air—for heat exchange, without any additional conditioning of the airflow.
@@ -77,7 +77,7 @@ Passive air cooling and heating rely solely on the movement of air—either ambi
 - **Environmental Dependency:** Performance is significantly influenced by external ambient temperatures, rendering it less effective in extreme climates.
 - **Inefficiency in High Demand Scenarios:** Not suitable for applications requiring rapid or substantial temperature adjustments.
 
-### 2. Active Air Cooling and Heating
+### Active Air Cooling and Heating
 
 #### Principle:
 Active air cooling and heating enhance thermal management by conditioning the airflow before it interacts with the battery pack, typically through air conditioning or heating units.
@@ -109,7 +109,7 @@ Active air cooling and heating enhance thermal management by conditioning the ai
 - **Higher Energy Consumption:** Conditioning the air requires more energy, impacting overall vehicle efficiency.
 - **Greater System Complexity:** More components increase the potential points of failure and complicate system maintenance.
 
-### 3. Forced Air Systems with Heat Recovery
+### Forced Air Systems with Heat Recovery
 
 #### Principle:
 Forced air systems with heat recovery aim to improve overall energy efficiency by reclaiming heat from exhaust air and using it to pre-condition incoming air, thereby reducing the energy required for air conditioning.
@@ -141,7 +141,7 @@ Forced air systems with heat recovery aim to improve overall energy efficiency b
 
 ---
 
-## Comparison of Air-Based BTMS Systems
+## Air-Based BTMS Systems
 
 The following table provides a comparative analysis of the three primary air-based BTMS configurations: Passive Air Cooling and Heating, Active Air Cooling and Heating, and Forced Air Systems with Heat Recovery.
 
@@ -213,38 +213,6 @@ While air-based BTMS solutions offer notable advantages in terms of simplicity a
    - **Mitigation:** Designing advanced airflow management systems and integrating supplemental cooling strategies can enhance heat dissipation.
 
 Addressing these limitations often involves balancing cost, complexity, and performance requirements to achieve an optimal BTMS configuration tailored to specific application needs.
-
----
-
-## Applications of Air-Based BTMS Systems
-
-Air-based thermal management systems find application across a diverse range of battery-powered systems, each with unique requirements and constraints. Key applications include:
-
-- **Electric Vehicles (EVs):**
-  - **Usage:** Ensures consistent battery temperatures to optimize performance, extend battery life, and enhance safety.
-  - **Example:** Compact and budget-friendly EV models often employ passive or active air cooling systems to manage thermal loads effectively.
-
-- **Renewable Energy Storage:**
-  - **Usage:** Manages battery temperatures in solar and wind energy storage systems, balancing energy capture and storage efficiency.
-  - **Example:** Air-cooled systems in stationary energy storage units maintain optimal battery conditions, ensuring reliable energy supply.
-
-- **Consumer Electronics:**
-  - **Usage:** Maintains battery temperatures in devices like laptops, smartphones, and tablets, preventing overheating and extending battery lifespan.
-  - **Example:** Passive air cooling techniques are integrated into high-performance laptops to dissipate heat from internal battery compartments.
-
-- **Uninterruptible Power Supplies (UPS):**
-  - **Usage:** Monitors and regulates battery temperatures to ensure reliable backup power during outages.
-  - **Example:** Active air cooling systems in UPS units maintain battery temperatures within safe limits, guaranteeing uninterrupted power supply.
-
-- **Medical Devices:**
-  - **Usage:** Ensures the reliability and safety of battery-powered medical equipment, where consistent performance is critical.
-  - **Example:** Air-cooled systems in portable medical devices prevent overheating, safeguarding both the device and patient safety.
-
-- **Aerospace and Defense:**
-  - **Usage:** Manages power systems in satellites, drones, and military equipment, ensuring optimal battery performance under varying conditions.
-  - **Example:** Heat recovery air cooling systems in drones enhance energy efficiency and prolong operational endurance.
-
-Air-based BTMS solutions are adaptable to various operational contexts, offering scalable and cost-effective thermal management options across multiple industries.
 
 ---
 

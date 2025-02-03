@@ -1,10 +1,10 @@
 # Liquid Cooling Systems
 
-Effective thermal management is crucial for maintaining the performance, safety, and longevity of Battery Management Systems (**BMS**) in electric vehicles (EVs) and other applications. Liquid cooling systems have emerged as a superior solution due to their high thermal conductivity and efficiency in heat dissipation. This documentation provides an in-depth overview of liquid cooling systems, focusing on indirect and direct liquid cooling methods, and compares their impact on thermal efficiency.
+Effective thermal management is crucial for maintaining the performance, safety, and longevity of Battery Management Systems in electric vehicles and other applications. Liquid cooling systems have emerged as a superior solution due to their high thermal conductivity and efficiency in heat dissipation. This documentation provides an in-depth overview of liquid cooling systems, focusing on indirect and direct liquid cooling methods, and compares their impact on thermal efficiency.
 
 ## Introduction
 
-As electric vehicles (EVs) and energy storage systems become increasingly prevalent, the demand for efficient Battery Thermal Management Systems (**BTMS**) has surged. Proper thermal management ensures that battery cells operate within optimal temperature ranges, enhancing performance, extending lifespan, and ensuring safety. Among the various BTMS methodologies, liquid cooling systems are recognized for their superior thermal management capabilities compared to air-based systems.
+As electric vehicles and energy storage systems become increasingly prevalent, the demand for efficient Battery Thermal Management Systems (**BTMS**) has surged. Proper thermal management ensures that battery cells operate within optimal temperature ranges, enhancing performance, extending lifespan, and ensuring safety. Among the various BTMS methodologies, liquid cooling systems are recognized for their superior thermal management capabilities compared to air-based systems.
 
 Liquid cooling involves circulating a coolant to absorb heat from battery cells, thereby maintaining optimal operating temperatures. The choice of coolant—typically water-glycol mixtures for indirect cooling and dielectric fluids for direct cooling—significantly influences the system's effectiveness. Key properties to consider include viscosity, density, thermal conductivity, and flow rate. This document delves into the two primary liquid cooling methods: indirect and direct liquid cooling, highlighting their mechanisms, advantages, limitations, and application scenarios.
 
@@ -17,7 +17,7 @@ Liquid cooling systems utilize a circulating coolant to absorb and remove heat f
 
 Each method employs distinct mechanisms and is suited to different application requirements.
 
-### 1. Indirect Liquid Cooling
+### Indirect Liquid Cooling
 
 #### Description
 
@@ -61,7 +61,7 @@ Indirect liquid cooling involves the flow of coolant through channels or plates 
 
 - **Tesla Model S:** Utilizes an indirect liquid cooling system with a water-ethylene glycol mixture. The system efficiently manages thermal loads, ensuring optimal battery performance and longevity.
 
-### 2. Direct Liquid Cooling
+### Direct Liquid Cooling
 
 #### Description
 
