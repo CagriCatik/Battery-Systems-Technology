@@ -6,12 +6,12 @@ This repository provides comprehensive resources, scripts, and documentation for
 
 The repository explores the following core aspects of battery systems:
 
-- [ ] **Fundamentals of Battery Technology**  
+- [x] **Fundamentals of Battery Technology**  
    Learn the basics of battery chemistry, structure, and functionality to understand their role in modern energy systems.
 
-- [ ] **Aging and Degradation**  
+- [x] **Aging and Degradation**  
    Explore the factors affecting battery aging and degradation and strategies to mitigate performance losses.
-- [ ] **Chemistry and Design Principles**  
+- [x] **Chemistry and Design Principles**  
    Understand various battery chemistries and principles of designing efficient battery systems.
 
 - [ ] **Battery Pack Engineering**  
