@@ -18,6 +18,13 @@ jobs:
         with:
           node-version: '18'
 
+      - name: Delete old GitHub Pages deployments
+        uses: strumwolf/delete-deployment-environment@v2
+        with:
+          token: ${{ secrets.Docusaurus_TOKEN }}
+          environment: github-pages
+          onlyRemoveDeployments: true
+
       - name: List repository files
         run: ls -R
 
