@@ -5,7 +5,7 @@ This section provides the foundational elements of requirements and strategies f
 
 1. **Requirements**:  
    - Define and document the fundamental needs of the system under development.  
-   
+
 2. **Test Concept**:  
    - Learn the high-level approach to testing, including methodologies and workflows to ensure system quality.  
 

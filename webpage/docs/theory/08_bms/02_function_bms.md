@@ -58,6 +58,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 - **Impact:** Informs users and systems about the current charge level, aiding in energy management and usage planning.
 
 *Calculation Methods:*
+
 - **Coulomb Counting:** Integrates the current over time to estimate SoC.
 - **Voltage-Based Algorithms:** Uses open-circuit voltage correlations to determine SoC.
 
@@ -69,6 +70,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 - **Impact:** Predicts the battery's lifespan and performance degradation, enabling proactive maintenance and replacement.
 
 *Indicators:*
+
 - **Capacity Fade:** Reduction in the total charge the battery can hold.
 - **Internal Resistance Increase:** Higher resistance leads to reduced efficiency and increased heat generation.
 
@@ -80,6 +82,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 - **Impact:** Maximizes overall pack efficiency, prevents individual cell degradation, and extends the battery's usable life.
 
 *Balancing Techniques:*
+
 - **Passive Balancing:** Dissipates excess energy from higher-charged cells as heat.
 - **Active Balancing:** Redistributes energy between cells to equalize charge levels.
 
@@ -95,6 +98,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 - **Impact:** Enables scheduling of maintenance and replacement before critical degradation occurs, minimizing downtime and operational costs.
 
 *Techniques:*
+
 - **Usage Pattern Analysis:** Examines charge/discharge cycles, depth of discharge, and operating conditions.
 - **Predictive Modeling:** Utilizes statistical and machine learning models to estimate remaining life.
 
@@ -106,6 +110,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 - **Impact:** Educates users on optimal charging practices, usage habits, and maintenance actions to prolong battery life.
 
 *Recommendations:*
+
 - **Optimal Charging Rates:** Advises on charging speeds to reduce stress on the battery.
 - **Depth of Discharge Management:** Suggests limiting the extent of discharge to preserve capacity.
 
@@ -121,6 +126,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 - **Impact:** Detects potential issues as they arise, facilitating immediate corrective actions to maintain system stability.
 
 *Parameters Monitored:*
+
 - **Electrical Metrics:** Voltage levels, current flows, and power output.
 - **Thermal Metrics:** Temperature readings across the battery pack.
 
@@ -132,6 +138,7 @@ A BMS performs several essential functions that can be broadly categorized into 
 - **Impact:** Enables proactive interventions, reducing the likelihood of unexpected failures and enhancing overall system reliability.
 
 *Techniques:*
+
 - **Data Trend Analysis:** Identifies patterns that precede faults or performance degradation.
 - **Machine Learning Models:** Learns from historical data to predict future anomalies.
 

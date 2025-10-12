@@ -1,10 +1,10 @@
-Certainly! Below is a comprehensive and detailed implementation of the **State of Charge (SoC) Estimation System** for a Battery Management System (BMS) in Rust. The project is organized into separate modules/files to enhance readability, maintainability, and scalability. Each section includes explanations and comments to help you understand the code easily.
+# SoC Estimation
 
 ## **Folder Structure**
 
 Here's the proposed folder structure for the project:
 
-```
+```sh
 soc_estimation/
 ├── Cargo.toml
 └── src
@@ -789,7 +789,7 @@ fn simulate_temperature(battery: &Battery) -> f64 {
 
 ## **Complete Folder Structure with Files**
 
-```
+```sh
 soc_estimation/
 ├── Cargo.toml
 └── src
@@ -874,7 +874,7 @@ cargo build
 
 **Expected Output:**
 
-```
+```sh
 Compiling soc_estimation v0.1.0 (/path/to/soc_estimation)
 Finished dev [unoptimized + debuginfo] target(s) in X.XXs
 ```
@@ -889,7 +889,7 @@ cargo run
 
 **Expected Output:**
 
-```
+```sh
 Cycle 1: Voltage: 4.20V, Current: -5.00A, Temperature: 25.30°C, SoC: 95.00%
 Cycle 2: Voltage: 4.15V, Current: -5.00A, Temperature: 25.25°C, SoC: 90.00%
 Cycle 3: Voltage: 4.10V, Current: -5.00A, Temperature: 25.10°C, SoC: 85.00%
@@ -996,7 +996,7 @@ cargo test
 
 **Expected Output:**
 
-```
+```sh
 running 5 tests
 test models::soc_calculator::tests::test_initial_soc ... ok
 test models::soc_calculator::tests::test_update_soc_discharge ... ok
@@ -1088,7 +1088,3 @@ The modular structure facilitates easy extension and integration of additional f
 ## **Conclusion**
 
 This comprehensive Rust-based **State of Charge (SoC) Estimation System** serves as a foundational framework for developing more advanced Battery Management Systems. The modular design, detailed comments, and unit tests enhance its readability, maintainability, and reliability. By following the provided folder structure and code implementations, you can further extend and adapt this project to suit specific requirements and integrate additional functionalities as needed.
-
-Feel free to experiment with the simulation parameters, enhance the algorithms, and integrate real sensor data to transform this simulation into a practical SoC estimation tool for real-world applications!
-
----

@@ -15,10 +15,12 @@ The **State of Charge (SoC)** represents the remaining capacity of a battery as 
 The Coulomb Counting method involves integrating the current over time to estimate the charge transferred in and out of the battery. It is a straightforward approach but is susceptible to cumulative errors due to sensor inaccuracies and requires periodic calibration to maintain accuracy.
 
 **Advantages:**
+
 - Simple to implement.
 - Provides real-time SoC updates.
 
 **Limitations:**
+
 - Accumulates errors over time without calibration.
 - Sensitive to current measurement inaccuracies.
 
@@ -62,10 +64,12 @@ if __name__ == "__main__":
 The OCV method estimates SoC based on the battery's open-circuit voltage, which correlates with its charge level. This method requires the battery to be at rest (no load or charge) to obtain accurate voltage measurements, limiting its applicability during active operation.
 
 **Advantages:**
+
 - Provides absolute SoC estimates without cumulative errors.
 - Simple relationship between voltage and SoC for certain battery chemistries.
 
 **Limitations:**
+
 - Requires the battery to rest, making it unsuitable for dynamic conditions.
 - Voltage-SOC relationship can be non-linear and temperature-dependent.
 
@@ -114,11 +118,13 @@ if __name__ == "__main__":
 Kalman Filters provide a robust approach to SoC estimation by combining measurements from various sensors and accounting for system noise. They offer improved accuracy over time by dynamically adjusting estimates based on incoming data, making them suitable for applications requiring high precision.
 
 **Advantages:**
+
 - Reduces the impact of measurement noise and errors.
 - Continuously refines SoC estimates based on new data.
 - Can incorporate multiple sensor inputs.
 
 **Limitations:**
+
 - More complex to implement compared to Coulomb Counting or OCV methods.
 - Requires accurate modeling of the battery system and noise characteristics.
 
@@ -198,10 +204,12 @@ The **State of Health (SoH)** indicates the overall condition of a battery relat
 Capacity Fade Analysis tracks the reduction in battery capacity over time to estimate SoH. By comparing the current capacity to the nominal capacity, the degree of degradation can be assessed.
 
 **Advantages:**
+
 - Direct measure of battery degradation.
 - Simple to implement with periodic capacity testing.
 
 **Limitations:**
+
 - Requires controlled discharge tests, which can be time-consuming.
 - Not suitable for real-time SoH estimation during regular operation.
 
@@ -239,10 +247,12 @@ if __name__ == "__main__":
 An increase in internal resistance is indicative of battery aging. By measuring the internal resistance and comparing it to the initial value, SoH can be inferred.
 
 **Advantages:**
+
 - Can be implemented during regular operation without requiring full discharge.
 - Provides insights into battery degradation mechanisms.
 
 **Limitations:**
+
 - Requires accurate internal resistance measurement techniques.
 - Temperature and other factors can influence resistance measurements, necessitating compensation.
 
@@ -286,10 +296,12 @@ The **State of Power (SoP)** refers to the maximum power output a battery can de
 Model-Based Estimation utilizes battery models, such as equivalent circuit models, to predict the maximum deliverable power based on current SoC, temperature, and other parameters. This approach integrates various factors influencing power output to provide a comprehensive SoP estimate.
 
 **Advantages:**
+
 - Can incorporate multiple influencing factors.
 - Provides dynamic SoP estimates based on real-time conditions.
 
 **Limitations:**
+
 - Requires accurate battery modeling and parameter identification.
 - Computationally more intensive compared to simpler methods.
 
@@ -349,11 +361,12 @@ Beyond the primary algorithms for SoC, SoH, and SoP estimation, BMS may employ a
 Fault Detection Algorithms identify anomalies in battery behavior, such as over-voltage, under-voltage, over-current, and thermal runaway conditions. These algorithms are crucial for initiating protective measures to prevent battery damage or hazardous situations.
 
 **Types of Faults:**
+
 - **Electrical Faults:** Short circuits, over-current, under-current.
 - **Thermal Faults:** Overheating, freezing.
 - **Structural Faults:** Physical damage to battery cells.
 
-**Example Algorithm: Voltage Fault Detection**
+### Example Algorithm: Voltage Fault Detection
 
 ```python
 def voltage_fault_detection(cell_voltages, voltage_min, voltage_max):
@@ -398,10 +411,11 @@ if __name__ == "__main__":
 Thermal Management Algorithms regulate the battery's temperature to maintain it within optimal operating ranges. These algorithms control heating and cooling systems based on real-time temperature measurements.
 
 **Common Techniques:**
+
 - **PID Controllers:** Adjust cooling/heating power based on the difference between desired and measured temperatures.
 - **Fuzzy Logic Controllers:** Handle non-linear and complex thermal dynamics with rule-based decision-making.
 
-**Code Snippet: Thermal Regulation Using PID Controller**
+## Code Snippet: Thermal Regulation Using PID Controller
 
 ```python
 class PIDController:
@@ -468,10 +482,11 @@ if __name__ == "__main__":
 Predictive Maintenance Algorithms analyze historical and real-time data to forecast potential battery failures or degradation trends. By anticipating issues before they become critical, these algorithms enable proactive maintenance, reducing downtime and extending battery life.
 
 **Techniques:**
+
 - **Machine Learning Models:** Train models on historical data to predict future SoH and potential faults.
 - **Trend Analysis:** Identify patterns and trends in parameters like SoC, SoH, temperature, and current to foresee maintenance needs.
 
-**Code Snippet: Simple Trend Analysis for Predictive Maintenance**
+## Code Snippet: Simple Trend Analysis for Predictive Maintenance
 
 ```python
 import numpy as np

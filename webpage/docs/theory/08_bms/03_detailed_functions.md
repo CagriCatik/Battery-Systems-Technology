@@ -47,7 +47,7 @@ Each category encompasses specific functionalities that work in tandem to mainta
   - **Passive Balancing:** Dissipates excess energy from higher-charged cells as heat using resistive elements.
   - **Active Balancing:** Redistributes energy between cells using inductive or capacitive methods, enhancing overall efficiency.
 
-- **Benefits:** 
+- **Benefits:**
   - **Enhanced Performance:** Ensures all cells contribute equally to the battery's capacity.
   - **Extended Lifespan:** Prevents individual cell degradation, thereby prolonging the overall battery life.
 

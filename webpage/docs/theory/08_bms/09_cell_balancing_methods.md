@@ -39,21 +39,25 @@ Passive cell balancing operates by dissipating excess energy from cells with hig
 
 **Operational Example:**
 Consider a battery pack comprising three cells:
+
 - **Cell 1:** 100% SoC
 - **Cell 2:** 50% SoC
 - **Cell 3:** 0% SoC
 
 In a passive balancing scenario:
+
 - **Cell 1** (100% SoC) and **Cell 3** (0% SoC) will have their excess energy managed.
 - Excess energy from **Cell 1** is dissipated via resistors until it aligns with **Cell 2's** SoC of 50%.
 - **Cell 3** may be prioritized for receiving charge if designed to do so, but typically, passive balancing equalizes to the lowest SoC, which is 50% in this case.
 
 **Advantages:**
+
 - **Simplicity:** Requires minimal circuitry, making it easy to implement.
 - **Cost-Effective:** Lower initial costs due to fewer components and simpler design.
 - **Reliability:** Fewer components result in fewer points of failure.
 
 **Disadvantages:**
+
 - **Energy Inefficiency:** Excess energy is lost as heat, leading to wastage.
 - **Thermal Management Needs:** Generated heat necessitates effective cooling solutions to prevent overheating.
 - **Limited Capacity Utilization:** The overall capacity is constrained to that of the weakest cell, reducing the total usable energy.
@@ -65,20 +69,24 @@ Active cell balancing transfers energy from cells with higher SoCs to those with
 
 **Operational Example:**
 Using the same battery pack:
+
 - **Cell 1:** 100% SoC
 - **Cell 2:** 50% SoC
 - **Cell 3:** 0% SoC
 
 In an active balancing scenario:
+
 - Energy is dynamically transferred from **Cell 1** to **Cell 3** using a DC-DC converter.
 - The transfer continues until all cells reach an equal SoC, ideally the average SoC across the pack (approximately 50% in this case).
 
 **Advantages:**
+
 - **High Energy Efficiency:** Energy is conserved by redistributing it within the pack rather than wasting it as heat.
 - **Maximized Capacity Utilization:** The battery pack can utilize the full energy potential by aligning SoCs, rather than being limited by the weakest cell.
 - **Enhanced Battery Longevity:** Uniform SoC distribution minimizes stress on individual cells, thereby extending the overall lifespan of the battery pack.
 
 **Disadvantages:**
+
 - **Complexity:** Requires sophisticated circuitry and control algorithms to manage energy transfers effectively.
 - **Higher Cost:** Additional components and intricate design increase the overall system cost.
 - **Potential for Increased Failure Modes:** More components can introduce additional points of failure, necessitating robust design and quality assurance.
@@ -176,10 +184,12 @@ To overcome the limitations of the basic cell balancing methods and improve SoH 
 Hybrid balancing combines passive and active balancing techniques to leverage the strengths of both methods while mitigating their weaknesses.
 
 **Implementation:**
+
 - Utilize passive balancing for low-cost and low-efficiency scenarios.
 - Implement active balancing selectively for cells that require high energy efficiency and capacity utilization.
 
 **Advantages:**
+
 - Balances cost and efficiency.
 - Provides flexibility in managing different cell conditions within the same battery pack.
 
@@ -189,10 +199,12 @@ Hybrid balancing combines passive and active balancing techniques to leverage th
 Incorporate intelligent algorithms that dynamically adjust balancing parameters based on real-time cell data and operating conditions.
 
 **Implementation:**
+
 - Use adaptive control algorithms that respond to varying load conditions, temperatures, and aging patterns.
 - Integrate predictive models to anticipate balancing needs before significant imbalances occur.
 
 **Advantages:**
+
 - Enhances balancing efficiency.
 - Reduces unnecessary energy dissipation.
 - Prolongs battery lifespan by preventing severe imbalances.
@@ -203,10 +215,12 @@ Incorporate intelligent algorithms that dynamically adjust balancing parameters 
 Combine cell balancing data with SoH estimation algorithms to provide a more comprehensive assessment of battery health.
 
 **Implementation:**
+
 - Use data from cell balancing operations (e.g., frequency, energy dissipated) as inputs to SoH estimation models.
 - Correlate balancing activity with capacity fade and internal resistance measurements.
 
 **Advantages:**
+
 - Provides deeper insights into battery degradation mechanisms.
 - Improves the accuracy of SoH predictions by leveraging additional data sources.
 
@@ -216,10 +230,12 @@ Combine cell balancing data with SoH estimation algorithms to provide a more com
 Leverage machine learning models to analyze complex patterns in balancing data and predict SoH more accurately.
 
 **Implementation:**
+
 - Train supervised learning models using features such as balancing frequency, energy dissipation rates, cell temperatures, and SoC levels.
 - Deploy models that can adapt to varying battery chemistries and usage patterns.
 
 **Advantages:**
+
 - Enhances predictive accuracy.
 - Can identify non-linear relationships and subtle patterns indicative of battery health.
 

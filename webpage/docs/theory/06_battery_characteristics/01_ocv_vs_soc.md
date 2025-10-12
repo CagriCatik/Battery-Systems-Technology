@@ -61,7 +61,6 @@ estimated_soc = estimate_soc(measured_ocv)
 print(f"Estimated SOC: {estimated_soc*100:.1f}%")
 ```
 
-
 ## Battery Chemistries and Their Characteristics
 
 The performance, management, and application suitability of batteries are profoundly influenced by their chemical composition. Among the widely used lithium-ion chemistries, each type exhibits distinct characteristics that dictate its optimal use cases and BMS requirements.
