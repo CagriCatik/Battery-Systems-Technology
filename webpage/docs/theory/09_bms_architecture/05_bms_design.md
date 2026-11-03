@@ -138,9 +138,9 @@ flowchart LR
    - Placed on every individual cell sense line directly adjacent to the AFE pins.
    - Series resistors ($R_{\text{diff}} = 100\,\Omega$) and differential capacitor ($C_{\text{diff}} = 100\,\text{nF}$) create a low-pass anti-aliasing cutoff frequency:
 
-     $$
-     f_{c, \text{diff}} = \frac{1}{2\pi \cdot (2 R_{\text{diff}}) \cdot C_{\text{diff}}} = \frac{1}{2\pi \cdot 200\,\Omega \cdot 100 \times 10^{-9}\,\text{F}} \approx 7.96\,\text{kHz}
-     $$
+$$
+f_{c, \text{diff}} = \frac{1}{2\pi \cdot (2 R_{\text{diff}}) \cdot C_{\text{diff}}} = \frac{1}{2\pi \cdot 200\,\Omega \cdot 100 \times 10^{-9}\,\text{F}} \approx 7.96\,\text{kHz}
+$$
 
    - Common-mode capacitors ($C_{\text{comm}} = 10\,\text{nF}$) divert high-frequency common-mode spikes to the local module shield plane.
 

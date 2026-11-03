@@ -1,202 +1,144 @@
-# Open Circuit Voltage Testing
+# Open-Circuit Voltage (OCV) Characterization & Hysteresis Modeling
 
-Open Circuit Voltage (OCV) testing is a fundamental procedure in evaluating the health and performance of batteries. By measuring the voltage of a battery when it is not under load, OCV testing provides critical insights into the battery's state of charge (SOC) and overall condition. This documentation delves into the comprehensive process of OCV testing, encompassing theoretical foundations, simulation methodologies using MATLAB/Simulink, state estimation through Kalman filters, and practical applications.
+The Open-Circuit Voltage (OCV) curve is the thermodynamic foundation of every Battery Management System (BMS). It maps the relationship between the equilibrium potential difference across cell terminals ($U_{\text{ocv}}$) and the internal electrochemical State of Charge ($\text{SoC}$)[^plett2004][^farmann2015].
 
-## Purpose and Importance of OCV Testing
+Because model-based observers (such as the Extended Kalman Filter) use $U_{\text{ocv}}(\text{SoC})$ to correct for current sensor drift and numerical integration error, any inaccuracy in the baseline OCV curve propagates directly as persistent State of Charge and State of Health estimation bias[^roscher2011].
 
-OCV testing serves multiple purposes:
-
-- **SOC Estimation:** Determines the current charge level of the battery.
-- **Battery Health Assessment:** Identifies degradation, capacity loss, and potential faults.
-- **Model Calibration:** Enhances the accuracy of battery models used in simulations and control systems.
-- **Quality Control:** Ensures batteries meet specified performance standards before deployment.
-
-Accurate OCV testing is crucial for applications ranging from electric vehicles to aerospace, where reliable battery performance is non-negotiable.
-
-## Theoretical Background
-
-### Battery Modeling
-
-Battery behavior can be effectively modeled using equivalent circuit models (ECMs), which represent the battery's electrical characteristics through a combination of resistors and capacitors. Common ECMs include:
-
-- **Single RC Model:** Consists of an internal resistance (R) and a single resistor-capacitor (RC) pair to simulate transient behavior.
-- **Dual RC Model:** Incorporates two RC pairs to capture more complex dynamics, such as diffusion and polarization effects.
-
-These models help in understanding how batteries respond to different load conditions and in predicting their performance over time.
-
-### Hysteresis Effects
-
-Hysteresis in batteries refers to the phenomenon where the voltage response depends not only on the current state of charge but also on the battery's history of charging and discharging. This effect can complicate accurate SOC estimation and requires sophisticated modeling techniques to account for memory effects in the battery.
-
-### State Equations
-
-State equations describe the dynamic behavior of the battery's state variables (e.g., SOC, voltage). They form the mathematical foundation for simulating battery performance and implementing state estimation algorithms like the Kalman filter.
-
-## Simulation Tools
-
-### MATLAB/Simulink Setup
-
-MATLAB and Simulink are powerful tools for simulating battery behavior and implementing OCV testing procedures. They offer a range of built-in functions and toolboxes that facilitate the modeling, simulation, and analysis of complex battery systems.
-
-### Essential Components
-
-- **Simulink Blocks:** Represent various elements of the battery model, such as resistors, capacitors, current sources, and sensors.
-- **Control System Toolbox:** Provides tools for designing and implementing Kalman filters and other state estimation techniques.
-- **Lookup Tables:** Used for mapping empirical data (e.g., OCV vs. SOC curves) to model parameters.
-
-## Implementing OCV Testing
-
-### Defining Input Conditions
-
-Input conditions for OCV testing typically include:
-
-- **Current Profiles:** Define how current is applied to or drawn from the battery during testing. This can include constant, pulsed, or random current profiles to simulate real-world usage.
-- **Temperature Conditions:** Battery performance is temperature-dependent. Accurate temperature modeling is essential for reliable OCV measurements.
-
-### Setting Up Simulations
-
-1. **Model Initialization:** Define the battery model parameters, including internal resistance, capacitance values, and initial SOC.
-2. **Input Signal Generation:** Create current and temperature profiles using Simulink signal generators (e.g., constant, pulse, random signals).
-3. **Sensor Simulation:** Incorporate virtual sensors to measure voltage and current, introducing realistic noise to mimic real-world measurements.
-
-### Handling Current Fluctuations and Noise
-
-Real-world battery operation involves fluctuating currents and environmental noise. To simulate these conditions:
-
-- **Random Current Sources:** Introduce variability in current profiles to reflect dynamic usage patterns.
-- **Noise Addition:** Add Gaussian or other types of noise to sensor signals to test the robustness of state estimation algorithms.
-
-## State Estimation and Kalman Filters
-
-### Purpose of Kalman Filters in OCV Testing
-
-Kalman filters are employed to estimate the battery's state variables (e.g., SOC) by combining model predictions with noisy sensor measurements. They provide optimal estimates in the presence of uncertainty and are essential for accurate OCV testing.
-
-### Setting Up Kalman Filters
-
-1. **State Vector Definition:** Define the state variables to be estimated (e.g., SOC, internal states).
-2. **Process Model:** Use the battery's state equations to predict the next state.
-3. **Measurement Model:** Relate the state variables to the sensor measurements.
-4. **Covariance Matrices:** Define process noise and measurement noise covariance matrices to quantify uncertainties.
-
-### Matrix Formation and State Equations
-
-Formulate the state and measurement equations in matrix form to facilitate their implementation in MATLAB/Simulink:
-
-- **State Transition Matrix (A):** Describes how the state evolves from one time step to the next.
-- **Control Input Matrix (B):** Relates control inputs (e.g., applied current) to state changes.
-- **Measurement Matrix (C):** Maps the state vector to the measurements.
-- **Noise Covariance Matrices (Q and R):** Represent process and measurement noise.
-
-## Calibration and Noise Handling
-
-### Adding Noise to Signals
-
-To simulate realistic sensor data, add noise to the voltage and current measurements:
-
-```matlab
-% Example: Adding Gaussian noise to voltage measurements
-noisy_voltage = true_voltage + randn(size(true_voltage)) * noise_std;
-```
-
-### Filtering Techniques
-
-Implement filtering techniques to mitigate the impact of noise on state estimation:
-
-- **Moving Average Filter:** Smooths out short-term fluctuations.
-- **Kalman Filter:** Optimally estimates the state by balancing model predictions and noisy measurements.
-- **Low-Pass Filters:** Remove high-frequency noise components from the signals.
-
-## Step-by-Step Guide
-
-### Step 1: Model Setup
-
-1. **Choose Battery Model:** Select an appropriate ECM (e.g., single or dual RC model) based on the desired accuracy and complexity.
-2. **Define Parameters:** Set internal resistance, capacitance values, and initial SOC.
-3. **Incorporate Hysteresis:** If necessary, include elements in the model to account for hysteresis effects.
-
-### Step 2: Define Parameters
-
-1. **Current and Temperature Inputs:** Define the profiles for current and temperature during the test.
-2. **State Equations:** Implement the state equations in Simulink using MATLAB functions or Simulink blocks.
-3. **Measurement Models:** Set up virtual sensors for voltage and current, including noise characteristics.
-
-### Step 3: Calibration
-
-1. **Initial Calibration:** Use known SOC and corresponding OCV values to calibrate the model.
-2. **Iterative Calibration:** Adjust model parameters based on simulation results to minimize discrepancies between predicted and measured voltages.
-3. **Kalman Filter Tuning:** Adjust the covariance matrices (Q and R) to optimize filter performance.
-
-### Step 4: Running Simulations
-
-1. **Simulate Discharge/Charge Cycles:** Apply the defined current profiles and observe the voltage response.
-2. **Monitor SOC Estimation:** Use the Kalman filter to estimate SOC and compare it with true SOC.
-3. **Analyze Results:** Evaluate the accuracy of SOC estimation and the effectiveness of noise handling.
-
-## Practical Applications
-
-### Electric Vehicles
-
-OCV testing is critical in electric vehicles (EVs) for:
-
-- **Battery Management Systems (BMS):** Ensures optimal battery performance and longevity.
-- **Range Estimation:** Provides accurate SOC information to predict driving range.
-- **Safety Monitoring:** Detects potential battery faults or degradation.
-
-### Satellite Power Systems
-
-In satellite applications:
-
-- **Autonomous Operation:** Satellites rely on accurate OCV testing for autonomous power management due to limited communication.
-- **Mission Reliability:** Ensures that batteries perform reliably over extended missions in harsh environments.
-- **Power Budgeting:** Helps in precise power allocation for various satellite subsystems.
-
-## Conclusion
-
-OCV testing is a pivotal process in battery management and performance evaluation. By leveraging advanced modeling techniques and state estimation algorithms like Kalman filters, engineers can achieve accurate SOC estimation and ensure the reliability of battery systems in diverse applications. Utilizing tools like MATLAB/Simulink facilitates the simulation and calibration processes, enabling the development of robust battery models that can withstand real-world operational challenges.
+This chapter formalizes the experimental characterization protocols—**Galvanostatic Intermittent Titration Technique (GITT)** versus **Quasi-Equilibrium Low-Rate Titration**—and models crystallographic phase-transition hysteresis.
 
 ---
 
-## Appendix
+## Experimental Characterization Methodologies
 
-### MATLAB/Simulink Example Code
+Determining the true thermodynamic open-circuit potential requires eliminating all internal ohmic and diffusion polarization overpotentials ($\eta \to 0$)[^verbrugge2003].
 
-```matlab
-% Example: Implementing a Kalman Filter for SOC Estimation
-
-% Define State Transition Matrix (A)
-A = [1, -delta_t/C1, 0;
-     0, 1, -delta_t/C2;
-     0, 0, 1];
-
-% Define Control Input Matrix (B)
-B = [delta_t/R1;
-     0;
-     0];
-
-% Define Measurement Matrix (C)
-C = [1, 0, 0];
-
-% Define Covariance Matrices
-Q = eye(3) * process_noise_variance;
-R = measurement_noise_variance;
-
-% Initialize State and Covariance
-x_est = [SOC_initial; 0; 0];
-P = eye(3);
-
-% Kalman Filter Loop
-for k = 1:length(current_measurements)
-    % Predict
-    x_pred = A * x_est + B * current_measurements(k);
-    P_pred = A * P * A' + Q;
-    
-    % Update
-    K = P_pred * C' / (C * P_pred * C' + R);
-    x_est = x_pred + K * (voltage_measurements(k) - C * x_pred);
-    P = (eye(3) - K * C) * P_pred;
-    
-    % Store Estimates
-    SOC_estimated(k) = x_est(1);
-end
+```mermaid
+flowchart TD
+    subgraph OCV_Protocols["OCV Characterization Methodologies"]
+        GITT["1. Galvanostatic Intermittent Titration (GITT)<br/>• Discrete 5% SoC discharge/charge pulses<br/>• Extended resting periods (2 - 4 hours)<br/>• Absolute thermodynamic equilibrium<br/>• Test Duration: 2 to 3 weeks"]
+        LowRate["2. Quasi-Equilibrium Titration (C/25 - C/30)<br/>• Continuous slow charge and discharge<br/>• Dynamic overpotential minimal (I · R0 ≈ 1-3 mV)<br/>• High data density (continuous curve)<br/>• Test Duration: 50 to 60 hours"]
+    end
 ```
+
+### 1. Galvanostatic Intermittent Titration Technique (GITT)
+
+GITT applies discrete discharge (or charge) current pulses equivalent to $\Delta \text{SoC} = 5.0\%$ or $2.5\%$, followed by an extended rest period ($I = 0$):
+
+```
+   Terminal Voltage V(t) during GITT Titration:
+      ^
+ 4.2V |----\  (Pulse ΔSoC = 5%)
+      |    \----------------------------\  Resting Relaxation (2-4 hrs, |dV/dt| < 1 mV/h)
+      |                                 \-----\  (Next Pulse)
+      |                                       \------------------------\
+ 2.8V +-----------------------------------------------------------------> Time [Days]
+```
+
+- **Relaxation Criterion:** The cell rests at each step until the voltage rate of change meets the strict asymptotic criterion:
+
+$$
+\left| \frac{dV_{\text{terminal}}}{dt} \right| < 1.0\,\frac{\text{mV}}{\text{hour}}
+$$
+
+- **Advantage:** True, uncorrupted thermodynamic equilibrium points across both positive and negative electrodes.
+- **Limitation:** Long test duration (typically 14 to 21 days inside high-precision temperature-controlled chambers per temperature setting).
+
+### 2. Quasi-Equilibrium Low-Rate Continuous Titration (C/25)
+
+The cell is continuously discharged at a very low current rate ($C/25$ to $C/30$) from $100\%$ to $0\%$ SoC, followed by a continuous recharge at $C/25$ back to $100\%$ SoC:
+
+$$
+V_{\text{terminal,chg}}(\text{SoC}) = U_{\text{ocv,chg}}(\text{SoC}) + I_{\text{C/25}} R_0 + \eta_{\text{pol}}
+$$
+
+$$
+V_{\text{terminal,dis}}(\text{SoC}) = U_{\text{ocv,dis}}(\text{SoC}) - I_{\text{C/25}} R_0 - \eta_{\text{pol}}
+$$
+
+The mean thermodynamic OCV curve is estimated by averaging the charge and discharge branches:
+
+$$
+U_{\text{ocv,mean}}(\text{SoC}) \approx \frac{V_{\text{terminal,chg}}(\text{SoC}) + V_{\text{terminal,dis}}(\text{SoC})}{2}
+$$
+
+---
+
+## Electrochemical Voltage Hysteresis Modeling
+
+In many commercial cell chemistries—most notably Lithium Iron Phosphate ($\text{LiFePO}_4$) and Silicon-doped graphite—the open-circuit potential exhibits a wide **hysteresis loop** where the equilibrium voltage during charge is significantly higher than during discharge at identical SoC levels[^roscher2011][^snihir2006]:
+
+$$
+U_{\text{ocv,chg}}(\text{SoC}) > U_{\text{ocv,dis}}(\text{SoC}), \quad \Delta V_h = U_{\text{ocv,chg}} - U_{\text{ocv,dis}} \le 50\,\text{mV}
+$$
+
+```
+   Terminal
+   Voltage [V]
+      ^
+ 3.45 |                  /------------------/  Charge OCV Envelope
+      |                 /   Sub-Loop       /
+ 3.35 |                /    Transition    /
+      |               /------------------/     Discharge OCV Envelope
+ 3.25 |              /
+      +-------------+---------------------+------> State of Charge [%]
+      0            20                    100
+```
+
+### Physical Mechanism
+
+Hysteresis originates from thermodynamic phase transformations (e.g. the two-phase coexistence of $\text{LiFePO}_4$ and $\text{FePO}_4$), microscopic mechanical strain energy within host particles, and domain boundary pinning during lithium de-insertion[^farmann2015].
+
+### Continuous Dynamic Hysteresis State Equation
+
+To prevent state estimation divergence during partial drive-cycle reversals, BMS algorithms model a continuous normalized hysteresis state $h(t) \in [-1, +1]$[^plett2004]:
+
+$$
+\frac{dh(t)}{dt} = -\gamma \left| \frac{\eta_c I(t)}{C_{\text{nom}}} \right| h(t) + \gamma \left| \frac{\eta_c I(t)}{C_{\text{nom}}} \right| \text{sgn}(I(t))
+$$
+
+The effective OCV used in state estimation is formulated as:
+
+$$
+U_{\text{ocv,eff}}(\text{SoC}, h) = U_{\text{ocv,mean}}(\text{SoC}) + h(t) \cdot M(\text{SoC})
+$$
+
+Where:
+- $\gamma > 0$ is a dimensionless tuning parameter governing how rapidly the voltage transitions from the charge boundary to the discharge boundary upon current reversal.
+- $M(\text{SoC}) = \frac{U_{\text{ocv,chg}}(\text{SoC}) - U_{\text{ocv,dis}}(\text{SoC})}{2}$ is half the hysteresis envelope width.
+
+---
+
+## Temperature Dependence: 2D Lookup Table (LUT) Construction
+
+The thermodynamic open-circuit voltage varies with junction temperature according to the **entropic temperature coefficient** $\frac{\partial U_{\text{ocv}}}{\partial T}$ (governed by the Gibbs-Helmholtz relation $\Delta S = n F \frac{\partial U}{\partial T}$)[^verbrugge2003]:
+
+$$
+U_{\text{ocv}}(\text{SoC}, T) = U_{\text{ocv}}(\text{SoC}, T_{\text{ref}}) + \frac{\partial U_{\text{ocv}}}{\partial T}(\text{SoC}) \cdot (T - T_{\text{ref}})
+$$
+
+Production automotive firmware compiles these characterization results into a **calibrated 2D Lookup Table (LUT)** with bilinear interpolation:
+
+```mermaid
+flowchart LR
+    Inputs["Inputs: SoC [%] & Temperature [°C]"] --> LUT["2D OCV Lookup Table Matrix<br/>• Rows: Temperatures (-20°C, 0°C, 25°C, 45°C)<br/>• Columns: 5% SoC Breakpoints (0% to 100%)"]
+    LUT --> Interp["Bilinear Interpolation Engine"]
+    Interp --> Output["Output: U_ocv(SoC, T) [V] ± 0.5 mV"]
+```
+
+| State of Charge ($\text{SoC}$) | $U_{\text{ocv}}$ at $-20^\circ\text{C}$ | $U_{\text{ocv}}$ at $0^\circ\text{C}$ | $U_{\text{ocv}}$ at $+25^\circ\text{C}$ (Ref) | $U_{\text{ocv}}$ at $+45^\circ\text{C}$ |
+| :---: | :---: | :---: | :---: | :---: |
+| **$0\%$** | $3.050\,\text{V}$ | $3.100\,\text{V}$ | $3.150\,\text{V}$ | $3.170\,\text{V}$ |
+| **$20\%$** | $3.510\,\text{V}$ | $3.550\,\text{V}$ | $3.580\,\text{V}$ | $3.590\,\text{V}$ |
+| **$50\%$** | $3.700\,\text{V}$ | $3.730\,\text{V}$ | $3.760\,\text{V}$ | $3.770\,\text{V}$ |
+| **$80\%$** | $3.990\,\text{V}$ | $4.020\,\text{V}$ | $4.050\,\text{V}$ | $4.060\,\text{V}$ |
+| **$100\%$** | $4.160\,\text{V}$ | $4.180\,\text{V}$ | $4.200\,\text{V}$ | $4.210\,\text{V}$ |
+
+---
+
+## References
+
+[^plett2004]: Plett, G. L. (2004). Extended Kalman filtering for battery management systems: Part 2. Modeling and identification. *Journal of Power Sources*, 134(2), 262–276.
+[^farmann2015]: Farmann, A., & Sauer, D. U. (2015). A comprehensive review of on-board condition monitoring of lithium-ion batteries based on open-circuit voltage. *Journal of Power Sources*, 281, 114–130.
+[^roscher2011]: Roscher, M. A., & Sauer, D. U. (2011). Dynamic electric behavior and open-circuit-voltage modeling of $\text{LiFePO}_4$ cathode based lithium-ion batteries. *Journal of Power Sources*, 196(1), 331–336.
+[^verbrugge2003]: Verbrugge, M. W., & Koch, B. J. (2003). Modeling and experimental characterization of lithium-ion batteries. *Journal of The Electrochemical Society*, 150(4), A374.
+[^snihir2006]: Snihir, I., et al. (2006). Battery open-circuit voltage estimation by a combined linear/exponential regression method. *Journal of Power Sources*, 159(2), 1484–1487.

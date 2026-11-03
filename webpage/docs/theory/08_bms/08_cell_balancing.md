@@ -35,15 +35,15 @@ flowchart TD
 Even within the same production batch from Tier-1 cell manufacturers, microscopic variations occur:
 - **Active Material Mass Loading:** Slot-die coating thickness variations ($\pm 1.5\,\mu\text{m}$) yield nominal capacity variations:
 
-  $$
-  C_i \sim \mathcal{N}\left(\mu_C, \, \sigma_C^2\right), \quad \frac{\sigma_C}{\mu_C} \approx 0.5\% - 1.5\%
-  $$
+$$
+C_i \sim \mathcal{N}\left(\mu_C, \, \sigma_C^2\right), \quad \frac{\sigma_C}{\mu_C} \approx 0.5\% - 1.5\%
+$$
 
 - **Impedance Dispersion:** Ultrasonic or laser tab welding tolerances and separator winding tension create ohmic resistance variations:
 
-  $$
-  R_{0,i} \sim \mathcal{N}\left(\mu_R, \, \sigma_R^2\right), \quad \frac{\sigma_R}{\mu_R} \approx 3\% - 8\%
-  $$
+$$
+R_{0,i} \sim \mathcal{N}\left(\mu_R, \, \sigma_R^2\right), \quad \frac{\sigma_R}{\mu_R} \approx 3\% - 8\%
+$$
 
 ### 2. Spatial Thermal Gradients
 
@@ -81,15 +81,15 @@ $$
 
 1. **Charging Cutoff:** Charging must stop as soon as the **highest cell voltage** reaches the upper safety limit $V_{\max}$ (e.g., $4.20\,\text{V}$ for NMC):
 
-   $$
-   t_{\text{chg,end}} \iff \max_{i \in [1, N]} V_i(t) = V_{\max}
-   $$
+$$
+t_{\text{chg,end}} \iff \max_{i \in [1, N]} V_i(t) = V_{\max}
+$$
 
 2. **Discharging Cutoff:** Discharging must stop as soon as the **lowest cell voltage** drops to the lower safety limit $V_{\min}$ (e.g., $2.80\,\text{V}$ for NMC):
 
-   $$
-   t_{\text{dis,end}} \iff \min_{i \in [1, N]} V_i(t) = V_{\min}
-   $$
+$$
+t_{\text{dis,end}} \iff \min_{i \in [1, N]} V_i(t) = V_{\min}
+$$
 
 ```
 Cell Voltages in Unbalanced 3S String:
@@ -127,11 +127,7 @@ $$
 
 > [!IMPORTANT]
 > The usable capacity of an unbalanced series string is **strictly less than the capacity of its weakest cell**:
-> 
-> $$
-> Q_{\text{usable,pack}} \le \min_{i} C_i
-> $$
-> 
+> $Q_{\text{usable,pack}} \le \min_{i} C_i$.
 > Unusable energy remains trapped in non-limiting cells at both ends of the cycle.
 
 ---

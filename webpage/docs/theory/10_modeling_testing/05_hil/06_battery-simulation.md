@@ -1,82 +1,179 @@
-# Battery Simulation
+# Real-Time Electro-Thermal Battery Plant Simulation
 
-The [dSPACE](https://www.youtube.com/watch?v=o1B0N50ocB0)battery simulation product is designed to enhance battery management system (BMS) testing by providing a state-of-the-art simulation model that integrates seamlessly into various test environments. Under the ASM (Automotive Simulation Models) banner, this solution is not limited to automotive applications but extends to electric aircraft, power supplies, and other domains. The goal is to facilitate early controller tests—even before the final hardware is available—by offering a simulation setup that is ready for both HIL and SIL testing as well as test automation.
+Hardware-in-the-Loop (HIL) testing requires that the simulated battery pack behaves with absolute physical fidelity in real time. If the simulation model lags behind real-world clock time, or if numerical discretization introduces artificial oscillations, the Device Under Test (DUT) will record corrupted state estimates or fail timing deadlines[^Ploeger2018]. To achieve sub-millivolt accuracy and microsecond responsiveness across large packs (e.g., $96\text{S}2\text{P}$ to $192\text{S}1\text{P}$), simulation platforms employ specialized real-time model packages, such as the **dSPACE Automotive Simulation Models (ASM) Battery** or **MathWorks Simscape™ Battery**, executing across multi-core CPUs and dedicated FPGAs[^dSPACE2023].
 
----
-
-## HIL Testing: High-Performance Simulation
-
-dSPACE’s HIL system forms the foundation for accurate battery simulation and controller verification. Key attributes include:
-
-- **Plug’n’Play Ready Simulation:**  
-  The battery simulation model is designed to integrate directly into the HIL environment. It supports real-time, closed-loop simulation, capturing all relevant physical effects such as voltage dynamics, diffusion, and double-layer effects.
-
-- **Performance and Precision:**  
-  With support for voltages up to 1500 volts, extremely low latencies in the microsecond range, and high precision with accuracies down to 300 microvolts, the system is optimized for rigorous testing. This performance ensures that all signal interfaces, including ISO-SPI emulation, work flawlessly with the BMS hardware.
-
-- **Seamless Integration:**  
-  The ASM Battery model is available as an open Simulink model that can be used “out of the box.” It is fully compatible with real-time simulation environments, offering an immediate and effective platform for battery controller testing. The model’s integration in a standard BMS I/O framework is straightforward, requiring only connection of the appropriate signal interfaces.
+This chapter explores the mathematical discretization, state-space formulations, lumped-parameter multi-node thermal networks, and FPGA deployment strategies necessary for deterministic real-time execution.
 
 ---
 
-## SIL Testing: Early Software Validation
+## 1. Mathematical Discretization for Real-Time Execution
 
-Beyond HIL, the simulation product supports software-in-the-loop (SIL) testing. This approach allows for:
+In desktop simulation, variable-step solvers (e.g., `ode23t`, `ode15s`) adjust the time step dynamically to manage stiff differential equations. In a real-time HIL environment, variable-step solvers are prohibited: the computational execution time must strictly satisfy a **fixed-step sample time** ($T_s \le 100\,\mu\text{s}$ on CPU, or $T_s \le 1\,\mu\text{s}$ on FPGA)[^Plett2015].
 
-- **Early Verification:**  
-  By shifting development phases forward, controllers can be tested and validated using the ASM Battery model well before the final hardware is available. This early testing helps in identifying and resolving issues sooner in the development cycle.
+```mermaid
+flowchart TD
+    subgraph Continuous_Physics["1. Continuous Electrochemical Dynamics"]
+        DIFF_EQ["v_dot_1 = -v_1 / (R1 C1) + I / C1"]
+        OHMIC["V_t = OCV(SOC, T) - v_1 - v_2 - I R_0"]
+    end
 
-- **Virtual ECU-Level Abstractions:**  
-  The simulation framework incorporates virtual control units that emulate different parts of the battery system. These virtual units interact with the simulated battery model, providing a realistic representation of the battery’s behavior and enabling comprehensive testing of the BMS software.
+    subgraph Discretization_Transforms["2. Deterministic Discretization Engine"]
+        ZOH["Zero-Order Hold (ZOH) State-Space: x(k+1) = Phi x(k) + Gamma u(k)"]
+        EULER["Explicit Euler: x(k+1) = x(k) + Ts f(x(k), u(k))"]
+        HEUN["Heun / Runge-Kutta 2 (RK2)"]
+    end
 
-- **Open and Flexible Simulation Environment:**  
-  The open Simulink model allows developers to dive into the lowest modeling details if necessary. With comprehensive documentation and clear interfaces, users can adapt and extend the model to match their specific battery topologies and application scenarios.
+    subgraph Hardware_Execution["3. Real-Time Hardware Mapping"]
+        CPU_CORE["Real-Time CPU Core (Linux RTOS): Ts = 100 µs"]
+        FPGA_PIPELINE["FPGA Logic Fabric (UltraScale): Ts = 1 µs Pipelined"]
+    end
+
+    Continuous_Physics --> Discretization_Transforms
+    ZOH --> CPU_CORE
+    ZOH --> FPGA_PIPELINE
+```
+
+### 1.1 Zero-Order Hold (ZOH) State-Space Exact Discretization
+For an individual RC overpotential branch:
+
+$$
+\frac{d v_{\text{rc}}(t)}{dt} = -\frac{1}{\tau} v_{\text{rc}}(t) + \frac{1}{C} I(t)
+$$
+
+where $\tau = R \cdot C$. Assuming the current $I(t)$ is constant over the sample period $[k T_s, (k+1) T_s)$ (Zero-Order Hold assumption), the exact analytical discrete solution is:
+
+$$
+v_{\text{rc}}[k+1] = e^{-\frac{T_s}{\tau}} v_{\text{rc}}[k] + R \left( 1 - e^{-\frac{T_s}{\tau}} \right) I[k]
+$$
+
+Letting $\alpha = e^{-\frac{T_s}{\tau}}$ and $\beta = R (1 - \alpha)$, the state update reduces to two multiplications and one addition:
+
+$$
+v_{\text{rc}}[k+1] = \alpha \cdot v_{\text{rc}}[k] + \beta \cdot I[k]
+$$
+
+This exact formulation eliminates numerical damping and artificial drift, maintaining unconditional numerical stability regardless of the ratio $\frac{T_s}{\tau}$[^Plett2015].
 
 ---
 
-## Domain Flexibility and Topology Customization
+## 2. Multi-Cell Pack Electro-Thermal Topology
 
-The ASM Battery Simulation model is built with flexibility in mind:
+Modern electric vehicle packs contain hundreds of cells grouped into series modules. The real-time model must calculate individual cell terminal voltages concurrently to feed the multi-channel cell emulators.
 
-- **Domain Independence:**  
-  Although it originated in the automotive sector, the simulation model is equally applicable to a wide range of domains. Whether it’s for electric aircraft, power supply systems, or train applications, the model can accommodate various battery technologies and configurations.
+```mermaid
+flowchart LR
+    subgraph Pack_String["96S Series Pack String"]
+        CELL_1["Cell 1: OCV_1, R0_1, vRC_1"] --- CELL_2["Cell 2: OCV_2, R0_2, vRC_2"]
+        CELL_2 --- CELL_DOTS[...]
+        CELL_DOTS --- CELL_96["Cell 96: OCV_96, R0_96, vRC_96"]
+    end
 
-- **Adaptable Battery Topologies:**  
-  Recognizing that battery system architectures differ greatly between applications, the solution supports a wide array of configurations. Users can easily adjust parameters for different battery types (e.g., lithium-titanate, NMC) and modify the battery pack topology. This includes the number of stacks and the arrangement of cells to mirror real-world systems accurately.
+    subgraph Voltage_Summation["Pack Voltage Output"]
+        SUM_V["V_pack = SUM(V_t,i) for i = 1 to 96"]
+    end
 
-- **User-Friendly Parameterization:**  
-  Tools like ModelDesk enable users to modify battery parameters—such as cell voltage behavior, capacity, and thermal characteristics—directly within the simulation environment. This capability ensures that the simulation model reflects the precise behavior of the battery under test.
+    subgraph Thermal_Network["Lumped 2-Node Thermal Network"]
+        CORE["Cell Core (C_core, T_core)"]
+        CASING["Cell Casing (C_case, T_case)"]
+        TIM["Thermal Interface Material (R_tim)"]
+        PLATE["Liquid Cold Plate (T_coolant, m_dot)"]
+        
+        CORE <-->|R_core-case| CASING
+        CASING <-->|R_tim| TIM
+        TIM <-->|R_conv| PLATE
+    end
+
+    Pack_String --> SUM_V
+    Pack_String -.->|Joule & Entropic Heat Q_gen| CORE
+    Thermal_Network -.->|T_cell| Pack_String
+```
+
+### 2.1 Lumped-Parameter Thermal State Equations
+To accurately simulate thermal gradients during extreme fast charging, a 2-node thermal model is solved for every cell:
+1. **Core Node ($T_{\text{core}}$)**: Generates heat via internal resistance and entropic changes:
+
+$$
+C_{\text{core}} \frac{d T_{\text{core}, i}}{dt} = \dot{Q}_{\text{gen}, i} - \frac{T_{\text{core}, i} - T_{\text{case}, i}}{R_{\text{cc}}}
+$$
+
+where $\dot{Q}_{\text{gen}, i} = I^2 R_{0, i} + \sum_j \frac{v_{\text{rc}, j, i}^2}{R_{j, i}} + I T_{\text{core}, i} \frac{\partial \text{OCV}_i}{\partial T}$.
+
+2. **Casing Node ($T_{\text{case}}$)**: Conducts heat through the thermal interface material (TIM) to the liquid cold plate:
+
+$$
+C_{\text{case}} \frac{d T_{\text{case}, i}}{dt} = \frac{T_{\text{core}, i} - T_{\text{case}, i}}{R_{\text{cc}}} - \frac{T_{\text{case}, i} - T_{\text{coolant}}}{R_{\text{tim}} + R_{\text{plate}}}
+$$
+
+Because thermal time constants ($\tau_{\text{thermal}} \sim 10 - 100\,\text{s}$) are orders of magnitude slower than electrical time constants ($\tau_{\text{electrical}} \sim 0.1 - 10\,\text{s}$), the thermal equations can be executed at a sub-rate (e.g., $10\,\text{ms}$) to preserve CPU execution budget[^Kramer2019].
 
 ---
 
-## Integration with Test Automation
+## 3. FPGA-Based Simulation for Large Cell Counts
 
-The dSPACE battery simulation product is fully integrated into a broader automated testing ecosystem:
+When battery pack architectures scale to high cell counts (e.g., $192\text{S}$ to $400\text{S}$ in heavy commercial vehicles or eVTOL aircraft), solving hundreds of stiff differential equations on standard x86 CPU cores within a $100\,\mu\text{s}$ budget causes CPU task overruns.
 
-- **Automated Test Catalogues:**  
-  The solution comes with a test catalogue developed in collaboration with industry, universities, and inspection institutes. This catalogue provides predefined test cases and key performance indicators (KPIs) for BMS testing.
+```mermaid
+flowchart TD
+    subgraph Host_CPU["Real-Time CPU (10 ms Task)"]
+        COOLANT_FLOW[Coolant Pump & Ambient Thermal Boundary]
+        CAN_STACK[CAN-FD Diagnostic Stacks]
+    end
 
-- **ISO 26262 Certification:**  
-  The automation tools and ASM simulation model toolchain have been certified according to ISO 26262, ensuring that the processes meet high safety and quality standards—crucial for automotive and other safety-critical applications.
+    subgraph FPGA_Fabric["dSPACE DS2655 FPGA (Kintex UltraScale, 1 µs Task)"]
+        PIPE_1["DSP Slice 1: Cells 1 to 24 (2-RC States)"]
+        PIPE_2["DSP Slice 2: Cells 25 to 48 (2-RC States)"]
+        PIPE_3["DSP Slice 3: Cells 49 to 72 (2-RC States)"]
+        PIPE_4["DSP Slice 4: Cells 73 to 96 (2-RC States)"]
+        
+        AFE_EMU["FPGA isoSPI / UART Virtual Transceivers"]
+        FIU_LOGIC["Hardware Fault Injection Latches"]
+    end
 
-- **AutomationDesk Integration:**  
-  Through AutomationDesk, users can execute and monitor automated test sequences. This integration allows for the rapid ramp-up of ECU tests and provides detailed reports and plots that evaluate the battery model’s performance under various test scenarios, such as load switching and fault conditions.
+    Host_CPU <==>|PCIe Shared Memory| FPGA_Fabric
+    PIPE_1 --> AFE_EMU
+    PIPE_2 --> AFE_EMU
+    PIPE_3 --> AFE_EMU
+    PIPE_4 --> AFE_EMU
+    AFE_EMU <-->|Sub-Microsecond Latency| DUT_BMC[Device Under Test: BMC Master]
+```
+
+### 3.1 FPGA Execution Characteristics
+- **Parallel Pipeline Execution**: FPGAs feature thousands of dedicated DSP slices capable of executing floating-point or 32-bit fixed-point multiplications concurrently. All 96 or 192 cells are computed in parallel within clock cycles rather than sequentially.
+- **Ultra-Low Latency ($< 1\,\mu\text{s}$)**: Real-time update rates under $1\,\mu\text{s}$ eliminate phase lag, allowing high-fidelity simulation of inverter switching harmonics ($10\,\text{kHz} - 20\,\text{kHz}$) on cell terminal voltages.
 
 ---
 
-## Summary
+## 4. Parameterization and Model Desk Calibration
 
-dSPACE’s battery simulation solution offers a comprehensive and flexible approach to upgrading BMS tests. Key benefits include:
+To ensure the simulation reflects actual physical cells, the ASM Battery models are parameterized using experimental test data (HPPC, GITT, and EIS)[^Ploeger2018].
 
-- **HIL Excellence:**  
-  The plug-and-play battery simulation model is optimized for closed-loop, real-time simulation with high performance and precision.
+```mermaid
+graph TD
+    LAB_DATA[Laboratory Test Data: HPPC & Temperature Chambers] --> ID_TOOL[MATLAB System Identification Toolbox]
+    ID_TOOL --> LUT_GEN[2D Look-Up Table Generator]
+    
+    subgraph ModelDesk_Calib["dSPACE ModelDesk Parameter Database"]
+        OCV_MAP["OCV(SOC, T) 2D Map"]
+        R0_MAP["R_0(SOC, T) 2D Map"]
+        RC_MAP["R_1(SOC, T), C_1(SOC, T) Maps"]
+        CAP_MAP["Capacity Q_max(T, SOH)"]
+    end
 
-- **SIL and Early Testing:**  
-  The open Simulink model supports early-stage testing and virtual ECU integration, enabling developers to verify controller functionality before final hardware is available.
+    LUT_GEN --> ModelDesk_Calib
+    ModelDesk_Calib -->|Online Flash Download| REAL_TIME_SIM[SCALEXIO Simulation Kernel]
+```
 
-- **Domain Flexibility:**  
-  With adaptable battery topologies and parameterization tools, the simulation model caters to a wide range of applications beyond the automotive industry.
+### 4.1 Online Parameter Tuning
+Through tools such as **dSPACE ModelDesk** or **ControlDesk**, test engineers can dynamically modify cell parameters during an active simulation run without recompiling the model:
+- Injecting cell imbalance by shifting initial SOC on Cell #14 ($\text{SOC}_{14} = 65\%$ while others are at $80\%$).
+- Simulating accelerated degradation by doubling $R_{0}$ on select cells to test end-of-life (EOL) thermal derating.
+- Triggering micro-short circuits by applying a parallel leakage resistance ($R_{\text{leak}} = 5\,\Omega$).
 
-- **Test Automation:**  
-  Certified automation tools and predefined test catalogues facilitate efficient and reliable ECU testing, ensuring that simulation environments are ready for final automation use cases.
+---
 
+## 5. References
+
+[^Ploeger2018]: M. Ploeger and H. V. Richter, "Hardware-in-the-Loop Simulation for Modern High-Voltage Automotive Systems," *ATZelektronik worldwide*, vol. 13, no. 4, pp. 38–43, 2018. [DOI: 10.1007/s38314-018-0036-7](https://doi.org/10.1007/s38314-018-0036-7)
+[^dSPACE2023]: dSPACE GmbH, "Automotive Simulation Models (ASM) - Battery Model User Guide," *dSPACE Technical Documentation*, Paderborn, Germany, 2023.
+[^Plett2015]: G. L. Plett, *Battery Management Systems, Volume I: Battery Modeling*, Artech House, 2015.
+[^Kramer2019]: B. Kramer, R. Simons, and S. Huh, "Model-Based Design of Battery Management Systems for Electric Vehicles," *SAE Technical Paper 2019-01-0872*, 2019. [DOI: 10.4271/2019-01-0872](https://doi.org/10.4271/2019-01-0872)

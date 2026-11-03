@@ -1,1087 +1,300 @@
-# Closed-Loop Testing
+# Closed-Loop System Validation and Co-Simulation
 
-## **Introduction to Closed-Loop Testing**
+Closed-loop testing is the apex of Model-Based Design (MBD) prior to hardware integration. While open-loop unit testing validates isolated algorithms against canned stimuli, **Closed-Loop System Testing** couples the Battery Management System (BMS) control algorithms directly to high-fidelity, multiphysics physical plant models[^Kramer2019]. This reciprocal interaction validates dynamic feedback stability, state-estimation convergence, thermal regulation, safety interlocks, and fault mitigation across real-world automotive drive cycles and extreme charging profiles[^Plett2015].
 
-Closed-loop testing is a comprehensive validation approach that ensures the entire Battery Management System (BMS) Electronic Control Unit (ECU) operates correctly within its intended environment. By integrating the BMS ECU with a plant model—comprising components such as the battery pack, charger, and load—closed-loop testing simulates real-world interactions and scenarios. This method is pivotal for verifying system-level functionality, safety, and performance, particularly in safety-critical applications like electric vehicles and energy storage systems.
-
-### **Key Objectives of Closed-Loop Testing**
-
-1. **Test Interactions**:
-   - **Function**: Validates the dynamic interactions between the BMS controller and physical components (e.g., battery cells, chargers).
-   - **Importance**: Ensures that commands from the BMS lead to expected responses from the hardware, maintaining system stability and safety.
-
-2. **Real-World Scenarios**:
-   - **Function**: Simulates various operational scenarios such as charging, discharging, and fault conditions.
-   - **Importance**: Tests the BMS's ability to handle typical and extreme conditions, ensuring robust performance under diverse circumstances.
-
-3. **Non-Intrusive Monitoring**:
-   - **Function**: Utilizes observers to monitor internal signals and states without altering the model's interfaces.
-   - **Importance**: Allows for detailed inspection and validation of the system's internal logic and behavior without impacting its operational integrity.
-
-By implementing closed-loop testing, developers can achieve a holistic validation of the BMS, ensuring that both the control algorithms and their interactions with physical components function seamlessly together.
+This chapter provides an exhaustive technical breakdown of closed-loop BMS validation: multi-physics plant coupling, co-simulation numerical dynamics, drive cycle synthesis, formal temporal logic assertions, and system-level fault injection under **ISO 26262** and **ASPICE SWE.5 / SWE.6**[^ISO26262_4].
 
 ---
 
-## **Closed-Loop Test Harness Setup**
+## 1. Closed-Loop System Architecture
 
-Creating an effective closed-loop test harness is fundamental to simulating the interaction between the BMS ECU and the plant model. This setup allows for the execution of comprehensive test scenarios that mimic real-world operations and fault conditions.
+In a closed-loop co-simulation, the plant and controller form a bidirectional dynamic feedback loop operating across mixed continuous-discrete domains.
 
-### **Creating the Test Harness**
+```mermaid
+flowchart LR
+    subgraph Controller["BMS Electronic Control Unit (Discrete: Ts = 10 ms)"]
+        AFE_DRV[AFE Drivers & Filtering] --> EST[EKF State Estimation: SOC/SOH/SOE]
+        EST --> LIM[Dynamic Power Limits: P_charge, P_discharge]
+        EST --> THERM_CTRL[Thermal Management Controller]
+        EST --> PROT[Protection & State Machine]
+        PROT --> ACT_CMD[Actuator Commands: Contactor, Chiller, Heaters]
+    end
 
-Setting up a closed-loop test harness involves integrating the BMS ECU with the plant model and defining the necessary inputs and monitoring mechanisms. The following steps outline the process using Simulink Test:
+    subgraph Plant["Multiphysics Battery Plant (Continuous / Stiff Solvers)"]
+        CELLS[Simscape Multi-Cell Pack: 96S2P 2-RC Thevenin]
+        THERM[Lumped Thermal Network & Chiller Plate]
+        PWR_TRAIN[Inverter / Electric Machine Load & On-Board Charger]
+        HV_CIRC[Main Contactors, Precharge & Pyrofuse]
+        
+        CELLS <--> THERM
+        CELLS <--> HV_CIRC
+        HV_CIRC <--> PWR_TRAIN
+    end
 
-1. **Isolate the Closed-Loop System**:
-   - **Action**: Combine the BMS ECU with the plant components, such as the battery pack and pre-charge circuit, to form an integrated closed-loop system.
-   - **Procedure**:
-     - Open the Simulink model containing the BMS ECU and plant components.
-     - Ensure that all connections between the ECU and plant components are correctly configured to enable two-way communication.
+    %% Closed loop signals
+    ACT_CMD -->|Contactor PWM, Chiller Flow Rate| Plant
+    LIM -->|Torque/Power Limit CAN Frames| PWR_TRAIN
+    Plant -->|Terminal Voltages, Shunt Current, NTC Temps| AFE_DRV
+```
 
-2. **Use Simulink Test to Create a Test Harness**:
-   - **Action**: Utilize Simulink Test to generate a test harness that encapsulates the closed-loop system.
-   - **Procedure**:
-     - Navigate to *Apps > Simulink Test > Create Test Harness*.
-     - Select the appropriate subsystem (e.g., BMS ECU and plant model) to include in the harness.
-     - Configure the harness settings, specifying inputs and outputs as needed.
-   - **Outcome**: A dedicated test harness that facilitates the injection of test inputs and the monitoring of system outputs without affecting the main model.
-
-3. **Define Test Inputs**:
-   - **Action**: Specify the inputs that drive the test scenarios, including state transitions and environmental conditions.
-   - **Tools**:
-     - **Test Sequence Block**: Defines temporal sequences of events and state transitions.
-     - **Signal Builder**: Provides pre-recorded test scenarios for consistent and repeatable testing.
-
-   **Test Sequence Block Example**:
-   
-   ```markdown
-   Step 1: Set State = STANDBY for 10 sec.
-   Step 2: Transition to DRIVING when SOC > 30%.
-   Step 3: Trigger FAULT if cell_temp > 45°C.
-   ```
-   
-   **Signal Builder Example**:
-   
-   - **Purpose**: Injects complex and realistic drive cycles to test the BMS under various load conditions.
-   - **Procedure**:
-     - Open the Signal Builder block within the test harness.
-     - Import or create drive cycle data representing aggressive acceleration, steady-state driving, and regenerative braking.
-   
-   **Code Snippet: Configuring Test Inputs Using Signal Builder**
-   
-   ```matlab
-   % MATLAB Code Snippet: Configuring Test Inputs with Signal Builder
-   testHarness = 'BMS_ClosedLoop_Test_Harness';
-   
-   % Define test sequence steps
-   testSequence = [
-       struct('time', 0, 'State', 'STANDBY'),
-       struct('time', 10, 'State', 'DRIVING', 'SOC', 31),
-       struct('time', 20, 'State', 'FAULT', 'cell_temp', 46)
-   ];
-   
-   % Configure Test Sequence Block
-   set_param([testHarness, '/Test_Sequence'], 'Sequence', testSequence);
-   
-   disp('Test Sequence configured for closed-loop testing.');
-   ```
-   
-   *Figure 1: Creating a Test Harness in Simulink Test*
-
-### **Visualizing Results**
-
-Effective visualization of test results is crucial for interpreting the behavior of the closed-loop system. Simulink provides various dashboard blocks that offer real-time monitoring and feedback during simulation runs.
-
-1. **Add Dashboard Blocks**:
-   - **Function**: Display key signals and states in an intuitive and interactive manner.
-   - **Components**:
-     - **Gauges**: Visual indicators for real-time values (e.g., cell temperatures, State of Charge (SOC)).
-     - **Lamps**: Status indicators for critical flags (e.g., fault conditions).
-     - **Displays**: Numerical displays for precise monitoring of signal values.
-
-2. **Monitor Key Signals**:
-   - **Examples**:
-     - **Cell Temperatures**: Gauge displaying the temperature of individual battery cells.
-     - **SOC**: Gauge indicating the current State of Charge of the battery pack.
-     - **Pack Current/Voltage**: Gauges showing the overall current and voltage levels.
-     - **Fault Indicators**: Lamps indicating the presence of over-temperature or over-voltage conditions.
-
-   **Dashboard Configuration Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Configuring Dashboard Blocks
-   testHarness = 'BMS_ClosedLoop_Test_Harness';
-   
-   % Add a Gauge for SOC
-   add_block('simulink/Commonly Used Blocks/Gauge', [testHarness, '/SOC_Gauge']);
-   set_param([testHarness, '/SOC_Gauge'], 'GaugeFormat', 'Percentage', ...
-             'Position', [100, 100, 150, 150]);
-   
-   % Add a Lamp for Fault Indicator
-   add_block('simulink/Commonly Used Blocks/Lamp', [testHarness, '/Fault_Lamp']);
-   set_param([testHarness, '/Fault_Lamp'], 'Position', [200, 100, 250, 150]);
-   
-   disp('Dashboard blocks added for result visualization.');
-   ```
-   
-   *Figure 2: Adding Dashboard Blocks for Monitoring*
-
-By incorporating dashboard blocks, developers can gain real-time insights into the system's performance and promptly identify any anomalies or deviations from expected behavior during testing.
+### 1.1 The Reciprocal Feedback Dynamic
+1. **Actuation & Load Demand**: The vehicle or charging station requests power $P_{\text{req}}(t)$ based on driver pedal inputs (WLTP drive cycles) or fast-charging profiles.
+2. **Current Draw & Overpotentials**: The pack current $I_{\text{pack}}(t)$ flows through all series cells, generating instantaneous ohmic drops and slow diffusion overpotentials across the RC networks.
+3. **Heat Generation**: Joule heating and entropic reversible heat generate thermal energy $\dot{Q}_{\text{gen}}$, driving cell temperature elevation.
+4. **Telemetry Feedback**: Simulated analog front-ends (AFE) digitize voltages, currents, and temperatures, superimposing measurement noise, quantization errors, and line impedance.
+5. **Controller Derating**: If cell temperatures or voltages approach safe operating limits (SOA), the BMS controller dynamically curtails maximum permissible charge/discharge current ($I_{\text{max\_chg}}, I_{\text{max\_dis}}$), forcing the powertrain to reduce power consumption[^Plett2015].
 
 ---
 
-## **Observing Internal Signals Without Interface Changes**
+## 2. Multi-Physics Battery Plant Modeling
 
-A critical aspect of closed-loop testing is the ability to monitor internal signals and states within the BMS ECU without altering the model's external interfaces. This non-intrusive monitoring is achieved using observers, which provide visibility into the system's internal operations.
+To deliver high-fidelity closed-loop fidelity, the plant model incorporates electro-thermal dynamics, auxiliary high-voltage components, and vehicle road load physics.
 
-### **Using Observers**
+### 2.1 Multi-Cell Electro-Thermal Plant Dynamics
 
-Observers allow developers to monitor specific internal signals and states, facilitating detailed analysis and validation without impacting the system's functional interfaces.
+Each series-connected cell is modeled via an expanded **2-RC Dual Polarization Thevenin Equivalent Circuit** coupled to a lumped-parameter thermal node:
 
-1. **Add an Observer**:
-   - **Action**: Incorporate an observer block into the test harness to monitor internal signals.
-   - **Procedure**:
-     - Right-click on the test harness canvas.
-     - Select *Observers > Add Observer*.
-     - Position the observer block appropriately within the harness.
-   
-   **Observer Addition Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Adding an Observer to the Test Harness
-   testHarness = 'BMS_ClosedLoop_Test_Harness';
-   
-   % Add Observer Block
-   add_block('simulink/Commonly Used Blocks/Observer', [testHarness, '/Internal_Observer']);
-   
-   disp('Observer block added to the test harness.');
-   ```
-   
-   *Figure 3: Adding an Observer Block*
+```mermaid
+graph LR
+    subgraph Electrical_Domain["Electrical Equivalent Circuit Model"]
+        OCV["OCV(SOC, T)"] --- R0["R_0(SOC, T)"]
+        R0 --- RC1["R_1 || C_1 (Electrochemical)"]
+        RC1 --- RC2["R_2 || C_2 (Diffusion)"]
+        RC2 --- V_TERM["Terminal Voltage V_t"]
+    end
 
-2. **Select Internal Signals**:
-   - **Action**: Specify which internal signals to monitor using the observer.
-   - **Procedure**:
-     - Click on the observer’s badge (🔍) to explore the model hierarchy.
-     - Navigate through the model to locate desired internal signals.
-     - Select signals such as `Charge_Current_Limit` and `Discharge_Current_Limit` within the BMS ECU.
-     - Click the Wi-Fi icon (📶) to add the selected signals to the observer.
-   
-   **Signal Selection Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Selecting Internal Signals for Observation
-   testHarness = 'BMS_ClosedLoop_Test_Harness';
-   
-   % Define signal paths
-   chargeCurrentPath = 'BMS_ECU/Current_Power_Limits/Charge_Current_Limit';
-   dischargeCurrentPath = 'BMS_ECU/Current_Power_Limits/Discharge_Current_Limit';
-   
-   % Add signals to observer
-   Simulink.Observer.addSignal(testHarness, 'Internal_Observer', chargeCurrentPath);
-   Simulink.Observer.addSignal(testHarness, 'Internal_Observer', dischargeCurrentPath);
-   
-   disp('Internal signals added to the observer.');
-   ```
-   
-   *Figure 4: Selecting Internal Signals for Observation*
+    subgraph Thermal_Domain["Lumped Thermal Network"]
+        Q_JOULE["Q_Joule = I^2 R_0"] --> Q_SUM((+))
+        Q_REVERSIBLE["Q_rev = I T (dOCV/dT)"] --> Q_SUM
+        Q_SUM --> C_TH["Thermal Capacitance C_th"]
+        C_TH --> R_TH["Thermal Resistance to Coolant R_th"]
+        R_TH --> COOLANT["Coolant Jacket T_coolant"]
+    end
 
-### **Observer Output**
+    Electrical_Domain -.->|I, R_0, dOCV/dT| Thermal_Domain
+    Thermal_Domain -.->|T_cell| Electrical_Domain
+```
 
-Observers capture and display the monitored internal signals, allowing developers to analyze system behavior in detail without altering the model's operational interfaces.
+The mathematical state equations for cell $i \in \{1, \dots, N_{\text{cells}}\}$ are governed by:
 
-1. **Observer Outputs**:
-   - **Function**: Provide non-intrusive access to internal signals, enabling comprehensive monitoring and validation.
-   - **Example Outputs**:
-     - `Charge_Current_Limit`: Tracks the maximum allowable charge current to prevent overcharging.
-     - `Discharge_Current_Limit`: Monitors the minimum discharge current to avoid deep discharging.
-   
-   **Observer Output Configuration Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Configuring Observer Outputs
-   testHarness = 'BMS_ClosedLoop_Test_Harness';
-   
-   % Retrieve observed signals
-   observedSignals = Simulink.Observer.getObservedSignals(testHarness, 'Internal_Observer');
-   
-   % Display observed signals
-   disp('Observer Outputs:');
-   disp(observedSignals);
-   ```
-   
-   *Figure 5: Displaying Observer Outputs*
+$$
+\frac{d v_{1,i}}{dt} = -\frac{1}{R_{1,i} C_{1,i}} v_{1,i} + \frac{1}{C_{1,i}} I(t)
+$$
 
-2. **Visualization**:
-   - **Function**: Present observed signals in an organized and easily interpretable format within the test harness.
-   - **Usage**:
-     - Connect observer outputs to display blocks or logging mechanisms for real-time monitoring.
-   
-   **Observer Output Visualization Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Visualizing Observer Outputs
-   testHarness = 'BMS_ClosedLoop_Test_Harness';
-   
-   % Connect Charge_Current_Limit to a Display Block
-   add_block('simulink/Commonly Used Blocks/Display', [testHarness, '/Charge_Current_Display']);
-   add_line(testHarness, 'Internal_Observer/1', 'Charge_Current_Display/1');
-   
-   % Connect Discharge_Current_Limit to a Display Block
-   add_block('simulink/Commonly Used Blocks/Display', [testHarness, '/Discharge_Current_Display']);
-   add_line(testHarness, 'Internal_Observer/2', 'Discharge_Current_Display/1');
-   
-   disp('Observer outputs connected to display blocks for visualization.');
-   ```
-   
-   *Figure 6: Connecting Observer Outputs to Display Blocks*
+$$
+\frac{d v_{2,i}}{dt} = -\frac{1}{R_{2,i} C_{2,i}} v_{2,i} + \frac{1}{C_{2,i}} I(t)
+$$
 
-By utilizing observers, developers gain deep insights into the BMS's internal operations, enabling the identification and rectification of issues that may not be apparent through external monitoring alone.
+$$
+V_{t,i}(t) = \text{OCV}_i(\text{SOC}_i, T_i) - v_{1,i}(t) - v_{2,i}(t) - I(t) \cdot R_{0,i}(\text{SOC}_i, T_i)
+$$
+
+The thermal dissipation balance across cell thermal mass $C_{\text{th}}$ is:
+
+$$
+C_{\text{th}} \frac{d T_i}{dt} = I(t)^2 R_{0,i} + I(t)^2 R_{1,i} + I(t)^2 R_{2,i} + I(t) T_i \frac{\partial \text{OCV}_i}{\partial T} - \frac{T_i - T_{\text{coolant}}}{R_{\text{th\_pack}}}
+$$
+
+where:
+- $\frac{\partial \text{OCV}}{\partial T}$ is the entropic temperature coefficient ($\text{V/K}$),
+- $R_{\text{th\_pack}}$ represents conductive heat transfer through thermal gap filler to the liquid-cooled aluminum cold plate.
 
 ---
 
-## **Defining Test Assessments**
+## 3. Co-Simulation Numerical Dynamics and Solver Setup
 
-Test assessments are automated checks that validate whether the BMS operates within predefined safety and performance parameters. By integrating assessment blocks into the test harness, developers can enforce and verify critical system constraints.
+Coupling stiff, nonlinear differential algebraic equations (DAEs) of physical power circuits with discrete multi-rate digital controllers poses significant numerical challenges.
 
-### **Test Assessment Blocks**
+### 3.1 Solver Selection and Step-Size Tuning
 
-Test assessment blocks allow for the automation of verification processes by defining logical conditions that system signals must satisfy during testing.
+Standard explicit solvers (e.g., `ode45`, `ode23`) fail or experience extreme step-size collapse when simulating switching power electronics and electrochemical stiffness.
 
-1. **Add Assessment Block**:
-   - **Action**: Incorporate a Test Assessment block into the observer to define verification conditions.
-   - **Procedure**:
-     - From the *Simulink Test Library*, drag a **Test Assessment** block into the observer.
-     - Connect the assessment block to the relevant observed signals.
-   
-   **Adding Assessment Block Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Adding a Test Assessment Block
-   testHarness = 'BMS_ClosedLoop_Test_Harness';
-   
-   % Add Test Assessment Block
-   add_block('simulink/Commonly Used Blocks/Test Assessment', [testHarness, '/Current_Limits_Assessment']);
-   
-   % Connect assessment block to observer outputs
-   add_line(testHarness, 'Internal_Observer/1', 'Current_Limits_Assessment/1');
-   add_line(testHarness, 'Internal_Observer/2', 'Current_Limits_Assessment/2');
-   
-   disp('Test Assessment block added and connected to observer outputs.');
-   ```
-   
-   *Figure 7: Adding a Test Assessment Block*
-
-2. **Define Verify Statements**:
-   - **Function**: Specify logical conditions that the monitored signals must satisfy.
-   - **Procedure**:
-     - Open the Test Assessment block's parameters.
-     - Define `verify` statements that represent safety and performance constraints.
-   
-   **Define Verify Statements Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Defining Verify Statements in Test Assessment
-   testHarness = 'BMS_ClosedLoop_Test_Harness';
-   
-   % Define verification conditions
-   assessmentBlock = [testHarness, '/Current_Limits_Assessment'];
-   
-   % Add verify statements
-   Simulink.Test.Assessment.addVerify(assessmentBlock, 'Charge_Current_Limit < 50', 'Must stay below 50A');
-   Simulink.Test.Assessment.addVerify(assessmentBlock, 'Discharge_Current_Limit > 10', 'Must stay above 10A');
-   
-   disp('Verify statements defined in Test Assessment block.');
-   ```
-   
-   *Figure 8: Defining Verify Statements in Test Assessment*
-
-### **Analyzing Results**
-
-Post-test analysis involves reviewing the outcomes of the assessment blocks to determine whether the BMS meets the defined safety and performance criteria.
-
-1. **Diagnostic Viewer**:
-   - **Function**: Provides a detailed view of the pass/fail status for each `verify` statement.
-   - **Usage**:
-     - Open the **Diagnostic Viewer** after test execution to inspect assessment results.
-     - Identify any failed assessments and analyze the corresponding conditions.
-   
-   **Diagnostic Viewer Analysis Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Analyzing Assessment Results
-   testSuite = 'BMS_ClosedLoop_Test_Suite';
-   
-   % Run the test suite
-   Simulink.Test.TestManager.runTestSuite(testSuite);
-   
-   % Open Diagnostic Viewer
-   Simulink.Test.TestManager.openDiagnosticViewer(testSuite);
-   
-   disp('Diagnostic Viewer opened for assessment result analysis.');
-   ```
-   
-   *Figure 9: Opening Diagnostic Viewer for Assessment Results*
-
-2. **Failure Diagnostics**:
-   - **Function**: Highlights specific instances where `verify` conditions were not met.
-   - **Example Failure**:
-     ```plaintext
-     FAIL: Charge_Current_Limit exceeded 50A at t=12.5s.
-     ```
-   - **Action**: Investigate the cause of the failure, which may involve reviewing the model logic, adjusting thresholds, or refining control algorithms.
-   
-   **Failure Diagnostics Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Retrieving Failure Diagnostics
-   testSuite = 'BMS_ClosedLoop_Test_Suite';
-   
-   % Retrieve diagnostics
-   diagnostics = Simulink.Test.TestManager.getDiagnosticReport(testSuite);
-   
-   % Display diagnostics
-   disp('Diagnostics Report:');
-   disp(diagnostics);
-   ```
-   
-   *Figure 10: Retrieving and Displaying Diagnostics Report*
-
-By systematically defining and analyzing test assessments, developers can ensure that the BMS operates within safe and efficient parameters, thereby enhancing system reliability and compliance with safety standards.
-
----
-
-## **Workflow Summary**
-
-A structured workflow is essential for conducting effective closed-loop testing. The following steps outline a comprehensive approach to validating the BMS ECU within a closed-loop environment.
-
-1. **Simulate Closed-Loop System**:
-   - **Action**: Execute the test harness with predefined state requests and test scenarios.
-   - **Procedure**:
-     - Run simulations that transition the system through various states (e.g., STANDBY, DRIVING, FAULT).
-     - Ensure that test inputs are accurately defined to reflect real-world operational conditions.
-
-2. **Monitor Signals**:
-   - **Action**: Use dashboard blocks and observers to track critical signals and system states in real-time.
-   - **Procedure**:
-     - Observe key metrics such as cell temperatures, SOC, pack current/voltage, and fault indicators.
-     - Utilize observers to monitor internal signals without altering the model's interfaces.
-
-3. **Validate Internal Logic**:
-   - **Action**: Employ test assessments and diagnostic tools to verify that internal logic adheres to safety and performance constraints.
-   - **Procedure**:
-     - Define `verify` statements to enforce conditions like charge/discharge limits.
-     - Analyze assessment results using the Diagnostic Viewer to identify and rectify any violations.
-
-4. **Iterate and Refine**:
-   - **Action**: Based on test outcomes, refine the model and test scenarios to address identified issues.
-   - **Procedure**:
-     - Modify control algorithms or adjust thresholds as needed.
-     - Re-run tests to validate the effectiveness of the refinements.
-
-5. **Ensure Coverage**:
-   - **Action**: Integrate Simulink Coverage to measure and enhance test completeness.
-   - **Procedure**:
-     - Enable coverage metrics (e.g., MCDC) within the test harness.
-     - Analyze coverage reports to identify untested paths and develop additional test cases accordingly.
-
-**Workflow Diagram**:
-
-![Closed-Loop Testing Workflow](#)
-
-*Figure 11: Structured Workflow for Closed-Loop Testing*
-
-By following this workflow, developers can systematically validate the BMS ECU's performance and safety within a simulated operational environment, ensuring readiness for deployment in real-world applications.
-
----
-
-## **Key Tools**
-
-Simulink offers a suite of tools that facilitate the implementation and execution of closed-loop testing. These tools streamline the testing process, enhance monitoring capabilities, and ensure comprehensive validation of the BMS ECU.
-
-| **Tool**                 | **Purpose**                                                                 |
-|--------------------------|-----------------------------------------------------------------------------|
-| **Test Sequence Block**  | Define state transitions and temporal logic for test scenarios.             |
-| **Signal Builder**       | Inject pre-recorded test inputs (e.g., drive cycles, fault triggers).       |
-| **Observers**            | Monitor internal signals without modifying model interfaces.                |
-| **Test Assessment**      | Automate verification of signal conditions (e.g., thresholds, timing).      |
-| **Diagnostic Viewer**    | Analyze pass/fail status of assessments and identify failure points.        |
-| **Simulation Data Inspector** | Compare and visualize signals across different test runs (MIL, SIL, PIL).  |
-| **Simulink Coverage**    | Measure and report test coverage metrics to ensure comprehensive testing.    |
-
-### **Test Sequence Block**
-
-- **Function**: Defines a sequence of events and state transitions to simulate various operational scenarios.
-- **Usage**:
-  - Create step-by-step test scenarios that transition the system through different states (e.g., STANDBY → DRIVING → FAULT).
-  - Specify temporal conditions and triggers for state transitions.
-  
-  **Test Sequence Block Configuration Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Configuring Test Sequence Block
-  testHarness = 'BMS_ClosedLoop_Test_Harness';
-  
-  % Define test sequence steps
-  testSequence = [
-      struct('time', 0, 'State', 'STANDBY'),
-      struct('time', 10, 'State', 'DRIVING', 'SOC', 31),
-      struct('time', 20, 'State', 'FAULT', 'cell_temp', 46)
-  ];
-  
-  % Set Test Sequence parameters
-  set_param([testHarness, '/Test_Sequence'], 'Sequence', testSequence);
-  
-  disp('Test Sequence configured with state transitions.');
-  ```
-  
-  *Figure 12: Configuring Test Sequence Block*
-
-### **Signal Builder**
-
-- **Function**: Provides pre-recorded or custom-defined signal scenarios to simulate complex operational conditions.
-- **Usage**:
-  - Import drive cycle data that reflects realistic and aggressive driving patterns.
-  - Define fault scenarios to test the BMS's response to abnormal conditions.
-  
-  **Signal Builder Configuration Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Configuring Signal Builder for Test Inputs
-  testHarness = 'BMS_ClosedLoop_Test_Harness';
-  
-  % Load drive cycle data
-  load('Aggressive_Drive_Cycle.mat'); % Contains predefined signal data
-  
-  % Set Signal Builder parameters
-  set_param([testHarness, '/Signal_Builder'], 'Data', driveCycleData);
-  
-  disp('Signal Builder configured with aggressive drive cycle data.');
-  ```
-  
-  *Figure 13: Configuring Signal Builder with Drive Cycle Data*
-
-### **Observers**
-
-- **Function**: Monitor and log internal signals without altering the model's external interfaces.
-- **Usage**:
-  - Add observers to track critical internal variables like `Charge_Current_Limit` and `Discharge_Current_Limit`.
-  - Configure observers to output data for real-time monitoring and post-test analysis.
-  
-  **Observer Configuration Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Configuring Observers
-  testHarness = 'BMS_ClosedLoop_Test_Harness';
-  
-  % Define signal paths
-  chargeCurrentPath = 'BMS_ECU/Current_Power_Limits/Charge_Current_Limit';
-  dischargeCurrentPath = 'BMS_ECU/Current_Power_Limits/Discharge_Current_Limit';
-  
-  % Add signals to observer
-  Simulink.Observer.addSignal(testHarness, 'Internal_Observer', chargeCurrentPath);
-  Simulink.Observer.addSignal(testHarness, 'Internal_Observer', dischargeCurrentPath);
-  
-  disp('Internal signals added to observer for monitoring.');
-  ```
-  
-  *Figure 14: Configuring Observers for Internal Signal Monitoring*
-
-### **Test Assessment**
-
-- **Function**: Automates the verification of signal conditions to enforce safety and performance constraints.
-- **Usage**:
-  - Define logical `verify` statements to ensure signals remain within specified limits.
-  - Automatically evaluate these conditions during test execution and report pass/fail statuses.
-  
-  **Test Assessment Configuration Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Defining Test Assessments
-  testHarness = 'BMS_ClosedLoop_Test_Harness';
-  
-  % Define assessment block
-  assessmentBlock = [testHarness, '/Current_Limits_Assessment'];
-  
-  % Add verify statements
-  Simulink.Test.Assessment.addVerify(assessmentBlock, 'Charge_Current_Limit < 50', 'Must stay below 50A');
-  Simulink.Test.Assessment.addVerify(assessmentBlock, 'Discharge_Current_Limit > 10', 'Must stay above 10A');
-  
-  disp('Test Assessments defined for current limits.');
-  ```
-  
-  *Figure 15: Defining Test Assessments for Current Limits*
-
-### **Diagnostic Viewer**
-
-- **Function**: Analyzes and displays the outcomes of test assessments, highlighting any failures or violations.
-- **Usage**:
-  - Open the Diagnostic Viewer after test execution to review assessment results.
-  - Investigate specific failures to identify and rectify underlying issues.
-  
-  **Diagnostic Viewer Usage Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Opening Diagnostic Viewer
-  testSuite = 'BMS_ClosedLoop_Test_Suite';
-  
-  % Run the test suite
-  Simulink.Test.TestManager.runTestSuite(testSuite);
-  
-  % Open Diagnostic Viewer
-  Simulink.Test.TestManager.openDiagnosticViewer(testSuite);
-  
-  disp('Diagnostic Viewer opened for result analysis.');
-  ```
-  
-  *Figure 16: Opening Diagnostic Viewer for Test Analysis*
-
-### **Simulation Data Inspector**
-
-- **Function**: Facilitates the comparison and visualization of simulation data across different test runs (e.g., MIL, SIL, PIL).
-- **Usage**:
-  - Load and overlay signals from multiple test runs to detect discrepancies.
-  - Analyze signal trajectories and timing to ensure consistency and correctness.
-  
-  **Simulation Data Inspector Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Using Simulation Data Inspector for Signal Comparison
-  % Load MIL data
-  milData = sdiCollection('BMS_MIL_Data.sdi');
-  
-  % Load SIL data
-  silData = sdiCollection('BMS_SIL_Data.sdi');
-  
-  % Load PIL data
-  pilData = sdiCollection('BMS_PIL_Data.sdi');
-  
-  % Open Simulation Data Inspector
-  Simulink.sdi.view;
-  
-  % Compare specific signals across MIL, SIL, and PIL
-  Simulink.sdi.compare(milData, silData, pilData, 'Error');
-  
-  disp('Signal comparison completed in Simulation Data Inspector.');
-  ```
-  
-  *Figure 17: Comparing Signals in Simulation Data Inspector*
-
-### **Simulink Coverage**
-
-- **Function**: Measures and reports the extent to which the model has been exercised by the test cases.
-- **Usage**:
-  - Enable coverage metrics such as Decision Coverage, Condition Coverage, and MCDC.
-  - Analyze coverage reports to identify untested paths and enhance test suites accordingly.
-  
-  **Simulink Coverage Configuration Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Enabling Simulink Coverage
-  testSuite = 'BMS_ClosedLoop_Test_Suite';
-  
-  % Select the test suite
-  Simulink.Test.TestManager.selectTestSuite(testSuite);
-  
-  % Enable coverage metrics
-  Simulink.Test.TestManager.setCoverageSettings(testSuite, ...
-      'Decision', true, 'Condition', true, 'MCDC', true);
-  
-  disp(['Coverage metrics enabled for test suite: ' testSuite]);
-  
-  % Run the test suite with coverage enabled
-  Simulink.Test.TestManager.runTestSuite(testSuite);
-  
-  % Retrieve and display coverage results
-  coverageResults = Simulink.Test.TestManager.getCoverage(testSuite);
-  disp('Coverage Results:');
-  disp(coverageResults);
-  ```
-  
-  *Figure 18: Enabling and Running Simulink Coverage*
-
-By leveraging these tools, developers can create a robust closed-loop testing environment that ensures comprehensive validation of the BMS ECU within its operational context.
-
----
-
-## **Example: Validating Current Limits**
-
-To illustrate the application of closed-loop testing, consider an example focused on validating the BMS's charge and discharge current limits. This example demonstrates how to set up test scenarios, monitor internal signals, define assessments, and analyze results to ensure that the BMS operates within safe and efficient parameters.
-
-### **Test Scenario**
-
-**Objective**: Ensure that the BMS maintains charge and discharge currents within specified safe limits during driving operations.
-
-**Steps**:
-
-1. **Inject a Drive Cycle with Aggressive Acceleration**:
-   - **Action**: Use the Test Sequence Block to define a drive cycle that includes rapid acceleration phases to test the BMS's ability to handle high current demands.
-   - **Procedure**:
-     - Set the system state to `DRIVING` with SOC starting above 30%.
-     - Simulate aggressive acceleration events that demand higher charge and discharge currents.
-   
-2. **Use Observers to Monitor Current Limits**:
-   - **Action**: Observe the `Charge_Current_Limit` and `Discharge_Current_Limit` signals to ensure they remain within predefined thresholds.
-   - **Procedure**:
-     - Connect observers to the relevant internal signals within the BMS ECU.
-     - Ensure that these signals are logged and available for assessment.
-   
-3. **Verify Limits via Test Assessment Blocks**:
-   - **Action**: Define and execute `verify` statements to automatically check that current limits are not exceeded during the test run.
-   - **Procedure**:
-     - Configure Test Assessment blocks with conditions like `Charge_Current_Limit < 50A` and `Discharge_Current_Limit > 10A`.
-     - Run the test harness and monitor assessment results for compliance.
-
-**Test Scenario Configuration Example**:
+| Solver | Formulation | Ideal Use Case in BMS Closed Loop | Stability & Performance Profile |
+| :--- | :--- | :--- | :--- |
+| `ode23t` | Trapezoidal rule with free interpolation | Simscape electro-thermal packs and contactors | **Recommended**: Preserves energy conservation, moderate numerical damping. |
+| `ode15s` | Variable-order Backward Differentiation (BDF) | Highly stiff chemical kinetics or severe transients | Robust against extreme stiffness, but computationally heavier. |
+| `FixedStepDiscrete`| Euler / Heun fixed step ($T_s$) | Real-time SIL / PIL / HIL code generation | Requires step size $T_s \le \frac{1}{10} \min(\tau_{RC})$ to prevent instability. |
 
 ```matlab
-% MATLAB Code Snippet: Configuring Test Scenario for Current Limits
-testHarness = 'BMS_ClosedLoop_Test_Harness';
-
-% Define aggressive acceleration drive cycle
-driveCycleData = [
-    struct('time', 0, 'State', 'STANDBY', 'SOC', 35, 'cell_temp', 40),
-    struct('time', 10, 'State', 'DRIVING', 'SOC', 35, 'cell_temp', 40),
-    struct('time', 20, 'State', 'DRIVING', 'SOC', 34, 'cell_temp', 42),
-    struct('time', 30, 'State', 'DRIVING', 'SOC', 33, 'cell_temp', 43),
-    struct('time', 40, 'State', 'DRIVING', 'SOC', 32, 'cell_temp', 44),
-    struct('time', 50, 'State', 'FAULT', 'SOC', 32, 'cell_temp', 46)
-];
-
-% Configure Test Sequence Block
-set_param([testHarness, '/Test_Sequence'], 'Sequence', driveCycleData);
-
-% Add Verify Statements for Current Limits
-assessmentBlock = [testHarness, '/Current_Limits_Assessment'];
-Simulink.Test.Assessment.addVerify(assessmentBlock, 'Charge_Current_Limit < 50', 'Must stay below 50A');
-Simulink.Test.Assessment.addVerify(assessmentBlock, 'Discharge_Current_Limit > 10', 'Must stay above 10A');
-
-disp('Test scenario configured for validating current limits.');
+% Recommended Closed-Loop Solver Settings in Simulink
+set_param(modelName, 'SolverType', 'Variable-step');
+set_param(modelName, 'Solver', 'ode23t');
+set_param(modelName, 'MaxStep', '0.001');      % 1 ms maximum integration step
+set_param(modelName, 'MinStep', '1e-7');       % 100 ns minimum step for switching
+set_param(modelName, 'RelTol', '1e-4');        % 0.01% relative tolerance
+set_param(modelName, 'AbsTol', '1e-6');
+set_param(modelName, 'MaxConsecutiveMinSteps', '100');
 ```
-
-*Figure 19: Configuring Test Scenario for Current Limits*
-
-### **Results**
-
-Upon executing the test scenario, the following outcomes are observed:
-
-1. **Pass Criteria**:
-   - **Condition**: All `verify` statements are satisfied; `Charge_Current_Limit` remains below 50A and `Discharge_Current_Limit` stays above 10A.
-   - **Outcome**: The BMS operates within safe current limits, passing the test case.
-   
-2. **Fail Criteria**:
-   - **Condition**: Any `verify` statement fails (e.g., `Charge_Current_Limit` exceeds 50A).
-   - **Outcome**: The test case fails, and the Diagnostic Viewer reports the specific condition violation.
-   
-**Test Results Overview**:
-
-```plaintext
-Test Results:
---------------
-- Test Case: Validate Current Limits
-  - Charge_Current_Limit: 48A (Pass)
-  - Discharge_Current_Limit: 12A (Pass)
-  - Overall Result: PASS
-```
-
-**Analysis**:
-
-1. **Execution Time**:
-   - **Observation**: The system maintained real-time performance, with control loops executing within the required time constraints.
-   
-2. **Signal Accuracy**:
-   - **Observation**: All observed signals matched the expected values, indicating consistent behavior across MIL, SIL, and PIL testing stages.
-   
-3. **Coverage Achievement**:
-   - **Observation**: The test scenario contributed to achieving full MCDC coverage, ensuring that all logical conditions within the current limit checks were thoroughly exercised.
-
-**Example Diagnostic Report**:
-
-```plaintext
-Diagnostic Viewer Report
-------------------------
-Test Case: Validate Current Limits
-
-1. Charge_Current_Limit Verification
-   - Condition: Charge_Current_Limit < 50A
-   - Actual Value: 48A
-   - Status: PASS
-
-2. Discharge_Current_Limit Verification
-   - Condition: Discharge_Current_Limit > 10A
-   - Actual Value: 12A
-   - Status: PASS
-
-Overall Test Result: PASS
-
-Recommendations:
-- Continue monitoring current limits during diverse operational scenarios.
-- Consider testing additional fault conditions to further validate BMS robustness.
-```
-
-*Figure 20: Sample Diagnostic Viewer Report*
-
-This example demonstrates how closed-loop testing effectively validates critical aspects of the BMS, ensuring that it operates safely and efficiently within its intended operational parameters.
 
 ---
 
-## **Key Tools**
+## 4. Driving and Charging Mission Profiles
 
-Implementing closed-loop testing effectively requires the integration of several specialized tools within the Simulink environment. These tools facilitate the creation of test harnesses, define test scenarios, monitor internal signals, automate assessments, and analyze results.
+Closed-loop testing must subject the virtual battery pack to standardized operational conditions covering urban congestion, high-speed highway sprints, and high-power fast charging[^Baronti2014].
 
-### **Test Sequence Block**
+```mermaid
+timeline
+    title Multi-Phase Closed-Loop Validation Mission Profile
+    Precharge & Wake-up : 0 to 5s : Contactor closure : HV bus precharging
+    WLTC Class 3 Drive : 5 to 1800s : Dynamic traction & regen : Thermal accumulation
+    Aggressive US06 Burst : 1800 to 2400s : High C-rate discharge (4C) : Peak derating check
+    Cool-down & Plug-in : 2400 to 2600s : DC Fast Charger handshake : Pre-cooling activation
+    Extreme Fast Charge : 2600 to 4000s : 350 kW CC-CV profile : Lithium plating risk mitigation
+```
 
-- **Function**: Defines a sequence of state transitions and temporal events to simulate various operational scenarios.
-- **Usage**:
-  - Create step-by-step test sequences that transition the system through different states (e.g., STANDBY → DRIVING → FAULT).
-  - Specify timing and conditions for each state transition to mimic real-world operations.
-  
-  **Test Sequence Block Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Defining a Test Sequence for State Transitions
-  testHarness = 'BMS_ClosedLoop_Test_Harness';
-  
-  % Define sequence steps
-  testSequence = [
-      struct('time', 0, 'State', 'STANDBY', 'SOC', 35, 'cell_temp', 40),
-      struct('time', 10, 'State', 'DRIVING', 'SOC', 35, 'cell_temp', 40),
-      struct('time', 20, 'State', 'DRIVING', 'SOC', 34, 'cell_temp', 42),
-      struct('time', 30, 'State', 'DRIVING', 'SOC', 33, 'cell_temp', 43),
-      struct('time', 40, 'State', 'DRIVING', 'SOC', 32, 'cell_temp', 44),
-      struct('time', 50, 'State', 'FAULT', 'SOC', 32, 'cell_temp', 46)
-  ];
-  
-  % Set Test Sequence parameters
-  set_param([testHarness, '/Test_Sequence'], 'Sequence', testSequence);
-  
-  disp('Test Sequence defined for closed-loop testing.');
-  ```
-  
-  *Figure 21: Defining Test Sequence for State Transitions*
-
-### **Signal Builder**
-
-- **Function**: Provides a mechanism to inject complex and pre-defined signal scenarios into the test harness.
-- **Usage**:
-  - Import or create drive cycle data that simulates realistic and aggressive driving patterns.
-  - Define fault scenarios that trigger specific BMS responses, ensuring comprehensive testing of fault handling mechanisms.
-  
-  **Signal Builder Configuration Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Configuring Signal Builder with Drive Cycles
-  testHarness = 'BMS_ClosedLoop_Test_Harness';
-  
-  % Load predefined drive cycle data
-  load('Aggressive_Drive_Cycle.mat'); % Contains driveCycleData structure
-  
-  % Configure Signal Builder block
-  set_param([testHarness, '/Signal_Builder'], 'Data', driveCycleData);
-  
-  disp('Signal Builder configured with predefined drive cycles.');
-  ```
-  
-  *Figure 22: Configuring Signal Builder with Drive Cycle Data*
-
-### **Observers**
-
-- **Function**: Monitor and log internal signals and states within the BMS ECU without altering external interfaces.
-- **Usage**:
-  - Add observers to track critical internal variables like `Charge_Current_Limit` and `Discharge_Current_Limit`.
-  - Configure observers to output data for real-time monitoring and post-test analysis.
-  
-  **Observer Configuration Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Adding and Configuring Observers
-  testHarness = 'BMS_ClosedLoop_Test_Harness';
-  
-  % Define signal paths for observation
-  chargeCurrentPath = 'BMS_ECU/Current_Power_Limits/Charge_Current_Limit';
-  dischargeCurrentPath = 'BMS_ECU/Current_Power_Limits/Discharge_Current_Limit';
-  
-  % Add signals to observer
-  Simulink.Observer.addSignal(testHarness, 'Internal_Observer', chargeCurrentPath);
-  Simulink.Observer.addSignal(testHarness, 'Internal_Observer', dischargeCurrentPath);
-  
-  disp('Observers configured for monitoring internal current limits.');
-  ```
-  
-  *Figure 23: Configuring Observers for Internal Signal Monitoring*
-
-### **Test Assessment**
-
-- **Function**: Automates the verification of signal conditions to ensure compliance with safety and performance standards.
-- **Usage**:
-  - Define logical conditions (`verify` statements) that system signals must satisfy during testing.
-  - Automate the evaluation of these conditions to generate pass/fail outcomes.
-  
-  **Test Assessment Configuration Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Defining Verify Statements in Test Assessment
-  testHarness = 'BMS_ClosedLoop_Test_Harness';
-  
-  % Define assessment block
-  assessmentBlock = [testHarness, '/Current_Limits_Assessment'];
-  
-  % Add verify statements
-  Simulink.Test.Assessment.addVerify(assessmentBlock, 'Charge_Current_Limit < 50', 'Must stay below 50A');
-  Simulink.Test.Assessment.addVerify(assessmentBlock, 'Discharge_Current_Limit > 10', 'Must stay above 10A');
-  
-  disp('Verify statements defined in Test Assessment block.');
-  ```
-  
-  *Figure 24: Defining Verify Statements in Test Assessment*
-
-### **Diagnostic Viewer**
-
-- **Function**: Analyzes and displays the outcomes of test assessments, highlighting any failures or violations.
-- **Usage**:
-  - Open the Diagnostic Viewer after test execution to review assessment results.
-  - Investigate specific failures to identify and rectify underlying issues.
-  
-  **Diagnostic Viewer Usage Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Opening Diagnostic Viewer for Test Analysis
-  testSuite = 'BMS_ClosedLoop_Test_Suite';
-  
-  % Run the test suite
-  Simulink.Test.TestManager.runTestSuite(testSuite);
-  
-  % Open Diagnostic Viewer
-  Simulink.Test.TestManager.openDiagnosticViewer(testSuite);
-  
-  disp('Diagnostic Viewer opened for assessment result analysis.');
-  ```
-  
-  *Figure 25: Opening Diagnostic Viewer for Test Analysis*
-
-### **Simulation Data Inspector**
-
-- **Function**: Facilitates the comparison and visualization of simulation data from multiple test runs (e.g., MIL, SIL, PIL).
-- **Usage**:
-  - Load and overlay signals from different test runs to detect discrepancies and ensure consistency.
-  - Analyze signal trajectories and timing to validate system behavior.
-  
-  **Simulation Data Inspector Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Using Simulation Data Inspector for Signal Comparison
-  % Load MIL data
-  milData = sdiCollection('BMS_MIL_Data.sdi');
-  
-  % Load SIL data
-  silData = sdiCollection('BMS_SIL_Data.sdi');
-  
-  % Load PIL data
-  pilData = sdiCollection('BMS_PIL_Data.sdi');
-  
-  % Open Simulation Data Inspector
-  Simulink.sdi.view;
-  
-  % Compare specific signals across MIL, SIL, and PIL
-  Simulink.sdi.compare(milData, silData, pilData, 'Error');
-  
-  disp('Signal comparison completed in Simulation Data Inspector.');
-  ```
-  
-  *Figure 26: Comparing Signals in Simulation Data Inspector*
-
-### **Simulink Coverage**
-
-- **Function**: Measures and reports the extent to which the model has been exercised by the test cases.
-- **Usage**:
-  - Enable coverage metrics such as Decision Coverage, Condition Coverage, and Modified Condition/Decision Coverage (MCDC) within the test harness.
-  - Analyze coverage reports to identify untested paths and enhance test suites accordingly.
-  
-  **Simulink Coverage Configuration Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Enabling and Running Simulink Coverage
-  testSuite = 'BMS_ClosedLoop_Test_Suite';
-  
-  % Select the test suite
-  Simulink.Test.TestManager.selectTestSuite(testSuite);
-  
-  % Enable coverage metrics
-  Simulink.Test.TestManager.setCoverageSettings(testSuite, ...
-      'Decision', true, 'Condition', true, 'MCDC', true);
-  
-  disp(['Coverage metrics enabled for test suite: ' testSuite]);
-  
-  % Run the test suite with coverage enabled
-  Simulink.Test.TestManager.runTestSuite(testSuite);
-  
-  % Retrieve and display coverage results
-  coverageResults = Simulink.Test.TestManager.getCoverage(testSuite);
-  disp('Coverage Results:');
-  disp(coverageResults);
-  ```
-  
-  *Figure 27: Enabling and Running Simulink Coverage*
-
-By effectively utilizing these tools, developers can create a robust closed-loop testing environment that ensures comprehensive validation of the BMS ECU within its operational context.
+### 4.1 Standardized Drive Cycles
+- **Worldwide Harmonised Light Vehicles Test Procedure (WLTP Class 3)**:
+  - Validates SOC estimation accuracy over $1,800\,\text{s}$ duration, peak speeds of $131.3\,\text{km/h}$, and varied regenerative braking energies.
+- **US06 Supplemental Federal Test Procedure (SFTP)**:
+  - High-acceleration aggressive highway profile; peak discharge rates up to $4\text{C}$ to $5\text{C}$ testing instantaneous dynamic overpotential models and voltage-sag derating.
+- **Extreme Fast Charging (XFC - 350 kW DC Fast Charging)**:
+  - Multi-stage Constant Current Constant Voltage (CC-CV) protocol. Validates active chiller pump throttling and high-temperature cutoff algorithms ($T_{\text{pack}} \ge 55^\circ\text{C}$).
 
 ---
 
-## **Example: Validating Current Limits**
+## 5. Formal Safety Verification via Temporal Logic Assertions
 
-To demonstrate the practical application of closed-loop testing, consider an example focused on validating the BMS's charge and discharge current limits. This example showcases how to set up test scenarios, monitor internal signals, define assessments, and analyze results to ensure that the BMS operates within safe and efficient parameters.
+Simulink Test enables mathematical verification of system safety requirements using **Temporal Logic Assessments**. These assertions verify not only steady-state conditions, but exact time-domain envelopes mandated by ISO 26262[^ISO26262_4].
 
-### **Test Scenario**
+```mermaid
+flowchart TD
+    subgraph Trigger_Condition["Trigger Condition: Fault Injected"]
+        V_VIOLATION["V_cell >= 4.250 V (Cell 42 Overvoltage)"]
+    end
 
-**Objective**: Ensure that the BMS maintains charge and discharge currents within specified safe limits during driving operations.
+    subgraph FTTI_Window["Fault Tolerant Time Interval (FTTI <= 100 ms)"]
+        TIMER["Clock: t_fault -> t_fault + 100 ms"]
+    end
 
-**Steps**:
+    subgraph Expected_Action["Safe State Transition"]
+        OPEN_CONTACTOR["Contactor State == OPEN"]
+        CURRENT_ZERO["|I_pack| <= 1.0 A"]
+    end
 
-1. **Inject a Drive Cycle with Aggressive Acceleration**:
-   - **Action**: Use the Test Sequence Block to define a drive cycle that includes rapid acceleration phases to test the BMS's ability to handle high current demands.
-   - **Procedure**:
-     - Set the system state to `DRIVING` with SOC starting above 30%.
-     - Simulate aggressive acceleration events that demand higher charge and discharge currents.
-   
-2. **Use Observers to Monitor Current Limits**:
-   - **Action**: Observe the `Charge_Current_Limit` and `Discharge_Current_Limit` signals to ensure they remain within predefined thresholds.
-   - **Procedure**:
-     - Connect observers to the relevant internal signals within the BMS ECU.
-     - Ensure that these signals are logged and available for assessment.
-   
-3. **Verify Limits via Test Assessment Blocks**:
-   - **Action**: Define and execute `verify` statements to automatically check that current limits are not exceeded during the test run.
-   - **Procedure**:
-     - Configure Test Assessment blocks with conditions like `Charge_Current_Limit < 50A` and `Discharge_Current_Limit > 10A`.
-     - Run the test harness and monitor assessment results for compliance.
+    V_VIOLATION --> TIMER
+    TIMER --> OPEN_CONTACTOR
+    OPEN_CONTACTOR --> CURRENT_ZERO
+    CURRENT_ZERO --> PASS_ASSERTION[Formal Safety Requirement PASSED]
+```
 
-**Test Scenario Configuration Example**:
+### 5.1 Temporal Logic Assessment Formulations
+
+1. **Overvoltage Protection FTTI Response**:
+   - *Requirement*: Whenever any cell voltage exceeds $4.25\,\text{V}$ for longer than $50\,\text{ms}$, the main contactors must transition to `OPEN` within $100\,\text{ms}$, and pack current must decay below $1.0\,\text{A}$.
+   - *Formal Temporal Logic Specification*:
+
+$$
+\square \left( \left( \exists i : V_i \ge 4.25\,\text{V} \right) \text{ held for } 50\,\text{ms} \implies \lozenge_{\le 100\,\text{ms}} \left( \text{State}_{\text{contactor}} == \text{OPEN} \land |I_{\text{pack}}| \le 1.0\,\text{A} \right) \right)
+$$
+
+2. **Precharge Sequence Timeout Assertion**:
+   - *Requirement*: Upon key-on, precharge must complete within $500\,\text{ms}$ ($V_{\text{link}} \ge 0.95 \cdot V_{\text{pack}}$); otherwise, the precharge contactor must abort opening within $20\,\text{ms}$.
+   - *Formal Specification*:
+
+$$
+\square \left( \text{PrechargeStarted} \land \neg \lozenge_{\le 500\,\text{ms}} \left( V_{\text{link}} \ge 0.95 V_{\text{pack}} \right) \implies \lozenge_{\le 20\,\text{ms}} \left( \text{PrechargeContactor} == \text{OPEN} \land \text{FaultLatched} \right) \right)
+$$
+
+3. **Active Thermal Derating Assertion**:
+   - *Requirement*: If maximum cell temperature exceeds $50^\circ\text{C}$, discharge power limit $P_{\text{dis\_max}}$ must scale down monotonically:
+
+$$
+\square \left( T_{\text{max}} \ge 50^\circ\text{C} \implies P_{\text{dis\_max}} \le P_{\text{nominal}} \cdot \left(1 - \frac{T_{\text{max}} - 50^\circ\text{C}}{10^\circ\text{C}}\right) \right)
+$$
+
+---
+
+## 6. Closed-Loop Fault Injection Experiments
+
+A robust closed-loop harness provides native mechanisms to inject electrical, mechanical, and thermal anomalies dynamically during simulation execution.
+
+```mermaid
+graph TD
+    subgraph Fault_Catalog["Automotive BMS Closed-Loop Fault Catalog"]
+        F1["1. Contactor Welding (Failure to open on trip command)"]
+        F2["2. Isolation Breakdown (Chassis short: R_iso drops to 50 Ohm/V)"]
+        F3["3. Thermal Runaway Initiation (Exothermic heat generation spike)"]
+        F4["4. CAN-FD Bus Disruption (Pack current sensor packet dropout)"]
+        F5["5. AFE Loss of Communication (Daisy-chain SPI parity faults)"]
+    end
+
+    Fault_Catalog --> INJECTOR[Simulink Test Fault Injector Engine]
+    INJECTOR --> CO_SIM[Closed-Loop Co-Simulation Harness]
+    CO_SIM --> DIAG[BMS Diagnostic Event Manager DEM Evaluation]
+```
+
+### 6.1 Fault Injection Matrix
+
+| Fault ID | Injected Phenomenon | Injection Point | Expected BMS Closed-Loop Action | ISO 26262 ASIL |
+| :--- | :--- | :--- | :--- | :--- |
+| **FLT_CL_01** | Negative contactor welded closed | Simscape Relay Block switch state | Detect weld via differential voltage sensor; trip positive contactor; inhibit restart | ASIL-D |
+| **FLT_CL_02** | Shunt current sensor bias ($+15\,\text{A}$) | Current measurement feedback line | EKF innovation residual exceeds threshold $\gamma_k$; trigger sensor plausibility fault | ASIL-C |
+| **FLT_CL_03** | Isolation breakdown ($R_{\text{iso}} = 50\,\Omega/\text{V}$)| DC+ bus to chassis virtual resistor | Bender insulation monitor flags isolation warning ($< 500\,\Omega/\text{V}$) within $5\,\text{s}$ | ASIL-B |
+| **FLT_CL_04** | Cell internal micro-short ($R_{\text{leak}} = 10\,\Omega$)| Cell #12 parallel leakage path | High self-discharge detected by resting cell balancing manager; set warning | ASIL-C |
+| **FLT_CL_05** | Coolant flow loss ($0\,\text{L/min}$)| Thermal boundary condition flow | Thermal controller derates current; triggers Emergency Stop before $T_{\text{cell}} \ge 60^\circ\text{C}$| ASIL-D |
+
+---
+
+## 7. Automated Closed-Loop Test Runner Script
+
+The following script executes a closed-loop WLTP mission profile, monitors formal temporal assertions, evaluates thermal derating performance, and logs critical validation metrics.
 
 ```matlab
-% MATLAB Code Snippet: Configuring Test Scenario for Current Limits
-testHarness = 'BMS_ClosedLoop_Test_Harness';
+%% Automated Closed-Loop BMS Co-Simulation Runner
+% System: Full 400V Pack + Simscape Multiphysics Plant + Discrete BMS ECU
 
-% Define aggressive acceleration drive cycle
-driveCycleData = [
-    struct('time', 0, 'State', 'STANDBY', 'SOC', 35, 'cell_temp', 40),
-    struct('time', 10, 'State', 'DRIVING', 'SOC', 35, 'cell_temp', 40),
-    struct('time', 20, 'State', 'DRIVING', 'SOC', 34, 'cell_temp', 42),
-    struct('time', 30, 'State', 'DRIVING', 'SOC', 33, 'cell_temp', 43),
-    struct('time', 40, 'State', 'DRIVING', 'SOC', 32, 'cell_temp', 44),
-    struct('time', 50, 'State', 'FAULT', 'SOC', 32, 'cell_temp', 46)
-];
+clc; clear; close all;
+harnessModel = 'BMS_ClosedLoop_Harness';
 
-% Configure Test Sequence Block
-set_param([testHarness, '/Test_Sequence'], 'Sequence', driveCycleData);
+fprintf('[INFO] Initializing Closed-Loop Model: %s\n', harnessModel);
+load_system(harnessModel);
 
-% Add Verify Statements for Current Limits
-assessmentBlock = [testHarness, '/Current_Limits_Assessment'];
-Simulink.Test.Assessment.addVerify(assessmentBlock, 'Charge_Current_Limit < 50', 'Must stay below 50A');
-Simulink.Test.Assessment.addVerify(assessmentBlock, 'Discharge_Current_Limit > 10', 'Must stay above 10A');
+% Step 1: Configure Co-Simulation Parameters
+set_param(harnessModel, 'StopTime', '1800'); % Full WLTC Class 3 Drive Cycle
+set_param(harnessModel, 'Solver', 'ode23t');
+set_param(harnessModel, 'MaxStep', '0.005'); % 5 ms step limit
 
-disp('Test scenario configured for validating current limits.');
+% Step 2: Inject Dynamic Environmental Profiles
+fprintf('[INFO] Loading WLTP Drive Cycle and Ambient Profile (T_amb = 35 degC)\n');
+evalin('base', 'T_ambient = 35.0;'); % Elevated ambient temperature
+evalin('base', 'Chiller_Coolant_Temp = 20.0;');
+
+% Step 3: Execute Co-Simulation
+fprintf('[INFO] Simulating Closed-Loop Dynamics...\n');
+tic;
+simOut = sim(harnessModel);
+simDuration = toc;
+fprintf('[INFO] Simulation completed in %.2f seconds.\n', simDuration);
+
+% Step 4: Extract Logged Simulation Vectors
+logsout = simOut.get('logsout');
+time = logsout.get('Pack_Current').Values.Time;
+current = logsout.get('Pack_Current').Values.Data;
+maxCellTemp = logsout.get('Max_Cell_Temperature').Values.Data;
+minCellVolt = logsout.get('Min_Cell_Voltage').Values.Data;
+estSOC = logsout.get('Estimated_SOC').Values.Data;
+trueSOC = logsout.get('True_Pack_SOC').Values.Data;
+
+% Step 5: Evaluate Verification Acceptance Criteria
+socRMSE = sqrt(mean((trueSOC - estSOC).^2));
+fprintf('[RESULT] SOC Estimation RMSE: %.4f%%\n', socRMSE * 100);
+
+maxObservedTemp = max(maxCellTemp);
+fprintf('[RESULT] Peak Cell Temperature Reached: %.2f degC\n', maxObservedTemp);
+
+% Step 6: Verify Assertions
+assert(socRMSE < 0.015, 'CRITICAL: SOC estimation error exceeds 1.5% limit!');
+assert(maxObservedTemp < 55.0, 'CRITICAL: Cell temperature exceeded maximum safety threshold of 55 degC!');
+assert(min(minCellVolt) >= 2.80, 'CRITICAL: Under-voltage limit (2.80V) violated during drive cycle!');
+
+fprintf('[SUCCESS] All closed-loop system requirements successfully verified.\n');
 ```
-
-*Figure 28: Configuring Test Scenario for Current Limits*
-
-### **Results**
-
-Upon executing the test scenario, the following outcomes are observed:
-
-1. **Pass Criteria**:
-   - **Condition**: All `verify` statements are satisfied; `Charge_Current_Limit` remains below 50A and `Discharge_Current_Limit` stays above 10A.
-   - **Outcome**: The BMS operates within safe current limits, passing the test case.
-   
-2. **Fail Criteria**:
-   - **Condition**: Any `verify` statement fails (e.g., `Charge_Current_Limit` exceeds 50A).
-   - **Outcome**: The test case fails, and the Diagnostic Viewer reports the specific condition violation.
-   
-**Test Results Overview**:
-
-```plaintext
-Test Results:
---------------
-- Test Case: Validate Current Limits
-  - Charge_Current_Limit: 48A (Pass)
-  - Discharge_Current_Limit: 12A (Pass)
-  - Overall Result: PASS
-```
-
-**Analysis**:
-
-1. **Execution Time**:
-   - **Observation**: The system maintained real-time performance, with control loops executing within the required time constraints.
-   
-2. **Signal Accuracy**:
-   - **Observation**: All observed signals matched the expected values, indicating consistent behavior across MIL, SIL, and PIL testing stages.
-   
-3. **Coverage Achievement**:
-   - **Observation**: The test scenario contributed to achieving full MCDC coverage, ensuring that all logical conditions within the current limit checks were thoroughly exercised.
-
-**Example Diagnostic Report**:
-
-```plaintext
-Diagnostic Viewer Report
-------------------------
-Test Case: Validate Current Limits
-
-1. Charge_Current_Limit Verification
-   - Condition: Charge_Current_Limit < 50A
-   - Actual Value: 48A
-   - Status: PASS
-
-2. Discharge_Current_Limit Verification
-   - Condition: Discharge_Current_Limit > 10A
-   - Actual Value: 12A
-   - Status: PASS
-
-Overall Test Result: PASS
-
-Recommendations:
-- Continue monitoring current limits during diverse operational scenarios.
-- Consider testing additional fault conditions to further validate BMS robustness.
-```
-
-*Figure 29: Sample Diagnostic Viewer Report*
-
-This example demonstrates how closed-loop testing effectively validates critical aspects of the BMS, ensuring that it operates safely and efficiently within its intended operational parameters.
 
 ---
 
-## **Benefits of Closed-Loop Testing**
+## 8. References
 
-Implementing closed-loop testing for the BMS ECU offers numerous advantages that significantly enhance system validation, reliability, and compliance with safety standards. The key benefits include:
-
-1. **System Validation**:
-   - **Description**: Tests the interactions between the BMS controller and plant dynamics, ensuring that all components work harmoniously.
-   - **Benefit**: Confirms that the integrated system functions as intended, maintaining stability and performance under various operational conditions.
-
-2. **Non-Intrusive Monitoring**:
-   - **Description**: Utilizes observers to monitor internal signals without modifying the model's external interfaces.
-   - **Benefit**: Enables detailed inspection and validation of internal logic and behavior without impacting system functionality or introducing potential errors.
-
-3. **Automated Checks**:
-   - **Description**: Employs `verify` statements within Test Assessment blocks to enforce safety constraints and performance metrics.
-   - **Benefit**: Automates the verification process, reducing manual oversight and ensuring consistent adherence to predefined conditions.
-
-4. **Real-World Scenario Simulation**:
-   - **Description**: Simulates real-world operational scenarios such as aggressive driving, charging, discharging, and fault conditions.
-   - **Benefit**: Tests the BMS's ability to handle typical and extreme conditions, ensuring robust performance and safety in real-world applications.
-
-5. **Comprehensive Coverage**:
-   - **Description**: Integrates Simulink Coverage to measure and ensure that all critical execution paths are tested.
-   - **Benefit**: Identifies untested areas within the model, allowing developers to enhance test suites for thorough validation.
-
-6. **Enhanced Traceability**:
-   - **Description**: Maintains clear bi-directional links between requirements, model elements, and test cases.
-   - **Benefit**: Facilitates audits and compliance checks by ensuring that all requirements are adequately addressed and validated through testing.
-
-7. **Risk Mitigation**:
-   - **Description**: Identifies and addresses potential issues early in the development process through rigorous testing.
-   - **Benefit**: Reduces the likelihood of system failures post-deployment, enhancing overall reliability and safety.
-
-8. **Efficiency and Automation**:
-   - **Description**: Streamlines the testing process by reusing test harnesses and automating verification checks.
-   - **Benefit**: Saves time and resources, allowing developers to focus on optimizing system performance and addressing complex issues.
-
-9. **Quality Assurance**:
-   - **Description**: Provides a robust framework for validating both functional and performance aspects of the BMS.
-   - **Benefit**: Ensures high-quality software delivery, fostering user confidence and system dependability.
+[^Kramer2019]: B. Kramer, R. Simons, and S. Huh, "Model-Based Design of Battery Management Systems for Electric Vehicles," *SAE Technical Paper 2019-01-0872*, 2019. [DOI: 10.4271/2019-01-0872](https://doi.org/10.4271/2019-01-0872)
+[^Plett2015]: G. L. Plett, *Battery Management Systems, Volume I: Battery Modeling*, Artech House, 2015.
+[^ISO26262_4]: International Organization for Standardization, "Road vehicles — Functional safety — Part 4: Product development at the system level," *ISO Standard 26262-4:2018*, Dec. 2018.
+[^Baronti2014]: F. Baronti, R. Roncella, and R. Saletti, "Performance comparison of active balancing techniques for lithium-ion batteries," *Journal of Power Sources*, vol. 267, pp. 603–609, 2014.

@@ -1,165 +1,223 @@
-# Battery Emulator
+# Precision Battery Cell Emulation Hardware
+
+Physical lithium-ion cells present severe safety, variability, and degradation challenges when utilized for software validation: testing edge-case failures—such as extreme overvoltage, deep thermal runaway, or internal dendrite micro-shorts—destroys physical cells and risks toxic gas venting or fires. Consequently, modern battery HIL test benches replace physical chemistry with **Precision Battery Cell Emulators**[^Ploeger2018].
+
+A cell emulator is not a simple programmable DC power supply. It is a specialized, multi-channel, galvanically isolated, **4-quadrant bipolar power electronic instrument** engineered to reproduce electrochemical dynamic impedance, millivolt-level accuracy, and high sink/source currents at microsecond bandwidths[^Andrea2020].
+
+This chapter provides an in-depth analysis of cell emulation hardware: 4-quadrant converter topologies, dynamic balancing sink mechanics, galvanic isolation architectures, and programmable temperature emulation.
+
+---
+
+## 1. Electrical Architecture of a Cell Emulation Channel
+
+To accurately interface with an automotive Analog Front-End (AFE), each individual cell emulator channel must operate across both sourcing (discharging) and sinking (charging/balancing) modes.
+
+```mermaid
+flowchart LR
+    subgraph Digital_Control["Digital Control Plane (Isolated)"]
+        DSP[Digital Signal Controller / FPGA]
+        DAC[16-bit Precision DAC]
+        ADC_V[18-bit Voltage Sense ADC]
+        ADC_I[16-bit Current Sense ADC]
+        DSP --> DAC
+        ADC_V --> DSP
+        ADC_I --> DSP
+    end
+
+    subgraph Power_Stage["Linear 4-Quadrant Power Stage"]
+        DAC --> ERROR_AMP[Linear Error Amplifier & Compensation]
+        ERROR_AMP --> PUSH_PULL[Bipolar Push-Pull Output Stage: BJT/MOSFET]
+        PUSH_PULL --> CH_OUT_P[Channel Terminal +]
+        SHUNT[Precision Shunt Resistor] --> CH_OUT_N[Channel Terminal -]
+        
+        CH_OUT_P -.->|Kelvin Voltage Feedback| ADC_V
+        CH_OUT_N -.->|Kelvin Voltage Feedback| ADC_V
+        SHUNT -.->|Differential Current Sense| ADC_I
+    end
 
-A **Battery Emulator** is an advanced device or system designed to replicate the behavior of real batteries. It allows engineers and developers to test and analyze various scenarios without relying on physical batteries. This capability is crucial in the development and validation of Battery Management Systems (BMS) and in testing battery-powered devices, ensuring safety, efficiency, and reliability in diverse applications.
+    subgraph Isolation_Barrier["Galvanic Isolation Barrier (1500 V DC)"]
+        ISO_PWR[Reinforced Isolated DC-DC Supply]
+        ISO_COMM[Digital Isolators: Capacitive / Magnetic]
+    end
+
+    ISO_PWR --> Digital_Control
+    ISO_PWR --> Power_Stage
+    DSP <--> ISO_COMM
+```
+
+### 1.1 Four-Quadrant Operational Envelope
+
+A standard laboratory power supply operates exclusively in Quadrant I (positive voltage, positive sourcing current). A cell emulator channel must seamlessly traverse **Quadrant I and Quadrant II**:
+
+```mermaid
+quadrantChart
+    title 4-Quadrant Cell Emulator V-I Operating Plane
+    x-axis "Negative Current (Sink / Charge / Balancing)" --> "Positive Current (Source / Discharge)"
+    y-axis "Negative Voltage (Reverse Polarity Fault)" --> "Positive Voltage (Nominal Cell Range: 0 to 5 V)"
+    quadrant-1 "Quadrant I: Sourcing Power (Simulating Discharge)"
+    quadrant-2 "Quadrant II: Sinking Power (Simulating Charge & Balancing)"
+    quadrant-3 "Quadrant III: Inverted Sinking (Fault Injection)"
+    quadrant-4 "Quadrant IV: Inverted Sourcing (Fault Injection)"
+```
+
+- **Quadrant I ($V > 0, I > 0$)**: The emulator acts as a power source, simulating a discharging cell delivering load current to the vehicle powertrain.
+- **Quadrant II ($V > 0, I < 0$)**: The emulator acts as an active electronic sink, absorbing regenerative braking currents or sinking passive cell balancing currents initiated by the BMS AFE.
+
+---
+
+## 2. Dynamic Performance and Metrological Requirements
 
-## Key Aspects of a Battery Emulator
+BMS AFEs (such as the Analog Devices ADBMS6830 or Texas Instruments BQ79616) utilize high-resolution $\Delta\Sigma$ converters with measurement resolutions down to $100\,\mu\text{V}$ and accuracies within $\pm 1.5\,\text{mV}$[^AnalogDevices2020]. To prevent the test equipment from dominating the measurement uncertainty budget, the emulator must exceed the AFE's precision by at least a factor of three (Test Uncertainty Ratio $\text{TUR} \ge 3:1$)[^Taylor1997].
+
+### 2.1 Critical Emulation Metrology Specifications
+
+| Metrological Parameter | Target Specification | Physical Justification in BMS Testing |
+| :--- | :--- | :--- |
+| **Voltage Range** | $0.000\,\text{V}$ to $+5.500\,\text{V}$ (or $-2.0\,\text{V}$ fault) | Covers deep discharge (LFP cutoff $2.0\,\text{V}$) to extreme OVP ($4.5\,\text{V}$). |
+| **Absolute Voltage Accuracy**| $\le \pm 1.0\,\text{mV}$ across full temperature range | Eliminates false-positive OVP/UVP diagnostics during calibration. |
+| **Measurement Resolution** | 16-bit to 18-bit ($\le 100\,\mu\text{V}$) | Enables detection of minute balancing voltage shifts. |
+| **Ripple and Noise** | $< 500\,\mu\text{V}_{\text{RMS}}$ ($10\,\text{Hz} - 100\,\text{kHz}$) | Prevents high-frequency switching noise from aliasing AFE ADC filters. |
+| **Current Sink/Source** | $\pm 3.0\,\text{A}$ continuous ($\pm 5.0\,\text{A}$ peak) | Absorbs full passive balancing currents and module pulse loads. |
+| **Current Measurement Accuracy**| $\pm 0.1\%$ Full Scale ($\pm 3\,\text{mA}$) | Verifies exact cell-by-cell balancing current consumption. |
+| **Dynamic Response Time** | $\le 10\,\mu\text{s}$ for $10\% \to 90\%$ load step | Accurately reproduces fast inverter switching current pulses. |
+| **Output Impedance ($Z_{\text{out}}$)**| Programmable: $0\,\text{m}\Omega$ to $100\,\text{m}\Omega$ | Hardware reproduction of high-frequency internal resistance $R_0$. |
+
+---
+
+## 3. Passive Balancing Load Sinking
+
+Cell balancing verification is one of the most hardware-demanding tasks in BMS testing. When a cell reaches the balancing threshold, the AFE closes an internal or external MOSFET, discharging current through a bypass resistor $R_{\text{bal}}$[^Baronti2014].
+
+```mermaid
+flowchart LR
+    subgraph Emulator_Channel["Cell Emulator Channel (V_cell = 4.200 V)"]
+        V_SOURCE[Ideal Voltage Source]
+        R_INT[Emulated Internal Resistor: R_0 = 15 mOhm]
+        CURRENT_SINK[Active Linear Current Sink]
+        V_SOURCE --- R_INT
+        R_INT --- CURRENT_SINK
+    end
+
+    subgraph AFE_Balancing_Circuit["AFE On-Board Passive Balancing Network"]
+        SW[Balancing MOSFET Switch]
+        R_BAL[Balancing Resistor: 33 Ohm]
+        FILTER_R[Input Filter Resistor: 100 Ohm]
+        AFE_PIN[AFE ADC Input Terminal]
+        
+        SW --- R_BAL
+        R_BAL --- FILTER_R
+        FILTER_R --- AFE_PIN
+    end
+
+    CURRENT_SINK <==>|Bypassed Current: I_bal = 127 mA| SW
+```
+
+### 3.1 Sinking Dynamics and Thermal Management
+When the balancing switch closes:
 
-Battery emulators encompass several critical features that make them indispensable tools in modern battery and BMS development. Understanding these aspects is essential for effectively utilizing emulators in various testing and development environments.
+$$
+I_{\text{bal}} = \frac{V_{\text{cell}}}{R_{\text{bal}} + R_{\text{MOSFET}} + 2 R_{\text{trace}}} \approx \frac{4.20\,\text{V}}{33\,\Omega} \approx 127.3\,\text{mA}
+$$
 
-### 1. Precise Replication of Battery Behavior
-
-A high-quality battery emulator accurately simulates the electrical characteristics of real batteries, including:
-
-- **Voltage and Current Profiles:** Emulators can mimic the voltage and current responses of batteries under different load conditions, enabling realistic testing scenarios.
-- **Internal Resistance:** By replicating the internal resistance of batteries, emulators provide a more authentic simulation of how batteries behave during charging and discharging cycles.
-- **Dynamic Behavior:** Emulators can simulate transient behaviors and responses to sudden changes in load, allowing for comprehensive testing of BMS algorithms and responses.
-
-This precise replication ensures that BMS and other battery-dependent systems are tested under conditions that closely mirror real-world operations, facilitating the identification and mitigation of potential issues.
-
-### 2. Configurable Battery Models
-
-Modern battery emulators come equipped with integrated battery models that can be tailored to specific requirements. Key features include:
-
-- **Diverse Cell Chemistries:** Emulators can simulate various battery chemistries, such as Lithium-Ion, Nickel-Metal Hydride, and Lead-Acid, providing flexibility for different applications.
-- **Adjustable Capacities:** Users can configure the capacity of the simulated battery to match the specifications of the target system.
-- **State of Charge (SOC) Simulation:** Emulators can replicate different SOC levels, enabling testing across the full operational range of the battery.
-
-These configurable models allow developers to create customized testing environments that reflect the unique characteristics of the batteries used in their specific applications.
-
-**Learn more:** [Battery Emulator Features](https://bexema.com/de/produkte/hochvolt-emulatoren/batterie-emulator/)
-
-### 3. Safety Features
-
-Testing with real batteries poses inherent risks, including overcharging, deep discharging, and short circuits. Battery emulators mitigate these risks by providing a controlled and safe testing environment. Key safety features include:
-
-- **Protective Mechanisms:** Emulators are equipped with safeguards to prevent conditions that could damage the test device or the emulator itself.
-- **Isolation:** Electrical isolation ensures that faults within the emulator do not propagate to connected systems.
-- **Emergency Shutdown:** In case of detected anomalies, emulators can automatically shut down to prevent unsafe conditions.
-
-These safety features enable developers to conduct rigorous testing without compromising safety, protecting both equipment and personnel.
-
-### 4. Reproducibility
-
-Unlike real batteries, which can experience performance degradation and variability over time, battery emulators offer consistent and repeatable test conditions. This reproducibility is crucial for:
-
-- **Comparative Testing:** Ensures that test results are comparable across different sessions and configurations.
-- **Algorithm Validation:** Facilitates the accurate assessment of BMS algorithms by providing stable and predictable battery behavior.
-- **Quality Assurance:** Enhances the reliability of testing processes, contributing to higher-quality BMS and battery-powered devices.
-
-Consistent test conditions enable more reliable and meaningful evaluations of system performance and behavior.
-
-## Application Areas of Battery Emulators
-
-Battery emulators serve a wide range of applications across various industries, each benefiting from the emulator's ability to provide controlled and accurate battery simulations.
-
-### Development and Testing of Battery Management Systems (BMS)
-
-Battery emulators are pivotal in the development and testing of BMS, allowing engineers to:
-
-- **Simulate Fault Scenarios:** Emulate conditions such as overcharging, deep discharging, and short circuits to test the BMS's protective responses.
-- **Evaluate System Responses:** Observe how the BMS manages battery parameters under different stress conditions.
-- **Optimize BMS Algorithms:** Fine-tune algorithms for better performance, efficiency, and safety based on emulator-generated data.
-
-**Discover more:** [BMS Development with Emulators](https://www.opal-rt.com/de/battery-management-system/)
-
-### Testing of Chargers and Power Electronics
-
-Charger manufacturers and power electronics developers use battery emulators to:
-
-- **Ensure Compatibility:** Test chargers with various simulated battery types and states to verify compatibility and performance.
-- **Assess Efficiency:** Measure the efficiency of charging processes under different simulated battery conditions.
-- **Validate Charging Profiles:** Confirm that chargers adhere to specified charging profiles and safety standards across a range of simulated scenarios.
-
-This application ensures that charging devices perform reliably and efficiently with different battery configurations.
-
-### Research and Development
-
-In research settings, battery emulators facilitate the exploration of new battery technologies and innovations by:
-
-- **Accelerating Prototyping:** Allowing researchers to test new concepts without the delays associated with physical battery production.
-- **Enabling Advanced Simulations:** Providing the flexibility to simulate cutting-edge battery chemistries and configurations.
-- **Supporting Experimental Studies:** Offering a controlled environment for conducting experiments and gathering data on battery behavior and BMS performance.
-
-Battery emulators thus play a crucial role in advancing battery technology and enhancing the development of next-generation energy storage solutions.
-
-## Examples of Battery Emulators
-
-Several manufacturers offer advanced battery emulators tailored to different testing and development needs. Below are notable examples:
-
-### BeXema Battery Emulator
-
-The **BeXema Battery Emulator** is renowned for its powerful and configurable battery models, making it suitable for simulating various vehicle energy storage systems. Key features include:
-
-- **SOC-Dependent Terminal Voltage:** Accurately replicates terminal voltage based on the state of charge, even under rapid and high load changes.
-- **Versatile Configuration:** Capable of emulating different battery sizes and chemistries to match specific application requirements.
-- **Robust Performance:** Designed to handle demanding testing scenarios typical in automotive and energy storage applications.
-
-**Learn more:** [BeXema Battery Emulator](https://bexema.com/de/produkte/hochvolt-emulatoren/batterie-emulator/)
-
-### OPAL-RT BMS Simulator
-
-**OPAL-RT** offers a real-time simulation platform specifically for Battery Management Systems. Its **BMS Simulator** provides:
-
-- **Real-Time Capabilities:** Enables direct simulation of battery models in real-time, facilitating Hardware-in-the-Loop (HIL) testing.
-- **Integration with Development Tools:** Seamlessly integrates with various development environments and testing setups.
-- **High Accuracy:** Delivers precise simulations that mirror the behavior of real batteries, enhancing the reliability of BMS testing.
-
-**Learn more:** [OPAL-RT BMS Simulator](https://www.opal-rt.com/de/battery-management-system/)
-
-### Comemso Battery Cell Simulator
-
-The **Comemso Battery Cell Simulator** serves as an all-in-one solution for testing and developing Battery Management Systems and mobile energy storage systems. Its features include:
-
-- **Precise Cell Simulation:** Accurately simulates individual battery cells, allowing for detailed monitoring and control system verification.
-- **Comprehensive Testing Capabilities:** Supports a wide range of testing scenarios, including charging, discharging, and fault conditions.
-- **User-Friendly Interface:** Designed for ease of use, enabling efficient setup and execution of tests without extensive configuration.
-
-**Learn more:** [Comemso Battery Cell Simulator](https://comemso.com/de/battery-cell-simulation-details/)
-
-## Advantages of Battery Emulators
-
-Battery emulators offer numerous benefits that make them essential tools in the development and testing of battery systems and BMS. Key advantages include:
-
-### Safety
-
-- **Risk Mitigation:** Conducting tests without real batteries eliminates risks such as fire hazards, chemical leaks, and electrical failures.
-- **Controlled Environment:** Emulators provide a stable and predictable testing environment, reducing the likelihood of accidental damage or injury.
-- **Protective Features:** Built-in safety mechanisms safeguard both the emulator and connected devices during testing.
-
-### Flexibility
-
-- **Versatile Simulations:** Emulators can mimic various battery types, chemistries, and states of charge, accommodating a wide range of testing requirements.
-- **Configurable Models:** Users can adjust emulator settings to replicate specific battery behaviors, enhancing the relevance of test results.
-- **Adaptable to Different Applications:** Suitable for diverse applications, including automotive, energy storage, and consumer electronics.
-
-### Cost-Efficiency
-
-- **Reduced Hardware Costs:** Eliminates the need to procure multiple physical batteries for testing different scenarios and configurations.
-- **Lower Maintenance:** Minimizes expenses related to battery maintenance, replacement, and storage.
-- **Scalable Testing:** Facilitates extensive testing without incurring additional costs associated with expanding physical battery inventories.
-
-These advantages contribute to more efficient, safe, and economical development and testing processes.
-
-## Disadvantages of Battery Emulators
-
-While battery emulators offer significant benefits, they also have certain limitations that users should consider:
-
-### Limited Realism
-
-- **Incomplete Physical Phenomena Replication:** Despite advanced modeling, emulators cannot fully capture all the complex physical and chemical behaviors of real batteries.
-- **Environmental Factors:** Real-world factors such as temperature variations, mechanical vibrations, and aging effects are challenging to simulate accurately.
-- **Dynamic Interactions:** Interactions between multiple cells and modules in a real battery pack may not be entirely replicable in an emulator.
-
-### Complexity
-
-- **Specialized Knowledge Required:** Setting up and configuring battery emulators demands a deep understanding of both the emulator's functionalities and the underlying battery systems.
-- **Time-Consuming Configuration:** Achieving accurate simulations may require extensive time and effort to fine-tune emulator settings and models.
-- **Integration Challenges:** Incorporating emulators into existing testing workflows and systems can be complex, particularly in environments with diverse equipment and standards.
-
-These disadvantages highlight the importance of careful planning and expertise when utilizing battery emulators to ensure that their limitations do not impede the development and testing objectives.
-
-## Summary
-
-Battery emulators are indispensable tools in the modern landscape of battery and Battery Management System (BMS) development. They provide a safe, flexible, and cost-effective means to simulate and analyze battery behavior under a wide array of conditions without the risks and constraints associated with using real batteries. By offering precise replication of electrical characteristics, configurable models, and consistent test environments, emulators facilitate the rigorous testing and validation necessary for developing reliable and efficient BMS solutions.
-
-While they may not fully replicate all physical aspects of real batteries and require specialized knowledge for effective use, the advantages they offer in terms of safety, flexibility, and cost-efficiency make battery emulators a valuable asset for engineers, developers, and researchers. As battery technologies continue to evolve, the role of emulators in advancing safe and efficient energy storage solutions will undoubtedly become even more critical.
+For an 8-channel board with all cells balancing concurrently:
+
+$$
+P_{\text{sink}} = 8 \times (4.20\,\text{V} \times 0.1273\,\text{A}) \approx 4.28\,\text{W}
+$$
+
+If testing high-current commercial vehicle active/passive balancing ($I_{\text{bal}} = 2.0\,\text{A}$ per cell), the board must dissipate or regenerate up to $67.2\,\text{W}$ continuously. Industrial emulator channels incorporate active forced-air cooling, copper vapor chambers, or backplane regenerative DC rails to dissipate this thermal energy without drifting calibration accuracy[^Andrea2020].
+
+---
+
+## 4. Galvanic Isolation and High-Voltage Stacking
+
+In an 800V traction battery pack, up to 192 cells are connected in series. The emulator channels must be cascaded identically in series:
+
+```mermaid
+flowchart TD
+    subgraph Stacking_Assembly["192-Cell Series String (800 V Common Mode)"]
+        CH_192[Channel 192: Potential = 800.0 V] --- CH_191[Channel 191: Potential = 795.8 V]
+        CH_191 --- DOTS[...]
+        DOTS --- CH_2[Channel 2: Potential = 8.4 V]
+        CH_2 --- CH_1[Channel 1: Potential = 4.2 V]
+        CH_1 --- GND[Chassis Reference / Common Ground: 0.0 V]
+    end
+
+    subgraph Isolation_Specs["Isolation Barrier Ratings"]
+        ISO_CH[Inter-Channel Isolation: 100 V DC]
+        ISO_BUS[Channel-to-Earth Chassis Isolation: 1500 V DC Continuous]
+        LEAK[Parasitic Leakage Capacitance: C_iso < 50 pF per channel]
+    end
+```
+
+### 4.1 Dielectric Breakdown and Parasitic Capacitance Hazards
+- **Common-Mode Voltage Stress**: Channel 192 operates at $+800\,\text{V}$ above earth ground. Its isolated DC-DC converter and digital isolation optocouplers/capacitive barriers must guarantee dielectric insulation conforming to **IEC 60664-1** and **UL 61010-1**[^IEC60664].
+- **Capacitive Leakage Currents**: In fast transient environments ($dV/dt$), parasitic capacitance to the grounded enclosure introduces displacement currents:
+
+$$
+i_{\text{leak}} = C_{\text{parasitic}} \frac{dV_{\text{common}}}{dt}
+$$
+
+If $C_{\text{parasitic}} = 100\,\text{pF}$ and an inverter transient exhibits $\frac{dV}{dt} = 10\,\text{kV}/\mu\text{s}$, the leakage current pulse is $i_{\text{leak}} = 1.0\,\text{A}$. Without low-capacitance isolation barrier design ($C_{\text{iso}} \le 30\,\text{pF}$), this current flows into the AFE sensing traces, corrupting ADC readings or destroying input multiplexers.
+
+---
+
+## 5. Programmable Temperature Sensor Emulation
+
+Battery packs deploy Negative Temperature Coefficient (NTC) or Positive Temperature Coefficient (PTC) thermistors embedded throughout the module busbars and cell casings to monitor thermal health.
+
+```mermaid
+flowchart LR
+    subgraph Emulation_Engine["Digital Resistor Decade Channel"]
+        DAC_CTRL[16-bit DAC / Relay Ladder]
+        FET_R[Solid-State Variable Resistor / Precision FET Stage]
+        CALIB_ROM[Steinhart-Hart Calibration LUT]
+        
+        CALIB_ROM --> DAC_CTRL
+        DAC_CTRL --> FET_R
+    end
+
+    subgraph DUT_Interface["AFE Thermistor Sense Circuit"]
+        V_REF[AFE Internal Reference Voltage: 3.300 V]
+        R_PULLUP[Precision Pull-Up Resistor: 10.0 kOhm]
+        AFE_ADC[AFE 16-bit GPIO ADC]
+        
+        V_REF --- R_PULLUP
+        R_PULLUP --- AFE_ADC
+    end
+
+    FET_R <==>|Emulated Resistance: R_NTC(T)| AFE_ADC
+```
+
+### 5.1 The Steinhart-Hart Transformation
+
+The real-time electro-thermal model calculates cell temperature $T$ in Kelvin. The programmable resistor module computes the corresponding target resistance $R_{\text{NTC}}$ via the inverted **Steinhart-Hart Equation**[^Steinhart1968]:
+
+$$
+\frac{1}{T} = A + B \ln(R) + C (\ln(R))^3
+$$
+
+or using the simplified exponential B-parameter formulation:
+
+$$
+R_{\text{NTC}}(T) = R_0 \exp\left( B \left( \frac{1}{T} - \frac{1}{T_0} \right) \right)
+$$
+
+For a standard $10\,\text{k}\Omega$ NTC ($R_0 = 10,000\,\Omega$ at $T_0 = 298.15\,\text{K}, B = 3435\,\text{K}$):
+- At $T = -20^\circ\text{C}$ ($253.15\,\text{K}$): $R_{\text{NTC}} \approx 97,070\,\Omega$
+- At $T = +25^\circ\text{C}$ ($298.15\,\text{K}$): $R_{\text{NTC}} = 10,000\,\Omega$
+- At $T = +60^\circ\text{C}$ ($333.15\,\text{K}$): $R_{\text{NTC}} \approx 2,488\,\Omega$
+
+The emulator channel updates its resistance output dynamically with sub-millisecond response times, allowing validation of sudden coolant loss or exothermic thermal runaway detection algorithms.
+
+---
+
+## 6. References
+
+[^Ploeger2018]: M. Ploeger and H. V. Richter, "Hardware-in-the-Loop Simulation for Modern High-Voltage Automotive Systems," *ATZelektronik worldwide*, vol. 13, no. 4, pp. 38–43, 2018. [DOI: 10.1007/s38314-018-0036-7](https://doi.org/10.1007/s38314-018-0036-7)
+[^Andrea2020]: D. Andrea, *Battery Management Systems for Large Lithium-Ion Battery Packs*, Artech House, 2020.
+[^AnalogDevices2020]: Analog Devices Inc., "ADBMS6830 16-Channel Multicell Battery Monitor Technical Datasheet," *Analog Devices Inc.*, Norwood, MA, 2020.
+[^Taylor1997]: J. R. Taylor, *An Introduction to Error Analysis: The Study of Uncertainties in Physical Measurements*, University Science Books, 1997.
+[^Baronti2014]: F. Baronti, R. Roncella, and R. Saletti, "Performance comparison of active balancing techniques for lithium-ion batteries," *Journal of Power Sources*, vol. 267, pp. 603–609, 2014.
+[^IEC60664]: International Electrotechnical Commission, "Insulation coordination for equipment within low-voltage systems," *IEC Standard 60664-1:2020*, 2020.
+[^Steinhart1968]: J. S. Steinhart and S. R. Hart, "Calibration curves for thermistors," *Deep Sea Research and Oceanographic Abstracts*, vol. 15, no. 4, pp. 497–503, 1968.

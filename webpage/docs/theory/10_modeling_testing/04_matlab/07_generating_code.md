@@ -1,434 +1,438 @@
-# Generating Code
+# Embedded Code Generation for Battery Management Systems
 
-## **1. Introduction to Code Generation**
+Model-Based Design (MBD) culminates in the automated translation of verified Simulink control models and Stateflow state machines into production-grade embedded C or C++ source code. In safety-critical automotive domains governed by **ISO 26262** (ASIL-D) and **ASPICE SWE.3** (Software Detailed Design and Unit Construction), manual coding is systematically superseded by certified automated code generation pipelines[^MathWorks2023]. Using tools such as MathWorks **Embedded Coder®**, battery management software can be synthesized with deterministic execution time, minimal memory footprints, strict static typing, and direct traceability back to architectural requirements[^Kramer2019].
 
-Code generation is a pivotal step in the development lifecycle of a Battery Management System (BMS) using Simulink. By converting validated Simulink models into embedded software, developers ensure that the transition from design to implementation maintains the integrity and functionality of the system. **Embedded Coder**, a key tool within Simulink, facilitates this process by providing advanced capabilities for generating optimized, production-quality C and C++ code tailored for embedded systems.
-
-### **Key Benefits of Code Generation**
-
-1. **Accuracy**:
-   - **Consistency**: The generated code mirrors the behavior of the Simulink model, ensuring that the implementation aligns perfectly with the design specifications.
-   - **Reduced Errors**: Automated code generation minimizes manual coding errors, enhancing the reliability of the BMS software.
-
-2. **Certification Readiness**:
-   - **Compliance**: Generated code adheres to stringent safety standards such as ISO 26262 ASIL-D, making it suitable for safety-critical automotive applications.
-   - **Documentation**: Embedded Coder supports the creation of comprehensive documentation required for certification processes, streamlining regulatory approvals.
-
-3. **Traceability**:
-   - **Bi-Directional Links**: Maintains clear connections between code, model elements, and system requirements, facilitating easy audits and compliance checks.
-   - **Change Management**: Simplifies tracking of modifications across the design and implementation phases, ensuring that updates are consistently applied.
-
-By leveraging Embedded Coder for code generation, developers can efficiently produce high-quality, certified software for BMS applications, ensuring both performance and compliance with industry standards.
+This chapter provides an exhaustive technical analysis of embedded code generation for BMS controllers: from target configuration, memory section mapping, and MISRA-C:2012 compliance, to fixed-point scaling, function partitioning, and AUTOSAR Classic Classic Platform software component (SWC) generation.
 
 ---
 
-## **2. Setting Up Code Generation**
+## 1. Code Generation Architecture and Workflow
 
-Setting up code generation involves configuring Simulink and Embedded Coder to translate the validated BMS model into executable embedded software. This setup ensures that the generated code meets design requirements and adheres to certification standards.
+The automated code generation pipeline converts the graphical block diagram representation into an Intermediate Representation (IR), applies optimization algorithms, and synthesizes ANSI/ISO C code conforming to the target microcontroller's compiler characteristics.
 
-### **2.1 Accessing the Code Perspective**
+```mermaid
+flowchart TD
+    subgraph Model_Level["1. Model-Based Design Level"]
+        SL[Simulink Control Model] --> SF[Stateflow Logic]
+        DICT[Simulink Data Dictionary / Parameters] --> SL
+        REQ[Requirements Links .slreqx] -.-> SL
+    end
 
-To initiate the code generation process, developers must access the Code Perspective within Simulink, which provides specialized tools for configuring and managing code generation settings.
+    subgraph IR_Transform["2. Intermediate Compilation"]
+        SL --> CGIR[Code Generation Intermediate Representation CGIR]
+        SF --> CGIR
+        CGIR --> OPT[AST Optimizations: Dead Code, Loop Unrolling, Constant Folding]
+    end
 
-1. **Open Embedded Coder**:
-   - **Action**: From the Simulink model, navigate to the *Simulink Toolstrip* and click on the *Embedded Coder* badge located in the bottom-right corner.
-   - **Alternative Access**: Alternatively, select *Apps > Embedded Coder* from the Simulink menu.
-   - **Outcome**: This action opens the Code Perspective, presenting tools and interfaces dedicated to code generation.
+    subgraph Code_Synthesizer["3. Code Synthesis Engine"]
+        OPT --> EC[Embedded Coder Engine]
+        CFG[Hardware Implementation: Word Lengths, Endianness] --> EC
+        TLC[Target Language Compiler TLC / Target Hardware Drivers] --> EC
+    end
 
-   ![Accessing Code Perspective](#)
+    subgraph Output_Artifacts["4. Certified Target Artifacts"]
+        EC --> C_SRC["Source Files: model.c, model_data.c"]
+        EC --> H_HDR["Header Files: model.h, model_types.h"]
+        EC --> ARXML["AUTOSAR Software Component Description .arxml"]
+        EC --> RPT["HTML Traceability & MISRA Compliance Report"]
+    end
 
-   *Figure 1: Accessing the Code Perspective in Simulink*
+    subgraph Verification["5. Static & Dynamic Audit"]
+        C_SRC --> STATIC[Static Analysis: Polyspace / MISRA-C:2012 / Coverity]
+        C_SRC --> COMPILER[Cross Compiler: HighTec / Tasking / GCC for ARM/AURIX]
+    end
+```
 
-2. **Key Tools**:
-   - **Code Mappings Editor**:
-     - **Function**: Define storage classes for model elements such as inputs, outputs, and parameters. Storage classes determine how variables are declared and managed in the generated code.
-     - **Usage**: Assign specific storage classes to control data handling, memory usage, and interfacing with other software components.
-     
-   - **Model Data Editor**:
-     - **Function**: Customize data types, dimensions, and storage for individual signals and parameters within the model.
-     - **Usage**: Optimize memory usage and ensure compatibility with target hardware by specifying appropriate data representations.
-
-   **Code Mappings Editor Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Configuring Storage Classes
-   % Define storage classes for model elements
-   Simulink.Requirements.setModelStorageClass('BMS_State', 'ExportedGlobal');
-   Simulink.Requirements.setModelStorageClass('Cell_Voltage', 'Volatile');
-   
-   % Display configuration
-   disp('Storage classes configured for BMS_State and Cell_Voltage.');
-   ```
-   
-   *Figure 2: MATLAB Code for Configuring Storage Classes*
-
-   **Model Data Editor Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Configuring Data Types and Storage
-   % Set data type for Cell_Voltage
-   set_param('BMS_Model/Cell_Voltage', 'OutDataTypeStr', 'single');
-   
-   % Define storage class for SOC_Estimation
-   Simulink.Requirements.setModelStorageClass('SOC_Estimation', 'NonReentrant');
-   
-   % Display configuration
-   disp('Data types and storage classes configured for Cell_Voltage and SOC_Estimation.');
-   ```
-   
-   *Figure 3: MATLAB Code for Configuring Data Types and Storage*
-
-### **2.2 Configuring Code Mappings**
-
-Proper configuration of code mappings is essential to control how model elements are translated into code. This configuration influences the structure, readability, and performance of the generated software.
-
-- **Storage Classes**: Determine the linkage and memory management of variables in the generated code. Common storage classes include:
-  
-  | **Model Element** | **Storage Class**   | **Code Declaration**                      |
-  |-------------------|---------------------|--------------------------------------------|
-  | `BMS_State`       | `ExportedGlobal`    | `extern uint8_T BMS_State;`                |
-  | `Cell_Voltage`    | `Volatile`          | `volatile float Cell_Voltage;`             |
-  
-  **Example Configuration**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Setting Storage Classes
-  % Assign ExportedGlobal to BMS_State
-  set_param('BMS_Model/BMS_State', 'StorageClass', 'ExportedGlobal');
-  
-  % Assign Volatile to Cell_Voltage
-  set_param('BMS_Model/Cell_Voltage', 'StorageClass', 'Volatile');
-  
-  % Confirm configurations
-  disp('Storage classes assigned to BMS_State and Cell_Voltage.');
-  ```
-  
-  *Figure 4: MATLAB Code for Assigning Storage Classes*
-
-- **Data Types and Dimensions**:
-  - **Purpose**: Optimize data representation for target hardware and ensure efficient memory usage.
-  - **Example**: Setting `Cell_Voltage` as a single-precision floating-point variable reduces memory footprint while maintaining sufficient precision for voltage measurements.
-  
-  **Data Type Configuration Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Configuring Data Types
-  % Set Cell_Voltage to single precision
-  set_param('BMS_Model/Cell_Voltage', 'OutDataTypeStr', 'single');
-  
-  % Set SOC_Estimation to double precision
-  set_param('BMS_Model/SOC_Estimation', 'OutDataTypeStr', 'double');
-  
-  % Confirm data type settings
-  disp('Data types configured for Cell_Voltage and SOC_Estimation.');
-  ```
-  
-  *Figure 5: MATLAB Code for Configuring Data Types*
-
-By meticulously configuring code mappings, developers can ensure that the generated code is optimized for performance, memory usage, and compliance with safety standards, thereby enhancing the overall effectiveness of the BMS software.
+### The Code Generation Pipeline
+1. **Model Compilation & Type Propagation**: The Simulink engine determines execution order, resolves algebraic loops, and propagates data types, dimensions, and sample times ($T_s$) across all discrete blocks.
+2. **CGIR Generation**: The model is flattened into an abstract syntax graph termed the *Code Generation Intermediate Representation* (CGIR)[^MathWorks2023].
+3. **Graph Optimization Transforms**:
+   - **Dead code elimination**: Removal of unreachable conditional branches or inactive blocks.
+   - **Expression folding**: Combining multiple primitive operations into single compound statements to reduce temporary variables in RAM.
+   - **Loop unrolling & function inlining**: Inlining atomic subsystems executed at high frequencies to eliminate call-overhead latency.
+4. **Target Language Compilation (TLC)**: Embedded Coder utilizes TLC scripts to map CGIR nodes into target-specific C constructs, invoking hardware-accelerated instructions (e.g., DSP MAC units, intrinsic saturation operations).
+5. **Artifact Generation**: Header files, source files, calibration parameter structures, and AUTOSAR XML (`.arxml`) interfaces are exported alongside an audit report[^Spitzer2015].
 
 ---
 
-## **3. Generating Code with Embedded Coder**
+## 2. Target Hardware Configuration & Memory Architecture
 
-Once the model is configured for code generation, the next step is to generate the embedded software using Embedded Coder. This process involves utilizing specialized tools and settings to produce high-quality, certification-ready code.
+Deploying BMS algorithms to automotive microcontrollers—such as the **Infineon AURIX™ TC397** (TriCore 32-bit architecture) or **TI Hercules™ TMS570** (ARM® Cortex®-R4F/R5F)—requires exact matching of hardware execution properties.
 
-### **3.1 Using the Code Generator Advisor**
+### 2.1 Hardware Implementation Configuration
 
-The Code Generator Advisor provides recommendations and optimizations to enhance the quality and performance of the generated code. It ensures that the code generation process aligns with best practices and certification requirements.
+In Simulink Configuration Parameters (`cs.set_param`), the hardware characteristics must be defined explicitly to prevent platform-dependent truncation or sign-extension defects:
 
-1. **Run Advisor**:
-   - **Action**: Navigate to *Code > Embedded Coder Advisor* within the Simulink interface.
-   - **Procedure**:
-     - Click on *Run Advisor* to initiate the analysis.
-     - Follow the advisor's recommendations to optimize the model for code generation.
-   - **Outcome**: The advisor identifies areas for improvement, such as memory alignment, MISRA compliance, and optimization opportunities.
+| Parameter Setting | AURIX TC397 Target | ARM Cortex-R5F Target | Architectural Impact on BMS |
+| :--- | :--- | :--- | :--- |
+| `TargetHWDeviceType` | `Infineon->TriCore` | `ARM Compatible->ARM Cortex-R` | Controls compiler intrinsics and assembly emission. |
+| `ProdBitPerChar` | 8 | 8 | Size of `uint8_T` and boolean flags. |
+| `ProdBitPerShort` | 16 | 16 | Size of `uint16_T` (e.g., AFE ADC raw codes). |
+| `ProdBitPerInt` | 32 | 32 | Size of loop counters and default integers. |
+| `ProdBitPerLong` | 32 | 32 | Standard 32-bit integer data representation. |
+| `ProdWordSize` | 32 | 32 | Native ALU register width; determines word alignment. |
+| `ProdEndianess` | LittleEndian | LittleEndian | Network byte order conversion for CAN / SPI frames. |
+| `ProdShiftRightIntArith`| `true` | `true` | Requires arithmetic shift (sign-preserving) for signed types. |
 
-   ![Code Generator Advisor](#)
+```matlab
+% MATLAB Configuration Automation for Infineon TriCore ASIL-D Target
+cs = getActiveConfigSet('BMS_Software_Unit');
 
-   *Figure 6: Running the Code Generator Advisor*
+% Configure Target Hardware Parameters
+set_param(cs, 'TargetHWDeviceType', 'Infineon->TriCore');
+set_param(cs, 'ProdEndianess', 'LittleEndian');
+set_param(cs, 'ProdBitPerInt', 32);
+set_param(cs, 'ProdWordSize', 32);
 
-2. **Generate Code**:
-   - **Action**: After addressing the advisor's recommendations, proceed to generate the code.
-   - **Procedure**:
-     - Click on *Generate Code* in the Embedded Coder interface.
-     - **Outputs**:
-       - **Source Files**: `.c` and `.h` files corresponding to model components (e.g., `BMS_StateMachine.c`, `BMS_StateMachine.h`).
-       - **Code Interface Report**: A comprehensive document detailing the APIs, data structures, and integration points for the generated code.
+% Set Solvers to Discrete Fixed-Step (Mandatory for Embedded Execution)
+set_param(cs, 'SolverType', 'Fixed-step');
+set_param(cs, 'Solver', 'FixedStepDiscrete');
+set_param(cs, 'FixedStep', '0.01'); % 10 ms base sample rate
 
-   **Code Generation Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Generating Code with Embedded Coder
-   % Define model and configuration
-   model = 'BMS_Model';
-   coderConfig = coder.config('ert');
-   
-   % Set code generation target
-   coderConfig.TargetLang = 'C';
-   coderConfig.GenerateReport = true;
-   
-   % Generate code
-   codegen(model, '-config', coderConfig);
-   
-   disp('Code generation completed. Source files and reports have been created.');
-   ```
-   
-   *Figure 7: MATLAB Code for Generating Code with Embedded Coder*
-
-3. **Review Code Interface Report**:
-   - **Purpose**: Understand the structure and interfaces of the generated code to facilitate integration with other software components.
-   - **Content**:
-     - **APIs**: Functions and their usage.
-     - **Data Structures**: Definitions of data types and their relationships.
-     - **Integration Points**: How the generated code interacts with external systems or modules.
-
-   **Example Report Content**:
-   
-   ```plaintext
-   Code Interface Report
-   ---------------------
-   
-   1. Overview
-      - Model: BMS_Model
-      - Generated Code: BMS_StateMachine.c, BMS_StateMachine.h
-   
-   2. APIs
-      - void Fault_Handler(void);
-      - void Balancing_Logic(void);
-   
-   3. Data Structures
-      - typedef struct {
-          uint8_T state;
-          float voltage;
-        } BMS_StateStruct;
-   
-   4. Integration Points
-      - Fault_Handler integrates with the main control loop.
-      - Balancing_Logic interfaces with voltage sensors.
-   ```
-   
-   *Figure 8: Sample Code Interface Report Structure*
-
-### **3.2 Integrated Code-Model View**
-
-Ensuring consistency between the Simulink model and the generated code is vital for maintaining system integrity. Simulink provides tools to trace code elements back to their corresponding model components and vice versa.
-
-- **Trace Code to Model**:
-  - **Action**: Hover over variables or functions in the generated code to highlight the corresponding Simulink blocks.
-  - **Benefit**: Quickly identify the origin of code segments, facilitating debugging and verification.
-  
-- **Navigate Between Model and Code**:
-  - **Action**: Click on model elements to view their code implementations.
-  - **Benefit**: Ensures that changes in the model are accurately reflected in the code and vice versa.
-  
-  **Traceability Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Navigating Between Model and Code
-  % Open the generated code in the editor
-  edit('BMS_StateMachine.c');
-  
-  % Highlight correspondence
-  Simulink.ModelManager.openCodeTrace('BMS_StateMachine.c', 'Fault_Handler');
-  
-  disp('Navigated to Fault_Handler in the generated code.');
-  ```
-  
-  *Figure 9: MATLAB Code for Navigating Between Model and Code*
-
-  ![Integrated Code-Model View](#)
-
-  *Figure 10: Integrated Code-Model Traceability View*
-
-By utilizing the integrated code-model view, developers can maintain a clear understanding of how the Simulink model translates into executable code, ensuring consistency and facilitating effective debugging.
+% Enforce Strict Compliance
+set_param(cs, 'GenCodeOnly', 'on');
+set_param(cs, 'SystemTargetFile', 'ert.tlc'); % Embedded Real-Time Target
+set_param(cs, 'TargetLang', 'C');
+```
 
 ---
 
-## **4. Analyzing Generated Code**
+## 3. Data Dictionary, Storage Classes, and Memory Mapping
 
-After generating the code, it is essential to analyze it to ensure that it meets performance, memory, and safety requirements. Simulink provides tools to assess various code metrics and maintain traceability between the code and system requirements.
+Safety standards mandate strict encapsulation of global data. Embedded Coder controls variable declaration, linkage, and memory location via **Storage Classes** defined in the **Simulink Data Dictionary (SLDD)** or the **Embedded Coder Mapping tool**[^Kramer2019].
 
-### **4.1 Code Metrics and Reports**
+### 3.1 Automotive Storage Class Taxonomies
 
-Analyzing code metrics helps in assessing the quality, efficiency, and compliance of the generated code. Simulink generates detailed reports that provide insights into various aspects of the code.
+```mermaid
+graph LR
+    subgraph Storage_Classes["Storage Classes in Embedded Coder"]
+        AUTO["Auto: Stack/Local Allocation (Auto Variables in step)"]
+        EXPORT["ExportedGlobal: Static Global (Defined in model.c, extern in model.h)"]
+        IMPORT["ImportedExtern: External Symbols (Provided by BSW / RTE)"]
+        VOLATILE["Volatile: Direct HW Register / ISR Shared Memory"]
+        CALIB["Custom Const: Flash / Calibration ROM (.rodata.calib)"]
+    end
+```
 
-- **Code Metrics Report**:
-  - **Content**:
-    - **Lines of Code (LOC)**: Total number of lines in the generated source files.
-    - **Memory Usage**: Amount of memory consumed by global variables and data structures.
-    - **Stack Consumption**: Maximum stack usage during execution.
-    - **Cyclomatic Complexity**: Measures the complexity of the code, indicating the number of independent paths.
-  
-  **Example Metrics**:
-  
-  ```plaintext
-  Code Metrics Report
-  -------------------
-  
-  Total LOC: 1,200
-  Global Variables: 12 (48 bytes)
-  Stack Usage: 256 bytes (max)
-  Cyclomatic Complexity: 15
-  ```
-  
-  *Figure 11: Sample Code Metrics Report*
+- **`Auto`**: Variables allocated inside the model step function on the execution stack or folded into register operations. Bounded lifetime; zero RAM overhead between task periods.
+- **`ExportedGlobal`**: System-level persistent variables defined in `BMS_Unit.c` and exposed via `BMS_Unit.h`. Used for inter-runnable data exchange within the same core.
+- **`ImportedExtern`**: External sensors or diagnostic flags instantiated by the Basic Software (BSW) or operating system (OS). Embedded Coder generates an `extern` reference without allocating local storage.
+- **`Volatile`**: Maps directly to hardware registers (e.g., AFE SPI DMA buffers) or inter-core shared memory. Tells the C compiler optimization engine (`-O2 / -O3`) never to cache the variable in an internal register or optimize out read operations.
+- **`Const / Calibration`**: Maps to read-only non-volatile memory (Flash / `.rodata`), modifiable exclusively via XCP / CANape calibration protocols during runtime.
 
-- **Web View Report**:
-  - **Functionality**: Provides an interactive HTML report with hyperlinks between code elements and corresponding model components.
-  - **Benefits**:
-    - **Ease of Navigation**: Quickly jump between code and model elements for thorough analysis.
-    - **Comprehensive Overview**: View all relevant metrics and assessments in a structured format.
-  
-  **Report Generation Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Generating a Code Metrics Report
-  reportFile = 'Code_Metrics_Report.html';
-  Simulink.Test.Report.generateCodeMetricsReport('BMS_Test_File', ...
-      'Format', 'html', 'OutputFile', reportFile);
-  
-  disp(['Code metrics report generated as ' reportFile '.']);
-  ```
-  
-  *Figure 12: MATLAB Code for Generating a Code Metrics Report*
+### 3.2 Defining Custom Storage Classes via MATLAB API
 
-### **4.2 Bidirectional Traceability**
+```matlab
+% Instantiate Signal and Parameter Objects with Specific Memory Sections
+Cell_Voltages = Simulink.Signal;
+Cell_Voltages.DataType = 'single';
+Cell_Voltages.Dimensions = [96 1];
+Cell_Voltages.Complexity = 'real';
+Cell_Voltages.StorageClass = 'ExportedGlobal';
+Cell_Voltages.Description = 'Pack cell terminal voltages measured via AFE daisy-chain';
 
-Maintaining traceability between the generated code and system requirements is essential for compliance with industry standards and for facilitating audits.
-
-- **Requirements Linking**:
-  - **Action**: Establish and maintain links between code elements and their corresponding requirements.
-  - **Example**: The `Fault_Handler` function in the code links to *Requirement 4.3: Fault Handling* in the requirements document.
-  
-  **Traceability Matrix Example**:
-  
-  ```plaintext
-  Traceability Matrix
-  -------------------
-  
-  | **Requirement ID** | **Model Block**          | **Code Function**        |
-  |---------------------|--------------------------|--------------------------|
-  | REQ_4.3             | `Fault_State` (Stateflow)| `void Fault_Handler(void)` |
-  | REQ_2.1             | `Voltage_Sensor`         | `float Read_Voltage(void)`  |
-  ```
-  
-  *Figure 13: Sample Traceability Matrix*
-
-- **Verification Status**:
-  - **Description**: Indicates the progress of verification for each requirement based on linked tests.
-  - **Example**:
-  
-    ```plaintext
-    Verification Status:
-    - Requirement 4.3 (Fault Handling) → 80% Verified
-    - Requirement 2.1 (Input Ranges) → 100% Verified
-    ```
-  
-  **Updating Verification Status Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Updating Verification Status
-  function updateVerificationStatus(requirement_id, status_percentage)
-      % Locate the requirement
-      req = Simulink.Requirements.getRequirementByID(requirement_id);
-      
-      if ~isempty(req)
-          % Update the verification status attribute
-          req.VerificationStatus = status_percentage;
-          disp(['Verification status of requirement ' requirement_id ' updated to ' num2str(status_percentage) '%']);
-      else
-          disp(['Requirement ' requirement_id ' not found.']);
-      end
-  end
-  ```
-  
-  *Figure 14: MATLAB Code for Updating Verification Status*
-
-By maintaining robust bidirectional traceability, developers can ensure that all requirements are adequately addressed in the generated code, facilitating compliance and enhancing the reliability of the BMS.
+% Define Calibration Parameter in Flash ROM
+OVP_Threshold = Simulink.Parameter;
+OVP_Threshold.DataType = 'single';
+OVP_Threshold.Value = 4.250; % Volts
+OVP_Threshold.CoderInfo.StorageClass = 'Custom';
+OVP_Threshold.CoderInfo.CustomStorageClass = 'Const';
+OVP_Threshold.CoderInfo.CustomAttributes.HeaderFile = 'bms_calibrations.h';
+OVP_Threshold.Description = 'Overvoltage Protection Threshold (ASIL-D)';
+```
 
 ---
 
-## **5. Certification and Compliance**
+## 4. MISRA-C:2012 Compliance and Defensive Code Synthesis
 
-Ensuring that the generated code complies with industry safety and reliability standards is paramount for deploying BMS in safety-critical applications. Simulink supports certification readiness through specialized tools and workflows.
+Production BMS software must adhere to the **MISRA-C:2012** Guidelines for the use of the C language in critical systems[^MISRA2013]. Embedded Coder provides dedicated configuration presets that enforce MISRA compliance natively during code generation.
 
-### **5.1 IEC Certification Kit**
+### 4.1 Critical MISRA-C:2012 Rules Enforced by Embedded Coder
 
-The **IEC Certification Kit** in Simulink provides comprehensive resources and workflows tailored for compliance with the IEC 61508 standard, which governs the functional safety of electrical/electronic/programmable electronic safety-related systems.
+1. **Rule 10.1 / 10.3 (Type Conversions & Implicit Casting)**:
+   - *Requirement*: Operands shall not undergo implicit conversions that result in loss of precision or unexpected sign extension.
+   - *Model Enforcement*: Cast blocks must be explicitly added; implicit mixed-mode arithmetic (e.g., `uint16_T` multiplied with `int32_T`) is blocked by enabling the diagnostic *Implicit type conversion -> Error*.
+2. **Rule 12.2 (Shift Operations)**:
+   - *Requirement*: The right-hand operand of a shift operator shall lie between zero and one less than the width in bits of the left-hand operand.
+   - *Model Enforcement*: Bitwise shift blocks configured with bounding validation.
+3. **Rule 14.3 (Controlling Expressions Invariant)**:
+   - *Requirement*: Controlling expressions shall not be invariant (no tautological `while(1)` or `if(1)` except bounded task dispatchers).
+   - *Model Enforcement*: Stateflow transitions are verified for complete conditional reachability.
+4. **Rule 21.3 (Dynamic Memory Allocation Banned)**:
+   - *Requirement*: `malloc()`, `calloc()`, `realloc()`, and `free()` shall never be used.
+   - *Model Enforcement*: All state vectors, lookup tables, and arrays are statically pre-allocated at compile time. Variable-size arrays are strictly forbidden.
 
-- **Access Artifacts**:
-  - **Action**: Navigate to *Apps > IEC Certification Kit* within Simulink.
-  - **Artifacts Included**:
-    - **TUV SUD Certificate**: Confirms the qualification of the code generator (Embedded Coder) for ISO 26262 compliance.
-    - **Tool Qualification Pack**: Maps Simulink workflows to the requirements of ISO 26262 tables (Parts 6 and 8), providing a clear pathway for achieving ASIL-D compliance.
-  
-  ![IEC Certification Kit](#)
+### 4.2 Embedded Coder Optimization Settings for ASIL-D
 
-  *Figure 15: Accessing the IEC Certification Kit*
+```matlab
+% Set Embedded Coder Optimization Flags for Certified MISRA-C Compliance
+set_param(cs, 'ZeroExternalMemoryAtStartup', 'on');
+set_param(cs, 'ZeroInternalMemoryAtStartup', 'on');
+set_param(cs, 'InitFltsAndDblsToZero', 'on');
+set_param(cs, 'NoOverrunWarnings', 'off');
 
-- **Key Use Cases**:
-  - **ASIL-D Compliance**: Ensures that the BMS software meets the highest Automotive Safety Integrity Level (ASIL-D) requirements.
-  - **DO-178C for Aerospace**: Facilitates compliance with the DO-178C standard for airborne systems, making the code suitable for aerospace applications.
-  
-  **Certification Workflow Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Initiating IEC Certification Workflow
-  model = 'BMS_Model';
-  
-  % Load IEC Certification Kit
-  certificationKit = 'IEC_Certification_Kit';
-  load(certificationKit);
-  
-  % Apply certification procedures
-  applyCertificationProcedures(model, certificationKit);
-  
-  % Generate certification documentation
-  generateCertificationReport(model, certificationKit, 'Certification_Report.pdf');
-  
-  disp('IEC certification workflow completed and report generated.');
-  ```
-  
-  *Figure 16: MATLAB Code for Initiating Certification Workflow*
+% Prevent Undefined Behaviors
+set_param(cs, 'RemoveDisableFunc', 'on');
+set_param(cs, 'RemoveResetFunc', 'on');
+set_param(cs, 'SupportNonFinite', 'off'); % Disallows NaN and Inf (IEEE 754 non-compliant)
+set_param(cs, 'SupportComplex', 'off');   % Disables complex math libraries
+set_param(cs, 'SupportAbsoluteTime', 'off'); % Eliminates roll-over risks in 32-bit timers
 
-### **5.2 Traceability Metrics**
+% MISRA-C Diagnostic Checks
+set_param(cs, 'ModelReferenceDataLoggingLevel', 'None');
+set_param(cs, 'BooleanDataType', 'on');
+set_param(cs, 'UnderSpecifiedDataTypeMsg', 'error');
+set_param(cs, 'IntegerOverflowMsg', 'error');
+```
 
-Maintaining traceability between requirements, model elements, and generated code is essential for certification and compliance. Simulink provides tools to create and manage traceability matrices that map requirements to their corresponding implementations.
+---
 
-- **Automated Traceability Matrix**:
-  - **Function**: Automatically generates a matrix that links requirements to model blocks and code functions, facilitating easy verification during audits.
-  
-  **Traceability Matrix Example**:
-  
-  ```plaintext
-  Traceability Matrix
-  -------------------
-  
-  | **Requirement ID** | **Model Block**          | **Code Function**        |
-  |---------------------|--------------------------|--------------------------|
-  | REQ_4.3             | `Fault_State` (Stateflow)| `void Fault_Handler(void)` |
-  | REQ_2.1             | `Voltage_Sensor`         | `float Read_Voltage(void)`  |
-  ```
-  
-  *Figure 17: Automated Traceability Matrix*
+## 5. Fixed-Point vs. Floating-Point Implementation
 
-  **Generating Traceability Matrix Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Generating a Traceability Matrix
-  testFile = 'BMS_Test_File';
-  coverageReport = Simulink.Coverage.runCoverage('BMS_Model');
-  
-  % Generate the traceability matrix
-  traceMatrix = Simulink.Test.Traceability.generateMatrix(testFile);
-  
-  % Export the matrix to Excel
-  writetable(traceMatrix, 'Traceability_Matrix.xlsx');
-  
-  disp('Traceability matrix generated and exported to Traceability_Matrix.xlsx.');
-  ```
-  
-  *Figure 18: MATLAB Code for Generating and Exporting Traceability Matrix*
+Automotive microcontrollers without a hardware Floating Point Unit (FPU), or power-constrained ASICs, necessitate **Fixed-Point Arithmetic**. Even with high-end FPUs (e.g., TriCore TC397 with single-precision FPU), certain safety paths utilize fixed-point representations to guarantee exact bit-for-bit repeatability across diverse toolchains[^Spitzer2015].
 
-By leveraging the IEC Certification Kit and maintaining comprehensive traceability metrics, developers can ensure that the generated BMS code complies with industry safety standards, facilitating smooth certification and deployment in safety-critical environments.
+### 5.1 Fixed-Point Representation Fundamentals
+
+A real-world continuous variable $x \in \mathbb{R}$ is approximated by an integer stored integer value $Q$ via linear slope-bias encoding:
+
+$$
+x \approx S \cdot Q + B
+$$
+
+where:
+- $S = F \cdot 2^E$ is the scaling factor (comprising fractional slope $F \in [1.0, 2.0)$ and binary exponent $E \in \mathbb{Z}$),
+- $B \in \mathbb{R}$ is the bias offset (typically $B = 0$ in DSP and control systems),
+- $Q \in [-2^{N-1}, 2^{N-1}-1]$ for signed integers, or $Q \in [0, 2^N-1]$ for unsigned integers.
+
+In pure binary radix scaling ($F=1, B=0$), this reduces to the standard fixed-point format $sfixN\_En$ (or standard notation $Q_{a.b}$ where $a$ is integer bits, $b$ is fractional bits):
+
+$$
+x = Q \cdot 2^{-b} \implies Q = \mathrm{round}\left( x \cdot 2^b \right)
+$$
+
+### 5.2 BMS Fixed-Point Quantization Example
+
+Consider the calculation of cell terminal resistance $R_0 \in [0.0001\,\Omega, 0.0500\,\Omega]$ and pack current $I \in [-600.0\,\text{A}, +600.0\,\text{A}]$:
+
+| Physical Quantity | Physical Range | Fixed-Point Type | Scaling ($S = 2^E$) | Resolution ($\Delta$) | Quantization Error ($\pm \Delta/2$) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Pack Current $I$ | $[-600, +600]\,\text{A}$ | `sfix16_En6` | $2^{-6} = 0.015625$ | $15.625\,\text{mA}$ | $\pm 7.81\,\text{mA}$ |
+| Cell Voltage $V$ | $[0.0, 5.0]\,\text{V}$ | `ufix16_En13` | $2^{-13} \approx 0.000122$ | $122.07\,\mu\text{V}$ | $\pm 61.04\,\mu\text{V}$ |
+| Internal Res. $R_0$ | $[0.0, 0.1]\,\Omega$ | `ufix16_En19` | $2^{-19} \approx 1.907\times 10^{-6}$ | $1.907\,\mu\Omega$ | $\pm 0.95\,\mu\Omega$ |
+| Cell SOC | $[0.0, 1.0]$ | `ufix16_En16` | $2^{-16} \approx 1.526\times 10^{-5}$ | $0.001526\%$ | $\pm 0.00076\%$ |
+
+When multiplying current and resistance to calculate the instantaneous ohmic overpotential $\eta_{\text{ohmic}} = I \cdot R_0$:
+
+$$
+Q_{\eta} = \left( Q_I \cdot Q_{R_0} \right) \cdot 2^{E_I + E_{R_0} - E_{\eta}}
+$$
+
+Embedded Coder synthesizes efficient integer shift and saturation instructions:
+
+```c
+/* Generated C Code: Fixed-point multiplication with saturation */
+int32_T tmpCurrent = (int32_T)pack_current_Q6;
+uint32_T tmpRes = (uint32_T)cell_r0_Q19;
+
+/* Intermediate product in 64-bit accumulator to avoid overflow */
+int64_T product = ((int64_T)tmpCurrent) * tmpRes; /* Exponent: -6 + (-19) = -25 */
+
+/* Scale down to target format: ufix16_En13 (Exponent: -13). Right-shift: 25 - 13 = 12 */
+int32_T scaled_eta = (int32_T)(product >> 12);
+
+/* Apply strict saturation arithmetic */
+if (scaled_eta > 65535) {
+    v_ohmic_Q13 = 65535U;
+} else if (scaled_eta < 0) {
+    v_ohmic_Q13 = 0U;
+} else {
+    v_ohmic_Q13 = (uint16_T)scaled_eta;
+}
+```
+
+---
+
+## 6. Synthesis of Production-Grade BMS C Code
+
+The following architecture demonstrates an end-to-end production module for an overvoltage protection monitor complying with ISO 26262 ASIL-D.
+
+### 6.1 Generated Header File (`BMS_SafetyMonitor.h`)
+
+```c
+/**
+ * @file    BMS_SafetyMonitor.h
+ * @brief   Automated Code Generated by Embedded Coder (R2023b)
+ * @target  Infineon TriCore AURIX TC397
+ * @safety  ISO 26262-6 ASIL-D Compliant
+ * @details Verification: MISRA-C:2012 strictly validated
+ */
+
+#ifndef RTW_HEADER_BMS_SafetyMonitor_h_
+#define RTW_HEADER_BMS_SafetyMonitor_h_
+
+#include "rtwtypes.h"
+
+/* Exported Global Signals */
+extern real32_T BMS_CellVoltages[96];       /* Input: Cell voltages from AFE (V) */
+extern real32_T BMS_PackCurrent;           /* Input: Shunt transducer current (A) */
+extern boolean_T BMS_OVP_FaultLatched;      /* Output: Hardware trip safety flag */
+
+/* Calibration Parameters (Mapped to Non-Volatile Flash .rodata) */
+typedef struct {
+    real32_T V_Cell_Max_Threshold;          /* 4.250 V */
+    real32_T V_Cell_Recovery_Threshold;     /* 4.150 V */
+    uint16_T OVP_Debounce_Time_ms;          /* 100 ms */
+} BMS_Calibration_Data_t;
+
+extern const BMS_Calibration_Data_t BMS_Calib_Const;
+
+/* Model Step and Initialization Signatures */
+extern void BMS_SafetyMonitor_Init(void);
+extern void BMS_SafetyMonitor_Step(void);   /* Periodic task period: 10 ms */
+
+#endif /* RTW_HEADER_BMS_SafetyMonitor_h_ */
+```
+
+### 6.2 Generated Implementation File (`BMS_SafetyMonitor.c`)
+
+```c
+/**
+ * @file    BMS_SafetyMonitor.c
+ * @brief   Overvoltage Protection Runnable Implementation
+ */
+
+#include "BMS_SafetyMonitor.h"
+
+/* Internal Static Persistent States */
+static uint16_T ovp_debounce_counter = 0U;
+
+/* Calibration Structure in Flash */
+const BMS_Calibration_Data_t BMS_Calib_Const = {
+    .V_Cell_Max_Threshold = 4.250F,
+    .V_Cell_Recovery_Threshold = 4.150F,
+    .OVP_Debounce_Time_ms = 100U
+};
+
+/* Exported Variables */
+real32_T BMS_CellVoltages[96];
+real32_T BMS_PackCurrent;
+boolean_T BMS_OVP_FaultLatched;
+
+/**
+ * @brief  Initialization Routine
+ * @req    REQ_BMS_SFT_001: Safe system start-up state
+ */
+void BMS_SafetyMonitor_Init(void)
+{
+    ovp_debounce_counter = 0U;
+    BMS_OVP_FaultLatched = false;
+}
+
+/**
+ * @brief  Cyclic Task Step Function (Executed at 100 Hz / 10 ms)
+ * @req    REQ_BMS_SFT_002: ISO 26262 ASIL-D Overvoltage Shutdown within 100 ms
+ */
+void BMS_SafetyMonitor_Step(void)
+{
+    uint8_T idx;
+    boolean_T overvoltage_detected = false;
+    const uint16_T debounce_limit = BMS_Calib_Const.OVP_Debounce_Time_ms / 10U;
+
+    /* Scan all 96 series cells */
+    for (idx = 0U; idx < 96U; idx++) {
+        if (BMS_CellVoltages[idx] >= BMS_Calib_Const.V_Cell_Max_Threshold) {
+            overvoltage_detected = true;
+            break; /* Early exit upon first violation */
+        }
+    }
+
+    /* Debounce Logic */
+    if (overvoltage_detected) {
+        if (ovp_debounce_counter < debounce_limit) {
+            ovp_debounce_counter++;
+        }
+        if (ovp_debounce_counter >= debounce_limit) {
+            BMS_OVP_FaultLatched = true; /* Permanent fault trip */
+        }
+    } else {
+        if (ovp_debounce_counter > 0U) {
+            ovp_debounce_counter--;
+        }
+    }
+}
+```
+
+---
+
+## 7. AUTOSAR Classic SWC Generation
+
+In standard automotive Electronic Control Units (ECUs), the generated code is packaged into an **AUTOSAR Classic Software Component (SWC)**. Embedded Coder utilizes the **AUTOSAR Blockset** to synthesize the complete AUTOSAR interface[^AUTOSAR2020].
+
+```mermaid
+flowchart TD
+    subgraph Simulink_SWC["Simulink Atomic Subsystem"]
+        IN_PORT["Inports (Receiver Ports)"]
+        ALGO["BMS State Estimation Algorithm"]
+        OUT_PORT["Outports (Sender Ports)"]
+    end
+
+    subgraph AUTOSAR_Interface["AUTOSAR RTE Layer"]
+        R_PORT["R-Port: RPort_CellVoltages (Sender-Receiver)"]
+        RUNNABLE["Runnable: BMS_Estimation_Step (Trigger: 10ms Cyclic Timer)"]
+        P_PORT["P-Port: PPort_EstimatedSOC (Sender-Receiver)"]
+    end
+
+    subgraph OS_Task["AUTOSAR OS / BSW"]
+        TASK["OsTask_10ms"] --> RUNNABLE
+    end
+
+    IN_PORT <--> R_PORT
+    ALGO <--> RUNNABLE
+    OUT_PORT <--> P_PORT
+```
+
+### 7.1 AUTOSAR Configuration Workflow
+1. **Set System Target File**: Change `SystemTargetFile` to `autosar.tlc`.
+2. **Define Schema Version**: Target AUTOSAR Release 4.3 or 4.4 (`ARXML` export standard).
+3. **Configure RTE Communication**:
+   - **Sender-Receiver (S-R)**: Asynchronous data transfer for continuous signals (e.g., cell voltages, pack temperature, SOC).
+   - **Client-Server (C-S)**: Synchronous function calls for non-volatile memory read/write (`NvM_ReadBlock`, `NvM_WriteBlock`) and diagnostic error management (`Dem_SetEventStatus`).
+4. **Runnable Mapping**: Map the model step function to an AUTOSAR Runnable Entity (`Runnable_BMS_Step`) triggered by a periodic timing event (`TimingEvent_10ms`).
+5. **Code Emission**: Embedded Coder produces both the C code containing `Rte_Read_*` and `Rte_Write_*` macro calls, and the companion XML metadata (`BMS_SWC.arxml`) for integration into Vector DaVinci Configurator or Elektrobit Tresos.
+
+---
+
+## 8. Static Analysis and Verification Metrics
+
+Prior to compiler compilation, the generated C files must undergo rigorous static code analysis.
+
+```mermaid
+graph TD
+    SRC[Generated Source Files] --> PC[Polyspace Code Prover]
+    SRC --> MISRA[MISRA-C:2012 Linter]
+    SRC --> CLANG[Clang-Tidy / Static Analyzer]
+
+    PC --> OUT_RTE[Zero Run-Time Errors Proof: Division by Zero, Array Out-of-Bounds]
+    MISRA --> OUT_MISRA[MISRA Compliance Report: 0 Violations]
+    CLANG --> OUT_WARN[Zero Compiler Warnings with -Wall -Wextra -Werror]
+```
+
+### Static Analysis Criteria Table
+
+| Verification Domain | Tool Used | Target Requirement | Pass/Fail Metric |
+| :--- | :--- | :--- | :--- |
+| **Run-Time Errors** | Polyspace Code Prover™ | ISO 26262-6 Table 1 | Zero orange/red defects (100% green: no overflow, no pointer corruption, no division-by-zero). |
+| **Coding Standards** | PC-Lint Plus / Axivion | MISRA-C:2012 | Zero unapproved rule deviations. Deviations must have formal safety justification. |
+| **Cyclomatic Complexity** | Embedded Coder Report | $v(G) \le 10$ per function | Ensures low branching complexity and high maintainability. |
+| **Stack Usage** | AbsInt StackAnalyzer | Worst-Case Stack Depth | Max stack consumption $\le 80\%$ of allocated OS task stack allocation. |
+| **Memory Footprint** | Linker Map File | ROM/RAM Budgets | Algorithm execution fits within bounded TC397 DSPR (Data Scratchpad RAM). |
+
+---
+
+## 9. References
+
+[^MathWorks2023]: MathWorks, "Embedded Coder® User's Guide (Release 2023b)," *The MathWorks Inc.*, Natick, MA, 2023.
+[^Kramer2019]: B. Kramer, R. Simons, and S. Huh, "Model-Based Design of Battery Management Systems for Electric Vehicles," *SAE Technical Paper 2019-01-0872*, 2019. [DOI: 10.4271/2019-01-0872](https://doi.org/10.4271/2019-01-0872)
+[^Spitzer2015]: C. R. Spitzer, U. Ferrell, and T. Ferrell, *Digital Avionics and Automotive Embedded Systems: Architecture and Verification*, CRC Press, 2015.
+[^MISRA2013]: Motor Industry Software Reliability Association, *MISRA C:2012 - Guidelines for the Use of the C Language in Critical Systems*, MIRA Ltd., Nuneaton, UK, 2013.
+[^AUTOSAR2020]: AUTOSAR Consortium, "Specification of Software Component Template (Release 4.4.0)," *AUTOSAR Standard Documents*, Nov. 2020.

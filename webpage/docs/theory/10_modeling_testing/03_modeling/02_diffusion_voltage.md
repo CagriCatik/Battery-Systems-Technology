@@ -1,104 +1,154 @@
-# Diffusion Voltage in Batteries
+# Diffusion Overpotential & Polarization Dynamics
 
-## Introduction
+When a current load is applied to or removed from a lithium-ion battery, the terminal voltage does not jump instantaneously between equilibrium states. While ohmic resistance causes an immediate step change within microseconds, the remainder of the voltage transient relaxes gradually over seconds, minutes, and even hours[^plett2015]. 
 
-Diffusion voltage is a critical phenomenon observed in batteries, particularly in lithium-ion batteries. It refers to the delay in the battery's voltage returning to its original state after a current has been drawn or applied. This delay is analogous to the behavior of a capacitor in an electrical circuit, where the voltage does not instantaneously return to its initial value after a change in current. Understanding diffusion voltage is essential for accurately modeling battery behavior, especially in applications like electric vehicles, portable electronics, and renewable energy storage systems.
+This delayed voltage response—termed **polarization overpotential** and **diffusion overpotential**—is governed by fundamental electrochemical transport phenomena: double-layer capacitive charging, interfacial charge-transfer kinetics, and solid-state lithium mass diffusion within active material host particles[^newman2004].
 
----
-
-## Understanding Diffusion Voltage
-
-### Conceptual Explanation
-
-To understand diffusion voltage, consider the following analogy:
-
-1. **Rubber Sheet Analogy**: Imagine a rubber sheet stretched over a frame. If you place a heavy ball on the sheet, it will bend and deform. When you remove the ball, the rubber sheet does not immediately return to its original flat state. Instead, it slowly relaxes back to its initial position over time. This delay in returning to the original state is similar to the diffusion voltage phenomenon in batteries.
-
-2. **Battery Context**: In a battery, when a current is drawn (discharge) or applied (charge), the voltage changes due to internal resistance and other factors. When the current is stopped, the voltage does not instantly return to its open-circuit voltage (OCV). Instead, it gradually relaxes back to the OCV over time. This delay is caused by the diffusion of ions within the battery's electrolyte and electrodes.
+This chapter formalizes the physical transport equations governing diffusion overpotentials, derives Fickian concentration gradients, and models multi-time-scale relaxation dynamics within equivalent circuit networks.
 
 ---
 
-## Mathematical Representation
+## Electrochemical Overpotential Decomposition
 
-### Linear Polarization
-
-Before diving into diffusion voltage, it is important to understand **linear polarization**, which is closely related. Linear polarization refers to the immediate voltage drop or rise observed when a current is applied to a battery. This effect is primarily due to the internal resistance of the battery.
-
-The mathematical representation of linear polarization is given by:
+The instantaneous terminal voltage $V_{\text{term}}(t)$ during discharge is the thermodynamic open-circuit voltage $U_{\text{ocv}}$ minus three distinct, physically decoupled overpotential terms[^doyle1993]:
 
 $$
-V_{\text{terminal}} = V_{\text{OCV}} \pm I \cdot R_{\text{internal}}
+V_{\text{term}}(t) = U_{\text{ocv}}(\text{SoC}) - \eta_{\text{ohmic}}(t) - \eta_{\text{ct}}(t) - \eta_{\text{diff}}(t)
 $$
 
-where:
+```mermaid
+gantt
+    title Multi-Time-Scale Overpotential Relaxation Dynamics
+    dateFormat X
+    axisFormat %s s
 
-- $V_{\text{terminal}}$: Terminal voltage of the battery.
-- $V_{\text{OCV}}$: Open-circuit voltage of the battery.
-- $I$: Current flowing through the battery (positive for discharge, negative for charge).
-- $R_{\text{internal}}$: Internal resistance of the battery.
+    section Current Load
+    Discharge Current Pulse (I = 50 A) : 0, 100
+    Current Interrupted (I = 0 A)        : 100, 400
 
-This equation captures the immediate voltage change due to the internal resistance of the battery.
+    section Ohmic Overpotential
+    Instantaneous IR Drop (t < 1 ms)   : 0, 100
+    Instantaneous Recovery (1 ms)      : 100, 101
+
+    section Charge-Transfer & Double Layer
+    Electrochemical Polarization (τ_1 ≈ 5-30 s) : 0, 100
+    Interfacial Relaxation (100-150 s)          : 100, 150
+
+    section Solid-State Mass Diffusion
+    Fickian Solid Diffusion Overpotential (τ_2 ≈ 100-3600 s) : 0, 100
+    Solid Concentration Homogenization (100-400 s)           : 100, 400
+```
+
+### Physical Attribution & Time Scales
+
+1. **Ohmic Overpotential ($\eta_{\text{ohmic}}$):**
+   - Driven by electronic conduction in current collectors and ionic conduction through the liquid electrolyte.
+   - Response time: $t < 1\,\text{ms}$ (instantaneous).
+   - Modeled by: Pure resistance $R_0$.
+2. **Charge-Transfer Polarization ($\eta_{\text{ct}}$):**
+   - Driven by the activation energy barrier of the electrochemical charge-transfer reaction at the electrode/electrolyte interface, governed by the Butler-Volmer equation:
+
+$$
+j = j_0 \left[ \exp\left(\frac{\alpha_a F}{RT}\eta_{\text{ct}}\right) - \exp\left(-\frac{\alpha_c F}{RT}\eta_{\text{ct}}\right) \right]
+$$
+
+   - Combined with the electric double-layer capacitance formed by the Helmholtz layer.
+   - Response time: $\tau_1 \approx 1 - 30\,\text{s}$.
+   - Modeled by: Fast RC branch ($R_1 \parallel C_1$).
+3. **Diffusion Overpotential ($\eta_{\text{diff}}$):**
+   - Driven by solid-state lithium-ion concentration gradients developing between the surface and the core of porous active material particles.
+   - Response time: $\tau_2 \approx 100 - 3600\,\text{s}$ ($1.5\,\text{minutes}$ to $>1\,\text{hour}$).
+   - Modeled by: Slow RC branch ($R_2 \parallel C_2$) or fractional-order Warburg element.
 
 ---
 
-### Diffusion Voltage
+## Solid-State Mass Diffusion: Fick's Second Law
 
-Diffusion voltage, on the other hand, accounts for the delayed response of the battery voltage after the current is removed. This phenomenon can be modeled using a combination of resistors and capacitors in an equivalent circuit model.
-
-#### Equivalent Circuit Model
-
-To model diffusion voltage, we use an RC (resistor-capacitor) circuit in parallel, connected in series with the battery's internal resistance. The RC circuit represents the diffusion process, where:
-
-- The resistor ($R_{\text{diff}}$) represents the resistance to ion diffusion.
-- The capacitor ($C_{\text{diff}}$) represents the storage and release of energy due to ion diffusion.
-
-The equivalent circuit for a lithium-ion battery with diffusion voltage can be represented as:
+Within intercalation electrode active materials (such as graphite, $\text{LiCoO}_2$, or NMC), lithium atoms diffuse through the interstitial vacancies of the host crystallographic lattice. Assuming spherical active particles of radius $R_p$, mass transport is governed by **Fick's Second Law of Diffusion in spherical coordinates**[^newman2004]:
 
 $$
-V_{\text{terminal}} = V_{\text{OCV}} \pm I \cdot R_{\text{internal}} - V_{\text{diff}}
+\frac{\partial c_s(r, t)}{\partial t} = \frac{D_s}{r^2} \frac{\partial}{\partial r} \left( r^2 \frac{\partial c_s(r, t)}{\partial r} \right)
 $$
 
-Where $V_{\text{diff}}$ is the voltage across the RC circuit, which accounts for the diffusion effect.
+Where:
+- $c_s(r, t)$ is the solid-phase lithium concentration at radial distance $r \in [0, R_p]$ and time $t$ ($\text{mol/m}^3$).
+- $D_s$ is the solid-state diffusion coefficient ($\text{m}^2/\text{s}$, typically $10^{-14}$ to $10^{-12}\,\text{m}^2/\text{s}$).
 
-#### Mathematical Equation for Diffusion Voltage
+```
+Lithium Concentration Profile inside Active Particle during Discharge:
+   Solid
+   Concentration c_s(r)
+      ^
+c_max |                  /-----\  Core Concentration c_s(0)
+      |                 /       \
+      |                /         \
+      |               /           \
+c_min |--------------/             \-----> Particle Surface r = R_p
+      +--------------+-------------+-----> Radius r
+      r = 0 (Center)              r = R_p (Surface)
+```
 
-The voltage across the RC circuit ($V_{\text{diff}}$) can be described by the following differential equation:
+### Boundary Conditions
+
+1. **Symmetry at Particle Center ($r = 0$):**
 
 $$
-\frac{dV_{\text{diff}}}{dt} = -\frac{1}{R_{\text{diff}} \cdot C_{\text{diff}}} \cdot V_{\text{diff}} + \frac{I}{C_{\text{diff}}}
+\left. \frac{\partial c_s}{\partial r} \right|_{r = 0} = 0
 $$
 
-where:
+2. **Interfacial Molar Flux at Particle Surface ($r = R_p$):**
 
-- $V_{\text{diff}}$: Voltage across the RC circuit.
-- $R_{\text{diff}}$: Diffusion resistance.
-- $C_{\text{diff}}$: Diffusion capacitance.
-- $I$: Current flowing through the battery.
+$$
+-D_s \left. \frac{\partial c_s}{\partial r} \right|_{r = R_p} = \frac{j^{\text{Li}}}{F} = \frac{I(t)}{a_s \cdot A \cdot L \cdot F}
+$$
 
-This equation describes how the diffusion voltage changes over time in response to the applied current.
+Where $a_s$ is the specific surface area, $A$ is electrode geometric area, $L$ is electrode thickness, and $F$ is Faraday's constant ($96{,}485\,\text{C/mol}$).
+
+### Electrochemical Origin of Diffusion Overpotential
+
+Because the electrochemical potential of an intercalation electrode is determined strictly by the **stoichiometric lithium concentration at the outer particle surface** ($c_{s,\text{surf}} = c_s(R_p, t)$), the effective open-circuit potential shifts away from its average state-of-charge equilibrium:
+
+$$
+\eta_{\text{diff}}(t) = U_{\text{ocv}}\left( \frac{c_{s,\text{surf}}(t)}{c_{s,\max}} \right) - U_{\text{ocv}}\left( \frac{\bar{c}_s(t)}{c_{s,\max}} \right)
+$$
+
+Where $\bar{c}_s(t) = \frac{3}{R_p^3}\int_0^{R_p} r^2 c_s(r, t) \, dr$ represents the bulk average concentration (true SoC).
 
 ---
 
-## Practical Implications
+## Circuit Approximation: Multi-Order RC Ladder Networks
 
-### Observing Diffusion Voltage
+To model this infinite-dimensional diffusion process in embedded microcontrollers without solving partial differential equations in real time, the diffusion overpotential is approximated using an $N$-order resistor-capacitor (RC) ladder network[^kuhn2006]:
 
-In practical scenarios, diffusion voltage can be observed in the following ways:
-1. **Voltage Relaxation**: After disconnecting a load or charger, the battery voltage does not immediately return to its OCV. Instead, it slowly relaxes over time.
-2. **State of Charge (SOC) Estimation**: Diffusion voltage affects the accuracy of SOC estimation. Ignoring this phenomenon can lead to errors in predicting the remaining battery capacity.
-3. **Battery Management Systems (BMS)**: Advanced BMS algorithms incorporate diffusion voltage models to improve the accuracy of voltage and SOC predictions.
+$$
+\eta_{\text{diff}}(t) = \sum_{i=1}^N V_{RC, i}(t)
+$$
+
+```mermaid
+flowchart LR
+    Current["Input Current I(t)"] --> RC1["Branch 1 (τ_1 = 15 s)<br/>Fast Interfacial Kinetics"]
+    RC1 --> RC2["Branch 2 (τ_2 = 120 s)<br/>Intermediate Electrolyte Diffusion"]
+    RC2 --> RC3["Branch 3 (τ_3 = 900 s)<br/>Slow Solid-State Fickian Diffusion"]
+```
+
+### Analytical Step-Response Formulation
+
+For a constant current discharge pulse of magnitude $I_0$ applied from $t = 0$ to $t_{\text{pulse}}$, followed by current interruption ($I = 0$) at $t > t_{\text{pulse}}$, the diffusion overpotential during the relaxation phase ($t > t_{\text{pulse}}$) decays according to:
+
+$$
+V_{\text{relax}}(t) = \sum_{i=1}^N I_0 R_i \left( 1 - \exp\left(-\frac{t_{\text{pulse}}}{\tau_i}\right) \right) \exp\left(-\frac{t - t_{\text{pulse}}}{\tau_i}\right)
+$$
+
+Where $\tau_i = R_i C_i$ are the characteristic time constants of the diffusion branches.
+
+> [!TIP]
+> In automotive production algorithms, a **2-RC network** ($N = 2$) captures over $95\%$ of the total diffusion relaxation energy while requiring only two scalar state variables in the Extended Kalman Filter, keeping microcontroller execution time below $5.0\,\text{ms}$.
 
 ---
 
-## Simulation and Modeling
+## References
 
-To better understand diffusion voltage, it is often simulated using software tools like MATLAB. The following steps outline a basic simulation approach:
-1. **Define Battery Parameters**: Specify the internal resistance, diffusion resistance, and diffusion capacitance.
-2. **Apply Current Profile**: Simulate charge and discharge cycles by applying a current profile.
-3. **Observe Voltage Response**: Analyze the terminal voltage response, paying attention to the delayed relaxation due to diffusion voltage.
-
----
-
-## Conclusion
-
-Diffusion voltage is a fundamental phenomenon in battery behavior that accounts for the delayed response of voltage after current changes. By modeling this effect using equivalent RC circuits and differential equations, we can accurately predict battery performance and improve the design of battery management systems. Understanding diffusion voltage is crucial for optimizing battery usage in various applications, from consumer electronics to electric vehicles.
+[^plett2015]: Plett, G. L. (2015). *Battery Management Systems, Volume I: Battery Modeling*. Artech House.
+[^newman2004]: Newman, J., & Thomas-Alyea, K. E. (2004). *Electrochemical Systems (3rd Edition)*. John Wiley & Sons.
+[^doyle1993]: Doyle, M., Fuller, T. F., & Newman, J. (1993). Modeling of galvanostatic charge and discharge of the lithium/polymer/insertion cell. *Journal of The Electrochemical Society*, 140(6), 1526–1533.
+[^kuhn2006]: Kuhn, E., et al. (2006). Modelling Ni-MH battery using equivalent circuits with electrical double-layer capacitors. *Journal of Power Sources*, 158(2), 1490–1497.

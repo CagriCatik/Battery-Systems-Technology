@@ -1,144 +1,233 @@
-# SCALEXIO
+# dSPACE SCALEXIO Real-Time Architecture for BMS HIL
 
-dSPACE’s **SCALEXIO** is a state-of-the-art, modular, and scalable real-time platform engineered for the development, simulation, and testing of embedded systems. Its flexible integration of hardware and software components allows customization to meet diverse project requirements. SCALEXIO is particularly prominent in the development and validation of Battery Management Systems (BMS), which are critical for the safe and efficient operation of lithium-ion batteries across various industries.
+Hardware-in-the-Loop (HIL) simulation represents the gold standard for validating electronic control units (ECUs) under realistic, real-time closed-loop conditions without endangering expensive physical battery packs or personnel. In the automotive industry, the **dSPACE SCALEXIO®** modular real-time platform is the preeminent system for battery management system testing, capable of handling extreme voltage levels (up to $1,500\,\text{V}$ DC), sub-millivolt cell voltage emulation, and nanosecond-level fault injection[^dSPACE2023].
 
-## Battery Simulation Concept
+This chapter explores the architectural foundations of dSPACE SCALEXIO for BMS applications: the multiprocessor real-time processing core, high-speed input/output (I/O) subsystems, battery simulation controllers, external power supply coupling, and ASAM XIL automation standards[^Ploeger2018].
 
-SCALEXIO facilitates direct control of battery simulations from the model itself, eliminating the need for additional Input/Output (I/O) hardware. This streamlined approach enhances efficiency and reduces system complexity. The battery simulation framework within SCALEXIO comprises three primary components:
+---
 
-### 1. Battery Simulation Controller
+## 1. SCALEXIO System Architecture Overview
 
-**DS2907 Battery Simulation Controller** is the core component managing the simulation of battery parameters such as current and voltage. Key features include:
+The SCALEXIO hardware topology decouples real-time computation from physical signal conditioning via a high-bandwidth, deterministic I/O network known as the **IOCON (I/O Controller Network)**[^dSPACE2023].
 
-- **Modular Design:** Equipped with two slots for battery simulation modules, allowing simultaneous control of up to two independent power supplies.
-- **Manufacturer Compatibility:** Supports power supplies from leading manufacturers like TDK-Lambda and Delta, ensuring versatility and reliability in simulations.
+```mermaid
+flowchart TD
+    subgraph Host_Environment["Host PC (Engineering Workstation)"]
+        CONF[ConfigurationDesk / ModelDesk]
+        AUTO[AutomationDesk / Python Test Scripts]
+        CANOE[Vector CANoe / ASAM XIL Client]
+    end
 
-The controller's ability to precisely manage electrical parameters is crucial for creating accurate and realistic battery scenarios, enabling comprehensive testing of BMS functionalities.
+    subgraph RealTime_Compute["Real-Time Processing Core"]
+        CPU[Intel Xeon Multi-Core Processor / Linux RTOS]
+        SHARED_MEM[Zero-Copy Shared Memory]
+        FPGA_BOARD[DS2655 FPGA Board / Xilinx Kintex UltraScale]
+        CPU <--> SHARED_MEM
+        SHARED_MEM <--> FPGA_BOARD
+    end
 
-**Learn more:** [DS2907 Battery Simulation Controller](https://www.dspace.com/en/inc/home/products/hw/simulator_hardware/scalexio/scalexio-board-overview/scalexio_ds2907.cfm)
+    subgraph IOCON_Bus["High-Speed IOCON / PCIe Gen3 Optical Interconnect"]
+        RT_LINK[Deterministic Real-Time Link: 10 Gbps Low Latency]
+    end
 
-### 2. Power Supply
+    subgraph IO_Subsystems["Modular SCALEXIO Subracks (19-inch 3U / 6U)"]
+        DS2907[DS2907 Battery Simulation Controller]
+        DS2642[DS2642 FIU & Power Switch Board]
+        DS2680[DS2680 Multi-I/O & Transceiver Unit]
+        CELL_CARDS[DS2671 High-Precision Cell Emulators]
+    end
 
-The power supply unit is responsible for generating the necessary current and voltage required for battery simulations. SCALEXIO supports a range of high-quality power supplies, including:
+    subgraph Physical_Power["High-Voltage Power Sources"]
+        HV_SUPPLY[High-Voltage DC Sink/Source: Delta Elektronika / TDK-Lambda]
+    end
 
-- **TDK-Lambda Models:** Genesys 20V76A, 40V38A, and 60V25A.
-- **Delta Models:** SM35/45 and SM15/100.
+    subgraph DUT["Device Under Test"]
+        BMS_ECU[BMS Main Controller + CSC Daisy-Chain]
+    end
 
-These power supplies are selected for their precision, stability, and compatibility with the SCALEXIO platform, ensuring that simulations accurately reflect real-world battery behavior.
+    Host_Environment <==>|Gigabit Ethernet / ASAM XIL| RealTime_Compute
+    RealTime_Compute <==> IOCON_Bus
+    IOCON_Bus <==> IO_Subsystems
+    DS2907 <--> HV_SUPPLY
+    IO_Subsystems <==>|Cell Voltages, NTCs, CAN-FD, isoSPI| DUT
+```
 
-**Learn more:** [Power Supplies for SCALEXIO](https://www.dspace.com/en/inc/home/products/hw/simulator_hardware/scalexio/scalexio-board-overview/scalexio_ds2907.cfm)
+### 1.1 Structural Components
+1. **Real-Time Processing Unit**: High-performance Intel® Xeon® multi-core processors running a customized Real-Time Linux kernel. Processing cores are isolated: dedicated cores execute the electro-thermal plant model at fixed rates (e.g., $100\,\mu\text{s}$), while separate cores manage I/O communication and network protocols.
+2. **IOCON Optical Interconnect**: A proprietary, low-latency, serial LVDS/PCIe interconnect that streams sensor, actuator, and fault states between the processing unit and distributed I/O boards at rates up to $10\,\text{Gbps}$ with deterministic jitter under $50\,\text{ns}$.
+3. **FPGA Coprocessing Board (DS2655)**: Houses Xilinx® UltraScale™ FPGAs to execute sub-microsecond computations, such as high-frequency PWM capture, hardware resolver emulation, and nanosecond-precision Fault Injection Unit (FIU) control[^Ploeger2018].
 
-### 3. Power Supply Switching Unit for the Controller
+---
 
-The **DS2642 FIU & Power Switch Board** serves as an intermediary, managing the connection between the power supply and the controller. Its functionalities include:
+## 2. The DS2907 Battery Simulation Controller
 
-- **Seamless Switching:** Facilitates smooth transitions and control over power supply inputs, ensuring uninterrupted simulation processes.
-- **Integration with I/O Units:** The **DS2680 I/O Unit** combines power supply control and switching capabilities, providing a unified interface for managing electrical parameters.
+The **DS2907 Battery Simulation Controller** serves as the central control intelligence for multi-channel cell emulation and high-voltage power integration.
 
-This switching mechanism is vital for maintaining the integrity of simulations, particularly when handling complex scenarios involving multiple power sources or dynamic changes in electrical conditions.
+```mermaid
+flowchart LR
+    subgraph DS2907_Architecture["DS2907 Controller Architecture"]
+        CTRL_CORE[Microcontroller & FPGA Logic]
+        SLOT_A[Simulation Module Slot 1: Master]
+        SLOT_B[Simulation Module Slot 2: Slave]
+        COMM_IF[Isolated High-Speed Bus: 100 Mbps]
+        CTRL_CORE --- SLOT_A
+        CTRL_CORE --- SLOT_B
+        CTRL_CORE --- COMM_IF
+    end
 
-**Learn more:** [Power Supply Switching Unit](https://www.dspace.com/de/gmb/home/products/hw/simulator_hardware/scalexio/scalexio_battery_simulation.cfm)
+    subgraph Power_Stage["Power Supply Interface"]
+        PWR_1[TDK-Lambda Genesys+ 60V / 25A]
+        PWR_2[Delta SM15/100 15V / 100A]
+    end
 
-### Simulation Process
+    subgraph Cell_Stack["Emulated Battery Stack"]
+        STACK_A[Cells 1 to 48 (Module 1)]
+        STACK_B[Cells 49 to 96 (Module 2)]
+    end
 
-During the simulation process, SCALEXIO allows for real-time monitoring and verification of current and voltage values. The voltage profiles are defined within the simulation model, offering precise control over various test scenarios. This capability enables engineers to:
+    SLOT_A <-->|Analog/Digital Control| PWR_1
+    SLOT_B <-->|Analog/Digital Control| PWR_2
+    PWR_1 --> STACK_A
+    PWR_2 --> STACK_B
+```
 
-- **Validate BMS Algorithms:** Ensure that BMS software correctly manages battery parameters under different conditions.
-- **Stress Test Systems:** Assess the BMS's ability to handle extreme or unexpected electrical behaviors.
-- **Optimize Performance:** Fine-tune BMS settings for enhanced efficiency and longevity of battery systems.
+### 2.1 Technical Specifications of the DS2907 Module
+- **Slot Capacity**: Accommodates two independent battery simulation modules per board, enabling concurrent control of two separate power rails.
+- **Power Supply Interfacing**: Supports leading commercial bidirectional power supplies (Delta Elektronika SM-series, TDK-Lambda Genesys+ series) via galvanically isolated CAN, Ethernet, or low-noise analog interfaces ($\pm 10\,\text{V}$).
+- **Dynamic Voltage Tracing**: Real-time closed-loop voltage adjustment with update frequencies exceeding $10\,\text{kHz}$, ensuring that sudden load current transients applied by the BMS (such as contactor precharge or active balancing) produce instantaneous, physically realistic voltage sags[^dSPACE2023].
 
-## Advanced Battery Cell Emulation
+---
 
-For more granular testing at the cell level, dSPACE provides specialized emulation boards that offer high-precision control over individual battery cells. These tools are essential for developing sophisticated BMS strategies, such as cell balancing and fault detection.
+## 3. Power Supply Switching and Hardware Fault Injection
 
-### EV1077 Battery Cell Voltage Emulation Board
+In battery HIL testing, testing nominal operation is secondary to verifying catastrophic safety interlocks. The **DS2642 FIU & Power Switch Board** acts as an inline hardware protection and fault insertion mechanism.
 
-The **EV1077 Battery Cell Voltage Emulation Board** is designed for high-precision cell-level testing, supporting system voltages up to 1,000 V. Its key features include:
+### 3.1 Relay Matrix Architecture and Fault Modes
 
-- **Four-Channel Configuration:** Allows simultaneous emulation of up to four individual battery cells.
-- **High Accuracy:** Delivers controllable and precise terminal voltages, essential for accurate simulation of cell behaviors.
-- **Support for Balancing Strategies:** Facilitates the testing of both passive and active cell balancing methods, ensuring uniform cell performance and extending battery pack lifespan.
+```mermaid
+graph TD
+    PS_IN[Power Supply Input Rail] --> RELAY_MAIN{Main Disconnect Relay}
+    RELAY_MAIN --> CURRENT_SENSE[High-Precision Shunt]
+    CURRENT_SENSE --> RELAY_FAULT{FIU Relay Matrix}
+    
+    RELAY_FAULT -->|Normal Operation| DUT_POS[DUT Pack Terminal +]
+    RELAY_FAULT -->|Fault 1: Open Circuit| OC_OPEN((Air Gap / Interrupted))
+    RELAY_FAULT -->|Fault 2: Short to Ground| GND_SHORT((Chassis GND))
+    RELAY_FAULT -->|Fault 3: Reverse Polarity| REV_POL((Reverse Voltage Injected))
+```
 
-This emulation board is ideal for applications requiring detailed analysis of cell interactions and performance within a battery pack.
+### 3.2 Electrical Protection Specifications
+- **Galvanic Isolation**: Rated up to $1,500\,\text{V}$ continuous dielectric breakdown isolation between the low-voltage control plane (IOCON/PCIe) and the high-voltage pack terminals.
+- **Switching Speed**: Fast electromagnetic and solid-state relays achieve disconnection within $\le 5\,\text{ms}$, protecting sensitive DUT circuitry in the event of an unmodelled short-circuit condition.
+- **Interlock Loop Integration**: The board includes dual-channel hardware interlock inputs wired to the test bench safety cage and emergency stop buttons. Opening the cage de-energizes all power supplies in under $2\,\text{ms}$ via hardware tripping without relying on software intervention[^ISO26262_5].
 
-**Learn more:** [EV1077 Battery Cell Voltage Emulation Board](https://www.dspace.com/de/gmb/home/products/special_solutions/battery_cell_voltage_emulation.cfm)
+---
 
-### DS5482 4-Channel Cell Voltage Emulation Board
+## 4. Real-Time Signal Conditioning and I/O Modules
 
-For scenarios demanding higher voltage capabilities, the **DS5482 4-Channel Cell Voltage Emulation Board** offers an advanced solution. Key attributes include:
+A complete BMS HIL rack integrates a broad spectrum of digital, analog, and communication channels:
 
-- **High Voltage Support:** Capable of simulating system voltages up to 1,500 V, accommodating larger and more complex battery systems.
-- **Compact and Cost-Effective:** Designed for efficient integration into existing setups without significant spatial or financial overhead.
-- **Versatile Applications:** Suitable for a wide range of testing environments, from automotive to aerospace applications, where high voltage and precision are paramount.
+| Module Identifier | Hardware Role | Technical Specifications | Target BMS Interface |
+| :--- | :--- | :--- | :--- |
+| **DS2671** | High-Precision Cell Voltage Emulator | 6 channels per board, $\pm 1\,\text{mV}$ accuracy, $\pm 5\,\text{A}$ sink/source | Battery Cell Monitoring Wire Harness |
+| **DS2680** | Multi-I/O and Protocol Transceiver | 16x ADC, 16x DAC, 32x DIO, 4x CAN-FD, 2x FlexRay | Contactors, Pyrofuse, HVIL, Current Sensor |
+| **DS2655** | FPGA Coprocessor & isoSPI Board | Kintex UltraScale, nanosecond cycle time, proprietary transceivers | Linear Tech / ADI isoSPI, TI BQ daisy-chain |
+| **DS2621** | Programmable Resistor Module | 0 to $10\,\text{M}\Omega$, $0.1\,\Omega$ resolution, 24 channels | NTC / PTC Pack Temperature Sensors |
+| **DS2642** | Fault Insertion Unit (FIU) | 16-channel high-current relay matrix, 30 A continuous | Line breaks, pin shorts, reverse voltage |
 
-This board enhances SCALEXIO's capability to simulate extensive battery systems, ensuring that BMS solutions can be thoroughly validated under stringent conditions.
+---
 
-**Learn more:** [DS5482 4-Channel Cell Voltage Emulation Board](https://www.dspace.com/en/inc/home/products/special_solutions/ds5482-4-channel-cell-voltage-.cfm)
+## 5. ASAM XIL Test Automation Architecture
 
-## Application Areas
+To maintain cross-platform test script portability across diverse toolchains (e.g., dSPACE SCALEXIO, Vector VT System, NI PXI), modern test benches adhere to the **ASAM XIL** (Association for Standardisation of Automation and Measuring Systems) API standard[^ASAM2020].
 
-SCALEXIO's robust simulation and emulation capabilities make it a versatile tool across various industries. Its applications span from automotive to aerospace, each demanding high reliability and precision in battery management.
+```mermaid
+flowchart TD
+    TEST_SCRIPT[Python / vTESTstudio Test Scripts] -->|ASAM XIL API Calls| XIL_FRAMEWORK[ASAM XIL Framework v2.2]
+    
+    subgraph ASAM_XIL_Ports["ASAM XIL Port Interfaces"]
+        EES_PORT[EES Port: Electrical Error Simulation / FIU]
+        MAP_PORT[MAP Port: Model Access / Parameters & Variables]
+        CAN_PORT[Network Port: CAN-FD, LIN, FlexRay Frames]
+    end
 
-### Automotive Industry
+    XIL_FRAMEWORK --> EES_PORT
+    XIL_FRAMEWORK --> MAP_PORT
+    XIL_FRAMEWORK --> CAN_PORT
 
-In the automotive sector, SCALEXIO is instrumental in the development and testing of Battery Management Systems for electric and hybrid vehicles. Key applications include:
+    EES_PORT -->|Set Pin Fault| DSPACE_XIL[dSPACE SCALEXIO XIL Server]
+    MAP_PORT -->|Read/Write Variables| DSPACE_XIL
+    CAN_PORT -->|Inject Frame / Log Bus| DSPACE_XIL
 
-- **Multi-Cell Battery Pack Simulation:** Enables the simulation of battery packs composed of multiple cells arranged in series and parallel configurations. This setup is essential for achieving desired voltage and current levels required by vehicle systems.
-- **BMS Algorithm Validation:** Ensures that BMS software effectively manages charging, discharging, and thermal conditions, contributing to vehicle safety and performance.
-- **Performance Optimization:** Assists in fine-tuning BMS parameters to enhance battery efficiency, longevity, and overall vehicle range.
+    DSPACE_XIL --> SCALEXIO_HW[SCALEXIO Real-Time Hardware]
+```
 
-**Learn more:** [Automotive BMS Development](https://www.dspace.com/en/ltd/home/products/systems/simulationmodels/simulation_models_use_cases/batterymanagement.cfm)
+### 5.1 Python ASAM XIL Test Script Example
+The following script utilizes the ASAM XIL Python binding to automate an overvoltage cutoff verification on SCALEXIO:
 
-### Energy Storage Systems
+```python
+"""
+Automated Overvoltage Protection Verification on dSPACE SCALEXIO
+Standard: ASAM XIL v2.2.0 API & ISO 26262 ASIL-D
+"""
 
-In the realm of renewable energy, efficient energy storage is critical for maximizing the utilization of available resources. SCALEXIO supports the simulation and validation of battery storage systems through:
+import time
+from asam.xil import Framework, Environment
 
-- **Capacity Utilization:** Helps in optimizing the use of available battery capacity, ensuring that energy storage systems operate efficiently under varying load conditions.
-- **Lifespan Maximization:** Enables testing of different charging and discharging profiles to extend the operational life of energy storage systems.
-- **System Reliability:** Validates the robustness of BMS solutions, ensuring consistent performance in diverse environmental and operational scenarios.
+# Initialize ASAM XIL Framework
+framework = Framework.create()
+env = framework.get_environment("dSPACE_SCALEXIO_Rack1")
 
-**Learn more:** [Energy Storage Systems Simulation](https://www.dspace.com/en/inc/home/news/dspace_pressroom/press/battery-management-systems.cfm)
+# Connect to Model Access Port (MAP) and Electrical Error Simulation (EES) Port
+map_port = env.get_map_port("ModelAccessPort")
+ees_port = env.get_ees_port("FaultInjectionPort")
 
-### Aerospace
+print("[INFO] Connected to SCALEXIO Real-Time Platform via ASAM XIL.")
 
-Aerospace applications demand the highest standards of safety and reliability in battery systems. SCALEXIO facilitates:
+try:
+    # Step 1: Initialize Battery Pack Emulation (96 Cells at 3.700 V)
+    print("[STEP 1] Setting nominal pack voltage (355.2 V, 3.700 V/cell)...")
+    for cell_idx in range(1, 97):
+        map_port.write_variable(f"Model Root/Battery_Pack/Cell_{cell_idx}/Voltage", 3.700)
+    
+    # Allow BMS to close contactors and enter STANDBY
+    time.sleep(2.0)
+    contactor_state = map_port.read_variable("DUT/BMS_MainContactor_Feedback")
+    assert contactor_state == 1, "Failed: BMS did not close contactors in nominal state!"
+    print("[PASS] BMS in Active Closed-Loop State.")
 
-- **Rigorous Testing:** Ensures that BMS solutions meet stringent aerospace requirements, including resistance to extreme temperatures, vibrations, and other environmental stressors.
-- **Safety Assurance:** Validates fail-safe mechanisms and emergency protocols within BMS, crucial for the safety of aircraft and spacecraft operations.
-- **Performance Under High Voltage:** Allows for the simulation of high-voltage battery systems used in aerospace applications, ensuring that BMS solutions can manage and mitigate risks associated with high energy densities.
+    # Step 2: Inject Overvoltage Fault on Cell #23 (Ramp to 4.300 V)
+    print("[STEP 2] Injecting Overvoltage condition on Cell 23 (4.300 V)...")
+    map_port.write_variable("Model Root/Battery_Pack/Cell_23/Voltage", 4.300)
+    t_fault_start = time.time()
 
-## Advantages of SCALEXIO Battery Simulation
+    # Step 3: Monitor Fault Tolerant Time Interval (FTTI <= 100 ms)
+    trip_detected = False
+    while (time.time() - t_fault_start) < 0.200: # 200 ms timeout window
+        contactor_state = map_port.read_variable("DUT/BMS_MainContactor_Feedback")
+        if contactor_state == 0:
+            trip_time_ms = (time.time() - t_fault_start) * 1000.0
+            trip_detected = True
+            break
+        time.sleep(0.005) # 5 ms poll interval
 
-SCALEXIO offers numerous benefits that make it an indispensable tool for BMS development and testing. Its design emphasizes integration, precision, flexibility, and scalability, catering to both simple and complex project requirements.
+    assert trip_detected, "CRITICAL HAZARD: BMS failed to open contactor upon overvoltage!"
+    assert trip_time_ms <= 100.0, f"VIOLATION: FTTI exceeded! Trip time: {trip_time_ms:.2f} ms"
+    print(f"[PASS] Overvoltage detected and contactors opened in {trip_time_ms:.2f} ms (FTTI <= 100 ms).")
 
-### Seamless Integration
+finally:
+    # Reset Environment to Safe Standby
+    print("[CLEANUP] Resetting all voltages and restoring fault matrix...")
+    map_port.write_variable("Model Root/Battery_Pack/Cell_23/Voltage", 3.700)
+    ees_port.clear_all_faults()
+    framework.dispose()
+```
 
-One of SCALEXIO's standout features is its ability to integrate battery simulations directly from the model. This integration eliminates the need for additional I/O hardware, simplifying the setup process and reducing potential points of failure. Engineers can efficiently implement and manage simulations, focusing more on development and less on hardware configuration.
+---
 
-### High Precision
+## 6. References
 
-Precision is paramount in battery simulations, and SCALEXIO delivers through:
-
-- **Accurate Control:** Provides meticulous control over current and voltage parameters, ensuring that simulations mirror real-world battery behaviors.
-- **Cell-Level Emulation:** Supports the emulation of individual battery cells, allowing for detailed analysis and testing of cell-specific behaviors and interactions.
-- **Realistic Scenarios:** Enables the creation of diverse and realistic battery scenarios, facilitating comprehensive testing of BMS functionalities under various conditions.
-
-### Flexibility
-
-SCALEXIO's modular architecture offers unparalleled flexibility, allowing customization to suit specific project needs. Key aspects include:
-
-- **Modular Components:** Users can select and configure different hardware and software modules based on project requirements, enabling tailored simulation environments.
-- **Expandable System:** The platform can be easily expanded with additional modules or emulation boards, accommodating growing project complexities without significant overhauls.
-- **Compatibility:** Supports a wide range of power supplies and emulation boards, ensuring compatibility with existing systems and facilitating integration with other tools and technologies.
-
-### Scalability
-
-As projects grow in complexity, SCALEXIO scales accordingly. Its capabilities include:
-
-- **Large-Scale Simulations:** Supports the simulation of extensive battery packs comprising numerous cells, essential for high-voltage systems found in electric vehicles and large energy storage installations.
-- **Performance Under Load:** Maintains high performance and accuracy even as the scale of simulations increases, ensuring reliable results across diverse testing scenarios.
-- **Future-Proof Design:** Designed to handle evolving technological advancements and increasing demands in battery management and simulation requirements.
-
-## Conclusion
-
-dSPACE’s SCALEXIO stands out as a powerful and flexible platform tailored for the development and testing of Battery Management Systems. Its seamless integration, high precision, flexibility, and scalability make it an ideal choice for engineers and developers across various industries, including automotive, energy storage, and aerospace. By providing a comprehensive suite of tools for battery simulation and cell-level emulation, SCALEXIO meets the rigorous demands for complexity and reliability, driving advancements in safe and efficient battery technologies.
+[^dSPACE2023]: dSPACE GmbH, "SCALEXIO® Hardware and Architecture Manual," *dSPACE Technical Documentation*, Paderborn, Germany, 2023.
+[^Ploeger2018]: M. Ploeger and H. V. Richter, "Hardware-in-the-Loop Simulation for Modern High-Voltage Automotive Systems," *ATZelektronik worldwide*, vol. 13, no. 4, pp. 38–43, 2018. [DOI: 10.1007/s38314-018-0036-7](https://doi.org/10.1007/s38314-018-0036-7)
+[^ISO26262_5]: International Organization for Standardization, "Road vehicles — Functional safety — Part 5: Product development at the hardware level," *ISO Standard 26262-5:2018*, Dec. 2018.
+[^ASAM2020]: Association for Standardisation of Automation and Measuring Systems, "ASAM XIL Standard: Generic Test Automation API, Version 2.2.0," *ASAM e.V.*, Nov. 2020.

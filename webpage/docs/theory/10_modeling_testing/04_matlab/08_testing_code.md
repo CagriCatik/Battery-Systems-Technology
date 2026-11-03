@@ -1,885 +1,291 @@
-# Testing Generated Code
+# Verification of Generated Code: SIL and PIL Testing
 
-## **Introduction to Code Validation**
+In Model-Based Design (MBD), verifying that compiled object code behaves identically to the high-level graphical model is an indispensable milestone. Governed by **ISO 26262-6** (Clauses 9 and 10) and **ASPICE SWE.4** (Software Unit Verification), automated code verification mandates **Back-to-Back Testing** to prove that the translation from design models to target binary code does not inject unintended functionality, numerical corruption, or timing anomalies[^ISO26262_6].
 
-After generating code from a BMS model in Simulink, it is imperative to validate the generated code to ensure that it faithfully replicates the behavior of the original model. Code validation serves as a bridge between model-based design and its implementation in embedded systems, guaranteeing that the transition maintains the system's integrity, performance, and compliance with safety standards. Two fundamental methods employed in code validation are:
-
-- **Software-in-the-Loop (SIL)**: This method involves executing the generated code on a host computer, allowing for the validation of functional correctness by comparing the code's behavior against the Simulink model's simulation results.
-
-- **Processor-in-the-Loop (PIL)**: PIL testing takes code validation a step further by running the generated code on the actual target embedded hardware (e.g., BeagleBone Black). This approach assesses both performance metrics and real-time behavior, ensuring that the code operates as intended in the intended hardware environment.
-
-Implementing both SIL and PIL testing provides a comprehensive validation framework, ensuring that the BMS software is not only functionally accurate but also performant and reliable in real-world applications.
-
-## **Software-in-the-Loop (SIL) Testing**
-
-Software-in-the-Loop (SIL) testing is a critical phase in validating the functional correctness of the generated code. By executing the code on a host PC, developers can ensure that the software behaves identically to the Simulink model before deploying it to embedded hardware.
-
-### **Workflow**
-
-The SIL testing workflow involves several key steps that bridge the gap between model-based design and code validation:
-
-1. **Generate Code**:
-   - **Action**: Utilize Embedded Coder to produce `.c` and `.h` files from the validated BMS Simulink model.
-   - **Procedure**:
-     - Open the Simulink model.
-     - Navigate to *Code > Embedded Coder*.
-     - Configure code generation settings as per model requirements.
-     - Click *Generate Code* to produce the source files.
-   - **Outcome**: Generated code files (e.g., `BMS_StateMachine.c`, `BMS_StateMachine.h`) ready for validation.
-
-2. **Reuse Existing Tests**:
-   - **Action**: Leverage the test harnesses created during the model-based testing phase to validate the generated code.
-   - **Procedure**:
-     - Ensure that test harnesses are configured to interface with the generated code.
-     - Import or reference the test cases within the Simulink Test Manager.
-   - **Benefit**: Streamlines the testing process by reusing established test scenarios, ensuring consistency between model and code validation.
-
-3. **Configure SIL Mode**:
-   - **Action**: Set up the Simulink Test Manager to execute tests in SIL mode.
-   - **Procedure**:
-     - Open **Simulink Test Manager**.
-     - Select the desired test suite or test case.
-     - Navigate to *Simulation Mode* and choose **Software-in-the-Loop**.
-     - Configure any additional SIL settings as required.
-   - **Outcome**: The simulation environment replaces the Simulink model with the compiled object code during test execution, enabling direct validation of the code's functionality.
-
-   **SIL Configuration Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Configuring SIL Mode in Test Manager
-   testSuite = 'BMS_SIL_Test_Suite';
-   Simulink.Test.TestManager.selectTestSuite(testSuite);
-   
-   % Set simulation mode to SIL
-   Simulink.Test.TestManager.setSimulationMode(testSuite, 'SIL');
-   
-   disp(['Simulation mode set to SIL for test suite: ' testSuite]);
-   ```
-   
-   *Figure 1: MATLAB Code for Configuring SIL Mode*
-
-### **2.2 Equivalence Testing**
-
-Equivalence testing is a method used to ensure that the behavior of the generated code (SIL) matches that of the original Simulink model (Model-in-the-Loop, MIL). This comparison is crucial for validating that the code accurately represents the model's logic and functionality.
-
-- **Objective**: Verify that outputs from SIL tests (generated code) are identical to those from MIL tests (Simulink model simulations).
-
-- **Steps**:
-  
-  1. **Run MIL Tests**:
-     - **Action**: Execute the test suite in MIL mode to obtain baseline simulation results.
-     - **Procedure**:
-       - Open **Simulink Test Manager**.
-       - Select the test suite and ensure the simulation mode is set to MIL.
-       - Run the tests and log the results.
-  
-  2. **Run SIL Tests**:
-     - **Action**: Execute the same test suite in SIL mode to obtain generated code results.
-     - **Procedure**:
-       - Change the simulation mode to SIL as outlined in Section 2.1.
-       - Run the tests and log the results.
-  
-  3. **Compare Results**:
-     - **Action**: Use **Simulink Test Manager** to compare MIL and SIL results for equivalence.
-     - **Procedure**:
-       - Navigate to the *Comparison* tool within Simulink Test Manager.
-       - Select the corresponding MIL and SIL test runs.
-       - Execute the comparison to identify discrepancies.
-  
-  - **Outcome**: A pass/fail status for each test iteration based on the equivalence of outputs between MIL and SIL.
-
-  **Equivalence Testing Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Performing Equivalence Testing
-  milResults = Simulink.Test.TestManager.runTestSuite('BMS_MIL_Test_Suite');
-  silResults = Simulink.Test.TestManager.runTestSuite('BMS_SIL_Test_Suite');
-  
-  % Compare MIL and SIL results
-  equivalence = Simulink.Test.TestManager.compareTestResults(milResults, silResults);
-  
-  if all(equivalence.Pass)
-      disp('All SIL tests passed; code behavior matches the Simulink model.');
-  else
-      disp('SIL tests failed; discrepancies detected between code and model.');
-  end
-  ```
-  
-  *Figure 2: MATLAB Code for Performing Equivalence Testing*
-
-### **2.3 Analyzing Results**
-
-Post-execution analysis is essential to interpret the outcomes of SIL tests, identify any discrepancies, and ensure that the generated code aligns with the model's intended behavior.
-
-- **Simulation Data Inspector**:
-  - **Function**: Provides a graphical interface to compare logged signals between MIL and SIL runs.
-  - **Usage**:
-    - Open the **Simulation Data Inspector** after running SIL and MIL tests.
-    - Load the corresponding data logs from both test runs.
-    - Overlay signals (e.g., contactor states, fault flags) to visually inspect for differences.
-  - **Example**:
-    - If a specific signal (e.g., `Error`) shows `0` across both MIL and SIL runs, it indicates identical behavior.
-
-  **Analyzing Simulation Data Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Loading and Comparing Simulation Data
-  % Load MIL simulation data
-  milData = load('BMS_MIL_Test_Suite.mat');
-  
-  % Load SIL simulation data
-  silData = load('BMS_SIL_Test_Suite.mat');
-  
-  % Open Simulation Data Inspector
-  Simulink.sdi.view;
-  
-  % Compare specific signals
-  Simulink.sdi.compare('Error', milData.Error, silData.Error);
-  
-  % Display comparison results
-  if silData.Error == milData.Error
-      disp('Error signal matches between MIL and SIL.');
-  else
-      disp('Discrepancy detected in Error signal between MIL and SIL.');
-  end
-  ```
-  
-  *Figure 3: MATLAB Code for Comparing Simulation Data*
-
-- **Code Coverage**:
-  - **Function**: Measures the extent to which the generated code executes various code paths during SIL testing.
-  - **Configuration**:
-    - Enable coverage metrics (e.g., Decision Coverage, Condition Coverage, MCDC) in SIL mode within Simulink Test Manager.
-    - Run the SIL test suite to collect coverage data.
-  - **Benefit**: Ensures that all critical execution paths in the code are tested, identifying untested or partially tested areas.
-
-  **Enabling Code Coverage in SIL Mode Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Enabling Coverage Metrics for SIL Testing
-  testSuite = 'BMS_SIL_Test_Suite';
-  
-  % Select the test suite
-  Simulink.Test.TestManager.selectTestSuite(testSuite);
-  
-  % Enable coverage metrics
-  Simulink.Test.TestManager.setCoverageSettings(testSuite, ...
-      'Decision', true, 'Condition', true, 'MCDC', true);
-  
-  disp(['Coverage metrics enabled for test suite: ' testSuite]);
-  
-  % Run the test suite with coverage enabled
-  Simulink.Test.TestManager.runTestSuite(testSuite);
-  
-  % Display coverage results
-  coverageResults = Simulink.Test.TestManager.getCoverage(testSuite);
-  disp(coverageResults);
-  ```
-  
-  *Figure 4: MATLAB Code for Enabling and Running Coverage Metrics*
-
-By meticulously analyzing SIL test results using tools like the Simulation Data Inspector and Code Coverage, developers can ensure that the generated code not only matches the model's functional behavior but also adheres to rigorous testing standards, paving the way for reliable and safe embedded BMS implementations.
+This chapter details the theoretical and practical frameworks for **Software-in-the-Loop (SIL)** and **Processor-in-the-Loop (PIL)** testing of Battery Management System (BMS) software, exploring numerical equivalence metrics, cross-compilation toolchains, execution profiling, and worst-case execution time (WCET) measurement[^MathWorksSIL2023].
 
 ---
 
-## **3. Processor-in-the-Loop (PIL) Testing**
+## 1. The Verification Hierarchy: MIL vs. SIL vs. PIL
 
-Processor-in-the-Loop (PIL) testing is an advanced validation technique that evaluates the performance and real-time behavior of the generated code on the target embedded hardware. This method bridges the gap between SIL testing and final deployment, ensuring that the BMS operates correctly within its intended hardware environment.
+Code verification bridges the gap between simulated continuous/discrete physics and compiled assembly executing on physical silicon.
 
-### **3.1 PIL Setup**
+```mermaid
+flowchart TD
+    subgraph MIL["1. Model-in-the-Loop (MIL)"]
+        IN_MIL[Stimulus Generator / Drive Cycles] --> MDL[Simulink BMS Behavioral Model]
+        MDL --> OUT_MIL[Continuous/Discrete Float Output]
+    end
 
-Setting up PIL testing involves configuring the target hardware, cross-compiling the generated code, and preparing the testing environment to execute the code on the embedded system.
+    subgraph SIL["2. Software-in-the-Loop (SIL)"]
+        IN_SIL[Stimulus Generator / Drive Cycles] --> WRAP_HOST[Host Wrapper DLL / Shared Object]
+        WRAP_HOST --> C_CODE[Compiled C Code: x86_64 Host]
+        C_CODE --> OUT_SIL[Host Object Code Output]
+    end
 
-1. **Target Configuration**:
-   - **Action**: Select and configure the embedded hardware platform (e.g., BeagleBone Black) within Simulink.
-   - **Procedure**:
-     - Open the Simulink model.
-     - Navigate to *Simulation > Hardware Configuration > Hardware Board*.
-     - Select the appropriate hardware (e.g., BeagleBone Black) from the list.
-     - Configure any additional hardware-specific settings, such as communication interfaces or memory allocations.
-   
-   **Target Configuration Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Configuring Target Hardware
-   hardware = 'BeagleBone Black';
-   set_param('BMS_Model', 'SystemTargetFile', 'ert.tlc');
-   set_param('BMS_Model', 'HardwareBoard', hardware);
-   
-   disp(['Target hardware configured to: ' hardware]);
-   ```
-   
-   *Figure 5: MATLAB Code for Configuring Target Hardware*
+    subgraph PIL["3. Processor-in-the-Loop (PIL)"]
+        IN_PIL[Stimulus Generator / Drive Cycles] --> COMM_PIL[CAN / UART / JTAG Link]
+        COMM_PIL --> HW_TARGET[Target Silicon: Infineon AURIX TC397 / ARM Cortex-R5]
+        HW_TARGET --> OUT_PIL[Target Binary Execution Output]
+    end
 
-2. **Configure PIL Mode**:
-   - **Action**: Enable Processor-in-the-Loop mode within the SIL/PIL Manager.
-   - **Procedure**:
-     - Open **Simulink Test Manager**.
-     - Select the desired test suite or test case.
-     - Navigate to *Simulation Mode* and choose **Processor-in-the-Loop**.
-     - Configure PIL-specific settings, such as connection parameters and data logging options.
-   
-   **PIL Configuration Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Configuring PIL Mode
-   testSuite = 'BMS_PIL_Test_Suite';
-   Simulink.Test.TestManager.selectTestSuite(testSuite);
-   
-   % Set simulation mode to PIL
-   Simulink.Test.TestManager.setSimulationMode(testSuite, 'PIL');
-   
-   disp(['Simulation mode set to PIL for test suite: ' testSuite]);
-   ```
-   
-   *Figure 6: MATLAB Code for Configuring PIL Mode*
-
-### **3.2 Execution Time Measurement**
-
-Measuring the execution time of the BMS code on the target hardware is crucial for validating real-time performance and ensuring that the system meets its timing requirements.
-
-- **Task Execution Time**:
-  - **Function**: Assess how long each task or control loop cycle takes to execute on the embedded processor.
-  - **Procedure**:
-    - Utilize profiling tools provided by the embedded hardware or external profilers.
-    - Log execution times during PIL tests to identify performance bottlenecks.
-  - **Example**:
-    - A task executing in `3.9 µs` per cycle indicates efficient performance, suitable for real-time applications.
-  
-  **Execution Time Measurement Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Measuring Execution Time in PIL Mode
-  testSuite = 'BMS_PIL_Test_Suite';
-  
-  % Run the PIL test suite
-  simOut = Simulink.Test.TestManager.runTestSuite(testSuite);
-  
-  % Extract execution time data
-  executionTime = simOut.getDiagnosticData('ExecutionTime');
-  
-  % Display execution time
-  fprintf('Average Execution Time per Cycle: %.2f µs\n', executionTime);
-  ```
-  
-  *Figure 7: MATLAB Code for Measuring Execution Time in PIL Mode*
-
-### **3.3 Workflow**
-
-The PIL testing workflow encompasses running tests on the target hardware, comparing results with MIL and SIL simulations, and generating comprehensive reports to document performance and compliance.
-
-1. **Run PIL Tests**:
-   - **Action**: Execute the configured test suite on the target embedded hardware via the SIL/PIL Manager.
-   - **Procedure**:
-     - Ensure that the hardware is connected and properly configured.
-     - In **Simulink Test Manager**, select the test suite set to PIL mode.
-     - Click the *Run* button to initiate the tests on the hardware.
-   - **Outcome**: Tests are executed on the embedded system, and results are logged for analysis.
-
-2. **Compare Results**:
-   - **Action**: Validate the equivalence of results across MIL, SIL, and PIL testing stages.
-   - **Procedure**:
-     - Use **Simulink Test Manager** to overlay and compare simulation logs from MIL, SIL, and PIL runs.
-     - Identify and investigate any discrepancies in signal behaviors or system responses.
-   - **Benefit**: Ensures consistency and reliability of the BMS software across different testing environments.
-
-3. **Generate Report**:
-   - **Action**: Compile a detailed report encompassing execution times, memory usage, signal comparisons, and overall test outcomes.
-   - **Procedure**:
-     - Use **Simulink Test Manager**'s reporting tools to generate structured reports.
-     - Include performance metrics and visualizations to facilitate comprehensive analysis.
-   - **Outcome**: A thorough documentation of PIL test results, suitable for internal review and certification purposes.
-
-   **Report Generation Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Generating a PIL Test Report
-   testSuite = 'BMS_PIL_Test_Suite';
-   reportFormat = 'pdf'; % Options: 'pdf', 'html'
-   
-   % Generate the PIL test report
-   Simulink.Test.Report.generateTestReport(testSuite, ...
-       'Format', reportFormat, 'OutputFile', 'PIL_Test_Report.pdf');
-   
-   disp('PIL test report generated as PIL_Test_Report.pdf.');
-   ```
-   
-   *Figure 8: MATLAB Code for Generating a PIL Test Report*
-
-By meticulously executing SIL and PIL tests, developers can ensure that the generated BMS code not only matches the Simulink model's functional behavior but also performs efficiently and reliably on the target hardware, laying the groundwork for successful deployment in real-world applications.
-
----
-
-## **4. Key Tools and Workflow**
-
-Achieving robust validation of generated BMS code necessitates the effective use of specialized tools and adherence to a structured workflow. Simulink provides a suite of tools that facilitate the testing and validation process, ensuring that the generated code meets both functional and performance requirements.
-
-### **4.1 Simulink Test Manager**
-
-**Simulink Test Manager** is an integrated environment that streamlines the creation, execution, and management of test cases. It provides comprehensive functionalities to automate equivalence testing, manage test suites, and integrate coverage metrics.
-
-- **Equivalence Tests**:
-  - **Function**: Automate the comparison between MIL, SIL, and PIL test results to ensure functional correctness.
-  - **Usage**:
-    - Define equivalence criteria within test cases.
-    - Automatically execute comparisons and generate pass/fail statuses based on defined metrics.
-  
-- **Batch Execution**:
-  - **Function**: Run multiple test iterations sequentially or in parallel, enhancing testing efficiency.
-  - **Usage**:
-    - Select a group of test cases or suites.
-    - Initiate batch runs to execute all selected tests in one operation.
-  
-- **Coverage Integration**:
-  - **Function**: Track and report code coverage metrics (e.g., MCDC) during SIL and PIL test executions.
-  - **Usage**:
-    - Enable coverage settings within test suites.
-    - Monitor coverage progress and identify gaps in test coverage.
-
-  **Simulink Test Manager Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Managing Tests with Simulink Test Manager
-  testSuite = 'BMS_Equivalence_Test_Suite';
-  
-  % Select the test suite
-  Simulink.Test.TestManager.selectTestSuite(testSuite);
-  
-  % Run the test suite
-  Simulink.Test.TestManager.runTestSuite(testSuite);
-  
-  % Retrieve and display test results
-  testResults = Simulink.Test.TestManager.getTestResults(testSuite);
-  disp(testResults);
-  ```
-  
-  *Figure 9: MATLAB Code for Managing Tests with Test Manager*
-
-### **4.2 SIL/PIL Manager**
-
-The **SIL/PIL Manager** is a specialized tool within Simulink that facilitates the configuration and execution of SIL and PIL tests. It manages the integration between the generated code and the testing environment, ensuring seamless execution and result logging.
-
-- **Hardware Integration**:
-  - **Function**: Supports a variety of embedded hardware platforms, including BeagleBone Black, Arduino, and custom targets.
-  - **Usage**:
-    - Select and configure the target hardware within the SIL/PIL Manager.
-    - Establish communication interfaces between Simulink and the hardware for real-time data exchange.
-  
-- **Automated Back-to-Back Testing**:
-  - **Function**: Enables the validation of code against the model without manual intervention, reducing the potential for human errors.
-  - **Usage**:
-    - Set up automated scripts to execute tests in SIL and PIL modes.
-    - Compare results automatically to identify discrepancies.
-
-  **SIL/PIL Manager Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Configuring and Running SIL/PIL Tests
-  testSuite = 'BMS_SIL_PIL_Test_Suite';
-  
-  % Select the test suite
-  Simulink.Test.TestManager.selectTestSuite(testSuite);
-  
-  % Configure PIL settings
-  Simulink.Test.TestManager.setHardwarePlatform(testSuite, 'BeagleBone Black');
-  
-  % Run SIL tests
-  Simulink.Test.TestManager.setSimulationMode(testSuite, 'SIL');
-  Simulink.Test.TestManager.runTestSuite(testSuite);
-  
-  % Run PIL tests
-  Simulink.Test.TestManager.setSimulationMode(testSuite, 'PIL');
-  Simulink.Test.TestManager.runTestSuite(testSuite);
-  
-  disp('SIL and PIL tests executed successfully.');
-  ```
-  
-  *Figure 10: MATLAB Code for Configuring and Running SIL/PIL Tests*
-
-### **4.3 Simulation Data Inspector**
-
-The **Simulation Data Inspector (SDI)** is a versatile tool that allows developers to visualize, compare, and analyze simulation data from MIL, SIL, and PIL runs. It provides a graphical interface to overlay and inspect signal behaviors across different testing stages.
-
-- **Signal Comparison**:
-  - **Function**: Overlay signals from MIL, SIL, and PIL runs to detect discrepancies and ensure consistency.
-  - **Usage**:
-    - Load data logs from different test runs into SDI.
-    - Use the overlay feature to visually compare signal trajectories.
-  
-- **Execution Time Profiling**:
-  - **Function**: Visualize task execution times to assess performance metrics and real-time compliance.
-  - **Usage**:
-    - Plot execution times against simulation time to identify performance bottlenecks.
-  
-  **Simulation Data Inspector Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Using Simulation Data Inspector for Signal Comparison
-  % Load MIL data
-  milData = sdiCollection('BMS_MIL_Data.sdi');
-  
-  % Load SIL data
-  silData = sdiCollection('BMS_SIL_Data.sdi');
-  
-  % Load PIL data
-  pilData = sdiCollection('BMS_PIL_Data.sdi');
-  
-  % Open SDI
-  Simulink.sdi.view;
-  
-  % Compare Error signal across MIL, SIL, and PIL
-  Simulink.sdi.compare(milData, silData, pilData, 'Error');
-  
-  disp('Signal comparison completed in Simulation Data Inspector.');
-  ```
-  
-  *Figure 11: MATLAB Code for Using Simulation Data Inspector*
-
-By leveraging these tools and adhering to a structured workflow, developers can ensure that the generated BMS code is both functionally accurate and performant, meeting the stringent requirements of safety-critical applications.
-
----
-
-## **5. Benefits**
-
-Implementing thorough testing of generated code using SIL and PIL methodologies offers numerous advantages that enhance the reliability, performance, and compliance of Battery Management Systems (BMS). The key benefits include:
-
-1. **Functional Correctness**:
-   - **Description**: Ensures that the generated code behaves identically to the Simulink model, reducing the risk of discrepancies that could lead to system malfunctions.
-   - **Benefit**: Enhances the overall reliability of the BMS by verifying that all functional requirements are met.
-
-2. **Performance Metrics**:
-   - **Description**: Measures execution time and memory usage on the target hardware, validating that the system meets real-time performance and resource constraints.
-   - **Benefit**: Guarantees that the BMS operates efficiently within the embedded environment, preventing issues like latency or resource exhaustion.
-
-3. **Certification Readiness**:
-   - **Description**: Aligns testing practices with safety standards such as ISO 26262 and DO-178C, ensuring that the generated code is suitable for certification in safety-critical applications.
-   - **Benefit**: Facilitates the certification process, enabling the deployment of the BMS in regulated industries like automotive and aerospace.
-
-4. **Risk Mitigation**:
-   - **Description**: Identifies and addresses potential errors and performance bottlenecks early in the development process through rigorous testing.
-   - **Benefit**: Reduces the likelihood of costly post-deployment fixes and enhances the safety and reliability of the BMS.
-
-5. **Efficiency and Automation**:
-   - **Description**: Automates repetitive testing tasks and leverages existing test harnesses, saving time and reducing manual effort.
-   - **Benefit**: Accelerates the development cycle, allowing developers to focus on more complex and critical aspects of the system.
-
-6. **Enhanced Traceability**:
-   - **Description**: Maintains clear bi-directional links between requirements, model elements, and generated code, facilitating audits and compliance checks.
-   - **Benefit**: Improves accountability and ensures that all system specifications are adequately addressed in the implementation.
-
-7. **Quality Assurance**:
-   - **Description**: Provides comprehensive validation of both functional and performance aspects of the generated code, ensuring high-quality software delivery.
-   - **Benefit**: Enhances user confidence in the BMS, contributing to better system performance and longevity.
-
-**Summary of Benefits**:
-
-```plaintext
-- Functional Correctness: Ensures code matches model behavior.
-- Performance Metrics: Validates real-time operation and resource usage.
-- Certification Readiness: Aligns with safety and industry standards.
-- Risk Mitigation: Identifies and resolves potential issues early.
-- Efficiency and Automation: Streamlines testing processes.
-- Enhanced Traceability: Facilitates audits and compliance.
-- Quality Assurance: Guarantees high-quality, reliable software.
+    subgraph Equivalence["Back-to-Back Equivalence Analysis"]
+        OUT_MIL --> COMP{Comparator Engine}
+        OUT_SIL --> COMP
+        OUT_PIL --> COMP
+        COMP --> PASS_FAIL[Equivalence Pass / Tolerance Violation]
+        COMP --> METRICS[Absolute / Relative Error & Timing Skew]
+    end
 ```
 
-By embracing SIL and PIL testing methodologies, developers can achieve a high level of confidence in the generated BMS code, ensuring that it is both functionally accurate and performant in its intended embedded environment.
+### 1.1 Systematic Comparison of Execution Levels
+
+| Metric / Dimension | Model-in-the-Loop (MIL) | Software-in-the-Loop (SIL) | Processor-in-the-Loop (PIL) |
+| :--- | :--- | :--- | :--- |
+| **Execution Engine** | Simulink Simulation Engine (Host) | Native Host Binary (`.dll`, `.so`) | Target Microcontroller (Core/Eval Board) |
+| **Compilation Toolchain** | Not Applicable (Interpreted / Model Reference) | Host C/C++ Compiler (MSVC, GCC, Clang) | Target Cross-Compiler (Tasking, HighTec, TI ARM) |
+| **Target Architecture** | Host CPU (x86_64 / ARM64) | Host CPU (x86_64 / ARM64) | Production Microcontroller (e.g., TriCore 32-bit) |
+| **Primary Objective** | Functional & Algorithmic Validation | Code Generation Correctness & MISRA-C | Compiler Semantics, Target Endianness, WCET |
+| **Execution Speed** | Moderate to Fast | Fastest (Native compiled machine code) | Slower (Throttled by JTAG/UART communication) |
+| **Execution Timing** | Virtual Simulation Time ($t_{\text{sim}}$) | Virtual Simulation Time ($t_{\text{sim}}$) | Execution Cycle Counts ($t_{\text{target}}$) logged |
+| **Memory Emulation** | Floating-point Double / Single | Host Memory Model (64-bit Pointers) | Target Memory Map (32-bit Pointers, Flash/RAM) |
 
 ---
 
-## **6. Example: BeagleBone Black PIL Test**
+## 2. Software-in-the-Loop (SIL) Verification
 
-To illustrate the practical application of Processor-in-the-Loop (PIL) testing, consider a case study involving the BeagleBone Black embedded board. This example demonstrates the setup, execution, and analysis of PIL tests to validate the performance and real-time behavior of the generated BMS code.
+SIL execution verifies the generated C/C++ source code directly on the development host. The code generator wraps the synthesized source files (`.c`, `.h`) into a compiled C-MEX S-function or dynamic library.
 
-### **6.1 Setup**
+### 2.1 The Host Compilation Loop
 
-- **Target**: BeagleBone Black board.
-- **Test Harness**: Reuse existing signal editor scenarios designed for fault conditions to maintain consistency across testing stages.
-- **Metrics**:
-  - **Execution Time**: Measure the time taken per control cycle (e.g., `3 µs` per cycle).
-  - **Signal Accuracy**: Ensure that the outputs from PIL tests match those from MIL and SIL tests, confirming consistency.
+During SIL simulation:
+1. Simulink feeds input vectors $u(k)$ at discrete time-step $k$ into the SIL wrapper.
+2. The wrapper passes pointers to the generated `model_step()` function.
+3. The host compiled C code computes the state updates $x(k+1)$ and outputs $y_{\text{SIL}}(k)$.
+4. The outputs are returned to the Simulink engine for visualization, logging, and automated assertion checking[^Broy2012].
 
-**Setup Steps**:
+### 2.2 Numerical Discrepancies and Root Causes
 
-1. **Configure Hardware**:
-   - Connect the BeagleBone Black to the host PC via USB or Ethernet.
-   - Install necessary drivers and software to facilitate communication between Simulink and the hardware.
+Although SIL executes the identical algorithmic equations, subtle divergences between MIL and SIL can emerge:
+- **Intermediate Accumulator Precision**: Host x86_64 FPUs may utilize 80-bit Extended Precision registers (x87) or 128/256-bit SSE/AVX registers, whereas the Simulink model simulates standard IEEE 754 32-bit single-precision arithmetic[^Goldberg1991].
+- **Compiler Optimizations**: Aggressive compiler flags (e.g., `-O3`, `-ffast-math`) may reorder floating-point operations:
 
-2. **Prepare Test Harness**:
-   - Ensure that the test harness is configured to interface with the generated code.
-   - Load the signal editor scenarios that simulate various fault conditions.
+$$
+(a + b) + c \neq a + (b + c)
+$$
 
-3. **Enable PIL Mode**:
-   - Open **Simulink Test Manager**.
-   - Select the appropriate test suite.
-   - Set the simulation mode to **Processor-in-the-Loop**.
-   - Configure hardware-specific settings as outlined in Section 3.1.
-
-   **PIL Setup Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Setting Up PIL for BeagleBone Black
-   testSuite = 'BMS_PIL_Test_Suite';
-   Simulink.Test.TestManager.selectTestSuite(testSuite);
-   
-   % Set simulation mode to PIL and select hardware
-   Simulink.Test.TestManager.setSimulationMode(testSuite, 'PIL');
-   Simulink.Test.TestManager.setHardwarePlatform(testSuite, 'BeagleBone Black');
-   
-   disp(['PIL mode configured for test suite: ' testSuite ' on BeagleBone Black']);
-   ```
-   
-   *Figure 12: MATLAB Code for Setting Up PIL*
-
-### **6.2 Results**
-
-Upon executing the PIL tests, the following outcomes are observed:
-
-- **Pass Criteria**:
-  - All 11 test iterations pass, with `Error = 0`, indicating identical behavior between MIL, SIL, and PIL tests.
-  
-- **Coverage**:
-  - Achieves **100% MCDC** coverage through the combination of MIL, SIL, and PIL testing, ensuring comprehensive validation of all logical pathways and conditions.
-
-**Results Overview**:
-
-```plaintext
-PIL Test Results:
-- Total Iterations: 11
-- Passed: 11
-- Failed: 0
-- Average Execution Time per Cycle: 3 µs
-- MCDC Coverage: 100%
-```
-
-**Analysis**:
-
-1. **Execution Time**:
-   - The measured execution time of `3 µs` per cycle confirms that the BMS code operates efficiently within the real-time constraints of the BeagleBone Black hardware.
-
-2. **Signal Accuracy**:
-   - All signal outputs from the PIL tests match those from MIL and SIL runs, validating the functional correctness and consistency of the generated code across different testing environments.
-
-3. **Coverage Achievement**:
-   - Attaining 100% MCDC coverage ensures that every condition within decision statements independently influences the decision outcome, fulfilling the stringent requirements for safety-critical systems.
-
-**Example PIL Test Report**:
-   
-```plaintext
-PIL Test Report
----------------
-1. Test Summary
-   - Total Iterations: 11
-   - Passed: 11
-   - Failed: 0
-   - Overall MCDC Coverage: 100%
-
-2. Execution Metrics
-   - Average Execution Time per Cycle: 3 µs
-   - Memory Usage: 48 bytes
-
-3. Signal Comparisons
-   - Error Signal: MIL vs. SIL vs. PIL - All match (Error = 0)
-   - Contactor States: No discrepancies detected
-   - Fault Flags: Consistent across all tests
-
-4. Coverage Details
-   - Decision Coverage: 100%
-   - Condition Coverage: 100%
-   - MCDC Coverage: 100%
-
-5. Recommendations
-   - Proceed with deployment as all tests have passed successfully.
-   - Maintain regular PIL testing to monitor performance on target hardware.
-```
-
-*Figure 13: Sample PIL Test Report Structure*
-
-This case study exemplifies the effectiveness of combining SIL and PIL testing to achieve comprehensive validation of generated BMS code, ensuring both functional accuracy and real-time performance on embedded hardware.
+Because floating-point addition is non-associative, reordered operations in matrix inversions (such as the Extended Kalman Filter innovation covariance $S_k = H_k P_k^- H_k^T + R_k$) introduce roundoff drift.
+- **Integer Saturation and Wrap-Around**: Implicit type conversions that behave predictably in Simulink blocks may cause compiler-dependent undefined behavior if sign extension rules are violated.
 
 ---
 
-## **7. Key Tools and Workflow**
+## 3. Processor-in-the-Loop (PIL) Testing & Hardware Co-Simulation
 
-Achieving robust validation of generated BMS code requires the seamless integration of various tools and a well-defined workflow. Simulink offers a suite of tools that facilitate this process, ensuring that the testing and validation phases are efficient, comprehensive, and compliant with industry standards.
+PIL testing executes the production binary on the actual embedded target (or a certified target instruction set simulator). This step is essential to validate platform-dependent attributes that cannot be audited on a PC[^Kramer2019].
 
-### **7.1 Simulink Test Manager**
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Host as Simulink Test Manager (Host PC)
+    participant JTAG as Debugger / Comms (Lauterbach / UART)
+    participant Target as Target MCU (Infineon AURIX TC397)
 
-**Simulink Test Manager** is the central hub for creating, managing, and executing test cases. It provides functionalities that streamline equivalence testing, batch execution, and coverage tracking.
+    Host->>Target: Flash Target Binary (ELF/HEX via JTAG)
+    Host->>Target: Reset & Initialize Target Peripherals
+    loop Every Simulation Step (10 ms)
+        Host->>JTAG: Transmit Stimulus Input Vector u(k)
+        JTAG->>Target: Write Inputs to Target RAM (DMA / Mailbox)
+        Target->>Target: Start Hardware Timer (STM / Cycle Counter)
+        Target->>Target: Execute Runnable: BMS_Step()
+        Target->>Target: Stop Hardware Timer (Capture Delta Cycles)
+        Target->>JTAG: Read Output Vector y_PIL(k) & Execution Cycles
+        JTAG->>Host: Stream Outputs & Timing Data back to Simulink
+        Host->>Host: Compute Back-to-Back Comparison vs MIL
+    end
+```
 
-- **Equivalence Tests**:
-  - **Function**: Automate the comparison between MIL, SIL, and PIL test runs to ensure functional correctness.
-  - **Usage**:
-    - Define equivalence criteria within test cases.
-    - Execute tests and automatically evaluate pass/fail statuses based on defined metrics.
-  
-- **Batch Execution**:
-  - **Function**: Run multiple test iterations or entire test suites in a single operation, enhancing testing efficiency.
-  - **Usage**:
-    - Select the desired test cases or suites.
-    - Initiate batch runs to execute all selected tests sequentially or in parallel.
-  
-- **Coverage Integration**:
-  - **Function**: Track and report code coverage metrics (e.g., MCDC) during SIL and PIL test executions.
-  - **Usage**:
-    - Enable coverage settings within test suites.
-    - Monitor coverage progress and identify areas needing additional testing.
+### 3.1 Target Specific Hazards Uncovered Exclusively by PIL
+1. **Endianness Differences**: If the host is Little-Endian and the target communicates with Big-Endian peripheral registers without proper byte swapping (`htons`, `htonl`), bitfields and CAN frame unpacking will corrupt state vectors.
+2. **Memory Alignment & Structure Padding**: 32-bit TriCore or ARM Cortex-R architectures enforce word alignment (4-byte boundaries). Unaligned memory accesses in multi-cell telemetry structures can trigger hardware traps (`BusFault` / `DataAbort`).
+3. **Hardware FPU Behavior**: Verification of target hardware division-by-zero traps, subnormal float handling, and denormalized number flush-to-zero (FTZ) modes.
+4. **Compiler Optimization Bugs**: Verification that the target cross-compiler (e.g., Tasking VX-toolset for TriCore with `-O2`) does not generate flawed machine instructions for safety-critical logic.
 
-**Simulink Test Manager Example**:
-  
+---
+
+## 4. Formal Equivalence Metrics and Tolerance Formulations
+
+In back-to-back testing, identical signals from MIL, SIL, and PIL are subtracted point-by-point. A test passes if the residual error lies strictly within predefined tolerance boundaries across the entire mission profile[^ISO26262_6].
+
+### 4.1 Mathematical Tolerance Formulation
+
+For an output vector $y(t)$ sampled at discrete instants $t_k = k \cdot T_s$:
+
+$$
+e(k) = \left| y_{\text{MIL}}(k) - y_{\text{SIL/PIL}}(k) \right|
+$$
+
+The verification criteria mandate that:
+
+$$
+e(k) \le \text{Tol}_{\text{abs}} + \text{Tol}_{\text{rel}} \cdot \left| y_{\text{MIL}}(k) \right|
+$$
+
+where:
+- $\text{Tol}_{\text{abs}}$ is the **Absolute Tolerance**, defined by physical sensor resolution (e.g., $1\,\text{mV}$ for cell voltage, $10\,\text{mA}$ for current).
+- $\text{Tol}_{\text{rel}}$ is the **Relative Tolerance**, capturing floating-point scale effects (typically $10^{-4}$ to $10^{-6}$).
+
+```mermaid
+graph TD
+    DIFF["Error Signal: e(k) = |y_MIL(k) - y_SIL(k)|"] --> ABS_CHK{"e(k) <= Tol_abs?"}
+    ABS_CHK -- Yes --> PASS[Equivalence Verified]
+    ABS_CHK -- No --> REL_CHK{"e(k) <= Tol_rel * |y_MIL(k)|?"}
+    REL_CHK -- Yes --> PASS
+    REL_CHK -- No --> TIME_CHK{"Within Allowed Time Skew Tau?"}
+    TIME_CHK -- Yes --> PASS
+    TIME_CHK -- No --> FAIL[Discrepancy Violation: Defect Raised]
+```
+
+### 4.2 Handling Delay and Time Skew ($\tau_{\text{skew}}$)
+
+When code generation inserts pipeline registers, or when multi-tasking schedulers introduce execution delays, the output signal may experience a 1-step sample delay:
+
+$$
+y_{\text{PIL}}(k) = y_{\text{MIL}}(k - 1)
+$$
+
+The comparison algorithm must account for allowable time shifts $\tau \in [-T_s, +T_s]$ before flagging a false-positive violation:
+
+$$
+e_{\text{skew}}(k) = \min_{\tau \in [-\tau_{\text{max}}, \tau_{\text{max}}]} \left| y_{\text{MIL}}(t_k + \tau) - y_{\text{PIL}}(t_k) \right|
+$$
+
+---
+
+## 5. Execution Profiling and WCET Analysis
+
+PIL testing provides deterministic empirical data regarding task execution duration on the target silicon.
+
+### 5.1 Real-Time Execution Budget Equation
+
+To avoid task overruns in a cyclic automotive operating system (AUTOSAR OS), the **Worst-Case Execution Time (WCET)** of the BMS runnable must satisfy the budget margin:
+
+$$
+\text{WCET} \le \rho_{\text{max}} \cdot T_{\text{task}} - \tau_{\text{OS\_overhead}}
+$$
+
+where:
+- $T_{\text{task}}$ is the cyclic task period (e.g., $10\,\text{ms}$ for cell supervisory control, $1\,\text{ms}$ for current/voltage limiters),
+- $\rho_{\text{max}} \in (0, 1]$ is the maximum permissible CPU utilization limit (typically $0.70$ or $70\%$ to preserve headroom for interrupts),
+- $\tau_{\text{OS\_overhead}}$ represents the context switch latency and interrupt service routine (ISR) preemption overhead.
+
+### 5.2 Microcontroller Instruction Cycle Profiling
+
+Target execution duration is captured directly via the microcontroller's hardware cycle counter:
+
+$$
+T_{\text{exec}} = \frac{\Delta N_{\text{cycles}}}{f_{\text{CPU}}}
+$$
+
+For an Infineon AURIX TC397 running at $f_{\text{CPU}} = 300\,\text{MHz}$:
+- $1\,\text{cycle} = \frac{1}{300\times 10^6} \approx 3.33\,\text{ns}$
+- A step function taking $45,000\,\text{cycles}$ equates to $T_{\text{exec}} = 45,000 \times 3.33\,\text{ns} = 150\,\mu\text{s}$.
+
+```mermaid
+xychart-beta
+    title "BMS Task Execution Time Distribution vs Budget (10 ms Task)"
+    x-axis ["Min Exec", "Mean Exec", "95th Perc", "99th Perc", "WCET Observed", "CPU Budget (70%)"]
+    y-axis "Execution Time (microseconds)" 0 --> 8000
+    bar [120, 340, 580, 890, 1420, 7000]
+```
+
+---
+
+## 6. Target Code Coverage Verification (ISO 26262-6 Table 12)
+
+While Model Coverage (MCDC) is audited on the graphical blocks, ISO 26262 ASIL-D requires proof that the compiler has not introduced untraceable code or branches.
+
+### 6.1 Structural Coverage Criteria on Object Code
+1. **Statement Coverage**: Every machine instruction in the compiled binary has been executed at least once.
+2. **Branch / Decision Coverage**: Every conditional branch instruction (e.g., `JNE`, `BNE`) has been taken in both true and false directions.
+3. **MCDC on Assembly Level**: Proves that compiler optimizations (such as conditional moves or predicated instructions) do not obfuscate safety-critical condition independence[^Chilenski2001].
+
+---
+
+## 7. Automated SIL/PIL Test Automation Script
+
+The following MATLAB script automates the end-to-end execution of a BMS Overvoltage Protection test suite across MIL, SIL, and PIL environments, computing back-to-back equivalence metrics and generating an audit report.
+
 ```matlab
-% MATLAB Code Snippet: Managing Tests with Simulink Test Manager
-testSuite = 'BMS_Equivalence_Test_Suite';
+%% Automated SIL/PIL Back-to-Back Verification Pipeline
+% Project: ASIL-D Battery Management System
+% Standard: ISO 26262-6 Clauses 9, 10
 
-% Select the test suite
-Simulink.Test.TestManager.selectTestSuite(testSuite);
+clc; clear; close all;
+modelName = 'BMS_SafetyMonitor';
+testFile = 'BMS_Verification_Suite.mldatx';
 
-% Run the test suite
-Simulink.Test.TestManager.runTestSuite(testSuite);
+fprintf('[INFO] Opening Model: %s\n', modelName);
+load_system(modelName);
 
-% Retrieve and display test results
-testResults = Simulink.Test.TestManager.getTestResults(testSuite);
-disp(testResults);
+% Step 1: Open Test Manager and Load Suite
+sltest.testmanager.clear();
+tf = sltest.testmanager.load(testFile);
+testSuite = getTestSuiteByName(tf, 'Overvoltage_Tests');
+testCase = getTestCaseByName(testSuite, 'OVP_Dynamic_Pulse_Test');
+
+% Step 2: Configure Test for Back-to-Back Equivalence
+fprintf('[INFO] Configuring Back-to-Back Test: Simulation 1 = MIL, Simulation 2 = SIL\n');
+setProperty(testCase, 'SimulationMode', 'Equivalence');
+
+% Simulation 1: Normal (MIL)
+sim1 = getSimulationSetting(testCase, 1);
+setProperty(sim1, 'Model', modelName);
+setProperty(sim1, 'SimulationMode', 'Normal');
+
+% Simulation 2: Software-in-the-Loop (SIL)
+sim2 = getSimulationSetting(testCase, 2);
+setProperty(sim2, 'Model', modelName);
+setProperty(sim2, 'SimulationMode', 'Software-in-the-Loop (SIL)');
+
+% Step 3: Define Equivalence Tolerances
+fprintf('[INFO] Setting Equivalence Tolerances\n');
+tolSignal = addTolerance(testCase, 'BMS_CellVoltages');
+tolSignal.AbsoluteTolerance = 0.001; % 1 mV
+tolSignal.RelativeTolerance = 0.0001; % 0.01%
+
+tolFault = addTolerance(testCase, 'BMS_OVP_FaultLatched');
+tolFault.AbsoluteTolerance = 0.0; % Exact boolean match required
+
+% Step 4: Run Back-to-Back Execution
+fprintf('[INFO] Executing Equivalence Run...\n');
+resultSet = sltest.testmanager.run();
+
+% Step 5: Extract and Evaluate Results
+result = getTestResult(resultSet);
+status = getProperty(result, 'Outcome');
+fprintf('[RESULT] Overall Equivalence Status: %s\n', char(status));
+
+if strcmp(char(status), 'Passed')
+    fprintf('[PASS] SIL code is mathematically equivalent to MIL model!\n');
+else
+    fprintf('[FAIL] Discrepancies detected exceeding safety threshold.\n');
+end
+
+% Step 6: Export ISO 26262 Verification Evidence Report
+reportPath = fullfile(pwd, 'SIL_Equivalence_Audit_Report.pdf');
+sltest.testmanager.report(resultSet, reportPath, ...
+    'IncludeMLDVR', true, ...
+    'IncludeCoverageResult', true);
+fprintf('[INFO] Verification report generated: %s\n', reportPath);
 ```
-
-*Figure 14: MATLAB Code for Managing Tests with Test Manager*
-
-### **7.2 SIL/PIL Manager**
-
-The **SIL/PIL Manager** is instrumental in configuring and executing SIL and PIL tests. It manages the interactions between Simulink, the generated code, and the target hardware, ensuring that tests are executed smoothly and results are accurately captured.
-
-- **Hardware Integration**:
-  - **Function**: Supports a variety of embedded hardware platforms, enabling flexible testing environments.
-  - **Usage**:
-    - Select the target hardware (e.g., BeagleBone Black, Arduino).
-    - Configure communication settings and data exchange protocols between Simulink and the hardware.
-  
-- **Automated Back-to-Back Testing**:
-  - **Function**: Facilitates the automated execution of SIL and PIL tests, reducing manual intervention and enhancing testing consistency.
-  - **Usage**:
-    - Set up automated scripts to run SIL and PIL tests in succession.
-    - Automatically compare results and log discrepancies for further analysis.
-
-**SIL/PIL Manager Example**:
-  
-```matlab
-% MATLAB Code Snippet: Configuring and Running SIL/PIL Tests
-testSuite = 'BMS_SIL_PIL_Test_Suite';
-
-% Select the test suite
-Simulink.Test.TestManager.selectTestSuite(testSuite);
-
-% Configure hardware platform for PIL
-Simulink.Test.TestManager.setHardwarePlatform(testSuite, 'BeagleBone Black');
-
-% Run SIL tests
-Simulink.Test.TestManager.setSimulationMode(testSuite, 'SIL');
-Simulink.Test.TestManager.runTestSuite(testSuite);
-
-% Run PIL tests
-Simulink.Test.TestManager.setSimulationMode(testSuite, 'PIL');
-Simulink.Test.TestManager.runTestSuite(testSuite);
-
-disp('SIL and PIL tests executed successfully.');
-```
-
-*Figure 15: MATLAB Code for Configuring and Running SIL/PIL Tests*
-
-### **7.3 Simulation Data Inspector**
-
-The **Simulation Data Inspector (SDI)** is a versatile tool that allows developers to visualize, compare, and analyze simulation data from different test runs. It is essential for identifying discrepancies and ensuring consistency across MIL, SIL, and PIL tests.
-
-- **Signal Comparison**:
-  - **Function**: Overlay signals from MIL, SIL, and PIL runs to detect discrepancies and validate consistency.
-  - **Usage**:
-    - Load data logs from MIL, SIL, and PIL tests into SDI.
-    - Use the overlay feature to visually compare signal behaviors.
-  
-- **Execution Time Profiling**:
-  - **Function**: Visualize task execution times to assess performance metrics and real-time compliance.
-  - **Usage**:
-    - Plot execution times against simulation time to identify performance bottlenecks.
-  
-  **Simulation Data Inspector Example**:
-  
-  ```matlab
-  % MATLAB Code Snippet: Using Simulation Data Inspector for Signal Comparison
-  % Load MIL data
-  milData = sdiCollection('BMS_MIL_Data.sdi');
-  
-  % Load SIL data
-  silData = sdiCollection('BMS_SIL_Data.sdi');
-  
-  % Load PIL data
-  pilData = sdiCollection('BMS_PIL_Data.sdi');
-  
-  % Open SDI
-  Simulink.sdi.view;
-  
-  % Compare specific signals
-  Simulink.sdi.compare(milData, silData, pilData, 'Error');
-  
-  disp('Signal comparison completed in Simulation Data Inspector.');
-  ```
-  
-  *Figure 16: MATLAB Code for Using Simulation Data Inspector*
-
-By effectively utilizing these tools and adhering to a structured workflow, developers can ensure that the generated BMS code is both functionally accurate and performant, meeting the stringent requirements of safety-critical applications.
 
 ---
 
-## **8. Benefits**
+## 8. References
 
-Testing the generated BMS code using SIL and PIL methodologies offers numerous advantages that significantly enhance the development process, system reliability, and compliance with industry standards. The key benefits include:
-
-1. **Functional Correctness**:
-   - **Description**: Ensures that the generated code behaves identically to the Simulink model, validating that all functional requirements are met.
-   - **Benefit**: Reduces the risk of discrepancies that could lead to system malfunctions, enhancing overall reliability.
-
-2. **Performance Metrics**:
-   - **Description**: Measures execution time and memory usage on the target hardware, ensuring that the BMS operates within real-time constraints and resource limitations.
-   - **Benefit**: Guarantees that the system performs efficiently, preventing issues like latency or resource exhaustion that could compromise functionality.
-
-3. **Certification Readiness**:
-   - **Description**: Aligns testing practices with safety and reliability standards such as ISO 26262 and DO-178C, ensuring that the generated code is suitable for certification in safety-critical applications.
-   - **Benefit**: Facilitates the certification process, enabling the deployment of the BMS in regulated industries like automotive and aerospace.
-
-4. **Risk Mitigation**:
-   - **Description**: Identifies and addresses potential errors and performance bottlenecks early in the development cycle through rigorous testing.
-   - **Benefit**: Minimizes the likelihood of costly post-deployment fixes and enhances the safety and reliability of the BMS.
-
-5. **Efficiency and Automation**:
-   - **Description**: Automates repetitive testing tasks and leverages existing test harnesses, saving time and reducing manual effort.
-   - **Benefit**: Accelerates the development cycle, allowing developers to focus on more complex and critical aspects of the system.
-
-6. **Enhanced Traceability**:
-   - **Description**: Maintains clear bi-directional links between requirements, models, and code, facilitating audits and compliance checks.
-   - **Benefit**: Improves accountability and ensures that all system specifications are adequately addressed in the implementation.
-
-7. **Quality Assurance**:
-   - **Description**: Provides comprehensive validation of both functional and performance aspects of the generated code, ensuring high-quality software delivery.
-   - **Benefit**: Enhances user confidence in the BMS, contributing to better system performance and longevity.
-
-**Summary of Benefits**:
-
-- Functional Correctness: Validates that code matches model behavior.
-- Performance Metrics: Ensures real-time operation and resource efficiency.
-- Certification Readiness: Aligns with safety and industry standards.
-- Risk Mitigation: Identifies and resolves potential issues early.
-- Efficiency and Automation: Streamlines testing processes and saves time.
-- Enhanced Traceability: Facilitates audits and compliance through clear links.
-- Quality Assurance: Guarantees high-quality, reliable software delivery.
-
-By integrating SIL and PIL testing methodologies, developers can achieve a high level of confidence in the generated BMS code, ensuring that it is both functionally accurate and performant in its intended embedded environment.
-
----
-
-## **9. Example: BeagleBone Black PIL Test**
-
-To provide a concrete example of Processor-in-the-Loop (PIL) testing, consider the following case study involving the BeagleBone Black embedded board. This example demonstrates the setup, execution, and analysis of PIL tests to validate the performance and real-time behavior of the generated BMS code.
-
-### **9.1 Setup**
-
-- **Target**: BeagleBone Black board.
-- **Test Harness**: Reuse signal editor scenarios designed for fault conditions to maintain consistency across testing stages.
-- **Metrics**:
-  - **Execution Time**: Measure the time taken per control cycle (e.g., `3 µs` per cycle).
-  - **Signal Accuracy**: Ensure that outputs from PIL tests match those from MIL and SIL tests, confirming consistency.
-
-**Setup Steps**:
-
-1. **Configure Hardware**:
-   - Connect the BeagleBone Black to the host PC via USB or Ethernet.
-   - Install necessary drivers and software to facilitate communication between Simulink and the hardware.
-
-2. **Prepare Test Harness**:
-   - Ensure that the test harness is configured to interface with the generated code.
-   - Load the signal editor scenarios that simulate various fault conditions.
-
-3. **Enable PIL Mode**:
-   - Open **Simulink Test Manager**.
-   - Select the appropriate test suite.
-   - Set the simulation mode to **Processor-in-the-Loop**.
-   - Configure hardware-specific settings as outlined in Section 3.1.
-
-   **PIL Setup Example**:
-   
-   ```matlab
-   % MATLAB Code Snippet: Setting Up PIL for BeagleBone Black
-   testSuite = 'BMS_PIL_Test_Suite';
-   Simulink.Test.TestManager.selectTestSuite(testSuite);
-   
-   % Set simulation mode to PIL and select hardware
-   Simulink.Test.TestManager.setSimulationMode(testSuite, 'PIL');
-   Simulink.Test.TestManager.setHardwarePlatform(testSuite, 'BeagleBone Black');
-   
-   disp(['PIL mode configured for test suite: ' testSuite ' on BeagleBone Black']);
-   ```
-   
-   *Figure 17: MATLAB Code for Setting Up PIL for BeagleBone Black*
-
-### **9.2 Results**
-
-Upon executing the PIL tests, the following outcomes are observed:
-
-- **Pass Criteria**:
-  - All 11 test iterations pass, with `Error = 0`, indicating identical behavior between MIL, SIL, and PIL tests.
-  
-- **Coverage**:
-  - Achieves **100% MCDC** coverage through the combination of MIL, SIL, and PIL testing, ensuring comprehensive validation of all logical pathways and conditions.
-
-**Results Overview**:
-
-```plaintext
-PIL Test Results:
-- Total Iterations: 11
-- Passed: 11
-- Failed: 0
-- Average Execution Time per Cycle: 3 µs
-- MCDC Coverage: 100%
-```
-
-**Analysis**:
-
-1. **Execution Time**:
-   - The measured execution time of `3 µs` per cycle confirms that the BMS code operates efficiently within the real-time constraints of the BeagleBone Black hardware.
-
-2. **Signal Accuracy**:
-   - All signal outputs from the PIL tests match those from MIL and SIL runs, validating the functional correctness and consistency of the generated code across different testing environments.
-
-3. **Coverage Achievement**:
-   - Attaining 100% MCDC coverage ensures that every condition within decision statements independently influences the decision outcome, fulfilling the stringent requirements for safety-critical systems.
-
-**Example PIL Test Report**:
-   
-```markdown
-PIL Test Report
----------------
-1. Test Summary
-   - Total Iterations: 11
-   - Passed: 11
-   - Failed: 0
-   - Overall MCDC Coverage: 100%
-
-2. Execution Metrics
-   - Average Execution Time per Cycle: 3 µs
-   - Memory Usage: 48 bytes
-
-3. Signal Comparisons
-   - Error Signal: MIL vs. SIL vs. PIL - All match (Error = 0)
-   - Contactor States: No discrepancies detected
-   - Fault Flags: Consistent across all tests
-
-4. Coverage Details
-   - Decision Coverage: 100%
-   - Condition Coverage: 100%
-   - MCDC Coverage: 100%
-
-5. Recommendations
-   - Proceed with deployment as all tests have passed successfully.
-   - Maintain regular PIL testing to monitor performance on target hardware.
-```
-
-*Figure 18: Sample PIL Test Report Structure*
-
-This case study exemplifies the effectiveness of combining SIL and PIL testing to achieve comprehensive validation of generated BMS code, ensuring both functional accuracy and real-time performance on embedded hardware.
+[^ISO26262_6]: International Organization for Standardization, "Road vehicles — Functional safety — Part 6: Product development at the software level," *ISO Standard 26262-6:2018*, Dec. 2018.
+[^MathWorksSIL2023]: MathWorks, "Simulink® Verification and Validation: Software-in-the-Loop and Processor-in-the-Loop Testing," *The MathWorks Inc.*, Natick, MA, 2023.
+[^Broy2012]: M. Broy, M. Feilkas, M. Herrmannsdoerfer, S. Merenda, and D. Ratiu, "Seamless model-based software engineering: Systems engineering meets software engineering," *IEEE Transactions on Software Engineering*, vol. 38, no. 5, pp. 1113–1129, 2012.
+[^Goldberg1991]: D. Goldberg, "What every computer scientist should know about floating-point arithmetic," *ACM Computing Surveys (CSUR)*, vol. 23, no. 1, pp. 5–48, 1991.
+[^Kramer2019]: B. Kramer, R. Simons, and S. Huh, "Model-Based Design of Battery Management Systems for Electric Vehicles," *SAE Technical Paper 2019-01-0872*, 2019. [DOI: 10.4271/2019-01-0872](https://doi.org/10.4271/2019-01-0872)
+[^Chilenski2001]: J. J. Chilenski, "An investigation of modified condition/decision coverage (MC/DC) for airborne software," *Federal Aviation Administration Technical Report DOT/FAA/AR-01/18*, 2001.

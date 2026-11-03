@@ -29,10 +29,10 @@ This mechanical breathing generates severe shear and tensile stresses at primary
 
 Traditional battery telemetry often relies on two rudimentary methods:
 1. **Zero-Crossing Current Integration:** Sums Ah throughput and divides by $2 \cdot C_{\text{nom}}$:
-   
-   $$
-   \text{EFC}_{\text{naive}} = \frac{1}{2 \cdot C_{\text{nom}}} \int_0^t |I(\tau)| \, d\tau
-   $$
+
+$$
+\text{EFC}_{\text{naive}} = \frac{1}{2 \cdot C_{\text{nom}}} \int_0^t |I(\tau)| \, d\tau
+$$
 
 2. **Peak-to-Valley Detection:** Detects directional reversals.
 

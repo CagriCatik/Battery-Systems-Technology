@@ -1,112 +1,106 @@
-# Documentation Template
+# Traceability, Safety Case & ASPICE Documentation
 
-A standardized documentation template is essential for achieving clarity and consistency throughout the requirements lifecycle. This section provides a detailed template that can be customized to meet specific project needs and align with organizational standards. It covers the structure and key components that must be included in the requirements documentation.
+In safety-critical automotive engineering, documentation is not an administrative afterthought; it is a legally binding engineering deliverable. Under automotive product liability laws and international safety regulations (UNECE R100, ISO 26262), **an unverified or undocumented safety feature is legally non-existent**[^iso26262].
 
----
+To achieve type approval for road vehicles, automotive manufacturers must present an auditable **Safety Case** supported by a complete, unbroken **Bi-Directional Requirements Traceability Matrix (RTM)** conforming to **Automotive SPICE (ASPICE v3.1/v4.0)** Level 2 or Level 3 standards[^automotivespice][^kelly2004].
 
-## Introduction
-
-The introduction sets the context for the requirements document, outlining its purpose, scope, and relevant references. This section ensures that all stakeholders understand the role of the document within the broader development and safety assurance process.
-
-### Purpose
-
-- **Objective:**  
-  Clearly define the purpose of the requirements document. This should include the goals of the document and its intended impact on the project.
-  
-- **Lifecycle Role:**  
-  Describe how the document fits into the overall development lifecycle. Explain its role in facilitating design, implementation, testing, validation, and ongoing safety assurance.
-
-### Scope
-
-- **Boundaries:**  
-  Explicitly delineate what is included and what is excluded in the scope of the requirements. This helps prevent scope creep and ensures focused documentation.
-  
-- **System Under Test:**  
-  Identify the specific system or component being addressed (e.g., Battery Management System). Include a brief description of its functions and criticality to overall system performance.
-
-### 10.1.3 References
-
-- **Standards and Guidelines:**  
-  List all applicable standards (e.g., ISO 26262) and guidelines that influence the requirements. This ensures that the documentation is aligned with industry best practices and regulatory expectations.
-  
-- **Related Documents:**  
-  Provide references to other relevant documents, such as design specifications, previous test plans, safety analyses, and any supporting documentation that informs the requirements.
+This chapter formalizes the structure of the ISO 26262 Safety Case, Goal Structuring Notation (GSN), and bi-directional traceability frameworks for high-voltage battery management systems.
 
 ---
 
-## Best Practices for Requirements
+## The ISO 26262 Safety Case Architecture
 
-This section outlines best practices that ensure requirements are clearly defined, comprehensive, traceable, testable, realistic, and modular. Adhering to these best practices improves the overall quality and maintainability of the requirements documentation.
+Under ISO 26262 Part 10, a **Safety Case** is defined as a structured argument, supported by a body of physical and analytical evidence, that provides a compelling, comprehensible, and valid case that a system is free of unreasonable risk under specified operating contexts[^iso26262].
 
-### Clarity and Precision
+### Goal Structuring Notation (GSN)
 
-- **Unambiguous Language:**  
-  Use clear, concise, and unambiguous language to prevent misinterpretation.
-  
-- **Defined Terminology:**  
-  Define all technical terms and acronyms explicitly to ensure consistent understanding among stakeholders.
+The automotive industry uses **Goal Structuring Notation (GSN)**—a graphical argumentation methodology—to clearly demonstrate how safety goals are satisfied by technical evidence[^kelly2004]:
 
-### Completeness and Consistency
+```mermaid
+flowchart TD
+    G1["Top Goal G1:<br/>The High-Voltage Battery System is free of<br/>unreasonable risk of thermal runaway, fire, or shock."]
+    
+    S1["Strategy S1:<br/>Argue by decomposition across identified<br/>HARA catastrophic hazard domains."]
+    
+    G1 --> S1
+    
+    S1 --> G2["Sub-Goal G2 (ASIL-D):<br/>Cell overcharge is prevented under all<br/>charging and driving conditions."]
+    S1 --> G3["Sub-Goal G3 (ASIL-D):<br/>High-voltage bus is isolated within < 10 ms<br/>upon dead short-circuit detection."]
+    S1 --> G4["Sub-Goal G4 (ASIL-D):<br/>Contactor welding is detected prior to<br/>touchable vehicle plug exposure."]
 
-- **Comprehensive Coverage:**  
-  Ensure that all functional, safety, and performance aspects of the system are thoroughly addressed.
-  
-- **Internal Consistency:**  
-  Maintain consistency in wording, format, and structure across all requirements to avoid conflicts or contradictions.
+    E1["Evidence E1:<br/>HIL Automated Overcharge Test Report<br/>(10,000 fault injections with 100% pass)"]
+    E2["Evidence E2:<br/>Dual-Core Lockstep Microcontroller<br/>Silicon FMEDA Report (SPFM = 99.4%)"]
+    E3["Evidence E3:<br/>100% MC/DC Code Coverage Report<br/>on Overvoltage Driver Software"]
 
-### Traceability
+    G2 --> E1
+    G2 --> E2
+    G2 --> E3
+```
 
-- **Traceability Matrix:**  
-  Develop and maintain a traceability matrix that links each requirement to its source, design elements, implementation details, and corresponding test cases. This supports accountability and facilitates change management.
+### Triad of the Safety Case: Claims, Arguments, and Evidence
 
-### Testability
-
-- **Measurable Requirements:**  
-  Write requirements in a way that allows for objective measurement and verification.
-  
-- **Clear Acceptance Criteria:**  
-  Define explicit acceptance criteria for each requirement, ensuring that tests can reliably determine whether the requirement has been met.
-
-###  Realistic and Achievable
-
-- **Feasibility Assessment:**  
-  Evaluate each requirement for technical, temporal, and financial feasibility before finalization.
-  
-- **Practical Implementation:**  
-  Ensure that the requirements can be implemented using current technology and resources.
-
-### Modularity
-
-- **Structured Organization:**  
-  Organize requirements into distinct, manageable sections or modules. This facilitates easier updates and maintenance.
-  
-- **Minimized Interdependencies:**  
-  Design requirements to minimize interdependencies between modules, which simplifies integration and testing.
+1. **Claims / Goals:** Clear assertions about system safety (e.g., *"The BMS shall prevent lithium plating during sub-zero regeneration"*).
+2. **Arguments:** The engineering rationale explaining why the claim is valid (e.g., *"By actively limiting charge current to zero when temperatures drop below $0^\circ\text{C}$ via redundant dual-sensor measurement"*).
+3. **Evidence:** Concrete, objective artifacts demonstrating the argument holds true (e.g., environmental chamber HIL test logs, static analysis reports, and peer-reviewed code reviews).
 
 ---
 
-## Example Requirements for BMS
+## Bi-Directional Traceability Matrix (RTM)
 
-Use the enhanced example requirements provided in Section 4 as a reference framework. These examples demonstrate how to apply the best practices for clarity, traceability, testability, and compliance, serving as a practical guide for developing detailed requirements for the Battery Management System.
+Under ASPICE process outcomes **SYS.2 (System Requirements)**, **SWE.1 (Software Requirements)**, and **SWE.6 (Software Qualification Testing)**, organizations must maintain an unbroken chain of forward and backward traceability links[^automotivespice]:
+
+```mermaid
+flowchart LR
+    Customer["Customer / Regulatory Req<br/>(ISO 15118 / FMVSS 305)"] <===> System_Req["System Requirement (SYS.2)<br/>(BMS_SYS_OVP_018)"]
+    System_Req <===> SW_Req["Software Requirement (SWE.1)<br/>(BMS_SSR_OVP_001)"]
+    SW_Req <===> SW_Arch["Software Architecture (SWE.2)<br/>(BmsProtection_SWC Port)"]
+    SW_Arch <===> SW_Code["Source Code Unit (SWE.3)<br/>(bms_ovp_eval.c)"]
+    SW_Code <===> Unit_Test["Unit Test Case (SWE.4)<br/>(TC_UT_OVP_012)"]
+    SW_Req <===> HIL_Test["System HIL Test (SYS.5 / SWE.6)<br/>(TC_HIL_OVP_003)"]
+```
+
+### Automotive SPICE Traceability Auditing Matrix
+
+| System Artifact | Linked Parent Artifact | Linked Child Artifact | Automated ASPICE Audit Verification Rule |
+| :--- | :--- | :--- | :--- |
+| **System Requirement** | Stakeholder Need / HARA Goal | Software Requirement (SWE.1) / Hardware Requirement (HSR) | **No Orphans:** Every system requirement must have at least one child software or hardware requirement. |
+| **Software Requirement** | System Requirement (SYS.2) | Architecture (SWE.2) & System Test Case (SWE.6) | **Complete Verification:** Every software requirement must link to at least one test case with pass/fail status. |
+| **Source Code Function** | Software Detailed Design (SWE.3) | Unit Test Case (SWE.4) with MC/DC report | **No Extraneous Code:** Every line of executable code must trace directly back to an approved requirement. |
+| **HIL Test Script** | Software Requirement (SWE.1) | Automated MDF4 Test Execution Log | **Results Traceability:** Every test execution report must link to the exact firmware build Git commit hash. |
+
+> [!CAUTION]
+> **Orphan Code Hazard:** Code written without a corresponding parent requirement represents a severe safety hazard under ISO 26262. In an audit, orphan code is classified as an uncontrolled modification that can trigger unintended system behaviors (such as inadvertent contactor trips on a highway).
 
 ---
 
-## Approval and Sign-off
+## Safety Audit & Certification Workflow
 
-This section details the process for reviewing, approving, and formally signing off the requirements document, ensuring accountability and traceability.
+Before series production (SOP), an independent third-party functional safety assessor (e.g., TÜV SÜD, TÜV Rheinland, SGS-TÜV Saar) audits the complete safety lifecycle:
 
-### Review Process
+```mermaid
+sequenceDiagram
+    autonumber
+    participant OEM as Automotive OEM / Tier-1
+    participant Tools as ALM Tool (DOORS / Polarion)
+    participant Auditor as Independent Safety Assessor (TÜV)
 
-- **Systematic Reviews:**  
-  Conduct thorough reviews of the requirements with cross-functional teams, including design, testing, safety, and quality assurance. These reviews ensure that all requirements meet the necessary standards and project objectives.
-  
-- **Stakeholder Involvement:**  
-  Involve key stakeholders—such as project managers, engineers, and quality assurance personnel—in the review process to gather diverse insights and validate the requirements from multiple perspectives.
+    OEM->>Tools: Freeze Project Baseline at SOP Gate
+    Tools->>Tools: Generate Automated Traceability Coverage Matrix
+    Tools->>OEM: Extract Safety Case & GSN Compilation
+    OEM->>Auditor: Submit Safety Case & Evidence Package
+    Auditor->>Auditor: Verify FMEDA Metrics (SPFM ≥ 99%, LFM ≥ 90%)
+    Auditor->>Auditor: Audit HIL Automated Test Logs & MC/DC Reports
+    alt All Criteria Met & Zero Orphans
+        Auditor-->>OEM: Issue ISO 26262 ASIL-D Safety Certificate
+    else Traceability Gaps / Incomplete Evidence Found
+        Auditor-->>OEM: Issue Major Non-Conformance Finding (Blocks SOP)
+    end
+```
 
-###  Approval Signatures
+---
 
-- **Formal Approval:**  
-  Secure formal sign-off from all key stakeholders. This confirms that the requirements have been reviewed, accepted, and are ready for implementation.
-  
-- **Documentation:**  
-  Archive all approval records and sign-off documents. This documentation serves as a reference for future audits, change management, and compliance verification.
+## References
+
+[^iso26262]: International Organization for Standardization. (2018). *ISO 26262-10: Road vehicles — Functional safety — Part 10: Guideline on ISO 26262*. ISO.
+[^automotivespice]: VDA QMC Working Group 13. (2017). *Automotive SPICE Process Assessment / Reference Model (PAM/PRM) v3.1*. VDA.
+[^kelly2004]: Kelly, T., & Weaver, R. (2004). The goal structuring notation—a safety argument notation. *Dependable Systems and Networks 2004 Workshop on Assurance Cases*, 6.

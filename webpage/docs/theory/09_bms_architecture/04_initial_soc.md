@@ -96,9 +96,9 @@ State estimation variables ($\text{SoC}$, $\text{SoH}$, cumulative cycle count, 
 - Standard microcontroller Data Flash (EEPROM emulation) possesses a rated write endurance of **$100{,}000$ cycles per sector**.
 - If the BMS software naively wrote the estimated State of Charge to the same Flash memory address every $100\,\text{ms}$ (the task loop rate), the memory sector would be permanently destroyed by dielectric breakdown in less than:
 
-  $$
-  t_{\text{destruction}} = \frac{100{,}000 \text{ cycles}}{10 \text{ writes/sec}} = 10{,}000 \text{ seconds} \approx 2.78 \text{ hours!}
-  $$
+$$
+t_{\text{destruction}} = \frac{100{,}000 \text{ cycles}}{10 \text{ writes/sec}} = 10{,}000 \text{ seconds} \approx 2.78 \text{ hours!}
+$$
 
 ### AUTOSAR NvM Architecture & Double-Buffering
 

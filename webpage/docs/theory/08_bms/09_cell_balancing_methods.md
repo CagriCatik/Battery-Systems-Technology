@@ -48,9 +48,9 @@ flowchart LR
 Modern Analog Front-End (AFE) ICs (e.g., Texas Instruments BQ79616, Analog Devices LTC6813, NXP MC33771C) integrate internal balancing MOSFETs:
 - **Internal Balancing:** The discharge current flows directly through internal silicon switches in the AFE package. To prevent exceeding the chip's maximum junction temperature ($T_j \le 125^\circ\text{C}$), internal currents are strictly bounded:
 
-  $$
-  I_{\text{bal,internal}} \le \frac{T_{j,\max} - T_{\text{ambient}}}{\theta_{JA} \cdot V_{\text{cell}} \cdot N_{\text{channels}}} \approx 50 - 150\,\text{mA}
-  $$
+$$
+I_{\text{bal,internal}} \le \frac{T_{j,\max} - T_{\text{ambient}}}{\theta_{JA} \cdot V_{\text{cell}} \cdot N_{\text{channels}}} \approx 50 - 150\,\text{mA}
+$$
 
 - **External Balancing:** High-capacity cells ($>60\,\text{Ah}$) require faster balancing rates ($I_{\text{bal}} \approx 0.5 - 1.5\,\text{A}$). External logic-level N-channel MOSFETs and discrete pulse-rated ceramic/power resistors are mounted on the PCB, offloading thermal stress from the AFE.
 
@@ -121,15 +121,15 @@ flowchart LR
 
 1. **Charge Phase:** $Q_1$ turns on for duration $D \cdot T_{\text{sw}}$, ramping current in inductor $L$:
 
-   $$
-   I_{L,\text{peak}} = \frac{V_k}{L} \cdot D T_{\text{sw}}
-   $$
+$$
+I_{L,\text{peak}} = \frac{V_k}{L} \cdot D T_{\text{sw}}
+$$
 
 2. **Discharge Phase:** $Q_1$ turns off and $Q_2$ (or body diode) conducts, discharging stored magnetic energy into cell $k+1$:
 
-   $$
-   \frac{dI_L}{dt} = -\frac{V_{k+1}}{L}
-   $$
+$$
+\frac{dI_L}{dt} = -\frac{V_{k+1}}{L}
+$$
 
 The average balancing current is decoupled from $\Delta V$:
 

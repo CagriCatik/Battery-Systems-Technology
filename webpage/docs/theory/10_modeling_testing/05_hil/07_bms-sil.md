@@ -1,115 +1,212 @@
-# BMS Software with SiL
+# SIL-to-HIL Continuity and Virtual HIL Architectures
 
-Testing the software component of a Battery Management System (BMS) is essential for ensuring the performance, reliability, and safety of electric vehicles. The BMS is responsible for tasks such as state-of-charge estimation, pre-charge control, and cell balancing, all of which directly impact battery lifespan and vehicle performance. Using Software-in-the-Loop technology allows for early and cost-effective testing by replacing hardware components with virtual models. This approach enables developers to simulate and analyze BMS software behavior under various conditions before the final hardware is available.
+In modern automotive software engineering, testing cannot wait for physical hardware availability. With tight vehicle development timelines, waiting for production microcontrollers, custom printed circuit boards (PCBs), and multi-rack Hardware-in-the-Loop (HIL) simulators introduces unacceptable bottlenecks. To overcome this, the industry employs a **Shift-Left Verification Strategy**, transitioning testing from physical testbenches into **Virtual HIL (vHIL)** and **Software-in-the-Loop (SIL)** environments running in automated cloud pipelines[^Broy2012].
 
----
-
-## Understanding the Battery Management System
-
-A Battery Management System in an electric car oversees the health and performance of the battery pack, which is the most critical and expensive component of the vehicle. Key responsibilities include:
-
-- **State-of-Charge (SoC) Management:** Ensuring the battery operates within an optimal range (typically between 20% and 90%) to maximize lifespan and performance.
-- **Cell Balancing:** Maintaining equal charge levels across individual battery cells to prevent premature aging or failure.
-- **High-Voltage Handling:** Managing the high voltages inherent in battery systems while ensuring safety.
-- **Long-Term Reliability:** Supporting battery operation over extended lifetimes (often more than ten years).
-
-Testing the BMS software involves verifying that these functions work correctly under a range of simulated scenarios.
+This chapter explores SIL-to-HIL continuity: Virtual ECU (vECU) classification levels, AUTOSAR Basic Software (BSW) emulation, containerized cloud execution (Docker/Kubernetes), and cross-environment test reuse via the **ASAM XIL** API[^Kramer2019].
 
 ---
 
-## Testing Options for BMS Software
+## 1. The Shift-Left Verification Paradigm
 
-There are several approaches to testing BMS functionality:
+The shift-left approach moves verification from right to left along the automotive V-Model, enabling test cases designed for physical HIL racks to execute weeks or months earlier in virtual environments.
 
-1. **Real-World Testing:**  
-   Involves installing the BMS in an actual vehicle and monitoring performance under real driving conditions. Although realistic, this method is expensive and time-consuming.
+```mermaid
+flowchart TD
+    subgraph Shift_Left["Verification Evolution Across Development Phases"]
+        direction LR
+        MIL["1. Model-in-the-Loop (MIL)\nDesktop Simulink\nAlgorithm Design"] --> 
+        SIL["2. Software-in-the-Loop (SIL)\nHost-Compiled C Code\nUnit Verification"] --> 
+        VHIL["3. Virtual HIL (vHIL)\nvECU + ASM Plant in Cloud\nSystem Integration"] --> 
+        PHIL["4. Physical HIL (pHIL)\nSCALEXIO Rack + Real ECU\nHardware Sign-Off"]
+    end
 
-2. **Hardware-in-the-Loop (HIL) Testing:**  
-   Uses the actual electronic control unit (ECU) in a simulated vehicle environment. While HIL testing provides high fidelity, it focuses on the integration of hardware and software rather than on software behavior alone.
+    subgraph Test_Reusability["Unified Test Asset Continuity"]
+        ASAM_TEST["Universal Test Scripts (Python ASAM XIL / vTESTstudio)"]
+        ASAM_TEST -.->|Execute Unchanged| SIL
+        ASAM_TEST -.->|Execute Unchanged| VHIL
+        ASAM_TEST -.->|Execute Unchanged| PHIL
+    end
+```
 
-3. **Software-in-the-Loop  Testing:**  
-   Focuses exclusively on the BMS software by replacing hardware components with virtual models. SIL offers a flexible, faster, and less costly alternative, allowing for variable simulation speeds and detailed step-by-step analysis of software behavior.
+### 1.1 Comparative Matrix: SIL vs. Virtual HIL vs. Physical HIL
 
----
-
-## Software-in-the-Loop Testing Methodology
-
-### Advantages of SIL Testing
-
-- **Cost Efficiency and Setup Simplicity:**  
-  Since no physical hardware is required, setting up SIL tests is less expensive and simpler compared to HIL systems.
-
-- **Flexible Simulation Speed:**  
-  SIL testing enables the simulation to run at speeds faster or slower than real time. This flexibility allows developers to quickly analyze system responses or closely inspect individual simulation steps.
-
-- **Early Software Validation:**  
-  By enabling testing before the final hardware is available, SIL accelerates the development cycle and helps identify software issues early on.
-
-### Virtual Processing Units (VPUs) and Virtual ECUs
-
-- **Virtual Processing Units:**  
-  The simulation architecture is built on virtual processing units (VPUs) that represent different components of the BMS:
-  - **Battery Management Controller (BMC):** Manages state-of-charge estimation and pre-charge control.
-  - **Cell Supervision Circuits (CSCs):** Monitor individual cell voltages and balance cells.
-  - **Battery Plant Model:** Emulates the behavior of the battery pack, including electrical dynamics and thermal characteristics.
-
-- **Virtual ECU (VECU):**  
-  To test the BMS software without physical hardware, a digital twin of the ECU is created. This virtual ECU replaces hardware-dependent drivers with virtual drivers, allowing the normal software to run in a simulated environment. Depending on the test requirements, parts of the software can be replaced or emulated, enabling focused testing of the application layer.
-
-### Simulation Architecture and Toolchain
-
-- **ASM Battery Library:**  
-  The ASM (Automotive Simulation Model) Battery library provides an open Simulink model for real-time battery simulation. This model incorporates the necessary physical effects (such as diffusion, double-layer phenomena, and thermal behavior) and is designed to interface seamlessly with virtual processing units.
-
-- **VEOS Platform:**  
-  The PC-based VEOS simulation platform runs the SIL tests, enabling the integration of virtual ECUs, battery plant models, and other simulation components. It allows for both accelerated and slowed-down simulation runs, facilitating detailed analysis and testing of dynamic scenarios.
-
-- **ControlDesk for Measurement and Calibration:**  
-  ControlDesk serves as the monitoring and calibration interface. It displays real-time data from the virtual BMS, such as cell voltages, state-of-charge, and communication messages. Operators can observe processes like cell balancing and fault handling as the simulation runs.
-
-- **Communication Protocol Simulation:**  
-  The SIL environment supports bus communication (e.g., SBI, CAN, or ISO-SPI) between the BMC and CSCs. The simulation includes an isolated SPI module for testing communication protocols. The setup allows for the monitoring of message exchanges between the battery management controller and the cell supervision circuits, ensuring correct data flow and fault detection.
+| Characteristic | Software-in-the-Loop (SIL) | Virtual HIL (vHIL) | Physical HIL (pHIL) |
+| :--- | :--- | :--- | :--- |
+| **Execution Environment** | Developer PC / Local OS | Cloud / Container (Docker / Linux) | Dedicated Real-Time Rack (SCALEXIO) |
+| **Target Code** | Algorithmic C Code (No OS/BSW) | Full ECU Binary / vECU with BSW | Cross-Compiled Production Binary |
+| **Hardware Emulation** | None (Direct function calls) | Virtual Processing Unit (QEMU / Synopsys) | Physical AURIX / ARM Microcontroller |
+| **I/O & Peripherals** | Virtual memory pointers | Simulated CAN-FD, SPI, AFE drivers | Physical DACs, FIUs, and Relays |
+| **Plant Model** | Simplified 1-RC / Ideal Pack | Real-Time Multiphysics ASM Battery | Real-Time ASM Battery on Multicore/FPGA |
+| **Execution Speed** | Faster than Real-Time ($10\times$) | Variable (Real-Time to $2\times$ slower) | Strictly Real-Time ($1.0\times$, deterministic) |
+| **Scalability** | Massive (Thousands of instances in parallel) | High (Cloud-based container orchestration) | Bounded (Limited by physical rack count) |
+| **Unit Cost** | Near Zero | Low (Cloud compute instances) | High (\$100k - \$1M per testbench) |
 
 ---
 
-## Demonstration Overview
+## 2. Virtual ECU (vECU) Classification Levels
 
-During a typical SIL demonstration:
+The automotive industry, spearheaded by the **AUTOSAR Development Partnership**, categorizes Virtual ECUs into distinct levels depending on the depth of Basic Software (BSW) and hardware virtualization[^AUTOSAR2020].
 
-1. **Initialization:**  
-   The simulation environment is configured with virtual processing units representing the battery, BMC, and CSCs. ControlDesk displays the initial state, including cell voltages and state-of-charge.
+```mermaid
+graph TD
+    subgraph Level_1["Level 1: Functional vECU (Controller Algorithms Only)"]
+        SWC1[Application SWCs: SOC, SOH, Balancing]
+        V_RTE1[Virtual RTE: Direct Memory Exchange]
+        SWC1 <--> V_RTE1
+    end
 
-2. **Dynamic Simulation:**  
-   The simulation starts with the battery undergoing a charging process. The BMC monitors the cell voltages and, when an imbalance is detected, initiates a cell balancing process. This action is reflected in real time on ControlDesk, where the imbalance diminishes as cells are balanced.
+    subgraph Level_2["Level 2: Behavioral vECU (Production RTE + BSW)"]
+        SWC2[Application SWCs]
+        PROD_RTE[Production AUTOSAR RTE]
+        BSW_SIM[Simulated BSW: Com, CanIf, Dem, NvM]
+        SWC2 <--> PROD_RTE
+        PROD_RTE <--> BSW_SIM
+    end
 
-3. **Adjustable Simulation Speed:**  
-   The simulation is capable of running much faster than real time—up to 20 times faster, as demonstrated. Alternatively, it can also be slowed down or executed step by step for detailed analysis.
+    subgraph Level_3["Level 3: Detailed Target vECU (Instruction-Set Simulator)"]
+        BIN[Complete Target Binary: .ELF / .HEX]
+        ISS[Instruction Set Simulator: QEMU / Virtualizer]
+        HW_PERIPH[Emulated Hardware Peripherals: MCAL, DMA, Timers]
+        BIN --> ISS
+        ISS <--> HW_PERIPH
+    end
+```
 
-4. **Communication Testing:**  
-   A separate SPI monitor captures the exchange of commands between the BMC and CSCs. The messages reveal the process of requesting and receiving cell data. When a simulated fault occurs (such as an overvoltage condition), the system responds by opening relays and indicating a voltage fault through both visual cues and communication messages.
-
-5. **Fault Injection and Verification:**  
-   The SIL environment allows for deliberate fault injection—such as applying a constant load to simulate an overvoltage scenario—to test the BMS’s response. The simulation confirms that the BMS software correctly identifies and handles faults, ensuring that the necessary safety protocols are executed.
+### 2.1 Technical Details of vECU Levels
+1. **Level 1 (Functional vECU)**:
+   - Contains only application software components (SWCs).
+   - Basic Software (BSW) and Microcontroller Abstraction Layer (MCAL) are stripped.
+   - Ideal for quick regression testing of control state machines and SOC estimators.
+2. **Level 2 (Behavioral vECU)**:
+   - Compiles the application SWCs alongside production AUTOSAR RTE and major BSW stacks (Diagnostic Event Manager `Dem`, Non-Volatile Memory `NvM`, Communication `Com`).
+   - MCAL is replaced by virtual transport layers (e.g., Virtual CAN sockets in Linux).
+   - Enables full validation of diagnostic trouble codes (UDS ISO 14229) and network management without hardware.
+3. **Level 3 (Target Instruction-Set vECU)**:
+   - Emulates the actual microcontroller architecture (e.g., Infineon TriCore TC397 or ARM Cortex-R5F) via cycle-approximate simulators (Synopsys Virtualizer or QEMU).
+   - Executes the exact compiled target `.elf` binary without source code modification[^Broy2012].
 
 ---
 
-## Summary
+## 3. Containerized Cloud Execution in CI/CD Pipelines
 
-Testing BMS software with Software-in-the-Loop technology offers a highly flexible and efficient method for validating critical battery management functions. Key benefits include:
+Virtual HIL allows automotive software teams to execute hundreds of nightly integration tests in automated cloud pipelines (GitHub Actions, GitLab CI, Jenkins) using Docker containers[^Kramer2019].
 
-- **Efficient Setup and Cost Savings:**  
-  SIL testing eliminates the need for physical hardware during early development phases, reducing both setup time and costs.
+```mermaid
+flowchart TD
+    DEV[Developer Git Push to main] --> GH_ACTION[GitHub Actions / GitLab CI Runner]
+    
+    subgraph Cloud_Cluster["Kubernetes / Docker Cloud Infrastructure"]
+        POD_1["Worker Pod 1: Overvoltage Tests (vECU + ASM)"]
+        POD_2["Worker Pod 2: DC Fast Charge Tests (vECU + ASM)"]
+        POD_3["Worker Pod 3: Thermal Runaway Tests (vECU + ASM)"]
+    end
 
-- **Flexible Simulation Speed:**  
-  The ability to run simulations faster or slower than real time enables both rapid testing cycles and detailed, step-by-step analysis.
+    GH_ACTION -->|Orchestrate 100 Parallel Pods| Cloud_Cluster
+    
+    POD_1 --> RPT_1[JUnit XML & HTML Test Artifacts]
+    POD_2 --> RPT_2[JUnit XML & HTML Test Artifacts]
+    POD_3 --> RPT_3[JUnit XML & HTML Test Artifacts]
 
-- **Virtual ECU Integration:**  
-  Creating digital twins of hardware components allows the BMS software to be tested in isolation, ensuring that only the software behavior is evaluated.
+    RPT_1 --> AGGREGATOR[Quality Gate Dashboard & Polarion Traceability]
+    RPT_2 --> AGGREGATOR
+    RPT_3 --> AGGREGATOR
+    AGGREGATOR --> PASS_FAIL{Merge Approved?}
+```
 
-- **Robust Communication Testing:**  
-  Simulated bus communications between virtual processing units ensure that data exchanges (e.g., via SPI or CAN) occur as expected, even under fault conditions.
+### 3.1 Docker Compose Configuration for Virtual BMS HIL
+The following configuration instantiates a complete virtual HIL environment, combining a Level 2 vECU with an ASM Battery plant simulation and a virtual CAN network.
 
-- **Comprehensive Toolchain:**  
-  The combination of the ASM Battery library, VEOS, and ControlDesk provides a complete environment for developing, simulating, and automating BMS tests.
+```yaml
+version: '3.8'
 
-By leveraging SIL testing, engineers can thoroughly validate BMS software early in the development process, optimize performance, and ensure that safety and reliability standards are met before transitioning to hardware-in-the-loop or real-world testing.
+services:
+  virtual_can_bus:
+    image: automotive/vcan-router:latest
+    container_name: vcan_network
+    networks:
+      bms_net:
+        ipv4_address: 172.28.1.2
+
+  asm_battery_plant:
+    image: dspace/asm-battery-simulation:latest
+    container_name: asm_plant
+    environment:
+      - PACK_CONFIG=96S2P_NMC
+      - SOLVER_STEP=0.0001
+      - VCAN_INTERFACE=vcan0
+    depends_on:
+      - virtual_can_bus
+    networks:
+      bms_net:
+        ipv4_address: 172.28.1.3
+
+  bms_vecu_controller:
+    image: tier1/bms-vecu-asil-d:v2.4
+    container_name: bms_vecu
+    environment:
+      - RTE_MODE=LEVEL_2_BEHAVIORAL
+      - VCAN_INTERFACE=vcan0
+    depends_on:
+      - asm_battery_plant
+    networks:
+      bms_net:
+        ipv4_address: 172.28.1.4
+
+  test_runner:
+    image: asam/xil-test-runner:python3.11
+    container_name: asam_runner
+    command: ["pytest", "--asam-xil-env=vHIL_Cloud", "/tests/bms_regression_suite.py"]
+    depends_on:
+      - bms_vecu_controller
+    networks:
+      bms_net:
+        ipv4_address: 172.28.1.5
+
+networks:
+  bms_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.1.0/24
+```
+
+---
+
+## 4. Test Parity and Model Continuity Metrics
+
+A fundamental risk in virtual HIL is **Parity Divergence**: a test passing in vHIL might fail on physical HIL due to unmodeled real-time latency, bus jitter, or electrical transients.
+
+### 4.1 Parity Metrics Formulation
+To mathematically certify that a vHIL test run is valid evidence for ISO 26262 sign-off, signal correlation between vHIL and physical HIL must satisfy strict thresholds[^Taylor1997]:
+
+```mermaid
+graph LR
+    SIG_VHIL[Virtual HIL Signal Output: y_vHIL] --> CORR[Cross-Correlation & Parity Engine]
+    SIG_PHIL[Physical HIL Signal Output: y_pHIL] --> CORR
+    
+    CORR --> R2_SCORE["Goodness of Fit: R^2 >= 0.98"]
+    CORR --> RMSE_SCORE["Root Mean Square Error: RMSE <= 1.5%"]
+    CORR --> TIMING_JITTER["Phase & Timing Jitter: Delta t <= 5 ms"]
+```
+
+The Normalized Cross-Correlation Coefficient $\rho_{xy}$ is calculated across time-series signals:
+
+$$
+\rho_{xy} = \frac{\sum_{k=1}^N \left( y_{\text{vHIL}}[k] - \bar{y}_{\text{vHIL}} \right) \left( y_{\text{pHIL}}[k] - \bar{y}_{\text{pHIL}} \right)}{\sqrt{\sum_{k=1}^N \left( y_{\text{vHIL}}[k] - \bar{y}_{\text{vHIL}} \right)^2 \sum_{k=1}^N \left( y_{\text{pHIL}}[k] - \bar{y}_{\text{pHIL}} \right)^2}}
+$$
+
+**Certification Criteria**:
+- $\rho_{xy} \ge 0.98$ (98% profile correlation),
+- Root-Mean-Square Error: $\text{RMSE} = \sqrt{\frac{1}{N} \sum_{k=1}^N (y_{\text{vHIL}}[k] - y_{\text{pHIL}}[k])^2} \le 1.5\%$,
+- State machine transition sequence must match with $0$ permutation errors.
+
+When these parity criteria are met, physical HIL testing is reserved strictly for final hardware homologation and electrical destructive fault tests, while 90% of all software regressions run autonomously in the virtual cloud.
+
+---
+
+## 5. References
+
+[^Broy2012]: M. Broy, M. Feilkas, M. Herrmannsdoerfer, S. Merenda, and D. Ratiu, "Seamless model-based software engineering: Systems engineering meets software engineering," *IEEE Transactions on Software Engineering*, vol. 38, no. 5, pp. 1113–1129, 2012.
+[^Kramer2019]: B. Kramer, R. Simons, and S. Huh, "Model-Based Design of Battery Management Systems for Electric Vehicles," *SAE Technical Paper 2019-01-0872*, 2019. [DOI: 10.4271/2019-01-0872](https://doi.org/10.4271/2019-01-0872)
+[^AUTOSAR2020]: AUTOSAR Consortium, "Specification of Software Component Template (Release 4.4.0)," *AUTOSAR Standard Documents*, Nov. 2020.
+[^Taylor1997]: J. R. Taylor, *An Introduction to Error Analysis: The Study of Uncertainties in Physical Measurements*, University Science Books, 1997.
