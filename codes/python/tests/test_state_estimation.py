@@ -53,3 +53,4 @@ def test_rls_parameter_tracking():
 
     assert est_r0 == pytest.approx(true_r0, 0.002)
     assert rls.compute_soh_resistance(r0_fresh=0.015) < 1.0
+

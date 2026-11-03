@@ -58,3 +58,4 @@ class BatteryCell:
     def max_continuous_current_a(self) -> float:
         """Maximum continuous discharge current in Amperes."""
         return self.capacity_ah * self.c_rate_continuous
+

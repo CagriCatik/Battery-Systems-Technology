@@ -193,153 +193,32 @@ $$
 
 ---
 
-## Production Python Implementation: 1-RC Extended Kalman Filter
+## Production EKF Implementation in Battery Toolkit
 
-The following script implements an Extended Kalman Filter with online linearization, 1-RC equivalent circuit modeling, and synthetic noise injection:
+The industrial-grade Kalman filtering engine is available in [`battery_toolkit.state_estimation.ekf`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/state_estimation/ekf.py). It couples directly with 1-RC and 2-RC Thevenin ECM models, incorporating Joseph-form stabilized covariance updates:
 
 ```python
-"""
-Extended Kalman Filter (EKF) for State of Charge (SoC) Estimation.
-Implements a 1-RC Thevenin battery model with discrete-time updates.
-"""
+from battery_toolkit.modeling.ecm import DualPolarizationECM
+from battery_toolkit.state_estimation.ekf import ExtendedKalmanFilter
 
-import numpy as np
-from typing import Tuple
+# Configure high-fidelity 2-RC equivalent circuit model
+ecm = DualPolarizationECM(
+    r0=0.025,    # 25 mOhm ohmic resistance
+    r1=0.015,    # 15 mOhm fast charge-transfer resistance
+    c1=1200.0,   # 1200 F double-layer capacitance
+    r2=0.020,    # 20 mOhm slow diffusion resistance
+    c2=8000.0    # 8000 F diffusion capacitance
+)
 
+# Initialize Extended Kalman Filter with nominal cell capacity
+ekf = ExtendedKalmanFilter(ecm=ecm, nominal_capacity_ah=50.0, initial_soc=0.60)
 
-class BatteryEKF:
-    def __init__(
-        self,
-        c_nom_ah: float = 2.5,        # 2.5 Ah nominal capacity
-        r0: float = 0.025,            # 25 mOhm ohmic resistance
-        r1: float = 0.015,            # 15 mOhm diffusion resistance
-        c1: float = 1200.0,           # 1200 F double-layer capacitance
-        dt: float = 0.10,             # 100 ms sample period
-        q_soc: float = 1e-7,          # Process noise covariance: SoC
-        q_vrc: float = 1e-6,          # Process noise covariance: V_RC
-        r_meas: float = 4e-4,         # Sensor noise covariance: (20 mV)^2
-        initial_soc: float = 0.80,    # Starting at 80% SoC
-    ) -> None:
-        self.c_nom = c_nom_ah * 3600.0  # Convert Ah to Ampere-seconds (Coulombs)
-        self.r0 = r0
-        self.r1 = r1
-        self.c1 = c1
-        self.dt = dt
-        self.tau1 = r1 * c1
-
-        # State vector: [SoC, V_RC]^T
-        self.x = np.array([[initial_soc], [0.0]], dtype=float)
-
-        # State error covariance matrix P
-        self.P = np.array([
-            [1e-4, 0.0],
-            [0.0, 1e-4]
-        ], dtype=float)
-
-        # Process noise covariance matrix Q
-        self.Q = np.array([
-            [q_soc, 0.0],
-            [0.0, q_vrc]
-        ], dtype=float)
-
-        # Measurement noise covariance scalar
-        self.R_meas = r_meas
-
-        # Discrete-time linear state transition matrices
-        self.A = np.array([
-            [1.0, 0.0],
-            [0.0, np.exp(-self.dt / self.tau1)]
-        ], dtype=float)
-
-        self.B = np.array([
-            [-self.dt / self.c_nom],
-            [self.r1 * (1.0 - np.exp(-self.dt / self.tau1))]
-        ], dtype=float)
-
-    @staticmethod
-    def ocv_function(soc: float) -> float:
-        """
-        Non-linear empirical polynomial OCV curve for NMC chemistry.
-        """
-        # 5th-order empirical fit
-        return 3.0 + 1.2 * soc - 0.6 * (soc ** 2) + 0.8 * (soc ** 3)
-
-    @staticmethod
-    def docv_dsoc(soc: float) -> float:
-        """
-        Analytical derivative dU_ocv / dSoC.
-        """
-        return 1.2 - 1.2 * soc + 2.4 * (soc ** 2)
-
-    def step(self, current: float, v_terminal_meas: float) -> Tuple[float, float]:
-        """
-        Execute one complete Predict-Linearize-Update EKF cycle.
-        Current convention: Positive = Discharge, Negative = Charge.
-        """
-        # --- 1. PREDICTION (Time Update) ---
-        x_pred = self.A @ self.x + self.B * current
-        # Bound SoC physically between 0.0 and 1.0
-        x_pred[0, 0] = np.clip(x_pred[0, 0], 0.0, 1.0)
-        P_pred = self.A @ self.P @ self.A.T + self.Q
-
-        # --- 2. LINEARIZATION ---
-        soc_pred = x_pred[0, 0]
-        v_rc_pred = x_pred[1, 0]
-        c_jacobian = np.array([[self.docv_dsoc(soc_pred), -1.0]], dtype=float)
-
-        # --- 3. CORRECTION (Measurement Update) ---
-        y_model = self.ocv_function(soc_pred) - (self.r0 * current) - v_rc_pred
-        innovation = v_terminal_meas - y_model
-
-        # Innovation covariance
-        s_cov = c_jacobian @ P_pred @ c_jacobian.T + self.R_meas
-        # Kalman Gain
-        k_gain = P_pred @ c_jacobian.T @ np.linalg.inv(s_cov)
-
-        # A-posteriori state update
-        self.x = x_pred + k_gain * innovation
-        self.x[0, 0] = np.clip(self.x[0, 0], 0.0, 1.0)
-
-        # Joseph stabilized form for covariance update: (I - K C) P (I - K C)^T + K R K^T
-        eye = np.eye(2)
-        i_kc = eye - k_gain @ c_jacobian
-        self.P = i_kc @ P_pred @ i_kc.T + k_gain * self.R_meas @ k_gain.T
-
-        return float(self.x[0, 0]), float(self.x[1, 0])
-
-
-# --- Test & Simulation Harness ---
-if __name__ == "__main__":
-    np.random.seed(42)
-    ekf = BatteryEKF(initial_soc=0.60)  # BMS initialized with 60% estimate (True = 75%)
-
-    true_soc = 0.75
-    true_vrc = 0.0
-    r0_true = 0.025
-    r1_true = 0.015
-    c1_true = 1200.0
-    tau_true = r1_true * c1_true
-    dt = 0.10
-    c_nom_true = 2.5 * 3600.0
-
-    print("Step | Current [A] | True SoC | EKF SoC  | Residual [mV]")
-    print("---------------------------------------------------------")
-
-    sim_currents = [2.0] * 50 + [0.0] * 20 + [-1.5] * 30  # Discharge -> Rest -> Regen
-
-    for step_i, i_k in enumerate(sim_currents):
-        # Update ground truth cell physics
-        true_soc -= (i_k * dt) / c_nom_true
-        true_vrc = true_vrc * np.exp(-dt / tau_true) + r1_true * (1.0 - np.exp(-dt / tau_true)) * i_k
-        v_true = ekf.ocv_function(true_soc) - (r0_true * i_k) - true_vrc
-        v_meas = v_true + np.random.normal(0.0, 0.005)  # Add 5 mV sensor noise
-
-        est_soc, est_vrc = ekf.step(current=i_k, v_terminal_meas=v_meas)
-
-        if step_i % 10 == 0:
-            error_mv = (est_soc - true_soc) * 1000.0
-            print(f"{step_i:4d} | {i_k:11.1f} | {true_soc:8.4f} | {est_soc:8.4f} | {error_mv:8.2f} %")
+# Periodic measurement step (invoked inside 10 ms BMS cyclic task)
+estimated_soc = ekf.step(current_a=35.0, voltage_v=3.82, dt_s=0.01)
+print(f"Online Estimated SOC: {estimated_soc * 100:.2f}%")
 ```
+
+For full implementation details, mathematical derivations, and unit test benchmarks comparing EKF vs. UKF vs. RLS, see [`codes/python/src/battery_toolkit/state_estimation/ekf.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/state_estimation/ekf.py) and [`test_state_estimation.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/tests/test_state_estimation.py).
 
 ---
 

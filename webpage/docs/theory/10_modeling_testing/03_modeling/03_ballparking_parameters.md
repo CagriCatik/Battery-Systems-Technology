@@ -112,116 +112,32 @@ $$
 
 ---
 
-## Production Python Implementation: HPPC Parameter Extraction
+## HPPC Parameter Identification in Battery Toolkit
 
-The following production script implements non-linear curve fitting on a synthetic HPPC pulse relaxation profile, extracting $R_0, R_1, C_1, R_2, C_2$:
+The non-linear least squares parameter extraction engine is implemented in [`battery_toolkit.modeling.hppc`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/modeling/hppc.py). It extracts $R_0, R_1, C_1, R_2, C_2$ from dynamic current pulses:
 
 ```python
-"""
-HPPC Parameter Extraction Engine for 2-RC Dual Polarization Battery Models.
-Uses Levenberg-Marquardt non-linear least squares optimization.
-"""
-
-from typing import Dict, Tuple
 import numpy as np
-from scipy.optimize import curve_fit
+from battery_toolkit.modeling.hppc import HPPCExtractor
 
+# Configure HPPC parameter extractor with pulse current and duration
+extractor = HPPCExtractor(pulse_current_a=30.0, pulse_duration_s=10.0)
 
-def relaxation_model_2rc(t: np.ndarray, u_ocv: float, v1: float, tau1: float, v2: float, tau2: float) -> np.ndarray:
-    """
-    Theoretical 2-RC relaxation model:
-    V(t) = U_ocv - V1 * exp(-t / tau1) - V2 * exp(-t / tau2)
-    """
-    return u_ocv - v1 * np.exp(-t / tau1) - v2 * np.exp(-t / tau2)
+# Extract parameters from post-pulse relaxation curve
+# time_s: time array starting from pulse shutoff
+# voltage_v: measured relaxation voltage
+# v_end_of_pulse: terminal voltage right before pulse shutoff
+params = extractor.extract_parameters(
+    time_s=relaxation_time,
+    voltage_v=relaxation_voltage,
+    v_end_of_pulse=v_pulse_end
+)
 
-
-class HPPCParameterExtractor:
-    def __init__(self, pulse_current_a: float = 30.0, pulse_duration_s: float = 10.0) -> None:
-        self.i_pulse = pulse_current_a
-        self.t_pulse = pulse_duration_s
-
-    def extract_parameters(
-        self,
-        t_relax: np.ndarray,
-        v_relax: np.ndarray,
-        v_end_of_pulse: float,
-    ) -> Dict[str, float]:
-        """
-        Extracts R0, R1, C1, R2, C2 from post-pulse relaxation data.
-        t_relax: time array starting at 0.0 s (pulse turn-off)
-        v_relax: measured voltage array starting immediately after IR step
-        """
-        # 1. Ohmic Resistance R0 from instantaneous step
-        delta_v_ir = v_relax[0] - v_end_of_pulse
-        r0 = delta_v_ir / self.i_pulse
-
-        # 2. Initial guesses for non-linear fit: [U_ocv, V1, tau1, V2, tau2]
-        u_ocv_guess = float(v_relax[-1])
-        v_span = u_ocv_guess - v_relax[0]
-        initial_guess = [u_ocv_guess, v_span * 0.4, 8.0, v_span * 0.6, 120.0]
-
-        # Bounds: strictly positive physical values
-        lower_bounds = [u_ocv_guess - 0.2, 0.0, 0.5, 0.0, 30.0]
-        upper_bounds = [u_ocv_guess + 0.2, 0.5, 30.0, 0.5, 800.0]
-
-        # 3. Levenberg-Marquardt curve fitting
-        popt, _ = curve_fit(
-            relaxation_model_2rc,
-            t_relax,
-            v_relax,
-            p0=initial_guess,
-            bounds=(lower_bounds, upper_bounds),
-            maxfev=5000,
-        )
-
-        u_ocv_fit, v1_fit, tau1_fit, v2_fit, tau2_fit = popt
-
-        # 4. Convert transient voltages into R and C components
-        r1 = v1_fit / (self.i_pulse * (1.0 - np.exp(-self.t_pulse / tau1_fit)))
-        c1 = tau1_fit / r1
-
-        r2 = v2_fit / (self.i_pulse * (1.0 - np.exp(-self.t_pulse / tau2_fit)))
-        c2 = tau2_fit / r2
-
-        return {
-            "R0_mOhm": r0 * 1000.0,
-            "R1_mOhm": r1 * 1000.0,
-            "C1_Farads": c1,
-            "tau1_seconds": tau1_fit,
-            "R2_mOhm": r2 * 1000.0,
-            "C2_Farads": c2,
-            "tau2_seconds": tau2_fit,
-            "U_ocv_Volts": u_ocv_fit,
-        }
-
-
-# --- Verification Execution ---
-if __name__ == "__main__":
-    np.random.seed(42)
-    # Ground truth parameters: R0=25 mΩ, R1=15 mΩ, C1=1000 F (tau1=15s), R2=20 mΩ, C2=6000 F (tau2=120s)
-    extractor = HPPCParameterExtractor(pulse_current_a=30.0, pulse_duration_s=10.0)
-
-    # Generate synthetic relaxation data with noise
-    time_vec = np.linspace(0.01, 300.0, 500)
-    v1_true = 30.0 * 0.015 * (1.0 - np.exp(-10.0 / 15.0))  # ~ 0.219 V
-    v2_true = 30.0 * 0.020 * (1.0 - np.exp(-10.0 / 120.0)) # ~ 0.048 V
-    u_ocv_true = 3.850
-
-    v_end_pulse = u_ocv_true - (30.0 * 0.025) - v1_true - v2_true # with IR drop (0.75V)
-    v_clean = relaxation_model_2rc(time_vec, u_ocv_true, v1_true, 15.0, v2_true, 120.0)
-    v_noisy = v_clean + np.random.normal(0.0, 0.001, size=len(time_vec)) # 1 mV noise
-
-    results = extractor.extract_parameters(time_vec, v_noisy, v_end_of_pulse=v_end_pulse)
-
-    print("=== HPPC 2-RC Model Parameter Extraction Results ===\n")
-    print(f"Ohmic Resistance (R_0):       {results['R0_mOhm']:6.2f} mΩ  (Ground Truth: 25.00 mΩ)")
-    print(f"Charge-Transfer Res (R_1):    {results['R1_mOhm']:6.2f} mΩ  (Ground Truth: 15.00 mΩ)")
-    print(f"Double-Layer Cap (C_1):       {results['C1_Farads']:6.1f} F   (Ground Truth: 1000.0 F)")
-    print(f"Fast Time Constant (τ_1):     {results['tau1_seconds']:6.2f} s   (Ground Truth: 15.00 s)")
-    print(f"Diffusion Resistance (R_2):   {results['R2_mOhm']:6.2f} mΩ  (Ground Truth: 20.00 mΩ)")
-    print(f"Diffusion Capacitance (C_2):  {results['C2_Farads']:6.1f} F   (Ground Truth: 6000.0 F)")
-    print(f"Slow Time Constant (τ_2):     {results['tau2_seconds']:6.2f} s   (Ground Truth: 120.00 s)")
+print(f"R0: {params['r0_mohm']:.2f} mOhm, R1: {params['r1_mohm']:.2f} mOhm, C1: {params['c1_farads']:.1f} F")
+print(f"R2: {params['r2_mohm']:.2f} mOhm, C2: {params['c2_farads']:.1f} F")
 ```
+
+Full algorithmic implementation and optimization tests are in [`codes/python/src/battery_toolkit/modeling/hppc.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/modeling/hppc.py) and [`test_modeling.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/tests/test_modeling.py).
 
 ---
 

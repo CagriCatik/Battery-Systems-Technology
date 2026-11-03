@@ -40,3 +40,4 @@ def test_unit_conversions():
     assert kw_to_hp(100.0) == pytest.approx(134.10, 0.05)
     assert hp_to_kw(134.102209) == pytest.approx(100.0, 0.05)
     assert celsius_to_kelvin(25.0) == 298.15
+

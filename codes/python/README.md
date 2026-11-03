@@ -8,13 +8,16 @@ An industrial-grade, academic-depth Python package for **Battery Systems Technol
 
 ```
 battery_toolkit/
-├── core/               # BatteryCell, BatteryPack topology, and engineering units
-├── sizing/             # Vehicle longitudinal physics & automated pack sizing optimizer
+├── core/               # BatteryCell, BatteryPack topology, units, and dispersion simulator
+├── sizing/             # Vehicle longitudinal physics, geometry calculators, & sizing optimizer
 ├── modeling/           # 1-RC/2-RC Thevenin ECM, OCV-SOC mapping, HPPC parameter extraction
-├── state_estimation/   # Coulomb Counting, Extended Kalman Filter (EKF), UKF, and RLS
-├── bms/                # ASIL-D State Machine, Cell Balancing, ASTM E1049 Rainflow cycle counting
-├── thermal/            # 2-node electro-thermal network and BTMS chiller/heater control
-└── testing/            # Virtual ASAM XIL test automation and safety assertion framework
+├── state_estimation/   # Coulomb Counting, Extended Kalman Filter (EKF), UKF, RLS, and ML Regressor
+├── bms/                # ASIL-D State Machine, Active/Passive Balancing, ASTM E1049 Rainflow counting
+├── thermal/            # 2-node electro-thermal network, BTMS control, and cabin HVAC co-simulation
+├── visualization/      # Chemistry radar spider charts, SOC comparison, and thermal profiling
+├── testing/            # Virtual ASAM XIL test automation and safety assertion framework
+├── data/               # Embedded battery cycle datasets and pretrained ML estimation models
+└── cli.py              # Command-line interface (`battery-toolkit`)
 ```
 
 ---
@@ -96,3 +99,21 @@ counter = RainflowCounter()
 cycles = counter.count_cycles(soc_time_series)
 damage = counter.compute_palmgren_miner_damage(cycles)
 ```
+
+---
+
+## Command Line Interface (CLI)
+
+The package installs an executable CLI command `battery-toolkit`:
+
+```bash
+# Size a pack to 400V / 75kWh:
+battery-toolkit size --voltage 400 --energy 75 --cell-cap 5.0 --cell-volt 3.65
+
+# Convert units (e.g., 200 kW to HP):
+battery-toolkit convert kw-to-hp 200
+
+# Benchmark thermal management systems:
+battery-toolkit benchmark
+```
+

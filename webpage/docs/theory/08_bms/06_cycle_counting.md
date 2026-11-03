@@ -114,162 +114,29 @@ Where:
 
 ---
 
-## Production Python Implementation: ASTM E1049 Rainflow Counter
+## ASTM E1049 Rainflow Counter in Battery Toolkit
 
-The following production script implements the ASTM E1049 four-point Rainflow counting algorithm and calculates cumulative Miner fatigue damage:
+The ASTM E1049-85 compliant 3-point and 4-point Rainflow counting algorithm and Palmgren-Miner cumulative fatigue damage model are implemented in [`battery_toolkit.bms.rainflow`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/bms/rainflow.py):
 
 ```python
-"""
-ASTM E1049-85 Compliant Rainflow Cycle Counting and Fatigue Estimator.
-Extracts closed cycles from dynamic State of Charge (SoC) profiles.
-"""
-
-from dataclasses import dataclass
-from typing import List, Tuple
 import numpy as np
+from battery_toolkit.bms import RainflowCounter
 
+# Synthetic dynamic EV SOC profile (driving with regenerative braking events)
+soc_profile = np.array([0.90, 0.70, 0.75, 0.60, 0.65, 0.50, 0.85, 0.40, 0.45, 0.20, 0.95])
 
-@dataclass
-class Cycle:
-    range_dod: float   # Cycle range ΔDoD in [0.0, 1.0]
-    mean_soc: float    # Cycle mean SoC in [0.0, 1.0]
-    count: float       # 1.0 for closed cycle, 0.5 for half-cycle
+counter = RainflowCounter(n0_ref=2500.0, beta_dod=1.85, k_soc=0.90)
 
+# Extract closed micro-cycles and residual half-cycles
+cycles = counter.count_cycles(soc_profile)
 
-class RainflowDamageCalculator:
-    def __init__(
-        self,
-        n0_ref: float = 2500.0,       # Cycles to failure at 100% DoD
-        beta_dod: float = 1.85,       # Non-linear DoD exponent
-        k_soc: float = 0.90,          # High-SoC acceleration coefficient
-    ) -> None:
-        self.n0 = n0_ref
-        self.beta = beta_dod
-        self.k_soc = k_soc
+# Compute cumulative fatigue damage according to Palmgren-Miner's hypothesis
+total_damage, rul_fraction = counter.compute_palmgren_miner_damage(cycles)
 
-    @staticmethod
-    def extract_turning_points(series: np.ndarray) -> np.ndarray:
-        """
-        Filters input series to keep only strict local extrema (peaks and valleys).
-        """
-        if len(series) < 3:
-            return series
-
-        diffs = np.diff(series)
-        # Exclude flat zero-differential regions
-        non_zero = diffs != 0
-        if not np.any(non_zero):
-            return np.array([series[0]])
-
-        compact_series = [series[0]]
-        for i in range(len(diffs)):
-            if diffs[i] != 0:
-                compact_series.append(series[i + 1])
-
-        # Identify direction reversals
-        turning_points = [compact_series[0]]
-        for i in range(1, len(compact_series) - 1):
-            d1 = compact_series[i] - compact_series[i - 1]
-            d2 = compact_series[i + 1] - compact_series[i]
-            if d1 * d2 < 0:  # Peak or Valley
-                turning_points.append(compact_series[i])
-        turning_points.append(compact_series[-1])
-
-        return np.array(turning_points)
-
-    def count_cycles(self, soc_history: np.ndarray) -> List[Cycle]:
-        """
-        Executes ASTM E1049 four-point rainflow cycle extraction.
-        """
-        pts = list(self.extract_turning_points(soc_history))
-        extracted_cycles: List[Cycle] = []
-
-        while len(pts) >= 3:
-            s1, s2, s3 = pts[0], pts[1], pts[2]
-            r1 = abs(s1 - s2)
-            r2 = abs(s2 - s3)
-
-            if len(pts) >= 4:
-                s4 = pts[3]
-                r3 = abs(s3 - s4)
-                if r2 <= r1 and r2 <= r3:
-                    # Closed inner loop between s2 and s3
-                    extracted_cycles.append(Cycle(
-                        range_dod=r2,
-                        mean_soc=(s2 + s3) / 2.0,
-                        count=1.0
-                    ))
-                    # Remove s2 and s3
-                    del pts[1:3]
-                    continue
-
-            if r2 <= r1:
-                extracted_cycles.append(Cycle(
-                    range_dod=r2,
-                    mean_soc=(s2 + s3) / 2.0,
-                    count=1.0
-                ))
-                del pts[1:3]
-            else:
-                # Rotate stack if no loop closed
-                pts.append(pts.pop(0))
-                break
-
-        # Remaining points form residual half-cycles
-        for i in range(len(pts) - 1):
-            r = abs(pts[i] - pts[i + 1])
-            m = (pts[i] + pts[i + 1]) / 2.0
-            extracted_cycles.append(Cycle(range_dod=r, mean_soc=m, count=0.5))
-
-        return extracted_cycles
-
-    def compute_damage(self, cycles: List[Cycle]) -> Tuple[float, float]:
-        """
-        Applies Wöhler model and Palmgren-Miner rule.
-        Returns: (Total Cumulative Damage D, Estimated Remaining Useful Life Cycles)
-        """
-        total_damage = 0.0
-
-        for cyc in cycles:
-            if cyc.range_dod < 1e-4:
-                continue
-            # Wöhler cycles to failure
-            n_f = (
-                self.n0
-                * (cyc.range_dod ** (-self.beta))
-                * np.exp(-self.k_soc * (cyc.mean_soc - 0.50))
-            )
-            cycle_damage = cyc.count / n_f
-            total_damage += cycle_damage
-
-        return total_damage, (1.0 - total_damage)
-
-
-# --- Test & Simulation Harness ---
-if __name__ == "__main__":
-    # Synthetic EV Drive Profile: Discharge with Regen Braking Events
-    soc_profile = np.array([
-        0.90, 0.70, 0.75, 0.60, 0.65, 0.50, 0.85, 0.40, 0.45, 0.20, 0.95
-    ])
-
-    calculator = RainflowDamageCalculator()
-    cycles = calculator.count_cycles(soc_profile)
-
-    print(f"Extracted {len(cycles)} cycle components from dynamic profile:\n")
-    print("Type        | Range ΔDoD | Mean SoC | Damage Contribution")
-    print("---------------------------------------------------------")
-
-    for idx, c in enumerate(cycles):
-        cyc_type = "Full Cycle" if c.count == 1.0 else "Half Cycle"
-        # Calculate isolated damage for display
-        n_f = calculator.n0 * (c.range_dod ** (-calculator.beta))
-        d_i = c.count / n_f
-        print(f"{cyc_type:11s} | {c.range_dod*100:9.1f}% | {c.mean_soc*100:7.1f}% | {d_i:11.2e}")
-
-    total_d, _ = calculator.compute_damage(cycles)
-    print("---------------------------------------------------------")
-    print(f"Total Palmgren-Miner Damage Accumulated: D = {total_d:.4e}")
+print(f"Extracted {len(cycles)} cycles. Cumulative Damage D = {total_damage:.4e}, Remaining Life = {rul_fraction * 100:.2f}%")
 ```
+
+Full algorithmic implementation, turning point reduction, and test validation scripts are located in [`codes/python/src/battery_toolkit/bms/rainflow.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/bms/rainflow.py) and [`test_bms.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/tests/test_bms.py).
 
 ---
 

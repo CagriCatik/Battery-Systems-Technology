@@ -111,3 +111,4 @@ class BMSStateMachine:
             },
             "fault": self.fault_latched,
         }
+

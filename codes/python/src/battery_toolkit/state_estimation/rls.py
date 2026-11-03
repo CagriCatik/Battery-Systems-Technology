@@ -65,3 +65,4 @@ class RecursiveLeastSquares:
             return 1.0
         soh = (r_eol - self.theta) / (r_eol - r0_fresh)
         return float(max(0.0, min(1.0, soh)))
+

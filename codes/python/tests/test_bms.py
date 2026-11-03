@@ -60,3 +60,4 @@ def test_rainflow_cycle_counting():
 
     damage = counter.compute_palmgren_miner_damage(cycles)
     assert damage > 0.0 and damage < 0.1
+

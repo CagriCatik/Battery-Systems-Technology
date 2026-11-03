@@ -30,3 +30,4 @@ def kwh_to_mj(kwh: float) -> float:
 def mj_to_kwh(mj: float) -> float:
     """Converts Megajoules to Kilowatt-hours."""
     return mj / 3.6
+

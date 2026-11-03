@@ -86,3 +86,4 @@ class DualPolarizationECM:
     def compute_terminal_voltage(self, ocv: float, current_a: float) -> float:
         """V_t = OCV - I*R0 - v1 - v2."""
         return ocv - current_a * self.r0 - self.v1 - self.v2
+

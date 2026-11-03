@@ -248,144 +248,30 @@ The BMS firmware hosts an ISO 14229-1 server responding to diagnostic clients:
 
 ---
 
-## Production-Grade Contactor & Precharge Controller
+## High-Voltage Sequencer & Contactor Management
 
-The following Python implementation illustrates the deterministic state machine, timing verification, and weld-diagnostic routines implemented within automotive BMS controller software:
+The contactor sequencing, weld detection, and precharge state automaton are implemented in [`battery_toolkit.bms.state_machine`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/bms/state_machine.py). The sequencer guarantees arc-free contact closure and aborts on DC link precharge timeout:
 
 ```python
-"""
-Deterministic High-Voltage Contactor and Precharge Controller.
-Compliant with ISO 26262 functional safety state machine architectures.
-"""
+from battery_toolkit.bms import BMSStateMachine, BMSState
 
-from enum import Enum, auto
-import time
-from typing import Dict, Tuple
+# Initialize contactor sequencer with 350 ms safety timeout
+sm = BMSStateMachine(precharge_timeout_s=0.350)
 
+# 1. Standby -> Precharge command: K- closes, K_pre closes, K+ remains open
+sm.process_event(v_pack=400.0, v_link=0.0, i_pack=0.0, max_cell_temp=25.0, hvil_closed=True, drive_requested=True)
+assert sm.state == BMSState.PRECHARGE and sm.k_minus and sm.k_pre and not sm.k_plus
 
-class ContactorState(Enum):
-    OPEN = auto()
-    CLOSED = auto()
-    WELDED = auto()
+# 2. Link voltage ramps to 95% (>= 380V) -> Main K+ closes, K_pre disengages
+sm.process_event(v_pack=400.0, v_link=385.0, i_pack=5.0, max_cell_temp=25.0, hvil_closed=True, drive_requested=True)
+assert sm.state == BMSState.RUN_DRIVE and sm.k_plus and not sm.k_pre
 
-
-class PrechargeStatus(Enum):
-    IDLE = auto()
-    PRECHARGING = auto()
-    COMPLETE = auto()
-    TIMEOUT_FAULT = auto()
-    WELD_FAULT = auto()
-
-
-class HighVoltageSequencer:
-    def __init__(
-        self,
-        c_dc_farads: float = 0.0015,     # 1500 uF DC link capacitor
-        r_pre_ohms: float = 47.0,         # 47 Ohm high-energy precharge resistor
-        v_diff_threshold: float = 0.05,   # Precharge complete when V_link >= 95% V_pack
-        timeout_seconds: float = 0.350,   # 350 ms timeout limit
-    ) -> None:
-        self.c_dc = c_dc_farads
-        self.r_pre = r_pre_ohms
-        self.v_diff_threshold = v_diff_threshold
-        self.timeout = timeout_seconds
-
-        # Contactor physical states
-        self.k_minus = ContactorState.OPEN
-        self.k_plus = ContactorState.OPEN
-        self.k_pre = ContactorState.OPEN
-
-        self.status = PrechargeStatus.IDLE
-        self.start_time = 0.0
-
-    def run_pre_weld_check(self, v_pack: float, v_link: float) -> bool:
-        """
-        Verify that all contactors are open and no contact welding has occurred.
-        """
-        if self.k_minus == ContactorState.OPEN and self.k_plus == ContactorState.OPEN:
-            # If all are commanded open, link voltage should be approximately zero
-            if v_link > 0.10 * v_pack:
-                self.status = PrechargeStatus.WELD_FAULT
-                return False
-        return True
-
-    def start_connection(self, v_pack: float, v_link: float) -> bool:
-        """
-        Initiate the high-voltage precharge sequence.
-        """
-        if not self.run_pre_weld_check(v_pack, v_link):
-            return False
-
-        # Step 1: Engage Negative Contactor K-
-        self.k_minus = ContactorState.CLOSED
-        
-        # Step 2: Engage Precharge Contactor K_pre
-        self.k_pre = ContactorState.CLOSED
-        self.status = PrechargeStatus.PRECHARGING
-        self.start_time = time.monotonic()
-        return True
-
-    def step(self, v_pack: float, v_link: float) -> PrechargeStatus:
-        """
-        Periodic execution task (called every 10 ms).
-        """
-        if self.status != PrechargeStatus.PRECHARGING:
-            return self.status
-
-        elapsed = time.monotonic() - self.start_time
-
-        # Check for precharge completion condition: V_link >= (1 - threshold) * V_pack
-        if v_link >= (1.0 - self.v_diff_threshold) * v_pack:
-            # Step 3: Close Main Positive Contactor K+
-            self.k_plus = ContactorState.CLOSED
-            # Step 4: Disengage Precharge Contactor K_pre
-            self.k_pre = ContactorState.OPEN
-            self.status = PrechargeStatus.COMPLETE
-            return self.status
-
-        # Check for timeout violation
-        if elapsed > self.timeout:
-            # Abort: open contactors immediately to protect precharge resistor
-            self.k_pre = ContactorState.OPEN
-            self.k_minus = ContactorState.OPEN
-            self.status = PrechargeStatus.TIMEOUT_FAULT
-            return self.status
-
-        return self.status
-
-    def open_all(self) -> None:
-        """Fail-safe disconnect."""
-        self.k_plus = ContactorState.OPEN
-        self.k_pre = ContactorState.OPEN
-        self.k_minus = ContactorState.OPEN
-        self.status = PrechargeStatus.IDLE
-
-
-# --- Verification Execution ---
-if __name__ == "__main__":
-    v_battery = 400.0  # 400V Nominal High-Voltage Pack
-    sequencer = HighVoltageSequencer()
-
-    print(f"Initial State: All Contactors Open. Testing Pre-Weld Check...")
-    assert sequencer.run_pre_weld_check(v_pack=v_battery, v_link=0.0) is True
-
-    sequencer.start_connection(v_pack=v_battery, v_link=0.0)
-    print(f"Precharge Started: K-={sequencer.k_minus.name}, K_pre={sequencer.k_pre.name}, K+={sequencer.k_plus.name}")
-
-    # Simulate RC charging curve in 50 ms time steps
-    sim_v_link = 0.0
-    dt = 0.050
-    tau = sequencer.r_pre * sequencer.c_dc  # ~ 0.0705 s
-
-    for step_idx in range(1, 10):
-        time.sleep(0.01)  # small synthetic delay
-        sim_v_link = v_battery * (1.0 - (2.71828 ** (-(step_idx * dt) / tau)))
-        status = sequencer.step(v_battery, sim_v_link)
-        print(f"Step {step_idx}: V_link = {sim_v_link:.1f} V, Status = {status.name}")
-        if status == PrechargeStatus.COMPLETE:
-            print(f"Precharge Succeeded! K-={sequencer.k_minus.name}, K_pre={sequencer.k_pre.name}, K+={sequencer.k_plus.name}")
-            break
+# 3. Controlled zero-current shutdown
+sm.process_event(v_pack=400.0, v_link=385.0, i_pack=1.0, max_cell_temp=25.0, hvil_closed=True, shutdown_requested=True)
+assert sm.state == BMSState.STANDBY and not sm.k_plus and not sm.k_minus
 ```
+
+Automated verification suites and state transition tests are provided in [`codes/python/src/battery_toolkit/bms/state_machine.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/bms/state_machine.py) and [`test_bms.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/tests/test_bms.py).
 
 ---
 

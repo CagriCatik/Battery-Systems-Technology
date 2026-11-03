@@ -112,3 +112,4 @@ class RainflowCounter:
         Failure occurs when D_total >= 1.0 (80% SOH End of Life).
         """
         return sum(c.damage for c in cycles)
+

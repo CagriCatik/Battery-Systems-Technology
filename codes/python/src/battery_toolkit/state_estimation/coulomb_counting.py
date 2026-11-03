@@ -58,3 +58,4 @@ class CoulombCounter:
     def reset_soc(self, new_soc: float) -> None:
         """Resets SOC (e.g. upon OCV-rest calibration)."""
         self.soc = float(max(0.0, min(1.0, new_soc)))
+

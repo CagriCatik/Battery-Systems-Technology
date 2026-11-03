@@ -35,3 +35,4 @@ def test_pack_sizing_optimizer():
     assert pack.topology.num_series == 109 # ceil(400 / 3.7)
     assert pack.nominal_energy_kwh >= 60.0
     assert pack.v_max_v > 400.0
+

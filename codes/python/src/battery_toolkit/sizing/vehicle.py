@@ -83,3 +83,4 @@ class VehicleParameters:
         # Time to travel 1 km = 1 / v_kmh (hours)
         hours_per_km = 1.0 / max(velocity_kmh, 1e-3)
         return p_elec_kw * 1000.0 * hours_per_km
+

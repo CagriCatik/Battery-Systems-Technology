@@ -152,88 +152,26 @@ By separating the execution frequencies, the State-EKF tracks rapid vehicle acce
 
 ---
 
-## Production Python Implementation: RLS Ohmic Resistance Tracker
+## Online Resistance Tracking in Battery Toolkit
 
-The following script implements Recursive Least Squares (RLS) with an exponential forgetting factor to track cell internal resistance $R_0$ online from dynamic current-voltage pulses:
+The online recursive least squares parameter identification algorithm is implemented in [`battery_toolkit.state_estimation.rls`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/state_estimation/rls.py). It incorporates an exponential forgetting factor $\lambda \in [0.98, 0.999]$ and excitation threshold guards to track internal resistance $R_0$ and compute $\text{SOH}_R$:
 
 ```python
-"""
-Recursive Least Squares (RLS) with Exponential Forgetting Factor.
-Tracks battery internal resistance (R_0) online under dynamic current excitation.
-"""
+from battery_toolkit.state_estimation.rls import RecursiveLeastSquares
 
-import numpy as np
-from typing import Tuple
+# Initialize RLS estimator with initial resistance estimate (20 mOhm) and forgetting factor
+rls = RecursiveLeastSquares(initial_theta=0.020, lambda_factor=0.995, initial_p=10.0)
 
+# Online update during dynamic pulse excitation (e.g. regenerative braking / acceleration)
+# delta_v: voltage step [V], delta_i: current step [A]
+estimated_r0 = rls.update(delta_y=0.45, phi=15.0)
 
-class OnlineResistanceRLS:
-    def __init__(
-        self,
-        r0_initial: float = 0.020,     # Initial guess: 20 mOhm
-        lambda_factor: float = 0.995,  # Forgetting factor (0.99 - 0.999)
-        initial_p: float = 10.0,       # Initial covariance scale
-    ) -> None:
-        self.r0 = r0_initial
-        self.lam = lambda_factor
-        self.P = initial_p  # Scalar covariance for single-parameter R_0 tracking
-
-    def update(self, delta_v: float, delta_i: float) -> float:
-        """
-        Executes one RLS step on differential excitation:
-        Model: ΔV_k = R_0 · ΔI_k + e_k
-        Where:
-            y_k = ΔV_k
-            phi_k = ΔI_k
-            theta_k = R_0
-        """
-        # Exclude near-zero current pulses to prevent division by zero / singularity
-        if abs(delta_i) < 0.20:
-            return self.r0
-
-        phi = delta_i
-        y = delta_v
-
-        # 1. Gain computation: K_k = (P_{k-1} * phi) / (lambda + phi * P_{k-1} * phi)
-        k_gain = (self.P * phi) / (self.lam + phi * self.P * phi)
-
-        # 2. Residual error
-        residual = y - phi * self.r0
-
-        # 3. Parameter update
-        self.r0 += k_gain * residual
-        # Physically bound resistance: must remain strictly positive
-        self.r0 = max(0.001, self.r0)
-
-        # 4. Covariance update: P_k = (1 / lambda) * (1 - K_k * phi) * P_{k-1}
-        self.P = (1.0 / self.lam) * (1.0 - k_gain * phi) * self.P
-
-        return self.r0
-
-
-# --- Verification Execution ---
-if __name__ == "__main__":
-    np.random.seed(42)
-    
-    # Ground truth: cell starts at 25 mOhm and degrades to 38 mOhm over time
-    true_r0_profile = np.linspace(0.025, 0.038, 100)
-    tracker = OnlineResistanceRLS(r0_initial=0.015, lambda_factor=0.985)
-
-    print("Step | True R_0 [mΩ] | Estimated R_0 [mΩ] | Estimation Error [mΩ]")
-    print("-----------------------------------------------------------------")
-
-    for step_idx, true_r0 in enumerate(true_r0_profile):
-        # Generate dynamic current pulse between -50 A (regen) and +100 A (traction)
-        pulse_i = np.random.uniform(-30.0, 60.0)
-        # Terminal voltage drop with 3 mV sensor noise
-        noise = np.random.normal(0.0, 0.003)
-        delta_v = pulse_i * true_r0 + noise
-
-        est_r0 = tracker.update(delta_v=delta_v, delta_i=pulse_i)
-
-        if step_idx % 15 == 0 or step_idx == len(true_r0_profile) - 1:
-            err_mohm = (est_r0 - true_r0) * 1000.0
-            print(f"{step_idx:4d} | {true_r0*1000:13.2f} | {est_r0*1000:18.2f} | {err_mohm:19.2f}")
+# Calculate Resistance-based State of Health relative to fresh cell (R_0_fresh = 20 mOhm, R_0_eol = 40 mOhm)
+soh_r = (0.040 - estimated_r0) / (0.040 - 0.020)
+print(f"Online R_0: {estimated_r0 * 1000:.2f} mOhm -> SOH_R: {soh_r * 100:.1f}%")
 ```
+
+The mathematical derivation, unit test coverage, and benchmark scripts are located in [`codes/python/src/battery_toolkit/state_estimation/rls.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/state_estimation/rls.py) and [`test_state_estimation.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/tests/test_state_estimation.py).
 
 ---
 

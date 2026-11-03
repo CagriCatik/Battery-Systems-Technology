@@ -34,3 +34,4 @@ def test_btms_controller():
     res_hot = btms.step(max_cell_temp_celsius=45.0)
     assert res_hot["mode"] == "ACTIVE_CHILLER"
     assert res_hot["chiller_duty_cycle"] > 0.5
+

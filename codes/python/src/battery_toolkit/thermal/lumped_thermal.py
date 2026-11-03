@@ -77,3 +77,4 @@ class LumpedThermalNode:
             q_gen_watts=round(q_gen, 2),
             q_cooling_watts=round(q_cooling, 2),
         )
+

@@ -127,3 +127,4 @@ class UnscentedKalmanFilter:
         self.P = P_pred - np.outer(K, K) * P_yy
 
         return self.estimated_soc
+

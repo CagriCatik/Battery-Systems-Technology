@@ -24,3 +24,4 @@ def test_virtual_xil_cell_tap_open():
     env = VirtualXILEnvironment(pack_size=96)
     env.set_pin_fault("PIN_CELL_SENSE_12", PinFaultType.OPEN_CIRCUIT)
     assert env.read_variable("Cell_12_Voltage") == 0.000
+

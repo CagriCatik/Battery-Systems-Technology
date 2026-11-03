@@ -79,3 +79,4 @@ class OCVModel:
         eq_ocv = self.get_equilibrium_ocv(soc, temp_celsius)
         v_hyst = self.update_hysteresis(current_a, dt_s)
         return eq_ocv + v_hyst
+

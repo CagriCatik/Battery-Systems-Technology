@@ -167,99 +167,27 @@ A valid resting point for OCV lookup requires:
 
 ---
 
-## Production Python Implementation: Resting Extrapolation & OCV Initializer
+## OCV-SOC Initialization in Battery Toolkit
 
-The following script implements resting state detection, exponential relaxation extrapolation, and temperature-interpolated OCV-to-SoC lookup:
+The temperature-dependent OCV lookup and thermodynamic hysteresis compensation are implemented in [`battery_toolkit.modeling.ocv`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/modeling/ocv.py):
 
 ```python
-"""
-Initial State of Charge (SoC) Estimator and Rest-Relaxation Extrapolator.
-Compliant with automotive BMS startup and calibration sequences.
-"""
+from battery_toolkit.modeling.ocv import OCVModel
 
-import numpy as np
-from typing import Dict, List, Optional, Tuple
+# Initialize OCV model with temperature coefficient dU/dT
+ocv_model = OCVModel(dudt_v_per_k=-0.00015)
 
+# Calculate SOC from measured rest voltage at 25°C
+rest_voltage = 3.840  # Measured terminal voltage after 30 min rest
+inferred_soc = ocv_model.soc_from_ocv(ocv_v=rest_voltage, temp_c=25.0)
 
-class InitialSoCEstimator:
-    def __init__(
-        self,
-        c_nom_ah: float = 60.0,
-        i_rest_threshold: float = 0.050,  # 50 mA rest cutoff
-        dv_dt_threshold: float = 1.0e-3,  # 1 mV/min = 1.67e-5 V/s
-        min_rest_seconds: float = 1800.0, # 30 minutes
-    ) -> None:
-        self.c_nom = c_nom_ah * 3600.0  # Coulombs
-        self.i_rest_threshold = i_rest_threshold
-        self.dv_dt_threshold = dv_dt_threshold / 60.0  # V/s
-        self.min_rest = min_rest_seconds
+# Evaluate cold start conditions (0°C) with Gibbs-Helmholtz temperature correction
+inferred_soc_cold = ocv_model.soc_from_ocv(ocv_v=rest_voltage, temp_c=0.0)
 
-        # Empirical 2D OCV-SoC Lookup Table: Rows = Temperatures [°C], Cols = SoC [0 to 1]
-        self.soc_axis = np.linspace(0.0, 1.0, 11)
-        self.temp_axis = np.array([0.0, 25.0, 45.0])
-        self.ocv_table = np.array([
-            # 0%     10%    20%    30%    40%    50%    60%    70%    80%    90%    100%
-            [3.100, 3.420, 3.550, 3.630, 3.680, 3.730, 3.810, 3.920, 4.020, 4.110, 4.180],  # 0°C
-            [3.150, 3.450, 3.580, 3.650, 3.700, 3.760, 3.840, 3.950, 4.050, 4.140, 4.200],  # 25°C
-            [3.170, 3.460, 3.590, 3.660, 3.710, 3.770, 3.850, 3.960, 4.060, 4.150, 4.210],  # 45°C
-        ])
-
-    def lookup_soc_from_ocv(self, ocv: float, temperature_c: float) -> float:
-        """
-        Bilinear inverse interpolation: finds SoC corresponding to OCV and Temperature.
-        """
-        # Clamp temperature
-        t_clamped = np.clip(temperature_c, self.temp_axis[0], self.temp_axis[-1])
-        # Interpolate OCV curves along temperature axis
-        ocv_curve_at_t = np.zeros_like(self.soc_axis)
-        for i in range(len(self.soc_axis)):
-            ocv_curve_at_t[i] = np.interp(t_clamped, self.temp_axis, self.ocv_table[:, i])
-
-        # Invert: interpolate SoC given measured OCV
-        soc_estimate = np.interp(ocv, ocv_curve_at_t, self.soc_axis)
-        return float(np.clip(soc_estimate, 0.0, 1.0))
-
-    def extrapolate_ocv_relaxation(
-        self,
-        time_history: np.ndarray,
-        v_history: np.ndarray
-    ) -> float:
-        """
-        Fits asymptotic 1st-order relaxation curve: V(t) = U_ocv - ΔV * exp(-t / τ).
-        Returns extrapolated steady-state U_ocv.
-        """
-        if len(time_history) < 20:
-            return float(v_history[-1])
-
-        # Linear regression on logarithmic transform of derivative
-        dt = np.diff(time_history)
-        dv = np.diff(v_history)
-        rates = dv / dt
-
-        # Asymptotic steady-state estimate using final rolling mean
-        return float(np.mean(v_history[-10:]))
-
-
-# --- Verification Execution ---
-if __name__ == "__main__":
-    estimator = InitialSoCEstimator(c_nom_ah=60.0)
-
-    # Test Case 1: Startup OCV Lookup at 25°C
-    v_measured_startup = 3.840  # 3.84V
-    est_soc = estimator.lookup_soc_from_ocv(ocv=v_measured_startup, temperature_c=25.0)
-    print(f"Startup OCV: {v_measured_startup:.3f} V at 25°C -> Inferred Initial SoC: {est_soc * 100:.1f} %")
-
-    # Test Case 2: Startup OCV Lookup at 0°C (Cold Start)
-    est_soc_cold = estimator.lookup_soc_from_ocv(ocv=v_measured_startup, temperature_c=0.0)
-    print(f"Startup OCV: {v_measured_startup:.3f} V at 0°C  -> Inferred Initial SoC: {est_soc_cold * 100:.1f} %")
-
-    # Test Case 3: Sensor Drift Impact Simulation
-    current_bias_amps = 0.050  # 50 mA sensor bias
-    operating_hours = 12.0
-    drift_coulombs = current_bias_amps * (operating_hours * 3600.0)
-    soc_drift_error = (drift_coulombs / estimator.c_nom) * 100.0
-    print(f"Cumulative Error from {current_bias_amps * 1000:.0f} mA bias over {operating_hours:.0f} hrs: {soc_drift_error:.2f} %")
+print(f"Startup OCV: {rest_voltage:.3f}V -> Inferred SOC: {inferred_soc * 100:.1f}% (25°C) | {inferred_soc_cold * 100:.1f}% (0°C)")
 ```
+
+Full algorithmic implementation, cubic spline interpolation, continuous hysteresis tracking, and verification tests are in [`codes/python/src/battery_toolkit/modeling/ocv.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/modeling/ocv.py) and [`test_modeling.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/tests/test_modeling.py).
 
 ---
 

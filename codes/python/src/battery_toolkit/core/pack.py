@@ -106,3 +106,4 @@ class BatteryPack:
             "total_pack_r0_mohm": round(self.total_resistance_mohm, 2),
             "gravimetric_energy_density_wh_per_kg": round(self.gravimetric_energy_density_wh_per_kg, 2),
         }
+

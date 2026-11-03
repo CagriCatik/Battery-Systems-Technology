@@ -175,104 +175,32 @@ flowchart TD
 
 ---
 
-## Production Python Implementation: Series Pack Imbalance Simulator
+## Cell Balancing Simulation in Battery Toolkit
 
-The following simulation demonstrates the compounding effect of cell capacity and resistance dispersion in an unmanaged series string vs. an actively balanced string:
+The multi-cell string imbalance and capacity loss model is implemented in [`battery_toolkit.bms.balancing`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/bms/balancing.py). It tracks cell dispersion, usable capacity bottlenecks, and bleeder dissipation:
 
 ```python
-"""
-Series Battery Pack Imbalance Simulator.
-Calculates usable capacity loss under intrinsic cell dispersion.
-"""
+from battery_toolkit.bms import PassiveBalancingSimulator
 
-from dataclasses import dataclass
-from typing import List
-import numpy as np
+# Configure 4-cell series string with intrinsic manufacturing dispersion
+simulator = PassiveBalancingSimulator(
+    cell_capacities_ah=[50.0, 49.1, 50.5, 49.8],
+    cell_socs=[0.88, 0.82, 0.91, 0.84],
+    bleed_resistor_ohms=33.0
+)
 
+# Compute initial unmanaged usable capacity vs. theoretical maximum
+initial_usable = simulator.compute_usable_capacity()
+print(f"Initial Usable String Capacity: {initial_usable:.2f} Ah (Loss: {min(simulator.capacities) - initial_usable:.2f} Ah)")
 
-@dataclass
-class Cell:
-    cell_id: int
-    c_nom_ah: float       # Nominal capacity [Ah]
-    r0_ohms: float        # Ohmic internal resistance [Ohms]
-    soc: float            # Current State of Charge [0.0 to 1.0]
+# Run 1 hour (3600 s) passive bleed balancing
+sim_log = simulator.run_balancing_simulation(duration_s=3600.0, voltage_threshold_v=0.005)
+recovered_usable = simulator.compute_usable_capacity()
 
-    def terminal_voltage(self, current_amps: float) -> float:
-        """Simplified OCV linear approximation for NMC."""
-        ocv = 3.20 + 0.95 * self.soc
-        return ocv - current_amps * self.r0_ohms
-
-
-class SeriesPack:
-    def __init__(self, cells: List[Cell]) -> None:
-        self.cells = cells
-
-    def compute_usable_capacity_unbalanced(self) -> float:
-        """
-        Calculates theoretical usable capacity without balancing:
-        Q_usable = min(SoC_i * C_i) + min((1 - SoC_i) * C_i)
-        """
-        q_dis_available = min(c.soc * c.c_nom_ah for c in self.cells)
-        q_chg_available = min((1.0 - c.soc) * c.c_nom_ah for c in self.cells)
-        return q_dis_available + q_chg_available
-
-    def run_passive_balancing_step(
-        self,
-        target_v_threshold: float = 0.010,  # 10 mV threshold
-        r_bleed_ohms: float = 33.0,          # 33 Ohm bleed resistor
-        dt_seconds: float = 1.0              # 1 second step
-    ) -> List[int]:
-        """
-        Executes one passive bleed cycle on cells exceeding the lowest cell.
-        Returns list of cell IDs being bled.
-        """
-        voltages = [c.terminal_voltage(0.0) for c in self.cells]
-        v_min = min(voltages)
-        active_bleeders: List[int] = []
-
-        for idx, cell in enumerate(self.cells):
-            v_cell = voltages[idx]
-            if (v_cell - v_min) > target_v_threshold:
-                # Bleed current I = V / R_bleed
-                i_bleed = v_cell / r_bleed_ohms
-                # Discharge cell slightly: ΔSoC = (I * dt) / (C_nom * 3600)
-                delta_soc = (i_bleed * dt_seconds) / (cell.c_nom_ah * 3600.0)
-                cell.soc = max(0.0, cell.soc - delta_soc)
-                active_bleeders.append(cell.cell_id)
-
-        return active_bleeders
-
-
-# --- Verification Execution ---
-if __name__ == "__main__":
-    np.random.seed(101)
-
-    # Instantiate an unmanaged 4-cell series string (4S) with 2% manufacturing variance
-    pack_cells = [
-        Cell(cell_id=1, c_nom_ah=50.0, r0_ohms=0.0018, soc=0.88),
-        Cell(cell_id=2, c_nom_ah=49.1, r0_ohms=0.0021, soc=0.82),  # Lowest capacity
-        Cell(cell_id=3, c_nom_ah=50.5, r0_ohms=0.0017, soc=0.91),  # Highest SoC
-        Cell(cell_id=4, c_nom_ah=49.8, r0_ohms=0.0019, soc=0.84),
-    ]
-
-    pack = SeriesPack(pack_cells)
-    min_single_cell_capacity = min(c.c_nom_ah for c in pack.cells)
-    usable_q = pack.compute_usable_capacity_unbalanced()
-
-    print(f"Pack Configuration: 4S Multi-Cell String")
-    print(f"Lowest Individual Cell Capacity: {min_single_cell_capacity:.2f} Ah")
-    print(f"Usable Pack Capacity (Unbalanced): {usable_q:.2f} Ah")
-    print(f"Trapped Energy / Lost Capacity:   {(min_single_cell_capacity - usable_q):.2f} Ah ({(min_single_cell_capacity - usable_q)/min_single_cell_capacity*100:.1f} %)\n")
-
-    # Simulate balancing over 3600 seconds
-    for t in range(3600):
-        bleeders = pack.run_passive_balancing_step(target_v_threshold=0.005, dt_seconds=1.0)
-
-    usable_q_after = pack.compute_usable_capacity_unbalanced()
-    print(f"After 1 Hour Passive Balancing:")
-    print(f"Usable Pack Capacity (Balanced):   {usable_q_after:.2f} Ah")
-    print(f"Capacity Recovery:                +{(usable_q_after - usable_q):.2f} Ah")
+print(f"Balanced Usable Capacity: {recovered_usable:.2f} Ah (Recovery: +{recovered_usable - initial_usable:.2f} Ah)")
 ```
+
+Full algorithmic implementation and automated test suites are in [`codes/python/src/battery_toolkit/bms/balancing.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/bms/balancing.py) and [`test_bms.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/tests/test_bms.py).
 
 ---
 

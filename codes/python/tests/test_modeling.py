@@ -64,3 +64,4 @@ def test_hppc_extractor():
     assert params.r0 > 0.01
     assert params.r1 > 0.0
     assert params.c1 > 0.0
+

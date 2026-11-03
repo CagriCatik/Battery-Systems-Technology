@@ -68,3 +68,4 @@ class BTMSController:
             "chiller_duty_cycle": round(self.chiller_duty_cycle, 2),
             "cell_temp_celsius": round(max_cell_temp_celsius, 2),
         }
+

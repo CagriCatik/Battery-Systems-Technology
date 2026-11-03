@@ -60,3 +60,4 @@ class VirtualXILEnvironment:
             self.pin_faults[pin] = PinFaultType.NOMINAL
         self.variables["DUT_HVIL_Status"] = True
         self.variables["DUT_Fault_Latched"] = False
+

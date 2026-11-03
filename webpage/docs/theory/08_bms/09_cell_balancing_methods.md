@@ -173,102 +173,32 @@ flowchart TD
 
 ---
 
-## Production Python Implementation: Balancing Speed & Energy Loss Modeler
+## Active vs. Passive Balancing Analysis in Battery Toolkit
 
-The following script models and compares passive vs. active balancing execution times, thermal energy loss, and pack recovery efficiency:
+The comparative balancing speed, thermal dissipation, and transfer efficiency model is implemented in [`battery_toolkit.bms.balancing`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/bms/balancing.py):
 
 ```python
-"""
-Balancing Circuit Performance and Thermal Loss Modeler.
-Compares Passive Resistor Bleed vs Active Inductive Converter.
-"""
+from battery_toolkit.bms import PassiveBalancingSimulator, ActiveBalancingSimulator
 
-from typing import Dict, Tuple
-import numpy as np
+# Cell parameters: 65 Ah cell with 3% SoC imbalance (1.95 Ah charge delta)
+q_delta_ah = 1.95
+v_nom = 3.70
 
+# 1. Passive bleed model (27 Ohm bleeder with 80% thermal duty cycle)
+passive = PassiveBalancingSimulator(cell_capacities_ah=[65.0, 65.0], cell_socs=[0.83, 0.80], bleed_resistor_ohms=27.0)
+i_passive_effective = (v_nom / 27.0) * 0.80
+time_passive_h = q_delta_ah / i_passive_effective
+heat_passive_wh = v_nom * q_delta_ah
 
-class BalancingCircuitComparison:
-    def __init__(
-        self,
-        c_cell_ah: float = 65.0,        # 65 Ah automotive pouch/prismatic cell
-        soc_imbalance_pct: float = 3.0,  # 3% initial SoC delta (1.95 Ah delta)
-        v_nominal: float = 3.70,         # Nominal cell voltage
-    ) -> None:
-        self.q_delta_ah = (soc_imbalance_pct / 100.0) * c_cell_ah
-        self.q_delta_coulombs = self.q_delta_ah * 3600.0
-        self.v_nom = v_nominal
+# 2. Active inductive buck-boost model (2.5 A transfer current, 88% efficiency)
+active = ActiveBalancingSimulator(transfer_current_a=2.5, efficiency=0.88)
+res_active = active.calculate_transfer_metrics(q_delta_ah=q_delta_ah, v_nom=v_nom)
 
-    def model_passive_bleed(
-        self,
-        r_bleed_ohms: float = 27.0,      # 27 Ohm bleeder
-        duty_cycle: float = 0.80,        # 80% thermal duty cycle
-    ) -> Dict[str, float]:
-        """
-        Passive bleeding: dissipates Q_delta as heat to lower cell voltage.
-        """
-        i_bleed_peak = self.v_nom / r_bleed_ohms
-        i_bleed_effective = i_bleed_peak * duty_cycle
-
-        # Balancing time: t = Q / I_effective
-        time_seconds = self.q_delta_coulombs / i_bleed_effective
-        time_hours = time_seconds / 3600.0
-
-        # Energy dissipated: E = V * Q
-        energy_loss_joules = self.v_nom * self.q_delta_coulombs
-        energy_loss_wh = energy_loss_joules / 3600.0
-        avg_thermal_power_w = energy_loss_joules / time_seconds
-
-        return {
-            "topology": "Passive Bleeder (27 Ω)",
-            "effective_current_a": i_bleed_effective,
-            "balancing_time_hours": time_hours,
-            "energy_wasted_wh": energy_loss_wh,
-            "average_heat_flux_w": avg_thermal_power_w,
-            "efficiency_pct": 0.0,
-        }
-
-    def model_active_inductive(
-        self,
-        i_transfer_a: float = 2.5,       # 2.5 A active transfer current
-        efficiency: float = 0.88,         # 88% converter efficiency
-    ) -> Dict[str, float]:
-        """
-        Active balancing: transfers charge with 88% efficiency.
-        """
-        time_seconds = self.q_delta_coulombs / i_transfer_a
-        time_hours = time_seconds / 3600.0
-
-        # Energy transferred vs wasted in converter losses
-        total_energy_wh = self.v_nom * self.q_delta_ah
-        energy_wasted_wh = total_energy_wh * (1.0 - efficiency)
-        avg_thermal_power_w = (energy_wasted_wh * 3600.0) / time_seconds
-
-        return {
-            "topology": "Active Buck-Boost (2.5 A)",
-            "effective_current_a": i_transfer_a,
-            "balancing_time_hours": time_hours,
-            "energy_wasted_wh": energy_wasted_wh,
-            "average_heat_flux_w": avg_thermal_power_w,
-            "efficiency_pct": efficiency * 100.0,
-        }
-
-
-# --- Verification Execution ---
-if __name__ == "__main__":
-    comparator = BalancingCircuitComparison(c_cell_ah=65.0, soc_imbalance_pct=3.0)
-
-    res_passive = comparator.model_passive_bleed()
-    res_active = comparator.model_active_inductive()
-
-    print("=== Balancing Architecture Comparison (65 Ah Cell, 3% Imbalance) ===\n")
-    print(f"Metric                        | Passive Bleed (27 Ω)   | Active Inductive (2.5 A)")
-    print("--------------------------------------------------------------------------------")
-    print(f"Effective Balancing Current   | {res_passive['effective_current_a']*1000:6.1f} mA           | {res_active['effective_current_a']:6.2f} A")
-    print(f"Balancing Time Required       | {res_passive['balancing_time_hours']:6.2f} hours         | {res_active['balancing_time_hours']:6.2f} hours")
-    print(f"Energy Wasted (Thermal Heat)  | {res_passive['energy_wasted_wh']:6.2f} Wh            | {res_active['energy_wasted_wh']:6.2f} Wh")
-    print(f"Average Continuous Heat Flux  | {res_passive['average_heat_flux_w']:6.3f} W             | {res_active['average_heat_flux_w']:6.3f} W")
-    print(f"Energy Transfer Efficiency    | {res_passive['efficiency_pct']:6.1f} %             | {res_active['efficiency_pct']:6.1f} %")
+print(f"Passive Bleed: {time_passive_h:.2f} h | Dissipated: {heat_passive_wh:.2f} Wh (0% efficiency)")
+print(f"Active Inductive: {res_active['time_hours']:.2f} h | Dissipated: {res_active['heat_dissipated_wh']:.2f} Wh (88% efficiency)")
 ```
+
+Source code, circuit loss formulas, and test validations are maintained in [`codes/python/src/battery_toolkit/bms/balancing.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/bms/balancing.py) and [`test_bms.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/tests/test_bms.py).
 
 ---
 

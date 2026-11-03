@@ -70,3 +70,4 @@ class ActiveBalancingSimulator:
             "energy_delivered_j": round(energy_delivered_j, 2),
             "heat_loss_j": round(heat_loss_j, 2),
         }
+

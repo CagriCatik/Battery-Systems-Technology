@@ -27,7 +27,10 @@ classifiers = [
 dependencies = [
     "numpy>=1.24.0",
     "scipy>=1.10.0",
-    "matplotlib>=3.7.0"
+    "matplotlib>=3.7.0",
+    "pandas>=2.0.0",
+    "scikit-learn>=1.3.0",
+    "joblib>=1.3.0"
 ]
 
 [project.optional-dependencies]
@@ -36,8 +39,14 @@ dev = [
     "pytest-cov>=4.0.0"
 ]
 
+[project.scripts]
+battery-toolkit = "battery_toolkit.cli:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+battery_toolkit = ["data/*.csv", "data/*.pkl"]
 
 [tool.pytest.ini_options]
 minversion = "7.0"

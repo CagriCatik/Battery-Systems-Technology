@@ -100,158 +100,34 @@ sequenceDiagram
 
 ---
 
-## Production Python Implementation: ASIL-D Deterministic State Machine
+## ASIL-D Deterministic State Machine Implementation
 
-The following script implements the complete finite-state automaton, transition guard evaluation, and contactor coordination logic:
+The production state machine is maintained in [`battery_toolkit.bms.state_machine`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/bms/state_machine.py). It models the full statechart, transition guards, precharge timers, and emergency trip behaviors:
 
 ```python
-"""
-Deterministic ASIL-D Battery Management System (BMS) State Machine.
-Implements formal statechart transitions, precharge timing, and fault hierarchy.
-"""
+from battery_toolkit.bms import BMSStateMachine, BMSState
 
-from enum import Enum, auto
-import time
-from typing import Optional, Tuple
+# Initialize deterministic state machine (ASIL-D compliant)
+sm = BMSStateMachine(precharge_timeout_s=0.250)
 
+# Step 1: BIST self-test transitions INIT -> STANDBY
+sm.process_event(v_pack=400.0, v_link=0.0, i_pack=0.0, max_cell_temp=25.0, hvil_closed=True)
+assert sm.state == BMSState.STANDBY
 
-class BMSState(Enum):
-    INIT = auto()
-    STANDBY = auto()
-    PRECHARGE = auto()
-    RUN_DRIVE = auto()
-    CHARGE_DC = auto()
-    LIMP_HOME = auto()
-    FAULT_TRIP = auto()
-    SLEEP = auto()
+# Step 2: Drive request engages precharge contactors K- and K_pre
+sm.process_event(v_pack=400.0, v_link=0.0, i_pack=0.0, max_cell_temp=25.0, hvil_closed=True, drive_requested=True)
+assert sm.state == BMSState.PRECHARGE and sm.k_minus and sm.k_pre
 
+# Step 3: Link voltage reaches 95% (385V) -> Main K+ closes, K_pre disengages -> RUN_DRIVE
+sm.process_event(v_pack=400.0, v_link=390.0, i_pack=10.0, max_cell_temp=25.5, hvil_closed=True, drive_requested=True)
+assert sm.state == BMSState.RUN_DRIVE and sm.k_plus and not sm.k_pre
 
-class FaultPriority(Enum):
-    NONE = auto()
-    PRIORITY_3_DEGRADED = auto()  # Limp home
-    PRIORITY_2_CONTROLLED = auto() # Zero-current shutdown
-    PRIORITY_1_CRITICAL = auto()   # Immediate trip (< 10 ms)
-
-
-class BMSStateMachine:
-    def __init__(self, precharge_timeout_s: float = 0.250) -> None:
-        self.state = BMSState.INIT
-        self.precharge_timeout = precharge_timeout_s
-        self.precharge_start_time = 0.0
-
-        # Contactor physical states
-        self.k_plus = False
-        self.k_minus = False
-        self.k_pre = False
-
-    def trigger_bist(self) -> bool:
-        """Simulate hardware built-in self-test (MBIST/LBIST)."""
-        return True
-
-    def process_event(
-        self,
-        v_pack: float,
-        v_link: float,
-        i_pack: float,
-        max_cell_temp: float,
-        hvil_closed: bool,
-        drive_requested: bool,
-        charge_requested: bool,
-        shutdown_requested: bool,
-    ) -> BMSState:
-        """
-        Periodic state machine cycle (executed every 10 ms).
-        """
-        # --- 1. CONTINUOUS SAFETY GUARD EVALUATION (Priority 1) ---
-        if not hvil_closed or max_cell_temp > 65.0:
-            self._emergency_trip("Critical Safety Violation: HVIL broken or Thermal Limit exceeded")
-            return self.state
-
-        # --- 2. STATE TRANSITION LOGIC ---
-        if self.state == BMSState.INIT:
-            if self.trigger_bist():
-                self.state = BMSState.STANDBY
-
-        elif self.state == BMSState.STANDBY:
-            self.k_plus = False
-            self.k_minus = False
-            self.k_pre = False
-
-            if drive_requested:
-                # Begin precharge: close K- and K_pre
-                self.k_minus = True
-                self.k_pre = True
-                self.precharge_start_time = time.monotonic()
-                self.state = BMSState.PRECHARGE
-
-            elif charge_requested:
-                self.state = BMSState.CHARGE_DC
-
-            elif shutdown_requested:
-                self.state = BMSState.SLEEP
-
-        elif self.state == BMSState.PRECHARGE:
-            elapsed = time.monotonic() - self.precharge_start_time
-
-            # Precharge completion condition: V_link >= 95% V_pack
-            if v_link >= 0.95 * v_pack:
-                self.k_plus = True     # Engage Main Positive
-                self.k_pre = False     # Disengage Precharge
-                self.state = BMSState.RUN_DRIVE
-            elif elapsed > self.precharge_timeout:
-                self._emergency_trip("Precharge Timeout Exceeded (Possible DC bus short)")
-
-        elif self.state == BMSState.RUN_DRIVE:
-            if shutdown_requested:
-                # Graceful zero-current shutdown
-                if abs(i_pack) < 5.0:
-                    self.k_plus = False
-                    self.k_minus = False
-                    self.state = BMSState.STANDBY
-
-        elif self.state == BMSState.FAULT_TRIP:
-            # Safe clamp state
-            self.k_plus = False
-            self.k_minus = False
-            self.k_pre = False
-
-        elif self.state == BMSState.SLEEP:
-            if drive_requested or not shutdown_requested:
-                self.state = BMSState.STANDBY
-
-        return self.state
-
-    def _emergency_trip(self, reason: str) -> None:
-        """Immediate hardware trip into safe state."""
-        self.k_plus = False
-        self.k_minus = False
-        self.k_pre = False
-        self.state = BMSState.FAULT_TRIP
-        print(f"[ASIL-D TRIP]: {reason}")
-
-
-# --- Verification Execution ---
-if __name__ == "__main__":
-    sm = BMSStateMachine()
-    v_battery = 400.0
-
-    print(f"Step 0: Initial State = {sm.state.name}")
-    # Step 1: Init -> Standby
-    sm.process_event(v_battery, 0.0, 0.0, 25.0, True, False, False, False)
-    print(f"Step 1: After BIST   = {sm.state.name}")
-
-    # Step 2: Driver turns key -> Precharge starts
-    sm.process_event(v_battery, 0.0, 0.0, 25.0, True, True, False, False)
-    print(f"Step 2: Precharge    = {sm.state.name} (K-={sm.k_minus}, K_pre={sm.k_pre}, K+={sm.k_plus})")
-
-    # Step 3: DC link charges to 390V (> 95%) -> RUN_DRIVE
-    sm.process_event(v_battery, 390.0, 10.0, 26.0, True, True, False, False)
-    print(f"Step 3: Drive Active = {sm.state.name} (K-={sm.k_minus}, K_pre={sm.k_pre}, K+={sm.k_plus})")
-
-    # Step 4: Simulate HVIL broken line -> Immediate Trip
-    sm.process_event(v_battery, 390.0, 10.0, 26.0, False, True, False, False)
-    print(f"Step 4: HVIL Break   = {sm.state.name} (K-={sm.k_minus}, K_pre={sm.k_pre}, K+={sm.k_plus})")
+# Step 4: Safety guard trigger (HVIL broken) -> Immediate trip (<10 ms)
+sm.process_event(v_pack=400.0, v_link=390.0, i_pack=10.0, max_cell_temp=25.5, hvil_closed=False)
+assert sm.state == BMSState.FAULT_TRIP and not sm.k_plus and not sm.k_minus
 ```
+
+Complete source code, unit test suites, and transition verification scripts are available in [`codes/python/src/battery_toolkit/bms/state_machine.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/bms/state_machine.py) and [`test_bms.py`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/tests/test_bms.py).
 
 ---
 
