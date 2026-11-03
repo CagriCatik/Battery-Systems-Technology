@@ -2,11 +2,14 @@
 """
 Example 01: Complete Battery Pack Sizing Pipeline
 Calculates vehicle road loads, iterative pack mass convergence, and series-parallel topology.
+Generates sizing tradeoff plots and road-load CSV logs.
 """
 
+import os
 from battery_toolkit.core.cell import BatteryCell, CellChemistry
 from battery_toolkit.sizing.vehicle import VehicleParameters
 from battery_toolkit.sizing.optimizer import PackSizingOptimizer, SizingRequirements
+from battery_toolkit.simulation_runner import SimulationRunner
 
 
 def main():
@@ -55,7 +58,15 @@ def main():
     for k, v in results["pack_summary"].items():
         print(f"  {k}: {v}")
 
+    # 4. Generate Plot & Log Artifacts
+    out_dir = os.path.join(os.path.dirname(__file__), "..", "outputs")
+    runner = SimulationRunner(output_root=out_dir)
+    res = runner.run_01_pack_sizing()
+    print(f"\n[Artifact Generated] Plot: {res['plot_path']}")
+    print(f"[Artifact Generated] Log:  {res['log_path']}")
+
 
 if __name__ == "__main__":
     main()
+
 

@@ -11,12 +11,12 @@ from battery_toolkit.thermal.btms import BTMSController
 def main():
     print("=== Fast-Charging Electro-Thermal Simulation & BTMS ===")
 
-    # Initialize cell thermal node (NMC pouch/cylindrical cell)
+    # Initialize cell thermal node (60 Ah automotive NMC pouch cell)
     cell_thermal = LumpedThermalNode(
-        c_core_j_per_k=70.0,
-        c_case_j_per_k=20.0,
-        r_core_case_k_per_w=2.2,
-        r_case_coolant_k_per_w=1.5,
+        c_core_j_per_k=1200.0,
+        c_case_j_per_k=300.0,
+        r_core_case_k_per_w=0.30,
+        r_case_coolant_k_per_w=0.20,
         initial_temp_celsius=25.0,
     )
 
@@ -28,7 +28,7 @@ def main():
 
     # Simulate 150A fast-charging pulse for 180 seconds (3 minutes)
     dt = 1.0
-    r0 = 0.015 # 15 mOhm
+    r0 = 0.0012 # 1.2 mOhm
     dudt = -0.00015 # -0.15 mV/K entropic coefficient
     coolant_temp = 20.0
 
@@ -52,6 +52,15 @@ def main():
         print(f"{sec:6d}  | {150.0:10.1f} | {state.t_core_celsius:10.2f} | {state.t_casing_celsius:12.2f} | {state.q_gen_watts:8.1f} | {control['mode']:10s} | {control['flow_rate_lpm']:12.1f}")
 
     print("\nResult: BTMS successfully engaged active chiller and stabilized core temperature below 45°C limit!")
+
+    # 2. Generate Plot & Log Artifacts
+    import os
+    from battery_toolkit.simulation_runner import SimulationRunner
+    out_dir = os.path.join(os.path.dirname(__file__), "..", "outputs")
+    runner = SimulationRunner(output_root=out_dir)
+    res = runner.run_05_thermal_simulation()
+    print(f"\n[Artifact Generated] Plot: {res['plot_path']}")
+    print(f"[Artifact Generated] Log:  {res['log_path']}")
 
 
 if __name__ == "__main__":

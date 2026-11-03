@@ -152,21 +152,16 @@ print(f"Pack Gravimetric Density:     {pack.gravimetric_energy_density_wh_per_kg
 
 ---
 
-## 4. Sensitivity Analysis: Impact of Vehicle Aerodynamics vs. Pack Mass
+## 4. Sensitivity Analysis & Generated Engineering Plots
 
-To guide engineering trade-offs, sensitivity analysis quantifies the relative impact of aerodynamic drag reduction vs. cell gravimetric density improvements on total pack weight:
+The simulation pipeline in [`battery_toolkit.simulation_runner`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/simulation_runner.py) executes a multi-speed parameter sweep ($60\text{--}150\,\text{km/h}$) and exports high-resolution engineering plots and time-series telemetry:
 
-```mermaid
-xychart-beta
-    title "Vehicle Energy Consumption (Wh/km) vs. Highway Speed"
-    x-axis [60, 80, 100, 120, 140]
-    y-axis "Consumption (Wh/km)" 80 --> 260
-    line [95, 115, 142, 185, 245]
-```
+![Battery Pack Sizing Tradeoffs](../../assets/images/generated/01_pack_sizing_tradeoffs.png)
 
-### 4.1 Engineering Takeaways
+### 4.1 Engineering Observations & Mass Tradeoffs
 - **Aerodynamic Dominance at High Speed**: Because aerodynamic drag scales with the square of velocity ($F_{\text{aero}} \propto v^2$) and power with the cube ($P_{\text{aero}} \propto v^3$), reducing drag coefficient $C_d$ from $0.28$ to $0.23$ saves $\approx 14\,\text{kWh}$ of required battery energy for a $500\,\text{km}$ range, eliminating over $80\,\text{kg}$ of pack mass.
 - **Mass Overhead Ratio**: Pack enclosures, thermal interface gap pads, and liquid cold plates add $20\% - 30\%$ non-cell structural mass. High cell-to-pack (CTP) structural integration directly reduces the iterative mass feedback penalty.
+- **Generated Log Data**: Numerical results are exported to [`codes/python/outputs/logs/01_sizing_tradeoffs.csv`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/outputs/logs/01_sizing_tradeoffs.csv).
 
 For complete source code and unit tests, see:
 - [codes/python/src/battery_toolkit/sizing/vehicle.py](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/sizing/vehicle.py)

@@ -66,3 +66,4 @@ class MLSOCEstimator:
             inst.model = data
             inst.is_fitted = True
         return inst
+

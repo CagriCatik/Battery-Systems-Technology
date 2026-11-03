@@ -204,6 +204,19 @@ Full algorithmic implementation and automated test suites are in [`codes/python/
 
 ---
 
+## 4. Multi-Channel Equalization Dynamics & Thermal Heat Output
+
+The simulation runner executes 16-channel string balancing under realistic initial dispersion, tracking individual cell voltages and PCB thermal dissipation:
+
+![Cell Balancing Dynamics](../../assets/images/generated/04_cell_balancing_dynamics.png)
+
+### Key Observations:
+- **Dispersion Equalization:** High-voltage cells ($4.145\,\text{V}$ and $4.138\,\text{V}$) are safely bled through $33\,\Omega$ shunt resistors down to the lowest pack potential.
+- **Thermal Management:** Peak PCB heat flux is clamped at $1.04\,\text{W}$, well within natural convective PCB limits.
+- **Data Export:** Individual voltage trajectories and heat logs are saved in [`codes/python/outputs/logs/04_cell_balancing_timeseries.csv`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/outputs/logs/04_cell_balancing_timeseries.csv).
+
+---
+
 ## References
 
 [^andrea2020]: Andrea, D. (2020). *Battery Management Systems for Large Lithium-Ion Battery Packs*. Artech House.

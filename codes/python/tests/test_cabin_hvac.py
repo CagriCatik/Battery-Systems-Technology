@@ -16,3 +16,4 @@ def test_integrated_thermal_manager():
     assert state.cabin_temp_c < 35.0
     assert state.battery_soc_percent < 100.0
     assert state.power_draw_kw > 20.0 # Traction + HVAC compressor
+

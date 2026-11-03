@@ -20,3 +20,4 @@ def test_cli_size():
     assert res.returncode == 0
     assert "Topology" in res.stdout
     assert "Total Cells" in res.stdout
+

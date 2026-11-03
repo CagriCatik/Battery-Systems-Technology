@@ -53,6 +53,15 @@ def main():
     print(f"R2: {params.r2 * 1000.0:.2f} mOhm (True: {r2_true * 1000.0:.2f} mOhm)")
     print(f"C2: {params.c2:.1f} F (True: {c2_true:.1f} F)")
 
+    # 4. Generate Plot & Log Artifacts
+    import os
+    from battery_toolkit.simulation_runner import SimulationRunner
+    out_dir = os.path.join(os.path.dirname(__file__), "..", "outputs")
+    runner = SimulationRunner(output_root=out_dir)
+    res = runner.run_02_ecm_hppc()
+    print(f"\n[Artifact Generated] Plot: {res['plot_path']}")
+    print(f"[Artifact Generated] Log:  {res['log_path']}")
+
 
 if __name__ == "__main__":
     main()

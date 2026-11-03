@@ -73,6 +73,15 @@ def main():
     print(f"UKF Estimate:              {ukf_history[-1] * 100:.2f}% (RMSE: {rmse_ukf * 100:.2f}%)")
     print("\nResult: Kalman filters successfully converged and eliminated the 15% initialization error!")
 
+    # 4. Generate Plot & Log Artifacts
+    import os
+    from battery_toolkit.simulation_runner import SimulationRunner
+    out_dir = os.path.join(os.path.dirname(__file__), "..", "outputs")
+    runner = SimulationRunner(output_root=out_dir)
+    res = runner.run_03_soc_estimation()
+    print(f"\n[Artifact Generated] Plot: {res['plot_path']}")
+    print(f"[Artifact Generated] Log:  {res['log_path']}")
+
 
 if __name__ == "__main__":
     main()

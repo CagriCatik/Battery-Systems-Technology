@@ -37,3 +37,4 @@ def test_statistical_dispersion():
     assert res["usable_capacity_ah"] <= 20.0
     assert res["capacity_loss_from_dispersion_pct"] >= 0.0
     assert res["max_parallel_current_imbalance_a"] >= 0.0
+

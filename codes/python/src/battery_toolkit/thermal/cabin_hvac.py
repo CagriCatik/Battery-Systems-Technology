@@ -102,3 +102,4 @@ class IntegratedThermalManager:
             power_draw_kw=round(total_battery_power_kw, 2),
             hvac_mode=mode,
         )
+

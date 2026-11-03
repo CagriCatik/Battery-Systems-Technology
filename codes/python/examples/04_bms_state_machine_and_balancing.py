@@ -52,6 +52,17 @@ def main():
     print(f"Total PCB Heat Dissipation: {results['total_pcb_dissipation_w']} W")
     print(f"Balancing Currents (mA): {results['balancing_currents_ma']}")
 
+    # 3. Generate Plot & Log Artifacts
+    import os
+    from battery_toolkit.simulation_runner import SimulationRunner
+    out_dir = os.path.join(os.path.dirname(__file__), "..", "outputs")
+    runner = SimulationRunner(output_root=out_dir)
+    res = runner.run_04_cell_balancing_and_state_machine()
+    print(f"\n[Artifact Generated] Balancing Plot: {res['balancing_plot']}")
+    print(f"[Artifact Generated] Balancing Log:  {res['balancing_log']}")
+    print(f"[Artifact Generated] State Machine Plot: {res['sm_plot']}")
+    print(f"[Artifact Generated] State Machine Trace: {res['sm_trace']}")
+
 
 if __name__ == "__main__":
     main()

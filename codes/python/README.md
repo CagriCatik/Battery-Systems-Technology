@@ -115,5 +115,44 @@ battery-toolkit convert kw-to-hp 200
 
 # Benchmark thermal management systems:
 battery-toolkit benchmark
+
+# Run full simulation pipeline & generate all publication-grade plots, logs, and reports:
+battery-toolkit simulate --output-dir outputs
 ```
+
+---
+
+## Master Simulation Pipeline & Generated Artifacts
+
+Run all 5 engineering simulation domains at once:
+
+```bash
+python run_all_simulations.py
+```
+
+This generates:
+
+### 1. High-Resolution Plots (`outputs/plots/`):
+- `01_pack_sizing_tradeoffs.png`: Speed vs tractive road loads, consumption (Wh/km), range sensitivity, and pack mass distribution.
+- `02_ecm_hppc_identification.png`: 40A HPPC pulse, experimental vs 2-RC model voltage, and residual error in mV.
+- `03_soc_estimation_benchmark.png`: Ground truth SOC vs Coulomb Counting vs EKF vs UKF vs ML with $\pm 3\sigma$ covariance envelope.
+- `04_cell_balancing_dynamics.png`: 16-channel series string equalization under cell dispersion and PCB thermal heat dissipation.
+- `05_state_machine_execution.png`: ASIL-D contactor sequencing, precharge capacitor inrush ramp, and emergency HVIL trip.
+- `06_electro_thermal_btms_simulation.png`: Fast-charging 150A cell thermal response ($T_{\text{core}}, T_{\text{case}}, T_{\text{cool}}$) and closed-loop BTMS chiller control.
+- `07_btms_cooling_technology_benchmark.png`: Comparison of Passive Air, Active Air, Liquid Cooling, and Heat Recovery across maximum temperature, auxiliary energy, and COP.
+- `08_battery_chemistry_radar.png`: Multivariate trade-off radar chart for NMC-811, LFP, LTO, and NCA.
+
+### 2. Time-Series Engineering Datasets (`outputs/logs/`):
+- `01_sizing_tradeoffs.csv`: Road-load power and driving range across vehicle speeds.
+- `02_ecm_hppc_identification.csv`: High-frequency millisecond voltage/current HPPC telemetry.
+- `03_soc_benchmark_timeseries.csv`: Complete state estimation logs and tracking error metrics.
+- `04_cell_balancing_timeseries.csv`: Multi-channel cell voltage convergence traces.
+- `05_state_machine_trace.json`: Chronological event and contactor state transition logs.
+- `06_thermal_transients.csv`: Core, casing, and coolant temperatures and heat rate breakdown.
+- `07_cooling_technology_benchmark.csv`: Performance metrics for all 4 BTMS topologies.
+
+### 3. Automated Executive Reports (`outputs/reports/`):
+- `executive_report.md`: Complete engineering summary with performance KPIs, model parameters, and algorithm RMSE scores.
+- `simulation_summary.json`: Structured machine-readable metrics for automated CI/CD validation.
+
 

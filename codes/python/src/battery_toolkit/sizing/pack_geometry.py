@@ -70,3 +70,4 @@ class PackGeometryCalculator:
         """Exports pack summary metrics to a standardized CSV file."""
         df = pd.DataFrame([pack.summary()])
         df.to_csv(filepath, index=False)
+

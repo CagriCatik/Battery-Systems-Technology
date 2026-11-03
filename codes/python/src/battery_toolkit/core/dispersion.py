@@ -81,3 +81,4 @@ class ConnectionSimulator:
             "strongest_brick_capacity_ah": round(float(np.max(brick_capacities)), 2),
             "max_parallel_current_imbalance_a": round(current_imbalance_max_a, 2),
         }
+

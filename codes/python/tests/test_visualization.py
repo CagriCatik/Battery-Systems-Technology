@@ -48,3 +48,4 @@ def test_plot_thermal_profiles():
     p = np.full_like(t, 25.0)
     fig = plot_thermal_profiles(t, t_batt, t_cab, p, show=False)
     assert fig is not None
+

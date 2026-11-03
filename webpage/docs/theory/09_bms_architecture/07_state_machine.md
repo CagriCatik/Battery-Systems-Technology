@@ -131,6 +131,20 @@ Complete source code, unit test suites, and transition verification scripts are 
 
 ---
 
+## State Machine Sequence Execution & Verification
+
+The state machine execution is verified by simulating the key-on precharge ramp followed by an emergency HVIL line break:
+
+![ASIL-D State Machine Execution](../../assets/images/generated/05_state_machine_execution.png)
+
+### Chronological Transition Trace:
+1. **$t = 0.05\,\text{s}$ (Precharge Inrush):** Negative contactor $K_-$ and precharge contactor $K_{\text{pre}}$ close simultaneously; the DC-link capacitor charges asymptotically.
+2. **$t = 0.25\,\text{s}$ (Main Positive Handshake):** $V_{\text{link}}$ reaches $95\%$ ($380\,\text{V}$); $K_+$ closes and $K_{\text{pre}}$ disengages seamlessly with zero contact arcing.
+3. **$t = 0.35\,\text{s}$ (Immediate Hardware Trip):** Simulated HVIL interlock break causes all contactors to trip immediately ($< 10\,\text{ms}$) into the safe `FAULT_TRIP` state.
+4. **Machine-Readable Event Log:** The detailed transition trace is exported to [`codes/python/outputs/logs/05_state_machine_trace.json`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/outputs/logs/05_state_machine_trace.json).
+
+---
+
 ## References
 
 [^iso26262]: International Organization for Standardization. (2018). *ISO 26262-4: Road vehicles — Functional safety — Part 4: Product development at the system level*. ISO.

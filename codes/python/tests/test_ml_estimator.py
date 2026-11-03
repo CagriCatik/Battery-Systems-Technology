@@ -19,3 +19,4 @@ def test_ml_estimator_training_and_prediction():
 
     metrics = estimator.evaluate(current, voltage, soc_gt)
     assert metrics["rmse"] < 0.15
+

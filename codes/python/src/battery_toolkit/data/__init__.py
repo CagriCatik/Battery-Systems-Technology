@@ -39,3 +39,4 @@ def load_pretrained_soc_model():
     """Loads pre-trained Random Forest SOC estimation model."""
     path = get_data_path("trained_model.pkl")
     return joblib.load(path)
+

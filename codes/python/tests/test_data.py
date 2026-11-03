@@ -29,3 +29,4 @@ def test_load_sizing_results_dataset():
 def test_load_pretrained_soc_model():
     model = load_pretrained_soc_model()
     assert model is not None
+

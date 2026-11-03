@@ -83,3 +83,4 @@ def plot_chemistry_radar_comparison(
         plt.show()
 
     return fig
+

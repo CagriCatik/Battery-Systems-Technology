@@ -40,3 +40,4 @@ def test_pack_geometry_csv_export():
     with tempfile.NamedTemporaryFile(suffix=".csv") as tmp:
         PackGeometryCalculator.export_sizing_to_csv(pack, tmp.name)
         assert Path(tmp.name).stat().st_size > 50
+

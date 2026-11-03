@@ -1,0 +1,79 @@
+{
+  "project": "Battery Systems Technology (battery_toolkit)",
+  "version": "1.0.0",
+  "pack_sizing": {
+    "requirements": "SizingRequirements(target_range_km=500.0, target_system_voltage_v=400.0, buffer_percentage=12.0, avg_speed_kmh=105.0, ambient_temp_celsius=20.0)",
+    "consumption_wh_per_km": 150.8,
+    "net_energy_kwh": 75.38,
+    "achieved_range_km": 503.9,
+    "total_vehicle_mass_kg": 2258.0,
+    "pack_summary": {
+      "topology": "110S43P",
+      "total_cells": 4730,
+      "nominal_voltage_v": 401.5,
+      "voltage_range_v": "308.0V - 462.0V",
+      "capacity_ah": 215.0,
+      "nominal_energy_kwh": 86.32,
+      "cell_mass_kg": 326.37,
+      "total_pack_mass_kg": 407.96,
+      "total_pack_r0_mohm": 110.78,
+      "gravimetric_energy_density_wh_per_kg": 211.59
+    },
+    "pack_object": "<battery_toolkit.core.pack.BatteryPack object at 0x1104db890>"
+  },
+  "ecm_hppc_parameters": {
+    "r0_mohm": 18.112158618500484,
+    "r1_mohm": 0.010000000117721662,
+    "c1_f": 9999.999882342116,
+    "r2_mohm": 4.5532139389347535,
+    "c2_f": 3786.7329376809416
+  },
+  "state_estimation_rmse": {
+    "coulomb_counting_pct": 15.01843022357439,
+    "ekf_pct": 3.4759631746010164,
+    "ukf_pct": 3.4840875047805477,
+    "ml_pct": 15.276093296029899
+  },
+  "thermal_transients": {
+    "max_t_core_celsius": 28.28,
+    "max_t_casing_celsius": 24.92
+  },
+  "cooling_benchmark": [
+    {
+      "System Type": "Passive Air",
+      "Average Battery Temperature (\u00b0C)": 34.31,
+      "Maximum Battery Temperature (\u00b0C)": 40.16,
+      "Minimum Battery Temperature (\u00b0C)": 28.01,
+      "Total Heat Transferred (J)": 251176.1,
+      "Total Energy Consumed (J)": 0.0,
+      "COP Efficiency Ratio": 251176.12
+    },
+    {
+      "System Type": "Active Forced Air",
+      "Average Battery Temperature (\u00b0C)": 32.27,
+      "Maximum Battery Temperature (\u00b0C)": 35.39,
+      "Minimum Battery Temperature (\u00b0C)": 28.01,
+      "Total Heat Transferred (J)": 823736.7,
+      "Total Energy Consumed (J)": 216000.0,
+      "COP Efficiency Ratio": 3.81
+    },
+    {
+      "System Type": "Liquid Cooling",
+      "Average Battery Temperature (\u00b0C)": 27.24,
+      "Maximum Battery Temperature (\u00b0C)": 28.0,
+      "Minimum Battery Temperature (\u00b0C)": 27.11,
+      "Total Heat Transferred (J)": 1816543.3,
+      "Total Energy Consumed (J)": 450000.0,
+      "COP Efficiency Ratio": 4.04
+    },
+    {
+      "System Type": "Heat Recovery",
+      "Average Battery Temperature (\u00b0C)": 29.22,
+      "Maximum Battery Temperature (\u00b0C)": 29.71,
+      "Minimum Battery Temperature (\u00b0C)": 28.0,
+      "Total Heat Transferred (J)": 1505284.4,
+      "Total Energy Consumed (J)": 270000.0,
+      "COP Efficiency Ratio": 5.58
+    }
+  ]
+}

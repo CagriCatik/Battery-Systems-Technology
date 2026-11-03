@@ -7,9 +7,13 @@ class BMSState(Enum):
     STANDBY = auto()
     PRECHARGE = auto()
     RUN = auto()
+    RUN_DRIVE = RUN
     CHARGE = auto()
+    CHARGE_DC = CHARGE
     FAULT = auto()
+    FAULT_TRIP = FAULT
     SHUTDOWN = auto()
+    SLEEP = SHUTDOWN
 
 
 class BMSStateMachine:
@@ -100,6 +104,42 @@ class BMSStateMachine:
             self.open_all_contactors()
 
         return self.state
+
+    @property
+    def k_plus(self) -> bool:
+        return self.positive_contactor_closed
+
+    @property
+    def k_minus(self) -> bool:
+        return self.negative_contactor_closed
+
+    @property
+    def k_pre(self) -> bool:
+        return self.precharge_contactor_closed
+
+    def process_event(
+        self,
+        v_pack: float,
+        v_link: float,
+        i_pack: float = 0.0,
+        max_cell_temp: float = 25.0,
+        hvil_closed: bool = True,
+        drive_requested: bool = False,
+        charge_requested: bool = False,
+        shutdown_requested: bool = False,
+        dt_s: float = 0.01,
+    ) -> BMSState:
+        """Convenience ASIL-D event processor interface."""
+        critical_fault = (not hvil_closed) or (max_cell_temp > 65.0)
+        key_on = drive_requested and (not shutdown_requested)
+        return self.step(
+            key_on=key_on,
+            charge_plug_connected=charge_requested,
+            v_pack=v_pack,
+            v_link=v_link,
+            dt_s=dt_s,
+            has_critical_safety_fault=critical_fault,
+        )
 
     def status(self) -> Dict[str, Any]:
         return {

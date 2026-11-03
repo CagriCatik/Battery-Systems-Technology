@@ -6,6 +6,23 @@ from battery_toolkit.sizing.vehicle import VehicleParameters
 from battery_toolkit.sizing.optimizer import PackSizingOptimizer, SizingRequirements
 from battery_toolkit.sizing.pack_geometry import PackGeometryCalculator
 from battery_toolkit.thermal.cooling_benchmark import CoolingTechnologyBenchmark
+from battery_toolkit.simulation_runner import SimulationRunner
+
+
+def handle_simulate(args):
+    print(f"=== Battery Toolkit Simulation Runner ===")
+    print(f"Target Output Directory: {args.output_dir}")
+    runner = SimulationRunner(output_root=args.output_dir)
+    results = runner.run_all()
+    print("\n--- Simulation Execution Complete ---")
+    print(f"Executive Report: {results['md_report']}")
+    print(f"JSON Summary:     {results['json_report']}")
+    print(f"Total Plots Generated: {len(results['plots_generated'])}")
+    for p in results['plots_generated']:
+        print(f"  - {p}")
+    print(f"Total Logs Generated:  {len(results['logs_generated'])}")
+    for l in results['logs_generated']:
+        print(f"  - {l}")
 
 
 def handle_size(args):
@@ -86,6 +103,10 @@ def main():
     # Benchmark Subcommand
     subparsers.add_parser("benchmark", help="Run BTMS cooling technology benchmark")
 
+    # Simulate / Run-All Subcommand
+    sim_p = subparsers.add_parser("simulate", help="Run full simulation pipeline & generate plots, logs, and reports")
+    sim_p.add_argument("--output-dir", type=str, default="outputs", help="Output directory for plots, logs, and reports")
+
     args = parser.parse_args()
     if args.command == "size":
         handle_size(args)
@@ -93,9 +114,12 @@ def main():
         handle_convert(args)
     elif args.command == "benchmark":
         handle_benchmark(args)
+    elif args.command == "simulate":
+        handle_simulate(args)
     else:
         parser.print_help()
 
 
 if __name__ == "__main__":
     main()
+

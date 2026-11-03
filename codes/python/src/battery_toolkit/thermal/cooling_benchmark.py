@@ -75,3 +75,4 @@ class CoolingTechnologyBenchmark:
         systems = ["Passive Air", "Active Forced Air", "Liquid Cooling", "Heat Recovery"]
         records = [self.simulate_technology(s, duration_s=duration_s) for s in systems]
         return pd.DataFrame(records)
+

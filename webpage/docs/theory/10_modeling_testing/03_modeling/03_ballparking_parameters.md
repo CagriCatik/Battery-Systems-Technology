@@ -141,6 +141,20 @@ Full algorithmic implementation and optimization tests are in [`codes/python/src
 
 ---
 
+## 4. Empirical HPPC Pulse Identification & Model Verification
+
+The parameter identification pipeline in [`battery_toolkit.simulation_runner`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/src/battery_toolkit/simulation_runner.py) reconstructs the dynamic voltage response from identified parameters and compares it against laboratory measurements:
+
+![HPPC Parameter Identification](../../../assets/images/generated/02_ecm_hppc_identification.png)
+
+### Identification Diagnostics
+- **Ohmic Separation ($R_0$):** The instantaneous $<10\,\text{ms}$ step identifies $R_0 = 18.11\,\text{m}\Omega$.
+- **Transient Separation ($\tau_1, \tau_2$):** Multi-exponential decay decouples charge-transfer ($C_1 = 10000\,\text{F}$) from solid-state diffusion ($C_2 = 3786\,\text{F}$).
+- **Residual Error:** Voltage error remains bounded within $\pm 2.0\,\text{mV}$ across the entire relaxation window.
+- **Data Export:** Complete experimental and simulated time-series logs are stored in [`codes/python/outputs/logs/02_ecm_hppc_identification.csv`](file:///Users/cc/Desktop/Battery-Systems-Technology/codes/python/outputs/logs/02_ecm_hppc_identification.csv).
+
+---
+
 ## References
 
 [^plett2015]: Plett, G. L. (2015). *Battery Management Systems, Volume I: Battery Modeling*. Artech House.

@@ -1,0 +1,5 @@
+System Type,Average Battery Temperature (°C),Maximum Battery Temperature (°C),Minimum Battery Temperature (°C),Total Heat Transferred (J),Total Energy Consumed (J),COP Efficiency Ratio
+Passive Air,34.31,40.16,28.01,251176.1,0.0,251176.12
+Active Forced Air,32.27,35.39,28.01,823736.7,216000.0,3.81
+Liquid Cooling,27.24,28.0,27.11,1816543.3,450000.0,4.04
+Heat Recovery,29.22,29.71,28.0,1505284.4,270000.0,5.58
