@@ -1,471 +1,160 @@
+# Hardware Design, Galvanic Isolation & EMC Compliance
+
+Designing the electronic hardware for a high-voltage Battery Management System (BMS) presents severe challenges in electrical insulation, high-voltage clearance, and electromagnetic compatibility (EMC). The BMS printed circuit board (PCB) interfaces directly with high-voltage traction domains ($400\,\text{V}$ to $>1000\,\text{V}_{\text{DC}}$) while simultaneously connecting to touchable low-voltage vehicle networks ($12\,\text{V}$ chassis ground, CAN-FD, and driver displays)[^andrea2020].
+
+Under international safety standards—principally **IEC 60664-1**, **ISO 6469-3**, and **CISPR 25 Class 5**—the hardware must guarantee that no dielectric breakdown, surface tracking, or inverter switching noise can breach the low-voltage domain or corrupt cell measurement accuracy[^iec60664][^cispr25].
+
+This chapter formalizes the physical layout rules, insulation coordination equations, galvanic isolation technologies, and anti-aliasing filter designs essential for production automotive BMS hardware.
+
 ---
-title: "Design of BMS"
----
 
-# Desing of BMS
+## Insulation Coordination: Creepage & Clearance (IEC 60664-1)
 
-The design of a Battery Management System (BMS) is a multifaceted process that integrates hardware, software, and control algorithms to ensure the safe, efficient, and reliable operation of battery systems. Effective BMS design is crucial for optimizing battery performance, extending lifespan, and ensuring safety in applications such as electric vehicles (EVs), renewable energy storage, and portable electronics. This chapter provides an in-depth exploration of the BMS design process, focusing on input/output architecture, control logic, and the implementation of key functionalities such as State of Charge (SoC) and State of Health (SoH) estimation.
-
+Insulation coordination dictates the physical separation required between conductive copper traces on a PCB to prevent electrical flashover through air or carbonized surface tracking along the laminate[^iec60664].
 
 ```mermaid
-graph TD
-    BatteryPack["Battery Pack"]
-    PowerDistribution["Power Distribution Module"]
+flowchart LR
+    subgraph Creepage_Clearance_Concepts["Insulation Distances"]
+        direction LR
+        Trace1["High-Voltage Trace (+800V)"]
+        Air["Clearance: Shortest distance through AIR"]
+        Surface["Creepage: Shortest distance along PCB SURFACE"]
+        Trace2["Low-Voltage Trace (Chassis 12V)"]
 
-    subgraph Monitoring["Cell Monitoring"]
-        CellMon["Cell Monitoring Module"]
-        VoltageSensor["Voltage Sensor"]
-        TemperatureSensor["Temperature Sensor"]
-        CurrentSensor["Current Sensor"]
-        CellMon --> VoltageSensor
-        CellMon --> TemperatureSensor
-        CellMon --> CurrentSensor
+        Trace1 --- Air --- Trace2
+        Trace1 --- Surface --- Trace2
     end
-
-    subgraph BalancingGroup["Balancing Methods"]
-        Balancer["Balancing Module"]
-        PassiveBalancer["Passive Balancer"]
-        ActiveBalancer["Active Balancer"]
-        Balancer --> PassiveBalancer
-        Balancer --> ActiveBalancer
-    end
-
-    subgraph ControlGroup["Control Processing"]
-        Control["Control Module"]
-        AlgorithmProcessor["Algorithm Processor"]
-        SafetyDiagnostics["Safety & Diagnostics"]
-        Control --> AlgorithmProcessor
-        Control --> SafetyDiagnostics
-    end
-
-    subgraph CommGroup["Communication Interfaces"]
-        Communication["Communication Module"]
-        CANBus["CAN Bus"]
-        Communication --> CANBus
-    end
-
-    BatteryPack -->|Provides voltage/current| CellMon
-    BatteryPack -->|Supplies power for balancing| Balancer
-
-    CellMon -->|Sends sensor data| Control
-    Balancer -->|Provides balancing status| Control
-    Control -->|Issues balancing commands| Balancer
-    Control -->|Triggers power control signals| PowerDistribution
-    Control -->|Transmits status & logs| Communication
-    PowerDistribution -->|Feedback voltage/current| Control
-    SafetyDiagnostics -->|Diagnostic requests| CellMon
 ```
 
+### Definitions & Governing Parameters
 
+1. **Clearance:** The shortest distance through air between two conductive elements. Clearance protects against transient atmospheric overvoltage breakdown (Paschen's law).
+2. **Creepage:** The shortest distance along the surface of an insulating dielectric material between two conductive elements. Creepage prevents progressive carbon-tracking failure caused by moisture, dust, and ionic salt contamination.
+3. **Comparative Tracking Index (CTI):** A material parameter measuring resistance to electrical breakdown under surface electrolyte tracking:
+   - **Material Group I:** $\text{CTI} \ge 600\,\text{V}$ (High-performance polyimides and advanced epoxy resins).
+   - **Material Group II:** $400\,\text{V} \le \text{CTI} < 600\,\text{V}$.
+   - **Material Group IIIa:** $175\,\text{V} \le \text{CTI} < 400\,\text{V}$ (Standard automotive FR-4 laminate, typically $\text{CTI} \approx 200\,\text{V}$).
 
+### Minimum Distance Equations for High-Voltage Packs (Pollution Degree 2)
+
+Automotive battery enclosures are sealed against bulk water spray (IP67 / IP6K9K) but experience internal humidity condensation and minor ionic contamination, classifying them as **Pollution Degree 2**:
+
+| System Voltage ($V_{\text{DC}}$) | Working Voltage ($V_{\text{RMS}}$) | Basic Clearance (Air) | Basic Creepage (FR-4 Group IIIa) | Reinforced Creepage (Safety Barrier) |
+| :--- | :--- | :--- | :--- | :--- |
+| **$48\,\text{V}$ (MHEV)** | $34\,\text{V}$ | $0.20\,\text{mm}$ | $0.63\,\text{mm}$ | $1.26\,\text{mm}$ |
+| **$400\,\text{V}$ (BEV)** | $283\,\text{V}$ | $1.50\,\text{mm}$ | $4.00\,\text{mm}$ | $8.00\,\text{mm}$ |
+| **$800\,\text{V}$ (Fast BEV)** | $566\,\text{V}$ | $3.00\,\text{mm}$ | $8.00\,\text{mm}$ | $16.00\,\text{mm}$ |
+| **$1000\,\text{V}$ (Commercial)**| $707\,\text{V}$ | $4.20\,\text{mm}$ | $10.00\,\text{mm}$ | $20.00\,\text{mm}$ |
+
+### PCB Milling: Isolation Slots
+
+Because maintaining a $16\,\text{mm}$ continuous surface creepage distance across a compact PCB consumes excessive board area, BMS designers mill **physical air slots** into the PCB laminate across the high-voltage / low-voltage boundary:
+
+```
+  +-------------------------------------------------------------+
+  |  High-Voltage Domain (+800V)                                |
+  |  [AFE IC]  [Bleed Resistors]  [isoSPI Driver]               |
+  +-------------------------------------------------------------+
+         ||                                              ||
+         ||  <===== MILLED AIR SLOT THROUGH PCB =====>   ||
+         ||                                              ||
+  +-------------------------------------------------------------+
+  |  Low-Voltage Domain (12V Chassis GND)                       |
+  |  [Safety MCU]  [CAN-FD]  [Power Supply / PMIC]              |
+  +-------------------------------------------------------------+
+```
+
+By cutting completely through the FR-4 fiberglass core, the surface path is broken. The dielectric boundary reverts to the air clearance rule, reducing the required separation distance from $16.0\,\text{mm}$ down to $3.5\,\text{mm}$.
 
 ---
 
-## BMS Input/Output Architecture
+## Galvanic Isolation Barrier Architecture
 
-The foundation of a robust BMS design lies in its input/output (I/O) architecture, which facilitates the seamless collection, processing, and dissemination of critical data. The architecture comprises **slave units**, a **master controller**, and various **communication interfaces** that interconnect these components.
-
-### Inputs to the BMS
-
-The BMS receives inputs from multiple sources to accurately monitor and manage the battery system. These inputs are essential for real-time decision-making and control actions.
-
-- **Sensor Data**: The BMS collects data from an array of sensors integrated into the battery modules. These sensors provide real-time measurements of key parameters, including:
-  - **Voltage Sensors**: Measure the voltage of individual cells or modules to monitor charge levels and detect imbalances.
-  - **Current Sensors**: Track the current flowing into (charging) or out of (discharging) the battery to manage power flow and prevent overcurrent conditions.
-  - **Temperature Sensors**: Monitor the thermal state of the battery modules to prevent overheating or excessive cooling, which can degrade battery performance and safety.
-
-- **Mode Request**: The Vehicle Control Unit (VCU) sends mode requests to the BMS, indicating the desired operating state of the battery. The primary modes include:
-  - **Charge Mode**: Indicates that the battery is being charged.
-  - **Discharge Mode**: Indicates that the battery is supplying power to the vehicle.
-  - **Idle Mode**: Indicates that the battery is neither charging nor discharging.
-
-- **Balancing Control Inputs**: The BMS receives commands to manage cell balancing, ensuring uniform voltage levels across all cells to maximize battery efficiency and lifespan. This includes instructions to activate or deactivate balancing circuits based on real-time data.
-
-### Outputs from the BMS
-
-Based on the processed inputs, the BMS generates various outputs to control and communicate with other system components, ensuring optimal battery performance and safety.
-
-- **Control Signals**: The BMS dispatches control signals to manage different aspects of the battery system:
-  - **Slave Units**: Sends instructions for cell balancing, such as activating or deactivating balancing circuits to maintain voltage uniformity across cells.
-  - **VCU**: Transmits information about the battery's state, including SoC, SoH, temperature, and current limits, enabling the VCU to make informed decisions regarding vehicle operations.
-  - **Motor Controller**: Provides current limits for discharging to prevent overcurrent conditions that could damage the motor or battery.
-  - **Charger**: Delivers current limits for charging to avoid overcharging, which can lead to battery degradation or safety hazards.
-
-- **Safety Actions**: In response to critical sensor data, the BMS can trigger safety mechanisms to protect the battery system:
-  - **Thermal Management Systems**: Activates cooling or heating systems to maintain optimal temperature ranges.
-  - **Emergency Shutdowns**: Initiates shutdown procedures in case of extreme conditions, such as overvoltage, overcurrent, or thermal runaway, to prevent catastrophic failures.
-
----
-
-## Overall System Architecture Diagram
-
-The following diagram illustrates the overall BMS system architecture, including the key components and communication interfaces:
+All control, telemetry, and diagnostic signals crossing between high-voltage CMCs and the low-voltage master controller must traverse a **galvanic isolation barrier** with a rated dielectric breakdown strength of at least $2500\,\text{V}_{\text{RMS}}$ for 60 seconds (UL 1577 / IEC 60747-5-5)[^andrea2020].
 
 ```mermaid
-graph TD
-    VCU["VCU"]
-    MC["Master Controller"]
-    Motor["Motor Controller"]
-    Charger["Charger"]
-    Slave["Slave Unit"]
-
-    subgraph BatteryModules["Battery Modules"]
-        Sensors["Cell Sensors"]
+flowchart LR
+    subgraph HV_Domain["High-Voltage Battery Domain"]
+        AFE["AFE Multi-Cell IC<br/>(Floating Common-Mode)"]
+        Pulse_Driver["Differential Transceiver"]
+        AFE --> Pulse_Driver
     end
 
-    VCU -->|Mode Request| MC
-    MC -->|Balancing Commands| Slave
-    MC -->|Current Limit| Motor
-    MC -->|Charging Limit| Charger
-    Sensors -->|Sensor Data| Slave
-    Slave -->|Processed Data| MC
+    subgraph Isolation_Barrier["Galvanic Isolation Barrier (> 2.5 kV RMS)"]
+        direction TB
+        XFMR["Pulse Transformer<br/>(Magnetic Core + Triple-Insulated Wire)<br/>CMTI > 100 kV/µs"]
+        Cap["High-Voltage Class-Y Capacitors<br/>(Capacitive Coupling)"]
+    end
+
+    subgraph LV_Domain["Low-Voltage Vehicle Domain"]
+        Safety_MCU["Automotive Safety MCU<br/>(Infineon AURIX / NXP S32K)"]
+        Receiver["Isolated Port Controller"]
+        Receiver --> Safety_MCU
+    end
+
+    Pulse_Driver <==> XFMR <==> Receiver
+    Pulse_Driver <==> Cap <==> Receiver
 ```
 
+### Comparison of Isolation Technologies
 
-
+1. **Pulse Transformers (Magnetic Coupling):**
+   - **Mechanism:** High-permeability toroidal ferrite cores wound with triple-insulated copper wire.
+   - **Common-Mode Transient Immunity (CMTI):** $> 100\,\text{kV}/\mu\text{s}$.
+   - **Aging:** Zero degradation over 20+ years; entirely immune to optical clouding or thermal degradation.
+   - **Dominant standard:** Preferred for isoSPI daisy-chain networks across battery modules.
+2. **Capacitive Digital Isolators:**
+   - **Mechanism:** On-chip silicon dioxide ($\text{SiO}_2$) dielectric microscopic capacitors ($>15\,\text{kV}/\text{mm}$ dielectric strength).
+   - **CMTI:** $\approx 75 - 150\,\text{kV}/\mu\text{s}$.
+   - **Data Rates:** High throughput ($>150\,\text{Mbps}$), suitable for high-speed parallel buses and SPI links.
+3. **Optocouplers (Optical Coupling):**
+   - **Mechanism:** Infrared LED illuminating a phototransistor across a transparent silicone gap.
+   - **Pitfalls in High-Voltage BMS:** Current Transfer Ratio (CTR) degrades by $20 - 40\%$ over 10 years at automotive temperatures ($>85^\circ\text{C}$); low CMTI ($<25\,\text{kV}/\mu\text{s}$). Consequently, optocouplers are largely obsolete in modern automotive traction BMS.
 
 ---
 
-## Control Logic in BMS Design
+## Electromagnetic Compatibility (EMC) & CISPR 25 Class 5
 
-The control logic within a BMS is the heart of its operation, governing how the system responds to various inputs to maintain battery integrity and performance. Operating as a **closed-loop control system**, the BMS continuously receives feedback from sensors to adjust its control actions dynamically.
+In an electric vehicle, the battery pack is mechanically adjacent to the traction inverter. The inverter switches currents up to $800\,\text{A}$ across $800\,\text{V}$ DC buses using Silicon Carbide (SiC) MOSFETs at high slew rates:
 
-### Mode Request Handling
+$$
+\frac{dV}{dt} > 50\,\frac{\text{V}}{\text{ns}}, \quad \frac{dI}{dt} > 1200\,\frac{\text{A}}{\mu\text{s}}
+$$
 
-Handling mode requests is the initial step in the BMS control logic, determining the operational state of the battery based on external commands.
+This extreme switching speed injects high-frequency common-mode noise across the battery cells and sense lines, threatening to corrupt millivolt-level ADC measurements or reset microcontrollers[^ott2009].
 
-- **Receiving Mode Requests**: The VCU sends mode requests to the BMS, specifying whether the battery should be in charge, discharge, or idle mode.
-- **Determining Control Actions**: Based on the received mode, the BMS decides which control actions to execute. For example:
-  - **Charge Mode**: Enables charging circuits and manages charging rates.
-  - **Discharge Mode**: Activates discharging pathways and regulates power delivery to the motor controller.
-  - **Idle Mode**: Disables both charging and discharging to conserve battery life when the vehicle is stationary.
-
-```c
-// Example Mode Request Handling
-typedef enum {
-    MODE_DISCHARGE,
-    MODE_CHARGE,
-    MODE_IDLE
-} BMS_Mode;
-
-BMS_Mode current_mode;
-
-void receiveModeRequest(BMS_Mode mode) {
-    current_mode = mode;
-    executeMode(current_mode);
-}
-
-void executeMode(BMS_Mode mode) {
-    switch(mode) {
-        case MODE_DISCHARGE:
-            enableDischarge();
-            disableCharge();
-            break;
-        case MODE_CHARGE:
-            enableCharge();
-            disableDischarge();
-            break;
-        case MODE_IDLE:
-            disableCharge();
-            disableDischarge();
-            break;
-    }
-}
-```
-
-### Control Logic Flow Diagram
-
-The following diagram illustrates the control flow for handling mode requests and safety checks:
+### Filtering & Noise Suppression Topology
 
 ```mermaid
-flowchart TD
-    Start([Start]) --> Recv["Receive Mode Request from VCU"]
-    Recv --> ModeCheck{"Check Mode"}
-    
-    ModeCheck -->|Mode == Charge| Charge["Enable Charging<br>Disable Discharging"]
-    ModeCheck -->|Mode == Discharge| Discharge["Enable Discharging<br>Disable Charging"]
-    ModeCheck -->|Idle / Other| Idle["Disable Charging<br>Disable Discharging"]
-
-    Charge --> ReadSensors["Read Sensor Data"]
-    Discharge --> ReadSensors
-    Idle --> ReadSensors
-
-    ReadSensors --> Estimate["Estimate SoC and SoH"]
-    Estimate --> SafetyCheck{"Safety Limit Exceeded?"}
-
-    SafetyCheck -->|Yes| SafetyAction["Trigger Safety Actions"]
-    SafetyCheck -->|No| Stop([Stop])
-    SafetyAction --> Stop
+flowchart LR
+    Cell_Terminal["Cell Terminal (+)"] --> TVS["Bi-Directional TVS Diode<br/>(Clamp > 6 V)"]
+    TVS --> R_filter["R_diff (100 Ω)"]
+    R_filter --> C_diff["C_diff (100 nF)"]
+    C_diff --> C_comm["C_comm (10 nF to Shield)"]
+    C_comm --> AFE_Pin["AFE ADC Pin (V_cell_in)"]
 ```
 
+1. **Differential & Common-Mode Anti-Aliasing RC Filters:**
+   - Placed on every individual cell sense line directly adjacent to the AFE pins.
+   - Series resistors ($R_{\text{diff}} = 100\,\Omega$) and differential capacitor ($C_{\text{diff}} = 100\,\text{nF}$) create a low-pass anti-aliasing cutoff frequency:
 
+     $$
+     f_{c, \text{diff}} = \frac{1}{2\pi \cdot (2 R_{\text{diff}}) \cdot C_{\text{diff}}} = \frac{1}{2\pi \cdot 200\,\Omega \cdot 100 \times 10^{-9}\,\text{F}} \approx 7.96\,\text{kHz}
+     $$
 
-### State Estimation
+   - Common-mode capacitors ($C_{\text{comm}} = 10\,\text{nF}$) divert high-frequency common-mode spikes to the local module shield plane.
 
-Accurate estimation of critical battery parameters is essential for informed decision-making within the BMS. The BMS employs algorithms to estimate the **State of Charge (SoC)** and **State of Health (SoH)** of the battery.
+2. **Transient Voltage Suppressors (TVS):**
+   - Bi-directional TVS diodes on every sense pin clamp inductive voltage spikes caused by module disconnection, fuse clearing, or tab-welding hot-plugging to $<6.0\,\text{V}$, shielding delicate $5\,\text{V}$ AFE CMOS inputs.
 
-- **State of Charge (SoC)**: Represents the remaining charge in the battery, typically expressed as a percentage. SoC estimation helps in predicting the driving range of EVs and managing charging cycles.
-- **State of Health (SoH)**: Indicates the overall condition and longevity of the battery. SoH assessment considers factors like capacity loss and internal resistance, providing insights into battery degradation over time.
-
-```c
-// Example Data Processing for SoC Estimation
-float current = readCurrentSensor();
-float delta_time = getDeltaTime();
-float initial_SOC = getInitialSOC();
-float battery_capacity = getBatteryCapacity();
-
-float new_SOC = estimate_SOC(current, delta_time, initial_SOC, battery_capacity);
-updateSOC(new_SOC);
-```
-
-### Cell Balancing
-
-Cell balancing ensures that all cells within a battery module operate at similar voltage levels, preventing overcharging or deep discharging of individual cells, which can degrade battery performance and lifespan.
-
-- **Monitoring Cell Voltages**: The BMS continuously monitors the voltage of each cell to identify imbalances.
-- **Activating Balancing Circuits**: When significant voltage differences are detected, the BMS activates balancing circuits to equalize the cell voltages. Balancing can be achieved through:
-  - **Passive Balancing**: Discharges higher-voltage cells through resistors to match lower-voltage cells.
-  - **Active Balancing**: Transfers charge from higher-voltage cells to lower-voltage cells using inductors or capacitors, enhancing overall efficiency.
-
-```c
-// Example Cell Balancing Control
-void balanceCells() {
-    for(int i = 0; i < NUM_CELLS; i++) {
-        if(cell_voltage[i] > BALANCE_THRESHOLD_HIGH) {
-            activatePassiveBalancing(i);
-        } else if(cell_voltage[i] < BALANCE_THRESHOLD_LOW) {
-            deactivateBalancing(i);
-        }
-    }
-}
-```
-
-### Safety and Limit Enforcement
-
-Safety is paramount in BMS design, with the system enforcing various operational limits to prevent hazardous conditions.
-
-- **Maximum Current Limiting**: Restricts the current during charging or discharging to prevent overheating, overcurrent, and potential damage to the battery or vehicle components.
-- **Temperature Regulation**: Monitors battery temperature and activates thermal management systems to maintain temperatures within safe operating ranges.
-- **Voltage Protection**: Prevents overcharging or deep discharging of cells by enforcing voltage limits, thereby safeguarding battery integrity.
-
-```c
-// Example Safety Limit Enforcement
-void enforceSafetyLimits() {
-    float current_temperature = readTemperatureSensor();
-    float current_voltage = readVoltageSensor();
-    float current_current = readCurrentSensor();
-    
-    if(current_temperature > MAX_TEMPERATURE) {
-        activateCoolingSystem();
-        limitCurrent(MAX_DISCHARGE_CURRENT);
-    } else if(current_temperature < MIN_TEMPERATURE) {
-        activateHeatingSystem();
-        limitCurrent(MAX_CHARGE_CURRENT);
-    }
-    
-    if(current_voltage > MAX_CELL_VOLTAGE) {
-        disableCharging();
-    } else if(current_voltage < MIN_CELL_VOLTAGE) {
-        disableDischarging();
-    }
-    
-    if(current_current > MAX_DISCHARGE_CURRENT) {
-        limitCurrent(MAX_DISCHARGE_CURRENT);
-    } else if(current_current < -MAX_CHARGE_CURRENT) {
-        limitCurrent(-MAX_CHARGE_CURRENT);
-    }
-}
-```
+3. **Common-Mode Chokes (CMC):**
+   - High-impedance common-mode chokes ($Z_{\text{cm}} > 1000\,\Omega$ at $100\,\text{MHz}$) inserted into isolated communication lines reject conducted RF noise and ensure compliance with **CISPR 25 Class 5** radiated emissions limits ($<18\,\text{dB}\mu\text{V/m}$ in the FM broadcast band).
 
 ---
 
-## Implementation of SoC and SoH Estimation
+## References
 
-Accurate estimation of SoC and SoH is critical for effective battery management. The BMS design incorporates various algorithms and methodologies to achieve precise estimations.
-
-### SoC Estimation
-
-SoC estimation determines the remaining charge in the battery, essential for predicting range and managing charging cycles. Several methods are employed to estimate SoC, each with its advantages and limitations.
-
-#### Coulomb Counting
-
-Coulomb counting involves integrating the current over time to estimate the charge added or removed from the battery. This method is straightforward but can accumulate errors over time due to sensor inaccuracies and integration drift.
-
-```c
-// Function to estimate State of Charge (SoC) using Coulomb Counting
-float estimate_SOC(float current, float delta_time, float initial_SOC, float battery_capacity) {
-    // current: Current in amperes
-    // delta_time: Time interval in seconds
-    // initial_SOC: SoC at the beginning of the interval (0-100%)
-    // battery_capacity: Total battery capacity in ampere-hours (Ah)
-    
-    // Convert battery capacity to coulombs
-    float battery_capacity_coulombs = battery_capacity * 3600.0;
-    
-    // Calculate charge change
-    float delta_charge = current * delta_time;
-    
-    // Update SoC
-    float new_SOC = initial_SOC - (delta_charge / battery_capacity_coulombs) * 100.0;
-    
-    // Clamp SoC between 0% and 100%
-    if (new_SOC > 100.0) new_SOC = 100.0;
-    if (new_SOC < 0.0) new_SOC = 0.0;
-    
-    return new_SOC;
-}
-```
-
-#### Open-Circuit Voltage Method
-
-The OCV method estimates SoC based on the relationship between the battery's open-circuit voltage and its SoC. This method requires the battery to rest without charging or discharging to obtain an accurate voltage reading.
-
-```c
-// Function to estimate SoC using OCV Method
-float estimate_SOC_OCV(float ocv) {
-    // ocv: Open-Circuit Voltage in volts
-    // Lookup table mapping OCV to SoC
-    float soc = lookup_SOC_from_OCV(ocv);
-    return soc;
-}
-```
-
-#### Kalman Filters
-
-Kalman Filters provide a sophisticated approach to SoC estimation by accounting for measurement noise and system uncertainties. Variants like Extended Kalman Filters (EKF) and Unscented Kalman Filters (UKF) are particularly effective for non-linear battery systems.
-
-```c
-// Example of a simple Kalman Filter implementation for SoC estimation
-float kalmanFilter(float measurement, float estimated, float uncertainty_estimated, float uncertainty_measurement) {
-    float kalman_gain = uncertainty_estimated / (uncertainty_estimated + uncertainty_measurement);
-    float updated_estimate = estimated + kalman_gain * (measurement - estimated);
-    float updated_uncertainty = (1 - kalman_gain) * uncertainty_estimated;
-    return updated_estimate;
-}
-```
-
-### SoH Estimation
-
-SoH estimation assesses the battery's overall condition and longevity, providing insights into capacity loss and degradation over time.
-
-#### Capacity Loss Calculation
-
-SoH is determined by comparing the current capacity of the battery with its original capacity. This metric indicates how much the battery has degraded.
-
-```c
-// Function to estimate State of Health (SoH) based on capacity loss
-float estimate_SOH(float current_capacity, float original_capacity) {
-    float soh = (current_capacity / original_capacity) * 100.0;
-    return soh;
-}
-```
-
-#### Cycle Counting
-
-Cycle counting tracks the number of charge-discharge cycles the battery has undergone. Each cycle contributes to capacity fade and internal resistance increase.
-
-```c
-// Function to estimate SoH based on cycle counting
-float estimate_SOH_cycles(int total_cycles, float capacity_loss_per_cycle) {
-    float total_capacity_loss = total_cycles * capacity_loss_per_cycle;
-    float soh = 100.0 - total_capacity_loss;
-    if (soh < 0.0) soh = 0.0;
-    return soh;
-}
-```
-
-#### Lookup Tables
-
-Lookup tables map the number of cycles or other parameters to estimated SoH, providing a quick reference for SoH estimation based on empirical data.
-
-```c
-// Function to estimate SoH using Lookup Tables
-float estimate_SOH_lookup(int cycle_count) {
-    // Example lookup table
-    float lookup_table[] = {100, 99, 98, 97, 96, 95}; // SoH percentages
-    int table_size = sizeof(lookup_table) / sizeof(lookup_table[0]);
-    
-    if(cycle_count < table_size) {
-        return lookup_table[cycle_count];
-    } else {
-        return lookup_table[table_size - 1]; // Minimum SoH
-    }
-}
-```
-
----
-
-## SoC and SoH Estimation Methods Diagram
-
-The following diagram outlines the key methods used for SoC and SoH estimation:
-
-```mermaid
-flowchart TD
-    Start([Start]) --> Measure["Measure Sensor Data"]
-    Measure --> MethodCheck{"Select Estimation Method"}
-
-    MethodCheck -->|Coulomb Counting| CC["Integrate Current over Time"]
-    MethodCheck -->|OCV Method| OCV["Measure Open-Circuit Voltage"]
-    MethodCheck -->|Kalman Filter| KF["Apply Kalman Filter"]
-
-    CC --> UpdateSoC["Update SoC Estimation"]
-    OCV --> UpdateSoC
-    KF --> UpdateSoC
-
-    UpdateSoC --> SoHCheck{"Estimate SoH?"}
-    SoHCheck -->|Yes| SoHCalc["Compare Current vs Original Capacity<br>Cycle Counting<br>Lookup Table"]
-    SoHCheck -->|No| Stop([Stop])
-    SoHCalc --> Stop
-```
-
-
-
-
----
-
-## Key Components of BMS Design
-
-Effective BMS design integrates several critical components, each playing a vital role in ensuring the system's overall functionality and reliability.
-
-| **Component**                | **Description**                                                                                                                  |
-|------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
-| **Slave Units**              | Monitor and manage individual battery modules, collect sensor data, and perform localized control actions such as cell balancing. |
-| **Master Controller**        | Processes sensor data, executes control algorithms, manages cell balancing at the system level, and communicates with the VCU and other vehicle systems. |
-| **Sensor Inputs**            | Include voltage, current, and temperature sensors that provide real-time data essential for accurate state estimation and control actions. |
-| **Control Logic**            | Encompasses algorithms for SoC/SoH estimation, cell balancing, and safety limit enforcement, ensuring optimal battery performance and safety. |
-| **Communication Interfaces** | Facilitate data exchange between slave units, master controller, VCU, motor controller, and charger, typically using protocols like CAN bus. |
-| **Power Management Circuits**| Manage the flow of electrical power within the battery system, including charging and discharging pathways, and integrate safety features such as fuses and relays. |
-| **Thermal Management Systems**| Maintain optimal battery temperatures through cooling or heating mechanisms to prevent thermal runaway and ensure efficient battery operation. |
-
----
-
-## Challenges in BMS Design
-
-Designing an effective BMS involves addressing several challenges that impact accuracy, performance, and safety. Overcoming these challenges is essential for developing reliable and efficient battery management solutions.
-
-### Accuracy
-
-- **State Estimation Precision**: Achieving precise SoC and SoH estimations is challenging due to factors like sensor noise, measurement inaccuracies, and the dynamic nature of battery behavior.
-- **Calibration**: Regular calibration of sensors and algorithms is necessary to maintain estimation accuracy over time and under varying operating conditions.
-
-### Real-Time Performance
-
-- **Computational Constraints**: Embedded systems within the BMS have limited computational resources, necessitating efficient algorithms that can operate in real time without overloading the processor.
-- **Latency**: Minimizing latency in data processing and control actions is critical to respond promptly to changes in battery conditions and prevent potential safety hazards.
-
-### Safety
-
-- **Overvoltage and Undervoltage Protection**: Preventing cells from exceeding their voltage limits requires robust monitoring and rapid response mechanisms.
-- **Thermal Management**: Ensuring that battery temperatures remain within safe ranges involves complex control of cooling and heating systems, especially under high-load conditions.
-- **Fault Detection and Isolation**: Quickly identifying and isolating faulty cells or modules is essential to prevent cascading failures and ensure overall system safety.
-
-### Scalability and Flexibility
-
-- **Modular Design**: Designing BMS architectures that can scale with different battery pack sizes and configurations without significant redesigns is a persistent challenge.
-- **Adaptability**: The BMS must adapt to various battery chemistries and evolving technologies, requiring flexible and programmable control logic.
-
-### Communication Reliability
-
-- **Data Integrity**: Ensuring the integrity and reliability of data transmitted between slave units and the master controller is vital for accurate monitoring and control.
-- **Interference and Noise**: Mitigating the effects of electrical noise and interference, especially in automotive environments, is necessary to maintain reliable communication.
-
+[^andrea2020]: Andrea, D. (2020). *Battery Management Systems for Large Lithium-Ion Battery Packs*. Artech House.
+[^iec60664]: International Electrotechnical Commission. (2020). *IEC 60664-1: Insulation coordination for equipment within low-voltage systems — Part 1: Principles, requirements and tests*. IEC.
+[^cispr25]: International Electrotechnical Commission. (2016). *CISPR 25: Vehicles, boats and internal combustion engines — Radio disturbance characteristics — Limits and methods of measurement*. IEC.
+[^ott2009]: Ott, H. W. (2009). *Electromagnetic Compatibility Engineering*. John Wiley & Sons.

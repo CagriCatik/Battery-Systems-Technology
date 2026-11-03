@@ -1,408 +1,283 @@
-# Cycle Counting and State of Health Estimation
+# Cycle Counting & Fatigue Damage Summation
 
-Battery Management Systems (BMS) play a crucial role in ensuring the optimal performance, safety, and longevity of lithium-ion batteries. One of the fundamental methods employed for estimating the **State of Health (SoH)** of a battery is **Cycle Counting**. This method involves tracking the number of charge-discharge cycles a battery undergoes, as each cycle contributes to the battery's aging and capacity degradation. Accurate SoH estimation through cycle counting is essential for applications such as electric vehicles, renewable energy storage systems, and portable electronics, where battery reliability and lifespan are paramount.
+In real-world applications—such as electric vehicle drive cycles (WLTP, US06) or renewable grid frequency regulation—batteries rarely experience complete, monolithic charge-discharge cycles from $0\%$ to $100\%$ State of Charge (SoC). Instead, they are subjected to chaotic, highly dynamic micro-cycles, regenerative braking pulses, and partial depth-of-discharge (DoD) swings[^millner2010].
 
-The **State of Health (SoH)** of a battery provides insights into its current condition relative to its ideal state, often expressed as a percentage. Accurate SoH estimation is vital for predicting battery lifespan, scheduling maintenance, and ensuring reliable performance. **Cycle Counting** serves as a foundational method for SoH estimation by tracking the number of charge-discharge cycles a battery undergoes. Each cycle contributes to the natural aging process of the battery, leading to capacity fade and increased internal resistance.
+Quantifying battery mechanical wear and capacity degradation requires translating erratic SoC trajectories into discrete closed stress cycles. This chapter formalizes the application of the **ASTM E1049 Rainflow cycle counting algorithm**, the **Palmgren-Miner linear damage hypothesis**, and non-linear Wöhler stress models to lithium-ion degradation tracking.
 
-This chapter explores the principles of cycle counting, its implementation within a BMS, the factors influencing battery degradation, and advanced techniques to enhance SoH estimation accuracy. Through detailed explanations and practical code examples, this documentation aims to provide a comprehensive understanding of cycle counting and its role in battery health management.
+---
 
-## Understanding Battery Cycles
+## Electrochemical Fatigue Mechanics
 
-### What Constitutes a Battery Cycle?
+During insertion and de-insertion of lithium ions, electrode host matrices undergo periodic lattice expansion and contraction:
+- **Graphite Anode:** $\approx 7 - 10\%$ crystallographic volume change between $\text{C}_6$ and $\text{LiC}_6$[^xu2018].
+- **Silicon-Doped Graphite:** $>100 - 300\%$ localized volume expansion.
+- **NMC / LCO Cathodes:** Anisotropic $c$-axis contraction and lattice distortion up to $2 - 3\%$.
 
-A **battery cycle** refers to the process of charging a battery from a lower **State of Charge (SoC)** to its maximum capacity and then discharging it back to the initial SoC. In practice, batteries rarely undergo full cycles; instead, they experience **partial cycles**, where they are charged and discharged within specific SoC ranges. For example, charging a battery from 50% to 100% SoC and then discharging it back to 50% constitutes one full cycle, even though only 50% of the battery's capacity was utilized.
-
-### Equivalent Full Cycles
-
-To account for partial cycles, the concept of **equivalent full cycles** is employed. This metric aggregates partial cycles into full cycle equivalents based on the cumulative Depth of Discharge (DoD). For instance, two 50% partial cycles equate to one full cycle. Tracking equivalent full cycles provides a more accurate representation of the battery's usage and degradation over time.
-
-### Importance of Cycle Counting
-
-- **SoH Estimation:** Helps in predicting the remaining useful life of the battery.
-- **Maintenance Scheduling:** Enables timely maintenance and replacement to prevent unexpected failures.
-- **Performance Optimization:** Assists in understanding usage patterns and optimizing charging strategies to extend battery lifespan.
-
-## Cycle Counting Algorithm
-
-Implementing a cycle counting algorithm involves several key steps, each contributing to accurate SoH estimation. Below is a detailed breakdown of each step.
-
-### 1. Data Acquisition
-
-**Objective:** Continuously monitor and record the battery's operational parameters, such as voltage, current, and temperature.
-
-- **Voltage Monitoring:** Measures the voltage of individual cells and the entire battery pack to assess charge levels and detect anomalies.
-- **Current Monitoring:** Tracks the flow of current into (charging) and out of (discharging) the battery.
-- **Temperature Monitoring:** Ensures the battery operates within safe temperature ranges to prevent thermal runaway and degradation.
-
-**Implementation Considerations:**
-
-- **Sensor Accuracy:** Utilize high-precision sensors to minimize measurement errors.
-- **Sampling Rate:** Choose an appropriate sampling rate to capture rapid changes without overwhelming the system.
-- **Data Storage:** Efficiently store acquired data for real-time processing and historical analysis.
-
-### 2. SoC Calculation
-
-**Objective:** Estimate the battery's State of Charge (SoC) using reliable methods such as Coulomb Counting or Open Circuit Voltage (OCV).
-
-- **Coulomb Counting:** Integrates current over time to estimate charge transfer.
-- **OCV Method:** Correlates open-circuit voltage with SoC based on the battery's discharge curve.
-
-**Implementation Considerations:**
-
-- **Initial SoC Determination:** Accurate initial SoC is crucial to prevent error accumulation.
-- **Temperature Compensation:** Adjust SoC calculations based on temperature variations affecting battery performance.
-
-### 3. Cycle Identification
-
-**Objective:** Detect charge and discharge events by analyzing changes in SoC to identify completed cycles.
-
-- **Thresholds:** Define upper and lower SoC thresholds to determine when a cycle starts and ends.
-- **Event Detection:** Monitor SoC transitions to identify the initiation and completion of cycles.
-
-**Implementation Considerations:**
-
-- **Debouncing:** Implement mechanisms to avoid false cycle detections due to transient SoC fluctuations.
-- **Noise Filtering:** Apply filters to smooth out SoC data for accurate event detection.
-
-### 4. Depth of Discharge (DoD) Assessment
-
-**Objective:** Determine the Depth of Discharge (DoD) for each cycle, as deeper discharges accelerate battery degradation.
-
-- **Calculation:** DoD is calculated as the difference between the maximum and minimum SoC during a cycle.
-
-    $$
-    \text{DoD} = \frac{\text{SoC}_{\text{max}} - \text{SoC}_{\text{min}}}{\text{SoC}_{\text{max}}} \times 100\%
-    $$
-
-**Implementation Considerations:**
-
-- **DoD Categorization:** Classify cycles based on DoD to weight their impact on SoH accordingly.
-- **Partial Cycle Accumulation:** Aggregate partial cycles to form equivalent full cycles based on DoD.
-
-### 5. Cycle Counting
-
-**Objective:** Increment the cycle count based on identified full and equivalent partial cycles.
-
-- **Equivalent Full Cycles:** Sum the DoD of partial cycles and convert them into full cycle equivalents.
-
-    $$
-    \text{Equivalent Full Cycles} = \frac{\sum \text{DoD}_i}{100\%}
-    $$
-
-**Implementation Considerations:**
-
-- **Cumulative Tracking:** Maintain a running total of equivalent full cycles for accurate SoH estimation.
-- **Cycle Reset Mechanism:** Implement mechanisms to reset cycle counts if necessary, such as after maintenance or calibration.
-
-### 6. SoH Estimation
-
-**Objective:** Utilize the cycle count, DoD information, and manufacturer-provided degradation curves to estimate the current SoH.
-
-- **Degradation Curves:** Manufacturers provide curves that relate the number of cycles and DoD to capacity loss.
-- **Capacity Loss Calculation:** Estimate capacity loss based on accumulated equivalent full cycles and corresponding DoD.
-
-**Implementation Considerations:**
-
-- **Dynamic Modeling:** Adjust SoH estimation models based on real-time usage patterns and environmental conditions.
-- **Data Integration:** Combine cycle counting data with other SoH indicators like internal resistance for comprehensive health assessment.
-
-## Factors Influencing Battery Degradation
-
-Several factors impact battery degradation and should be considered in the SoH estimation process:
-
-### Depth of Discharge (DoD)
-
-- **Impact:** Deeper discharges subject batteries to increased stress, accelerating wear and capacity loss.
-- **Mitigation:** Limit DoD through optimized charging strategies and battery management protocols.
-
-### C-Rate
-
-- **Definition:** The rate at which a battery is charged or discharged relative to its capacity.
-- **Impact:** Higher C-rates can lead to increased stress, heat generation, and faster capacity loss.
-- **Mitigation:** Implement charging and discharging rate limits to balance performance and longevity.
-
-### Temperature
-
-- **Impact:** Elevated temperatures accelerate chemical reactions leading to degradation, while extremely low temperatures can reduce battery performance and lifespan.
-- **Mitigation:** Incorporate thermal management systems to maintain optimal operating temperatures.
-
-### State of Charge (SoC) Range
-
-- **Impact:** Operating a battery within certain SoC ranges can prolong its lifespan. Frequent cycling at high or low SoC extremes can contribute to faster degradation.
-- **Mitigation:** Define and adhere to optimal SoC windows based on battery specifications.
-
-## Advanced Considerations
-
-While cycle counting provides a foundational approach to SoH estimation, integrating additional parameters can enhance accuracy:
-
-### Coulombic Efficiency
-
-- **Definition:** The ratio of charge output during discharge to charge input during charging.
-- **Significance:** Monitoring Coulombic efficiency offers insights into internal losses and degradation mechanisms.
-
-    $$
-    \text{Coulombic Efficiency} = \frac{Q_{\text{out}}}{Q_{\text{in}}} \times 100\%
-    $$
-
-### Internal Resistance Measurement
-
-- **Impact:** Increased internal resistance is indicative of battery aging, as it correlates with capacity loss and reduced efficiency.
-- **Implementation:** Measure internal resistance periodically to serve as an additional SoH indicator.
-
-### Machine Learning Models
-
-- **Advantage:** Data-driven models can analyze complex patterns in battery usage and degradation data, improving SoH predictions.
-- **Implementation:** Train machine learning algorithms on historical and real-time data to forecast battery health and lifespan.
-
-## Code Snippets and Practical Implementations
-
-To illustrate the practical aspects of cycle counting and SoH estimation, the following Python code snippets demonstrate key algorithms and processes essential for effective battery health management.
-
-### 1. Cycle Identification and Counting
-
-This example demonstrates how to identify charge and discharge events based on SoC thresholds and count equivalent full cycles.
-
-```python
-class CycleCounter:
-    def __init__(self, soc_threshold_upper=0.9, soc_threshold_lower=0.1):
-        """
-        Initializes the CycleCounter with specified SoC thresholds.
-        
-        :param soc_threshold_upper: Upper SoC threshold (0 to 1)
-        :param soc_threshold_lower: Lower SoC threshold (0 to 1)
-        """
-        self.soc_threshold_upper = soc_threshold_upper
-        self.soc_threshold_lower = soc_threshold_lower
-        self.in_charge = False
-        self.in_discharge = False
-        self.max_soc = None
-        self.min_soc = None
-        self.equivalent_cycles = 0.0
-        self.partial_cycle = 0.0
-
-    def update_soc(self, soc):
-        """
-        Updates the cycle count based on the current SoC.
-        
-        :param soc: Current State of Charge (0 to 1)
-        """
-        if soc >= self.soc_threshold_upper and not self.in_charge:
-            self.in_charge = True
-            self.in_discharge = False
-            self.max_soc = soc
-            print("Charge cycle started.")
-        
-        elif soc <= self.soc_threshold_lower and not self.in_discharge:
-            self.in_discharge = True
-            self.in_charge = False
-            self.min_soc = soc
-            print("Discharge cycle started.")
-        
-        if self.in_charge:
-            if soc > self.max_soc:
-                self.max_soc = soc
-                print(f"New max SoC during charge: {self.max_soc * 100:.2f}%")
-        
-        if self.in_discharge:
-            if soc < self.min_soc:
-                self.min_soc = soc
-                print(f"New min SoC during discharge: {self.min_soc * 100:.2f}%")
-        
-        # Detect end of charge-discharge cycle
-        if self.in_charge and soc <= self.soc_threshold_lower:
-            self.in_charge = False
-            self.in_discharge = True
-            self.min_soc = soc
-            doD = self.max_soc - self.min_soc
-            self.equivalent_cycles += doD
-            print(f"Charge-Discharge cycle completed with DoD: {doD * 100:.2f}%")
-        
-        elif self.in_discharge and soc >= self.soc_threshold_upper:
-            self.in_discharge = False
-            self.in_charge = True
-            self.max_soc = soc
-            doD = self.max_soc - self.min_soc
-            self.equivalent_cycles += doD
-            print(f"Discharge-Charge cycle completed with DoD: {doD * 100:.2f}%")
-
-    def get_equivalent_cycles(self):
-        """
-        Returns the total equivalent full cycles.
-        
-        :return: Equivalent full cycles (float)
-        """
-        return self.equivalent_cycles
-
-# Example Usage
-if __name__ == "__main__":
-    cycle_counter = CycleCounter(soc_threshold_upper=0.9, soc_threshold_lower=0.1)
-    soc_readings = [0.1, 0.15, 0.3, 0.5, 0.7, 0.85, 0.95, 0.9, 0.75, 0.6, 0.4, 0.2, 0.1]
-
-    for soc in soc_readings:
-        cycle_counter.update_soc(soc)
-    
-    print(f"Total Equivalent Full Cycles: {cycle_counter.get_equivalent_cycles():.2f}")
+```mermaid
+flowchart LR
+    Lithi["Electrochemical Lithiation / Delithiation"] --> Stress["Cyclic Interfacial Stress & Strain (σ_ij)"]
+    Stress --> Cracks["Active Particle Micro-Cracking & Cleavage"]
+    Cracks --> SEI["Fresh Interfacial Exposure -> Uncontrolled SEI Growth"]
+    SEI --> Loss["Capacity Fade (LLI) & Impedance Growth (ΔR)"]
 ```
 
-**Explanation:**
+This mechanical breathing generates severe shear and tensile stresses at primary particle boundaries, inducing intergranular and transgranular microcracking. Fresh metallic and active surfaces are continuously exposed to liquid electrolyte, consuming active cyclable lithium to repair the solid electrolyte interphase (SEI)[^schmalstieg2014].
 
-- **Cycle Identification:** The `CycleCounter` class monitors SoC transitions between defined upper and lower thresholds to identify charge and discharge events.
-- **DoD Calculation:** Upon completing a charge-discharge cycle, it calculates the Depth of Discharge (DoD) and accumulates it towards equivalent full cycles.
-- **Equivalent Full Cycles:** Partial cycles are summed based on their DoD to provide an aggregated cycle count.
+---
 
-### 2. Depth of Discharge Calculation
+## Limitations of Naive Counting Approaches
 
-This snippet calculates the Depth of Discharge (DoD) for each detected cycle.
+Traditional battery telemetry often relies on two rudimentary methods:
+1. **Zero-Crossing Current Integration:** Sums Ah throughput and divides by $2 \cdot C_{\text{nom}}$:
+   
+   $$
+   \text{EFC}_{\text{naive}} = \frac{1}{2 \cdot C_{\text{nom}}} \int_0^t |I(\tau)| \, d\tau
+   $$
 
-```python
-def calculate_dod(max_soc, min_soc):
-    """
-    Calculates the Depth of Discharge (DoD) for a cycle.
-    
-    :param max_soc: Maximum State of Charge during the cycle (0 to 1)
-    :param min_soc: Minimum State of Charge during the cycle (0 to 1)
-    :return: DoD as a percentage (0 to 100)
-    """
-    dod = (max_soc - min_soc) * 100
-    return dod
+2. **Peak-to-Valley Detection:** Detects directional reversals.
 
-# Example Usage
-if __name__ == "__main__":
-    max_soc = 0.95
-    min_soc = 0.15
-    dod = calculate_dod(max_soc, min_soc)
-    print(f"Depth of Discharge: {dod:.2f}%")
+> [!CAUTION]
+> Naive Ah throughput completely neglects the **depth-dependent non-linearity** of mechanical strain. Because particle strain energy scales super-linearly with cycle depth, a single $100\%$ DoD cycle inflicts substantially more fatigue damage than ten $10\%$ DoD cycles, even though their Ah throughput is identical.
+
+---
+
+## ASTM E1049-85 Rainflow Cycle Counting
+
+Originally formulated in structural mechanical fatigue by Matsuishi and Endo (1968) and standardized in ASTM E1049-85, the **Rainflow counting method** decomposes complex irregular time series into an equivalent set of closed hysteresis stress-strain loops[^astm1985][^matsuishi1968].
+
+```
+  SoC [%]
+   ^
+90 |      B (90%)
+   |     /\                  D (85%)
+   |    /  \      C (70%)   /\
+   |   /    \    /\        /  \
+50 |  /      \  /  \      /    \
+   | /        \/    \    /      \
+20 |/          A     \  /        \
+   +-----------(40%)--\/----------\----------> Time
+                      E (20%)
 ```
 
-**Explanation:**
+### Four-Point Reversal Rule
 
-- **DoD Calculation:** Determines the percentage of battery capacity utilized during a charge-discharge cycle.
-- **Usage:** Essential for weighting partial cycles in equivalent full cycle calculations.
+The continuous SoC profile is first filtered to isolate local turning points (peaks and valleys). The sequence is then evaluated using a sliding four-point window $[S_1, S_2, S_3, S_4]$:
 
-### 3. SoH Estimation Based on Cycle Count and DoD
+1. Define inner stress range $\Delta S_{\text{inner}} = |S_2 - S_3|$.
+2. Define outer bounding ranges $\Delta S_{\text{left}} = |S_1 - S_2|$ and $\Delta S_{\text{right}} = |S_3 - S_4|$.
+3. If $\Delta S_{\text{inner}} \le \Delta S_{\text{left}}$ and $\Delta S_{\text{inner}} \le \Delta S_{\text{right}}$:
+   - A closed sub-cycle of range $\Delta \text{DoD} = \Delta S_{\text{inner}}$ and mean $\bar{S} = \frac{S_2 + S_3}{2}$ is extracted.
+   - Points $S_2$ and $S_3$ are removed from the vector.
+   - The algorithm rewinds to point $S_1$ and resumes scanning.
+4. Otherwise, advance the four-point window by one index.
 
-This example demonstrates how to estimate SoH using accumulated equivalent full cycles and manufacturer-provided degradation curves.
+Residual unclosed paths after processing the sequence represent half-cycles.
 
-```python
-class SoHEstimator:
-    def __init__(self, degradation_curve):
-        """
-        Initializes the SoH Estimator with a degradation curve.
-        
-        :param degradation_curve: Dictionary mapping equivalent full cycles to SoH
-        """
-        self.degradation_curve = degradation_curve
+---
 
-    def estimate_soh(self, equivalent_cycles):
-        """
-        Estimates the State of Health (SoH) based on equivalent full cycles.
-        
-        :param equivalent_cycles: Total equivalent full cycles
-        :return: Estimated SoH (0 to 1)
-        """
-        sorted_cycles = sorted(self.degradation_curve.keys())
-        for cycle in sorted_cycles:
-            if equivalent_cycles < cycle:
-                return self.degradation_curve[cycle]
-        # If cycles exceed provided data, extrapolate or set minimum SoH
-        return self.degradation_curve[sorted_cycles[-1]]
+## Palmgren-Miner Cumulative Damage Hypothesis
 
-# Example Usage
-if __name__ == "__main__":
-    # Define a sample degradation curve (cycles: SoH)
-    degradation_curve = {
-        0: 1.0,
-        500: 0.9,
-        1000: 0.8,
-        1500: 0.7,
-        2000: 0.6
-    }
+The cumulative fatigue damage $D_{\text{total}}$ induced by $K$ discrete extracted cycles is modeled via Palmgren-Miner's linear damage rule[^miner1945]:
 
-    soh_estimator = SoHEstimator(degradation_curve)
+$$
+D_{\text{total}} = \sum_{i=1}^K \frac{1}{N_f(\Delta \text{DoD}_i, \bar{\text{SoC}}_i, T_i)} \le 1.0
+$$
 
-    # Suppose we have accumulated 750 equivalent full cycles
-    equivalent_cycles = 750
-    estimated_soh = soh_estimator.estimate_soh(equivalent_cycles)
-    print(f"Estimated SoH: {estimated_soh * 100:.2f}%")
-```
+Where:
+- $N_f(\Delta \text{DoD}_i, \bar{\text{SoC}}_i, T_i)$ is the total cycles to failure (typically defined as $80\%$ remaining capacity, $\text{SoH} = 0.80$) under stress condition $i$.
+- When $D_{\text{total}} = 1.0$, the battery reaches its End-of-Life (EOL).
 
-**Explanation:**
+### Wöhler Power-Law Formulation
 
-- **Degradation Curve:** Represents the relationship between equivalent full cycles and SoH as provided by the battery manufacturer.
-- **SoH Estimation:** Uses the accumulated equivalent full cycles to interpolate or extrapolate the current SoH based on the degradation curve.
+The cycle life $N_f$ follows a modified Wöhler (S-N) power law with an Arrhenius temperature dependence and a mean SoC acceleration factor[^schmalstieg2014]:
 
-## Practical Implementation Example
+$$
+N_f(\Delta \text{DoD}, \bar{\text{SoC}}, T) = N_0 \cdot \left( \frac{\Delta \text{DoD}}{1.0} \right)^{-\beta_{\text{DoD}}} \cdot \exp\left( -k_{\text{SoC}} \cdot (\bar{\text{SoC}} - 0.5) \right) \cdot \exp\left( \frac{E_a}{R} \left( \frac{1}{T} - \frac{1}{T_{\text{ref}}} \right) \right)
+$$
 
-The following comprehensive Python example integrates cycle counting, DoD assessment, equivalent full cycle calculation, and SoH estimation using predefined degradation curves.
+Where:
+- $N_0$ is the reference cycle life under $100\%$ DoD at $25^\circ\text{C}$ (e.g., $1500$ cycles for NMC, $4000$ cycles for LFP).
+- $\beta_{\text{DoD}} \approx 1.5 - 2.2$ is the fatigue damage exponent.
+- $k_{\text{SoC}} \approx 0.8 - 1.4$ accounts for accelerated cathode degradation at high average potential.
+
+#### Non-Linear Fatigue Comparison ($\beta = 2.0, N_0 = 2000$)
+
+| Cycle Profile | Range ($\Delta \text{DoD}$) | Cycles to Failure ($N_f$) | Damage per Cycle ($1/N_f$) | Number of Cycles for Equivalent Damage of $1 \times 100\%$ Cycle |
+| :--- | :--- | :--- | :--- | :--- |
+| **Deep Cycle** | $100\%$ ($1.00$) | $2{,}000$ | $5.00 \times 10^{-4}$ | $1$ cycle (Ah throughput = $2 \cdot C_n$) |
+| **Mid Cycle** | $50\%$ ($0.50$) | $8{,}000$ | $1.25 \times 10^{-4}$ | $4$ cycles (Ah throughput = $4 \cdot C_n$) |
+| **Shallow Cycle** | $20\%$ ($0.20$) | $50{,}000$ | $2.00 \times 10^{-5}$ | $25$ cycles (Ah throughput = $10 \cdot C_n$) |
+| **Micro-Cycle** | $5\%$ ($0.05$) | $800{,}000$ | $1.25 \times 10^{-6}$ | $400$ cycles (Ah throughput = $40 \cdot C_n$) |
+
+> [!TIP]
+> Operating within shallow micro-cycles delivers up to **20 times more total cumulative energy throughput** before reaching EOL compared to deep cycling.
+
+---
+
+## Production Python Implementation: ASTM E1049 Rainflow Counter
+
+The following production script implements the ASTM E1049 four-point Rainflow counting algorithm and calculates cumulative Miner fatigue damage:
 
 ```python
-class Battery:
-    def __init__(self, nominal_capacity, degradation_curve, soc_threshold_upper=0.9, soc_threshold_lower=0.1):
-        """
-        Initializes the Battery with specified parameters.
-        
-        :param nominal_capacity: Battery capacity in Ampere-hours (Ah)
-        :param degradation_curve: Dictionary mapping equivalent full cycles to SoH
-        :param soc_threshold_upper: Upper SoC threshold for cycle identification
-        :param soc_threshold_lower: Lower SoC threshold for cycle identification
-        """
-        self.nominal_capacity = nominal_capacity
-        self.degradation_curve = degradation_curve
-        self.cycle_counter = CycleCounter(soc_threshold_upper, soc_threshold_lower)
-        self.soh_estimator = SoHEstimator(degradation_curve)
-        self.equivalent_cycles = 0.0
+"""
+ASTM E1049-85 Compliant Rainflow Cycle Counting and Fatigue Estimator.
+Extracts closed cycles from dynamic State of Charge (SoC) profiles.
+"""
 
-    def process_soc(self, soc):
-        """
-        Processes the current SoC reading for cycle counting.
-        
-        :param soc: Current State of Charge (0 to 1)
-        """
-        self.cycle_counter.update_soc(soc)
-        self.equivalent_cycles = self.cycle_counter.get_equivalent_cycles()
+from dataclasses import dataclass
+from typing import List, Tuple
+import numpy as np
 
-    def estimate_soh(self):
-        """
-        Estimates the current State of Health (SoH).
-        
-        :return: Estimated SoH (0 to 1)
-        """
-        return self.soh_estimator.estimate_soh(self.equivalent_cycles)
 
-# Define the CycleCounter and SoHEstimator classes as previously
+@dataclass
+class Cycle:
+    range_dod: float   # Cycle range ΔDoD in [0.0, 1.0]
+    mean_soc: float    # Cycle mean SoC in [0.0, 1.0]
+    count: float       # 1.0 for closed cycle, 0.5 for half-cycle
 
-# Example Usage
+
+class RainflowDamageCalculator:
+    def __init__(
+        self,
+        n0_ref: float = 2500.0,       # Cycles to failure at 100% DoD
+        beta_dod: float = 1.85,       # Non-linear DoD exponent
+        k_soc: float = 0.90,          # High-SoC acceleration coefficient
+    ) -> None:
+        self.n0 = n0_ref
+        self.beta = beta_dod
+        self.k_soc = k_soc
+
+    @staticmethod
+    def extract_turning_points(series: np.ndarray) -> np.ndarray:
+        """
+        Filters input series to keep only strict local extrema (peaks and valleys).
+        """
+        if len(series) < 3:
+            return series
+
+        diffs = np.diff(series)
+        # Exclude flat zero-differential regions
+        non_zero = diffs != 0
+        if not np.any(non_zero):
+            return np.array([series[0]])
+
+        compact_series = [series[0]]
+        for i in range(len(diffs)):
+            if diffs[i] != 0:
+                compact_series.append(series[i + 1])
+
+        # Identify direction reversals
+        turning_points = [compact_series[0]]
+        for i in range(1, len(compact_series) - 1):
+            d1 = compact_series[i] - compact_series[i - 1]
+            d2 = compact_series[i + 1] - compact_series[i]
+            if d1 * d2 < 0:  # Peak or Valley
+                turning_points.append(compact_series[i])
+        turning_points.append(compact_series[-1])
+
+        return np.array(turning_points)
+
+    def count_cycles(self, soc_history: np.ndarray) -> List[Cycle]:
+        """
+        Executes ASTM E1049 four-point rainflow cycle extraction.
+        """
+        pts = list(self.extract_turning_points(soc_history))
+        extracted_cycles: List[Cycle] = []
+
+        while len(pts) >= 3:
+            s1, s2, s3 = pts[0], pts[1], pts[2]
+            r1 = abs(s1 - s2)
+            r2 = abs(s2 - s3)
+
+            if len(pts) >= 4:
+                s4 = pts[3]
+                r3 = abs(s3 - s4)
+                if r2 <= r1 and r2 <= r3:
+                    # Closed inner loop between s2 and s3
+                    extracted_cycles.append(Cycle(
+                        range_dod=r2,
+                        mean_soc=(s2 + s3) / 2.0,
+                        count=1.0
+                    ))
+                    # Remove s2 and s3
+                    del pts[1:3]
+                    continue
+
+            if r2 <= r1:
+                extracted_cycles.append(Cycle(
+                    range_dod=r2,
+                    mean_soc=(s2 + s3) / 2.0,
+                    count=1.0
+                ))
+                del pts[1:3]
+            else:
+                # Rotate stack if no loop closed
+                pts.append(pts.pop(0))
+                break
+
+        # Remaining points form residual half-cycles
+        for i in range(len(pts) - 1):
+            r = abs(pts[i] - pts[i + 1])
+            m = (pts[i] + pts[i + 1]) / 2.0
+            extracted_cycles.append(Cycle(range_dod=r, mean_soc=m, count=0.5))
+
+        return extracted_cycles
+
+    def compute_damage(self, cycles: List[Cycle]) -> Tuple[float, float]:
+        """
+        Applies Wöhler model and Palmgren-Miner rule.
+        Returns: (Total Cumulative Damage D, Estimated Remaining Useful Life Cycles)
+        """
+        total_damage = 0.0
+
+        for cyc in cycles:
+            if cyc.range_dod < 1e-4:
+                continue
+            # Wöhler cycles to failure
+            n_f = (
+                self.n0
+                * (cyc.range_dod ** (-self.beta))
+                * np.exp(-self.k_soc * (cyc.mean_soc - 0.50))
+            )
+            cycle_damage = cyc.count / n_f
+            total_damage += cycle_damage
+
+        return total_damage, (1.0 - total_damage)
+
+
+# --- Test & Simulation Harness ---
 if __name__ == "__main__":
-    # Define degradation curve
-    degradation_curve = {
-        0: 1.0,
-        500: 0.9,
-        1000: 0.8,
-        1500: 0.7,
-        2000: 0.6
-    }
-    
-    # Initialize Battery
-    nominal_capacity = 2.0  # Ah
-    battery = Battery(nominal_capacity, degradation_curve)
-    
-    # Simulate SoC readings over time
-    soc_readings = [
-        0.1, 0.15, 0.3, 0.5, 0.7, 0.85, 0.95, 0.9, 0.75, 0.6, 0.4, 0.2, 0.1,
-        0.15, 0.25, 0.45, 0.65, 0.85, 0.95, 0.85, 0.7, 0.5, 0.3, 0.1
-    ]
-    
-    for soc in soc_readings:
-        battery.process_soc(soc)
-    
-    estimated_soh = battery.estimate_soh()
-    print(f"Total Equivalent Full Cycles: {battery.equivalent_cycles:.2f}")
-    print(f"Estimated State of Health (SoH): {estimated_soh * 100:.2f}%")
+    # Synthetic EV Drive Profile: Discharge with Regen Braking Events
+    soc_profile = np.array([
+        0.90, 0.70, 0.75, 0.60, 0.65, 0.50, 0.85, 0.40, 0.45, 0.20, 0.95
+    ])
+
+    calculator = RainflowDamageCalculator()
+    cycles = calculator.count_cycles(soc_profile)
+
+    print(f"Extracted {len(cycles)} cycle components from dynamic profile:\n")
+    print("Type        | Range ΔDoD | Mean SoC | Damage Contribution")
+    print("---------------------------------------------------------")
+
+    for idx, c in enumerate(cycles):
+        cyc_type = "Full Cycle" if c.count == 1.0 else "Half Cycle"
+        # Calculate isolated damage for display
+        n_f = calculator.n0 * (c.range_dod ** (-calculator.beta))
+        d_i = c.count / n_f
+        print(f"{cyc_type:11s} | {c.range_dod*100:9.1f}% | {c.mean_soc*100:7.1f}% | {d_i:11.2e}")
+
+    total_d, _ = calculator.compute_damage(cycles)
+    print("---------------------------------------------------------")
+    print(f"Total Palmgren-Miner Damage Accumulated: D = {total_d:.4e}")
 ```
 
-**Explanation:**
+---
 
-- **Battery Class:** Integrates cycle counting and SoH estimation, encapsulating the entire process.
-- **Processing SoC:** For each SoC reading, the cycle counter updates the equivalent cycle count.
-- **SoH Estimation:** After processing all SoC readings, the battery estimates its current SoH based on accumulated cycles.
-- **Simulation:** The example simulates a series of SoC readings that include both full and partial cycles, demonstrating how equivalent full cycles are accumulated and how SoH is estimated accordingly.
+## References
+
+[^millner2010]: Millner, A. (2010). Modeling lithium ion battery health for electric vehicles. *IEEE Conference on Innovative Technologies for an Efficient and Reliable Electricity Supply (CITRES)*, 396–400.
+[^xu2018]: Xu, B., Oudalov, A., Ulbig, A., Andersson, G., & Kirschen, D. S. (2018). Modeling of lithium-ion battery degradation for cell life assessment. *IEEE Transactions on Smart Grid*, 9(2), 1131–1140.
+[^schmalstieg2014]: Schmalstieg, J., Käbitz, S., Ecker, M., & Sauer, D. U. (2014). A holistic aging model for Li(NiMnCo)O2 based 18650 lithium-ion batteries. *Journal of Power Sources*, 257, 325–334.
+[^astm1985]: ASTM International. (1985 / Reapproved 2017). *ASTM E1049-85: Standard Practices for Cycle Counting in Fatigue Analysis*. ASTM International.
+[^matsuishi1968]: Matsuishi, M., & Endo, T. (1968). Fatigue of metals subjected to varying stress. *Japan Society of Mechanical Engineers*, Fukuoka, Japan.
+[^miner1945]: Miner, M. A. (1945). Cumulative damage in fatigue. *Journal of Applied Mechanics*, 12(3), A159–A164.

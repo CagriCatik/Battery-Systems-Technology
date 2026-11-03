@@ -1,491 +1,159 @@
+# Introduction to Battery Management Systems (BMS)
+
+A **Battery Management System (BMS)** is the specialized electronic and computational architecture responsible for operating, monitoring, and protecting electrochemical energy storage packs[^plett2015a][^andrea2010]. Because lithium-ion cells operate with volatile organic carbonate electrolytes and exhibit narrow electrochemical and thermal safety envelopes, an unregulated battery pack presents severe risks of premature cell death, energetic thermal runaway, and lethal electrical hazards[^scrosati2010][^dahn2011].
+
+The BMS sits at the boundary between raw electrochemistry and system-level applications, translating noisy cell-level analog voltages, currents, and temperatures into deterministic states, safety interlocks, and propulsion commands[^bergveld2002].
+
 ---
-title: "Introduction"
----
 
-# Introduction
+## 1. System Boundary and High-Voltage Environment
 
-A **Battery Management System (BMS)** is a critical component in the operation of battery packs, particularly those utilizing lithium-ion technology. Serving as the central control unit, a BMS ensures the safe, efficient, and reliable performance of battery systems by overseeing various operational parameters. Its primary functions encompass monitoring, protection, optimization, and communication, all aimed at maximizing battery longevity and performance while safeguarding against potential hazards.
-
-## Key Functions of a Battery Management System
-
-A BMS performs several essential functions to manage and maintain battery health and performance. These functions can be broadly categorized into five key areas: Monitoring, State Estimation, Protection, Balancing, and Communication.
-
-### 1. Monitoring
-
-**Monitoring** involves continuously tracking various electrical and thermal parameters of the battery pack to ensure it operates within safe and optimal conditions.
-
-- **Voltage Measurement:**
-  - **Total Voltage:** Measures the cumulative voltage of the entire battery pack.
-  - **Individual Cell Voltages:** Monitors the voltage of each cell to detect imbalances.
-  - **Battery Subset Voltages:** Tracks groups of cells to manage larger battery assemblies effectively.
-  
-  *Example:* In an electric vehicle, ensuring that each cell maintains a voltage within specified limits prevents overcharging and undercharging, which can degrade cell life or cause safety issues.
-
-- **Temperature Measurement:**
-  - **Individual Cell Temperatures:** Detects hotspots or cold spots within the battery pack.
-  - **Coolant System Temperatures:** Monitors the effectiveness of thermal management systems like liquid cooling.
-  
-  *Example:* During high-load operations, such as rapid acceleration in an EV, temperature monitoring helps activate cooling systems to prevent overheating.
-
-- **Current Measurement:**
-  - **Charge and Discharge Currents:** Tracks the flow of current into and out of the battery to manage energy usage.
-  
-  *Example:* Accurate current measurement is vital for implementing charge protocols that prevent overcurrent conditions, which can lead to thermal runaway.
+In an electric vehicle (EV) or stationary grid storage system (BESS), the BMS operates across a severe electrical and environmental interface:
 
 ```mermaid
-graph TD
-    subgraph MON["Monitoring"]
-        MON1["Voltage Sensors"]
-        MON2["Temperature Sensors"]
-        MON3["Current Sensors"]
+flowchart TD
+    subgraph Cell_Domain["Electrochemical Cell Domain (Low Voltage Sensors)"]
+        Cells["Battery Cell Matrix (96S - 216S)<br/>Voltages: 2.5 V - 4.35 V per cell"]
+        TempMatrix["NTC / RTD Thermistor Grid<br/>Temperatures: -40 °C to +85 °C"]
+        Shunt["Manganin Shunt / Hall Sensor<br/>Currents: mA resolution up to ±1500 A"]
     end
 
-    subgraph SE["State Estimation"]
-        SE1["SoC Module"]
-        SE2["SoH Module"]
-        SE3["SoP Module"]
-        SE4["SoE Module"]
+    subgraph BMS_Domain["Battery Management System Core"]
+        AFE["Analog Front-End (AFE) ICs<br/>• Synchronized Delta-Sigma ADCs<br/>• Internal MUX & passive balancing switches"]
+        IsoBarrier["Galvanic Isolation Barrier<br/>Capacitive / Magnetic Isolators (>2.5 kV Isolation)"]
+        BMU["Main Controller (BMU / Master MCU)<br/>• Dual-Core Lockstep Safety Core<br/>• Real-Time Operating System (RTOS)<br/>• EKF State Estimation (SoC, SoH, SoP)"]
+        ContactorDriver["High-Side / Low-Side Contactor Drivers<br/>• Precharge, Main(+), Main(-), DC Fast Charge"]
+        IMD["Insulation Monitoring Device (IMD)<br/>Continuous Chassis Ground Fault Detection"]
     end
 
-    subgraph PROT["Protection"]
-        PROT1["Over-Charge / Over-Discharge"]
-        PROT2["Over-Current Protection"]
-        PROT3["Thermal Management"]
+    subgraph Vehicle_Domain["Vehicle Powertrain & Grid (High Voltage & Comms)"]
+        Inverter["Traction Inverter & DC-Link Capacitor"]
+        VCU["Vehicle Control Unit (VCU) via CAN FD / Ethernet"]
+        Charger["On-Board Charger (OBC) / DC Fast Charger (CCS/NACS)"]
     end
 
-    subgraph BAL["Balancing"]
-        BAL1["Passive Balancing"]
-        BAL2["Active Balancing"]
-    end
+    Cells --> AFE
+    TempMatrix --> AFE
+    Shunt --> BMU
+    AFE <==>|"Isolated Daisy Chain (isoSPI)"| IsoBarrier
+    IsoBarrier <==> BMU
+    BMU --> ContactorDriver
+    ContactorDriver --> Inverter
+    IMD --- Cells
+    BMU <==>|"Automotive Ethernet / CAN FD"| VCU
+    BMU <==>|"ISO 15118 / CAN"| Charger
 
-    subgraph COMM["Communication"]
-        COMM1["CAN Bus"]
-        COMM2["SMBus / I²C / UART"]
-        COMM3["Wireless Interfaces"]
-    end
-
-    subgraph ADV["Advanced Features"]
-        ADV1["Machine Learning"]
-        ADV2["Predictive Maintenance"]
-        ADV3["Energy Optimization"]
-    end
-
-    MON -->|Provides sensor data| SE
-    SE -->|Informs protection decisions| PROT
-    PROT -->|May trigger cell balancing| BAL
-    MON -->|Transmits raw data| COMM
-    SE -->|Sends state info| COMM
-    PROT -->|Sends alerts / diagnostics| COMM
-    ADV -->|Improves estimation (ML)| SE
-    ADV -->|Predicts faults| PROT
-    ADV -->|Enables remote monitoring| COMM
+    classDef cell fill:#1e293b,stroke:#3b82f6,stroke-width:1.5px,color:#f8fafc;
+    classDef bms fill:#1e3a8a,stroke:#60a5fa,stroke-width:2px,color:#ffffff;
+    classDef veh fill:#064e3b,stroke:#10b981,stroke-width:1.5px,color:#ffffff;
+    class Cells,TempMatrix,Shunt cell;
+    class AFE,IsoBarrier,BMU,ContactorDriver,IMD bms;
+    class Inverter,VCU,Charger veh;
 ```
 
+---
 
+## 2. Core Functional Pillars of a Modern BMS
 
-
-
-### 2. State Estimation
-
-**State Estimation** involves calculating various states of the battery to provide insights into its current condition and predict future performance.
-
-- **State of Charge (SoC):**
-  - Represents the remaining charge in the battery, typically expressed as a percentage of total capacity.
-  
-  *Calculation:* SoC can be estimated using methods like Coulomb counting, which integrates current over time, or voltage-based algorithms.
-
-- **State of Health (SoH):**
-  - Assesses the overall health and remaining capacity of the battery compared to its original specifications.
-  
-  *Indicators:* SoH can be determined by analyzing capacity fade, internal resistance increases, and other degradation factors.
-
-- **State of Power (SoP):**
-  - Determines the available power output the battery can provide at any given time.
-  
-  *Application:* SoP is crucial for applications requiring immediate power delivery, such as starting an electric vehicle.
-
-- **State of Energy (SoE):**
-  - Calculates the usable energy remaining in the battery, factoring in current and historical usage patterns.
-  
-  *Usage:* SoE provides a more comprehensive view than SoC by considering both charge and energy efficiency.
-
-### 3. Protection
-
-**Protection** mechanisms safeguard the battery pack from conditions that could lead to damage or safety hazards.
-
-- **Over-Charge and Over-Discharge Protection:**
-  - Prevents the battery from being charged beyond its maximum voltage or discharged below its minimum voltage.
-  
-  *Impact:* Avoids irreversible damage to cells and reduces the risk of thermal runaway.
-
-- **Over-Current Protection:**
-  - Guards against excessive current during both charging and discharging processes.
-  
-  *Function:* Limits the current to safe levels, preventing overheating and potential fire hazards.
-
-- **Thermal Management:**
-  - Ensures the battery operates within safe temperature ranges through cooling or heating systems.
-  
-  *Strategy:* Implements active cooling (e.g., liquid cooling) or passive cooling (e.g., heat sinks) based on temperature readings.
-
+A production-grade automotive BMS executes five interconnected operational domains in real time[^plett2015a][^andrea2010][^bergveld2002]:
 
 ```mermaid
-stateDiagram-v2
-    [*] --> Idle
-
-    Idle --> Charging : Start Charging
-    Charging --> Idle : Charge Complete
-
-    Idle --> Discharging : Begin Discharge
-    Discharging --> Idle : Discharge Complete
-
-    Idle --> Fault : Error Detected
-    Charging --> Fault : Overvoltage / Overcurrent
-    Discharging --> Fault : Undervoltage / Overcurrent
-
-    Fault --> Idle : Reset / Recovery
+mindmap
+  root((BMS Core Responsibilities))
+    Data Acquisition
+      Cell Voltage: Sub-millivolt accuracy
+      Current Sensing: Dynamic range from mA to kA
+      Thermal Mapping: Multi-point cell and busbar NTCs
+    Safety & Protection
+      Safe Operating Area SOA enforcement
+      Isolation Resistance Monitoring ISO 6469
+      High-Voltage Interlock Loop HVIL
+      Thermal Runaway Detection & Pyrofuse trigger
+    State Estimation
+      State of Charge SoC: Coulomb counting + EKF
+      State of Health SoH: Capacity fade & Resistance rise
+      State of Power SoP: Peak 2s, 10s, 30s power envelopes
+      State of Energy SoE: Remaining usable energy in kWh
+    Cell Equalization
+      Passive Balancing: Switched resistive shunts
+      Active Balancing: Bidirectional DC-DC energy transfer
+    Communication & Diagnostics
+      CAN FD and Automotive Ethernet interfaces
+      Unified Diagnostic Services UDS ISO 14229
+      Crash de-energization and event logging
 ```
 
-
-
-
-
-### 4. Balancing
-
-**Balancing** ensures that all cells within a battery pack maintain equal charge levels, maximizing performance and extending battery life.
-
-- **Cell Balancing:**
-  - **Passive Balancing:** Dissipates excess energy from higher-charged cells as heat.
-  - **Active Balancing:** Redistributes energy between cells to equalize charge levels.
-  
-  *Benefits:* Prevents individual cell degradation, enhances overall pack capacity, and ensures consistent performance across the battery.
-
-### 5. Communication
-
-**Communication** involves transmitting data between the BMS and external devices or systems, enabling informed decision-making and system integration.
-
-- **Data Reporting:**
-  - Provides real-time data on battery parameters to external systems such as vehicle control units, energy management systems, or user interfaces.
-  
-  *Protocols:* Common communication protocols include CAN bus, SMBus, I²C, and UART.
-
-- **Diagnostic Information:**
-  - Offers insights into battery performance, potential faults, and maintenance needs.
-  
-  *Utility:* Facilitates predictive maintenance and timely interventions to prevent failures.
-
-## Algorithmic Components of a BMS
-
-A BMS leverages various algorithms to perform its functions effectively, ensuring accurate monitoring, estimation, protection, and optimization of the battery system.
-
-### 1. State of Charge Estimation
-
-**State of Charge (SoC)** estimation is fundamental for understanding the remaining capacity of a battery. Two primary methods are employed:
-
-- **Coulomb Counting:**
-  
-  *Description:* Integrates the current flowing into and out of the battery over time to estimate SoC.
-  *Advantages:* Simple and effective for short-term SoC tracking.
-  *Limitations:* Susceptible to drift errors over time without periodic calibration.
-  *Code Snippet Example:*
-
-  ```python
-  class BatteryManagementSystem:
-      def __init__(self, nominal_capacity):
-          self.nominal_capacity = nominal_capacity  # in Ah
-          self.soc = 100.0  # State of Charge in percentage
-          self.current = 0.0  # Current in Amperes
-          self.time_interval = 1  # Time interval in seconds
-  
-      def update_current(self, current_reading):
-          self.current = current_reading
-  
-      def estimate_soc(self):
-          # Coulomb Counting: SoC = SoC_previous - (I * Δt / Q) * 100
-          delta_soc = (self.current * self.time_interval) / (self.nominal_capacity * 3600) * 100
-          self.soc -= delta_soc
-          # Ensure SoC remains within 0-100%
-          self.soc = max(0.0, min(self.soc, 100.0))
-          return self.soc
-  ```
-
-  *Usage:* This method requires accurate current measurements and periodic calibration against known SoC references to maintain precision.
-
-- **Voltage Profiling:**
-  
-  *Description:* Utilizes the open-circuit voltage (OCV) of the battery, which correlates with SoC, to estimate the remaining charge.
-  
-  *Advantages:* Provides absolute SoC estimates without cumulative errors.
-  
-  *Limitations:* Requires the battery to rest (no load or charge) to obtain accurate voltage readings, making it less suitable for dynamic conditions.
-
-### 2. State of Health Estimation
-
-**State of Health (SoH)** assesses the degradation and remaining useful life of the battery. Key methodologies include:
-
-- **Differential Voltage Analysis (DVA):**
-  
-  *Description:* Analyzes changes in the voltage profile during charging or discharging to identify capacity loss and internal resistance increases.
-  
-  *Application:* Suitable for detecting subtle changes in battery behavior indicative of aging.
-
-- **Incremental Capacity Analysis (ICA):**
-  
-  *Description:* Examines the derivative of capacity with respect to voltage (dQ/dV) to identify shifts in battery characteristics.
-  
-  *Benefits:* Sensitive to changes in electrode materials and can detect early signs of degradation.
-
-### 3. Thermal Management Algorithms
-
-Effective thermal management is crucial for maintaining battery performance and safety. Algorithms in this category:
-
-- **Temperature Regulation:**
-  
-  *Function:* Controls cooling and heating systems based on temperature readings to maintain optimal operating conditions.
-  
-  *Techniques:* PID (Proportional-Integral-Derivative) controllers are commonly used to adjust cooling rates dynamically.
-
-- **Predictive Thermal Modeling:**
-  
-  *Description:* Uses historical temperature data and current operating conditions to predict future thermal states and proactively manage cooling systems.
-  
-  *Advantage:* Enhances thermal stability by anticipating temperature fluctuations.
-
-### 4. Fault Detection Algorithms
-
-Identifying and mitigating faults promptly is essential for battery safety. Key algorithms include:
-
-- **Anomaly Detection:**
-  
-  *Method:* Utilizes statistical models or machine learning techniques to identify deviations from normal operating patterns.
-  
-  *Examples:* Detecting unexpected voltage spikes or unusual temperature increases.
-
-- **Rule-Based Systems:**
-  
-  *Description:* Implements predefined rules to trigger protective actions when specific conditions are met.
-  
-  *Usage:* Activates shutdown procedures or alerts when parameters exceed safe thresholds.
-
-## Advanced Features and Enhancements
-
-Beyond the fundamental functions and algorithms, modern BMS implementations incorporate advanced features to enhance performance, safety, and user experience.
-
-### 1. Machine Learning Integration
-
-**Machine Learning (ML)** techniques are increasingly integrated into BMS to improve state estimation, predictive maintenance, and fault detection.
-
-- **Predictive SoC and SoH Models:**
-  
-  *Description:* ML models can learn from historical data to provide more accurate SoC and SoH predictions, adapting to changing battery conditions over time.
-
-- **Anomaly Prediction:**
-  
-  *Function:* Uses ML algorithms to predict potential faults before they occur, enabling proactive maintenance and reducing downtime.
-
-### 2. Wireless Communication
-
-Advancements in wireless communication technologies enable more flexible and scalable BMS configurations.
-
-- **Wireless Sensor Networks:**
-  
-  *Benefit:* Eliminates the need for extensive wiring, reducing weight and simplifying installation in applications like electric vehicles.
-
-- **Remote Monitoring:**
-  
-  *Function:* Allows real-time monitoring and control of battery systems from remote locations, facilitating large-scale energy storage management.
-
-### 3. Energy Optimization Strategies
-
-Optimizing energy usage extends battery life and improves overall system efficiency.
-
-- **Dynamic Charging Algorithms:**
-  
-  *Description:* Adjusts charging rates based on real-time SoC, SoH, and temperature data to optimize charging cycles and minimize degradation.
-
-- **Load Balancing:**
-  
-  *Function:* Distributes energy demands evenly across cells to prevent localized stress and enhance pack longevity.
-
-## Implementation Considerations
-
-Designing and implementing an effective BMS requires careful consideration of various factors to ensure reliability, scalability, and performance.
-
-### 1. Hardware Components
-
-Key hardware components of a BMS include:
-
-- **Microcontroller Units (MCUs):**
-  
-  *Role:* Executes BMS algorithms and manages data processing.
-  
-  *Selection Criteria:* Processing power, memory capacity, and power efficiency.
-
-- **Sensors:**
-  
-  *Types:* Voltage sensors, current sensors (e.g., shunt resistors, Hall effect sensors), and temperature sensors (e.g., thermistors, RTDs).
-  
-  *Placement:* Strategically placed to accurately monitor individual cell and overall pack parameters.
-
-- **Communication Interfaces:**
-  
-  *Protocols:* CAN bus, SMBus, I²C, UART, and Ethernet.
-  
-  *Function:* Facilitates data exchange between the BMS and external systems.
-
-### 2. Software Architecture
-
-A robust software architecture ensures efficient and reliable BMS operation.
-
-- **Modular Design:**
-  
-  *Approach:* Divides the software into distinct modules (e.g., monitoring, estimation, protection) for easier development and maintenance.
-
-- **Real-Time Operating Systems (RTOS):**
-  
-  *Usage:* Manages tasks and ensures timely execution of critical functions.
-
-- **Safety and Redundancy:**
-  
-  *Implementation:* Incorporates fail-safes and redundancy to maintain operation in case of component failures.
-
-### 3. Calibration and Testing
-
-Accurate calibration and rigorous testing are essential for BMS reliability.
-
-- **Sensor Calibration:**
-  
-  *Process:* Ensures that voltage, current, and temperature measurements are precise and consistent.
-
-- **Algorithm Validation:**
-  
-  *Method:* Tests state estimation and fault detection algorithms against known scenarios to verify accuracy and responsiveness.
-
-- **Environmental Testing:**
-  
-  *Objective:* Validates BMS performance under various environmental conditions, such as temperature extremes and vibration.
-
-## Code Snippets and Practical Implementations
-
-To illustrate the practical aspects of BMS functionality, the following code snippets demonstrate key algorithms and processes.
-
-### 1. State of Charge Estimation Using Coulomb Counting
-
-```python
-class BatteryManagementSystem:
-    def __init__(self, nominal_capacity):
-        self.nominal_capacity = nominal_capacity  # in Ah
-        self.soc = 100.0  # State of Charge in percentage
-        self.current = 0.0  # Current in Amperes
-        self.time_interval = 1  # Time interval in seconds
-
-    def update_current(self, current_reading):
-        self.current = current_reading
-
-    def estimate_soc(self):
-        # Coulomb Counting: SoC = SoC_previous - (I * Δt / Q) * 100
-        delta_soc = (self.current * self.time_interval) / (self.nominal_capacity * 3600) * 100
-        self.soc -= delta_soc
-        # Ensure SoC remains within 0-100%
-        self.soc = max(0.0, min(self.soc, 100.0))
-        return self.soc
-
-# Example Usage
-bms = BatteryManagementSystem(nominal_capacity=50)  # 50 Ah battery
-bms.update_current(-10)  # Discharging at 10 A
-current_soc = bms.estimate_soc()
-print(f"Current SoC: {current_soc:.2f}%")
+---
+
+## 3. High-Precision Sensing Requirements
+
+The accuracy of all downstream BMS algorithms (SoC, SoH, SoP) is strictly bounded by sensor hardware fidelity[^plett2015a]:
+
+### A. Cell Voltage Acquisition
+Lithium-ion cells have very flat open-circuit voltage plateaus, particularly **Lithium Iron Phosphate ($\text{LFP}$)**, where a $1\,\text{mV}$ measurement error translates to an $\text{SoC}$ estimation error greater than $5\%$ between $30\%$ and $70\%\,\text{SoC}$[^schmalstieg2014]:
+- **Analog Front-End (AFE):** Multi-channel (12-ch to 24-ch) dedicated battery ICs (e.g., ADI ADBMS6815, TI BQ79616, NXP MC33771C).
+- **Measurement Precision:** Measurement accuracy better than $\pm 1.5\,\text{mV}$ across the entire temperature range ($-40^\circ\text{C}$ to $+105^\circ\text{C}$) using synchronized delta-sigma ($\Delta\Sigma$) analog-to-digital converters.
+- **Low-Pass Filtering:** On-chip digital averaging filters reject high-frequency switching noise induced by inverter pulse-width modulation (PWM, typically $8 - 20\,\text{kHz}$).
+
+### B. Current Measurement: Shunts vs. Hall Sensors
+Pack current measurement must resolve currents across a dynamic range of **six orders of magnitude**: from quiescent sleep currents ($\approx 100\,\mu\text{A}$) up to peak acceleration and regenerative braking bursts ($\pm 1200\,\text{A}$)[^andrea2010]:
+
+| Technology | Operating Principle | Measurement Accuracy | Advantages | Limitations |
+| :--- | :--- | :--- | :--- | :--- |
+| **Manganin Shunt** | Ohmic voltage drop ($V = I \cdot R_{\text{shunt}}$) across calibrated low-TCR alloy ($25 - 100\,\mu\Omega$). | High ($<0.1\%$) | Zero magnetic hysteresis; excellent for Coulomb counting integration. | Lacks galvanic isolation; dissipated power ($I^2 R$) at high current requires thermal management. |
+| **Open-Loop Hall Effect** | Magnetic flux detection via Hall element in gapped ferromagnetic core. | Moderate ($1 - 2\%$) | Inherent galvanic isolation; zero power insertion loss. | Subject to magnetic core saturation, temperature drift, and residual offset. |
+| **Closed-Loop (Fluxgate) Transducer** | Active zero-flux compensation with secondary feedback winding. | Very High ($<0.2\%$) | True galvanic isolation; negligible offset drift; broad bandwidth ($>100\,\text{kHz}$). | Higher cost, larger physical packaging volume, higher idle power consumption. |
+
+> [!NOTE]
+> Automotive safety architectures (ASIL-C/D) frequently mandate **redundant dual sensing**: a primary precision Manganin shunt paired with a secondary galvanically isolated fluxgate sensor to cross-check current readings and detect sensor drift[^iso26262].
+
+### C. Temperature Matrix Distribution
+Thermal gradients within a large battery pack accelerate cell imbalance and localized aging. NTC thermistors are deployed across:
+1. Negative and positive cell terminal tabs (highest Ohmic heating locations).
+2. Coolant inlet and outlet manifolds.
+3. Central cells in dense modules (thermal core hot spots).
+
+---
+
+## 4. Hardware Realization & Real-Time Constraints
+
+Automotive BMS electronic control units operate on **AUTOSAR**-compliant real-time operating systems (RTOS) executing deterministic task cycles[^andrea2010][^bergveld2002]:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant AFE as Cell Monitoring AFE
+    participant Task10 as 10 ms Real-Time Task
+    participant Task100 as 100 ms State Estimator
+    participant Task1000 as 1000 ms Thermal & Balancing
+    participant VCU as Vehicle Control Unit (VCU)
+
+    Note over AFE,Task10: Safety & Protection Loop (10 ms)
+    AFE->>Task10: Raw Voltage, Current, Temperature ADC readings
+    Task10->>Task10: Fault Check: Overvoltage, Overcurrent, Short-Circuit
+    alt Fault Detected
+        Task10->>Task10: Trip Safe State: De-energize Contactors (< 20 ms)
+    else Normal
+        Task10->>Task100: Filtered V, I, T Dataset
+    end
+
+    Note over Task100,VCU: Dynamic State Estimation (100 ms)
+    Task100->>Task100: Execute EKF Algorithm (SoC & SoP Calculation)
+    Task100->>VCU: Broadcast CAN Frame: Available Charge/Discharge Power (kW)
+
+    Note over Task1000: Thermal & Equalization Loop (1000 ms)
+    Task1000->>Task1000: Compute SoH & Determine Balancing Mask
+    Task1000->>AFE: Set Switched Resistor Balancing Channels
 ```
 
-*Explanation:* This class initializes a BMS with a nominal capacity and tracks the State of Charge by integrating the current over time. The `estimate_soc` method updates the SoC based on the current reading and ensures it remains within the valid range.
+---
 
-### 2. Over-Current Protection Mechanism
+## References
 
-```python
-class OverCurrentProtection:
-    def __init__(self, max_current):
-        self.max_current = max_current  # Maximum allowable current in Amperes
-
-    def check_current(self, current):
-        if abs(current) > self.max_current:
-            self.trigger_protection()
-            return False
-        return True
-
-    def trigger_protection(self):
-        print("Over-current detected! Initiating protection measures.")
-        # Implement shutdown or current limiting logic here
-
-# Example Usage
-ocp = OverCurrentProtection(max_current=20)  # 20 A limit
-current_reading = 25  # Current exceeds limit
-if not ocp.check_current(current_reading):
-    # Handle protection state
-    pass
-```
-
-*Explanation:* This class monitors the current and triggers protective actions if the current exceeds the predefined maximum threshold, preventing potential damage or hazards.
-
-### 3. Temperature Regulation Using PID Controller
-
-```python
-class PIDController:
-    def __init__(self, kp, ki, kd, setpoint):
-        self.kp = kp
-        self.ki = ki
-        self.kd = kd
-        self.setpoint = setpoint
-        self.integral = 0.0
-        self.previous_error = 0.0
-
-    def compute(self, measurement):
-        error = self.setpoint - measurement
-        self.integral += error
-        derivative = error - self.previous_error
-        output = self.kp * error + self.ki * self.integral + self.kd * derivative
-        self.previous_error = error
-        return output
-
-# Example Usage
-pid = PIDController(kp=1.0, ki=0.1, kd=0.05, setpoint=25.0)  # Target temperature 25°C
-current_temp = 30.0  # Current temperature
-control_signal = pid.compute(current_temp)
-print(f"Control Signal: {control_signal}")
-# Use control_signal to adjust cooling/heating systems
-```
-
-*Explanation:* This PID controller adjusts the cooling or heating systems based on the difference between the desired setpoint and the actual temperature, ensuring the battery operates within safe thermal limits.
-
-## Best Practices for BMS Implementation
-
-Implementing an effective BMS requires adherence to best practices to ensure reliability, safety, and performance.
-
-### Accurate Sensor Placement and Calibration
-
-- **Strategic Sensor Placement:** Position sensors to accurately capture the most critical parameters, such as individual cell temperatures and voltages, to provide comprehensive monitoring.
-  
-- **Regular Calibration:** Periodically calibrate sensors to maintain measurement accuracy, accounting for potential drifts and environmental influences.
-
-### Robust Communication Protocols
-
-- **Protocol Selection:** Choose communication protocols that match the application requirements in terms of speed, reliability, and compatibility.
-  
-- **Error Handling:** Implement error detection and correction mechanisms to ensure data integrity during transmission.
-
-### Redundancy and Fail-Safe Mechanisms
-
-- **Redundant Systems:** Incorporate redundant sensors and pathways to maintain functionality in case of component failures.
-  
-- **Fail-Safe Design:** Design the BMS to default to a safe state (e.g., disconnecting the battery) in the event of critical failures or detected hazards.
-
-### Testing and Validation
-
-- **Simulation Testing:** Use simulation tools to model BMS behavior under various scenarios before physical implementation.
-  
-- **Field Testing:** Conduct extensive testing in real-world conditions to validate performance, identify potential issues, and refine algorithms.
-
-### Scalability and Flexibility
-
-- **Modular Design:** Develop the BMS with a modular architecture to facilitate scalability and adaptability to different battery configurations and capacities.
-  
-- **Firmware Updates:** Enable over-the-air (OTA) firmware updates to allow for software improvements and feature enhancements without physical intervention.
+[^plett2015a]: Plett, G. L. (2015). *Battery Management Systems, Volume I: Battery Modeling*. Artech House, Norwood, MA. ISBN: 978-1-63081-023-8.
+[^andrea2010]: Andrea, D. (2010). *Battery Management Systems for Large Lithium-Ion Battery Packs*. Artech House, Norwood, MA. ISBN: 978-1-60807-104-3.
+[^scrosati2010]: Scrosati, B., & Garche, J. (2010). *Lithium batteries: Status, prospects and future*. Journal of Power Sources, 195(9), 2419–2430. DOI: [10.1016/j.jpowsour.2009.11.048](https://doi.org/10.1016/j.jpowsour.2009.11.048)
+[^dahn2011]: Dahn, J. R., et al. (2011). *High-precision coulometry for predicting battery cycle life*. Journal of The Electrochemical Society, 158(3), A302. DOI: [10.1149/1.3533417](https://doi.org/10.1149/1.3533417)
+[^bergveld2002]: Bergveld, H. J., Kruijt, W. S., & Notten, P. H. (2002). *Battery Management Systems: Design by Modelling*. Philips Research Book Series, Vol. 1. Springer, Dordrecht. DOI: [10.1007/978-94-017-0843-2](https://doi.org/10.1007/978-94-017-0843-2)
+[^schmalstieg2014]: Schmalstieg, J., et al. (2014). *A holistic aging model for Li(NiMnCo)O2 based 18650 lithium-ion cells*. Journal of Power Sources, 257, 325–334. DOI: [10.1016/j.jpowsour.2014.02.012](https://doi.org/10.1016/j.jpowsour.2014.02.012)
+[^iso26262]: International Organization for Standardization. (2018). *ISO 26262:2018 Road vehicles — Functional safety*. Geneva, Switzerland.

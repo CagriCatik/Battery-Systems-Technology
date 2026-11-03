@@ -1,271 +1,181 @@
-# Functions
+# Safety, Protection & Fault Management in BMS
 
-The primary role of a BMS is to oversee and manage the performance, safety, and longevity of battery packs by executing a series of critical functions. These functions ensure that batteries operate within their specified parameters, optimize their performance, extend their usable life, and maintain safety standards across various operating conditions.
+Safety is the absolute foremost requirement of any Battery Management System (BMS)[^andrea2010][^plett2015a]. High-voltage traction battery packs in modern electric vehicles store hundreds of megajoules of chemical energy and operate at voltages between $400\,\text{V}$ and $900\,\text{V}$ DC[^iso6469]. Failure to detect abnormal operating conditions within milliseconds can result in lethal electric shock, explosive cell venting, or uncontrollable thermal runaway propagation[^wang2012][^scrosati2010].
 
-Understanding the functions of a BMS is essential for both developers and users of battery-powered systems, as it directly impacts the efficiency, reliability, and safety of the devices and vehicles that depend on these energy storage solutions. This chapter delves into the core functions of a BMS, exploring how each contributes to the overall management of battery systems, and highlights application-specific considerations that tailor these functions to meet the unique demands of different industries.
+Automotive functional safety standard **ISO 26262** mandates that battery protection mechanisms achieve safety integrity levels up to **ASIL D**—the most stringent category reserved for safety-critical automotive systems[^iso26262].
 
-## Key Functions of a Battery Management System
+---
 
-A BMS performs several essential functions that can be broadly categorized into Safety Assurance, Performance Optimization, Longevity Management, and Diagnostic and Prognostic Capabilities. Each of these categories encompasses specific tasks and processes that collectively ensure the optimal operation of battery systems.
+## 1. Multi-Tier Protection Hierarchy
 
-### Safety Assurance
+Modern automotive safety architectures implement a **three-tier defense-in-depth protection model**[^andrea2010][^iso26262]:
 
-**Safety Assurance** is the foremost function of a BMS, focusing on preventing conditions that could lead to battery failure or hazardous situations. This involves a combination of protective measures and real-time monitoring to maintain safe operating conditions.
+```mermaid
+flowchart TD
+    subgraph Tier1["Tier 1: Algorithmic Derating (Preventive)"]
+        T1["Dynamic Power Limiting (SoP)<br/>Throttles inverter/charger current before reaching critical limits"]
+    end
 
-#### Overcharge and Overdischarge Protection
+    subgraph Tier2["Tier 2: Software Fault Interlocks (Contactor Open)"]
+        T2["Electronic Threshold Trip<br/>AFE/MCU opens high-voltage contactors within 10 - 50 ms"]
+    end
 
-- **Overcharge Protection:**
-  - **Function:** Prevents the battery cells from being charged beyond their maximum voltage threshold.
-  - **Impact:** Avoids excessive pressure and heat generation, which can lead to cell degradation, reduced lifespan, or thermal runaway.
-  
-- **Overdischarge Protection:**
-  - **Function:** Ensures that battery cells are not discharged below their minimum voltage limit.
-  - **Impact:** Protects against irreversible capacity loss, increased internal resistance, and potential cell damage.
+    subgraph Tier3["Tier 3: Hardware Failsafe (Pyrotechnic Disconnect)"]
+        T3["Passive Fuse & Active Pyrofuse<br/>Physical physical separation within < 2 ms during short circuit / crash"]
+    end
 
-*Example:* In an electric vehicle, overcharging can cause overheating of cells, while overdischarging can lead to a sudden drop in performance and potential battery failure. The BMS monitors voltage levels continuously to prevent these scenarios.
+    T1 -->|If thresholds exceeded| T2
+    T2 -->|If contactor welds / catastrophic fault| T3
 
-#### Thermal Management
-
-- **Temperature Monitoring:**
-  - **Function:** Continuously measures the temperature of individual cells and the overall battery pack.
-  - **Impact:** Identifies hotspots or areas at risk of freezing, ensuring that the battery operates within safe thermal boundaries.
-  
-- **Temperature Regulation:**
-  - **Function:** Activates cooling or heating systems based on temperature readings.
-  - **Impact:** Maintains optimal operating temperatures, preventing thermal runaway and enhancing battery efficiency.
-
-*Example:* During high-load operations, such as rapid acceleration in an EV, the BMS activates cooling systems to dissipate excess heat, maintaining the battery's temperature within safe limits.
-
-#### Fault Detection
-
-- **Anomaly Identification:**
-  - **Function:** Detects irregularities such as short circuits, ground faults, or unexpected voltage spikes.
-  - **Impact:** Initiates protective measures to prevent escalation of faults, ensuring user safety and system integrity.
-  
-- **Protective Response:**
-  - **Function:** Implements actions like disconnecting the battery, limiting current flow, or triggering alarms upon fault detection.
-  - **Impact:** Mitigates risks associated with electrical failures, reducing the likelihood of fires or explosions.
-
-*Example:* In a consumer electronic device, the BMS can detect a short circuit and immediately cut off the power supply to prevent device damage or user injury.
-
-### Performance Optimization
-
-**Performance Optimization** involves enhancing the efficiency and effectiveness of the battery system to meet the operational demands of the application. This includes accurate state estimations and ensuring balanced cell operations.
-
-#### State of Charge (SoC) Estimation
-
-- **Function:** Calculates the remaining battery capacity, typically expressed as a percentage.
-- **Impact:** Informs users and systems about the current charge level, aiding in energy management and usage planning.
-
-*Calculation Methods:*
-
-- **Coulomb Counting:** Integrates the current over time to estimate SoC.
-- **Voltage-Based Algorithms:** Uses open-circuit voltage correlations to determine SoC.
-
-*Example:* In a smartphone, accurate SoC estimation allows users to monitor battery life and manage charging cycles effectively.
-
-#### State of Health (SoH) Assessment
-
-- **Function:** Evaluates the overall condition and remaining capacity of the battery compared to its original specifications.
-- **Impact:** Predicts the battery's lifespan and performance degradation, enabling proactive maintenance and replacement.
-
-*Indicators:*
-
-- **Capacity Fade:** Reduction in the total charge the battery can hold.
-- **Internal Resistance Increase:** Higher resistance leads to reduced efficiency and increased heat generation.
-
-*Example:* In an EV, SoH assessment helps in determining when battery packs need servicing or replacement, ensuring consistent vehicle performance.
-
-#### Cell Balancing
-
-- **Function:** Ensures uniform charge levels across all cells within a battery pack.
-- **Impact:** Maximizes overall pack efficiency, prevents individual cell degradation, and extends the battery's usable life.
-
-*Balancing Techniques:*
-
-- **Passive Balancing:** Dissipates excess energy from higher-charged cells as heat.
-- **Active Balancing:** Redistributes energy between cells to equalize charge levels.
-
-*Example:* In high-capacity battery packs used in electric buses, cell balancing prevents discrepancies that could lead to reduced performance and shortened battery life.
-
-### Longevity Management
-
-**Longevity Management** focuses on extending the usable life of the battery by analyzing usage patterns and providing actionable insights to optimize battery performance over time.
-
-#### Life Cycle Prediction
-
-- **Function:** Analyzes historical usage data to forecast the battery's lifespan.
-- **Impact:** Enables scheduling of maintenance and replacement before critical degradation occurs, minimizing downtime and operational costs.
-
-*Techniques:*
-
-- **Usage Pattern Analysis:** Examines charge/discharge cycles, depth of discharge, and operating conditions.
-- **Predictive Modeling:** Utilizes statistical and machine learning models to estimate remaining life.
-
-*Example:* In renewable energy storage systems, life cycle prediction helps in planning maintenance schedules, ensuring uninterrupted energy supply.
-
-#### Usage Recommendations
-
-- **Function:** Provides guidelines to users based on current battery health and performance data.
-- **Impact:** Educates users on optimal charging practices, usage habits, and maintenance actions to prolong battery life.
-
-*Recommendations:*
-
-- **Optimal Charging Rates:** Advises on charging speeds to reduce stress on the battery.
-- **Depth of Discharge Management:** Suggests limiting the extent of discharge to preserve capacity.
-
-*Example:* In portable medical devices, usage recommendations ensure that critical equipment remains operational without frequent battery replacements.
-
-### Diagnostic and Prognostic Capabilities
-
-**Diagnostic and Prognostic Capabilities** enable the BMS to not only monitor current battery conditions but also anticipate future issues, allowing for proactive management and maintenance.
-
-#### Real-Time Monitoring
-
-- **Function:** Continuously observes key battery parameters such as voltage, current, temperature, and SoC.
-- **Impact:** Detects potential issues as they arise, facilitating immediate corrective actions to maintain system stability.
-
-*Parameters Monitored:*
-
-- **Electrical Metrics:** Voltage levels, current flows, and power output.
-- **Thermal Metrics:** Temperature readings across the battery pack.
-
-*Example:* In electric forklifts, real-time monitoring ensures that batteries operate efficiently during heavy-duty operations, preventing unexpected failures.
-
-#### Predictive Analysis
-
-- **Function:** Utilizes data trends and historical information to forecast potential faults and performance issues.
-- **Impact:** Enables proactive interventions, reducing the likelihood of unexpected failures and enhancing overall system reliability.
-
-*Techniques:*
-
-- **Data Trend Analysis:** Identifies patterns that precede faults or performance degradation.
-- **Machine Learning Models:** Learns from historical data to predict future anomalies.
-
-*Example:* In electric flight applications, predictive analysis ensures that battery systems remain reliable during critical flight operations, enhancing safety and mission success rates.
-
-## Application-Specific Considerations
-
-The functions of a BMS are tailored to meet the specific demands of different applications, each with its unique operational requirements and safety standards. Understanding these considerations is crucial for designing effective BMS solutions that align with the intended use case.
-
-### Consumer Electronics (e.g., Smartphones)
-
-- **Focus Areas:**
-  - **Safety:** Prevents overheating and overcharging, ensuring user safety.
-  - **Basic Performance:** Manages simple SoC and SoH estimations to inform users about battery status.
-  
-- **Challenges:**
-  - **Compact Design:** Limited space necessitates miniaturized BMS components.
-  - **Low Power Consumption:** BMS must operate efficiently without significantly draining the device's power.
-
-*Example:* In smartphones, the BMS ensures that charging cycles are managed to prevent battery swelling and extends battery life through efficient power management.
-
-### Electric Vehicles (EVs)
-
-- **Focus Areas:**
-  - **Safety:** Robust protection mechanisms to handle high-capacity battery packs.
-  - **Performance Optimization:** Enhances driving range and accelerates performance through precise SoC and SoH management.
-  - **Lifespan Management:** Extends battery life to reduce maintenance costs and improve vehicle reliability.
-  
-- **Challenges:**
-  - **High Energy Density:** Managing large-scale battery packs with numerous cells.
-  - **Dynamic Operating Conditions:** Varying loads and temperatures during vehicle operation require adaptive BMS strategies.
-
-*Example:* In EVs, the BMS balances the charge across thousands of cells, manages thermal conditions during long drives, and provides real-time data to the vehicle's control systems to optimize energy usage.
-
-### Electric Flight (e.g., eVTOL Aircraft)
-
-- **Focus Areas:**
-  - **Stringent Safety Requirements:** Ensures airworthiness and prevents in-flight battery failures.
-  - **Real-Time Diagnostics:** Provides immediate responses to potential faults to maintain flight safety.
-  - **Complex Management:** Handles high power demands and rapid charge/discharge cycles characteristic of flight operations.
-  
-- **Challenges:**
-  - **Critical Safety Standards:** Compliance with aviation safety regulations necessitates highly reliable BMS.
-  - **Real-Time Responsiveness:** Must detect and respond to faults instantaneously to prevent catastrophic failures.
-  - **Weight and Efficiency Constraints:** BMS components must be lightweight without compromising functionality.
-
-*Example:* In eVTOL aircraft, the BMS continuously monitors battery integrity, manages thermal conditions during flight, and ensures that any anomalies trigger immediate protective actions to maintain flight safety.
-
-## Code Snippet Example: Fault Detection in BMS
-
-To illustrate the practical implementation of fault detection within a BMS, consider the following Python code snippet. This example demonstrates how a BMS can monitor cell voltages and temperatures, identifying any that fall outside predefined safe operating ranges.
-
-```python
-class BatteryManagementSystem:
-    def __init__(self, voltage_limits, temperature_limits):
-        self.voltage_limits = voltage_limits  # Tuple (min_voltage, max_voltage)
-        self.temperature_limits = temperature_limits  # Tuple (min_temp, max_temp)
-        self.cell_voltages = []
-        self.cell_temperatures = []
-
-    def add_cell_readings(self, voltage, temperature):
-        """Adds the voltage and temperature readings of a single cell."""
-        self.cell_voltages.append(voltage)
-        self.cell_temperatures.append(temperature)
-
-    def check_faults(self):
-        """Checks each cell for voltage and temperature faults."""
-        faults = []
-        for i, (voltage, temperature) in enumerate(zip(self.cell_voltages, self.cell_temperatures)):
-            if not (self.voltage_limits[0] <= voltage <= self.voltage_limits[1]):
-                faults.append(f"Cell {i + 1}: Voltage out of range ({voltage} V)")
-            if not (self.temperature_limits[0] <= temperature <= self.temperature_limits[1]):
-                faults.append(f"Cell {i + 1}: Temperature out of range ({temperature} °C)")
-        return faults
-
-    def clear_readings(self):
-        """Clears the current cell readings after fault checking."""
-        self.cell_voltages.clear()
-        self.cell_temperatures.clear()
-
-# Example Usage
-if __name__ == "__main__":
-    # Define safe operating limits
-    voltage_limits = (3.0, 4.2)  # in Volts
-    temperature_limits = (0, 45)  # in Celsius
-
-    # Initialize BMS with specified limits
-    bms = BatteryManagementSystem(voltage_limits, temperature_limits)
-
-    # Simulate adding readings from 4 cells
-    cell_data = [
-        (3.7, 25),
-        (4.3, 30),  # Overvoltage
-        (3.5, 50),  # Overtemperature
-        (2.9, 20)   # Undervoltage
-    ]
-
-    for voltage, temperature in cell_data:
-        bms.add_cell_readings(voltage, temperature)
-
-    # Check for faults
-    detected_faults = bms.check_faults()
-    if detected_faults:
-        for fault in detected_faults:
-            print(f"Fault Detected: {fault}")
-        # Implement protective measures here
-    else:
-        print("All cells are operating within safe limits.")
-
-    # Clear readings for the next cycle
-    bms.clear_readings()
+    classDef t1 fill:#064e3b,stroke:#10b981,stroke-width:1.5px,color:#ffffff;
+    classDef t2 fill:#1e3a8a,stroke:#3b82f6,stroke-width:1.5px,color:#ffffff;
+    classDef t3 fill:#7f1d1d,stroke:#ef4444,stroke-width:2px,color:#ffffff;
+    class Tier1,T1 t1;
+    class Tier2,T2 t2;
+    class Tier3,T3 t3;
 ```
 
-**Explanation:**
+---
 
-- **Initialization:**
-  - The `BatteryManagementSystem` class is initialized with voltage and temperature limits, defining the safe operating ranges for each cell.
-  
-- **Adding Readings:**
-  - The `add_cell_readings` method records the voltage and temperature of each cell.
-  
-- **Fault Checking:**
-  - The `check_faults` method iterates through each cell's readings, comparing them against the predefined limits.
-  - If a cell's voltage or temperature falls outside the safe range, a fault message is appended to the `faults` list.
-  
-- **Example Usage:**
-  - The example simulates readings from four cells, deliberately introducing overvoltage, overtemperature, and undervoltage conditions to demonstrate fault detection.
-  - Upon detecting faults, appropriate protective measures (e.g., shutting down the system or activating cooling mechanisms) can be implemented.
-  
-This example underscores the importance of continuous monitoring and immediate fault detection in maintaining battery safety and integrity.
+## 2. Electrical Threshold Monitoring (Voltage, Current, Temp)
+
+To prevent false trips while ensuring absolute safety, the BMS utilizes **multi-stage thresholds** with programmable debounce timers[^andrea2010][^plett2015a]:
+
+```mermaid
+graph TD
+    subgraph Threshold_Stages["Multi-Level Safe Operating Area (SOA) Monitoring"]
+        direction TB
+        L4_Max["Hardware OVP Trip (AFE Level: 4.28 V) → Immediate Contactor Open"]
+        L3_Max["Software Fault (BMS Level: 4.22 V) → Inverter Power Derate to 0 kW"]
+        L2_Max["Software Warning (BMS Level: 4.18 V) → Derate Charging Current"]
+        Normal["NORMAL OPERATING WINDOW (2.80 V to 4.15 V)"]
+        L2_Min["Software Warning (BMS Level: 2.90 V) → Derate Discharge Power"]
+        L3_Min["Software Fault (BMS Level: 2.60 V) → Disconnect Propulsion"]
+        L4_Min["Hardware UVP Trip (AFE Level: 2.40 V) → Lockout Contactor Open"]
+    end
+
+    classDef trip fill:#7f1d1d,stroke:#ef4444,stroke-width:1.5px,color:#ffffff;
+    classDef warn fill:#b45309,stroke:#f59e0b,stroke-width:1.5px,color:#ffffff;
+    classDef norm fill:#064e3b,stroke:#10b981,stroke-width:2px,color:#ffffff;
+    class L4_Max,L4_Min trip;
+    class L3_Max,L2_Max,L2_Min,L3_Min warn;
+    class Normal norm;
+```
+
+### Safety Threshold Table (NMC Chemistry Example)
+
+| Parameter | Normal Range | Warning (Derate) | Fault (Contactor Open) | Hardware Trip (AFE) | Fault Reaction Time |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Cell Overvoltage (OVP)** | $3.0 - 4.18\,\text{V}$ | $4.18\,\text{V}$ | $4.22\,\text{V}$ | $4.28\,\text{V}$ | $< 20\,\text{ms}$ |
+| **Cell Undervoltage (UVP)** | $3.0 - 4.18\,\text{V}$ | $2.90\,\text{V}$ | $2.60\,\text{V}$ | $2.40\,\text{V}$ | $< 50\,\text{ms}$ |
+| **Charge Overcurrent (OCP)** | $\le 200\,\text{A}$ | $220\,\text{A}$ | $250\,\text{A}$ | $300\,\text{A}$ | $< 10\,\text{ms}$ |
+| **Discharge Overcurrent** | $\le 600\,\text{A}$ | $650\,\text{A}$ | $750\,\text{A}$ | $900\,\text{A}$ | $< 5\,\text{ms}$ |
+| **Overtemperature (OT)** | $15 - 45^\circ\text{C}$ | $50^\circ\text{C}$ | $55^\circ\text{C}$ | $60^\circ\text{C}$ | $< 500\,\text{ms}$ |
+| **Undertemperature Charge**| $0 - 45^\circ\text{C}$ | $5^\circ\text{C}$ | $0^\circ\text{C}$ | $-5^\circ\text{C}$ | $< 100\,\text{ms}$ |
+
+---
+
+## 3. High-Voltage Isolation Monitoring (ISO 6469-1)
+
+Because traction batteries operate at dangerous voltages isolated from the vehicle metallic chassis, a breakdown in cable insulation presents an electrocution hazard[^iso6469]:
+
+```mermaid
+flowchart LR
+    HV_Pos["Pack High Voltage Positive (HV+)"] --- R_iso_pos["Isolation Resistance (R_iso+)"]
+    R_iso_pos --- Chassis["Vehicle Chassis Ground (GND)"]
+    Chassis --- R_iso_neg["Isolation Resistance (R_iso-)"]
+    R_iso_neg --- HV_Neg["Pack High Voltage Negative (HV-)"]
+    
+    IMD["Insulation Monitoring Device (IMD)"] -.->|"Active Switched-Resistor Injection"| Chassis
+
+    classDef hv fill:#7f1d1d,stroke:#ef4444,stroke-width:1.5px,color:#ffffff;
+    classDef ground fill:#374151,stroke:#9ca3af,stroke-width:1.5px,color:#ffffff;
+    classDef imd fill:#1e3a8a,stroke:#3b82f6,stroke-width:1.5px,color:#ffffff;
+    class HV_Pos,HV_Neg hv;
+    class Chassis ground;
+    class IMD imd;
+```
+
+### Governing Standard: ISO 6469-1 / UN ECE R100
+International safety regulations mandate a minimum electrical isolation resistance ($R_{\text{iso}}$):
+
+$$
+R_{\text{iso}} \ge 500\,\frac{\Omega}{\text{V}_{\text{nominal}}} \quad (\text{for DC systems})
+$$
+
+- For a **$400\,\text{V}$ nominal pack**, $R_{\text{iso}}$ must exceed **$200\,\text{k}\Omega$**.
+- For an **$800\,\text{V}$ nominal pack**, $R_{\text{iso}}$ must exceed **$400\,\text{k}\Omega$**.
+- If $R_{\text{iso}}$ drops below $100\,\Omega/\text{V}$ (critical isolation fault), the BMS alerts the driver and locks out contactor engagement upon vehicle power-down.
+
+---
+
+## 4. High-Voltage Interlock Loop (HVIL)
+
+The **High-Voltage Interlock Loop (HVIL)** is a dedicated low-voltage, low-current hardware loop that passes in series through every removable high-voltage connector, module cover, manual service disconnect (MSD), and inverter cable[^andrea2010]:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Tech as Service Technician
+    participant MSD as Manual Service Disconnect (HVIL Pin)
+    participant BMS as Master BMS Controller
+    participant Contactors as Primary High-Voltage Contactors
+
+    Note over Tech,Contactors: Normal Driving / Power State: HVIL Loop is Closed
+    Tech->>MSD: Pulls Service Disconnect Handle
+    Note over MSD: Short HVIL pin breaks contact FIRST (mechanical lead)
+    MSD-->>BMS: HVIL Circuit Opens (Loop Current = 0 mA)
+    BMS->>Contactors: Commanded to OPEN within < 10 ms
+    Contactors->>Contactors: Galvanically Isolate HV Pack
+    Note over MSD: High-Voltage main pins disconnect SECOND (Zero Arc Risk!)
+```
+
+By ensuring that the low-voltage HVIL pin disconnects **before** the high-voltage power pins disengage, the BMS de-energizes the contactors under zero-current conditions, preventing explosive electric arc flash and contactor destruction[^andrea2010].
+
+---
+
+## 5. Contactor Sequencing & Weld Detection
+
+Automotive battery packs incorporate three primary electromechanical contactors and a precharge circuit[^plett2015a]:
+
+```mermaid
+flowchart LR
+    Pack_Pos["Pack HV(+)"] --> MainPos["Main Contactor (+)"]
+    Pack_Pos --> Pre_SW["Precharge Contactor"]
+    Pre_SW --> R_Pre["Precharge Resistor (e.g., 50 Ω)"]
+    R_Pre --> DC_Link["DC-Link Inverter Capacitor (C_link)"]
+    MainPos --> DC_Link
+    DC_Link --> MainNeg["Main Contactor (-)"]
+    MainNeg --> Pack_Neg["Pack HV(-)"]
+
+    classDef cont fill:#1e3a8a,stroke:#3b82f6,stroke-width:1.5px,color:#ffffff;
+    classDef pass fill:#111827,stroke:#10b981,stroke-width:1px,color:#f3f4f6;
+    class MainPos,MainNeg,Pre_SW cont;
+    class R_Pre,DC_Link pass;
+```
+
+### Contactor Weld Detection Protocol
+If high current causes a contactor's copper-silver contacts to physically weld together, the pack cannot be de-energized in an emergency. The BMS executes automated weld detection before every startup and after every shutdown:
+1. With $\text{Main}(+)$ and $\text{Main}(-)$ commanded open, the BMS measures voltage across the inverter DC-link terminals ($V_{\text{link}}$).
+2. If $V_{\text{link}} \approx V_{\text{pack}}$, one or both contactors are welded.
+3. The BMS closes $\text{Main}(-)$ independently; if $V_{\text{link}}$ jumps, $\text{Main}(+)$ is welded.
+4. The system flags an irreversible diagnostic trouble code (DTC) and disables vehicle startup per **ISO 26262 ASIL D**[^iso26262].
+
+---
+
+## 6. Pyrotechnic Disconnect Switches (Pyrofuse)
+
+In high-speed collisions or dead short-circuits (where current exceeds $2000\,\text{A}$ within micro-seconds), electromechanical contactors cannot open quickly enough and risk contactor arcing. 
+
+The BMS interfaces with the vehicle crash sensing unit (airbag controller). Upon detecting a collision exceeding deceleration thresholds ($>5g$), an active pyrofuse detonates a small chemical propellant charge, physically driving an insulated solid knife blade through a busbar within **$< 1.5\,\text{ms}$**, completely severing the high-voltage circuit[^iso26262].
+
+---
+
+## References
+
+[^andrea2010]: Andrea, D. (2010). *Battery Management Systems for Large Lithium-Ion Battery Packs*. Artech House, Norwood, MA. ISBN: 978-1-60807-104-3.
+[^plett2015a]: Plett, G. L. (2015). *Battery Management Systems, Volume I: Battery Modeling*. Artech House, Norwood, MA. ISBN: 978-1-63081-023-8.
+[^iso6469]: International Organization for Standardization. (2019). *ISO 6469-1: Electrically propelled road vehicles — Safety specifications*. Geneva, Switzerland.
+[^wang2012]: Wang, Q., et al. (2012). *Thermal runaway caused fire and explosion of lithium ion batteries*. Journal of Power Sources, 208, 210–224. DOI: [10.1016/j.jpowsour.2012.02.038](https://doi.org/10.1016/j.jpowsour.2012.02.038)
+[^scrosati2010]: Scrosati, B., & Garche, J. (2010). *Lithium batteries: Status, prospects and future*. Journal of Power Sources, 195(9), 2419–2430. DOI: [10.1016/j.jpowsour.2009.11.048](https://doi.org/10.1016/j.jpowsour.2009.11.048)
+[^iso26262]: International Organization for Standardization. (2018). *ISO 26262:2018 Road vehicles — Functional safety*. Geneva, Switzerland.

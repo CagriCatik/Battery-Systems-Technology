@@ -1,348 +1,142 @@
-# Initial SoC & SoH Estimation
+# Boot Sequencing, Sleep Modes & NVM Persistence
 
-The State of Charge (SoC) and State of Health (SoH) are fundamental parameters in Battery Management Systems (BMS). Accurate estimation of these metrics is crucial for ensuring the optimal performance, safety, and longevity of battery systems used in applications such as electric vehicles (EVs), renewable energy storage, and portable electronics. This chapter provides a comprehensive exploration of the methods and algorithms employed for initial SoC and SoH estimation, detailing the mathematical and logical processes involved.
+The operational lifecycle of a Battery Management System (BMS) extends far beyond active driving or charging. During vehicle parking or long-term storage, the BMS must enter ultra-low-power sleep states to prevent parasitic depletion of the auxiliary $12\,\text{V}$ battery and high-voltage traction pack[^andrea2020]. 
 
----
+When vehicle ignition, charging plugs, or timed wake-up events occur, the BMS executes a deterministic **boot sequence**, validates memory integrity via **Hardware Built-In Self-Tests (BIST)**, and restores critical electrochemical states ($\text{SoC}$, $\text{SoH}$, cumulative fatigue damage, and fault logs) from **Non-Volatile Memory (NVM)**[^autosar_nvm2021].
 
-## Overview of SoC and SoH Estimation
-
-Understanding the State of Charge (SoC) and State of Health (SoH) is essential for effective battery management. These parameters provide insights into the battery's current capacity and its ability to perform over time.
-
-### State of Charge
-
-**State of Charge (SoC)** represents the remaining capacity of the battery as a percentage of its maximum capacity. It indicates how much energy is left in the battery at any given time and is crucial for applications like EVs to predict driving range and manage charging cycles effectively.
-
-### State of Health
-
-**State of Health (SoH)** reflects the overall condition of the battery, indicating its ability to store and deliver energy compared to its original capacity. SoH accounts for factors such as capacity loss, internal resistance increase, and overall degradation due to aging and usage patterns.
+This chapter formalizes the microcontroller startup pipeline, quiescent current budgeting, cyclic wake-up architectures, and flash wear-leveling algorithms.
 
 ---
 
-## Initial SoC Estimation
+## Microcontroller Startup & Hardware Built-In Self-Test (BIST)
 
-Accurate initial SoC estimation is vital for the BMS to provide reliable battery status from the outset. Various methods are employed to determine the initial SoC, each with its advantages and limitations.
+Upon power application or wake-up interrupt, an automotive ASIL-D microcontroller (such as the Infineon AURIX TC3xx or NXP S32K3) undergoes a multi-stage hardware and software verification pipeline before closing any high-voltage circuits[^infineon2020]:
 
-### Open-Circuit Voltage Method
+```mermaid
+sequenceDiagram
+    autonumber
+    participant PWR as Power Management IC (PMIC)
+    participant Core as Safety MCU Cores & BIST
+    participant MCAL as MCAL & Drivers
+    participant NVM as Non-Volatile Memory (Flash)
+    participant AFE as Satellite AFEs (CMCs)
 
-The Open-Circuit Voltage (OCV) method estimates SoC based on the relationship between the battery's voltage and its SoC when the battery is at rest (i.e., no load or charge is applied). This method is straightforward but requires the battery to be in a rested state to obtain accurate readings.
-
-#### Steps:
-
-1. **Measure Open-Circuit Voltage**: Ensure the battery is at rest, then measure its voltage.
-2. **Map OCV to SoC**: Use a pre-defined OCV-SoC curve or lookup table to estimate the SoC based on the measured OCV.
-
-#### Example:
-
-```c
-// Function to estimate SoC using OCV Method
-float estimate_SOC_OCV(float ocv) {
-    // Example OCV-SoC lookup table
-    float ocv_table[] = {3.0, 3.2, 3.4, 3.6, 3.8, 4.0, 4.2}; // Voltage in volts
-    float soc_table[] = {0, 20, 40, 60, 80, 90, 100}; // SoC in percentage
-    int table_size = sizeof(ocv_table) / sizeof(ocv_table[0]);
-
-    // Find the closest OCV value in the table
-    for(int i = 0; i < table_size - 1; i++) {
-        if(ocv >= ocv_table[i] && ocv < ocv_table[i+1]) {
-            // Linear interpolation
-            float slope = (soc_table[i+1] - soc_table[i]) / (ocv_table[i+1] - ocv_table[i]);
-            return soc_table[i] + slope * (ocv - ocv_table[i]);
-        }
-    }
-    return soc_table[table_size - 1]; // Return 100% if OCV exceeds table
-}
+    PWR->>Core: Power-On Reset (POR) & Voltage Rail Stabilization
+    activate Core
+    Core->>Core: Hardware LBIST (Logic BIST) & MBIST (SRAM ECC)
+    Core->>Core: Dual-Core Lockstep Comparator Synchronization
+    Core->>MCAL: Execute Reset Vector & PLL Clock Tree Setup (300 MHz)
+    deactivate Core
+    activate MCAL
+    MCAL->>NVM: Read Persisted Battery State & CRC-32 Block
+    NVM-->>MCAL: Return Last SoC, SoH & Calibration Vector
+    MCAL->>MCAL: Verify Memory CRC Integrity
+    MCAL->>AFE: Send Wakeup Pulse & Synchronous Daisy-Chain Ping
+    AFE-->>MCAL: All CMCs Acknowledge (Register CRC Valid)
+    deactivate MCAL
+    Note over MCAL,AFE: Transition to Standby State Machine
 ```
 
-*Note: The OCV-SoC relationship varies with battery chemistry and temperature. Calibration is essential for accurate estimation.*
+### 1. Power-On Reset (POR) & Safety Supply Supervision
 
-### Coulomb Counting Method
+The dedicated System Basis Chip (SBC) / Power Management IC (PMIC, e.g., Bosch CY310 or TI TPS65381A-Q1) supervises all internal voltage rails ($V_{\text{core}} = 1.25\,\text{V}, V_{\text{io}} = 3.3\,\text{V} / 5.0\,\text{V}$). If any rail exhibits an undervoltage or overvoltage condition outside $\pm 3\%$, a hardware reset line holds the microcontroller in a safe clamp state.
 
-Coulomb counting estimates SoC by integrating the current flowing into or out of the battery over time. This method provides dynamic SoC estimation but requires an accurate initial SoC value and precise current measurements to minimize cumulative errors.
+### 2. Hardware BIST (Logic & Memory Built-In Self-Test)
 
-#### Steps:
+Under ISO 26262 ASIL-D requirements, latent hardware faults within the microcontroller silicon itself must be detected before code execution begins:
+- **MBIST (Memory BIST):** Automatically writes, reads, and inverts test patterns across all internal SRAM blocks to verify single-bit Error Correction Code (ECC) and double-bit error detection logic.
+- **LBIST (Logic BIST):** Employs pseudo-random pattern generators to test internal logic gates, achieving $>90\%$ latent fault coverage within $<15\,\text{ms}$.
+- **Lockstep Comparator:** Two redundant physical processor cores execute the identical instruction stream staggered by a 2-clock delay. If a physical comparator detects a discrepancy between the outputs of Core 0 and Core 1, a non-maskable Safety Alarm is triggered immediately.
 
-1. **Measure Current Flow**: Continuously measure the current entering (charging) or leaving (discharging) the battery.
-2. **Integrate Current Over Time**: Calculate the total charge added or removed by integrating the current over the elapsed time.
-3. **Update SoC**: Adjust the initial SoC based on the integrated charge.
+---
 
-#### Example:
+## Quiescent Current Budgeting & Low-Power Sleep Modes
 
-```c
-// Function to estimate SoC using Coulomb Counting
-float estimate_SOC(float current, float delta_time, float initial_SOC, float battery_capacity) {
-    // current: Current in amperes (A)
-    // delta_time: Time interval in seconds (s)
-    // initial_SOC: SoC at the beginning of the interval (%)
-    // battery_capacity: Total battery capacity in ampere-hours (Ah)
+When a vehicle is parked at an airport for 30 to 60 days, continuous operation of the BMS would discharge the $12\,\text{V}$ auxiliary lead-acid or LFP battery, disabling the vehicle[^andrea2020].
 
-    // Convert battery capacity to coulombs (1 Ah = 3600 C)
-    float battery_capacity_coulombs = battery_capacity * 3600.0;
+```mermaid
+flowchart TD
+    Run["Active / Run Mode<br/>• Full System Clock (300 MHz)<br/>• All Sensors, AFE isoSPI & CAN-FD Active<br/>• Current Draw: 150 - 350 mA"]
+    Standby["Standby / Pre-Sleep<br/>• Reduced Clock (20 MHz)<br/>• CAN Transceiver in Listen-Only<br/>• Current Draw: 15 - 30 mA"]
+    DeepSleep["Deep Sleep / Stop Mode<br/>• Main Cores Gated Off (0 Hz)<br/>• Only Standby RAM, Low-Power RTC & Wakeup Logic Powered<br/>• Quiescent Current Draw: < 80 µA"]
 
-    // Calculate charge change (Coulombs)
-    float delta_charge = current * delta_time;
-
-    // Update SoC
-    float new_SOC = initial_SOC - (delta_charge / battery_capacity_coulombs) * 100.0;
-
-    // Clamp SoC between 0% and 100%
-    if (new_SOC > 100.0) new_SOC = 100.0;
-    if (new_SOC < 0.0) new_SOC = 0.0;
-
-    return new_SOC;
-}
+    Run --> Standby --> DeepSleep
+    DeepSleep -->|Wakeup Event| Run
 ```
 
-*Note: Accurate current measurement and minimal sensor drift are critical for reducing errors in Coulomb counting.*
+### Quiescent Current Breakdown
+
+Automotive Original Equipment Manufacturers (OEMs) strictly mandate that the total parasitic quiescent current drawn from the $12\,\text{V}$ auxiliary battery during deep sleep must not exceed **$100\,\mu\text{A}$** (with tier-1 targets pushing toward $\le 50\,\mu\text{A}$):
+
+| Subsystem Component | Active Operating Current | Deep Sleep Quiescent Current | Power Gating Technique |
+| :--- | :--- | :--- | :--- |
+| **Microcontroller (Safety Cores)** | $120.0\,\text{mA}$ | $15.0\,\mu\text{A}$ | Core supply completely gated; retain $64\,\text{kB}$ standby SRAM |
+| **System Basis Chip / PMIC** | $25.0\,\text{mA}$ | $18.0\,\mu\text{A}$ | Switched into ultra-low-quiescent LDO mode |
+| **AFE Satellite Interface (isoSPI)**| $35.0\,\text{mA}$ | $2.5\,\mu\text{A}$ per CMC | AFE enters `SLEEP` state via serial broadcast command |
+| **CAN-FD Transceiver** | $45.0\,\text{mA}$ | $10.0\,\mu\text{A}$ | Partial networking / selective wake-up mode (ISO 11898-2) |
+| **Insulation Monitoring Circuit** | $12.0\,\text{mA}$ | $0.0\,\mu\text{A}$ | Disconnected via high-voltage solid-state opto-relays |
+| **Total BMS Quiescent Current** | **$\approx 237\,\text{mA}$** | **$\approx 55 - 75\,\mu\text{A}$** | **Meets OEM Requirement ($< 100\,\mu\text{A}$)** |
+
+### Asynchronous & Cyclic Wake-Up Triggers
+
+The BMS exits deep sleep and returns to active run mode upon any of the following hardware wake-up events:
+1. **CAN-FD Network Activity:** Reception of a standardized wake-up frame (WUF) or voltage edge on the CAN RX line.
+2. **High-Voltage Interlock Loop (HVIL) Interruption:** Physical disconnection of a high-voltage connector or service plug.
+3. **EVSE Charger Connection:** Detection of a resistance change on the Control Pilot (CP) or Proximity Pilot (PP) line.
+4. **Real-Time Clock (RTC) Cyclic Timer:** The low-power RTC timer triggers every 1 to 4 hours. The BMS wakes up for $500\,\text{ms}$, measures all cell voltages under resting conditions ($I=0$), checks for abnormal self-discharge, executes passive balancing if configured, and returns to sleep.
 
 ---
 
-## Initial SoH Estimation
+## Non-Volatile Memory (NVM) Architecture & Wear-Leveling
 
-State of Health (SoH) estimation evaluates the battery's condition and predicts its remaining useful life. Accurate SoH assessment helps in proactive maintenance and ensures reliability in applications.
+State estimation variables ($\text{SoC}$, $\text{SoH}$, cumulative cycle count, Palmgren-Miner damage $D$) must be saved when the BMS powers down and restored accurately upon restart[^autosar_nvm2021].
 
-### Capacity Loss Calculation
+### The Flash Endurance Dilemma
 
-Capacity loss quantifies the reduction in the battery's ability to store energy compared to its original capacity. It is influenced by factors like the number of charge-discharge cycles, depth of discharge, and operating temperatures.
+- Standard microcontroller Data Flash (EEPROM emulation) possesses a rated write endurance of **$100{,}000$ cycles per sector**.
+- If the BMS software naively wrote the estimated State of Charge to the same Flash memory address every $100\,\text{ms}$ (the task loop rate), the memory sector would be permanently destroyed by dielectric breakdown in less than:
 
-#### Steps:
+  $$
+  t_{\text{destruction}} = \frac{100{,}000 \text{ cycles}}{10 \text{ writes/sec}} = 10{,}000 \text{ seconds} \approx 2.78 \text{ hours!}
+  $$
 
-1. **Determine Charge-Discharge Cycles**: Track the number of complete and partial charge-discharge cycles the battery has undergone.
-2. **Estimate Capacity Loss**: Use empirical models or lookup tables to estimate capacity loss based on the cycle count.
-3. **Calculate Current Capacity**: Subtract the estimated capacity loss from the original capacity.
-4. **Compute SoH**: Express SoH as the ratio of current capacity to original capacity.
+### AUTOSAR NvM Architecture & Double-Buffering
 
-#### Formula:
+To guarantee a 15-year / 300,000 km automotive service lifetime, the BMS employs a **three-tier memory architecture**:
 
-$$
-\text{SoH} = \left( \frac{\text{Current Capacity}}{\text{Original Capacity}} \right) \times 100\%
-$$
+```mermaid
+flowchart LR
+    subgraph RAM_Runtime["1. Active RAM (Fast Execution)"]
+        SRAM["Fast Dual-Port RAM<br/>Updated every 10 ms (SoC, I_pack, Flags)<br/>Guarded by ECC"]
+    end
 
-#### Example:
+    subgraph Shutdown_Trigger["2. Shutdown / Key-Off Detection"]
+        KL15["Terminal 15 (Ignition OFF) Detected"]
+        Hold["Hold PMIC Latch High for 200 ms"]
+        KL15 --> Hold
+    end
 
-```c
-// Function to estimate SoH based on capacity loss
-float estimate_SOH(float current_capacity, float original_capacity) {
-    return (current_capacity / original_capacity) * 100.0;
-}
+    subgraph NVM_Flash["3. Non-Volatile Flash Memory (Emulated EEPROM)"]
+        Ring["Circular Ring Buffer (Wear-Leveling)<br/>Writes to Next Free Block Across 128 Sectors"]
+        Redundant["Double-Buffering (Image A & Image B)<br/>Guaranteed Power-Cut Resilient"]
+    end
+
+    SRAM -->|Write Only on Shutdown or Event| Ring
+    Hold --> Ring
+    Ring --> Redundant
 ```
 
-### Cycle Counting
-
-Cycle counting involves tracking the number of charge-discharge cycles a battery has experienced. Each cycle contributes to the gradual degradation of the battery's capacity and overall health.
-
-#### Steps:
-
-1. **Measure Depth of Discharge (DoD)**: For each cycle, determine how deeply the battery was discharged.
-2. **Accumulate Partial Cycles**: Account for partial cycles by normalizing DoD to equivalent full cycles.
-3. **Estimate Total Cycles**: Sum the equivalent full cycles to determine the total cycle count.
-4. **Map Cycles to Capacity Loss**: Use a predefined model or lookup table to estimate capacity loss based on total cycles.
-
-#### Example:
-
-```c
-// Function to estimate SoH based on cycle counting
-float estimate_SOH_cycles(int total_cycles, float capacity_loss_per_cycle) {
-    float total_capacity_loss = total_cycles * capacity_loss_per_cycle;
-    float soh = 100.0 - total_capacity_loss;
-    if (soh < 0.0) soh = 0.0;
-    return soh;
-}
-```
-
-*Note: The capacity loss per cycle varies with battery chemistry and operating conditions.*
+1. **Runtime Execution in SRAM:** All state variables are maintained exclusively in volatile SRAM during vehicle operation.
+2. **Event-Based & Periodic Shadow Writing:**
+   - **Controlled Key-Off Shutdown:** When the vehicle ignition signal (Terminal 15 / `KL15`) turns off, the PMIC maintains power to the microcontroller for $200\,\text{ms}$, during which the complete state block is serialized, CRC-32 protected, and written to Flash.
+   - **Periodic Checkpointing:** Every 15 minutes, a state checkpoint is committed to non-volatile storage to guard against sudden auxiliary battery disconnection (e.g., terminal detachment).
+3. **Circular Ring-Buffer Wear-Leveling:** Data writes rotate sequentially across a wide array of Flash sectors (e.g., 64 blocks of $4\,\text{kB}$). Rotating writes across 64 sectors increases total write endurance from $100{,}000$ to $6.4 \times 10^6$ cycles, ensuring lifetime durability.
+4. **Power-Fail Resilient Double-Buffering:** Data is written alternately between Block A and Block B with a sequence counter and CRC-32 checksum. If power is severed mid-write (corrupting Block A), the boot routine discards Block A and restores valid data from Block B.
 
 ---
 
-## Mathematical and Logical Steps for SoC and SoH Estimation
+## References
 
-Accurate SoC and SoH estimation involves a systematic approach that integrates data collection, processing, and algorithmic analysis.
-
-### Data Collection
-
-Effective estimation begins with the acquisition of accurate and reliable data from the battery system.
-
-- **Terminal Voltage**: Measure the voltage across the battery terminals using voltage sensors.
-- **Current**: Monitor the current flowing into or out of the battery using current sensors.
-- **Temperature**: Track the battery temperature using temperature sensors.
-- **Open-Circuit Voltage (OCV)**: Measure OCV when the battery is at rest for the OCV-based SoC estimation.
-
-### Cycle Counting and Capacity Loss Estimation
-
-1. **Calculate Depth of Discharge (DoD)**:
-
-    $$
-    \text{DoD} = \frac{\text{Energy Discharged}}{\text{Battery Capacity}} \times 100\%
-    $$
-
-2. **Accumulate DoD Values**:
-
-    Normalize partial cycles to equivalent full cycles.
-
-    $$
-    \text{Equivalent Full Cycles} = \frac{\text{DoD}}{100\%}
-    $$
-
-3. **Estimate Capacity Loss**:
-   
-   Use the total number of equivalent full cycles to determine capacity loss.
-
-4. **Compute SoH**:
-   
-   Apply the capacity loss to calculate SoH.
-
-### SoC Estimation
-
-1. **Initial SoC Estimation**:
-   
-   Utilize the OCV method to establish the initial SoC when the battery is at rest.
-
-2. **Dynamic SoC Update**:
-   
-   Implement Coulomb counting to update SoC in real-time during battery operation.
-
-   ```c
-   // Combined SoC Estimation Process
-   float initial_SOC = estimate_SOC_OCV(measured_ocv);
-   float updated_SOC = initial_SOC;
-
-   void update_SOC(float current, float delta_time, float battery_capacity) {
-       updated_SOC = estimate_SOC(current, delta_time, updated_SOC, battery_capacity);
-   }
-   ```
-
-### SoH Estimation
-
-1. **Calculate Current Capacity**:
-   
-   Subtract the estimated capacity loss from the original capacity.
-
-2. **Compute SoH**:
-   
-   Use the SoH formula to determine the battery's health status.
-
-   ```c
-   // Combined SoH Estimation Process
-   float current_capacity = original_capacity - (total_cycles * capacity_loss_per_cycle);
-   float soh = estimate_SOH(current_capacity, original_capacity);
-   ```
-
----
-
-## Practical Implementation in BMS
-
-Implementing SoC and SoH estimation within a BMS involves integrating the aforementioned algorithms into the system's software architecture. The following steps outline the practical workflow:
-
-1. **Data Acquisition**: Continuously collect sensor data (voltage, current, temperature) from the battery modules via slave units.
-
-2. **Initial SoC Estimation**:
-   - When the battery is at rest, measure the OCV.
-   - Use the OCV-SoC lookup table or curve to estimate the initial SoC.
-
-3. **Cycle Counting**:
-   - Track each charge-discharge cycle and calculate the DoD.
-   - Accumulate partial cycles to estimate the total number of equivalent full cycles.
-
-4. **Capacity Loss Estimation**:
-   - Utilize a lookup table or empirical model to determine capacity loss based on the total cycle count.
-
-5. **SoH Calculation**:
-   - Calculate the current capacity by subtracting the capacity loss from the original capacity.
-   - Compute SoH using the current and original capacity values.
-
-6. **Dynamic SoC Update**:
-   - During operation, employ Coulomb counting to update SoC based on real-time current measurements.
-
-7. **Integration and Communication**:
-   - Integrate SoC and SoH estimates into the BMS's overall monitoring and control logic.
-   - Communicate the estimated SoC and SoH to the Vehicle Control Unit (VCU) and other relevant systems for informed decision-making.
-
-#### Example Workflow:
-
-```c
-// Initialize BMS Parameters
-float original_capacity = 100.0; // in Ah
-float capacity_loss_per_cycle = 0.05; // in Ah
-int total_cycles = 0;
-
-// Initial SoC Estimation
-float measured_ocv = readOCV();
-float initial_SOC = estimate_SOC_OCV(measured_ocv);
-float current_SOC = initial_SOC;
-
-// Main Control Loop
-void loop() {
-    // Data Acquisition
-    float current = readCurrentSensor();
-    float voltage = readVoltageSensor();
-    float temperature = readTemperatureSensor();
-    float delta_time = getDeltaTime(); // Time since last update
-
-    // Update SoC
-    current_SOC = estimate_SOC(current, delta_time, current_SOC, original_capacity);
-
-    // Cycle Counting
-    float dod = calculate_DoD(voltage, original_capacity);
-    total_cycles += calculate_equivalent_cycles(dod);
-
-    // Capacity Loss Estimation
-    float capacity_loss = total_cycles * capacity_loss_per_cycle;
-    float current_capacity = original_capacity - capacity_loss;
-
-    // SoH Calculation
-    float soh = estimate_SOH(current_capacity, original_capacity);
-
-    // Communication with VCU
-    send_SOC_SoH_to_VCU(current_SOC, soh);
-
-    // Safety and Control Actions
-    enforceSafetyLimits(voltage, current, temperature);
-
-    delay(1000); // Update interval (e.g., 1 second)
-}
-```
-
-*Note: The above example is a simplified representation. Actual implementations may require more sophisticated error handling and calibration mechanisms.*
-
----
-
-## Challenges and Future Directions
-
-While significant advancements have been made in SoC and SoH estimation, several challenges persist that require ongoing research and development.
-
-### Accuracy
-
-- **Sensor Precision**: High-precision sensors are essential for minimizing errors in voltage and current measurements.
-- **Algorithm Calibration**: Continuous calibration of estimation algorithms is necessary to account for changes in battery behavior over time and under varying conditions.
-
-### Aging Effects
-
-- **Dynamic Modeling**: Developing models that accurately reflect the aging process of batteries to improve SoH estimation.
-- **Adaptive Algorithms**: Implementing algorithms that adapt to the changing characteristics of the battery as it ages.
-
-### Real-Time Implementation
-
-- **Computational Efficiency**: Designing algorithms that can run efficiently on embedded systems with limited processing power.
-- **Latency Reduction**: Ensuring that SoC and SoH estimations are updated promptly to reflect real-time battery states.
-
-### Environmental Factors
-
-- **Temperature Variations**: Accounting for the impact of temperature on battery performance and measurement accuracy.
-- **Load Fluctuations**: Managing rapid changes in load conditions to maintain accurate SoC and SoH estimates.
-
-### Integration with Advanced Technologies
-
-- **Machine Learning and AI**: Leveraging advanced machine learning techniques to enhance the accuracy and adaptability of SoC and SoH estimation algorithms.
-- **IoT Integration**: Utilizing IoT platforms for remote monitoring and data analysis to improve estimation accuracy and enable predictive maintenance.
-
----
-
-## Summary of SoC and SoH Estimation
-
-Understanding and accurately estimating SoC and SoH are pivotal for effective battery management. The methods outlined ensure that the BMS can provide reliable information for optimal battery operation and longevity.
-
-| **Parameter**       | **Method**                          | **Key Steps**                                                                 |
-|---------------------|-------------------------------------|-------------------------------------------------------------------------------|
-| **State of Charge (SoC)** | Open-Circuit Voltage (OCV) Method  | Measure OCV, use lookup table to estimate SoC.                                |
-|                     | Coulomb Counting Method            | Integrate current over time, update SoC based on initial value.               |
-| **State of Health (SoH)** | Capacity Loss Estimation           | Track cycles, estimate capacity loss, compute SoH as current/original capacity.|
-|                     | Cycle Counting                      | Measure DoD, accumulate equivalent cycles, map to capacity loss.             |
+[^andrea2020]: Andrea, D. (2020). *Battery Management Systems for Large Lithium-Ion Battery Packs*. Artech House.
+[^autosar_nvm2021]: AUTOSAR Consortium. (2021). *Specification of Memory Abstraction Interface and NVRAM Manager (FO R21-11)*. AUTOSAR.
+[^infineon2020]: Infineon Technologies. (2020). *AURIX TC3xx 32-Bit Microcontroller Family User's Manual*. Infineon AG.
