@@ -1,244 +1,211 @@
-# Battery Terminology
+# Battery Terminology, Key Metrics & Standardization
 
-Battery Management Systems rely on specific technical terminologies to monitor, analyze, and optimize battery performance, safety, and reliability. A deep understanding of these terms is essential for professionals in electric vehicle (EV) development and energy storage systems. This guide provides an in-depth exploration of battery terminology, offering precise definitions, equations, examples, and their relevance to battery technology.
+Developing, simulating, and operating Battery Management Systems (BMS) for electric vehicles and stationary storage systems requires a mathematically rigorous vocabulary[^plett2015a][^andrea2010]. Because cell behaviors depend strongly on non-linear couplings between temperature, current rate, state of charge, and cycle history, imprecise definitions lead to simulation errors and safety hazards.
 
----
-
-## State of Charge
-
-The State of Charge (SoC) quantifies the remaining energy in a battery as a percentage of its full capacity.
-
-- **Definition:**  
-
-    $$
-    SOC = \frac{\text{Remaining Capacity (Ah)}}{\text{Full Capacity (Ah)}} \times 100
-    $$
-
-- **Example:**  
-  For a battery with a total capacity of 100 Ah and 40 Ah remaining:  
-
-    $$
-    SOC = \frac{40}{100} \times 100 = 40\%
-    $$
-
-- **Key Characteristics:**  
-  - SoC is dynamic, varying with usage and charging conditions.  
-  - Indicates how much energy is still available for use.
-
-- **Importance:**  
-  SoC acts as a fuel gauge for batteries, helping users understand energy availability in real-time.
+This reference provides formal mathematical definitions, physical interpretations, and governing international standards for core battery engineering terminology.
 
 ---
 
-## State of Health
+## 1. Capacity and Charge Metrics
 
-The State of Health (SoH) represents the overall condition of a battery relative to its original state.
+### Ampere-Hour ($\text{Ah}$) and Coulomb ($\text{C}$)
+Charge capacity ($Q$) quantifies the total electrical charge an electrochemical cell can deliver under defined discharge conditions:
 
-- **Definition:**  
+$$
+Q = \int_0^{t_{\text{dis}}} I(t) \, dt
+$$
 
-    $$
-    SOH = \frac{\text{Current Usable Capacity (Ah)}}{\text{Initial Full Capacity (Ah)}} \times 100
-    $$
+- In SI units, charge is expressed in **Coulombs ($\text{C}$)**: $1\,\text{C} = 1\,\text{A}\cdot\text{s}$.
+- In battery engineering, capacity is conventionally specified in **Ampere-hours ($\text{Ah}$)**:
 
-- **Key Characteristics:**  
-  - SoH decreases over time due to chemical degradation and operational wear.  
-  - Common replacement threshold in EVs is at 80% SoH.
+$$
+1\,\text{Ah} = 3600\,\text{A}\cdot\text{s} = 3600\,\text{C}
+$$
 
-- **Example:**  
-  A new battery with 100 Ah capacity degrades to 80 Ah:  
-
-    $$
-    SOH = \frac{80}{100} \times 100 = 80\%
-    $$
-
-- **Importance:**  
-  SoH is critical for predicting remaining useful life and scheduling maintenance.
+### Nominal vs. Usable Capacity
+- **Nominal Capacity ($C_{\text{nom}}$):** The manufacturer-rated capacity delivered by a pristine cell at standard temperature ($25^\circ\text{C}$) when discharged at a low reference rate (typically $0.2\text{C}$ or $0.33\text{C}$) from $V_{\text{max}}$ to $V_{\text{min}}$.
+- **Usable Capacity ($C_{\text{usable}}$):** The actual charge extracted within the vehicle's restricted operating buffer (e.g., $10\%$ to $90\%\,\text{SoC}$), accounting for temperature derating and aging.
 
 ---
 
-## Depth of Discharge (DOD)
+## 2. State Metrics: SoC, DoD, and SoH
 
-The Depth of Discharge (DOD) measures the percentage of energy removed from a battery relative to its full capacity.
+```mermaid
+flowchart TD
+    subgraph Battery_States["Fundamental Battery State Vector"]
+        SoC["State of Charge (SoC)<br/>Remaining usable charge percentage<br/>• Fuel gauge of the EV"]
+        DoD["Depth of Discharge (DoD)<br/>Fraction of capacity removed<br/>• DoD = 1 - SoC"]
+        SoH["State of Health (SoH)<br/>Health condition relative to fresh cell<br/>• Capacity fade & resistance rise"]
+        SoP["State of Power (SoP)<br/>Max safe instantaneous charge/discharge power<br/>• Voltage & thermal bound"]
+    end
 
-- **Definition:**  
+    classDef stateBox fill:#1e293b,stroke:#3b82f6,stroke-width:1.5px,color:#f8fafc;
+    class SoC,DoD,SoH,SoP stateBox;
+```
+
+### State of Charge ($\text{SoC}$)
+The State of Charge represents the ratio of currently available charge to the maximum available capacity under the current degradation state:
+
+$$
+\text{SoC}(t) = \text{SoC}(t_0) - \frac{1}{C_{\text{usable}}} \int_{t_0}^t \eta_i \cdot I(\tau) \, d\tau
+$$
+
+where:
+
+- $I(\tau)$ is the terminal current (defined as positive for discharge and negative for charge).
+- $\eta_i$ is the Coulombic efficiency factor ($\eta_i \approx 1.0$ during discharge; $\eta_i \le 1.0$ during charge to account for parasitic side reactions).
+- In discrete digital implementations, the BMS updates $\text{SoC}$ at each sampling interval $\Delta t$:
+
+$$
+\text{SoC}_{k} = \text{SoC}_{k-1} - \frac{I_k \cdot \Delta t}{C_{\text{usable}} \cdot 3600}
+$$
+
+### Depth of Discharge ($\text{DoD}$)
+The percentage of battery capacity that has been discharged relative to the fully charged state:
+
+$$
+\text{DoD}(t) = 1 - \text{SoC}(t) \quad \left[\text{or } \text{DoD}\% = 100\% - \text{SoC}\%\right]
+$$
+
+During cycling aging analysis, partial cycles are aggregated using rainflow counting algorithms, where damage scales exponentially with cycle depth ($\Delta \text{DoD}$)[^plett2015a].
+
+### State of Health ($\text{SoH}$)
+State of Health tracks irreversible battery aging relative to its Beginning-of-Life ($\text{BOL}$) baseline. It is dual-dimensional, reflecting both capacity loss and impedance rise[^andrea2010]:
+
+1. **Capacity-Based Health ($\text{SoH}_C$):**
 
     $$
-    DOD = 100\% - SOC
+    \text{SoH}_C = \frac{C_{\text{actual, max}}}{C_{\text{nominal}}} \times 100\%
     $$
 
-- **Key Characteristics:**  
-  - High DOD reduces cycle life.  
-  - Managing DOD improves battery longevity.
-
-- **Example:**  
-  If a battery has 40% SoC remaining, then:  
+2. **Resistance-Based Health ($\text{SoH}_R$):**
 
     $$
-    DOD = 100\% - 40\% = 60\%
+    \text{SoH}_R = \frac{R_{\text{EOL}} - R_{\text{actual}}}{R_{\text{EOL}} - R_{\text{BOL}}} \times 100\%
     $$
 
-- **Importance:**  
-  DOD directly impacts battery life and performance.
+> [!IMPORTANT]
+> In automotive applications, **End-of-Life ($\text{EOL}$)** is reached when $\text{SoH}_C$ drops to **$70 - 80\%$**, or when internal resistance increases by **$100\%$ ($2\times R_{\text{BOL}}$)**, which restricts acceleration and regenerative braking capability.
 
 ---
 
-## Cycle Life
+## 3. C-Rate and Peukert's Law
 
-The Cycle Life defines the number of complete charge-discharge cycles a battery can undergo before its capacity drops to a predefined threshold (e.g., 80% SoH).
+The **C-Rate** normalizes the charge or discharge current relative to nominal capacity:
 
-- **Definition of a Cycle:**  
-  A single cycle consists of one full discharge (100% to 0%) and one full recharge (0% to 100%).
+$$
+I = C_{\text{rate}} \cdot C_{\text{nom}}
+$$
 
-- **Key Characteristics:**  
-  - Dependent on Depth of Discharge (DOD).  
-  - Higher cycle life corresponds to increased durability.
+- **$1\text{C}$ Rate:** A current that charges or discharges the nominal capacity in exactly $1\,\text{hour}$ (e.g., $100\,\text{A}$ for a $100\,\text{Ah}$ cell).
+- **$0.5\text{C}$ Rate:** Discharges the cell in $2\,\text{hours}$ (e.g., $50\,\text{A}$ for a $100\,\text{Ah}$ cell).
+- **$3\text{C}$ Rate:** Discharges the cell in $20\,\text{minutes}$ ($1/3\,\text{hour}$, e.g., $300\,\text{A}$).
 
-- **Example:**  
-  A battery rated for 3000 cycles can sustain 3000 full charge-discharge cycles before significant capacity loss.
+### Peukert's Effect
+Under elevated C-rates, internal Ohmic dissipation and mass-transport limitations reduce the net delivered capacity before reaching $V_{\text{min}}$. This is modeled historically via **Peukert's Law**[^peukert1897]:
 
-- **Importance:**  
-  Cycle life defines battery longevity and cost-effectiveness.
+$$
+C_p = I^k \cdot t
+$$
 
----
-
-## C-Rate
-
-The C-Rate indicates the **charge** or **discharge** rate relative to a battery's capacity.
-
-- **Formula:**  
-
-    $$
-    C\text{-Rate} = \frac{\text{Current (A)}}{\text{Battery Capacity (Ah)}}
-    $$
-
-- **Key Characteristics:**  
-  - A 1C rate discharges the battery fully in 1 hour.  
-  - High C-Rates result in heat generation and faster degradation.
-
-- **Example:**  
-  For a 100 Ah battery, a discharge current of 200 A corresponds to:  
-
-    $$
-    C\text{-Rate} = \frac{200}{100} = 2C
-    $$
-
-- **Importance:**  
-  C-Rate impacts battery safety, efficiency, and thermal management.
+where $k$ is the Peukert exponent ($k \approx 1.02 - 1.15$ for lithium-ion, compared to $1.25 - 1.40$ for lead-acid). Lower exponents signify that lithium-ion cells maintain high usable capacity even under aggressive acceleration demands[^linden2002].
 
 ---
 
-## Self-Discharge
+## 4. Voltage Thresholds & The Cell Potential Window
 
-Self-Discharge is the natural reduction in battery capacity over time due to internal chemical reactions, even when the battery is not in use.
+```mermaid
+flowchart TB
+    V_max["Upper Cutoff Voltage (V_max)<br/>NMC: 4.20 V | LFP: 3.65 V"]
+    V_ocv["Open-Circuit Voltage (OCV)<br/>Thermodynamic equilibrium at rest (I = 0)"]
+    V_nom["Nominal Voltage (V_nom)<br/>NMC: 3.65 V | LFP: 3.20 V"]
+    V_term["Terminal Voltage V_t(t)<br/>V_t = OCV - I · R_int (under load)"]
+    V_min["Lower Cutoff Voltage (V_min)<br/>NMC: 2.50 V | LFP: 2.00 V"]
 
-- **Key Characteristics:**  
-  - Affected by battery chemistry and storage conditions.  
-  - Lithium-ion batteries exhibit lower self-discharge compared to older technologies.
+    V_max --- V_ocv
+    V_ocv --- V_nom
+    V_nom --- V_term
+    V_term --- V_min
 
-- **Example:**  
-  A fully charged battery loses 10–15% of its charge after 6 months of storage.
+    classDef vTop fill:#7f1d1d,stroke:#ef4444,stroke-width:1.5px,color:#ffffff;
+    classDef vMid fill:#1e3a8a,stroke:#3b82f6,stroke-width:1.5px,color:#ffffff;
+    classDef vBot fill:#7f1d1d,stroke:#ef4444,stroke-width:1.5px,color:#ffffff;
+    class V_max vTop;
+    class V_ocv,V_nom,V_term vMid;
+    class V_min vBot;
+```
 
-- **Importance:**  
-  Understanding self-discharge is essential for long-term storage and efficiency.
+### Definitions:
+- **Open-Circuit Voltage ($\text{OCV}$):** The stable potential difference between positive and negative terminals when no current flows ($I = 0$) and electrochemical relaxation has completed (typically $> 1 - 2\,\text{hours}$ rest).
+- **Terminal Voltage ($V_t$):** The instantaneous voltage measured across cell terminals under active load or charging:
+
+    $$
+    V_t(t) = \text{OCV}(\text{SoC}, T) - I(t) \cdot R_{\text{internal}}
+    $$
+
+- **Nominal Voltage ($V_{\text{nom}}$):** The volumetric median voltage during a standard $0.2\text{C}$ discharge cycle.
+- **Upper Cutoff Voltage ($V_{\text{max}}$):** The maximum permissible charging limit. Exceeding $V_{\text{max}}$ triggers electrolyte oxidation, transition metal dissolution, and catastrophic thermal runaway.
+- **Lower Cutoff Voltage ($V_{\text{min}}$):** The minimum permissible discharge threshold. Discharging below $V_{\text{min}}$ causes anode copper dissolution and permanent internal micro-short circuits.
 
 ---
 
-## Calendar Life
+## 5. Impedance & Equivalent Circuit Parameters
 
-The Calendar Life is the duration a battery can be stored under specified conditions before performance degrades.
+Under AC excitation or dynamic drive cycles, internal cell resistance behaves as a complex, frequency-dependent impedance ($Z(\omega)$)[^plett2015a]:
 
-- **Key Characteristics:**  
-  - Affected by storage temperature, SoC, and chemical composition.  
-  - Measured in years for lithium-ion batteries.
+```mermaid
+flowchart LR
+    R0["Bulk Ohmic Resistance (R₀)<br/>• Electrolyte conductivity<br/>• Current collectors<br/>• Frequency: > 1 kHz"]
+    RC1["SEI & Charge Transfer (R₁ || C₁)<br/>• Double-layer capacitance<br/>• Charge-transfer kinetics<br/>• Time constant: τ₁ ~ 0.5 - 5 s"]
+    RC2["Solid Diffusion / Mass Transport (R₂ || C₂)<br/>• Concentration gradient relaxation<br/>• Warburg diffusion regime<br/>• Time constant: τ₂ ~ 20 - 200 s"]
 
-- **Example:**  
-  A lithium-ion battery stored at 50% SoC and 25°C may have a calendar life of 10 years.
+    R0 --- RC1
+    RC1 --- RC2
 
-- **Importance:**  
-  Calendar life considerations are vital for backup power systems and seasonal storage.
+    classDef ecm fill:#111827,stroke:#10b981,stroke-width:1.5px,color:#f3f4f6;
+    class R0,RC1,RC2 ecm;
+```
 
----
+### DC Internal Resistance ($R_{\text{DC}}$)
+Determined experimentally via current step pulses (e.g., $10\,\text{second}$ high-rate discharge pulse per ISO 12405 / IEC 62660-1):
 
-## Internal Resistance
-
-Internal Resistance measures the opposition to current flow within a battery.
-
-- **Key Characteristics:**  
-  - Increases with age and affects power output.  
-  - Varies with SoC, temperature, and usage.
-
-- **Example:**  
-  A new battery may have 10 mΩ resistance, which increases to 15 mΩ over time due to aging.
-
-- **Importance:**  
-  Impacts energy efficiency and heat generation during operation.
+$$
+R_{\text{DC}} = \frac{\Delta V}{\Delta I} = \frac{V(t_0) - V(t_0 + 10\,\text{s})}{I_{\text{pulse}}}
+$$
 
 ---
 
-## Specific Energy and Energy Density
+## 6. Energy and Power Density Metrics
 
-- **Specific Energy:**  
-  Energy output per unit mass, expressed as:
+Battery systems are evaluated on both mass (gravimetric) and spatial (volumetric) bases[^linden2002]:
 
-    $$
-    \text{Specific Energy (Wh/kg)} = \frac{\text{Total Energy (Wh)}}{\text{Mass (kg)}}
-    $$
-
-- **Energy Density:**  
-  Energy output per unit volume, expressed as:
-
-    $$
-    \text{Energy Density (Wh/L)} = \frac{\text{Total Energy (Wh)}}{\text{Volume (L)}}
-    $$
-
-- **Example:**  
-  A lithium-ion battery has a specific energy of 200 Wh/kg and an energy density of 500 Wh/L.
-
-- **Importance:**  
-  Essential for lightweight, compact designs in EVs and portable devices.
+| Metric | Symbol | SI Unit | Formula | Significance in EV Design |
+| :--- | :--- | :--- | :--- | :--- |
+| **Gravimetric Energy Density (Specific Energy)** | $e_g$ | $\text{Wh/kg}$ | $e_g = \frac{E_{\text{usable}}}{m_{\text{cell/pack}}}$ | Determines vehicle driving range per unit curb weight. |
+| **Volumetric Energy Density** | $e_v$ | $\text{Wh/L}$ | $e_v = \frac{E_{\text{usable}}}{V_{\text{cell/pack}}}$ | Determines passenger cabin and cargo volume constraints. |
+| **Gravimetric Power Density (Specific Power)** | $p_g$ | $\text{W/kg}$ | $p_g = \frac{P_{\text{peak}}}{m_{\text{cell/pack}}}$ | Determines $0 - 100\,\text{km/h}$ acceleration and hill-climbing capability. |
+| **Volumetric Power Density** | $p_v$ | $\text{W/L}$ | $p_v = \frac{P_{\text{peak}}}{V_{\text{cell/pack}}}$ | Determines packaging volume of high-power hybrid battery packs. |
 
 ---
 
-## Open Circuit Voltage
+## 7. Governing Standards and Test Specifications
 
-Open Circuit Voltage (OCV) is the voltage measured across battery terminals when no current flows.
+Automotive battery systems are governed by comprehensive international compliance frameworks:
 
-- **Key Characteristics:**  
-  - Directly correlates with SoC.  
-  - Provides insight into battery health.
-
-- **Example:**  
-  A fully charged lithium-ion battery may have an OCV of 4.2V, while a discharged battery shows 3.0V.
-
-- **Importance:**  
-  OCV is used to estimate SoC and validate battery health.
-
----
-
-## Nominal Voltage
-
-Nominal Voltage is the average voltage at which a battery operates under typical conditions.
-
-- **Key Characteristics:**  
-  - Specific to battery chemistry.  
-  - Lower than the maximum voltage.
-
-- **Example:**  
-  A lithium-ion battery with a maximum voltage of 4.2V has a nominal voltage of 3.7V.
-
-- **Importance:**  
-  Used as a design parameter for system compatibility.
+| Standard | Publishing Body | Scope & Mandate |
+| :--- | :--- | :--- |
+| **ISO 26262** | ISO | Automotive functional safety lifecycle (hazard analysis, ASIL classification, fail-safe contactor open states). |
+| **IEC 62619** | IEC | Industrial secondary lithium-ion safety (cell balancing, overcharge, thermal abuse). |
+| **IEC 62660-1/-2/-3** | IEC | Secondary lithium-ion cells for EV propulsion: Part 1 (Performance), Part 2 (Reliability), Part 3 (Safety). |
+| **UN 38.3** | United Nations | Transport safety certification: thermal cycling, altitude simulation, vibration, external short circuit, impact. |
+| **SAE J2464 / UL 2580** | SAE / UL | RESS safety testing: nail penetration, crush, immersion, drop, thermal propagation. |
+| **GB/T 38031** | Standardization China | Chinese mandatory national standard: 5-minute thermal runaway non-propagation rule for passenger egress. |
 
 ---
 
-## Depth of Discharge vs. State of Charge
+## References
 
-- **Relationship:**  
-
-    $$
-    DOD = 100\% - SOC
-    $$
-
-- **Key Characteristics:**  
-  - SoC reflects remaining capacity, while DOD indicates usage.  
-  - Managing both ensures optimal performance and longevity.
+[^plett2015a]: Plett, G. L. (2015). *Battery Management Systems, Volume I: Battery Modeling*. Artech House, Norwood, MA. ISBN: 978-1-63081-023-8.
+[^andrea2010]: Andrea, D. (2010). *Battery Management Systems for Large Lithium-Ion Battery Packs*. Artech House, Norwood, MA. ISBN: 978-1-60807-104-3.
+[^peukert1897]: Peukert, W. (1897). *Über die Abhängigkeit der Kapazität von der Entladestromstärke bei Bleiakkumulatoren*. Elektrotechnische Zeitschrift (ETZ), 18, 287–288.
+[^linden2002]: Linden, D., & Reddy, T. B. (2002). *Handbook of Batteries* (3rd ed.). McGraw-Hill, New York. ISBN: 978-0-07-135978-7.

@@ -19,3 +19,4 @@ if (typeof document$ !== "undefined") {
 } else {
   document.addEventListener("DOMContentLoaded", renderKaTeX);
 }
+
