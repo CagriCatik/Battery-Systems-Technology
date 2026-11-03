@@ -1,10 +1,6 @@
 ---
-id: bms-architecture
 title: "Architecture"
 ---
-
-import plantumlEncoder from 'plantuml-encoder';
-import PlantUML from '@site/src/components/PlantUML';
 
 # Architecture
 
@@ -25,34 +21,32 @@ The following diagram illustrates the overall BMS architecture. Multiple slave u
 
 
 
-<PlantUML code={`
-@startuml
-skinparam componentStyle rectangle
+```mermaid
+graph TD
+    subgraph BMS["Battery Management System (BMS)"]
+        Slave1["Slave Unit 1"]
+        Slave2["Slave Unit 2"]
+        Slave3["Slave Unit 3"]
+        SlaveN["Slave Unit N"]
 
-package "Battery Management System (BMS)" {
-  
-  node "Slave Unit 1" as Slave1
-  node "Slave Unit 2" as Slave2
-  node "Slave Unit 3" as Slave3
-  node "..." as SlaveDots
-  node "Slave Unit N" as SlaveN
-  
-  node "CAN Bus" as CANBus
-  
-  node "Master Controller" as MasterController
-  
-  Slave1 --> CANBus : Transmit Sensor Data
-  Slave2 --> CANBus : Transmit Sensor Data
-  Slave3 --> CANBus : Transmit Sensor Data
-  SlaveN --> CANBus : Transmit Sensor Data
-  
-  CANBus --> MasterController : Aggregated Data
-  MasterController --> CANBus : Control Commands
-}
+        CANBus["CAN Bus"]
 
-node "Vehicle Control Unit (VCU)" as VCU
-MasterController --> VCU : Communicate Battery Status/Commands
-@enduml`} />
+        MasterController["Master Controller"]
+
+        Slave1 -->|Transmit Sensor Data| CANBus
+        Slave2 -->|Transmit Sensor Data| CANBus
+        Slave3 -->|Transmit Sensor Data| CANBus
+        SlaveN -->|Transmit Sensor Data| CANBus
+
+        CANBus -->|Aggregated Data| MasterController
+        MasterController -->|Control Commands| CANBus
+    end
+
+    VCU["Vehicle Control Unit (VCU)"]
+    MasterController -->|Communicate Battery Status / Commands| VCU
+```
+
+
 
 ## Key Components of the BMS
 
@@ -87,32 +81,32 @@ The BMS architecture comprises two main types of components:
 
 ### Slave Unit Component Diagram
 
-<PlantUML code={`@startuml
-skinparam componentStyle rectangle
+```mermaid
+graph TD
+    subgraph SlaveUnit["Slave Unit"]
+        TempSensor["Temperature Sensor"]
+        CurrentSensor["Current Sensor"]
+        VoltageSensor["Voltage Sensor"]
 
-package "Slave Unit" {
-  
-  [Temperature Sensor] as TempSensor
-  [Current Sensor] as CurrentSensor
-  [Voltage Sensor] as VoltageSensor
-  
-  [Passive Balancing] as PassiveBalancing
-  [Active Balancing] as ActiveBalancing
-  
-  [Data Collection Module] as DataCollection
-  
-  [Communication Interface (CAN)] as CommInterface
-  
-  TempSensor --> DataCollection : Provides Temperature Data
-  CurrentSensor --> DataCollection : Provides Current Data
-  VoltageSensor --> DataCollection : Provides Voltage Data
-  
-  DataCollection --> PassiveBalancing : Send Data
-  DataCollection --> ActiveBalancing : Send Data
-  
-  DataCollection --> CommInterface : Transmit Aggregated Data
-}
-@enduml`} />
+        DataCollection["Data Collection Module"]
+
+        PassiveBalancing["Passive Balancing"]
+        ActiveBalancing["Active Balancing"]
+
+        CommInterface["Communication Interface (CAN)"]
+
+        TempSensor -->|Provides Temperature Data| DataCollection
+        CurrentSensor -->|Provides Current Data| DataCollection
+        VoltageSensor -->|Provides Voltage Data| DataCollection
+
+        DataCollection -->|Send Data| PassiveBalancing
+        DataCollection -->|Send Data| ActiveBalancing
+
+        DataCollection -->|Transmit Aggregated Data| CommInterface
+    end
+```
+
+
 
 ---
 
@@ -147,37 +141,21 @@ The master controller aggregates data from all slave units and performs several 
 
 ### Master Controller Component Diagram
 
-<PlantUML code={`@startuml
-skinparam componentStyle rectangle
+```mermaid
+graph TD
+    subgraph MasterController["Master Controller"]
+        DataAggregation["Data Aggregation Module<br><i>Aggregates data from all slave units</i>"]
+        StateEstimation["State Estimation Module<br><i>Calculates SOC, SOH, SOP</i>"]
+        ControlLogic["Control Logic Module<br><i>Manages charging/discharging & safety protocols</i>"]
+        SystemComm["System Communication Module<br><i>Interfaces with VCU & vehicle systems</i>"]
 
-package "Master Controller" {
+        DataAggregation -->|Provide Aggregated Data| StateEstimation
+        StateEstimation -->|Provide SOC/SOH/SOP Estimates| ControlLogic
+        ControlLogic -->|Send Control/Status Commands| SystemComm
+    end
+```
 
-  [Data Aggregation Module] as DataAggregation
-  [State Estimation Module] as StateEstimation
-  [Control Logic Module] as ControlLogic
-  [System Communication Module] as SystemComm
 
-  DataAggregation --> StateEstimation : Provide Aggregated Data
-  StateEstimation --> ControlLogic : Provide SOC/SOH/SOP Estimates
-  ControlLogic --> SystemComm : Send Control/Status Commands
-  
-  note right of DataAggregation
-    Aggregates data from all slave units
-  end note
-  
-  note right of StateEstimation
-    Calculates SOC, SOH, SOP
-  end note
-  
-  note right of ControlLogic
-    Manages charging/discharging and safety protocols
-  end note
-  
-  note right of SystemComm
-    Interfaces with VCU and other vehicle systems
-  end note
-}
-@enduml`} />
 
 ---
 

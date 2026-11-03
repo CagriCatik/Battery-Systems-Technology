@@ -1,10 +1,6 @@
 ---
-id: bms-control-system
 title: "Control System"
 ---
-
-import plantumlEncoder from 'plantuml-encoder';
-import PlantUML from '@site/src/components/PlantUML';
 
 # BMS Control System
 
@@ -114,32 +110,34 @@ In electric vehicles, the BMS control system functions as a closed-loop system. 
 
 The following diagram illustrates the overall architecture of the BMS control system:
 
-<PlantUML code={`@startuml
-skinparam componentStyle rectangle
+```mermaid
+graph TD
+    BP["Battery Pack"]
+    VCU["Vehicle Control Unit (VCU)"]
+    MC["Motor Controller"]
+    Charger["Charger"]
+    Info["Infotainment"]
 
-package "BMS Control System" {
-  [BMS Controller] as BMS
-  [Sensor Array] as Sensors
-  [Data Processing & Control Logic] as Logic
-  [Thermal Management] as Thermal
-}
+    subgraph BMSControl["BMS Control System"]
+        Sensors["Sensor Array"]
+        Logic["Data Processing & Control Logic"]
+        BMS["BMS Controller"]
+        Thermal["Thermal Management"]
 
-[Battery Pack] as BP
-[Vehicle Control Unit (VCU)] as VCU
-[Motor Controller] as MC
-[Charger] as Charger
-[Infotainment] as Info
+        Sensors -->|Sensor Data| Logic
+        Logic -->|Processed Data & Decisions| BMS
+        BMS -->|Activate Cooling / Heating| Thermal
+    end
 
-VCU --> BMS : Mode Request & Commands
-BP --> Sensors : Provides Voltage, Current, Temp Data
-Sensors --> Logic : Sensor Data
-Logic --> BMS : Processed Data & Decisions
-BMS --> MC : Set Discharge Limits
-BMS --> Charger : Set Charging Parameters
-BMS --> Thermal : Activate Cooling/Heating
-BMS --> VCU : Status Updates
-BMS --> Info : Display Battery Status
-@enduml`} />
+    BP -->|Provides Voltage, Current, Temp Data| Sensors
+    VCU -->|Mode Request & Commands| BMS
+    BMS -->|Set Discharge Limits| MC
+    BMS -->|Set Charging Parameters| Charger
+    BMS -->|Status Updates| VCU
+    BMS -->|Display Battery Status| Info
+```
+
+
 
 ---
 
@@ -190,18 +188,18 @@ The BMS control system follows a structured logic to maintain optimal battery pe
 
 The following diagram illustrates the closed-loop control process within the BMS:
 
-<PlantUML code={`@startuml
-skinparam componentStyle rectangle
+```mermaid
+graph LR
+    Sensors["Sensor Array"]
+    Control["Control Algorithm"]
+    Actuators["Actuators"]
 
-component "Sensor Array" as Sensors
-component "Control Algorithm" as Control
-component "Actuators" as Actuators
+    Sensors -->|Feedback: Voltage, Current, Temperature| Control
+    Control -->|Control Signal: adjust charging, limit current| Actuators
+    Actuators -->|System Response Feedback| Sensors
+```
 
-Sensors --> Control : Feedback (Voltage, Current, Temperature)
-Control --> Actuators : Control Signal (e.g., adjust charging, limit current)
-Actuators --> Sensors : System Response Feedback
 
-@enduml`} />
 
 ---
 
@@ -273,4 +271,4 @@ Actuators --> Sensors : System Response Feedback
 
 ---
 
-This documentation, complete with embedded PlantUML diagrams, provides a comprehensive overview of the BMS control system—from the basic types of control (open-loop and closed-loop) to the operational logic and interaction with vehicle systems. Enjoy integrating these concepts into your documentation!
+This documentation, complete with embedded Mermaid diagrams, provides a comprehensive overview of the BMS control system—from the basic types of control (open-loop and closed-loop) to the operational logic and interaction with vehicle systems. Enjoy integrating these concepts into your documentation!

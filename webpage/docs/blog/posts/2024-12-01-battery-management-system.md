@@ -1,11 +1,14 @@
 ---
-title: Battery Management System
-authors: [catik]
+title: "Battery Management System"
+date: 2024-12-01
+authors:
+  - catik
 ---
+
 
 In the electric vehicle revolution, the **Battery Management System** is arguably the unsung hero, working tirelessly behind the scenes. As the bridge between the battery pack and the rest of the vehicle, the BMS ensures efficiency, safety, and performance—a crucial trifecta for any EV. But what exactly makes the BMS such an integral component, and why does its role go beyond mere power management?
 
-<!-- truncate -->
+<!-- more -->
 
 ## The Core Role of a BMS
 

@@ -1,13 +1,16 @@
 ---
-title: Megawatt Charging System 
-authors: [catik]
+title: "Megawatt Charging System"
+date: 2025-02-05
+authors:
+  - catik
 ---
+
 
 
 
 The **Megawatt Charging System (MCS)** is an advanced charging solution specifically developed to support the growing demands of heavy-duty electric vehicles (EVs), such as electric trucks and buses. Spearheaded by the **Charging Interface Initiative (CharIN)**, MCS aims to become a globally recognized standard for ultra-fast, high-power charging. In this post, we explore MCS’s technical specifications, development, and its impact on sustainable transportation.
 
-<!-- truncate -->
+<!-- more -->
 
 ## **Technical Specifications**
 

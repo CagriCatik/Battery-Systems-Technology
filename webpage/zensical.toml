@@ -1,0 +1,269 @@
+[project]
+site_name = "Battery Systems and Technology"
+site_description = "Comprehensive resources, scripts, and documentation for simulating, designing, and analyzing Battery Systems Technology."
+site_author = "Cagri Catik"
+site_url = "https://cagricatik.github.io/Battery-Systems-Technology/"
+copyright = "Copyright &copy; 2026 Battery Systems and Technology"
+
+repo_url = "https://github.com/CagriCatik/Battery-Systems-Technology"
+repo_name = "CagriCatik/Battery-Systems-Technology"
+edit_uri = "edit/main/webpage/docs/"
+
+nav = [
+  { "Home" = "index.md" },
+  { "Fundamentals" = [
+    { "Getting Started" = "theory/01_fundamentals/00_getting-started.md" },
+    { "Importance of Battery" = "theory/01_fundamentals/01_importance_of_battery.md" },
+    { "Why Lithium Battery" = "theory/01_fundamentals/02_why_lithium_battery.md" },
+    { "How Lithium Battery Works" = "theory/01_fundamentals/03_how_lithium_battery_works.md" },
+    { "Battery Terminology" = "theory/01_fundamentals/04_battery_terminology.md" },
+    { "Electric Vehicles" = [
+      { "Components" = "theory/01_fundamentals/electric_vehicles/01_components.md" },
+      { "PMSM Motor" = "theory/01_fundamentals/electric_vehicles/02_em-pmsm.md" },
+      { "ASM Motor" = "theory/01_fundamentals/electric_vehicles/03_em-asm.md" },
+      { "Power Electronics" = "theory/01_fundamentals/electric_vehicles/04_pe.md" },
+      { "BMS Overview" = "theory/01_fundamentals/electric_vehicles/05_bms.md" },
+    ] },
+  ] },
+  { "Aging & Degradation" = [
+    { "Getting Started" = "theory/02_aging_degradation/00_getting-started.md" },
+    { "Cycle Aging" = "theory/02_aging_degradation/01_cycle_ageing.md" },
+    { "Calendar Aging" = "theory/02_aging_degradation/02_calendar_ageing.md" },
+  ] },
+  { "Chemistry & Design" = [
+    { "Getting Started" = "theory/03_chemistry_design_principles/00_getting-started.md" },
+    { "Chemistries vs Design" = "theory/03_chemistry_design_principles/01_chemistries_vs_design.md" },
+    { "Form Factors" = "theory/03_chemistry_design_principles/02_form_factors.md" },
+    { "Cell Construction" = "theory/03_chemistry_design_principles/03_cell_construction.md" },
+    { "Cell Comparison" = "theory/03_chemistry_design_principles/04_cell_comparison.md" },
+  ] },
+  { "Battery Pack" = [
+    { "Getting Started" = "theory/04_battery_pack/00_getting_started.md" },
+    { "Electrical Connection" = "theory/04_battery_pack/01_electrical_connection.md" },
+    { "Types & Welding" = "theory/04_battery_pack/02_types_and_welding.md" },
+    { "Cylindrical Module" = "theory/04_battery_pack/03_cylindrical_module.md" },
+    { "Pouch Module" = "theory/04_battery_pack/04_pouch_module.md" },
+    { "Prismatic Module" = "theory/04_battery_pack/05_prismatic_module.md" },
+    { "Cell to Pack" = "theory/04_battery_pack/06_cell_to_pack.md" },
+  ] },
+  { "Thermal Management" = [
+    { "Getting Started" = "theory/05_thermal_management/00_getting_started.md" },
+    { "Cooling Mechanism" = "theory/05_thermal_management/01_cooling_mechanism.md" },
+    { "Air Cooling & Heating" = "theory/05_thermal_management/02_air_cooling_heating.md" },
+    { "Liquid Cooling" = "theory/05_thermal_management/03_liquid_cooling.md" },
+    { "Phase Change Materials" = "theory/05_thermal_management/04_phase_change_materials.md" },
+    { "Heat Pipe" = "theory/05_thermal_management/05_heat_pipe.md" },
+    { "HVAC Integration" = "theory/05_thermal_management/06_integration_hvac.md" },
+    { "Thermal Insulation & Shielding" = "theory/05_thermal_management/06_thermal_insulation_shielding.md" },
+    { "Thermal Runaway" = "theory/05_thermal_management/07_thermal_runaway.md" },
+  ] },
+  { "Characteristics" = [
+    { "Getting Started" = "theory/06_battery_characteristics/00_getting_started.md" },
+    { "OCV vs SOC" = "theory/06_battery_characteristics/01_ocv_vs_soc.md" },
+    { "Specification Sheet" = "theory/06_battery_characteristics/02_specification_sheet.md" },
+  ] },
+  { "Sizing & Optimization" = [
+    { "Getting Started" = "theory/07_battery_sizing/00_getting_started.md" },
+    { "Sizing Basics" = "theory/07_battery_sizing/01_sizing_basics.md" },
+    { "Python for Battery Sizing" = "theory/07_battery_sizing/02_using_python_for_battery_sizing.md" },
+  ] },
+  { "BMS" = [
+    { "Getting Started" = "theory/08_bms/00_getting_started.md" },
+    { "Introduction" = "theory/08_bms/01_introduction_bms.md" },
+    { "Functions of BMS" = "theory/08_bms/02_function_bms.md" },
+    { "Detailed Functions" = "theory/08_bms/03_detailed_functions.md" },
+    { "BMS Algorithms" = "theory/08_bms/04_bms_algorithms.md" },
+    { "Initial BMS" = "theory/08_bms/05_initial_bms.md" },
+    { "Cycle Counting" = "theory/08_bms/06_cycle_counting.md" },
+    { "SOH Algorithm" = "theory/08_bms/07_soh_algorithm.md" },
+    { "Cell Balancing" = "theory/08_bms/08_cell_balancing.md" },
+    { "Cell Balancing Methods" = "theory/08_bms/09_cell_balancing_methods.md" },
+  ] },
+  { "Architecture" = [
+    { "Getting Started" = "theory/09_bms_architecture/00_getting_started.md" },
+    { "BMS Architecture" = "theory/09_bms_architecture/01_bms_architecture.md" },
+    { "BMS Control System" = "theory/09_bms_architecture/02_bms_control.md" },
+    { "Development Trends" = "theory/09_bms_architecture/03_development_trends.md" },
+    { "Initial SOC" = "theory/09_bms_architecture/04_initial_soc.md" },
+    { "BMS Design" = "theory/09_bms_architecture/05_bms_design.md" },
+    { "BMS Topology" = "theory/09_bms_architecture/06_topology.md" },
+    { "State Machine" = "theory/09_bms_architecture/07_state_machine.md" },
+  ] },
+  { "Modeling & Testing" = [
+    { "Getting Started" = "theory/10_modeling_testing/00_getting_started.md" },
+    { "Requirements & Testing" = [
+      { "Overview" = "theory/10_modeling_testing/01_req_test/01_overview.md" },
+      { "Introduction" = "theory/10_modeling_testing/01_req_test/02_introduction.md" },
+      { "Best Practices" = "theory/10_modeling_testing/01_req_test/03_best-practices.md" },
+      { "Example BMS" = "theory/10_modeling_testing/01_req_test/04_example-bms.md" },
+      { "Functional Requirements" = "theory/10_modeling_testing/01_req_test/05_functional-requierements.md" },
+      { "ISO 26262" = "theory/10_modeling_testing/01_req_test/06_iso26262.md" },
+      { "Test Requirements" = "theory/10_modeling_testing/01_req_test/07_test-requirements.md" },
+      { "Environment Requirements" = "theory/10_modeling_testing/01_req_test/08_environment-req.md" },
+      { "Performance Requirements" = "theory/10_modeling_testing/01_req_test/09_performance-req.md" },
+      { "Documentation" = "theory/10_modeling_testing/01_req_test/10_doc.md" },
+    ] },
+    { "Testing Concepts" = [
+      { "Test Concept" = "theory/10_modeling_testing/02_testing/01_test_concept.md" },
+      { "Test Strategy" = "theory/10_modeling_testing/02_testing/02_test_strategy.md" },
+      { "Test Specification" = "theory/10_modeling_testing/02_testing/03_test_specification.md" },
+    ] },
+    { "Modeling" = [
+      { "Equivalent Circuit" = "theory/10_modeling_testing/03_modeling/01_equivalent_circuit.md" },
+      { "Diffusion Voltage" = "theory/10_modeling_testing/03_modeling/02_diffusion_voltage.md" },
+      { "Ballparking Parameters" = "theory/10_modeling_testing/03_modeling/03_ballparking_parameters.md" },
+      { "OCV Testing" = "theory/10_modeling_testing/03_modeling/04_ocv_testing.md" },
+    ] },
+    { "MATLAB & Simulink" = [
+      { "Introduction" = "theory/10_modeling_testing/04_matlab/01_intro.md" },
+      { "Testing" = "theory/10_modeling_testing/04_matlab/02_testing.md" },
+      { "Requirements" = "theory/10_modeling_testing/04_matlab/03_requirements.md" },
+      { "Unit Testing" = "theory/10_modeling_testing/04_matlab/04_unit-testing.md" },
+      { "Managing Tests" = "theory/10_modeling_testing/04_matlab/05_managing_tests.md" },
+      { "Measuring" = "theory/10_modeling_testing/04_matlab/06_measuring.md" },
+      { "Generating Code" = "theory/10_modeling_testing/04_matlab/07_generating_code.md" },
+      { "Testing Code" = "theory/10_modeling_testing/04_matlab/08_testing_code.md" },
+      { "Closed Loop" = "theory/10_modeling_testing/04_matlab/09_closed_loop.md" },
+    ] },
+    { "Hardware-in-the-Loop" = [
+      { "SCALEXIO" = "theory/10_modeling_testing/05_hil/01_scalexio.md" },
+      { "BMS Testing" = "theory/10_modeling_testing/05_hil/02_bms-testing.md" },
+      { "Emulator" = "theory/10_modeling_testing/05_hil/03_emulator.md" },
+      { "BMS in HIL" = "theory/10_modeling_testing/05_hil/04_bms.md" },
+      { "BMS EV Testing" = "theory/10_modeling_testing/05_hil/05_bms-ev.md" },
+      { "Battery Simulation" = "theory/10_modeling_testing/05_hil/06_battery-simulation.md" },
+      { "BMS SIL" = "theory/10_modeling_testing/05_hil/07_bms-sil.md" },
+    ] },
+  ] },
+  { "Glossary" = [
+    { "Electrical Concepts" = "glossary/00_electrical_concepts.md" },
+    { "Clamp Status" = "glossary/01_clamp-status.md" },
+    { "A" = "glossary/A.md" },
+    { "B" = "glossary/B.md" },
+    { "C" = "glossary/C.md" },
+    { "D" = "glossary/D.md" },
+    { "E" = "glossary/E.md" },
+    { "F" = "glossary/F.md" },
+    { "G" = "glossary/G.md" },
+    { "H" = "glossary/H.md" },
+    { "I" = "glossary/I.md" },
+    { "J" = "glossary/J.md" },
+    { "K" = "glossary/K.md" },
+    { "L" = "glossary/L.md" },
+    { "M" = "glossary/M.md" },
+    { "N" = "glossary/N.md" },
+    { "O" = "glossary/O.md" },
+    { "P" = "glossary/P.md" },
+    { "Q" = "glossary/Q.md" },
+    { "R" = "glossary/R.md" },
+    { "S" = "glossary/S.md" },
+    { "T" = "glossary/T.md" },
+    { "U" = "glossary/U.md" },
+    { "V" = "glossary/V.md" },
+    { "W" = "glossary/W.md" },
+    { "X" = "glossary/X.md" },
+    { "Y" = "glossary/Y.md" },
+    { "Z" = "glossary/Z.md" },
+  ] },
+  { "References" = "references/info.md" },
+  { "Blog" = "blog/index.md" },
+]
+
+
+docs_dir = "docs"
+site_dir = "site"
+
+extra_javascript = [
+  "javascripts/mathjax.js",
+  "https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js",
+]
+
+[project.theme]
+variant = "modern"
+language = "en"
+logo = "assets/img/battery.png"
+favicon = "assets/img/favicon.ico"
+
+features = [
+  "announce.dismiss",
+  "content.action.edit",
+  "content.action.view",
+  "content.code.annotate",
+  "content.code.copy",
+  "content.code.select",
+  "content.footnote.tooltips",
+  "content.tabs.link",
+  "content.tooltips",
+  "navigation.footer",
+  "navigation.indexes",
+  "navigation.instant",
+  "navigation.instant.prefetch",
+  "navigation.path",
+  "navigation.sections",
+  "navigation.tabs",
+  "navigation.tabs.sticky",
+  "navigation.top",
+  "navigation.tracking",
+  "search.highlight",
+  "search.share",
+  "search.suggest",
+  "toc.follow",
+]
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme)"
+toggle.icon = "lucide/sun-moon"
+toggle.name = "Switch to light mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: light)"
+scheme = "default"
+primary = "indigo"
+accent = "indigo"
+toggle.icon = "lucide/sun"
+toggle.name = "Switch to dark mode"
+
+[[project.theme.palette]]
+media = "(prefers-color-scheme: dark)"
+scheme = "slate"
+primary = "indigo"
+accent = "indigo"
+toggle.icon = "lucide/moon"
+toggle.name = "Switch to system preference"
+
+[[project.extra.social]]
+icon = "fontawesome/brands/github"
+link = "https://github.com/CagriCatik/Battery-Systems-Technology"
+
+[project.plugins.blog]
+
+[project.markdown_extensions]
+abbr = {}
+admonition = {}
+attr_list = {}
+def_list = {}
+footnotes = {}
+md_in_html = {}
+toc.permalink = true
+pymdownx.arithmatex.generic = true
+pymdownx.betterem = {}
+pymdownx.caret = {}
+pymdownx.details = {}
+pymdownx.emoji.emoji_generator = "zensical.extensions.emoji.to_svg"
+pymdownx.emoji.emoji_index = "zensical.extensions.emoji.twemoji"
+pymdownx.highlight.anchor_linenums = true
+pymdownx.highlight.line_spans = "__span"
+pymdownx.highlight.pygments_lang_class = true
+pymdownx.inlinehilite = {}
+pymdownx.keys = {}
+pymdownx.magiclink = {}
+pymdownx.mark = {}
+pymdownx.smartsymbols = {}
+pymdownx.superfences.custom_fences = [
+  { name = "mermaid", class = "mermaid", format = "pymdownx.superfences.fence_code_format" },
+]
+pymdownx.tabbed.alternate_style = true
+pymdownx.tabbed.combine_header_slug = true
+pymdownx.tasklist.custom_checkbox = true
+pymdownx.tilde = {}
+

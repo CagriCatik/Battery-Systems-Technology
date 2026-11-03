@@ -1,11 +1,14 @@
 ---
-title: The Future of Mobility
-authors: [catik]
+title: "The Future of Mobility"
+date: 2025-01-07
+authors:
+  - catik
 ---
+
 
 The global mobility landscape is undergoing a seismic shift as governments, corporations, and individuals grapple with the urgent need to decarbonize transportation. The battle between Battery Electric Vehicles and Fuel Cell Vehicles has taken center stage in this transition. 
 
-<!-- truncate -->
+<!-- more -->
 
 ## The Future of Mobility: Battery Electric Vehicles vs. Fuel Cell Vehicles
 

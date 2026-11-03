@@ -1,11 +1,14 @@
 ---
-title: Impact of Fast Charging on EV Battery Health
-authors: [catik]
+title: "Impact of Fast Charging on EV Battery Health"
+date: 2025-02-04
+authors:
+  - catik
 ---
+
 
 Recent studies have challenged the long-held belief that frequent fast charging accelerates battery degradation in electric vehicles (EVs). In particular, a comprehensive analysis by Recurrent—based on data from over 13,000 Tesla vehicles spanning model years 2012 to 2023—found no statistically significant difference in battery degradation between vehicles that fast charge more than 70% of the time and those that do so less than 30% ([recurrentauto.com](https://www.recurrentauto.com/research/impacts-of-fast-charging?utm_source=chatgpt.com)). This documentation examines these findings from a Battery Management System (BMS) standpoint, addressing both the technical nuances and practical implications for users and engineers alike.
 
-<!-- truncate -->
+<!-- more -->
 
 ## Overview of EV Fast Charging and Battery Management
 

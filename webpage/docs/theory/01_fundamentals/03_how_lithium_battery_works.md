@@ -34,7 +34,7 @@ A lithium-ion battery consists of the following critical components:
 ### Fundamental Mechanisms
 Lithium-ion batteries operate based on the movement of lithium ions and electrons during the charge and discharge cycles.
 
-![Lithium-Ion Battery](/battery/lithium-ion-battery.png)
+![Lithium-Ion Battery](../../battery/lithium-ion-battery.png)
 
 
 #### Charge Cycle

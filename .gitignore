@@ -165,6 +165,9 @@ venv.bak/
 
 # mkdocs documentation
 /site
+site/
+webpage/site/
+.zensical/
 
 # mypy
 .mypy_cache/

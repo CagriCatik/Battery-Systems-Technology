@@ -1,11 +1,6 @@
 ---
-id: bms-introduction
 title: "Introduction"
 ---
-
-import plantumlEncoder from 'plantuml-encoder';
-import PlantUML from '@site/src/components/PlantUML';
-
 
 # Introduction
 
@@ -37,52 +32,56 @@ A BMS performs several essential functions to manage and maintain battery health
   
   *Example:* Accurate current measurement is vital for implementing charge protocols that prevent overcurrent conditions, which can lead to thermal runaway.
 
-<PlantUML code={`
-@startuml BMS_Component_Diagram
-skinparam componentStyle rectangle
+```mermaid
+graph TD
+    subgraph MON["Monitoring"]
+        MON1["Voltage Sensors"]
+        MON2["Temperature Sensors"]
+        MON3["Current Sensors"]
+    end
 
-component "Monitoring" as MON {
-  [Voltage Sensors]
-  [Temperature Sensors]
-  [Current Sensors]
-}
-component "State Estimation" as SE {
-  [SoC Module]
-  [SoH Module]
-  [SoP Module]
-  [SoE Module]
-}
-component "Protection" as PROT {
-  [Over-Charge/Over-Discharge]
-  [Over-Current Protection]
-  [Thermal Management]
-}
-component "Balancing" as BAL {
-  [Passive Balancing]
-  [Active Balancing]
-}
-component "Communication" as COMM {
-  [CAN Bus]
-  [SMBus / I²C / UART]
-  [Wireless Interfaces]
-}
-component "Advanced Features" as ADV {
-  [Machine Learning]
-  [Predictive Maintenance]
-  [Energy Optimization]
-}
+    subgraph SE["State Estimation"]
+        SE1["SoC Module"]
+        SE2["SoH Module"]
+        SE3["SoP Module"]
+        SE4["SoE Module"]
+    end
 
-MON --> SE : Provides sensor data
-SE --> PROT : Informs protection decisions
-PROT --> BAL : May trigger cell balancing
-MON --> COMM : Transmits raw data
-SE --> COMM : Sends state info
-PROT --> COMM : Sends alerts/diagnostics
-ADV --> SE : Improves estimation (ML)
-ADV --> PROT : Predicts faults
-ADV --> COMM : Enables remote monitoring
+    subgraph PROT["Protection"]
+        PROT1["Over-Charge / Over-Discharge"]
+        PROT2["Over-Current Protection"]
+        PROT3["Thermal Management"]
+    end
 
-@enduml`} />
+    subgraph BAL["Balancing"]
+        BAL1["Passive Balancing"]
+        BAL2["Active Balancing"]
+    end
+
+    subgraph COMM["Communication"]
+        COMM1["CAN Bus"]
+        COMM2["SMBus / I²C / UART"]
+        COMM3["Wireless Interfaces"]
+    end
+
+    subgraph ADV["Advanced Features"]
+        ADV1["Machine Learning"]
+        ADV2["Predictive Maintenance"]
+        ADV3["Energy Optimization"]
+    end
+
+    MON -->|Provides sensor data| SE
+    SE -->|Informs protection decisions| PROT
+    PROT -->|May trigger cell balancing| BAL
+    MON -->|Transmits raw data| COMM
+    SE -->|Sends state info| COMM
+    PROT -->|Sends alerts / diagnostics| COMM
+    ADV -->|Improves estimation (ML)| SE
+    ADV -->|Predicts faults| PROT
+    ADV -->|Enables remote monitoring| COMM
+```
+
+
 
 
 
@@ -130,21 +129,24 @@ ADV --> COMM : Enables remote monitoring
   *Strategy:* Implements active cooling (e.g., liquid cooling) or passive cooling (e.g., heat sinks) based on temperature readings.
 
 
-<PlantUML code={`
-@startuml Battery_State_Machine
-[*] --> Idle
+```mermaid
+stateDiagram-v2
+    [*] --> Idle
 
-Idle --> Charging : Start Charging
-Charging --> Idle : Charge Complete
-Idle --> Discharging : Begin Discharge
-Discharging --> Idle : Discharge Complete
+    Idle --> Charging : Start Charging
+    Charging --> Idle : Charge Complete
 
-Idle --> Fault : Error Detected
-Charging --> Fault : Overvoltage/Overcurrent
-Discharging --> Fault : Undervoltage/Overcurrent
+    Idle --> Discharging : Begin Discharge
+    Discharging --> Idle : Discharge Complete
 
-Fault --> Idle : Reset/Recovery
-@enduml`} />
+    Idle --> Fault : Error Detected
+    Charging --> Fault : Overvoltage / Overcurrent
+    Discharging --> Fault : Undervoltage / Overcurrent
+
+    Fault --> Idle : Reset / Recovery
+```
+
+
 
 
 

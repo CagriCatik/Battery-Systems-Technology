@@ -1,12 +1,15 @@
 ---
-title: Cell Balancing
-authors: [catik]
+title: "Cell Balancing"
+date: 2025-02-07
+authors:
+  - catik
 ---
+
 
 
 Battery packs in electric vehicles require **cell balancing** to ensure safety, performance, and longevity. Variations in cell capacity, state of charge (SoC), and internal resistance can lead to imbalances, which—if not corrected—can result in overcharging, over-discharging, and reduced battery capacity. In this post, we explore cell balancing, its working principles, and the techniques used in **Battery Management Systems**.
 
-<!-- truncate -->
+<!-- more -->
 
 ## **The Importance of Cell Balancing**
 

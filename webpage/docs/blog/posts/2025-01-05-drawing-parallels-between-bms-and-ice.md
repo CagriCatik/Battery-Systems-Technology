@@ -1,13 +1,16 @@
 ---
-title: Drawing Parallels Between BMS and ICE
-authors: [catik]
+title: "Drawing Parallels Between BMS and ICE"
+date: 2025-01-05
+authors:
+  - catik
 ---
+
 
 # Electric Vehicles vs. Conventional Vehicles: Drawing Parallels Between BMS and ICE Control Units
 
 In the grand theater of automotive evolution, **Electric Vehicles (EVs)** and **Conventional Vehicles (Internal Combustion Engine)** take center stage as the protagonists of modern transportation. Behind their seemingly disparate operations lie intricate systems ensuring performance, safety, and longevity. Among these, the **Battery Management System (BMS)** in EVs and the **ICE Control Unit** in conventional vehicles play pivotal roles. While not direct counterparts, their functionalities offer a fascinating analogy into how different vehicle types orchestrate their internal symphonies. Let’s delve into this analogy with a critical yet ironic lens, uncovering the complexities and quirks that define each system.
 
-<!-- truncate -->
+<!-- more -->
 
 ## The Symphonic Conductors: BMS and ICE Control Units
 

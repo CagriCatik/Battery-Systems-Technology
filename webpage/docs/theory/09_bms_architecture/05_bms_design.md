@@ -1,75 +1,62 @@
 ---
-id: bms-design
 title: "Design of BMS"
 ---
-
-import plantumlEncoder from 'plantuml-encoder';
-import PlantUML from '@site/src/components/PlantUML';
-
 
 # Desing of BMS
 
 The design of a Battery Management System (BMS) is a multifaceted process that integrates hardware, software, and control algorithms to ensure the safe, efficient, and reliable operation of battery systems. Effective BMS design is crucial for optimizing battery performance, extending lifespan, and ensuring safety in applications such as electric vehicles (EVs), renewable energy storage, and portable electronics. This chapter provides an in-depth exploration of the BMS design process, focusing on input/output architecture, control logic, and the implementation of key functionalities such as State of Charge (SoC) and State of Health (SoH) estimation.
 
 
-<PlantUML code={`
-@startuml
-skinparam componentStyle rectangle
+```mermaid
+graph TD
+    BatteryPack["Battery Pack"]
+    PowerDistribution["Power Distribution Module"]
 
-' Main Modules
-component "Battery Pack" as BatteryPack
-component "Cell Monitoring Module" as CellMon
-component "Balancing Module" as Balancer
-component "Control Module" as Control
-component "Communication Module" as Communication
-component "Power Distribution Module" as PowerDistribution
+    subgraph Monitoring["Cell Monitoring"]
+        CellMon["Cell Monitoring Module"]
+        VoltageSensor["Voltage Sensor"]
+        TemperatureSensor["Temperature Sensor"]
+        CurrentSensor["Current Sensor"]
+        CellMon --> VoltageSensor
+        CellMon --> TemperatureSensor
+        CellMon --> CurrentSensor
+    end
 
-' Battery Pack provides inputs to the modules
-BatteryPack --> CellMon : Provides voltage/current
-BatteryPack --> Balancer : Supplies power for balancing
+    subgraph BalancingGroup["Balancing Methods"]
+        Balancer["Balancing Module"]
+        PassiveBalancer["Passive Balancer"]
+        ActiveBalancer["Active Balancer"]
+        Balancer --> PassiveBalancer
+        Balancer --> ActiveBalancer
+    end
 
-' Grouping Cell Monitoring Sensors
-package "Cell Monitoring Sensors" {
-    [Voltage Sensor] as VoltageSensor
-    [Temperature Sensor] as TemperatureSensor
-    [Current Sensor] as CurrentSensor
-}
-CellMon --> VoltageSensor
-CellMon --> TemperatureSensor
-CellMon --> CurrentSensor
+    subgraph ControlGroup["Control Processing"]
+        Control["Control Module"]
+        AlgorithmProcessor["Algorithm Processor"]
+        SafetyDiagnostics["Safety & Diagnostics"]
+        Control --> AlgorithmProcessor
+        Control --> SafetyDiagnostics
+    end
 
-' Grouping Balancing Methods
-package "Balancing Methods" {
-    [Passive Balancer] as PassiveBalancer
-    [Active Balancer] as ActiveBalancer
-}
-Balancer --> PassiveBalancer
-Balancer --> ActiveBalancer
+    subgraph CommGroup["Communication Interfaces"]
+        Communication["Communication Module"]
+        CANBus["CAN Bus"]
+        Communication --> CANBus
+    end
 
-' Grouping Control Processing Elements
-package "Control Processing" {
-    [Algorithm Processor] as AlgorithmProcessor
-    [Safety & Diagnostics] as SafetyDiagnostics
-}
-Control --> AlgorithmProcessor
-Control --> SafetyDiagnostics
+    BatteryPack -->|Provides voltage/current| CellMon
+    BatteryPack -->|Supplies power for balancing| Balancer
 
-' Grouping Communication Interfaces
-package "Communication Interfaces" {
-    [CAN Bus] as CANBus
-}
-Communication --> CANBus
+    CellMon -->|Sends sensor data| Control
+    Balancer -->|Provides balancing status| Control
+    Control -->|Issues balancing commands| Balancer
+    Control -->|Triggers power control signals| PowerDistribution
+    Control -->|Transmits status & logs| Communication
+    PowerDistribution -->|Feedback voltage/current| Control
+    SafetyDiagnostics -->|Diagnostic requests| CellMon
+```
 
-' Data Flow Between Modules
-CellMon --> Control : Sends sensor data
-Balancer --> Control : Provides balancing status
-Control --> Balancer : Issues balancing commands
-Control --> PowerDistribution : Triggers power control signals
-Control --> Communication : Transmits status & logs
-PowerDistribution --> Control : Feedback voltage/current
-SafetyDiagnostics --> CellMon : Diagnostic requests
 
-@enduml`} />
 
 
 ---
@@ -114,28 +101,27 @@ Based on the processed inputs, the BMS generates various outputs to control and 
 
 The following diagram illustrates the overall BMS system architecture, including the key components and communication interfaces:
 
-<PlantUML code={`
-@startuml
-skinparam componentStyle rectangle
+```mermaid
+graph TD
+    VCU["VCU"]
+    MC["Master Controller"]
+    Motor["Motor Controller"]
+    Charger["Charger"]
+    Slave["Slave Unit"]
 
-component "VCU" as vcu
-component "Master Controller" as mc
-component "Motor Controller" as motor
-component "Charger" as charger
-component "Slave Unit" as slave
+    subgraph BatteryModules["Battery Modules"]
+        Sensors["Cell Sensors"]
+    end
 
-node "Battery Modules" {
-    component "Cell Sensors" as sensors
-}
+    VCU -->|Mode Request| MC
+    MC -->|Balancing Commands| Slave
+    MC -->|Current Limit| Motor
+    MC -->|Charging Limit| Charger
+    Sensors -->|Sensor Data| Slave
+    Slave -->|Processed Data| MC
+```
 
-vcu --> mc: Mode Request
-mc --> slave: Balancing Commands
-mc --> motor: Current Limit
-mc --> charger: Charging Limit
-sensors --> slave: Sensor Data
-slave --> mc: Processed Data
 
-@enduml`} />
 
 
 ---
@@ -189,29 +175,30 @@ void executeMode(BMS_Mode mode) {
 
 ### Control Logic Flow Diagram
 
-The following PlantUML diagram illustrates the control flow for handling mode requests and safety checks:
+The following diagram illustrates the control flow for handling mode requests and safety checks:
 
-<PlantUML code={`
-@startuml
-start
-:Receive Mode Request from VCU;
-if (Mode == Charge?) then (yes)
-  :Enable Charging;
-  :Disable Discharging;
-elseif (Mode == Discharge?) then (yes)
-  :Enable Discharging;
-  :Disable Charging;
-else (Idle)
-  :Disable Charging;
-  :Disable Discharging;
-endif
-:Read Sensor Data;
-:Estimate SoC and SoH;
-if (Safety Limit Exceeded?) then (yes)
-  :Trigger Safety Actions;
-endif
-stop
-@enduml`} />
+```mermaid
+flowchart TD
+    Start([Start]) --> Recv["Receive Mode Request from VCU"]
+    Recv --> ModeCheck{"Check Mode"}
+    
+    ModeCheck -->|Mode == Charge| Charge["Enable Charging<br>Disable Discharging"]
+    ModeCheck -->|Mode == Discharge| Discharge["Enable Discharging<br>Disable Charging"]
+    ModeCheck -->|Idle / Other| Idle["Disable Charging<br>Disable Discharging"]
+
+    Charge --> ReadSensors["Read Sensor Data"]
+    Discharge --> ReadSensors
+    Idle --> ReadSensors
+
+    ReadSensors --> Estimate["Estimate SoC and SoH"]
+    Estimate --> SafetyCheck{"Safety Limit Exceeded?"}
+
+    SafetyCheck -->|Yes| SafetyAction["Trigger Safety Actions"]
+    SafetyCheck -->|No| Stop([Stop])
+    SafetyAction --> Stop
+```
+
+
 
 ### State Estimation
 
@@ -412,25 +399,26 @@ float estimate_SOH_lookup(int cycle_count) {
 
 The following diagram outlines the key methods used for SoC and SoH estimation:
 
-<PlantUML code={`
-@startuml
-start
-:Measure Sensor Data;
-if (Using Coulomb Counting?) then (yes)
-  :Integrate Current over Time;
-elseif (Using OCV Method?) then (yes)
-  :Measure Open-Circuit Voltage;
-elseif (Using Kalman Filter?) then (yes)
-  :Apply Kalman Filter;
-endif
-:Update SoC Estimation;
-if (Estimate SoH?) then (yes)
-  :Compare Current vs Original Capacity;
-  :Cycle Counting;
-  :Lookup Table;
-endif
-stop
-@enduml`} />
+```mermaid
+flowchart TD
+    Start([Start]) --> Measure["Measure Sensor Data"]
+    Measure --> MethodCheck{"Select Estimation Method"}
+
+    MethodCheck -->|Coulomb Counting| CC["Integrate Current over Time"]
+    MethodCheck -->|OCV Method| OCV["Measure Open-Circuit Voltage"]
+    MethodCheck -->|Kalman Filter| KF["Apply Kalman Filter"]
+
+    CC --> UpdateSoC["Update SoC Estimation"]
+    OCV --> UpdateSoC
+    KF --> UpdateSoC
+
+    UpdateSoC --> SoHCheck{"Estimate SoH?"}
+    SoHCheck -->|Yes| SoHCalc["Compare Current vs Original Capacity<br>Cycle Counting<br>Lookup Table"]
+    SoHCheck -->|No| Stop([Stop])
+    SoHCalc --> Stop
+```
+
+
 
 
 ---

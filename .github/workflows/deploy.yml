@@ -5,47 +5,36 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+      - name: Setup Python
+        uses: actions/setup-python@v5
         with:
-          node-version: '18'
-
-      - name: Delete old GitHub Pages deployments
-        uses: strumwolf/delete-deployment-environment@v2
-        with:
-          token: ${{ secrets.Docusaurus_TOKEN }}
-          environment: github-pages
-          onlyRemoveDeployments: true
-
-      - name: List repository files
-        run: ls -R
-
-      - name: List webpage folder contents
-        working-directory: ./webpage
-        run: ls -R
+          python-version: '3.11'
 
       - name: Install dependencies
         working-directory: ./webpage
-        run: npm install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
-      - name: Clear cache
+      - name: Build Zensical documentation
         working-directory: ./webpage
-        run: npm run clear
-
-      - name: Build Docusaurus site
-        working-directory: ./webpage
-        run: npm run build
+        run: |
+          zensical build --clean --strict
+          touch site/.nojekyll
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.Docusaurus_TOKEN }}
-          publish_dir: ./webpage/build
+          github_token: ${{ secrets.Docusaurus_TOKEN || secrets.GITHUB_TOKEN }}
+          publish_dir: ./webpage/site

@@ -1,11 +1,14 @@
 ---
 title: "Fast Charging Effects on EV Batteries"
-authors: [catik]
+date: 2024-12-04
+authors:
+  - catik
 ---
+
 
 Fast charging is widely promoted as the antidote to EV range anxiety. However, a closer critical examination of both laboratory experiments and field data reveals a more complex picture—one where modern battery management systems (BMS) help mitigate many risks, yet uncertainties remain about the long-term, cumulative effects of rapid charging.
 
-<!-- truncate -->
+<!-- more -->
 
 
 ## Laboratory Insights: Mechanisms Under Stress

@@ -36,26 +36,33 @@ The repository explores the following core aspects of battery systems:
     Study methods for battery modeling and testing to predict performance and ensure quality control.
 
 
-## Docusaurus 🦕
+## Documentation (Zensical ⚡)
 
-This repository includes detailed documentation built with **Docusaurus**, providing insights into using and extending the available tools and models.
+This repository includes detailed documentation built with **[Zensical](https://zensical.org/)**, providing insights into using and extending the available tools and models.
 
-**Serve the Documentation Locally**  
-   To preview the documentation locally, follow these steps:
-   
-   1. Change to the documentation directory:
-      ```bash
-      cd webpage
-      ```
-   
-   2. Install dependencies (if not already done):
-      ```bash
-      npm install
-      ```
+### Serve the Documentation Locally
 
-   3. Start the local server:
-      ```bash
-      npm run start
-      ```
+To preview the documentation locally with hot-reloading:
 
-   4. Open your browser and navigate to `http://localhost:3000`.
+1. Install dependencies (requires Python 3.11+):
+   ```bash
+   pip install -r webpage/requirements.txt
+   ```
+
+2. Start the local server:
+   ```bash
+   cd webpage
+   zensical serve
+   ```
+   *(or run `zensical serve` directly from the repository root)*
+
+3. Open your browser and navigate to `http://localhost:8000`.
+
+### Build the Static Site
+
+To build the static HTML files:
+```bash
+cd webpage
+zensical build --clean
+```
+The built site will be generated in `webpage/site/`.

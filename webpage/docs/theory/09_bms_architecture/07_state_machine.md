@@ -1,10 +1,6 @@
 ---
-id: state_machine
 title: State Machine
 ---
-
-import plantumlEncoder from 'plantuml-encoder';
-import PlantUML from '@site/src/components/PlantUML';
 
 # State Machine
 
@@ -16,61 +12,62 @@ The state diagram comprises six primary states: Sleep Mode, Active Mode, Start M
 
 ### State Diagram
 
-<PlantUML code={`
-@startuml
-hide empty description
+```mermaid
+stateDiagram-v2
+    [*] --> SelfTest
 
-[*] --> SelfTest
+    SelfTest --> Initialization : Test Passed
+    SelfTest --> Fault : Test Failed
 
-SelfTest --> Initialization : Test Passed
-SelfTest --> Fault : Test Failed
+    Initialization --> NormalOperation : Init Complete
 
-Initialization --> NormalOperation : Init Complete
+    NormalOperation --> Charging : Charger Connected
+    NormalOperation --> Discharging : Load Connected
+    NormalOperation --> Sleep : Low Activity
+    NormalOperation --> Fault : Error Detected
 
-NormalOperation --> Charging : Charger Connected
-NormalOperation --> Discharging : Load Connected
-NormalOperation --> Sleep : Low Activity
-NormalOperation --> Fault : Error Detected
+    Charging --> NormalOperation : Charge Complete
+    Discharging --> NormalOperation : Load Removed
+    Sleep --> NormalOperation : Wake Up
 
-Charging --> NormalOperation : Charge Complete
-Discharging --> NormalOperation : Load Removed
-Sleep --> NormalOperation : Wake Up
+    Fault --> SelfTest : Reset
+```
 
-Fault --> SelfTest : Reset
 
-@enduml`} />
 
 ### Sequence Diagram
 
-<PlantUML code={`
-@startuml
-actor Vehicle
-participant System
+```mermaid
+sequenceDiagram
+    actor Vehicle
+    participant System
 
-Vehicle -> System: Turn on vehicle
-System -> System: Transition to Start_Mode
-activate System
-System -> System: Verify battery condition
-alt Successful verification
-    System -> System: Transition to Operational_Mode
-    System -> System: Monitor battery
-    System -> System: Dynamically adjust cooling/heating measures
-    Vehicle -> System: Turn off vehicle
-    System -> System: Transition to Sleep_Mode
-else Fault detected
-    System -> System: Transition to Fault_Mode
-    System -> System: Analyze and log fault
-    alt Critical fault
-        System -> System: Transition to Safety_Mode
-        System -> System: Interrupt driving power
-        Vehicle -> System: Fault resolved
-        System -> System: Transition to Operational_Mode
-    else Fault resolved
-        System -> System: Transition to Operational_Mode
+    Vehicle->>System: Turn on vehicle
+    activate System
+    System->>System: Transition to Start_Mode
+    System->>System: Verify battery condition
+    alt Successful verification
+        System->>System: Transition to Operational_Mode
+        System->>System: Monitor battery
+        System->>System: Dynamically adjust cooling/heating measures
+        Vehicle->>System: Turn off vehicle
+        System->>System: Transition to Sleep_Mode
+    else Fault detected
+        System->>System: Transition to Fault_Mode
+        System->>System: Analyze and log fault
+        alt Critical fault
+            System->>System: Transition to Safety_Mode
+            System->>System: Interrupt driving power
+            Vehicle->>System: Fault resolved
+            System->>System: Transition to Operational_Mode
+        else Fault resolved
+            System->>System: Transition to Operational_Mode
+        end
     end
-end
-deactivate System
-@enduml`} />
+    deactivate System
+```
+
+
 
 ## Description of States and Transitions
 
