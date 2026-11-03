@@ -169,18 +169,18 @@ Effective estimation begins with the acquisition of accurate and reliable data f
 ### Cycle Counting and Capacity Loss Estimation
 
 1. **Calculate Depth of Discharge (DoD)**:
-   
-   $$
-   \text{DoD} = \frac{\text{Energy Discharged}}{\text{Battery Capacity}} \times 100\%
-   $$
+
+    $$
+    \text{DoD} = \frac{\text{Energy Discharged}}{\text{Battery Capacity}} \times 100\%
+    $$
 
 2. **Accumulate DoD Values**:
-   
-   Normalize partial cycles to equivalent full cycles.
 
-   $$
-   \text{Equivalent Full Cycles} = \frac{\text{DoD}}{100\%}
-   $$
+    Normalize partial cycles to equivalent full cycles.
+
+    $$
+    \text{Equivalent Full Cycles} = \frac{\text{DoD}}{100\%}
+    $$
 
 3. **Estimate Capacity Loss**:
    

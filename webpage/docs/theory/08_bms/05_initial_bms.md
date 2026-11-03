@@ -16,18 +16,17 @@ $$
 
 Where:
 
-- $ \text{SoC}(t) $: State of Charge at time $ t $
-- $ \text{SoC}(t_0) $: Initial State of Charge
-- $ C_{\text{nom}} $: Nominal capacity of the battery (Ampere-hours, Ah)
-- $ I(\tau) $: Battery current at time $ \tau $ (Amperes)
-- $ \int_{t_0}^{t} I(\tau) \, d\tau $: Net charge transferred into the battery over the time interval
+- $\text{SoC}(t)$: State of Charge at time$t$-$\text{SoC}(t_0)$: Initial State of Charge
+- $C_{\text{nom}}$: Nominal capacity of the battery (Ampere-hours, Ah)
+- $I(\tau)$: Battery current at time$\tau$ (Amperes)
+- $\int_{t_0}^{t} I(\tau) \, d\tau$: Net charge transferred into the battery over the time interval
 
 ### Principles of Coulomb Counting
 
 1. **Current Measurement:** Accurate real-time measurement of the current flowing into (charging) or out of (discharging) the battery is essential.
 2. **Integration Over Time:** The cumulative sum of the current over time provides the net charge added or removed from the battery.
 3. **Initial SoC Reference:** A reliable initial SoC value is necessary to anchor the estimation process.
-4. **Nominal Capacity Utilization:** The nominal capacity $ C_{\text{nom}} $ serves as the scaling factor to convert charge (Ampere-seconds) into SoC percentage.
+4. **Nominal Capacity Utilization:** The nominal capacity $C_{\text{nom}}$ serves as the scaling factor to convert charge (Ampere-seconds) into SoC percentage.
 
 ### Mathematical Representation
 
@@ -37,7 +36,7 @@ $$
 \text{SoC}(t + \Delta t) = \text{SoC}(t) + \frac{I(t) \times \Delta t}{C_{\text{nom}} \times 3600}
 $$
 
-Where $ \Delta t $ is the time step in seconds, and the division by 3600 converts Ampere-seconds to Ampere-hours.
+Where $\Delta t$ is the time step in seconds, and the division by 3600 converts Ampere-seconds to Ampere-hours.
 
 ## Implementation Steps
 
@@ -72,16 +71,16 @@ Precise current measurement is the backbone of the Coulomb Counting Method. Any 
 Integrate the measured current over discrete time intervals to estimate the net charge transfer.
 
 - **Discrete Integration:**
-  
-  For each time step $ \Delta t $:
 
-  $$
-  \Delta \text{SoC} = \frac{I(t) \times \Delta t}{C_{\text{nom}} \times 3600}
-  $$
+    For each time step $\Delta t$:
 
-  $$
-  \text{SoC}(t + \Delta t) = \text{SoC}(t) - \Delta \text{SoC}
-  $$
+    $$
+    \Delta \text{SoC} = \frac{I(t) \times \Delta t}{C_{\text{nom}} \times 3600}
+    $$
+
+    $$
+    \text{SoC}(t + \Delta t) = \text{SoC}(t) - \Delta \text{SoC}
+    $$
 
   *Note:* Discharging currents are considered positive, while charging currents are negative, or vice versa, depending on the convention used.
 
@@ -121,7 +120,7 @@ To mitigate the inherent limitations of the Coulomb Counting Method and enhance 
 - **Rationale:** Battery capacity and sensor performance are temperature-dependent.
 - **Implementation:**
   - Incorporate temperature measurements into the SoC estimation algorithm.
-  - Adjust the nominal capacity $ C_{\text{nom}} $ based on temperature to account for capacity variations.
+  - Adjust the nominal capacity $C_{\text{nom}}$ based on temperature to account for capacity variations.
   
   **Code Snippet: Temperature-Compensated Coulomb Counting**
 
@@ -245,7 +244,7 @@ To mitigate the inherent limitations of the Coulomb Counting Method and enhance 
 
 - **Rationale:** Battery capacity diminishes over time due to aging and usage.
 - **Implementation:**
-  - Periodically update $ C_{\text{nom}} $ based on SoH estimations to reflect the current effective capacity.
+  - Periodically update $C_{\text{nom}}$ based on SoH estimations to reflect the current effective capacity.
   
   **Code Snippet: Dynamic Nominal Capacity Adjustment**
 

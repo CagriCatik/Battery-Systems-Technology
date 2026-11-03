@@ -59,11 +59,17 @@ Lithium-ion batteries operate based on the movement of lithium ions and electron
 Lithium-ion batteries operate through reversible electrochemical reactions. These reactions enable the storage and release of energy.
 
 #### Discharge Reactions:
-- At the anode:  
-  $$ \text{LiC}_6 \rightarrow \text{C}_6 + \text{Li}^+ + e^- $$
+- At the anode:
 
-- At the cathode:  
-  $$ \text{LiCoO}_2 + \text{Li}^+ + e^- \rightarrow \text{Li}_2\text{CoO}_2 $$
+    $$
+    \text{LiC}_6 \rightarrow \text{C}_6 + \text{Li}^+ + e^-
+    $$
+
+- At the cathode:
+
+    $$
+    \text{LiCoO}_2 + \text{Li}^+ + e^- \rightarrow \text{Li}_2\text{CoO}_2
+    $$
 
 
 #### Charge Reactions:

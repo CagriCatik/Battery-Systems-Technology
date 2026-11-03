@@ -9,16 +9,17 @@ Battery Management Systems rely on specific technical terminologies to monitor, 
 The State of Charge (SoC) quantifies the remaining energy in a battery as a percentage of its full capacity.
 
 - **Definition:**  
-  $$ 
-  SOC = \frac{\text{Remaining Capacity (Ah)}}{\text{Full Capacity (Ah)}} \times 100 
-  $$
+
+    $$
+    SOC = \frac{\text{Remaining Capacity (Ah)}}{\text{Full Capacity (Ah)}} \times 100
+    $$
 
 - **Example:**  
   For a battery with a total capacity of 100 Ah and 40 Ah remaining:  
-  $$
-  SOC = \frac{40}{100} \times 100 = 40\%
-  $$
 
+    $$
+    SOC = \frac{40}{100} \times 100 = 40\%
+    $$
 
 - **Key Characteristics:**  
   - SoC is dynamic, varying with usage and charging conditions.  
@@ -34,7 +35,10 @@ The State of Charge (SoC) quantifies the remaining energy in a battery as a perc
 The State of Health (SoH) represents the overall condition of a battery relative to its original state.
 
 - **Definition:**  
-  $$ SOH = \frac{\text{Current Usable Capacity (Ah)}}{\text{Initial Full Capacity (Ah)}} \times 100 $$
+
+    $$
+    SOH = \frac{\text{Current Usable Capacity (Ah)}}{\text{Initial Full Capacity (Ah)}} \times 100
+    $$
 
 - **Key Characteristics:**  
   - SoH decreases over time due to chemical degradation and operational wear.  
@@ -42,7 +46,10 @@ The State of Health (SoH) represents the overall condition of a battery relative
 
 - **Example:**  
   A new battery with 100 Ah capacity degrades to 80 Ah:  
-  $$ SOH = \frac{80}{100} \times 100 = 80\% $$
+
+    $$
+    SOH = \frac{80}{100} \times 100 = 80\%
+    $$
 
 - **Importance:**  
   SoH is critical for predicting remaining useful life and scheduling maintenance.
@@ -54,7 +61,10 @@ The State of Health (SoH) represents the overall condition of a battery relative
 The Depth of Discharge (DOD) measures the percentage of energy removed from a battery relative to its full capacity.
 
 - **Definition:**  
-  $$ DOD = 100\% - SOC $$
+
+    $$
+    DOD = 100\% - SOC
+    $$
 
 - **Key Characteristics:**  
   - High DOD reduces cycle life.  
@@ -62,7 +72,10 @@ The Depth of Discharge (DOD) measures the percentage of energy removed from a ba
 
 - **Example:**  
   If a battery has 40% SoC remaining, then:  
-  $$ DOD = 100\% - 40\% = 60\% $$
+
+    $$
+    DOD = 100\% - 40\% = 60\%
+    $$
 
 - **Importance:**  
   DOD directly impacts battery life and performance.
@@ -93,7 +106,10 @@ The Cycle Life defines the number of complete charge-discharge cycles a battery 
 The C-Rate indicates the **charge** or **discharge** rate relative to a battery's capacity.
 
 - **Formula:**  
-  $$ C\text{-Rate} = \frac{\text{Current (A)}}{\text{Battery Capacity (Ah)}} $$
+
+    $$
+    C\text{-Rate} = \frac{\text{Current (A)}}{\text{Battery Capacity (Ah)}}
+    $$
 
 - **Key Characteristics:**  
   - A 1C rate discharges the battery fully in 1 hour.  
@@ -101,7 +117,10 @@ The C-Rate indicates the **charge** or **discharge** rate relative to a battery'
 
 - **Example:**  
   For a 100 Ah battery, a discharge current of 200 A corresponds to:  
-  $$ C\text{-Rate} = \frac{200}{100} = 2C $$
+
+    $$
+    C\text{-Rate} = \frac{200}{100} = 2C
+    $$
 
 - **Importance:**  
   C-Rate impacts battery safety, efficiency, and thermal management.
@@ -160,15 +179,17 @@ Internal Resistance measures the opposition to current flow within a battery.
 
 - **Specific Energy:**  
   Energy output per unit mass, expressed as:
-  $$
-  \text{Specific Energy (Wh/kg)} = \frac{\text{Total Energy (Wh)}}{\text{Mass (kg)}}
-  $$
+
+    $$
+    \text{Specific Energy (Wh/kg)} = \frac{\text{Total Energy (Wh)}}{\text{Mass (kg)}}
+    $$
 
 - **Energy Density:**  
   Energy output per unit volume, expressed as:
-  $$
-  \text{Energy Density (Wh/L)} = \frac{\text{Total Energy (Wh)}}{\text{Volume (L)}}
-  $$
+
+    $$
+    \text{Energy Density (Wh/L)} = \frac{\text{Total Energy (Wh)}}{\text{Volume (L)}}
+    $$
 
 - **Example:**  
   A lithium-ion battery has a specific energy of 200 Wh/kg and an energy density of 500 Wh/L.
@@ -213,9 +234,10 @@ Nominal Voltage is the average voltage at which a battery operates under typical
 ## Depth of Discharge vs. State of Charge
 
 - **Relationship:**  
-  $$
-  DOD = 100\% - SOC
-  $$
+
+    $$
+    DOD = 100\% - SOC
+    $$
 
 - **Key Characteristics:**  
   - SoC reflects remaining capacity, while DOD indicates usage.  

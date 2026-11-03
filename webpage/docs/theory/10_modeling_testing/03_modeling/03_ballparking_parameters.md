@@ -17,16 +17,17 @@ Each of these features is influenced by specific components in the battery's equ
 
 ### 1. **Initial Voltage Drop**
 
-The initial voltage drop is primarily caused by the **internal resistance ($ R_{\text{internal}} $)** of the battery. When a current ($ I $) is drawn from the battery, the voltage drops instantaneously due to Ohm's Law:
+The initial voltage drop is primarily caused by the **internal resistance ($R_{\text{internal}}$)** of the battery. When a current ($I$) is drawn from the battery, the voltage drops instantaneously due to Ohm's Law:
 
 $$
 \Delta V_{\text{initial}} = I \cdot R_{\text{internal}}
 $$
 
-Where:
-- $ \Delta V_{\text{initial}} $: The initial voltage drop.
-- $ I $: The current drawn from the battery.
-- $ R_{\text{internal}} $: The internal resistance of the battery.
+where:
+
+- $\Delta V_{\text{initial}}$: The initial voltage drop.
+- $I$: The current drawn from the battery.
+- $R_{\text{internal}}$: The internal resistance of the battery.
 
 This drop is linear and directly proportional to the current. The higher the current, the greater the voltage drop.
 
@@ -34,7 +35,7 @@ This drop is linear and directly proportional to the current. The higher the cur
 
 ### 2. **Curve Shape (Diffusion Effect)**
 
-The shape of the curve after the initial drop is influenced by the **diffusion resistance ($ R_{\text{diff}} $)** and **diffusion capacitance ($ C_{\text{diff}} $)**. These components model the delayed response of the battery voltage due to the diffusion of ions within the electrolyte and electrodes.
+The shape of the curve after the initial drop is influenced by the **diffusion resistance ($R_{\text{diff}}$)** and **diffusion capacitance ($C_{\text{diff}}$)**. These components model the delayed response of the battery voltage due to the diffusion of ions within the electrolyte and electrodes.
 
 The voltage change due to diffusion is described by the following equation:
 
@@ -42,18 +43,19 @@ $$
 V_{\text{diff}}(t) = V_{\text{diff, initial}} \cdot e^{-\frac{t}{\tau}}
 $$
 
-Where:
-- $ V_{\text{diff}}(t) $: The diffusion voltage at time $ t $.
-- $ V_{\text{diff, initial}} $: The initial diffusion voltage.
-- $ \tau $: The time constant of the RC circuit, given by $ \tau = R_{\text{diff}} \cdot C_{\text{diff}} $.
+where:
 
-The time constant ($ \tau $) determines how quickly the voltage relaxes back to its initial state. A larger $ \tau $ means a slower relaxation, while a smaller $ \tau $ means a faster relaxation.
+- $V_{\text{diff}}(t)$: The diffusion voltage at time$t$.
+- $V_{\text{diff, initial}}$: The initial diffusion voltage.
+- $\tau$: The time constant of the RC circuit, given by$\tau = R_{\text{diff}} \cdot C_{\text{diff}}$.
+
+The time constant ($\tau$) determines how quickly the voltage relaxes back to its initial state. A larger$\tau$means a slower relaxation, while a smaller$\tau$ means a faster relaxation.
 
 ---
 
 ### 3. **Relaxation Time**
 
-The relaxation time is the time taken for the voltage to return to its initial state after the current is removed. This is determined by the **time constant ($ \tau $)** of the RC circuit:
+The relaxation time is the time taken for the voltage to return to its initial state after the current is removed. This is determined by the **time constant ($\tau$)** of the RC circuit:
 
 $$
 \tau = R_{\text{diff}} \cdot C_{\text{diff}}
@@ -76,12 +78,13 @@ $$
 V_{\text{terminal}} = V_{\text{OCV}} - I \cdot R_{\text{internal}} - \sum_{i=1}^{n} V_{\text{diff, i}}
 $$
 
-Where:
-- $ V_{\text{OCV}} $: Open-circuit voltage of the battery.
-- $ I \cdot R_{\text{internal}} $: Voltage drop due to internal resistance.
-- $ \sum_{i=1}^{n} V_{\text{diff, i}} $: Sum of diffusion voltages across all RC branches.
+where:
 
-Each diffusion voltage ($ V_{\text{diff, i}} $) is governed by the differential equation:
+- $V_{\text{OCV}}$: Open-circuit voltage of the battery.
+- $I \cdot R_{\text{internal}}$: Voltage drop due to internal resistance.
+- $\sum_{i=1}^{n} V_{\text{diff, i}}$: Sum of diffusion voltages across all RC branches.
+
+Each diffusion voltage ($V_{\text{diff, i}}$) is governed by the differential equation:
 
 $$
 \frac{dV_{\text{diff, i}}}{dt} = -\frac{1}{R_{\text{diff, i}} \cdot C_{\text{diff, i}}} \cdot V_{\text{diff, i}} + \frac{I}{C_{\text{diff, i}}}
@@ -92,10 +95,10 @@ $$
 ## Practical Interpretation
 
 ### Key Parameters and Their Roles
-1. **Internal Resistance ($ R_{\text{internal}} $)**: Causes the immediate voltage drop when current is applied.
-2. **Diffusion Resistance ($ R_{\text{diff}} $)**: Determines the magnitude of the diffusion effect.
-3. **Diffusion Capacitance ($ C_{\text{diff}} $)**: Determines the time scale of the diffusion effect.
-4. **Time Constant ($ \tau $)**: Defines how quickly the voltage relaxes back to its initial state.
+1. **Internal Resistance ($R_{\text{internal}}$)**: Causes the immediate voltage drop when current is applied.
+2. **Diffusion Resistance ($R_{\text{diff}}$)**: Determines the magnitude of the diffusion effect.
+3. **Diffusion Capacitance ($C_{\text{diff}}$)**: Determines the time scale of the diffusion effect.
+4. **Time Constant ($\tau$)**: Defines how quickly the voltage relaxes back to its initial state.
 
 ### Example for Different Chemistries
 - **LFP Battery**: 

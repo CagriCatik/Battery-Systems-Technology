@@ -180,15 +180,17 @@ The efficacy of a BMS is largely determined by the sophistication of its underly
 To safeguard the battery system, the BMS incorporates current limiting mechanisms based on voltage and temperature thresholds. This ensures that the system operates within safe electrical and thermal boundaries.
 
 1. **Voltage-Based Threshold**:
-   - **Calculation**:
-     - The maximum allowable current ($ I_{max} $) is computed using the formula:
-       $$
-       I_{max} = \frac{V_{min} - V_{cutoff}}{R_{max}}
-       $$
-       - **Variables**:
-         - $ V_{min} $: Minimum permissible cell voltage.
-         - $ V_{cutoff} $: Cutoff voltage threshold.
-         - $ R_{max} $: Maximum allowable resistance.
+    - **Calculation**:
+        - The maximum allowable current ($I_{max}$) is computed using the formula:
+
+            $$
+            I_{max} = \frac{V_{min} - V_{cutoff}}{R_{max}}
+            $$
+
+        - **Variables**:
+            - $V_{min}$: Minimum permissible cell voltage.
+            - $V_{cutoff}$: Cutoff voltage threshold.
+            - $R_{max}$: Maximum allowable resistance.
    - **Purpose**: Prevents over-voltage conditions during the charging process by limiting the charging current based on cell voltage measurements.
    
    **Implementation Example**:
@@ -326,14 +328,16 @@ Accurate estimation of the State of Charge (SOC) is pivotal for effective batter
 Coulomb Counting is a fundamental method for SOC estimation based on the principle of charge conservation.
 
 - **Principle**:
-  - **Integration**: SOC is estimated by integrating the current over time, starting from a known initial SOC value.
-    $$
-    SOC = SOC_{initial} + \frac{\int I \, dt}{Capacity}
-    $$
-    - **Variables**:
-      - $ SOC_{initial} $: The initial State of Charge at the start of measurement.
-      - $ I $: Current flowing into or out of the battery.
-      - $ Capacity $: The rated capacity of the battery.
+    - **Integration**: SOC is estimated by integrating the current over time, starting from a known initial SOC value.
+
+        $$
+        SOC = SOC_{initial} + \frac{\int I \, dt}{Capacity}
+        $$
+
+        - **Variables**:
+            - $SOC_{initial}$: The initial State of Charge at the start of measurement.
+            - $I$: Current flowing into or out of the battery.
+            - $Capacity$: The rated capacity of the battery.
 
 - **Advantages**:
   - **Simplicity**: Easy to implement with minimal computational resources.

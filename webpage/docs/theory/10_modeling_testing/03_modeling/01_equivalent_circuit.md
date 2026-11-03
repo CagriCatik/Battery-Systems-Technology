@@ -45,39 +45,51 @@ The equivalent circuit model simplifies the complex electrochemical processes in
 The equivalent circuit model can be represented mathematically using the following equations:
 
 ### 3.1 **Voltage Drop Due to Internal Resistance**
+
 $$
 V_{\text{drop}} = I \cdot R_0
 $$
+
 where:
-- $ V_{\text{drop}} $ is the voltage drop across the internal resistance.
-- $ I $ is the current flowing through the battery.
-- $ R_0 $ is the internal resistance.
+
+- $V_{\text{drop}}$ is the voltage drop across the internal resistance.
+- $I$ is the current flowing through the battery.
+- $R_0$ is the internal resistance.
 
 ### 3.2 **Voltage Drop Due to Polarization Effects**
+
 $$
 V_{\text{polarization}} = I \cdot R_1 \cdot (1 - e^{-t / (R_1 \cdot C_1)})
 $$
+
 where:
-- $ V_{\text{polarization}} $ is the voltage drop due to polarization effects.
-- $ R_1 $ and $ C_1 $ are the polarization resistance and capacitance, respectively.
-- $ t $ is the time.
+
+- $V_{\text{polarization}}$ is the voltage drop due to polarization effects.
+- $R_1$ and $C_1$ are the polarization resistance and capacitance, respectively.
+- $t$ is the time.
 
 ### 3.3 **Voltage Drop Due to Diffusion Effects**
+
 $$
 V_{\text{diffusion}} = I \cdot R_2 \cdot (1 - e^{-t / (R_2 \cdot C_2)})
 $$
+
 where:
-- $ V_{\text{diffusion}} $ is the voltage drop due to diffusion effects.
-- $ R_2 $ and $ C_2 $ are the diffusion resistance and capacitance, respectively.
-- $ t $ is the time.
+
+- $V_{\text{diffusion}}$ is the voltage drop due to diffusion effects.
+- $R_2$ and $C_2$ are the diffusion resistance and capacitance, respectively.
+- $t$ is the time.
 
 ### 3.4 **Total Battery Voltage**
+
 $$
 V_{\text{total}} = \text{OCV} - V_{\text{drop}} - V_{\text{polarization}} - V_{\text{diffusion}}
 $$
+
 where:
-- $ V_{\text{total}} $ is the total voltage of the battery.
-- $ \text{OCV} $ is the open-circuit voltage.
+
+- $V_{\text{total}}$ is the total voltage of the battery.
+- $\text{OCV}$ is the open-circuit voltage.
 
 ---
 

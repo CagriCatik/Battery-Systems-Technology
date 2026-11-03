@@ -179,7 +179,7 @@ $$
 
 Where:
 
-- $ \text{DoD}_i $ represents the DoD of each individual cycle.
+- $\text{DoD}_i$ represents the DoD of each individual cycle.
 
 **Implementation Considerations:**
 

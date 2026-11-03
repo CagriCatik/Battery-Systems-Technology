@@ -68,7 +68,9 @@
 
 Ohm’s Law defines how these parameters interact:
 
-$$V = I \cdot R$$
+$$
+V = I \cdot R
+$$
 
 - **Current ($I$):** The number of electrons flowing per second.  
 - **Voltage ($V$):** The force driving the electrons.  

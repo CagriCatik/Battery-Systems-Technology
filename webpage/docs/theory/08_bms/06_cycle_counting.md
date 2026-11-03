@@ -69,10 +69,10 @@ Implementing a cycle counting algorithm involves several key steps, each contrib
 **Objective:** Determine the Depth of Discharge (DoD) for each cycle, as deeper discharges accelerate battery degradation.
 
 - **Calculation:** DoD is calculated as the difference between the maximum and minimum SoC during a cycle.
-  
-  $$
-  \text{DoD} = \frac{\text{SoC}_{\text{max}} - \text{SoC}_{\text{min}}}{\text{SoC}_{\text{max}}} \times 100\%
-  $$
+
+    $$
+    \text{DoD} = \frac{\text{SoC}_{\text{max}} - \text{SoC}_{\text{min}}}{\text{SoC}_{\text{max}}} \times 100\%
+    $$
 
 **Implementation Considerations:**
 
@@ -84,10 +84,10 @@ Implementing a cycle counting algorithm involves several key steps, each contrib
 **Objective:** Increment the cycle count based on identified full and equivalent partial cycles.
 
 - **Equivalent Full Cycles:** Sum the DoD of partial cycles and convert them into full cycle equivalents.
-  
-  $$
-  \text{Equivalent Full Cycles} = \frac{\sum \text{DoD}_i}{100\%}
-  $$
+
+    $$
+    \text{Equivalent Full Cycles} = \frac{\sum \text{DoD}_i}{100\%}
+    $$
 
 **Implementation Considerations:**
 
@@ -139,10 +139,10 @@ While cycle counting provides a foundational approach to SoH estimation, integra
 
 - **Definition:** The ratio of charge output during discharge to charge input during charging.
 - **Significance:** Monitoring Coulombic efficiency offers insights into internal losses and degradation mechanisms.
-  
-  $$
-  \text{Coulombic Efficiency} = \frac{Q_{\text{out}}}{Q_{\text{in}}} \times 100\%
-  $$
+
+    $$
+    \text{Coulombic Efficiency} = \frac{Q_{\text{out}}}{Q_{\text{in}}} \times 100\%
+    $$
 
 ### Internal Resistance Measurement
 

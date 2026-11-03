@@ -30,11 +30,12 @@ $$
 V_{\text{terminal}} = V_{\text{OCV}} \pm I \cdot R_{\text{internal}}
 $$
 
-Where:
-- $ V_{\text{terminal}} $: Terminal voltage of the battery.
-- $ V_{\text{OCV}} $: Open-circuit voltage of the battery.
-- $ I $: Current flowing through the battery (positive for discharge, negative for charge).
-- $ R_{\text{internal}} $: Internal resistance of the battery.
+where:
+
+- $V_{\text{terminal}}$: Terminal voltage of the battery.
+- $V_{\text{OCV}}$: Open-circuit voltage of the battery.
+- $I$: Current flowing through the battery (positive for discharge, negative for charge).
+- $R_{\text{internal}}$: Internal resistance of the battery.
 
 This equation captures the immediate voltage change due to the internal resistance of the battery.
 
@@ -47,8 +48,9 @@ Diffusion voltage, on the other hand, accounts for the delayed response of the b
 #### Equivalent Circuit Model
 
 To model diffusion voltage, we use an RC (resistor-capacitor) circuit in parallel, connected in series with the battery's internal resistance. The RC circuit represents the diffusion process, where:
-- The resistor ($ R_{\text{diff}} $) represents the resistance to ion diffusion.
-- The capacitor ($ C_{\text{diff}} $) represents the storage and release of energy due to ion diffusion.
+
+- The resistor ($R_{\text{diff}}$) represents the resistance to ion diffusion.
+- The capacitor ($C_{\text{diff}}$) represents the storage and release of energy due to ion diffusion.
 
 The equivalent circuit for a lithium-ion battery with diffusion voltage can be represented as:
 
@@ -56,21 +58,22 @@ $$
 V_{\text{terminal}} = V_{\text{OCV}} \pm I \cdot R_{\text{internal}} - V_{\text{diff}}
 $$
 
-Where $ V_{\text{diff}} $ is the voltage across the RC circuit, which accounts for the diffusion effect.
+Where $V_{\text{diff}}$ is the voltage across the RC circuit, which accounts for the diffusion effect.
 
 #### Mathematical Equation for Diffusion Voltage
 
-The voltage across the RC circuit ($ V_{\text{diff}} $) can be described by the following differential equation:
+The voltage across the RC circuit ($V_{\text{diff}}$) can be described by the following differential equation:
 
 $$
 \frac{dV_{\text{diff}}}{dt} = -\frac{1}{R_{\text{diff}} \cdot C_{\text{diff}}} \cdot V_{\text{diff}} + \frac{I}{C_{\text{diff}}}
 $$
 
-Where:
-- $ V_{\text{diff}} $: Voltage across the RC circuit.
-- $ R_{\text{diff}} $: Diffusion resistance.
-- $ C_{\text{diff}} $: Diffusion capacitance.
-- $ I $: Current flowing through the battery.
+where:
+
+- $V_{\text{diff}}$: Voltage across the RC circuit.
+- $R_{\text{diff}}$: Diffusion resistance.
+- $C_{\text{diff}}$: Diffusion capacitance.
+- $I$: Current flowing through the battery.
 
 This equation describes how the diffusion voltage changes over time in response to the applied current.
 

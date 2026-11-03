@@ -216,42 +216,52 @@ print(f"Estimated SoC: {battery.get_soc_percentage():.1f}%")  # Output: Estimate
 ### Sizing Steps
 
 1. **Voltage Determination**
-   - **Select Nominal Voltage:** Based on application requirements (e.g., 48 V for two-wheelers, 800 V for electric buses).
-   - **Calculate Required Cell Count:**
-     $$
-     \text{Number of cells} = \frac{\text{System Voltage}}{\text{Nominal Cell Voltage}}
-     $$
-     - *Example:* For an 800 V system using cells with a nominal voltage of 3.7 V:
-       $$
-       \text{Number of cells} = \frac{800 \text{ V}}{3.7 \text{ V}} \approx 216 \text{ cells}
-       $$
+    - **Select Nominal Voltage:** Based on application requirements (e.g., 48 V for two-wheelers, 800 V for electric buses).
+    - **Calculate Required Cell Count:**
+
+        $$
+        \text{Number of cells} = \frac{\text{System Voltage}}{\text{Nominal Cell Voltage}}
+        $$
+
+        - *Example:* For an 800 V system using cells with a nominal voltage of 3.7 V:
+
+            $$
+            \text{Number of cells} = \frac{800 \text{ V}}{3.7 \text{ V}} \approx 216 \text{ cells}
+            $$
 
 2. **Energy Estimation**
-   - **Calculate Required Energy (kWh):** Based on range and specific energy consumption (Wh/km).
-     $$
-     \text{Energy (kWh)} = \text{Range (km)} \times \text{Specific Energy (Wh/km)}
-     $$
-     - *Example:* For an electric vehicle with a range of 200 km and specific energy consumption of 150 Wh/km:
-       $$
-       \text{Energy} = 200 \text{ km} \times 150 \text{ Wh/km} = 30,000 \text{ Wh} = 30 \text{ kWh}
-       $$
+    - **Calculate Required Energy (kWh):** Based on range and specific energy consumption (Wh/km).
+
+        $$
+        \text{Energy (kWh)} = \text{Range (km)} \times \text{Specific Energy (Wh/km)}
+        $$
+
+        - *Example:* For an electric vehicle with a range of 200 km and specific energy consumption of 150 Wh/km:
+
+            $$
+            \text{Energy} = 200 \text{ km} \times 150 \text{ Wh/km} = 30,000 \text{ Wh} = 30 \text{ kWh}
+            $$
 
 3. **Capacity Calculation**
-   - **Divide Energy by System Voltage:**
-     $$
-     \text{Capacity (Ah)} = \frac{\text{Energy (kWh)}}{\text{System Voltage (V)}}
-     $$
-     - *Example:* For a 30 kWh system operating at 400 V:
-       $$
-       \text{Capacity} = \frac{30,000 \text{ Wh}}{400 \text{ V}} = 75 \text{ Ah}
-       $$
+    - **Divide Energy by System Voltage:**
+
+        $$
+        \text{Capacity (Ah)} = \frac{\text{Energy (kWh)}}{\text{System Voltage (V)}}
+        $$
+
+        - *Example:* For a 30 kWh system operating at 400 V:
+
+            $$
+            \text{Capacity} = \frac{30,000 \text{ Wh}}{400 \text{ V}} = 75 \text{ Ah}
+            $$
 
 4. **Buffer and Aging Factors**
-   - **Reserve Capacity:** Allocate approximately 20% additional capacity to account for aging and ensure long-term performance.
-     - *Example:* For a required capacity of 75 Ah:
-       $$
-       \text{Total Capacity} = 75 \text{ Ah} \times 1.20 = 90 \text{ Ah}
-       $$
+    - **Reserve Capacity:** Allocate approximately 20% additional capacity to account for aging and ensure long-term performance.
+        - *Example:* For a required capacity of 75 Ah:
+
+            $$
+            \text{Total Capacity} = 75 \text{ Ah} \times 1.20 = 90 \text{ Ah}
+            $$
 
 5. **Temperature Considerations**
    - **Design for Operating Conditions:** Incorporate thermal management solutions, such as heating elements or cooling systems, to maintain optimal battery temperatures in varying climates.
@@ -487,17 +497,19 @@ Battery sizing and design involve determining the appropriate capacity, voltage,
    - **Calculate Number of Cells:** Determine how many cells are needed in series to achieve the desired system voltage.
 
 2. **Energy Estimation**
-   - **Determine Energy Needs:** Calculate the total energy required based on the application's range and energy consumption.
-   - **Example Calculation:**
-     $$
-     \text{Energy (kWh)} = \text{Range (km)} \times \text{Specific Energy (Wh/km)}
-     $$
+    - **Determine Energy Needs:** Calculate the total energy required based on the application's range and energy consumption.
+    - **Example Calculation:**
+
+        $$
+        \text{Energy (kWh)} = \text{Range (km)} \times \text{Specific Energy (Wh/km)}
+        $$
 
 3. **Capacity Calculation**
-   - **Compute Capacity:** Divide the total energy by the system voltage to obtain the required capacity in ampere-hours (Ah).
-     $$
-     \text{Capacity (Ah)} = \frac{\text{Energy (kWh)} \times 1000}{\text{System Voltage (V)}}
-     $$
+    - **Compute Capacity:** Divide the total energy by the system voltage to obtain the required capacity in ampere-hours (Ah).
+
+        $$
+        \text{Capacity (Ah)} = \frac{\text{Energy (kWh)} \times 1000}{\text{System Voltage (V)}}
+        $$
 
 4. **Buffer and Aging Factors**
    - **Reserve Capacity:** Allocate additional capacity (e.g., 20%) to account for aging and ensure long-term reliability.

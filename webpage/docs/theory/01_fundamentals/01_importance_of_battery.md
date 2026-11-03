@@ -7,24 +7,26 @@ Battery Management Systems (BMS) are vital for ensuring the safe, efficient, and
 Batteries are absolutely necessary in energy storage applications, particularly for electric vehicles, due to their unique ability to balance specific energy (capacity to store energy) and specific power (ability to deliver power). They outperform alternative energy storage solutions such as **capacitors** and **fuel cells** in terms of versatility and practical application.
 
 - **Specific Energy (Wh/kg):** Measures the energy stored per unit mass of the storage system. 
-  - Higher specific energy allows longer vehicle ranges.
-  - The formula is:  
-    $$
-    \text{Specific Energy} = \frac{E}{m}
-    $$
+    - Higher specific energy allows longer vehicle ranges.
+    - The formula is:
 
-  - $E$: Total energy stored in the system (in watt-hours, Wh)  
-  - $m$: Mass of the system (in kilograms, kg)
+        $$
+        \text{Specific Energy} = \frac{E}{m}
+        $$
+
+    - $E$: Total energy stored in the system (in watt-hours, Wh)  
+    - $m$: Mass of the system (in kilograms, kg)
 
 - **Specific Power (W/kg):** Indicates the power output per unit mass. 
-  - Higher specific power translates to better acceleration and performance.
-  - The formula is:  
-    $$
-    \text{Specific Power} = \frac{P}{m}
-    $$
+    - Higher specific power translates to better acceleration and performance.
+    - The formula is:
 
-  - $P$: Power output of the system (in watts, W)  
-  - $m$: Mass of the system (in kilograms, kg)
+        $$
+        \text{Specific Power} = \frac{P}{m}
+        $$
+
+    - $P$: Power output of the system (in watts, W)  
+    - $m$: Mass of the system (in kilograms, kg)
 
 
 These values are critical when comparing energy storage systems such as batteries or fuel cells in electric vehicles.
